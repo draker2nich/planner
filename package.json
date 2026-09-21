@@ -1,0 +1,14 @@
+{
+  "name": "planner",
+  "version": "0.4.0",
+  "private": true,
+  "description": "Планировка комнаты: редактор, каталог, админ‑панель",
+  "engines": { "node": ">=22.5" },
+  "scripts": {
+    "start": "node server/index.js"
+  },
+  "dependencies": {
+    "@neondatabase/serverless": "latest",
+    "@vercel/blob": "latest"
+  }
+}
