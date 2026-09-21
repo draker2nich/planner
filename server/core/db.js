@@ -82,6 +82,8 @@ const SCHEMA = [
 const MIGRATIONS = [
   // v2: поле для поиска без учёта регистра (SQLite не понижает регистр кириллицы в LOWER/LIKE)
   ["ALTER TABLE products ADD COLUMN search TEXT NOT NULL DEFAULT ''"],
+  // v3: служебные настройки (отпечаток ADMIN_EMAIL/ADMIN_PASSWORD и т. п.)
+  ["CREATE TABLE IF NOT EXISTS settings (key TEXT PRIMARY KEY, value TEXT NOT NULL)"],
 ];
 const SCHEMA_VERSION = 1 + MIGRATIONS.length;
 

@@ -34,24 +34,43 @@ async function fromEnv(env = process.env, { dataDir } = {}) {
   return { db, storage, env, dataDir, onVercel };
 }
 
+/* Администратор из переменных окружения ADMIN_EMAIL / ADMIN_PASSWORD.
+   В базе хранится солёный отпечаток пары «почта + пароль», с которой администратор был создан или обновлён.
+   Пока переменные не меняются — пароль, заданный в админ‑панели, сохраняется.
+   Изменили переменную (другой пароль или почта) и сделали Redeploy — пароль этого администратора
+   переписывается значением из переменной (так же восстанавливается забытый пароль). */
+async function syncEnvAdmin(ctx) {
+  const { db, env } = ctx;
+  let email = String(env.ADMIN_EMAIL || '').trim().toLowerCase();
+  let pw = String(env.ADMIN_PASSWORD || '').replace(/[\r\n]+$/, '');
+  if (email && pw) {
+    const sig = await db.get("SELECT value FROM settings WHERE key='env_admin'");
+    if (sig && auth.verifyPassword(email + '\n' + pw, sig.value)) return; // уже применено
+    const u = await db.get('SELECT id, role FROM users WHERE email=?', [email]);
+    if (u) {
+      await db.run("UPDATE users SET password_hash=?, role='admin', disabled=0 WHERE id=?", [auth.hashPassword(pw), u.id]);
+      await db.run('DELETE FROM sessions WHERE user_id=?', [u.id]);
+      console.log(`Администратор ${email}: пароль обновлён из ADMIN_PASSWORD`);
+    } else {
+      try { await auth.createUser(db, { email, password: pw, role: 'admin', name: 'Администратор' }); console.log(`Администратор создан: ${email}`); }
+      catch (e) { if (!/unique|duplicate/i.test(e.message)) throw e; } // параллельный холодный старт уже создал
+    }
+    await db.run("INSERT INTO settings (key, value) VALUES ('env_admin', ?) ON CONFLICT (key) DO UPDATE SET value = excluded.value", [auth.hashPassword(email + '\n' + pw)]);
+    return;
+  }
+  const admins = Number((await db.get("SELECT CAST(COUNT(*) AS INTEGER) AS c FROM users WHERE role='admin'")).c);
+  if (admins) return;
+  if (ctx.onVercel) { ctx.setupProblem = 'Администратор не создан: задайте ADMIN_EMAIL и ADMIN_PASSWORD в Settings → Environment Variables проекта Vercel и сделайте Redeploy.'; return; }
+  email = email || 'admin@local'; pw = crypto.randomBytes(9).toString('base64url');
+  await auth.createUser(db, { email, password: pw, role: 'admin', name: 'Администратор' });
+  fs.writeFileSync(path.join(ctx.dataDir, 'admin-credentials.txt'), `Администратор создан: ${email} / ${pw}\nСмените пароль и удалите этот файл.\n`);
+  console.log(`Администратор создан: ${email} / ${pw}`);
+}
+
 async function bootstrap(ctx) {
   const { db, env } = ctx;
   await migrate(db);
-  const admins = Number((await db.get("SELECT CAST(COUNT(*) AS INTEGER) AS c FROM users WHERE role='admin'")).c);
-  if (!admins) {
-    let email = env.ADMIN_EMAIL, pw = env.ADMIN_PASSWORD;
-    if (!email || !pw) {
-      if (ctx.onVercel) { ctx.setupProblem = 'Администратор не создан: задайте ADMIN_EMAIL и ADMIN_PASSWORD в Settings → Environment Variables проекта Vercel и сделайте Redeploy.'; }
-      else {
-        email = email || 'admin@local'; pw = crypto.randomBytes(9).toString('base64url');
-        fs.writeFileSync(path.join(ctx.dataDir, 'admin-credentials.txt'), `Администратор создан: ${email} / ${pw}\nСмените пароль и удалите этот файл.\n`);
-      }
-    }
-    if (email && pw) {
-      try { await auth.createUser(db, { email, password: pw, role: 'admin', name: 'Администратор' }); console.log(`Администратор создан: ${email}` + (env.ADMIN_PASSWORD ? '' : ` / ${pw}`)); }
-      catch (e) { if (!/unique|duplicate/i.test(e.message)) throw e; } // параллельный холодный старт уже создал
-    }
-  }
+  await syncEnvAdmin(ctx);
   await ctx.catalog.backfillSearch();
   const products = Number((await db.get('SELECT CAST(COUNT(*) AS INTEGER) AS c FROM products')).c);
   if (!products && env.SEED_DEMO !== '0') { await ctx.catalog.seedDemo(); console.log('Каталог заполнен демо‑товарами.'); }
