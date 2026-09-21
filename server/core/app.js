@@ -19,7 +19,16 @@ async function fromEnv(env = process.env, { dataDir } = {}) {
   if (dbUrl) { const { neon } = await import('@neondatabase/serverless'); db = postgresDriver(neon, dbUrl); }
   else if (onVercel) throw new ApiError(503, 'setup', 'Не подключена база данных: добавьте Neon (Storage → Postgres) в проект Vercel — появится переменная DATABASE_URL — и сделайте Redeploy.');
   else { fs.mkdirSync(dataDir, { recursive: true }); db = sqliteDriver(path.join(dataDir, 'planner.sqlite')); }
-  if (env.BLOB_READ_WRITE_TOKEN) { const sdk = await import('@vercel/blob'); storage = blobStorage(sdk); }
+  /* Blob: либо статический токен BLOB_READ_WRITE_TOKEN, либо OIDC (так Vercel подключает новые store: STORE_ID + автоматический
+     OIDC‑токен функции). Store может быть подключён с другим префиксом (напр. BLOB_READ_WRITE_TOKEN_STORE_ID) — ищем любой BLOB…_STORE_ID. */
+  const storeKey = env.BLOB_STORE_ID ? 'BLOB_STORE_ID' : Object.keys(env).find(k => /^BLOB\w*_STORE_ID$/.test(k) && env[k]);
+  const blobStoreId = storeKey ? env[storeKey] : '';
+  if (blobStoreId && !process.env.BLOB_STORE_ID) process.env.BLOB_STORE_ID = blobStoreId; // SDK читает именно это имя
+  if (env.BLOB_READ_WRITE_TOKEN || blobStoreId) {
+    const sdk = await import('@vercel/blob');
+    storage = blobStorage(sdk);
+    storage.auth = env.BLOB_READ_WRITE_TOKEN ? 'token' : 'oidc';
+  }
   else if (onVercel) throw new ApiError(503, 'setup', 'Не подключено хранилище файлов: создайте Blob store (Storage → Blob, доступ Public) в проекте Vercel и сделайте Redeploy.');
   else storage = fsStorage(path.join(dataDir, 'uploads'));
   return { db, storage, env, dataDir, onVercel };
@@ -80,7 +89,7 @@ function createApp(makeCtx) {
 
   // служебное
   route('GET', '/api/health', async (ctx) => ({ ok: true, db: ctx.db.dialect, storage: ctx.storage.kind, setup: ctx.setupProblem || null }));
-  route('GET', '/api/config', async (ctx) => ({ uploads: ctx.storage.kind === 'blob' ? 'blob' : 'direct', maxModelMb: 50, maxImageMb: 15 }));
+  route('GET', '/api/config', async (ctx) => ({ uploads: ctx.storage.kind === 'blob' ? 'blob' : 'direct', blobAuth: ctx.storage.auth || null, maxModelMb: 50, maxImageMb: 15 }));
 
   // авторизация
   route('POST', '/api/auth/login', async (ctx, req) => {
@@ -143,10 +152,14 @@ function createApp(makeCtx) {
      Браузер получает здесь одноразовый токен; права проверяются по токену сессии в clientPayload. */
   route('POST', '/api/admin/blob-upload', async (ctx, req) => {
     if (ctx.storage.kind !== 'blob') throw new ApiError(400, 'not_blob', 'Хранилище Blob не подключено');
-    const { handleUpload } = await import('@vercel/blob/client');
+    const client = await import('@vercel/blob/client');
+    const oidc = ctx.storage.auth === 'oidc';
+    // handleUpload требует статический токен; при OIDC — presigned‑поток (handleUploadPresigned + uploadPresigned в браузере)
+    const handler = oidc ? client.handleUploadPresigned : client.handleUpload;
+    if (typeof handler !== 'function') throw new ApiError(500, 'blob_sdk', 'Версия @vercel/blob не поддерживает ' + (oidc ? 'handleUploadPresigned' : 'handleUpload') + ': обновите зависимость и сделайте Redeploy');
     const body = await readJson(req);
     try {
-      return await handleUpload({
+      return await handler({
         body, request: req.webRequest(),
         onBeforeGenerateToken: async (pathname, clientPayload) => {
           let cp = {}; try { cp = JSON.parse(clientPayload || '{}'); } catch {}
@@ -159,7 +172,7 @@ function createApp(makeCtx) {
             allowedContentTypes: model ? ['model/gltf-binary', 'application/octet-stream'] : ['image/jpeg', 'image/png', 'image/webp'],
             maximumSizeInBytes: model ? LIMITS.glbBytes : LIMITS.imageBytes,
             addRandomSuffix: true,
-            tokenPayload: JSON.stringify({ productId: cp.productId, kind: cp.kind, userId: u.id }),
+            ...(oidc ? {} : { tokenPayload: JSON.stringify({ productId: cp.productId, kind: cp.kind, userId: u.id }) }),
           };
         },
         onUploadCompleted: async () => { /* файл привязывается к товару вызовом …/commit из админ‑панели */ },

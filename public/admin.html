@@ -190,14 +190,17 @@ const S={token:null,user:null,stats:null,dirty:false,config:{uploads:'direct'}};
 /* Загрузка файла: локально — прямо в API; на Vercel — из браузера в Vercel Blob (лимит функции 4,5 МБ), затем commit */
 let blobClient=null;
 async function loadBlobClient(){if(blobClient)return blobClient;
-  for(const src of ['https://esm.sh/@vercel/blob/client','https://cdn.jsdelivr.net/npm/@vercel/blob/client/+esm']){try{blobClient=await import(src);if(blobClient.upload)return blobClient;}catch(e){console.warn('blob client',src,e);}}
+  for(const src of ['https://esm.sh/@vercel/blob/client','https://cdn.jsdelivr.net/npm/@vercel/blob/client/+esm']){try{blobClient=await import(src);if(blobClient.upload||blobClient.uploadPresigned)return blobClient;}catch(e){console.warn('blob client',src,e);}}
   throw new Error('Не удалось загрузить модуль загрузки файлов (@vercel/blob/client)');}
 async function uploadFile(productId,kind,file,onProgress){
   if(S.config.uploads!=='blob'){
     const type=kind==='model'?'model/gltf-binary':file.type;
     return kind==='model'?api('PUT',`/admin/products/${productId}/model`,null,new Blob([await file.arrayBuffer()],{type})):api('POST',`/admin/products/${productId}/images`,null,new Blob([await file.arrayBuffer()],{type}));
   }
-  const {upload}=await loadBlobClient();
+  const bc=await loadBlobClient();
+  const presigned=S.config.blobAuth==='oidc';            // OIDC‑store: presigned‑загрузка; со статическим токеном — обычная
+  const upload=presigned?bc.uploadPresigned:bc.upload;
+  if(typeof upload!=='function')throw new Error('Модуль загрузки файлов устарел (нет '+(presigned?'uploadPresigned':'upload')+')');
   const ext=(file.name.match(/\.[a-z0-9]+$/i)||[''])[0].toLowerCase();
   const pathname=`products/${productId}/${kind==='model'?'model':'img'}-${Date.now()}${ext}`;
   let blob;
