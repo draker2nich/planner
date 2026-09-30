@@ -126,12 +126,13 @@
 
   /* Кто может стоять в жёсткой зоне якоря (гость зоны): тумбы у кровати, стулья у стола и т. п. (ТЗ §14.3) */
   const ZONE_GUESTS = {
-    sofa: ['armchair'], bed: ['nightstand', 'bench', 'rug'], 'kids-bed': ['nightstand', 'rug'], table: ['chair', 'bench', 'bar-stool'],
+    // тумбы стоят у изголовья, до начала боковых зон кровати (from = 450), поэтому гостями кровати не являются
+    table: ['chair', 'bench', 'bar-stool'],
     'meeting-table': ['chair', 'office-chair'], desk: ['chair', 'office-chair', 'pedestal'], 'bar-counter': ['bar-stool'],
     island: ['bar-stool', 'chair'], 'dressing-table': ['pouf', 'chair', 'bench'], 'changing-table': [], 'coffee-table': ['pouf'],
   };
   /* Кто не мешает рекомендуемой (мягкой) глубине зоны, хотя жёсткую соблюдает: журнальный столик у дивана (ТЗ §14.3) */
-  const SOFT_GUESTS = { sofa: ['coffee-table', 'pouf', 'armchair'], armchair: ['coffee-table', 'pouf'], bed: ['nightstand', 'bench'] };
+  const SOFT_GUESTS = { sofa: ['coffee-table', 'pouf', 'armchair'], armchair: ['coffee-table', 'pouf'], bed: ['nightstand', 'bench', 'rug'], 'kids-bed': ['nightstand', 'rug'] };
 
   /* Программа комнаты по назначению (ТЗ §14.5): must — обязательно, usual — обычно, optional — по желанию */
   const PROGRAMS = {

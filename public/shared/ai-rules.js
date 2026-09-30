@@ -151,7 +151,7 @@
   /* ---------- Стены, к которым предмет стоит тылом ---------- */
   function backWall(D, room, maxGap) {
     if (!D.fr) return null;
-    if (D.mount === 'wall') { const w = room.W.get(D.item.wallId); return w ? { wall: w, gap: 0 } : null; }
+    if (D.mount === 'wall') { const w = room.W.get(D.item.wallId); if (!w) return null; const [t0, t1] = w.tOf(D.item.offset, D.item.dims.W); return { wall: w, gap: 0, t: (t0 + t1) / 2 }; }
     if (D.mount !== 'floor') return null;
     const lim = (maxGap ?? KP.backGapOf(D.typeId)[1]) + TOL.anchorGap;
     const bc = D.fr.w(0, -D.h / 2); let best = null;
@@ -178,7 +178,7 @@
       const oc = outerCornerLocal(D.fp, D.w, D.h); const p = D.fr.w(oc.x, oc.y);
       // «в углу» — только прямой угол 88–92° (ТЗ §13.3); у косого угла форма просто стоит у стены
       const c = room.corners.find(k => k.inner && Math.abs(k.angle - 90) <= TOL.cornerAngle && dist2(k, p) <= TOL.cornerSnap);
-      if (c) return { kind: 'corner', vertexId: c.vertexId, x: c.x, y: c.y, rot: D.fr.rot, mirror: D.fr.mirror };
+      if (c) return { kind: 'corner', vertexId: c.vertexId, x: c.x, y: c.y, rot: D.fr.rot, mirror: D.fr.mirror, side: oc.x > 0 ? 1 : -1 };
     }
     const bw = backWall(D, room);
     if (bw) {
@@ -204,7 +204,7 @@
     let c;
     if (a.kind === 'wall') { const o = off(0, loc.h / 2); c = { x: a.x + o.x, y: a.y + o.y }; }
     else if (a.kind === 'wallCorner') { const o = off(-a.sx * loc.w / 2, loc.h / 2); c = { x: a.x + o.x, y: a.y + o.y }; }
-    else if (a.kind === 'corner') { const oc = outerCornerLocal(fo.fp, loc.w, loc.h); const o = off(oc.x, oc.y); c = { x: a.x - o.x, y: a.y - o.y }; }
+    else if (a.kind === 'corner') { const oc = a.side ? { x: a.side * loc.w / 2, y: -loc.h / 2 } : outerCornerLocal(fo.fp, loc.w, loc.h); const o = off(oc.x, oc.y); c = { x: a.x - o.x, y: a.y - o.y }; }
     else c = { x: a.x, y: a.y };
     return { x: c.x, y: c.y, rot: a.rot, mirror: !!a.mirror, ...(a.kind === 'ontop' ? { baseId: a.baseId } : {}) };
   }
@@ -219,7 +219,7 @@
     const exemptOpen = D.category === 'infra' || D.typeId === 'curtain';
     // Ж1
     if (D.mount === 'floor' || D.mount === 'ceiling') { if (!G.insideRoom(D.poly, room.project, room.d)) out.push(V('Ж1', [D.id], `${D.name}: вне комнаты или в стене`)); }
-    else if (D.mount === 'wall') { const w = room.W.get(f.wallId); if (f.offset < -0.5 || f.offset + f.dims.W > w.len + 0.5) out.push(V('Ж1', [D.id], `${D.name}: не помещается на стене`, { need: f.dims.W, have: Math.round(w.len) })); }
+    else if (D.mount === 'wall') { const w = room.W.get(f.wallId); if (f.offset < -0.5 || f.offset + f.dims.W > w.len + 0.5 || !G.insideRoom(D.poly, room.project, room.d)) out.push(V('Ж1', [D.id], `${D.name}: не помещается на стене`, { need: f.dims.W, have: Math.round(w.len) })); }
     // Ж7
     const H = f.dims.H || 0;
     if (D.mount === 'wall') { if (D.hInt[0] < -0.5 || D.hInt[1] > room.height + 0.5) out.push(V('Ж7', [D.id], `${D.name}: выше потолка`, { top: Math.round(D.hInt[1]), ceiling: room.height })); }
@@ -299,6 +299,18 @@
     }
     return res;
   }
+  /* Индексы нарушенных зон: закрытая обычная зона или вся группа «хотя бы одна из» без свободной */
+  function failingZones(A, blocked) {
+    const out = []; const groups = new Map();
+    for (let i = 0; i < A.zones.length; i++) {
+      const z = A.zones[i]; if (z.ignored || !z.hardPts) continue;
+      const bad = z.wallBlocked || (blocked && blocked.has(i));
+      if (z.oneOf) { const g = groups.get(z.oneOf) || { any: false, idx: [] }; g.idx.push(i); if (!bad) g.any = true; groups.set(z.oneOf, g); }
+      else if (bad) out.push(i);
+    }
+    for (const g of groups.values()) if (!g.any) out.push(...g.idx);
+    return out;
+  }
   /* Зоны удовлетворены? blocked — множество индексов, перекрытых предметами; стены учитываются здесь */
   function zonesOk(A, blocked) {
     const groups = new Map();
@@ -328,11 +340,14 @@
     }
     const r = inflateOf(room);
     const main = room.zones.entry.find(z => z.id === (room.entrance.openingId || 'assumed')) || room.zones.entry[0];
-    const starts = main ? R.cellsOf(grid, main.pts) : [];
     const thr = r - grid.c / 2 - 0.01;   // допуск на дискретность сетки — полклетки
+    let starts = main ? R.cellsOf(grid, main.pts) : [];
+    const entranceOk = starts.some(k => dist[k] >= thr);
+    // вход загорожен: человек протискивается — стартуем с проходимых клеток в 1,2 м от проёма, остальное проверяем как обычно
+    if (main && !entranceOk) { const b = G.aabbOf(main.pts); starts = R.cellsOf(grid, [{ x: b.x0 - 1200, y: b.y0 - 1200 }, { x: b.x1 + 1200, y: b.y0 - 1200 }, { x: b.x1 + 1200, y: b.y1 + 1200 }, { x: b.x0 - 1200, y: b.y1 + 1200 }]).filter(k => dist[k] >= thr); }
     let best = null, reach = null;
     const pi = {
-      grid, blocked, dist, r, need: 2 * r, main, starts, thr, entranceOk: starts.some(k => dist[k] >= thr),
+      grid, blocked, dist, r, need: 2 * r, main, starts, thr, entranceOk,
       get best() { if (!best) best = R.widestMap(grid, dist, starts); return best; },
       // ширина прохода к области: 2 × узкое место + клетка (поправка на дискретность)
       widthTo(pts) { const b = pi.best; let m = 0; for (const k of R.cellsOf(grid, pts)) if (b[k] > m) m = b[k]; return m > 0 ? 2 * m + grid.c : 0; },
@@ -353,8 +368,7 @@
   function needsAccess(D) { return !D.invalid && !D.outside && !D.isRug && D.category !== 'infra' && D.mount !== 'ceiling' && D.mount !== 'ontop' && (D.mount === 'floor' || D.zones.some(z => z.hardPts)); }
   function accessCheck(room, descs, pi) {
     pi = pi || passInfo(room, descs); const out = [];
-    // вход загорожен (обычно неподвижным предметом): дальше проверять нечего, одно нарушение на всю комнату
-    if (!pi.entranceOk) return [V('Ж11', [], 'Вход загорожен')];
+    if (!pi.entranceOk) out.push(V('Ж11', [], 'Вход загорожен'));
     for (const z of room.zones.entry) if (z !== pi.main && !pi.reaches(z.pts)) out.push(V('Ж11', [z.id === 'assumed' ? null : z.id], 'Нет прохода между дверями'));
     const e = pi.r + pi.grid.c;
     for (const D of descs) {
@@ -383,7 +397,15 @@
       if (c.mode === 'range' && ((c.min != null && v < c.min - TOL.dims) || (c.max != null && v > c.max + TOL.dims))) return V('Ж12', [item.id], `${nameOf(item)}: размер ${k} вне диапазона`, { min: c.min, max: c.max, have: v });
     }
     for (const k in product.dims) if (k !== 'E' && Math.abs((item.dims[k] || 0) - product.dims[k]) > TOL.dims) return V('Ж12', [item.id], `${nameOf(item)}: размеры не совпадают с товаром`);
+    if (!handednessOk(product, item.mirror)) return V('Ж12', [item.id], `${nameOf(item)}: товар нельзя зеркалить`);
     return null;
+  }
+
+  /* Зеркало угловых форм (ТЗ §11.5): left — без зеркала, right — зеркально; reversible или пусто — как угодно */
+  function handednessOk(product, mirror) {
+    if (!product || !product.handedness || product.handedness === 'reversible') return true;
+    const fp = formOf(TYPE.get(product.typeId), product.formId).fp; if (!['L', 'U', 'quarter'].includes(fp)) return true;
+    return (product.handedness === 'right') === !!mirror;
   }
 
   /* ---------- Права и инварианты (ТЗ §11.7, Ж14) ---------- */
@@ -408,7 +430,7 @@
       const infra = KF.categoryOf(o.typeId) === 'infra';
       if (!o.productId && !infra && !r.productId) out.push(V('Ж14', [id], `${nameOf(o)}: пустышке не подобран товар`));
       if (pol === 'keep') {
-        if (r.productId !== o.productId) out.push(V('Ж14', [id], `${nameOf(o)}: заменён товар при «Ничего не делать»`));
+        if (r.productId !== o.productId || r.formId !== o.formId || Object.keys(o.dims).some(k => k !== 'E' && Math.abs((o.dims[k] || 0) - (r.dims[k] || 0)) > TOL.dims)) out.push(V('Ж14', [id], `${nameOf(o)}: заменён товар при «Ничего не делать»`));
         const t = TYPE.get(o.typeId), mt = G.mountOf(t, formOf(t, o.formId));
         if (mt === 'ontop' && o.baseId) {
           const ob = org.get(o.baseId), rb = res.get(r.baseId);
@@ -425,8 +447,12 @@
         const exp = poseFromAnchor(anchorOf(od, room), r.typeId, r.formId, r.dims);
         const t = TYPE.get(r.typeId), mt = G.mountOf(t, formOf(t, r.formId));
         if (mt === 'wall') { if (r.wallId !== exp.wallId || Math.abs(r.offset - exp.offset) > TOL.pos || Math.abs((r.elev ?? r.dims.E ?? 0) - exp.elev) > TOL.pos) out.push(V('Ж14', [id], `${nameOf(o)}: сдвинут при «Только заменять»`)); }
-        else if (mt === 'ontop') { if (r.baseId !== o.baseId) out.push(V('Ж14', [id], `${nameOf(o)}: перенесён на другое основание`)); }
-        else if (Math.hypot(r.x - exp.x, r.y - exp.y) > TOL.pos || angDiff(r.rot, exp.rot) > TOL.rot) out.push(V('Ж14', [id], `${nameOf(o)}: сдвинут при «Только заменять»`, { moved: Math.round(Math.hypot(r.x - exp.x, r.y - exp.y)) }));
+        else if (mt === 'ontop') {
+          const ob = org.get(o.baseId), rb = res.get(r.baseId);
+          if (r.baseId !== o.baseId || !ob || !rb) out.push(V('Ж14', [id], `${nameOf(o)}: перенесён на другое основание`));
+          else { const a = relTo(o, ob), b = relTo(r, rb); if (Math.hypot(a.x - b.x, a.y - b.y) > TOL.pos + 0.5 || angDiff(a.rot, b.rot) > TOL.rot) out.push(V('Ж14', [id], `${nameOf(o)}: сдвинут на основании при «Только заменять»`)); }
+        }
+        else if (Math.hypot(r.x - exp.x, r.y - exp.y) > TOL.pos || angDiff(r.rot, exp.rot) > TOL.rot || !!r.mirror !== !!exp.mirror) out.push(V('Ж14', [id], `${nameOf(o)}: сдвинут при «Только заменять»`, { moved: Math.round(Math.hypot(r.x - exp.x, r.y - exp.y)) }));
       }
     }
     // добавления (ТЗ §11.6)
@@ -456,18 +482,24 @@
     for (let i = 0; i < live.length; i++) for (let j = i + 1; j < live.length; j++) out.push(...pairChecks(live[i], live[j]));
     for (const A of live) {
       if (!A.zones.length) continue;
-      const blocked = new Map();
-      // виноватым называем неподвижный предмет, если он есть среди мешающих (так унаследованное нарушение узнаётся)
-      for (const B of live) for (const k of blocksZones(A, B)) { const cur = blocked.get(k); if (!cur || (ctx.isFixed && !ctx.isFixed(cur.id) && ctx.isFixed(B.id))) blocked.set(k, B); }
+      const blocked = new Map();   // индекс зоны → все мешающие предметы
+      for (const B of live) for (const k of blocksZones(A, B)) { if (!blocked.has(k)) blocked.set(k, []); blocked.get(k).push(B); }
       const r = zonesOk(A, new Set(blocked.keys()));
       if (!r.ok) {
-        const idx = r.zone != null ? r.zone : A.zones.findIndex(z => z.oneOf === r.group);
-        const z = A.zones[idx]; const by = blocked.get(idx);
-        out.push(V('Ж10', [A.id, by && by.id], by ? `${A.name}: мешает ${by.name}` : `${A.name}: нет места для подхода`, { need: z.hard }));
+        // в нарушении — все мешающие: если к унаследованной помехе добавился новый предмет, ключ другой (не усугублять, §11.8)
+        const idxs = r.zone != null ? [r.zone] : A.zones.map((z, i) => (z.oneOf === r.group ? i : -1)).filter(i => i >= 0);
+        const by = [...new Set(idxs.flatMap(i => blocked.get(i) || []))];
+        const z = A.zones[idxs[0]];
+        out.push(V('Ж10', [A.id, ...by.map(B => B.id)], by.length ? `${A.name}: мешает ${by.map(B => B.name).join(', ')}` : `${A.name}: нет места для подхода`, { need: z.hard }));
       }
     }
     out.push(...accessCheck(room, live));
     return out;
+  }
+  /* Нарушения исходной расстановки только среди неподвижных предметов (keep, replace, инженерное):
+     унаследовать можно лишь то, что вызвано ими самими (§11.8); перемещаемые ИИ обязан исправить */
+  function fixedViolations(original, opts = {}) {
+    return validate({ ...original, furniture: (original.furniture || []).filter(f => immovable(f)) }, opts).violations;
   }
   const vkey = (v) => v.rule + '|' + [...v.ids].sort().join(',');
   const PHYSICAL = new Set(['Ж1', 'Ж2', 'Ж7', 'Ж8', 'Ж9']);
@@ -478,7 +510,9 @@
     const origById = new Map(((opts.original && opts.original.furniture) || []).map(f => [f.id, f]));
     // предмет с «Ничего не делать» целиком за стеной не учитывается (ТЗ §26 п. 7)
     ctx.ignoreOutside = (D) => { const o = origById.get(D.id) || D.item; return policyOf(o) === 'keep'; };
-    ctx.isFixed = (id) => { const o = origById.get(id); return !!o && immovable(o); };
+    // неподвижный — по праву и фактически (предмет «Ничего не делать» на переехавшем основании уже не неподвижен)
+    const own = new Map(items.map(f => [f.id, f])); const src = opts.original ? origById : own;
+    ctx.isFixed = (id) => { const o = src.get(id), f = own.get(id); if (!o || !immovable(o)) return false; if (policyOf(o) === 'replace' || !f) return true; return poseDiff(o, f).d <= TOL.pos && poseDiff(o, f).r <= TOL.rot && (o.baseId || null) === (f.baseId || null); };
     const all = describeAll(room, items, ctx);
     const ignored = all.filter(D => D.outside && ctx.ignoreOutside(D)).map(D => D.id);
     const descs = all.filter(D => !ignored.includes(D.id));
@@ -497,13 +531,17 @@
     if (opts.original) {
       const freeArea = opts.freeArea;
       out.push(...invariants(project, opts.original, { room, allowAdd: opts.allowAdd, freeArea }));
-      const base = opts.originalViolations || validate(opts.original, { room, productById: opts.productById }).violations;
+      const base = opts.originalViolations || fixedViolations(opts.original, { room, productById: opts.productById });
       const had = new Set(base.map(vkey));
       const itemIds = new Set(items.map(f => f.id));
+      // проход, закрытый только неподвижными предметами: те же нарушения Ж11 без всех остальных
+      let fixedAccess = null;
+      const accessByFixed = () => { if (!fixedAccess) { const fx = descs.filter(D => ctx.isFixed(D.id)); fixedAccess = new Set(accessCheck(room, fx).map(vkey)); } return fixedAccess; };
       for (const v of out) {
         if (v.rule === 'Ж14' || v.rule === 'Ж13' || v.rule === 'Ж12') continue;
+        if (v.rule === 'Ж11' && !accessByFixed().has(vkey(v))) continue;
         // все участники неподвижны (проёмы — тоже) и нарушение было в исходной расстановке
-        const fixedOnly = v.ids.every(id => origById.has(id) ? immovable(origById.get(id)) : !itemIds.has(id));
+        const fixedOnly = v.ids.every(id => origById.has(id) ? ctx.isFixed(id) : !itemIds.has(id));
         // физические нарушения (в стене, пересечение, потолок, проём, основание) у нового товара не наследуются
         const newProduct = PHYSICAL.has(v.rule) && v.ids.some(id => { const o = origById.get(id), f = items.find(x => x.id === id); return o && f && (o.productId !== f.productId || !o.productId); });
         if (fixedOnly && !newProduct && had.has(vkey(v))) v.inherited = true;
@@ -720,7 +758,7 @@
     VERSION, SOLID_TOP, TOL, PASS, RADIATOR, WEIGHTS, CODES, OPENING_MARGIN,
     mkFrame, rectL, polyDist, angDiff, angBetween, bbOverlap, lerp01, clamp01,
     mkCtx, describe, describeAll, backWall, anchorOf, poseFromAnchor, outerCornerLocal,
-    roomChecks, baseCheck, pairChecks, blocksZones, zonesOk, passInfo, baseBlocked, accessCheck, vkey, PHYSICAL, accessTargets, needsAccess, productCheck,
-    policyOf, immovable, invariants, validate, soft, combine, evaluate, freeDepth, entranceCenter, nearestWindow, seatCapacity, gridOf,
+    roomChecks, baseCheck, pairChecks, blocksZones, zonesOk, failingZones, passInfo, baseBlocked, accessCheck, vkey, PHYSICAL, accessTargets, needsAccess, productCheck,
+    policyOf, immovable, invariants, validate, fixedViolations, handednessOk, soft, combine, evaluate, freeDepth, entranceCenter, nearestWindow, seatCapacity, gridOf,
   };
 });

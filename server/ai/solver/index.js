@@ -69,19 +69,20 @@ function prepare(project, catalog, task = {}, limits = {}) {
   const fixedDescs = fixed.map(f => origDesc.get(f.id)).filter(D => D && !D.invalid && !D.outside).map(withBBZ);
   const fixedById = new Map(fixedDescs.map(D => [D.id, D]));
   const fixedBlocked = new Map();
-  for (const A of fixedDescs) { const s = new Set(); for (const B of fixedDescs) for (const k of AR.blocksZones(A, B)) s.add(k); fixedBlocked.set(A.id, s); }
-  const origViolations = AR.validate(project, { room, productById }).violations;
+  const fixedBlockers = new Map();
+  for (const A of fixedDescs) { const s = new Set(), m = new Map(); for (const B of fixedDescs) for (const k of AR.blocksZones(A, B)) { s.add(k); (m.get(k) || m.set(k, []).get(k)).push(B.id); } fixedBlocked.set(A.id, s); fixedBlockers.set(A.id, m); }
+  const origViolations = AR.fixedViolations(project, { room, productById });
   const origKeys = new Set(origViolations.map(AR.vkey));
   // быстрая проверка доступности в поиске — на сетке 100 мм для больших комнат (итоговая проверка — на 50 мм)
   const fine = AR.gridOf(room); const accessGrid = fine.nx * fine.ny > L.accessCells ? R.makeGrid({ ...room, cell: 100 }) : fine;
   const passBase = AR.baseBlocked(room, fixedDescs, accessGrid);
   const baseAccess = new Set(AR.accessCheck(room, fixedDescs, AR.passInfo(room, fixedDescs, { base: passBase, grid: accessGrid })).map(v => v.rule + '|' + v.ids.join(',')));
   // бюджет (ТЗ §12): F — неизменяемая стоимость
-  const F = orig.filter(f => { const I = info.get(f.id); return f.productId && !I.picks; }).reduce((s, f) => s + ((productById(f.productId) || {}).price || 0), 0);
+  const F = orig.filter(f => { const I = info.get(f.id); return f.productId && !I.picks; }).reduce((s, f) => s + Math.max(0, (productById(f.productId) || {}).price || 0), 0);   // цена ≤ 0 не входит (§12.1)
   const b = task.budget || { mode: 'none' };
   const limit = b.mode === 'strict' ? b.amount : b.mode === 'over' ? b.amount * (1 + (b.overPct || 0) / 100) : b.mode === 'target' ? null : Infinity;
   const prep = {
-    L, room, project: clone(project), catalog, productById, orig, origById, origDesc, fixed, fixedDescs, fixedById, fixedBlocked, jobs,
+    L, room, project: clone(project), catalog, productById, orig, origById, origDesc, fixed, fixedDescs, fixedById, fixedBlocked, fixedBlockers, jobs,
     origViolations, origKeys, baseAccess, passBase, accessGrid, task, budget: { ...b, F, limit }, radiators: C.radiatorsOn(room, fixed), cache: new Map(), stats: { described: 0 },
   };
   for (const j of jobs) initProducts(prep, j);
@@ -227,12 +228,14 @@ function materialize(job, entry, pose) {
   const p = entry.p; const f = { ...job.orig, formId: p.formId || job.formId, productId: p.missing ? job.orig.productId : p.id, dims: { ...p.dims }, formAny: p.missing ? job.orig.formAny : false };
   if (job.picks && !p.missing && p.id !== job.orig.productId) f.name = p.name || f.name;
   delete f.wallId; delete f.offset; delete f.elev; delete f.baseId; delete f.warnings;
-  if (pose.wallId != null && pose.offset != null) { f.wallId = pose.wallId; f.offset = pose.offset; f.elev = pose.elev; f.x = job.orig.x; f.y = job.orig.y; f.rot = 0; f.mirror = false; }
-  else { f.x = pose.x; f.y = pose.y; f.rot = pose.rot; f.mirror = !!pose.mirror; if (pose.baseId) f.baseId = pose.baseId; }
+  // координаты округляются до 1 мм сразу (ТЗ §13.1): солвер проверяет ровно то, что уйдёт в вариант; поворот — как есть
+  if (pose.wallId != null && pose.offset != null) { f.wallId = pose.wallId; f.offset = Math.round(pose.offset); f.elev = Math.round(pose.elev); f.x = job.orig.x; f.y = job.orig.y; f.rot = 0; f.mirror = false; }
+  else { f.x = pose.baseId ? pose.x : Math.round(pose.x); f.y = pose.baseId ? pose.y : Math.round(pose.y); f.rot = pose.rot; f.mirror = !!pose.mirror; if (pose.baseId) f.baseId = pose.baseId; }
   return f;
 }
 /* Статическая проверка: против комнаты и неподвижных (кешируется). Возвращает null или {code, id?}.
-   allow — ключи унаследованных нарушений: неподвижному (привязанному к точке) предмету они разрешены (ТЗ §11.8) */
+   allow — ключи унаследованных нарушений: неподвижному (привязанному к точке) предмету они разрешены (ТЗ §11.8),
+   кроме физических (в стене, пересечение, потолок, проём, основание) */
 function staticCheck(prep, D, allow) {
   const ok = (v) => allow && !AR.PHYSICAL.has(v.rule) && allow.has(AR.vkey(v));
   for (const v of AR.roomChecks(D, prep.room)) if (!ok(v)) return { code: v.code, id: v.ids[1] };
@@ -241,22 +244,31 @@ function staticCheck(prep, D, allow) {
   for (const F of prep.fixedDescs) {
     if (!AR.bbOverlap(D.bbZ, F.bbZ)) continue;
     for (const v of AR.pairChecks(D, F)) if (!ok(v)) return { code: v.code, id: F.id };
-    for (const k of AR.blocksZones(D, F)) { bl.add(k); if (!by.has(k)) by.set(k, F.id); }
+    for (const k of AR.blocksZones(D, F)) { bl.add(k); (by.get(k) || by.set(k, []).get(k)).push(F.id); }
     const ks = AR.blocksZones(F, D); if (ks.length) blocksFixed.set(F.id, ks);
   }
-  const zr = AR.zonesOk(D, bl);
-  if (!zr.ok) {
-    const idx = zr.zone != null ? zr.zone : D.zones.findIndex(z => z.oneOf === zr.group);
-    if (!(allow && allow.has(AR.vkey({ rule: 'Ж10', ids: [D.id, by.get(idx)].filter(Boolean) })))) return { code: 'SERVICE_ZONE', id: by.get(idx) };
+  const fail = AR.failingZones(D, bl);
+  if (fail.length) {
+    const ids = [...new Set(fail.flatMap(i => by.get(i) || []))];
+    if (!(allow && allow.has(AR.vkey({ rule: 'Ж10', ids: [D.id, ...ids] })))) return { code: 'SERVICE_ZONE', id: ids[0] };
     D.zoneAllowFail = true;
   }
-  // неподвижный с уже нарушенной зоной: разрешено, только если нарушение было и раньше
-  for (const [fid, ks] of blocksFixed) if (allow && allow.has(AR.vkey({ rule: 'Ж10', ids: [fid, D.id] }))) blocksFixed.delete(fid);
+  // неподвижный с уже нарушенной зоной: этот же предмет мешал ей и в исходной расстановке — разрешено
+  D.allowFixedFail = new Set();
+  for (const [fid, ks] of blocksFixed) {
+    const F = prep.fixedById.get(fid); const nb = new Set(prep.fixedBlocked.get(fid)); for (const k of ks) nb.add(k);
+    const fz = AR.failingZones(F, nb); if (!fz.some(i => ks.includes(i))) continue;
+    const ids = [...new Set(fz.flatMap(i => (prep.fixedBlockers.get(fid).get(i) || [])).concat(D.id))];
+    if (allow && allow.has(AR.vkey({ rule: 'Ж10', ids: [fid, ...ids] }))) D.allowFixedFail.add(fid);
+    else return { code: 'SERVICE_ZONE', id: fid };
+  }
   D.blockedStatic = bl; D.blocksFixed = blocksFixed; return null;
 }
 function withBBZ(D) {
   if (!D || D.invalid || D.bbZ) return D;
-  let { x0, y0, x1, y1 } = D.bb; for (const z of D.zones) { const b = z.softBB || z.hardBB; if (!b) continue; x0 = Math.min(x0, b.x0); y0 = Math.min(y0, b.y0); x1 = Math.max(x1, b.x1); y1 = Math.max(y1, b.y1); }
+  let { x0, y0, x1, y1 } = D.bb;
+  if (D.typeId === 'radiator') { const m = AR.RADIATOR.tall; x0 -= m; y0 -= m; x1 += m; y1 += m; }   // зона перед радиатором (Ж6)
+  for (const z of D.zones) { const b = z.softBB || z.hardBB; if (!b) continue; x0 = Math.min(x0, b.x0); y0 = Math.min(y0, b.y0); x1 = Math.max(x1, b.x1); y1 = Math.max(y1, b.y1); }
   D.bbZ = { x0, y0, x1, y1 }; return D;
 }
 function cached(prep, key, make) { let v = prep.cache.get(key); if (v === undefined) { v = make(); prep.cache.set(key, v); } return v; }
@@ -297,6 +309,8 @@ function gather(prep, job, S, stage, env, concept, reasons) {
       const B = get(job.orig.baseId); if (!B || !B.fr) continue; const fb = B.fr; const p = fb.w(job.relBase.x, job.relBase.y);
       poses.push({ x: p.x, y: p.y, rot: C.norm360(fb.rot + job.relBase.rot), mirror: job.orig.mirror, baseId: B.id, tag: 'ride', dyn: true });
     } else if (!job.moves) {
+      if (!job.anchor) { bump(reasons, 'OUTSIDE'); continue; }
+      if (!AR.handednessOk(e.p, job.anchor.mirror)) continue;   // зеркало угловой формы задано точкой привязки
       poses.push({ ...AR.poseFromAnchor(job.anchor, job.typeId, shape.formId, shape.dims), tag: 'anchor', dyn: true });
     } else {
       const methods = methodsAt(job, shape.formId, stage);
@@ -328,10 +342,12 @@ function gather(prep, job, S, stage, env, concept, reasons) {
           for (const p of C.mountPoses(room, shape, { onlyAttract: true, attract, elevAt })) if (!filt.walls || filt.walls.has(p.wallId)) poses.push({ ...p, dyn: true });
         }
       }
-      // исходная поза предмета всегда среди кандидатов (ТЗ §19.4)
+      // исходная поза предмета всегда среди кандидатов (ТЗ §19.4), если не противоречит обязательным отношениям места
       if (job.orig && !job.added && !job.outside) {
         const od = prep.origDesc.get(job.id);
-        if (od && !od.invalid) {
+        const obw = od && !od.invalid ? AR.backWall(od, room) : null;
+        const fits = od && !od.invalid && (!filt.walls || (obw && filt.walls.has(obw.wall.id))) && (!regionPoly || G.pointInPoly({ x: od.fr.x, y: od.fr.y }, regionPoly));
+        if (fits) {
           if (job.mount === 'wall') poses.push({ wallId: job.orig.wallId, offset: job.orig.offset, elev: job.orig.elev ?? job.orig.dims.E ?? 0, tag: 'orig', dyn: true });
           else if (job.mount === 'ontop') { const B = get(job.orig.baseId); if (B) poses.push({ x: job.orig.x, y: job.orig.y, rot: job.orig.rot, mirror: job.orig.mirror, baseId: B.id, tag: 'orig', dyn: true }); }
           else poses.push({ ...AR.poseFromAnchor(AR.anchorOf(od, room), job.typeId, shape.formId, shape.dims), tag: 'orig', dyn: true });
@@ -352,7 +368,7 @@ function candDesc(prep, job, cand, S) {
     const item = materialize(job, cand.e, cand.pose);
     const D = withBBZ(describeItem(prep, item, (id) => S.placed.get(id) || prep.fixedById.get(id)));
     if (!D || D.invalid) return { D: null, bad: { code: 'OUTSIDE' } };
-    return { D, bad: staticCheck(prep, D, job.moves ? null : prep.origKeys) };
+    return { D, bad: staticCheck(prep, D, job.moves || job.rides ? null : prep.origKeys) };
   };
   if (cand.pose.dyn && cand.pose.baseId) return make();
   if (!cand.pose.dyn) { const m = cand.pose._cd || (cand.pose._cd = new Map()); let r = m.get(job.id); if (!r) { r = make(); m.set(job.id, r); } return r; }
@@ -361,6 +377,8 @@ function candDesc(prep, job, cand, S) {
 
 /* Динамическая проверка против уже поставленного; возвращает null или {code,id} и заполняет обновления зон */
 const EMPTY = new Set();
+/* Против уже поставленного. Помеха зоне недопустима, если задетая зона оказывается среди нарушенных
+   (в том числе уже нарушенных раньше — не усугублять, §11.8). Обновления зон — в upd. */
 function dynamicCheck(prep, S, D, upd) {
   let blockedD = D.blockedStatic || EMPTY, own = false;
   const addOwn = (k) => { if (blockedD.has(k)) return; if (!own) { blockedD = new Set(blockedD); own = true; } blockedD.add(k); };
@@ -368,20 +386,21 @@ function dynamicCheck(prep, S, D, upd) {
     const B = S.placed.get(D.item.baseId) || prep.fixedById.get(D.item.baseId); const v = AR.baseCheck(D, B); if (v) return { code: 'BASE', id: B && B.id };
     for (const F of prep.fixedDescs) { if (!AR.bbOverlap(D.bb, F.bb)) continue; const pv = AR.pairChecks(D, F); if (pv.length) return { code: pv[0].code, id: F.id }; }
   }
+  const hit = (A, cur, ks) => { const nb = new Set(cur); for (const k of ks) nb.add(k); const fz = AR.failingZones(A, nb); return { nb, bad: fz.some(i => ks.includes(i)) }; };
   for (const P of S.placed.values()) {
     if (!AR.bbOverlap(D.bbZ, P.bbZ)) continue;
     const pv = AR.pairChecks(D, P); if (pv.length) return { code: pv[0].code, id: P.id };
     for (const k of AR.blocksZones(D, P)) addOwn(k);
     const ks = AR.blocksZones(P, D);
-    if (ks.length) { const cur = S.blocked.get(P.id) || EMPTY; let nb = null; for (const k of ks) if (!cur.has(k)) { if (!nb) nb = new Set(cur); nb.add(k); } if (nb) { if (!AR.zonesOk(P, nb).ok) return { code: 'SERVICE_ZONE', id: P.id }; upd.push([P.id, nb]); } }
+    if (ks.length) { const h = hit(P, S.blocked.get(P.id) || EMPTY, ks); if (h.bad || P.zoneAllowFail) return { code: 'SERVICE_ZONE', id: P.id }; upd.push([P.id, h.nb]); }
   }
   for (const [fid, ks] of D.blocksFixed || []) {
-    const F = prep.fixedById.get(fid); const cur = S.blocked.get(fid) || prep.fixedBlocked.get(fid); let nb = null;
-    for (const k of ks) if (!cur.has(k)) { if (!nb) nb = new Set(cur); nb.add(k); }
-    if (nb) { if (!AR.zonesOk(F, nb).ok) return { code: 'SERVICE_ZONE', id: fid }; upd.push([fid, nb]); }
+    const F = prep.fixedById.get(fid); const h = hit(F, S.blocked.get(fid) || prep.fixedBlocked.get(fid), ks);
+    if (h.bad && !(D.allowFixedFail && D.allowFixedFail.has(fid))) return { code: 'SERVICE_ZONE', id: fid };
+    upd.push([fid, h.nb]);
   }
   if (D.zoneAllowFail) { if (own) return { code: 'SERVICE_ZONE' }; }
-  else if (own && !AR.zonesOk(D, blockedD).ok) return { code: 'SERVICE_ZONE' };
+  else if (own && AR.failingZones(D, blockedD).length) return { code: 'SERVICE_ZONE' };
   upd.push([D.id, blockedD]);
   return null;
 }
@@ -462,6 +481,7 @@ function solveConcept(prep, concept, opts = {}) {
         const env = { room: prep.room, get: (id) => S.placed.get(id) || prep.fixedById.get(id), all: null };
         const groups = gather(prep, job, S, stage, env, concept, reasons);
         const scored = []; const seen = new Set(); const lc = localCtx(prep, job, S);
+        const quick = (job.mount === 'floor' || job.mount === 'wall') ? quickReach(prep, S) : null;
         const cand = { e: null, pose: null };
         for (const g of groups) for (const pose of g.poses) {
           cand.e = g.e; cand.pose = pose;
@@ -472,6 +492,7 @@ function solveConcept(prep, concept, opts = {}) {
           if (cand.pose.dyn && cand.pose.baseId && D.blockedStatic === undefined) { D.blockedStatic = new Set(); D.blocksFixed = new Map(); }
           const upd = []; const dv = dynamicCheck(prep, S, D, upd);
           if (dv) { bump(reasons, dv.code, dv.id ? { id: dv.id } : null); continue; }
+          if (quick && !quick(D)) { bump(reasons, 'ACCESS'); continue; }
           const price = job.picks && !cand.e.p.missing ? (cand.e.p.price || 0) : 0;
           if (prep.budget.limit !== Infinity && prep.budget.limit != null && prep.budget.F + S.spent + price + reserveAfter.get(oi) > prep.budget.limit + 0.005) { bump(reasons, 'BUDGET', { need: Math.round(prep.budget.F + S.spent + price + reserveAfter.get(oi) - prep.budget.limit) }); continue; }
           scored.push({ D, e: cand.e, upd, price, ls: localScore(prep, job, D, cand.e, lc, concept, rnd), tag: cand.pose.tag });
@@ -480,11 +501,14 @@ function solveConcept(prep, concept, opts = {}) {
         if (job.dependents.length) { const top = scored.slice(0, L.branch * 3); for (const c of top) c.ls += W.look * lookahead(prep, S, job, c); top.sort((a, b) => b.ls - a.ls); scored.splice(0, top.length, ...top); }
         expanded.push({ S, scored });
       }
-      // дети по страницам: сначала 12 лучших поз каждого состояния; если все они отсечены по доступности — следующие 12
+      // дети по страницам: сначала 12 лучших поз каждого состояния; если все отсечены по доступности — следующие
       const B = greedy ? 1 : L.branch; const checkAccess = job.mount === 'floor' || job.mount === 'wall';
+      // страницы растут: 12, 24, 48, …; последняя — всё оставшееся
+      const pageAt = (k) => B * ((1 << k) - 1);
       for (let page = 0; page < (checkAccess ? L.accessPages : 1) && !next.length; page++) {
         const children = [];
-        for (const { S, scored } of expanded) for (const c of scored.slice(page * B, (page + 1) * B)) {
+        const last = page === L.accessPages - 1;
+        for (const { S, scored } of expanded) for (const c of scored.slice(checkAccess ? pageAt(page) : 0, checkAccess && !last ? pageAt(page + 1) : B)) {
           const placed = new Map(S.placed); placed.set(job.id, c.D);
           const blocked = new Map(S.blocked); for (const [k, v] of c.upd) blocked.set(k, v);
           const picks = job.picks ? new Map(S.picks).set(job.id, c.e) : S.picks;
@@ -496,8 +520,8 @@ function solveConcept(prep, concept, opts = {}) {
         // отсечение по доступности (ТЗ §19.3 п. 4): лениво, только для состояний, попадающих в луч
         children.sort((a, b) => b.score - a.score);
         for (const S of children) { if (next.length >= L.beam) break; if (S.newD && cannotBlock(prep, S) || accessOk(prep, S)) next.push(S); else bump(reasons, 'ACCESS'); }
-        for (const { S } of expanded) releaseDist(prep, S);
       }
+      for (const { S } of expanded) releaseDist(prep, S);
       for (const S of next) { delete S.par; delete S.newD; }
       if (next.length) break;
     }
@@ -552,7 +576,7 @@ function cannotBlock(prep, S) {
   for (const z of room.zones.entry) if (AR.polyDist(D.poly, z.pts) < need) return false;
   for (const P of S.placed.values()) if (P !== D && !check(P)) return false;
   for (const P of prep.fixedDescs) if (!check(P)) return false;
-  return true;
+  return ownReachable(prep, S);
   function check(P) {
     if (!P.solid || P.mount === 'ontop' || P.outside || P.invalid) return true;
     const dx = Math.max(0, D.bb.x0 - P.bb.x1, P.bb.x0 - D.bb.x1), dy = Math.max(0, D.bb.y0 - P.bb.y1, P.bb.y0 - D.bb.y1);
@@ -570,7 +594,37 @@ function parentDist(prep, S) {
   const pi = AR.passInfo(prep.room, descs, { base: prep.passBase, scratch: true, grid });
   const buf = (prep.distPool && prep.distPool.pop()) || new Float32Array(grid.nx * grid.ny); buf.set(pi.dist); S._dist = buf; return buf;
 }
-function releaseDist(prep, S) { if (S._dist) { (prep.distPool || (prep.distPool = [])).push(S._dist); S._dist = null; } }
+function releaseDist(prep, S) { S._pi = null; if (S._dist) { (prep.distPool || (prep.distPool = [])).push(S._dist); S._dist = null; } }
+/* Быстрый отсев поз в недоступной части комнаты: точки по периметру цели доступа должны быть достижимы
+   по полю родителя (без самого предмета). Точная проверка — дальше, для состояний луча. */
+function quickReach(prep, S) {
+  if (!S.placed.size && !prep.fixedDescs.length) return null;
+  const grid = prep.accessGrid;
+  if (!S._pi) S._pi = AR.passInfo(prep.room, [], { grid, dist: parentDist(prep, S) });
+  const pi = S._pi; if (!pi.entranceOk && !pi.starts.length) return null;
+  const e = pi.r + grid.c;
+  return (D) => {
+    if (!AR.needsAccess(D)) return true;
+    for (const t of AR.accessTargets(D, e)) {
+      const cells = [];
+      for (let i = 0; i < t.length; i++) { const a = t[i], b = t[(i + 1) % t.length]; const n = Math.max(1, Math.ceil(Math.hypot(b.x - a.x, b.y - a.y) / 150)); for (let q = 0; q < n; q++) { const k = R.cellOf(grid, { x: a.x + (b.x - a.x) * q / n, y: a.y + (b.y - a.y) * q / n }); if (k >= 0) cells.push(k); } }
+      if (pi.reachesCells(cells)) return true;
+    }
+    return false;
+  };
+}
+/* До самого нового предмета можно дойти (по полю родителя; клетки у самого предмета станут непроходимыми — их не считаем) */
+function ownReachable(prep, S) {
+  const D = S.newD; if (!AR.needsAccess(D)) return true;
+  const P = S.par; const grid = prep.accessGrid;
+  if (!P._pi) P._pi = AR.passInfo(prep.room, [], { grid, dist: parentDist(prep, P) });
+  const pi = P._pi; const e = pi.r + grid.c;
+  for (const t of AR.accessTargets(D, e)) {
+    const cells = R.cellsOf(grid, t).filter(k => { const p = R.cellCenter(grid, k); if (G.pointInPoly(p, D.poly)) return false; let d = Infinity; for (let q = 0; q < D.poly.length; q++) d = Math.min(d, G.distPtSeg(p, D.poly[q], D.poly[(q + 1) % D.poly.length])); return d - grid.c / 2 >= pi.thr; });
+    if (pi.reachesCells(cells)) return true;
+  }
+  return false;
+}
 function childDist(prep, S) {
   const grid = prep.accessGrid; const D = S.newD; const base = parentDist(prep, S.par);
   const out = prep._childDist && prep._childDist.length === base.length ? prep._childDist : (prep._childDist = new Float32Array(base.length)); out.set(base);
@@ -602,8 +656,8 @@ function buildFurniture(prep, S, jobsById) {
 }
 function outItem(prep, f, orig) {
   const o = clone(f);
-  for (const k of ['x', 'y', 'offset', 'elev']) if (typeof o[k] === 'number') o[k] = Math.round(o[k]);
-  if (typeof o.rot === 'number') o.rot = Math.round(o.rot * 10) / 10;
+  // на основании координаты не округляются: иначе относительная поза на тумбе «плывёт» больше допуска 1 мм
+  for (const k of o.baseId ? ['offset', 'elev'] : ['x', 'y', 'offset', 'elev']) if (typeof o[k] === 'number') o[k] = Math.round(o[k]);
   // неизменённые координаты — как в снимке (ТЗ Б.1: округляются только изменённые)
   if (orig) { const same = ['x', 'y', 'rot', 'offset', 'elev'].every(k => o[k] === undefined || orig[k] === undefined || Math.abs(o[k] - orig[k]) < 1); if (same && o.wallId === orig.wallId && o.baseId === orig.baseId && !!o.mirror === !!orig.mirror) for (const k of ['x', 'y', 'rot', 'offset', 'elev']) if (orig[k] !== undefined) o[k] = orig[k]; }
   o.warnings = []; return o;
@@ -636,15 +690,17 @@ function scoreFurniture(prep, concept, rels, furniture, picks, opts = {}) {
   const soft = AR.soft(prep.room, descs, { people: prep.task.people, purpose: prep.task.purpose, productById: prep.productById, extra });
   return { score: AR.combine(soft), soft, total, project: p };
 }
-function checkFurniture(prep, furniture) {
-  return AR.validate({ ...prep.project, furniture }, { original: prep.project, productById: prep.productById, allowAdd: !!prep.task.allowAdd, room: prep.room, originalViolations: prep.origViolations });
+function checkFurniture(prep, furniture, picks) {
+  const b = prep.budget; const limit = b.limit != null && isFinite(b.limit) ? b.limit : null;
+  const total = picks ? b.F + [...picks.values()].reduce((s, e) => s + (e.p.missing ? 0 : Math.max(0, e.p.price || 0)), 0) : null;
+  return AR.validate({ ...prep.project, furniture }, { original: prep.project, productById: prep.productById, allowAdd: !!prep.task.allowAdd, room: prep.room, originalViolations: prep.origViolations, budget: limit != null && total != null ? { limit, total } : null });
 }
 function finish(prep, concept, beam, rels, ctx) {
   const L = prep.L; const jobsById = new Map(ctx.jobs.map(j => [j.id, j]));
   const sols = []; const invalid = [];
   for (const S of beam) {
     const furniture = buildFurniture(prep, S, jobsById);
-    const val = checkFurniture(prep, furniture);
+    const val = checkFurniture(prep, furniture, S.picks);
     if (!val.ok) { invalid.push(val.violations.filter(v => !v.inherited)); continue; }
     const ev = scoreFurniture(prep, concept, rels, furniture, S.picks, ctx.opts || {});
     sols.push({ furniture, picks: S.picks, score: ev.score, soft: ev.soft, total: ev.total, violations: val.violations, S });
@@ -700,7 +756,7 @@ function improve(prep, concept, rels, sol, jobs) {
       const furniture = sol.furniture.slice(); furniture[idx] = t;
       // едущие на основании — вместе с ним
       for (let k = 0; k < furniture.length; k++) if (furniture[k].baseId === j.id) { const rp = relPose(sol.furniture[k], f0); const fb = AR.mkFrame(t); const p = fb.w(rp.x, rp.y); furniture[k] = { ...furniture[k], x: Math.round(p.x), y: Math.round(p.y), rot: C.norm360(t.rot + rp.rot) }; }
-      const val = checkFurniture(prep, furniture); if (!val.ok) continue;
+      const val = checkFurniture(prep, furniture, sol.picks); if (!val.ok) continue;
       const ev = scoreFurniture(prep, concept, rels, furniture, sol.picks);
       if (ev.score > sol.score + 0.05) { Object.assign(sol, { furniture, score: ev.score, soft: ev.soft, total: ev.total, violations: val.violations }); break; }
     }
