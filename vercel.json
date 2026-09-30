@@ -5,7 +5,7 @@
   "outputDirectory": "public",
   "cleanUrls": false,
   "functions": {
-    "api/index.mjs": { "maxDuration": 60 }
+    "api/index.mjs": { "maxDuration": 300 }
   },
   "rewrites": [
     { "source": "/api/:path*", "destination": "/api/index?__p=:path*" },

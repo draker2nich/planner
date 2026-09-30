@@ -14,6 +14,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
 <script src="shared/catalog-types.js"></script>
+<script src="shared/geometry.js"></script>
 <style>
 /* ================= Редактор: токены холста и раскладка ================= */
 :root{
@@ -470,6 +471,7 @@ const DEF={door:{w:800,h:2000},window:{w:1200,h:1400,sill:900},arch:{w:900,h:210
 const KIND_NAME={door:'Дверь',window:'Окно',arch:'Арка'};
 const UNITS={mm:{f:1,d:0,l:'мм'},cm:{f:10,d:1,l:'см'},m:{f:1000,d:3,l:'м'},in:{f:25.4,d:2,l:'in'},ftin:{f:25.4,d:0,l:'ft-in'}};
 const uid=()=>Math.random().toString(36).slice(2,10);
+const DEBUG=/[?&]debug=1(&|$)/.test(location.search); // технические экраны (JSON) — только с ?debug=1
 
 /* ================= Единицы ================= */
 function fmt(mm,unit=P.unit){
@@ -501,19 +503,15 @@ function newProject(){
 }
 const E={propsOpen:false,copyMode:false,tool:'select',mode:'idle',sel:null,hover:null,start:null,stretch:null,ghost:null,openParams:null,drag:null,dialogOpen:false,hintUntil:0,activeDim:null,pointers:new Map(),gesture:null,pan:null,space:false,dimHits:[],markers:[],ctx:null,W:0,H:0,dpr:1,cursorW:null,zoomHintShown:false};
 
-/* ================= Геометрия ================= */
-const sub=(a,b)=>({x:a.x-b.x,y:a.y-b.y}), dot=(a,b)=>a.x*b.x+a.y*b.y, hyp=(a)=>Math.hypot(a.x,a.y);
-function orient(a,b,c){const v=(b.x-a.x)*(c.y-a.y)-(b.y-a.y)*(c.x-a.x); return Math.abs(v)<1e-6?0:(v>0?1:-1);}
-function onSeg(a,b,c){return Math.min(a.x,b.x)-1e-6<=c.x&&c.x<=Math.max(a.x,b.x)+1e-6&&Math.min(a.y,b.y)-1e-6<=c.y&&c.y<=Math.max(a.y,b.y)+1e-6;}
-function segInter(p1,p2,p3,p4){
-  const o1=orient(p1,p2,p3),o2=orient(p1,p2,p4),o3=orient(p3,p4,p1),o4=orient(p3,p4,p2);
-  if(o1!==o2&&o3!==o4) return true;
-  if(o1===0&&onSeg(p1,p2,p3))return true; if(o2===0&&onSeg(p1,p2,p4))return true;
-  if(o3===0&&onSeg(p3,p4,p1))return true; if(o4===0&&onSeg(p3,p4,p2))return true; return false;
-}
-function distPtSeg(p,a,b){const ab=sub(b,a),L2=dot(ab,ab); if(L2<1e-9)return hyp(sub(p,a)); let t=dot(sub(p,a),ab)/L2; t=Math.max(0,Math.min(1,t)); return hyp(sub(p,{x:a.x+ab.x*t,y:a.y+ab.y*t}));}
-function shoelace(pts){let s=0;for(let i=0;i<pts.length;i++){const a=pts[i],b=pts[(i+1)%pts.length];s+=a.x*b.y-b.x*a.y;}return s/2;}
-function lineInter(p,d,q,e){const den=d.x*e.y-d.y*e.x; if(Math.abs(den)<1e-9)return null; const t=((q.x-p.x)*e.y-(q.y-p.y)*e.x)/den; return {x:p.x+d.x*t,y:p.y+d.y*t};}
+/* ================= Геометрия =================
+   Общие функции — public/shared/geometry.js (FurniGeo): те же, что использует ИИ-дизайнер на сервере. */
+const {sub,dot,hyp}=FurniGeo;
+function orient(a,b,c){return FurniGeo.orient(a,b,c);}
+function onSeg(a,b,c){return FurniGeo.onSeg(a,b,c);}
+function segInter(p1,p2,p3,p4){return FurniGeo.segInter(p1,p2,p3,p4);}
+function distPtSeg(p,a,b){return FurniGeo.distPtSeg(p,a,b);}
+function shoelace(pts){return FurniGeo.shoelace(pts);}
+function lineInter(p,d,q,e){return FurniGeo.lineInter(p,d,q,e);}
 function rectsOverlap(a,b,pad=0){return a.x<b.x+b.w+pad&&a.x+a.w+pad>b.x&&a.y<b.y+b.h+pad&&a.y+a.h+pad>b.y;}
 function rectSegInter(r,a,b){
   if(a.x>=r.x&&a.x<=r.x+r.w&&a.y>=r.y&&a.y<=r.y+r.h)return true;
@@ -522,33 +520,7 @@ function rectSegInter(r,a,b){
 }
 
 /* ================= Производные данные ================= */
-function derive(p){
-  const V=new Map(p.vertices.map(v=>[v.id,v])); const deg=new Map(), adj=new Map();
-  p.vertices.forEach(v=>{deg.set(v.id,0);adj.set(v.id,[]);});
-  p.walls.forEach(w=>{deg.set(w.a,deg.get(w.a)+1);deg.set(w.b,deg.get(w.b)+1);adj.get(w.a).push(w);adj.get(w.b).push(w);});
-  let cycle=null, area=0;
-  if(p.vertices.length>=3&&p.walls.length===p.vertices.length&&[...deg.values()].every(d=>d===2)){
-    const order=[]; let cur=p.vertices[0].id, prevW=null, guard=0;
-    while(guard++<p.vertices.length+1){ order.push(cur); const w=adj.get(cur).find(x=>x!==prevW); if(!w)break; const nxt=w.a===cur?w.b:w.a; prevW=w; cur=nxt; if(cur===order[0])break; }
-    if(order.length===p.vertices.length&&cur===order[0]) cycle=order;
-  }
-  const cyclePos=new Map(cycle?cycle.map((id,i)=>[id,i]):[]);
-  if(cycle) area=shoelace(cycle.map(id=>V.get(id)));
-  const os=cycle?(area>0?-1:1):1;
-  const W=new Map();
-  for(const w of p.walls){
-    const a=V.get(w.a),b=V.get(w.b); const dx=b.x-a.x,dy=b.y-a.y,len=Math.hypot(dx,dy)||1; const ux=dx/len,uy=dy/len;
-    const ortho=Math.abs(dx)<0.5||Math.abs(dy)<0.5, horiz=Math.abs(dy)<0.5;
-    let s=1; if(cycle){const n=cycle.length; s=((cyclePos.get(w.a)+1)%n===cyclePos.get(w.b))?1:-1;}
-    const nx=-uy*s*os, ny=ux*s*os;
-    const refIsA=(a.y<b.y-0.5)||(Math.abs(a.y-b.y)<=0.5&&a.x<=b.x); const ref=refIsA?a:b, oth=refIsA?b:a;
-    W.set(w.id,{w,a,b,len:Math.hypot(dx,dy),ux,uy,ortho,horiz,nx,ny,ref,oth,rx:(oth.x-ref.x)/len,ry:(oth.y-ref.y)/len,refIsA});
-  }
-  const convex=new Map();
-  if(cycle){ const n=cycle.length; for(let i=0;i<n;i++){const pv=V.get(cycle[(i-1+n)%n]),c=V.get(cycle[i]),nx=V.get(cycle[(i+1)%n]); const cr=(c.x-pv.x)*(nx.y-c.y)-(c.y-pv.y)*(nx.x-c.x); convex.set(cycle[i],Math.sign(cr)===Math.sign(area));} }
-  p.closed=!!cycle;
-  return {V,deg,adj,cycle,area,W,convex};
-}
+function derive(p){return FurniGeo.derive(p);}
 function freeVertices(d=D,p=P){return p.vertices.filter(v=>d.deg.get(v.id)===1);}
 function wallOpenings(wid,p=P){return p.openings.filter(o=>o.wallId===wid).sort((a,b)=>a.offset-b.offset);}
 function kOf(wid,d=D,p=P){const w=p.walls.find(x=>x.id===wid); if(!d.cycle)return 2; return (d.convex.get(w.a)?1:0)+(d.convex.get(w.b)?1:0);}
@@ -1231,7 +1203,7 @@ const FLOOR_DEF='#d9cfbf', WALL_DEF='#e9e6df', EXT_COL='#9a9a94';
 /* ---------- Точки обзора ---------- */
 const VP={key:null,points:[]};
 function innerPoly(){return D.cycle?D.cycle.map(id=>D.V.get(id)):null;}
-function pointInPoly(p,poly){let ins=false;for(let i=0,j=poly.length-1;i<poly.length;j=i++){const a=poly[i],b=poly[j];if((a.y>p.y)!==(b.y>p.y)&&p.x<(b.x-a.x)*(p.y-a.y)/(b.y-a.y)+a.x)ins=!ins;}return ins;}
+function pointInPoly(p,poly){return FurniGeo.pointInPoly(p,poly);}
 function distToWalls(p){let m=Infinity;for(const w of P.walls){const i=D.W.get(w.id);m=Math.min(m,distPtSeg(p,i.a,i.b));}return m;}
 function polyCentroid(poly){let A=0,cx=0,cy=0;for(let i=0;i<poly.length;i++){const a=poly[i],b=poly[(i+1)%poly.length];const f=a.x*b.y-b.x*a.y;A+=f;cx+=(a.x+b.x)*f;cy+=(a.y+b.y)*f;}A/=2;if(Math.abs(A)<1e-6){return {x:poly.reduce((s,p)=>s+p.x,0)/poly.length,y:poly.reduce((s,p)=>s+p.y,0)/poly.length};}return {x:cx/(6*A),y:cy/(6*A)};}
 function getViewPoints(){
@@ -1300,21 +1272,22 @@ function getLibTexture(id){if(T3.libTex.has(id))return T3.libTex.get(id);const c
 const IDB={db:null,open(){if(this.db)return Promise.resolve(this.db);return new Promise((res,rej)=>{const r=indexedDB.open('roomEditor.assets',1);r.onupgradeneeded=()=>r.result.createObjectStore('photos',{keyPath:'id'});r.onsuccess=()=>{this.db=r.result;res(this.db);};r.onerror=()=>rej(r.error);});},
   tx(mode,fn){return this.open().then(db=>new Promise((res,rej)=>{const t=db.transaction('photos',mode);const st=t.objectStore('photos');const rq=fn(st);rq.onsuccess=()=>res(rq.result);rq.onerror=()=>rej(rq.error);}));},
   put(rec){return this.tx('readwrite',s=>s.put(rec));},get(id){return this.tx('readonly',s=>s.get(id));},del(id){return this.tx('readwrite',s=>s.delete(id));},all(){return this.tx('readonly',s=>s.getAll());}};
-async function importPhoto(file){
+async function importPhoto(file,kind='tex'){ // kind: 'tex' — текстура, 'ref' — фото-пример из пожеланий
   if(!/^image\/(jpeg|png|webp)$/.test(file.type))throw new Error('Формат: JPG, PNG или WebP');
   if(file.size>15*1024*1024)throw new Error('Файл больше 15 МБ');
   const bmp=await createImageBitmap(file,{imageOrientation:'from-image'}); const k=Math.min(1,2048/Math.max(bmp.width,bmp.height)); const w=Math.round(bmp.width*k),h=Math.round(bmp.height*k);
   const c=document.createElement('canvas');c.width=w;c.height=h;c.getContext('2d').drawImage(bmp,0,0,w,h);
   const png=file.type==='image/png'; const blob=await new Promise(r=>c.toBlob(r,png?'image/png':'image/jpeg',0.85));
   const all=await IDB.all(); const total=all.reduce((s,r)=>s+r.blob.size,0)+blob.size; if(total>60*1024*1024)throw new Error('Освободите место: удалите неиспользуемые фото');
-  const id=uid(); await IDB.put({id,blob,w,h,createdAt:Date.now()}); P.photos=P.photos||[]; P.photos.push(id); save(); return id;
+  const id=uid(); await IDB.put({id,blob,w,h,kind,createdAt:Date.now()}); if(kind==='tex'){P.photos=P.photos||[]; P.photos.push(id); save();} return id;
 }
 function getPhotoTexture(id){
   if(T3.photoTex.has(id))return T3.photoTex.get(id);
   const pr=IDB.get(id).then(rec=>{if(!rec)return null;return createImageBitmap(rec.blob).then(b=>{const t=new THREE.Texture(b);t.encoding=THREE.sRGBEncoding;t.anisotropy=8;t.needsUpdate=true;return t;});}).catch(()=>null);
   T3.photoTex.set(id,pr);return pr;
 }
-async function gcPhotos(){const used=new Set();P.walls.forEach(w=>{if(w.material?.type==='photo')used.add(w.material.photoId);});if(P.floor?.material?.type==='photo')used.add(P.floor.material.photoId);const all=await IDB.all();let n=0;for(const r of all){if(!used.has(r.id)){await IDB.del(r.id);n++;}}P.photos=[...used];save();toast(n?`Удалено фото: ${n}`:'Неиспользуемых фото нет');}
+function wishPhotoIds(){const ids=new Set();for(const b of [P.briefDraft,P.brief])(b?.photos||[]).forEach(ph=>{if(ph&&ph.photoId)ids.add(ph.photoId);});return ids;}
+async function gcPhotos(){const used=new Set(wishPhotoIds());P.walls.forEach(w=>{if(w.material?.type==='photo')used.add(w.material.photoId);});if(P.floor?.material?.type==='photo')used.add(P.floor.material.photoId);const all=await IDB.all();let n=0;for(const r of all){if(!used.has(r.id)){await IDB.del(r.id);n++;}}P.photos=[...used].filter(id=>!wishPhotoIds().has(id));save();toast(n?`Удалено фото: ${n}`:'Неиспользуемых фото нет');}
 
 /* ---------- Материалы three.js ---------- */
 function buildMaterial(m,faceW,faceH,u0=0,v0=0,isFloor=false){
@@ -1538,7 +1511,7 @@ function openMaterialPanel(sel){
       pn.onpaste=e=>{const it=[...(e.clipboardData?.items||[])].find(i=>i.type.startsWith('image/'));if(it){doImport(it.getAsFile());}};
       body.append(drop);
       const list=h('div',{class:'grid'}); body.append(h('div',{class:'row'},h('span',{},'Мои фото'),h('button',{onclick:gcPhotos},'Очистить неиспользуемые')),list);
-      IDB.all().then(all=>{all.sort((a,b)=>b.createdAt-a.createdAt).forEach(rec=>{const url=URL.createObjectURL(rec.blob);const im=h('div',{class:'ti'+(m.photoId===rec.id?' on':''),role:'button',tabindex:'0','aria-label':'Фото '+new Date(rec.createdAt).toLocaleDateString()});im.style.backgroundImage=`url(${url})`;im.onclick=()=>{m.photoId=rec.id;commit(m);};im.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();im.click();}};const del=h('button',{type:'button',class:'x','aria-label':'Удалить фото',onclick:async(e)=>{e.stopPropagation();await IDB.del(rec.id);T3.photoTex.delete(rec.id);if(m.photoId===rec.id){m.photoId=null;}renderTab();}},ic('close'));im.append(del);list.append(im);});if(!all.length)list.append(h('div',{class:'hint'},'Пока нет фото'));});
+      IDB.all().then(all=>{const wish=wishPhotoIds();all.filter(rec=>rec.kind!=='ref'&&!wish.has(rec.id)).sort((a,b)=>b.createdAt-a.createdAt).forEach(rec=>{const url=URL.createObjectURL(rec.blob);const im=h('div',{class:'ti'+(m.photoId===rec.id?' on':''),role:'button',tabindex:'0','aria-label':'Фото '+new Date(rec.createdAt).toLocaleDateString()});im.style.backgroundImage=`url(${url})`;im.onclick=()=>{m.photoId=rec.id;commit(m);};im.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();im.click();}};const del=h('button',{type:'button',class:'x','aria-label':'Удалить фото',onclick:async(e)=>{e.stopPropagation();await IDB.del(rec.id);T3.photoTex.delete(rec.id);if(m.photoId===rec.id){m.photoId=null;}renderTab();}},ic('close'));im.append(del);list.append(im);});if(!all.length)list.append(h('div',{class:'hint'},'Пока нет фото'));});
       if(m.photoId){
         const mode=h('select',{},h('option',{value:'stretch'},'Растянуть'),h('option',{value:'tile'},'Плитка'));mode.value=m.mode;mode.onchange=()=>{m.mode=mode.value;commit(m);}; body.append(h('div',{class:'row'},h('span',{},'Режим'),mode));
         if(m.mode==='stretch'){const fit=h('select',{},h('option',{value:'cover'},'С обрезкой'),h('option',{value:'contain'},'С полями'));fit.value=m.fit||'cover';fit.onchange=()=>{m.fit=fit.value;commit(m);};
@@ -1572,48 +1545,20 @@ async function loadCatalog(){
 }
 const mountOf=(t,f)=>f.mount||t.mount;
 
-/* ---------- Габарит (локальные координаты, фронт = +y) ---------- */
-function fpPoly(fp,d){
-  const P2=(x,y)=>({x,y}); let pts=[];
-  const W=d.W??d.A??d.DIA??500, Dd=d.D??d.L??d.DIA??500;
-  if(fp==='rect'){pts=[P2(0,0),P2(W,0),P2(W,Dd),P2(0,Dd)];}
-  else if(fp==='square'){pts=[P2(0,0),P2(W,0),P2(W,W),P2(0,W)];}
-  else if(fp==='circle'){const r=(d.DIA||W)/2;for(let i=0;i<32;i++)pts.push(P2(r+r*Math.cos(i/32*Math.PI*2),r+r*Math.sin(i/32*Math.PI*2)));}
-  else if(fp==='ellipse'){for(let i=0;i<32;i++)pts.push(P2(W/2+W/2*Math.cos(i/32*Math.PI*2),Dd/2+Dd/2*Math.sin(i/32*Math.PI*2)));}
-  else if(fp==='L'){const A=d.A,B=d.B,D2=Math.min(d.D,A,B);pts=[P2(0,0),P2(A,0),P2(A,B),P2(A-D2,B),P2(A-D2,D2),P2(0,D2)];}
-  else if(fp==='U'){const A=d.A,B=d.B,D2=Math.min(d.D,A/2,B);pts=[P2(0,0),P2(A,0),P2(A,B),P2(A-D2,B),P2(A-D2,D2),P2(D2,D2),P2(D2,B),P2(0,B)];}
-  else if(fp==='quarter'){const r=d.R;pts=[P2(0,0),P2(r,0)];for(let i=1;i<12;i++){const a=i/12*Math.PI/2;pts.push(P2(r*Math.cos(a),r*Math.sin(a)));}pts.push(P2(0,r));}
-  let x0=Infinity,y0=Infinity,x1=-Infinity,y1=-Infinity;pts.forEach(p=>{x0=Math.min(x0,p.x);y0=Math.min(y0,p.y);x1=Math.max(x1,p.x);y1=Math.max(y1,p.y);});
-  const cx=(x0+x1)/2,cy=(y0+y1)/2; return {pts:pts.map(p=>P2(p.x-cx,p.y-cy)),w:x1-x0,h:y1-y0};
-}
-function fLocal(f){const t=TYPE.get(f.typeId);const fo=formOf(t,f.formId);return fpPoly(fo.fp,f.dims);}
-function fWorld(f){const l=fLocal(f);const r=f.rot*Math.PI/180,c=Math.cos(r),s=Math.sin(r),m=f.mirror?-1:1;return l.pts.map(p=>({x:f.x+(p.x*m)*c-p.y*s,y:f.y+(p.x*m)*s+p.y*c}));}
-function aabbOf(pts){let x0=Infinity,y0=Infinity,x1=-Infinity,y1=-Infinity;pts.forEach(p=>{x0=Math.min(x0,p.x);y0=Math.min(y0,p.y);x1=Math.max(x1,p.x);y1=Math.max(y1,p.y);});return {x0,y0,x1,y1,w:x1-x0,h:y1-y0,cx:(x0+x1)/2,cy:(y0+y1)/2};}
-function shrink(pts,mm){const c=aabbOf(pts);return pts.map(p=>{const dx=p.x-c.cx,dy=p.y-c.cy,L=Math.hypot(dx,dy)||1;return {x:p.x-dx/L*mm,y:p.y-dy/L*mm};});}
-function segCross(p1,p2,p3,p4){const o=(a,b,c)=>{const v=(b.x-a.x)*(c.y-a.y)-(b.y-a.y)*(c.x-a.x);return Math.abs(v)<1?0:Math.sign(v);};const o1=o(p1,p2,p3),o2=o(p1,p2,p4),o3=o(p3,p4,p1),o4=o(p3,p4,p2);return o1*o2<0&&o3*o4<0;}
-function polyIntersect(A0,B0){const A=shrink(A0,1),B=shrink(B0,1);for(let i=0;i<A.length;i++)for(let j=0;j<B.length;j++)if(segCross(A[i],A[(i+1)%A.length],B[j],B[(j+1)%B.length]))return true;return A.some(q=>pointInPoly(q,B0))||B.some(q=>pointInPoly(q,A0));}
-function insideRoom(pts,p=P,d=D){const poly=d.cycle?d.cycle.map(id=>d.V.get(id)):null;if(!poly)return false;const s=shrink(pts,2);if(!s.every(q=>pointInPoly(q,poly)))return false;for(const w of p.walls){const i=d.W.get(w.id);for(let k=0;k<s.length;k++)if(segCross(s[k],s[(k+1)%s.length],i.a,i.b))return false;}return true;}
-function fWorldOf(f,p,d){ // для валидации на клоне
-  const t=TYPE.get(f.typeId);const fo=formOf(t,f.formId);const mt=mountOf(t,fo);
-  if(mt==='wall'){const i=d.W.get(f.wallId);if(!i)return null;const c={x:i.ref.x+i.rx*(f.offset+f.dims.W/2),y:i.ref.y+i.ry*(f.offset+f.dims.W/2)};const r=Math.atan2(i.nx,-i.ny);const dd=f.dims.D;const cx=c.x-i.nx*dd/2,cy=c.y-i.ny*dd/2;const l=fpPoly(fo.fp,f.dims);const cs=Math.cos(r),sn=Math.sin(r);return l.pts.map(q=>({x:cx+q.x*cs-q.y*sn,y:cy+q.x*sn+q.y*cs}));}
-  return fWorld(f);
-}
-function doorZones(p=P,d=D){const z=[];for(const o of p.openings){if(o.kind!=='door')continue;const i=d.W.get(o.wallId);if(!i)continue;const hingeA=o.hinge==='left'?o.offset:o.offset+o.width;const hp={x:i.ref.x+i.rx*hingeA,y:i.ref.y+i.ry*hingeA};const dirA=o.hinge==='left'?1:-1;const inward=o.swing==='in'?-1:1;const ax={x:i.rx*dirA,y:i.ry*dirA},ay={x:i.nx*inward,y:i.ny*inward};if(inward>0)continue;const pts=[hp];for(let k=0;k<=8;k++){const a=k/8*Math.PI/2;pts.push({x:hp.x+(ax.x*Math.cos(a)+ay.x*Math.sin(a))*o.width,y:hp.y+(ax.y*Math.cos(a)+ay.y*Math.sin(a))*o.width});}z.push({name:o.name,pts});}return z;}
-function windowZones(p=P,d=D){const z=[];for(const o of p.openings){if(o.kind!=='window')continue;const i=d.W.get(o.wallId);if(!i)continue;const a={x:i.ref.x+i.rx*o.offset,y:i.ref.y+i.ry*o.offset},b={x:i.ref.x+i.rx*(o.offset+o.width),y:i.ref.y+i.ry*(o.offset+o.width)};const n={x:-i.nx*300,y:-i.ny*300};z.push({name:o.name,pts:[a,b,{x:b.x+n.x,y:b.y+n.y},{x:a.x+n.x,y:a.y+n.y}]});}return z;}
-function furnitureWarnings(f,p=P,d=D){const w=[];const pts=fWorldOf(f,p,d);if(!pts)return ['outside'];const t=TYPE.get(f.typeId);const mt=mountOf(t,formOf(t,f.formId));if((mt==='floor'||mt==='ceiling')&&!insideRoom(pts,p,d))w.push('outside');if(mt==='floor'){for(const z of doorZones(p,d))if(polyIntersect(pts,z.pts)){w.push('door');break;}for(const z of windowZones(p,d))if(polyIntersect(pts,z.pts)){w.push('window');break;}}return w;}
-function validateFurniture(p,d){
-  if(!d.cycle)return null; const items=p.furniture||[]; const polys=new Map(); const strict=p._strict?new Set(p._strict):null; const chk=(f)=>strict?strict.has(f.id):!(f.warnings||[]).includes('outside');
-  for(const f of items){const pts0=fWorldOf(f,p,d);if(!pts0)return `${f.name}: стена не найдена`;polys.set(f.id,pts0);if(!chk(f))continue;const t=TYPE.get(f.typeId);if(!t)return `${f.name}: неизвестный тип`;const fo=formOf(t,f.formId);const mt=mountOf(t,fo);const pts=pts0;
-    if(mt==='wall'){const i=d.W.get(f.wallId);if(f.offset<-0.5||f.offset+f.dims.W>i.len+0.5)return `${f.name}: не помещается на стене`;}
-    else if(mt==='ontop'){const b=items.find(x=>x.id===f.baseId);if(!b)return `${f.name}: нет основания`;const bb=aabbOf(fWorldOf(b,p,d)),aa=aabbOf(pts);if(aa.x0<bb.x0-1||aa.x1>bb.x1+1||aa.y0<bb.y0-1||aa.y1>bb.y1+1)return `${f.name}: выходит за пределы основания`;}
-    else if(!insideRoom(pts,p,d))return `${f.name}: вне комнаты или в стене`;
-    if(f.productId){const pr=PRODUCTS.find(x=>x.id===f.productId);if(pr)for(const k in pr.dims)if(k!=='E'&&Math.abs((f.dims[k]||0)-pr.dims[k])>0.5)return `${f.name}: размеры товара фиксированы`;}
-  }
-  for(let i=0;i<items.length;i++)for(let j=i+1;j<items.length;j++){const a=items[i],b=items[j];if(!chk(a)&&!chk(b))continue;const la=TYPE.get(a.typeId).layer,lb=TYPE.get(b.typeId).layer;const ma=mountOf(TYPE.get(a.typeId),formOf(TYPE.get(a.typeId),a.formId)),mb=mountOf(TYPE.get(b.typeId),formOf(TYPE.get(b.typeId),b.formId));
-    let check=false;if(ma==='floor'&&mb==='floor'&&la==='floor'&&lb==='floor')check=true;if(ma==='ontop'&&mb==='ontop'&&a.baseId===b.baseId)check=true;if(ma==='wall'&&mb==='wall'&&a.wallId===b.wallId)check=true;if(ma==='ceiling'&&mb==='ceiling')check=true;
-    if(check&&polyIntersect(polys.get(a.id),polys.get(b.id)))return `${a.name} пересекает ${b.name}`;}
-  return null;
-}
+/* ---------- Габарит и проверки мебели — public/shared/geometry.js ---------- */
+function fpPoly(fp,d){return FurniGeo.fpPoly(fp,d);}
+function fLocal(f){return FurniGeo.fLocal(f);}
+function fWorld(f){return FurniGeo.fWorld(f);}
+function aabbOf(pts){return FurniGeo.aabbOf(pts);}
+function shrink(pts,mm){return FurniGeo.shrink(pts,mm);}
+function segCross(p1,p2,p3,p4){return FurniGeo.segCross(p1,p2,p3,p4);}
+function polyIntersect(A0,B0){return FurniGeo.polyIntersect(A0,B0);}
+function insideRoom(pts,p=P,d=D){return FurniGeo.insideRoom(pts,p,d);}
+function fWorldOf(f,p,d){return FurniGeo.fWorldOf(f,p,d);} // для валидации на клоне
+function doorZones(p=P,d=D){return FurniGeo.doorZones(p,d);}
+function windowZones(p=P,d=D){return FurniGeo.windowZones(p,d);}
+function furnitureWarnings(f,p=P,d=D){return FurniGeo.furnitureWarnings(f,p,d);}
+function validateFurniture(p,d){return FurniGeo.validateFurniture(p,d,{productById:id=>PRODUCT_BY_ID.get(id)||PRODUCTS.find(x=>x.id===id)});}
 
 /* ---------- Символы ---------- */
 const SYM={};
@@ -1658,11 +1603,7 @@ function drawFurniturePlan(ctx){
   for(const f of sorted)drawFurnitureItem(ctx,f,{faded,sel:E.sel?.type==='furniture'&&E.sel.id===f.id,hover:E.hover==='furniture'+f.id});
   if(E.mode==='fPlace'&&E.fGhost)drawFurnitureItem(ctx,E.fGhost.item,{ghost:E.fGhost.invalid?'bad':'ok'});
 }
-function furniturePlacementFrame(f){ // {x,y,rot} в мировых координатах, учитывая wall‑mount
-  const t=TYPE.get(f.typeId),fo=formOf(t,f.formId),mt=mountOf(t,fo);
-  if(mt==='wall'){const i=D.W.get(f.wallId);if(!i)return null;const c={x:i.ref.x+i.rx*(f.offset+f.dims.W/2),y:i.ref.y+i.ry*(f.offset+f.dims.W/2)};return {x:c.x-i.nx*f.dims.D/2,y:c.y-i.ny*f.dims.D/2,rot:Math.atan2(i.nx,-i.ny)*180/Math.PI,mirror:false};}
-  return {x:f.x,y:f.y,rot:f.rot,mirror:f.mirror};
-}
+function furniturePlacementFrame(f){return FurniGeo.placementFrame(f,D);} // {x,y,rot} в мировых координатах, учитывая wall‑mount
 function drawFurnitureItem(ctx,f,o={}){
   const t=TYPE.get(f.typeId);if(!t)return;const fo=formOf(t,f.formId);const l=fpPoly(fo.fp,f.dims);const fr=furniturePlacementFrame(f);if(!fr)return;
   const z=vp().zoom;const s=S(fr);const col=o.ghost?(o.ghost==='bad'?C.danger:C.accent):(o.sel||o.hover?C.accent:(f.locked?C.muted:C.wall));
@@ -1949,7 +1890,7 @@ function buildMenu(){
     menu.append(h('button',{type:'button',class:'mi',role:'menuitem',onclick:()=>{menu.hidden=true;fitRoom();}},ic('maximize'),'Показать комнату'),h('hr'));
   }
   if((P.furniture||[]).some(f=>f.aiPolicy)){menu.append(chkItem('sparkles','Показывать права ИИ на плане',P.showAiBadges,()=>{P.showAiBadges=!P.showAiBadges;save();updateTools();render();}),h('hr'));}
-  if(P.brief){menu.append(h('button',{type:'button',class:'mi',role:'menuitem',onclick:()=>{menu.hidden=true;showBriefJson();}},ic('copy'),'Бриф (JSON)'),h('hr'));}
+  if(P.brief&&DEBUG){menu.append(h('button',{type:'button',class:'mi',role:'menuitem',onclick:()=>{menu.hidden=true;showBriefJson();}},ic('copy'),'Данные для отладки'),h('hr'));}
   menu.append(h('div',{class:'mi',style:'cursor:default'},ic('ruler'),'Единицы измерения'));
   const sub=h('div',{class:'sub'});Object.keys(UNITS).forEach(u=>sub.append(h('button',{class:u===P.unit?'on':'',onclick:()=>{P.unit=u;$('#unitSel').value=u;save();render();buildMenu();}},UNITS[u].l)));menu.append(sub,h('hr'));
   menu.append(h('button',{type:'button',class:'mi',role:'menuitem',onclick:async()=>{menu.hidden=true;const r=await roomParamsDialog();if(!r)return;const err=apply(Q=>{Object.assign(Q,r);Q.wallParamsSet=true;Q.openings.forEach(o=>{if(o.kind==='window')o.head=Q.wallHeight-o.sill-o.height;});});if(err)toast(err,true);}},ic('settings'),'Параметры комнаты'));
@@ -2094,7 +2035,7 @@ async function wishesDialog(st){
     const list=h('div',{});
     const file=h('input',{type:'file',accept:'image/jpeg,image/png,image/webp',multiple:''});
     const drop=h('div',{class:'drop'},ic('upload'),' Перетащите фото сюда, вставьте из буфера или ',h('label',{class:'lnk'},'выберите файлы',file),h('div',{class:'hint'},'До 10 фото. По каждому отметьте, что именно нравится.'));
-    const add=async(files)=>{for(const f of [...files]){if(photos.length>=10){toast('Не больше 10 фото',true);break;}try{const id=await importPhoto(f);photos.push({photoId:id,likes:[],furnitureTypes:[],comment:''});}catch(e){toast(e.message,true);}}fill();};
+    const add=async(files)=>{for(const f of [...files]){if(photos.length>=10){toast('Не больше 10 фото',true);break;}try{const id=await importPhoto(f,'ref');photos.push({photoId:id,likes:[],furnitureTypes:[],comment:''});}catch(e){toast(e.message,true);}}fill();};
     file.onchange=()=>add(file.files); drop.ondragover=e=>{e.preventDefault();drop.classList.add('over');}; drop.ondragleave=()=>drop.classList.remove('over'); drop.ondrop=e=>{e.preventDefault();drop.classList.remove('over');add(e.dataTransfer.files);};
     box.onpaste=e=>{const its=[...(e.clipboardData?.items||[])].filter(i=>i.type.startsWith('image/'));if(its.length)add(its.map(i=>i.getAsFile()));};
     box.append(drop,list);
@@ -2141,12 +2082,12 @@ function submitBrief(st){
 function showResult(){
   const r=$('#result'); r.hidden=false; r.innerHTML=''; const b=P.brief; if(!b){r.hidden=true;return;} document.body.classList.add('res');
   const wrap=h('div',{class:'wrap'}); r.append(wrap);
-  wrap.append(h('h2',{},'Итоговый вариант'),h('div',{class:'hint'},'Бриф сохранён. Здесь появится результат ИИ‑дизайнера (этап 4–5). Пока — 4 вида комнаты и сводка брифа.'));
+  wrap.append(h('h2',{},'Итоговый вариант'),h('div',{class:'hint'},'Пожелания сохранены. Здесь появится результат ИИ‑дизайнера. Пока — 4 вида комнаты и сводка пожеланий.'));
   const c=polyCentroid(innerPoly()||[{x:0,y:0}]); const pi=nearestPointTo(c);
   const views=h('div',{class:'views'}); [['Вид 0°',0],['Вид 90°',Math.PI/2],['Вид 180°',Math.PI],['Вид 270°',Math.PI*1.5]].forEach(([nm,yaw])=>views.append(h('button',{onclick:()=>enter3D(pi,{yaw})},ic('eye'),nm)));
   wrap.append(h('div',{class:'card'},h('h4',{},'4 вида из центра комнаты'),views,h('div',{class:'hint'},`Точка обзора ${pi+1}. Esc — вернуться сюда.`)));
   const s=briefSummary(); const pol={};(P.furniture||[]).forEach(f=>{pol[f.aiPolicy||'free']=(pol[f.aiPolicy||'free']||0)+1;});
-  const card=h('div',{class:'card'},h('h4',{},'Сводка брифа'),h('div',{class:'row'},h('span',{},'Предметы'),h('span',{},`${s.locked+s.free} товаров, ${s.ph} пустышек`)),h('div',{class:'row'},h('span',{},'Права ИИ'),h('span',{},Object.keys(pol).map(k=>`${AI_NAME[k]}: ${pol[k]}`).join(' · '))),h('div',{class:'row'},h('span',{},'Комната'),h('span',{},['walls','floor','ceiling','lighting'].map(k=>({walls:'стены',floor:'пол',ceiling:'потолок',lighting:'свет'})[k]+': '+(b.room[k]==='keep'?'как есть':'ИИ')).join(' · '))));
+  const card=h('div',{class:'card'},h('h4',{},'Сводка пожеланий'),h('div',{class:'row'},h('span',{},'Предметы'),h('span',{},`${s.locked+s.free} товаров, ${s.ph} пустышек`)),h('div',{class:'row'},h('span',{},'Права ИИ'),h('span',{},Object.keys(pol).map(k=>`${AI_NAME[k]}: ${pol[k]}`).join(' · '))),h('div',{class:'row'},h('span',{},'Комната'),h('span',{},['walls','floor','ceiling','lighting'].map(k=>({walls:'стены',floor:'пол',ceiling:'потолок',lighting:'свет'})[k]+': '+(b.room[k]==='keep'?'как есть':'ИИ')).join(' · '))));
   if(b.prefs&&Object.values(b.prefs).some(Boolean))card.append(h('div',{class:'row'},h('span',{},'Предпочтения'),h('span',{},Object.values(b.prefs).filter(Boolean).join(' · '))));
   if(b.text)card.append(h('div',{class:'row'},h('span',{},'Пожелания'),h('span',{},b.text)));
   wrap.append(card);
@@ -2154,9 +2095,9 @@ function showResult(){
   b.photos.forEach(p=>{const im=h('img',{alt:'',title:p.likes.map(k=>LIKES.find(x=>x[0]===k)?.[1]).join(', ')+(p.comment?' — '+p.comment:'')});IDB.get(p.photoId).then(rec=>{if(rec)im.src=URL.createObjectURL(rec.blob);});pl.append(im);}); if(!b.photos.length)pl.append(h('span',{class:'hint'},'Без фото'));
   wrap.append(ph);
   const it=h('div',{class:'card'},h('h4',{},'Предметы и права')); (P.furniture||[]).forEach(f=>it.append(h('div',{class:'row'},h('span',{},f.name),h('span',{},AI_NAME[f.aiPolicy||'free'])))); wrap.append(it);
-  wrap.append(h('div',{class:'acts'},h('button',{onclick:()=>showBriefJson()},ic('copy'),'Бриф (JSON)'),h('button',{class:'primary',onclick:()=>{const err=apply(Q=>{Q.status='draft';},{noHist:true});if(err)toast(err,true);r.hidden=true;document.body.classList.remove('res');render();}},'Вернуться к редактированию')));
+  wrap.append(h('div',{class:'acts'},DEBUG?h('button',{onclick:()=>showBriefJson()},ic('copy'),'Данные для отладки'):null,h('button',{class:'primary',onclick:()=>{const err=apply(Q=>{Q.status='draft';},{noHist:true});if(err)toast(err,true);r.hidden=true;document.body.classList.remove('res');render();}},'Вернуться к редактированию')));
 }
-function showBriefJson(){const json=JSON.stringify({room:{vertices:P.vertices,walls:P.walls,openings:P.openings,wallHeight:P.wallHeight,wallThickness:P.wallThickness,floor:P.floor},brief:P.brief},null,2);dialog((box,api)=>{box.classList.add('wide');box.append(h('h3',{},'Бриф для этапа 4'));const ta=h('textarea',{rows:'16',readonly:''});ta.value=json;box.append(ta);api.buttons=[{label:'Копировать',onClick:()=>{navigator.clipboard?.writeText(json).then(()=>toast('Скопировано'),()=>{ta.select();toast('Выделите и скопируйте вручную');});}},{label:'Закрыть',primary:true,cancel:true,onClick:a=>a.close(null)}];});}
+function showBriefJson(){const json=JSON.stringify({room:{vertices:P.vertices,walls:P.walls,openings:P.openings,wallHeight:P.wallHeight,wallThickness:P.wallThickness,floor:P.floor},brief:P.brief},null,2);dialog((box,api)=>{box.classList.add('wide');box.append(h('h3',{},'Данные для отладки'));const ta=h('textarea',{rows:'16',readonly:''});ta.value=json;box.append(ta);api.buttons=[{label:'Копировать',onClick:()=>{navigator.clipboard?.writeText(json).then(()=>toast('Скопировано'),()=>{ta.select();toast('Выделите и скопируйте вручную');});}},{label:'Закрыть',primary:true,cancel:true,onClick:a=>a.close(null)}];});}
 function toggleMatPanel(){P.panelCollapsed=!P.panelCollapsed;save();$('#matPanel').classList.toggle('collapsed',P.panelCollapsed);}
 
 /* ================= Инициализация ================= */
