@@ -83,9 +83,10 @@
   function fLocal(f) { const t = TYPE.get(f.typeId); const fo = formOf(t, f.formId); return fpPoly(fo.fp, f.dims); }
   function fWorld(f) { const l = fLocal(f); const r = f.rot * Math.PI / 180, c = Math.cos(r), s = Math.sin(r), m = f.mirror ? -1 : 1; return l.pts.map(p => ({ x: f.x + (p.x * m) * c - p.y * s, y: f.y + (p.x * m) * s + p.y * c })); }
   function aabbOf(pts) { let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity; pts.forEach(p => { x0 = Math.min(x0, p.x); y0 = Math.min(y0, p.y); x1 = Math.max(x1, p.x); y1 = Math.max(y1, p.y); }); return { x0, y0, x1, y1, w: x1 - x0, h: y1 - y0, cx: (x0 + x1) / 2, cy: (y0 + y1) / 2 }; }
-  function shrink(pts, mm) { const c = aabbOf(pts); return pts.map(p => { const dx = p.x - c.cx, dy = p.y - c.cy, L = Math.hypot(dx, dy) || 1; return { x: p.x - dx / L * mm, y: p.y - dy / L * mm }; }); }
+  function shrink(pts, mm) { const c = aabbOf(pts); return pts.map(p => { const dx = p.x - c.cx, dy = p.y - c.cy, L = Math.sqrt(dx * dx + dy * dy) || 1; return { x: p.x - dx / L * mm, y: p.y - dy / L * mm }; }); }
   function segCross(p1, p2, p3, p4) { const o = (a, b, c) => { const v = (b.x - a.x) * (c.y - a.y) - (b.y - a.y) * (c.x - a.x); return Math.abs(v) < 1 ? 0 : Math.sign(v); }; const o1 = o(p1, p2, p3), o2 = o(p1, p2, p4), o3 = o(p3, p4, p1), o4 = o(p3, p4, p2); return o1 * o2 < 0 && o3 * o4 < 0; }
-  function polyIntersect(A0, B0) { const A = shrink(A0, 1), B = shrink(B0, 1); for (let i = 0; i < A.length; i++) for (let j = 0; j < B.length; j++) if (segCross(A[i], A[(i + 1) % A.length], B[j], B[(j + 1) % B.length])) return true; return A.some(q => pointInPoly(q, B0)) || B.some(q => pointInPoly(q, A0)); }
+  /* As, Bs — заранее сжатые на 1 мм копии (ускорение для солвера), по умолчанию считаются здесь */
+  function polyIntersect(A0, B0, As, Bs) { const A = As || shrink(A0, 1), B = Bs || shrink(B0, 1); for (let i = 0; i < A.length; i++) for (let j = 0; j < B.length; j++) if (segCross(A[i], A[(i + 1) % A.length], B[j], B[(j + 1) % B.length])) return true; return A.some(q => pointInPoly(q, B0)) || B.some(q => pointInPoly(q, A0)); }
   function insideRoom(pts, p, d) { const poly = roomPolygon(d); if (!poly) return false; const s = shrink(pts, 2); if (!s.every(q => pointInPoly(q, poly))) return false; for (const w of p.walls) { const i = d.W.get(w.id); for (let k = 0; k < s.length; k++) if (segCross(s[k], s[(k + 1) % s.length], i.a, i.b)) return false; } return true; }
 
   /* Поза предмета в мире {x, y, rot, mirror}; у настенных считается от стены и offset */
