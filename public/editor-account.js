@@ -71,7 +71,7 @@ header .save.warn{color:var(--warning)}
 
   /* Хук основного скрипта: вызывается после каждого локального сохранения */
   window.afterLocalSave = function (ok) {
-    document.title = (P.name || 'Новый проект') + ' — Планировка';
+    document.title = (P.name || 'Новый проект') + ' — furnitech';
     maybeGuestHint();
     if (Sync.mode !== 'account') { ind(ok ? 'guest' : 'error'); return; }
     const k = key();
@@ -130,7 +130,7 @@ header .save.warn{color:var(--warning)}
     updateTools(); updateModeUI(); if (P.mode === 'furniture') buildCatalog();
     if (keepView) render(); else fitRoom();
     if (P.status === 'submitted' && P.brief) showResult();
-    document.title = (P.name || 'Новый проект') + ' — Планировка';
+    document.title = (P.name || 'Новый проект') + ' — furnitech';
     ind('saved');
   }
   function backupLocal() { try { localStorage.setItem(LS.backup, JSON.stringify(P)); } catch {} }
@@ -355,6 +355,6 @@ header .save.warn{color:var(--warning)}
     e.preventDefault(); e.returnValue = '';
   });
 
-  document.title = (P.name || 'Новый проект') + ' — Планировка';
+  document.title = (P.name || 'Новый проект') + ' — furnitech';
   start();
 })();

@@ -5,14 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#09090b">
-<title>Планировка — онлайн‑планировщик комнаты с 3D и каталогом мебели</title>
+<title>furnitech — онлайн‑планировщик комнаты с 3D и каталогом мебели</title>
 <meta name="description" content="Нарисуйте комнату по своим размерам, поставьте двери и окна, расставьте мебель из каталога и пройдитесь по ней в 3D. Бесплатно, можно без регистрации.">
-<link rel="canonical" href="https://planner.vercel.app/">
+<link rel="canonical" href="https://furnitech.vercel.app/">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://planner.vercel.app/">
-<meta property="og:title" content="Планировка — спланируйте комнату за вечер">
+<meta property="og:url" content="https://furnitech.vercel.app/">
+<meta property="og:title" content="furnitech — спланируйте комнату за вечер">
 <meta property="og:description" content="Точные размеры, мебель из каталога с реальными габаритами и прогулка по комнате в 3D. Бесплатно.">
-<meta property="og:image" content="https://planner.vercel.app/og.png">
+<meta property="og:image" content="https://furnitech.vercel.app/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:locale" content="ru_RU">
@@ -25,7 +25,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
 <link rel="stylesheet" href="/shared/ui.css">
 <link rel="stylesheet" href="/shared/site.css">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Планировка","url":"https://planner.vercel.app/","description":"Онлайн‑планировщик комнаты: стены по точным размерам, двери и окна, мебель из каталога и прогулка в 3D.","applicationCategory":"DesignApplication","operatingSystem":"Any","inLanguage":"ru","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"furnitech","url":"https://furnitech.vercel.app/","description":"Онлайн‑планировщик комнаты: стены по точным размерам, двери и окна, мебель из каталога и прогулка в 3D.","applicationCategory":"DesignApplication","operatingSystem":"Any","inLanguage":"ru","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
 <style>
 /* ================= Главная ================= */
 :root{--plan-grid:color-mix(in srgb,var(--foreground) 6%,transparent);--plan-wall:var(--foreground);--plan-floor:var(--card);--plan-furn:color-mix(in srgb,var(--foreground) 7%,var(--card));--plan-line:color-mix(in srgb,var(--foreground) 45%,transparent);
@@ -157,7 +157,7 @@ h2.sec{font-size:24px;line-height:32px;letter-spacing:-.02em;margin:0 0 12px;fon
 <a class="skip" href="#main">Перейти к содержимому</a>
 <header class="site-h">
   <div class="wrap">
-    <a class="brand" href="/" translate="no"><span class="logo"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l9 5v10l-9 5-9-5V7z"/><path d="M12 22V12M21 7l-9 5-9-5"/></svg></span>Планировка</a>
+    <a class="brand" href="/" translate="no"><span class="logo"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19V9a3 3 0 0 1 3-3h4.5M9 12.5h5.5"/></svg></span><span class="wm" translate="no">furni<span>tech</span></span></a>
     <nav class="anchors" aria-label="Разделы"><a href="#features">Возможности</a><a href="#how">Как это работает</a><a href="#catalog" data-needs="catalog">Каталог</a><a href="#faq">Вопросы</a></nav>
     <span class="sp"></span>
     <div class="acct"><span class="skel" aria-hidden="true"></span></div>
@@ -189,9 +189,9 @@ h2.sec{font-size:24px;line-height:32px;letter-spacing:-.02em;margin:0 0 12px;fon
             <rect width="480" height="360" fill="url(#g)"/>
             <!-- размеры -->
             <g class="p-dim"><path d="M60 34H420M60 28v12M420 28v12"/></g>
-            <rect x="214" y="25" width="52" height="18" rx="4" fill="var(--plan-floor)"/><text class="p-dimt" x="240" y="38" text-anchor="middle">5,40 м</text>
+            <rect x="208" y="25" width="64" height="18" rx="4" fill="var(--plan-floor)"/><text class="p-dimt" x="240" y="38" text-anchor="middle">5400 мм</text>
             <g class="p-dim"><path d="M446 60V318M440 60h12M440 318h12"/></g>
-            <rect x="437" y="180" width="18" height="52" rx="4" fill="var(--plan-floor)"/><text class="p-dimt" x="0" y="0" text-anchor="middle" transform="translate(450 206) rotate(-90)">3,90 м</text>
+            <rect x="437" y="174" width="18" height="64" rx="4" fill="var(--plan-floor)"/><text class="p-dimt" x="0" y="0" text-anchor="middle" transform="translate(450 206) rotate(-90)">3900 мм</text>
             <!-- ковёр -->
             <ellipse cx="290" cy="190" rx="78" ry="56" class="p-dash"/>
             <!-- стены -->
@@ -208,7 +208,7 @@ h2.sec{font-size:24px;line-height:32px;letter-spacing:-.02em;margin:0 0 12px;fon
             <rect class="p-furn" x="262" y="168" width="58" height="44" rx="8"/>
             <!-- диван (выделен) -->
             <rect class="p-sel" x="354" y="110" width="56" height="160" rx="8"/><rect class="p-sel" x="394" y="110" width="16" height="160" rx="5"/>
-            <g class="p-cap"><rect x="262" y="78" width="142" height="24" rx="12"/><text x="333" y="94" text-anchor="middle">Диван · 220 × 90 см</text></g>
+            <g class="p-cap"><rect x="250" y="78" width="154" height="24" rx="12"/><text x="327" y="94" text-anchor="middle">Диван · 2200 × 900 мм</text></g>
             <!-- стол и стулья -->
             <circle class="p-furn" cx="168" cy="262" r="26"/>
             <rect class="p-furn" x="158" y="222" width="20" height="12" rx="3"/><rect class="p-furn" x="158" y="290" width="20" height="12" rx="3"/><rect class="p-furn" x="128" y="252" width="12" height="20" rx="3"/><rect class="p-furn" x="196" y="252" width="12" height="20" rx="3"/>
@@ -328,7 +328,7 @@ h2.sec{font-size:24px;line-height:32px;letter-spacing:-.02em;margin:0 0 12px;fon
 
 <footer class="site-f">
   <div class="wrap">
-    <span>© <span id="year">2026</span> Планировка</span>
+    <span>© <span id="year">2026</span> furnitech</span>
     <nav aria-label="Ссылки"><a href="/terms">Условия использования</a><a href="/privacy">Политика конфиденциальности</a><a href="/editor">Редактор</a><a href="/login" id="footLogin">Войти</a></nav>
     <span class="sp"></span>
     <div class="seg theme-sw" role="group" aria-label="Тема оформления"></div>

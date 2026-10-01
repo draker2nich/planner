@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#09090b">
-<title>Планировка — редактор комнаты</title>
+<title>Редактор — furnitech</title>
 <meta name="robots" content="noindex">
 <script>try{var t=localStorage.getItem('planner.theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
@@ -41,6 +41,12 @@ header .name{height:36px;width:220px;min-width:80px;font-weight:600;border-color
 header .name:hover{background:var(--accent)}
 header .name:focus{background:var(--field);border-color:var(--ring)}
 header .sp{flex:1 1 0;min-width:4px}
+#homeMark{width:30px;height:30px;flex:none;display:inline-flex;align-items:center;justify-content:center;border-radius:var(--radius-md);background:var(--primary);color:var(--primary-foreground);margin-right:2px;transition:opacity .15s}
+#homeMark:hover{opacity:.85}
+#homeMark .ic{width:18px;height:18px;stroke-width:2.4}
+#homeMark:focus-visible{box-shadow:0 0 0 3px color-mix(in srgb,var(--ring) 50%,transparent)}
+@media (max-width:640px){#homeMark{display:none}}
+body.in3d #homeMark{display:none}
 header .save{color:var(--muted-foreground);font-size:13px;white-space:nowrap;padding:0 6px}
 header .iconbtn{color:var(--muted-foreground);position:relative;flex:none}
 header .iconbtn:hover{color:var(--foreground)}
@@ -165,6 +171,11 @@ header .only3d.on{background:var(--accent);border-color:var(--ring)}
 #dlg .f>label{font-size:14px;font-weight:500}
 #dlg .f .val{display:flex;gap:8px;align-items:center}
 #dlg .f .val span{color:var(--muted-foreground);font-size:13px;min-width:22px}
+#dlg .f .val.stepper{gap:6px;justify-content:flex-end}
+#dlg .f .val.stepper button{width:32px;height:32px;font-size:16px;font-variant-numeric:tabular-nums}
+#props .rowinfo{display:flex;align-items:center;gap:8px;padding:8px 10px;margin:0 0 6px;border-radius:var(--radius-md);background:var(--brand-soft);color:var(--foreground);font-size:13px;font-weight:500}
+#props .rowinfo .ic{color:var(--brand)}
+#props .rowhint{margin:0 0 6px;font-size:12px;color:var(--muted-foreground)}
 #dlg .f input[type=text]{width:100%;text-align:right;font-variant-numeric:tabular-nums}
 #dlg .f select{width:100%}
 #dlg .f:has(.seg){grid-template-columns:1fr;gap:6px}
@@ -411,6 +422,7 @@ header .only3d.on{background:var(--accent);border-color:var(--ring)}
 <body>
 <div id="app">
 <header>
+  <a id="homeMark" href="/" aria-label="furnitech — на главную" translate="no"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19V9a3 3 0 0 1 3-3h4.5M9 12.5h5.5"/></svg></a>
   <div id="menuWrap"><button id="menuBtn" class="iconbtn ghost" aria-label="Меню" aria-haspopup="menu" aria-expanded="false"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/></svg></button><div id="menu" class="dmenu" role="menu" hidden></div></div>
   <select id="unitSel" hidden aria-hidden="true" tabindex="-1"><option value="mm">мм</option><option value="cm">см</option><option value="m">м</option><option value="in">дюймы</option><option value="ftin">фут-дюйм</option></select>
   <input class="name" id="projName" value="Новый проект" aria-label="Название проекта" autocomplete="off" spellcheck="false" maxlength="80">
@@ -500,7 +512,7 @@ function m2(mm2){return (mm2/1e6).toFixed(2)+' м²';}
 /* ================= Состояние ================= */
 let P, D, hist=[], hi=-1;
 function newProject(){
-  return {id:uid(),name:'Новый проект',unit:'cm',wallHeight:DEF.wallH,wallThickness:DEF.wallT,lengthsIncludeThickness:false,
+  return {id:uid(),name:'Новый проект',unit:'mm',wallHeight:DEF.wallH,wallThickness:DEF.wallT,lengthsIncludeThickness:false,
     wallParamsSet:false,floor:{material:{type:'color',color:'#d9cfbf'}},viewPointsVisible:true,eyeHeight:1600,photos:[],mode:'walls',furniture:[],fseq:{},status:'draft',showAiBadges:false,panelCollapsed:false,vertices:[],walls:[],openings:[],closed:false,showDims:false,seq:{door:0,window:0,arch:0},
     viewport:{x:0,y:0,zoom:0.08},createdAt:new Date().toISOString(),updatedAt:new Date().toISOString()};
 }
@@ -591,11 +603,72 @@ function validateProject(p){
   return null;
 }
 function fitOffset(info,width,desired,excludeId,p=P){
-  const occ=wallOpenings(info.w.id,p).filter(o=>o.id!==excludeId); let s=0; const gaps=[];
+  const ex=excludeId instanceof Set?excludeId:new Set(excludeId==null?[]:[excludeId]);
+  const occ=wallOpenings(info.w.id,p).filter(o=>!ex.has(o.id)); let s=0; const gaps=[];
   for(const o of occ){ if(o.offset-s>=width-0.5) gaps.push([s,o.offset]); s=o.offset+o.width; }
   if(info.len-s>=width-0.5) gaps.push([s,info.len]);
   let best=null,bd=Infinity; for(const [g0,g1] of gaps){const c=Math.max(g0,Math.min(desired,g1-width)); const dd=Math.abs(c-desired); if(dd<bd){bd=dd;best=c;}}
   return best===null?null:Math.round(best);
+}
+
+/* ================= Ряд окон =================
+   Несколько одинаковых окон на одной стене. У каждого окна ряда: group (общий id) и groupLayout:
+   'even' — равные простенки между окнами и до углов стены (пересчитываются при изменении длины стены);
+   'gap'  — ряд с заданными простенками, начало ряда задаётся отступом первого окна.
+   Ряд из одного окна ведёт себя как обычное окно. */
+const MIN_PIER=100;            // минимальный простенок и отступ от угла при равномерной расстановке, мм
+const DEF_PIER=600;            // простенок по умолчанию, мм
+const MAX_ROW=12;              // окон в ряду максимум
+function nWin(n){const m=n%10,k=n%100;return n+' '+(m===1&&k!==11?'окно':m>=2&&m<=4&&(k<12||k>14)?'окна':'окон');}
+function rowOf(o,p=P){if(!o)return [];if(!o.group)return [o];return p.openings.filter(x=>x.group===o.group).sort((a,b)=>a.offset-b.offset);}
+function rowGaps(row){return row.slice(1).map((q,k)=>q.offset-row[k].offset-row[k].width);}
+function rowUniformGap(row){const g=rowGaps(row);if(!g.length)return null;return g.every(x=>Math.abs(x-g[0])<=1)?g[0]:null;}
+function rowSpan(row){if(!row.length)return 0;const last=row[row.length-1];return last.offset+last.width-row[0].offset;}
+function evenOffsets(L,n,w){const g=(L-n*w)/(n+1);return {gap:g,offs:Array.from({length:n},(_,k)=>Math.round(g+k*(w+g)))};}
+function gapOffsets(start,n,w,gap){return Array.from({length:n},(_,k)=>Math.round(start+k*(w+gap)));}
+/* Пересчитать ряд: ch = {width?, start?, gap?, layout?}. Явный start или gap переводит ряд в режим 'gap'. */
+function relayoutRow(Q,gid,ch={},d){
+  const row=Q.openings.filter(x=>x.group===gid).sort((a,b)=>a.offset-b.offset); if(!row.length)return;
+  const i=(d||derive(Q)).W.get(row[0].wallId); if(!i)return;
+  const n=row.length, w=ch.width??row[0].width, gaps=rowGaps(row);
+  let layout=ch.layout||row[0].groupLayout||'gap'; if((ch.start!=null||ch.gap!=null)&&!ch.layout)layout='gap';
+  let offs;
+  if(layout==='even') offs=evenOffsets(i.len,n,w).offs;
+  else { const start=ch.start??row[0].offset; offs=[Math.round(start)]; for(let k=1;k<n;k++)offs.push(Math.round(offs[k-1]+w+(ch.gap??gaps[k-1]))); }
+  row.forEach((q,k)=>{q.width=w;q.offset=offs[k];q.groupLayout=layout;});
+}
+/* Окно уходит из ряда (удаление, «Отделить», «Переставить»): остальные остаются на месте и больше не «равномерные» */
+function leaveRow(Q,id){
+  const o=Q.openings.find(x=>x.id===id); if(!o||!o.group)return; const gid=o.group;
+  delete o.group; delete o.groupLayout;
+  const rest=Q.openings.filter(x=>x.group===gid);
+  if(rest.length<=1)rest.forEach(x=>{delete x.group;delete x.groupLayout;}); else rest.forEach(x=>{x.groupLayout='gap';});
+}
+/* Ряд целиком: отступ первого окна от опорного конца стены и простенок */
+async function rowPositionDialog(row,start,opt={}){
+  const info=D.W.get(row[0].wallId); const L=info.len; const n=row.length; const w=row[0].width; const ids=new Set(row.map(x=>x.id));
+  const uniform=opt.gap??rowUniformGap(row);
+  return dialog((box,api)=>{
+    box.append(h('h3',{},`Положение ряда: ${nWin(n)}`));
+    let fromOther=false;
+    const G=uniform!=null?numRow('Простенок',uniform):null;
+    const gapNow=()=>{if(!G)return null;const g=G.get();return isNaN(g)?NaN:g;};
+    const span=()=>{const g=gapNow();return g==null?rowSpan(row):(isNaN(g)?NaN:n*w+(n-1)*g);};
+    const A=numRow('От стены до первого окна',start), B=numRow('От последнего окна до другой стены',L-start-rowSpan(row),{readonly:true}), S=numRow('Ширина ряда',rowSpan(row),{readonly:true});
+    const sw=h('button',{class:'alt',type:'button'},'Задать от другой стороны');
+    const sync=()=>{const sp=span(); if(!isNaN(sp))S.set(sp); if(isNaN(sp))return; if(fromOther){const b=B.get(); if(!isNaN(b))A.set(L-b-sp);} else {const a=A.get(); if(!isNaN(a))B.set(L-a-sp);} };
+    sw.onclick=()=>{fromOther=!fromOther;sw.classList.toggle('on',fromOther);A.inp.readOnly=fromOther;B.inp.readOnly=!fromOther;(fromOther?B:A).inp.focus();};
+    A.inp.oninput=sync; B.inp.oninput=sync; if(G)G.inp.oninput=sync;
+    box.append(h('div',{class:'hint'},`${nWin(n)} по ${fmtU(w)} в один ряд. Опорная сторона — ${info.horiz?'левый':'верхний'} конец стены, длина стены ${fmtU(L)}.`),A.row);
+    if(G)box.append(G.row); box.append(S.row,B.row,sw);
+    api.buttons=[{label:'Отмена',cancel:true,onClick:a=>a.close(null)},{label:'ОК',primary:true,onClick:a=>{
+      const g=gapNow(); if(G&&isNaN(g))return a.err('Введите простенок'); if(g!=null&&g<0)return a.err('Простенок не может быть меньше 0');
+      const sp=span(); const st=fromOther?(L-B.get()-sp):A.get(); if(isNaN(st))return a.err('Введите значение');
+      if(st<-0.5||st+sp>L+0.5)return a.err(`Ряд шириной ${fmtU(Math.round(sp))} не помещается: допустимо 0 … ${fmtU(Math.max(0,Math.round(L-sp)))} от стены`);
+      const offs=g==null?row.map(q=>Math.round(st+q.offset-row[0].offset)):gapOffsets(st,n,w,g);
+      for(const q of wallOpenings(row[0].wallId)){ if(ids.has(q.id))continue; if(offs.some(o=>o<q.offset+q.width-0.5&&q.offset<o+w-0.5)) return a.err(`Мешает ${q.name} (${fmtU(q.offset)}…${fmtU(q.offset+q.width)}).`); }
+      a.close({start:Math.round(st),gap:g});}}];
+  });
 }
 
 /* ================= История и сохранение ================= */
@@ -715,6 +788,30 @@ async function openingDialog(kind,init){
       btnAny.onclick=()=>{anyChosen=true;btnAny.classList.add('on');Sr.inp.value=fmt(DEF.window.sill);recompute('sill');upd();};
       box.append(Sr.row,Cr.row,h('div',{class:'hint'},`Введите одно из значений — второе посчитается (высота стены ${fmtU(P.wallHeight)}). «Без разницы» = подоконник ${fmtU(DEF.window.sill)}.`),btnAny);
       if(init){recompute('sill');}
+      if(!init){ // ряд одинаковых окон
+        const cnt=h('input',{type:'text',inputmode:'numeric',value:'1',id:'winCount','aria-label':'Количество окон',autocomplete:'off',style:'width:56px;text-align:center'});
+        const getN=()=>{const v=Number(String(cnt.value).trim());return Number.isInteger(v)?v:NaN;};
+        const step=(d)=>{const v=getN();cnt.value=String(Math.max(1,Math.min(MAX_ROW,(isNaN(v)?1:v)+d)));refreshRow();};
+        const minus=h('button',{type:'button',class:'iconbtn sm','aria-label':'Меньше окон'},'−'), plus=h('button',{type:'button',class:'iconbtn sm','aria-label':'Больше окон'},'+');
+        minus.onclick=()=>step(-1); plus.onclick=()=>step(1);
+        cnt.onkeydown=(e)=>{if(e.key==='ArrowUp'){e.preventDefault();step(1);}else if(e.key==='ArrowDown'){e.preventDefault();step(-1);}};
+        cnt.oninput=()=>refreshRow();
+        const cntRow=h('div',{class:'f'},h('label',{for:'winCount'},'Количество'),h('div',{class:'val stepper'},minus,cnt,plus));
+        let layout='even';
+        const seg=h('div',{class:'seg',role:'group','aria-label':'Расстановка окон'});
+        const segBtn=(v,l)=>{const b=h('button',{type:'button','aria-pressed':String(layout===v)},l);b.onclick=()=>{layout=v;[...seg.children].forEach(x=>{const on=x===b;x.classList.toggle('on',on);x.setAttribute('aria-pressed',String(on));});refreshRow();};if(layout===v)b.classList.add('on');return b;};
+        seg.append(segBtn('even','Равномерно по стене'),segBtn('gap','С простенком'));
+        const segRow=h('div',{class:'f'},h('label',{},'Расстановка'),seg);
+        const Gr=numRow('Простенок',DEF_PIER);
+        const rowHint=h('div',{class:'hint'});
+        const rowBox=h('div',{hidden:true},segRow,Gr.row,rowHint);
+        function refreshRow(){
+          const n=getN(); const multi=n>1; rowBox.hidden=!multi; Gr.row.hidden=layout!=='gap';
+          rowHint.textContent=layout==='even'?`${nWin(isNaN(n)?2:n)} одинакового размера встанут в ряд на выбранной стене с равными простенками между окнами и до углов. При изменении длины стены ряд перераспределится.`:`${nWin(isNaN(n)?2:n)} одинакового размера встанут в ряд с заданным простенком; ряд можно сдвигать вдоль стены целиком.`;
+        }
+        all.push(Gr); box.append(h('hr',{style:'border:none;border-top:1px solid var(--border);margin:14px 0 4px'}),cntRow,rowBox); refreshRow();
+        api.rowParams=()=>({n:getN(),layout,gap:Gr.get()});
+      }
     }
     U.sel.onchange=()=>{const vals=all.map(r=>r.get());P.unit=U.sel.value;$('#unitSel').value=P.unit;all.forEach((r,i)=>{if(!isNaN(vals[i]))r.inp.value=fmt(vals[i]);r.unitSpan.textContent=UNITS[P.unit].l;});render();};
     const upd=()=>{ if(!api.primaryBtn)return; let ok=true; if(kind==='arch') ok=anyChosen||!isNaN(Rr.get()); if(kind==='window') ok=!isNaN(Sr.get())&&!isNaN(Cr.get()); api.primaryBtn.disabled=!ok; };
@@ -725,6 +822,12 @@ async function openingDialog(kind,init){
       const r={kind,width:w,height:hh};
       if(kind==='arch'){ r.radius=anyChosen?Math.round(w/2):Rr.get(); if(isNaN(r.radius))return a.err('Укажите радиус'); if(r.radius<0||r.radius>w/2)return a.err(`Радиус: 0 … ${fmtU(w/2)}`); if(r.radius>hh)return a.err('Радиус больше высоты'); }
       if(kind==='window'){ r.sill=Sr.get(); r.head=Cr.get(); if(isNaN(r.sill)||isNaN(r.head))return a.err('Укажите «от пола» или «до потолка»'); r.head=P.wallHeight-r.sill-hh; if(r.sill<0)return a.err('«От пола» не может быть меньше 0'); if(r.head<0)return a.err(`Окно не помещается по высоте: max высота = ${fmtU(P.wallHeight-r.sill)}`); }
+      if(kind==='window'&&api.rowParams){ const rp=api.rowParams();
+        if(isNaN(rp.n)||rp.n<1||rp.n>MAX_ROW)return a.err(`Количество окон: 1 … ${MAX_ROW}`);
+        if(rp.n>1){ if(rp.layout==='gap'){ if(isNaN(rp.gap))return a.err('Введите простенок'); if(rp.gap<0)return a.err('Простенок не может быть меньше 0'); }
+          const longest=Math.max(...P.walls.map(w=>D.W.get(w.id).len)); const need=rp.layout==='even'?rp.n*w+(rp.n+1)*MIN_PIER:rp.n*w+(rp.n-1)*rp.gap;
+          if(need>longest+0.5)return a.err(`${nWin(rp.n)} по ${fmtU(w)} не поместятся ни на одной стене: нужно ${fmtU(Math.round(need))}, самая длинная стена ${fmtU(Math.round(longest))}`);
+          r.count=rp.n; r.layout=rp.layout; r.gap=rp.layout==='gap'?rp.gap:null; } }
       a.close(r);}}];
   });
 }
@@ -803,7 +906,18 @@ function setWallLength(wid,newLen){
     clampOpenings(Q,derive(Q));
   });
 }
-function clampOpenings(Q,d){ for(const o of Q.openings){const i=d.W.get(o.wallId); if(i&&o.offset+o.width>i.len) o.offset=Math.max(0,Math.round(i.len-o.width));} }
+function clampOpenings(Q,d){
+  const done=new Set();
+  for(const o of Q.openings){
+    const i=d.W.get(o.wallId); if(!i)continue;
+    const row=rowOf(o,Q);
+    if(row.length>1){ if(done.has(o.group))continue; done.add(o.group);
+      if(row[0].groupLayout==='even') relayoutRow(Q,o.group,{},d);
+      else { const sp=rowSpan(row); if(row[0].offset+sp>i.len) relayoutRow(Q,o.group,{start:Math.max(0,Math.round(i.len-sp))},d); }
+      continue; }
+    if(o.offset+o.width>i.len) o.offset=Math.max(0,Math.round(i.len-o.width));
+  }
+}
 function deleteWall(wid){
   const w=P.walls.find(x=>x.id===wid); if(!w)return;
   if(P.mode==='furniture'){toast('Стены удаляются в режиме стен',true);return;}
@@ -814,7 +928,8 @@ function deleteWall(wid){
   const go=()=>{ const err=apply(Q=>{Q.walls=Q.walls.filter(x=>x.id!==wid);Q.openings=Q.openings.filter(o=>o.wallId!==wid);Q.furniture=(Q.furniture||[]).filter(f=>f.wallId!==wid);const used=new Set();Q.walls.forEach(x=>{used.add(x.a);used.add(x.b);});Q.vertices=Q.vertices.filter(v=>used.has(v.id));}); if(err)toast(err,true); else {E.sel=null;render();} };
   if(ops.length) confirmDlg('Удалить стену?',`Вместе со стеной удалятся: ${ops.map(o=>o.name).join(', ')}`).then(ok=>{if(ok)go();}); else go();
 }
-function deleteOpening(id){if(P.mode==='furniture'){toast('Проёмы удаляются в режиме стен',true);return;}if(P.openings.find(o=>o.id===id)?.locked){toast('Объект зафиксирован. Снимите замок (L)',true);return;}const err=apply(Q=>{Q.openings=Q.openings.filter(o=>o.id!==id);}); if(err)toast(err,true); else E.sel=null; render();}
+function deleteOpening(id){if(P.mode==='furniture'){toast('Проёмы удаляются в режиме стен',true);return;}if(P.openings.find(o=>o.id===id)?.locked){toast('Объект зафиксирован. Снимите замок (L)',true);return;}const err=apply(Q=>{leaveRow(Q,id);Q.openings=Q.openings.filter(o=>o.id!==id);}); if(err)toast(err,true); else E.sel=null; render();}
+async function deleteRow(o){const row=rowOf(o);if(row.some(x=>x.locked)){toast('В ряду есть зафиксированное окно. Снимите замок (L)',true);return;}if(!(await confirmDlg(`Удалить ряд: ${nWin(row.length)}?`,'Будут удалены все окна этого ряда. Отменить можно через Ctrl+Z.')))return;const ids=new Set(row.map(x=>x.id));const err=apply(Q=>{Q.openings=Q.openings.filter(x=>!ids.has(x.id));});if(err)toast(err,true);else{E.sel=null;toast(`Ряд удалён: ${nWin(row.length)}. Ctrl+Z — вернуть`);}render();}
 function deleteSelected(){ if(!E.sel)return; if(E.sel.type==='furniture'){deleteFurniture(E.sel.id);return;} if(E.sel.type==='wall')deleteWall(E.sel.id); else if(E.sel.type==='opening')deleteOpening(E.sel.id); else toast('Точка удаляется вместе со стенами'); }
 
 /* ================= Инструменты и режимы ================= */
@@ -866,6 +981,20 @@ function computeStretch(startV,cw){
 }
 function computeGhost(cw){
   const info=nearestWall(cw); if(!info)return null; const p=E.openParams;
+  if(p.count>1){
+    const n=p.count, w=p.width, proj=dot(sub(cw,info.ref),{x:info.rx,y:info.ry});
+    if(p.layout==='even'){
+      const ev=evenOffsets(info.len,n,w);
+      if(ev.gap<MIN_PIER-0.5) return {info,invalid:`${nWin(n)} по ${fmtU(w)} не помещаются на стене ${fmtU(Math.round(info.len))}`};
+      const hit=wallOpenings(info.w.id).find(q=>ev.offs.some(o=>o<q.offset+q.width-0.5&&q.offset<o+w-0.5));
+      if(hit) return {info,invalid:`Мешает ${hit.name} — уберите его или выберите расстановку «С простенком»`,offs:ev.offs};
+      return {info,offs:ev.offs,gap:Math.round(ev.gap)};
+    }
+    const sp=n*w+(n-1)*p.gap;
+    if(info.len<sp-0.5) return {info,invalid:`Ряд шириной ${fmtU(Math.round(sp))} длиннее стены`};
+    const off=fitOffset(info,sp,proj-sp/2,null); if(off===null) return {info,invalid:'Нет места для ряда между проёмами'};
+    return {info,offs:gapOffsets(off,n,w,p.gap),gap:p.gap};
+  }
   if(info.len<p.width-0.5) return {info,invalid:'Стена короче проёма'};
   const proj=dot(sub(cw,info.ref),{x:info.rx,y:info.ry}); const off=fitOffset(info,p.width,proj-p.width/2,null);
   if(off===null) return {info,invalid:'Нет места между проёмами'};
@@ -917,7 +1046,9 @@ async function onClick(sp){
   }
   if(E.mode==='openingPlace'){
     const g=computeGhost(cw); if(!g||g.invalid){if(g)toast(g.invalid,true);return;}
-    const p=E.openParams; const kind=p.kind; const id=uid(); const name=p.name||newOpeningName(kind);
+    const p=E.openParams; const kind=p.kind;
+    if(p.count>1&&g.offs){ await placeRow(p,g); return; }
+    const id=uid(); const name=p.name||newOpeningName(kind);
     const o={id,kind,name,wallId:g.info.w.id,offset:g.offset,width:p.width,height:p.height,sill:p.sill,head:p.head,radius:p.radius,hinge:p.hinge||'left',swing:p.swing||'in'};
     const err=apply(Q=>{Q.openings.push(o);Q.seq=Q.seq||{door:0,window:0,arch:0};if(!p.name)Q.seq[kind]=(Q.seq[kind]||0)+1;},{noHist:true}); if(err)return toast(err,true);
     E.sel={type:'opening',id}; E.activeDim={type:'opening',id}; render();
@@ -930,7 +1061,26 @@ async function onClick(sp){
     updateTools(); render(); return;
   }
 }
-function copyOpening(o){E.openParams={kind:o.kind,width:o.width,height:o.height,sill:o.sill,head:o.head,radius:o.radius,hinge:o.hinge,swing:o.swing};E.copyMode=true;E.sel=null;E.tool=o.kind;E.mode='openingPlace';E.ghost=null;updateTools();render();}
+async function placeRow(p,g){
+  const n=g.offs.length, gid=uid(), wallId=g.info.w.id; const base=(P.seq&&P.seq.window)||0;
+  const ops=g.offs.map((off,k)=>({id:uid(),kind:'window',name:`${KIND_NAME.window} ${base+k+1}`,wallId,offset:off,width:p.width,height:p.height,sill:p.sill,head:p.head,hinge:'left',swing:'in',group:gid,groupLayout:p.layout}));
+  const ids=new Set(ops.map(o=>o.id));
+  const finish=()=>{ if(E.copyMode){E.mode='openingPlace';E.ghost=null;} else {E.tool='select';E.mode='idle';E.openParams=null;E.ghost=null;} updateTools(); render(); };
+  if(p.layout==='even'){
+    const err=apply(Q=>{Q.openings.push(...ops);Q.seq=Q.seq||{door:0,window:0,arch:0};Q.seq.window=base+n;});
+    if(err){toast(err,true);return;}
+    E.sel={type:'opening',id:ops[0].id}; toast(`${nWin(n)} в ряд: простенки по ${fmtU(g.gap)}`); finish(); return;
+  }
+  const err=apply(Q=>{Q.openings.push(...ops);Q.seq=Q.seq||{door:0,window:0,arch:0};Q.seq.window=base+n;},{noHist:true}); if(err){toast(err,true);return;}
+  E.sel={type:'opening',id:ops[0].id}; E.activeDim={type:'opening',id:ops[0].id}; render();
+  const row=P.openings.filter(x=>ids.has(x.id)).sort((a,b)=>a.offset-b.offset);
+  const r=await rowPositionDialog(row,row[0].offset,{gap:p.gap}); E.activeDim=null;
+  if(!r){ apply(Q=>{Q.openings=Q.openings.filter(x=>!ids.has(x.id));Q.seq.window=base;},{noHist:true}); E.sel=null; }
+  else { const e2=apply(Q=>relayoutRow(Q,gid,{start:r.start,gap:r.gap})); if(e2)toast(e2,true); }
+  finish();
+}
+function copyOpening(o){const row=rowOf(o);if(o.kind==='window'&&row.length>1){const g=rowUniformGap(row);E.openParams={kind:'window',width:o.width,height:o.height,sill:o.sill,head:o.head,count:row.length,layout:row[0].groupLayout==='even'?'even':'gap',gap:g==null?DEF_PIER:g};E.copyMode=true;E.sel=null;E.tool='window';E.mode='openingPlace';E.ghost=null;updateTools();render();toast(`Укажите стену для копии ряда: ${nWin(row.length)}`);return;}
+E.openParams={kind:o.kind,width:o.width,height:o.height,sill:o.sill,head:o.head,radius:o.radius,hinge:o.hinge,swing:o.swing};E.copyMode=true;E.sel=null;E.tool=o.kind;E.mode='openingPlace';E.ghost=null;updateTools();render();}
 let CLIP=null;
 function duplicateOpening(o){const i=D.W.get(o.wallId);const off=o.offset+o.width;const fits=off+o.width<=i.len+0.5&&!wallOpenings(o.wallId).some(q=>q.id!==o.id&&off<q.offset+q.width&&q.offset<off+o.width);
   if(fits){const id=uid();const name=newOpeningName(o.kind);const err=apply(Q=>{Q.openings.push(Object.assign({},o,{id,name,offset:off}));Q.seq[o.kind]=(Q.seq[o.kind]||0)+1;});if(err)toast(err,true);else E.sel={type:'opening',id};render();}
@@ -945,7 +1095,7 @@ async function editDim(item){
   if(item.kind==='chain'){ const o=P.openings.find(x=>x.id===item.openingId); E.sel={type:'opening',id:o.id}; E.activeDim={type:'opening',id:o.id}; render();
     const r=await positionDialog(o); E.activeDim=null; if(r){const err=apply(Q=>{Q.openings.find(x=>x.id===o.id).offset=r.offset;}); if(err)toast(err,true);} render(); }
 }
-async function repositionOpening(o){ if(o.locked||P.mode==='furniture'){toast('Объект зафиксирован',true);return;} E.openParams={kind:o.kind,name:o.name,width:o.width,height:o.height,sill:o.sill,head:o.head,radius:o.radius,hinge:o.hinge,swing:o.swing}; apply(Q=>{Q.openings=Q.openings.filter(x=>x.id!==o.id);},{noHist:true}); E.sel=null; E.tool=o.kind; E.mode='openingPlace'; updateTools(); render(); }
+async function repositionOpening(o){ if(o.locked||P.mode==='furniture'){toast('Объект зафиксирован',true);return;} E.openParams={kind:o.kind,name:o.name,width:o.width,height:o.height,sill:o.sill,head:o.head,radius:o.radius,hinge:o.hinge,swing:o.swing}; apply(Q=>{leaveRow(Q,o.id);Q.openings=Q.openings.filter(x=>x.id!==o.id);},{noHist:true}); E.sel=null; E.tool=o.kind; E.mode='openingPlace'; updateTools(); render(); }
 
 /* ================= Перетаскивание ================= */
 function beginDrag(hit,sp){
@@ -953,7 +1103,9 @@ function beginDrag(hit,sp){
   if(P.mode==='furniture'){toast('Стены и проёмы в режиме мебели только для просмотра');return false;}
   if(hit.type==='opening'&&P.openings.find(x=>x.id===hit.id)?.locked){toast('Объект зафиксирован. Снимите замок (L)');return false;}
   if(hit.type==='vertex'&&D.adj.get(hit.id).some(w=>w.locked)){toast('Стена зафиксирована. Снимите замок (L)');return false;}
-  if(hit.type==='opening'){const o=P.openings.find(x=>x.id===hit.id); const i=D.W.get(o.wallId); const proj=dot(sub(cw,i.ref),{x:i.rx,y:i.ry}); E.drag={type:'opening',id:o.id,grab:proj-o.offset,orig:o.offset}; E.activeDim={type:'opening',id:o.id}; return true;}
+  if(hit.type==='opening'){const o=P.openings.find(x=>x.id===hit.id); const i=D.W.get(o.wallId); const proj=dot(sub(cw,i.ref),{x:i.rx,y:i.ry}); const row=rowOf(o);
+    if(row.length>1){ if(row.some(x=>x.locked)){toast('В ряду есть зафиксированное окно. Снимите замок (L)');return false;} E.drag={type:'opening',id:o.id,row:row.map(x=>({id:x.id,rel:x.offset-row[0].offset,orig:x.offset})),grab:proj-row[0].offset,span:rowSpan(row)}; E.activeDim={type:'opening',id:o.id}; return true; }
+    E.drag={type:'opening',id:o.id,grab:proj-o.offset,orig:o.offset}; E.activeDim={type:'opening',id:o.id}; return true;}
   if(hit.type==='vertex'){
     const v=D.V.get(hit.id); const ws=D.adj.get(v.id); let axis=null,wall=null;
     if(ws.length===1){const i=D.W.get(ws[0].id);axis={x:i.ux,y:i.uy};wall=ws[0];}
@@ -966,12 +1118,18 @@ function beginDrag(hit,sp){
 }
 function updateDrag(sp){
   const cw=Wd(sp); const dr=E.drag;
-  if(dr.type==='opening'){const o=P.openings.find(x=>x.id===dr.id);const i=D.W.get(o.wallId);const proj=dot(sub(cw,i.ref),{x:i.rx,y:i.ry});const off=fitOffset(i,o.width,proj-dr.grab,o.id);if(off!==null)o.offset=off;}
+  if(dr.type==='opening'&&dr.row){const o=P.openings.find(x=>x.id===dr.id);const i=D.W.get(o.wallId);const proj=dot(sub(cw,i.ref),{x:i.rx,y:i.ry});const st=fitOffset(i,dr.span,proj-dr.grab,new Set(dr.row.map(x=>x.id)));if(st!==null)dr.row.forEach(m=>{P.openings.find(x=>x.id===m.id).offset=st+m.rel;});}
+  else if(dr.type==='opening'){const o=P.openings.find(x=>x.id===dr.id);const i=D.W.get(o.wallId);const proj=dot(sub(cw,i.ref),{x:i.rx,y:i.ry});const off=fitOffset(i,o.width,proj-dr.grab,o.id);if(off!==null)o.offset=off;}
   else { const v=D.V.get(dr.id); const t=dot(sub(cw,dr.start),dr.axis); v.x=Math.round(dr.start.x+dr.axis.x*t); v.y=Math.round(dr.start.y+dr.axis.y*t); D=derive(P); }
   render();
 }
 async function endDrag(){
   const dr=E.drag; E.drag=null;
+  if(dr.type==='opening'&&dr.row){ const cur=dr.row.map(m=>P.openings.find(x=>x.id===m.id).offset); const curStart=Math.min(...cur);
+    dr.row.forEach(m=>{P.openings.find(x=>x.id===m.id).offset=m.orig;});
+    const o=P.openings.find(x=>x.id===dr.id); const row=rowOf(o); const gid=o.group;
+    const r=await rowPositionDialog(row,curStart); E.activeDim=null;
+    if(r){const err=apply(Q=>relayoutRow(Q,gid,r.gap==null?{start:r.start}:{start:r.start,gap:r.gap})); if(err)toast(err,true);} render(); return; }
   if(dr.type==='opening'){ const o=P.openings.find(x=>x.id===dr.id); const cur=o.offset; o.offset=dr.orig; const tmp=Object.assign({},o,{offset:cur});
     const r=await positionDialog(tmp); E.activeDim=null;
     if(r){const err=apply(Q=>{Q.openings.find(x=>x.id===o.id).offset=r.offset;}); if(err)toast(err,true);} render(); return; }
@@ -1119,7 +1277,9 @@ function drawOpening(o,ghost){
   if(isSel&&!ghost){ctx.strokeStyle=C.accent;ctx.lineWidth=2;ctx.beginPath();[q.p00,q.p10,q.p11,q.p01].forEach((p,k)=>k?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y));ctx.closePath();ctx.stroke();}
 }
 function drawGhost(){
-  const g=E.ghost,p=E.openParams; if(g.invalid){ const i=g.info; const proj=dot(sub(E.cursorW,i.ref),{x:i.rx,y:i.ry}); const off=Math.max(0,Math.min(i.len-p.width,proj-p.width/2)); drawOpening({id:'ghost',kind:p.kind,wallId:i.w.id,offset:off,width:p.width,hinge:'left',swing:'in'},'bad'); const s=S(E.cursorW); label(s.x+12,s.y-12,g.invalid,C.danger); return; }
+  const g=E.ghost,p=E.openParams; if(g.invalid&&g.offs){ g.offs.forEach((o,k)=>drawOpening({id:'ghost'+k,kind:p.kind,wallId:g.info.w.id,offset:o,width:p.width,hinge:'left',swing:'in'},'bad')); const s=S(E.cursorW); label(s.x+12,s.y-12,g.invalid,C.danger); return; }
+  if(g.invalid){ const i=g.info; const proj=dot(sub(E.cursorW,i.ref),{x:i.rx,y:i.ry}); const off=Math.max(0,Math.min(i.len-p.width,proj-p.width/2)); drawOpening({id:'ghost',kind:p.kind,wallId:i.w.id,offset:off,width:p.width,hinge:'left',swing:'in'},'bad'); const s=S(E.cursorW); label(s.x+12,s.y-12,g.invalid,C.danger); return; }
+  if(g.offs){ g.offs.forEach((o,k)=>drawOpening({id:'ghost'+k,kind:p.kind,wallId:g.info.w.id,offset:o,width:p.width,hinge:'left',swing:'in'},'ok')); const s=S(E.cursorW); label(s.x+12,s.y-12,`${nWin(g.offs.length)} · простенок ${fmtU(g.gap)}`,C.accent); return; }
   drawOpening({id:'ghost',kind:p.kind,wallId:g.info.w.id,offset:g.offset,width:p.width,hinge:'left',swing:'in'},'ok');
 }
 function label(x,y,text,color){const ctx=E.ctx;ctx.font='12px '+cssv('--font');const w=ctx.measureText(text).width+8;ctx.fillStyle=C.paper;ctx.fillRect(x-4,y-14,w,18);ctx.fillStyle=color;ctx.fillText(text,x,y);}
@@ -1215,12 +1375,21 @@ function buildFullWidget(wg){
   else if(sel.type==='vertex'){ const v=D.V.get(sel.id); if(!v)return null; anchor=v; const ws=D.adj.get(v.id); n={x:0,y:-1}; wg.append(h('h4',{},'Точка'));
     ws.forEach((w,k)=>{const i=D.W.get(w.id);wg.append(row(`Стена ${k+1}`,Math.round(i.len),(val)=>setWallLength(w.id,val)));}); }
   else if(sel.type==='opening'){ const o=P.openings.find(x=>x.id===sel.id); if(!o)return null; const i=D.W.get(o.wallId); anchor={x:i.ref.x+i.rx*(o.offset+o.width/2),y:i.ref.y+i.ry*(o.offset+o.width/2)}; n={x:i.nx,y:i.ny};
-    const upd=(fn)=>{return apply(Q=>{const q=Q.openings.find(x=>x.id===o.id);fn(q);if(q.kind==='window')q.head=Q.wallHeight-q.sill-q.height;});};
-    wg.append(h('h4',{},o.name,h('button',{type:'button',class:'lk','aria-label':'Зафиксировать',title:'Зафиксировать (L)',onclick:()=>toggleLock(sel)},lockIcon(o.locked))),row('Ширина',o.width,(v)=>upd(q=>{q.width=v;})),row('Высота',o.height,(v)=>upd(q=>{q.height=v;})));
+    const rw=rowOf(o), inRow=o.kind==='window'&&rw.length>1, gid=o.group;
+    const upd=(fn)=>{return apply(Q=>{const ts=inRow?Q.openings.filter(x=>x.group===gid):[Q.openings.find(x=>x.id===o.id)];ts.forEach(q=>{fn(q);if(q.kind==='window')q.head=Q.wallHeight-q.sill-q.height;});});};
+    wg.append(h('h4',{},o.name,h('button',{type:'button',class:'lk','aria-label':'Зафиксировать',title:'Зафиксировать (L)',onclick:()=>toggleLock(sel)},lockIcon(o.locked))));
+    if(inRow){const ug=rowUniformGap(rw);wg.append(h('div',{class:'rowinfo'},ic('window'),h('span',{},`Ряд: ${nWin(rw.length)} · ${rw[0].groupLayout==='even'?'равномерно по стене':'с простенком'}`)),h('div',{class:'hint rowhint'},'Размеры и высота меняются у всех окон ряда сразу.'));}
+    wg.append(row('Ширина',o.width,(v)=>inRow?apply(Q=>relayoutRow(Q,gid,{width:v})):upd(q=>{q.width=v;})),row('Высота',o.height,(v)=>upd(q=>{q.height=v;})));
     if(o.kind==='window'){wg.append(row('От пола',o.sill,(v)=>upd(q=>{q.sill=v;})),row('До потолка',o.head,(v)=>upd(q=>{q.sill=Q_head(q,v);})));}
     if(o.kind==='arch')wg.append(row('Радиус',o.radius,(v)=>upd(q=>{q.radius=v;})));
     if(o.kind==='door'){const sh=h('select',{},h('option',{value:'left'},'Петли слева'),h('option',{value:'right'},'Петли справа'));sh.value=o.hinge;sh.onchange=()=>upd(q=>{q.hinge=sh.value;});const ss=h('select',{},h('option',{value:'in'},'Внутрь'),h('option',{value:'out'},'Наружу'));ss.value=o.swing;ss.onchange=()=>upd(q=>{q.swing=ss.value;});wg.append(h('div',{class:'row'},h('span',{},'Петли'),sh),h('div',{class:'row'},h('span',{},'Открывание'),ss));}
-    wg.append(row('От стены',o.offset,(v)=>upd(q=>{q.offset=v;})),row('До другой',Math.round(i.len-o.offset-o.width),(v)=>upd(q=>{q.offset=Math.round(i.len-v-q.width);})),
+    if(inRow){ const sp=rowSpan(rw), ug=rowUniformGap(rw);
+      wg.append(row('Ряд от стены',rw[0].offset,(v)=>apply(Q=>relayoutRow(Q,gid,{start:v}))),row('Ряд до другой',Math.round(i.len-rw[0].offset-sp),(v)=>apply(Q=>relayoutRow(Q,gid,{start:Math.round(i.len-v-sp)}))),
+        ...(ug!=null?[row('Простенок',ug,(v)=>{if(v<0)return 'Простенок не может быть меньше 0';return apply(Q=>relayoutRow(Q,gid,{gap:v}));})]:[]),
+        h('div',{class:'acts'},rw[0].groupLayout!=='even'?h('button',{onclick:()=>{const e=apply(Q=>relayoutRow(Q,gid,{layout:'even'}));if(e)toast(e,true);else render();}},'Равномерно'):null,
+          h('button',{onclick:()=>copyOpening(o)},'Копировать ряд'),h('button',{title:'Окно станет самостоятельным, остальные останутся на месте',onclick:()=>{if(o.locked){toast('Объект зафиксирован',true);return;}const e=apply(Q=>leaveRow(Q,o.id));if(e)toast(e,true);else{toast(`${o.name} больше не в ряду`);render();}}},'Отделить'),
+          h('button',{class:'del',onclick:()=>deleteOpening(o.id)},'Удалить окно'),h('button',{class:'del',onclick:()=>deleteRow(o)},'Удалить ряд'))); }
+    else wg.append(row('От стены',o.offset,(v)=>upd(q=>{q.offset=v;})),row('До другой',Math.round(i.len-o.offset-o.width),(v)=>upd(q=>{q.offset=Math.round(i.len-v-q.width);})),
       h('div',{class:'acts'},h('button',{onclick:()=>repositionOpening(o)},'Переставить'),h('button',{onclick:()=>copyOpening(o)},'Копировать'),h('button',{class:'del',onclick:()=>deleteOpening(o.id)},'Удалить'))); }
   if(roSel){wg.querySelectorAll('input').forEach(i=>{i.readOnly=true;});wg.querySelectorAll('select').forEach(i=>{i.disabled=true;});wg.querySelectorAll('.acts button').forEach(b=>{if(!/Копировать|Изменить в 3D/.test(b.textContent))b.disabled=true;});}
   return {anchor,n};
@@ -2009,7 +2178,7 @@ function initTips(){
 /* ---------- Компактный виджет и панель свойств ---------- */
 function compactInfo(sel){
   if(sel.type==='wall'){const i=D.W.get(sel.id);const n=P.walls.findIndex(w=>w.id===sel.id)+1;return {title:`Стена ${n}`,sub:`${fmt(i.len)} × ${fmtU(P.wallHeight)}`,lock:true};}
-  if(sel.type==='opening'){const o=P.openings.find(x=>x.id===sel.id);return {title:o.name,sub:`${fmt(o.width)} × ${fmtU(o.height)}`,lock:true};}
+  if(sel.type==='opening'){const o=P.openings.find(x=>x.id===sel.id);const rw=rowOf(o);return {title:o.name,sub:`${fmt(o.width)} × ${fmtU(o.height)}`+(o.kind==='window'&&rw.length>1?` · ряд из ${rw.length}`:''),lock:true};}
   if(sel.type==='furniture'){const f=P.furniture.find(x=>x.id===sel.id);const t=TYPE.get(f.typeId),fo=formOf(t,f.formId);return {title:f.name,sub:fo.dims.map(k=>fmt(f.dims[k])).join('×')+' '+UNITS[P.unit].l,lock:true};}
   if(sel.type==='vertex'){return {title:'Точка',sub:'',lock:false};}
   if(sel.type==='floor'){return {title:'Пол',sub:m2(Math.abs(D.area)),lock:false};}
