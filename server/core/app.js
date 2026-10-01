@@ -10,6 +10,9 @@ const { makeCatalog, ApiError, LIMITS } = require('./catalog.js');
 const { sqliteDriver, postgresDriver, migrate } = require('./db.js');
 const { fsStorage, blobStorage } = require('./storage.js');
 const T = require('../../public/shared/catalog-types.js');
+const V = require('../../public/shared/validation.js');
+const { makeLimiter, clientIp } = require('./ratelimit.js');
+const { makeProjects, PROJECT_MAX_BYTES } = require('./projects.js');
 
 /* ---------- сборка окружения ---------- */
 async function fromEnv(env = process.env, { dataDir } = {}) {
@@ -67,14 +70,29 @@ async function syncEnvAdmin(ctx) {
   console.log(`Администратор создан: ${email} / ${pw}`);
 }
 
+/* Соль для HMAC адресов в лимитах: AUTH_SECRET или случайная строка, сохранённая в settings */
+async function authSecret(ctx) {
+  if (ctx.env.AUTH_SECRET) return String(ctx.env.AUTH_SECRET);
+  const row = await ctx.db.get("SELECT value FROM settings WHERE key='auth_secret'");
+  if (row) return row.value;
+  const v = crypto.randomBytes(32).toString('hex');
+  await ctx.db.run("INSERT INTO settings (key, value) VALUES ('auth_secret', ?) ON CONFLICT (key) DO NOTHING", [v]);
+  return (await ctx.db.get("SELECT value FROM settings WHERE key='auth_secret'")).value;
+}
+
 async function bootstrap(ctx) {
   const { db, env } = ctx;
   await migrate(db);
+  ctx.limiter = makeLimiter(db, await authSecret(ctx));
+  ctx.projects = makeProjects(db);
   await syncEnvAdmin(ctx);
   await ctx.catalog.backfillSearch();
   const products = Number((await db.get('SELECT CAST(COUNT(*) AS INTEGER) AS c FROM products')).c);
   if (!products && env.SEED_DEMO !== '0') { await ctx.catalog.seedDemo(); console.log('Каталог заполнен демо‑товарами.'); }
 }
+
+const registrationOpen = (ctx) => String(ctx.env.REGISTRATION_ENABLED ?? '1').trim() !== '0';
+const contactEmail = (ctx) => { const s = String(ctx.env.CONTACT_EMAIL || '').trim(); return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s) ? s : null; };
 
 /* makeCtx — функция, возвращающая Promise контекста (вызывается лениво, при первом запросе) */
 function createApp(makeCtx) {
@@ -92,8 +110,8 @@ function createApp(makeCtx) {
     const keys = []; const re = new RegExp('^' + pattern.replace(/:(\w+)/g, (_, k) => { keys.push(k); return '([^/]+)'; }) + '$');
     routes.push({ method, re, keys, handler });
   };
-  const readJson = async (req) => {
-    const b = await req.body(1024 * 1024);
+  const readJson = async (req, limit = 1024 * 1024) => {
+    const b = await req.body(limit);
     if (!b.length) return {};
     try { return JSON.parse(b.toString('utf8')); } catch { throw new ApiError(400, 'bad_json', 'Некорректный JSON'); }
   };
@@ -108,14 +126,26 @@ function createApp(makeCtx) {
 
   // служебное
   route('GET', '/api/health', async (ctx) => ({ ok: true, db: ctx.db.dialect, storage: ctx.storage.kind, setup: ctx.setupProblem || null }));
-  route('GET', '/api/config', async (ctx) => ({ uploads: ctx.storage.kind === 'blob' ? 'blob' : 'direct', blobAuth: ctx.storage.auth || null, maxModelMb: 50, maxImageMb: 15 }));
+  route('GET', '/api/config', async (ctx) => ({ uploads: ctx.storage.kind === 'blob' ? 'blob' : 'direct', blobAuth: ctx.storage.auth || null, maxModelMb: 50, maxImageMb: 15,
+    registration: registrationOpen(ctx), contactEmail: contactEmail(ctx), termsVersion: V.TERMS_VERSION }));
 
   // авторизация
+  const tooMany = (retryAfter) => {
+    const min = Math.max(1, Math.ceil(retryAfter / 60));
+    return new ApiError(429, 'rate_limited', `Слишком много попыток. Попробуйте через ${min} мин`, { retryAfter }, { 'Retry-After': String(retryAfter) });
+  };
   route('POST', '/api/auth/login', async (ctx, req) => {
     if (ctx.setupProblem) throw new ApiError(503, 'setup', ctx.setupProblem);
-    const b = await readJson(req);
+    const b = await readJson(req, 16 * 1024);
+    const L = ctx.limiter; const ip = L.tag(clientIp(req)); const em = L.tag(V.normEmail(b.email));
+    const kPair = `login:pair:${ip}:${em}`, kIp = `login:ip:${ip}`;
+    for (const [k, lim, win] of [[kPair, 10, 900], [kIp, 50, 3600]]) { const c = await L.peek(k, lim, win); if (!c.ok) throw tooMany(c.retryAfter); }
     const r = await auth.login(ctx.db, b.email, b.password);
-    if (!r) throw new ApiError(401, 'bad_credentials', 'Неверная почта или пароль');
+    if (!r) {
+      await L.hit(kPair, 10, 900); await L.hit(kIp, 50, 3600);
+      throw new ApiError(401, 'bad_credentials', 'Неверная почта или пароль');
+    }
+    await L.reset(kPair);
     return r;
   });
   route('POST', '/api/auth/logout', async (ctx, req) => { const u = await requireUser(ctx, req); await auth.logout(ctx.db, u.token); return { ok: true }; });
@@ -129,7 +159,43 @@ function createApp(makeCtx) {
     await ctx.db.run('DELETE FROM sessions WHERE user_id=? AND token<>?', [u.id, u.token]);
     return { ok: true };
   });
-  route('POST', '/api/auth/register', async () => { throw new ApiError(501, 'not_implemented', 'Регистрация компаний и клиентов появится на следующем этапе'); });
+  /* Регистрация клиента. Роль всегда client; после успеха — сразу сессия (ответ как у входа). */
+  route('POST', '/api/auth/register', async (ctx, req) => {
+    if (ctx.setupProblem) throw new ApiError(503, 'setup', ctx.setupProblem);
+    if (!registrationOpen(ctx)) throw new ApiError(403, 'registration_closed', 'Регистрация временно закрыта');
+    const L = ctx.limiter; const ipTag = L.tag(clientIp(req));
+    const lim = await L.hit(`reg:ip:${ipTag}`, 5, 3600);
+    if (!lim.ok) throw tooMany(lim.retryAfter);
+    const b = await readJson(req, 16 * 1024);
+    if (b.website) {
+      await ctx.db.run('INSERT INTO audit_log (user_id, action, entity, entity_id, data, at) VALUES (?,?,?,?,?,?)', [null, 'user.register_rejected', 'user', null, JSON.stringify({ ip: ipTag.slice(0, 12), reason: 'honeypot' }), new Date().toISOString()]);
+      throw new ApiError(422, 'rejected', 'Не удалось создать аккаунт');
+    }
+    const v = V.validateRegistration(b);
+    if (!v.ok) throw new ApiError(422, 'validation', Object.values(v.fields)[0], { fields: v.fields });
+    const taken = () => new ApiError(409, 'email_taken', 'Эта почта уже зарегистрирована', { fields: { email: 'Эта почта уже зарегистрирована' } });
+    if (await ctx.db.get('SELECT id FROM users WHERE email=?', [v.values.email])) throw taken();
+    let id;
+    try {
+      id = await auth.createUser(ctx.db, { email: v.values.email, password: v.values.password, role: 'client', name: v.values.name,
+        terms: { acceptedAt: new Date().toISOString(), version: V.TERMS_VERSION }, marketing: v.values.marketing });
+    } catch (e) { if (/unique|duplicate/i.test(e.message)) throw taken(); throw e; }
+    const u = await ctx.db.get('SELECT * FROM users WHERE id=?', [id]);
+    await ctx.db.run('INSERT INTO audit_log (user_id, action, entity, entity_id, data, at) VALUES (?,?,?,?,?,?)', [id, 'user.register', 'user', id, JSON.stringify({ ip: ipTag.slice(0, 12) }), new Date().toISOString()]);
+    return auth.createSession(ctx.db, u);
+  });
+
+  // проекты редактора в аккаунте
+  route('GET', '/api/projects', async (ctx, req) => ctx.projects.list(await requireUser(ctx, req)));
+  route('POST', '/api/projects', async (ctx, req) => { const u = await requireUser(ctx, req); return ctx.projects.create(u, await readJson(req, PROJECT_MAX_BYTES + 64 * 1024)); });
+  route('GET', '/api/projects/:id', async (ctx, req, p) => ctx.projects.get(await requireUser(ctx, req), p.id));
+  route('PUT', '/api/projects/:id', async (ctx, req, p) => {
+    const u = await requireUser(ctx, req);
+    const lim = await ctx.limiter.hit(`proj:put:${u.id}`, 120, 60);
+    if (!lim.ok) throw tooMany(lim.retryAfter);
+    return ctx.projects.update(u, p.id, await readJson(req, PROJECT_MAX_BYTES + 64 * 1024));
+  });
+  route('DELETE', '/api/projects/:id', async (ctx, req, p) => ctx.projects.remove(await requireUser(ctx, req), p.id));
 
   // публичный каталог
   route('GET', '/api/catalog/types', async () => ({ cats: T.CATS, dimNames: T.DIMN, types: T.TYPES.map(t => ({ id: t.id, name: t.name, cats: t.cats, mount: t.mount, forms: t.forms.map(f => ({ id: f.id, name: f.name, fp: f.fp, dims: T.formDimKeys(f), typical: f.typical })) })) }));
@@ -214,9 +280,9 @@ function createApp(makeCtx) {
       const body = await r.handler(ctx, req, params, req.query);
       return { status: 200, body, headers: { 'Cache-Control': 'no-store' } };
     } catch (e) {
-      if (e instanceof ApiError) return { status: e.status, body: { error: { code: e.code, message: e.message, details: e.details } } };
+      if (e instanceof ApiError) return { status: e.status, body: { error: { code: e.code, message: e.message, details: e.details } }, headers: { 'Cache-Control': 'no-store', ...(e.headers || {}) } };
       console.error(e);
-      return { status: 500, body: { error: { code: 'internal', message: 'Внутренняя ошибка сервера' } } };
+      return { status: 500, body: { error: { code: 'internal', message: 'Внутренняя ошибка сервера' } }, headers: { 'Cache-Control': 'no-store' } };
     }
   }
   return { handle, init };

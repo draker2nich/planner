@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#fafafa">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#111113">
+<title>Регистрация — Планировка</title>
+<script>try{var t=localStorage.getItem('planner.theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="/shared/ui.css">
+<link rel="stylesheet" href="/shared/site.css">
+<style>
+body{background:var(--sidebar)}
+.auth{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;padding:calc(32px + var(--safe-top)) 16px calc(32px + var(--safe-bottom))}
+.acard{width:100%;max-width:400px;padding:24px;display:flex;flex-direction:column;gap:20px}
+.acard h1{font-size:22px;line-height:28px;font-weight:600;letter-spacing:-.015em;margin:0}
+.acard .sub{color:var(--muted-foreground);margin:6px 0 0;font-size:14px;line-height:20px}
+.acard form{display:flex;flex-direction:column;gap:16px}
+.acard input:not([type=checkbox]){width:100%;height:40px}
+.acard .fld .err{min-height:0}
+.acard button[type=submit]{width:100%;height:40px}
+.pwbox{position:relative}
+.pwbox input{padding-right:44px}
+.pwbox .eye{position:absolute;right:4px;top:4px;width:32px;height:32px;padding:0;border:none;background:transparent;box-shadow:none;color:var(--muted-foreground)}
+.pwbox .eye:hover{background:var(--accent);color:var(--foreground)}
+.meter{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted-foreground);min-height:16px}
+.meter .bars{display:flex;gap:4px}
+.meter .bars i{width:28px;height:4px;border-radius:2px;background:var(--muted)}
+.meter[data-s="0"] .bars i:nth-child(1){background:var(--destructive)}
+.meter[data-s="1"] .bars i:nth-child(-n+2){background:var(--warning)}
+.meter[data-s="2"] .bars i{background:var(--success)}
+.caps{font-size:12px;color:var(--warning);display:flex;align-items:center;gap:6px}
+.caps .ic{width:14px;height:14px}
+.typo{font-size:13px;color:var(--muted-foreground)}
+.typo button{height:auto;padding:0;border:none;background:none;box-shadow:none;color:var(--foreground);text-decoration:underline;text-underline-offset:3px;font-weight:500}
+.chk{display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:20px;cursor:pointer}
+.chk input{margin-top:2px}
+.chk a{color:var(--foreground);text-underline-offset:3px}
+.chk.bad{color:var(--destructive)}
+.hp{position:absolute!important;left:-10000px!important;width:1px;height:1px;overflow:hidden}
+.gerr{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border-radius:var(--radius-md);background:var(--destructive-soft);color:var(--destructive);font-size:14px;line-height:20px}
+.gerr .ic{margin-top:2px}
+.gerr:empty{display:none}
+.gwarn{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border-radius:var(--radius-md);background:var(--warning-soft);color:var(--warning);font-size:13px;line-height:18px}
+.gwarn .ic{margin-top:1px}
+.afoot{font-size:14px;color:var(--muted-foreground);text-align:center;margin:0}
+.afoot a{color:var(--foreground);font-weight:500;text-underline-offset:4px}
+.forgot{font-size:13px;align-self:flex-end;margin-top:-8px}
+.forgot button{height:auto;padding:0;border:none;background:none;box-shadow:none;color:var(--muted-foreground);text-decoration:underline;text-underline-offset:3px;font-weight:400;font-size:13px}
+.forgot button:hover{color:var(--foreground);background:none}
+.spin{width:14px;height:14px;border-radius:50%;border:2px solid currentColor;border-right-color:transparent;animation:spin .7s linear infinite;flex:none}
+@keyframes spin{to{transform:rotate(360deg)}}
+.closed{text-align:center;display:flex;flex-direction:column;gap:12px;align-items:center}
+.closed .ic{width:28px;height:28px;color:var(--muted-foreground)}
+</style>
+</head>
+<body>
+<main class="auth" id="main">
+  <a class="brand" href="/" translate="no" aria-label="Планировка — на главную"><span class="logo"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l9 5v10l-9 5-9-5V7z"/><path d="M12 22V12M21 7l-9 5-9-5"/></svg></span>Планировка</a>
+  <div class="card acard" id="card"></div>
+  <p class="afoot" id="foot"></p>
+</main>
+<div id="toasts" role="status" aria-live="polite"></div>
+<script src="/shared/icons.js"></script>
+<script src="/shared/common-passwords.js"></script>
+<script src="/shared/validation.js"></script>
+<script src="/shared/session.js"></script>
+<script src="/shared/site.js"></script>
+<script>
+'use strict';
+/* =========================================================================
+   Вход и регистрация клиента (ТЗ, разделы 6–7). Режим — по пути: /login или /register.
+   Переключение без перезагрузки (history.replaceState), почта переносится.
+   ========================================================================= */
+const $ = (s, el = document) => el.querySelector(s);
+const V = window.Validation;
+const params = new URLSearchParams(location.search);
+const NEXT = V.safeNext(params.get('next'));
+const S = { mode: location.pathname.replace(/\/+$/, '') === '/login' ? 'login' : 'register', email: params.get('email') || '', busy: false, cfg: null, lockUntil: 0 };
+
+/* ---------- поле с подписью и ошибкой ---------- */
+function field(name, label, input, extra = []) {
+  const err = h('div', { class: 'err', id: 'e-' + name, role: 'alert' });
+  input.setAttribute('aria-describedby', 'e-' + name);
+  input.id = 'f-' + name;
+  return { el: h('div', { class: 'fld' }, h('label', { for: 'f-' + name }, h('span', { class: 'lbl' }, label)), input, ...extra, err), err, input };
+}
+function setErr(f, msg) {
+  f.err.textContent = msg || '';
+  if (msg) f.input.setAttribute('aria-invalid', 'true'); else f.input.removeAttribute('aria-invalid');
+}
+function pwInput(autocomplete) {
+  const inp = h('input', { type: 'password', name: 'password', autocomplete, maxlength: '128', spellcheck: 'false', autocapitalize: 'off' });
+  const eye = h('button', { type: 'button', class: 'eye', 'aria-label': 'Показать пароль', 'aria-pressed': 'false' }, ic('eye'));
+  eye.addEventListener('click', () => {
+    const show = inp.type === 'password'; inp.type = show ? 'text' : 'password';
+    eye.replaceChildren(ic(show ? 'eye-off' : 'eye')); eye.setAttribute('aria-label', show ? 'Скрыть пароль' : 'Показать пароль'); eye.setAttribute('aria-pressed', String(show));
+    inp.focus();
+  });
+  const caps = h('div', { class: 'caps', hidden: true }, ic('alert'), 'Включён Caps Lock');
+  const onKey = (e) => { if (e.getModifierState) caps.hidden = !e.getModifierState('CapsLock'); };
+  inp.addEventListener('keydown', onKey); inp.addEventListener('keyup', onKey); inp.addEventListener('blur', () => { caps.hidden = true; });
+  return { box: h('div', { class: 'pwbox' }, inp, eye), inp, caps };
+}
+function busyBtn(btn, on, text) {
+  btn.disabled = on;
+  btn.replaceChildren(...(on ? [h('span', { class: 'spin', 'aria-hidden': 'true' }), text] : [text]));
+}
+function lockFor(btn, sec, label) {
+  S.lockUntil = Date.now() + sec * 1000;
+  const tick = () => {
+    const left = Math.ceil((S.lockUntil - Date.now()) / 1000);
+    if (left <= 0) { btn.disabled = false; btn.textContent = label; return; }
+    btn.disabled = true; btn.textContent = `Повторите через ${left >= 60 ? Math.ceil(left / 60) + ' мин' : left + ' с'}`;
+    setTimeout(tick, 1000);
+  };
+  tick();
+}
+function storageWarn() {
+  return Session.storageOk ? null : h('div', { class: 'gwarn', role: 'note' }, ic('info'), 'Браузер не даёт сохранить вход — после закрытия вкладки придётся войти снова.');
+}
+function switchMode(mode, email) {
+  S.mode = mode; if (email != null) S.email = email;
+  const q = new URLSearchParams(); if (params.get('next')) q.set('next', NEXT);
+  history.replaceState(null, '', '/' + mode + (q.toString() ? '?' + q : ''));
+  render();
+}
+const nextQ = () => (params.get('next') ? '?next=' + encodeURIComponent(NEXT) : '');
+
+/* ---------- перенос локального проекта в аккаунт (ТЗ 6.5) ---------- */
+async function migrateLocalProject() {
+  let p = null;
+  try { const s = localStorage.getItem('roomEditor.project'); p = s ? JSON.parse(s) : null; } catch { return; }
+  if (!p || !Array.isArray(p.walls) || !p.walls.length) return;
+  try { if (localStorage.getItem('roomEditor.projectId')) return; } catch {}
+  try {
+    const r = await Session.api('POST', '/projects', { name: p.name || 'Новый проект', data: p });
+    localStorage.setItem('roomEditor.projectId', r.id);
+    localStorage.setItem('roomEditor.projectRev', String(r.rev));
+    localStorage.removeItem('roomEditor.dirty');
+  } catch { /* редактор предложит сохранить проект ещё раз (ТЗ 11.4) */ }
+}
+function flash(msg) { try { sessionStorage.setItem('planner.flash', msg); } catch {} }
+
+/* ---------- регистрация ---------- */
+function renderRegister() {
+  document.title = 'Регистрация — Планировка';
+  const card = $('#card');
+  if (!S.cfg.registration) {
+    card.replaceChildren(h('div', { class: 'closed' }, ic('lock'), h('h1', {}, 'Регистрация временно закрыта'),
+      h('p', { class: 'sub' }, 'Пока можно работать в редакторе без аккаунта — проект сохранится в этом браузере.'),
+      h('a', { class: 'btn primary', href: '/editor' }, 'Открыть редактор'), h('a', { class: 'tlink', href: '/' }, 'На главную')));
+    $('#foot').replaceChildren('Уже есть аккаунт? ', h('a', { href: '/login' + nextQ(), onclick: (e) => { e.preventDefault(); switchMode('login'); } }, 'Войти'));
+    return;
+  }
+  const name = field('name', 'Имя', h('input', { type: 'text', name: 'name', autocomplete: 'name', maxlength: '60', autocapitalize: 'words' }));
+  const typo = h('div', { class: 'typo', hidden: true });
+  const email = field('email', 'Почта', h('input', { type: 'email', name: 'email', autocomplete: 'email', inputmode: 'email', spellcheck: 'false', autocapitalize: 'off', maxlength: '254', placeholder: 'name@example.com' }), [typo]);
+  email.input.value = S.email;
+  const pw = pwInput('new-password');
+  const meter = h('div', { class: 'meter', 'aria-live': 'polite' }, h('span', { class: 'bars', 'aria-hidden': 'true' }, h('i'), h('i'), h('i')), h('span', {}, 'Не короче 8 символов'));
+  const pass = field('password', 'Пароль', pw.inp, [meter, pw.caps]);
+  pass.el.replaceChild(pw.box, pw.inp); pw.box.prepend(pw.inp);
+  const terms = h('input', { type: 'checkbox', name: 'acceptTerms', id: 'f-terms', 'aria-describedby': 'e-terms' });
+  const termsErr = h('div', { class: 'err', id: 'e-terms', role: 'alert' });
+  const termsLbl = h('label', { class: 'chk', for: 'f-terms' }, terms, h('span', {}, 'Я принимаю ', h('a', { href: '/terms', target: '_blank', rel: 'noopener' }, 'условия использования'), ' и ', h('a', { href: '/privacy', target: '_blank', rel: 'noopener' }, 'политику конфиденциальности')));
+  const mk = h('input', { type: 'checkbox', name: 'marketing', id: 'f-mk' });
+  const mkLbl = h('label', { class: 'chk', for: 'f-mk' }, mk, h('span', {}, 'Присылать новости продукта (не чаще раза в месяц)'));
+  const hp = h('div', { class: 'hp', 'aria-hidden': 'true' }, h('label', {}, 'Сайт', h('input', { type: 'text', name: 'website', tabindex: '-1', autocomplete: 'off' })));
+  const gerr = h('div', { class: 'gerr', role: 'alert' });
+  const btn = h('button', { type: 'submit', class: 'primary' }, 'Создать аккаунт');
+  const form = h('form', { novalidate: true }, name.el, email.el, pass.el, h('div', {}, termsLbl, termsErr), mkLbl, hp, storageWarn(), gerr, btn);
+
+  const F = { name, email, password: pass };
+  const touched = new Set();
+  const check = {
+    name: () => V.validateName(name.input.value),
+    email: () => V.validateEmail(email.input.value),
+    password: () => V.validatePassword(pw.inp.value, email.input.value),
+  };
+  const setTermsErr = (m) => { termsErr.textContent = m || ''; termsLbl.classList.toggle('bad', !!m); if (m) terms.setAttribute('aria-invalid', 'true'); else terms.removeAttribute('aria-invalid'); };
+  for (const k of Object.keys(check)) {
+    const inp = F[k].input;
+    inp.addEventListener('blur', () => { if (inp.value || touched.has(k)) { touched.add(k); setErr(F[k], check[k]()); } });
+    inp.addEventListener('input', () => { if (F[k].err.textContent) setErr(F[k], check[k]()); gerr.textContent = ''; });
+  }
+  email.input.addEventListener('blur', () => {
+    const fix = V.emailTypo(email.input.value);
+    typo.hidden = !fix; typo.replaceChildren();
+    if (fix) typo.append('Возможно, вы имели в виду ', h('button', { type: 'button', onclick: () => { email.input.value = fix; typo.hidden = true; setErr(email, check.email()); } }, fix), '?');
+  });
+  email.input.addEventListener('input', () => { S.email = email.input.value; });
+  pw.inp.addEventListener('input', () => {
+    const v = pw.inp.value;
+    if (!v) { meter.removeAttribute('data-s'); meter.lastChild.textContent = 'Не короче 8 символов'; return; }
+    const s = V.passwordStrength(v); meter.dataset.s = String(s);
+    meter.lastChild.textContent = ['Слабый пароль', 'Нормальный пароль', 'Хороший пароль'][s];
+  });
+  terms.addEventListener('change', () => { if (terms.checked) setTermsErr(''); });
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (S.busy || Date.now() < S.lockUntil) return;
+    gerr.replaceChildren();
+    const body = { name: name.input.value, email: email.input.value, password: pw.inp.value, acceptTerms: terms.checked, marketing: mk.checked, website: form.website.value };
+    const v = V.validateRegistration(body);
+    for (const k of Object.keys(check)) { touched.add(k); setErr(F[k], v.fields[k]); }
+    setTermsErr(v.fields.acceptTerms);
+    if (!v.ok) { const first = ['name', 'email', 'password'].find(k => v.fields[k]); (first ? F[first].input : terms).focus(); return; }
+    S.busy = true; busyBtn(btn, true, 'Создаём аккаунт…');
+    form.querySelectorAll('input').forEach(i => { i.readOnly = true; });
+    try {
+      const r = await Session.api('POST', '/auth/register', body);
+      Session.set(r.token, r.user);
+      busyBtn(btn, true, 'Сохраняем проект…');
+      await migrateLocalProject();
+      flash('Аккаунт создан');
+      location.replace(NEXT);
+      return;
+    } catch (x) {
+      S.busy = false; busyBtn(btn, false, 'Создать аккаунт');
+      form.querySelectorAll('input').forEach(i => { i.readOnly = false; });
+      if (x.code === 'email_taken') {
+        email.err.replaceChildren('Эта почта уже зарегистрирована. ', h('a', { href: '/login?email=' + encodeURIComponent(V.normEmail(email.input.value)) + (params.get('next') ? '&next=' + encodeURIComponent(NEXT) : ''), onclick: (ev) => { ev.preventDefault(); switchMode('login', V.normEmail(email.input.value)); } }, 'Войти'));
+        email.input.setAttribute('aria-invalid', 'true'); email.input.focus();
+      } else if (x.code === 'validation' && x.details && x.details.fields) {
+        const f = x.details.fields;
+        for (const k of Object.keys(check)) setErr(F[k], f[k]);
+        setTermsErr(f.acceptTerms);
+        const first = ['name', 'email', 'password'].find(k => f[k]); if (first) F[first].input.focus();
+      } else if (x.code === 'registration_closed') {
+        S.cfg.registration = false; render();
+      } else if (x.status === 429) {
+        gerr.replaceChildren(ic('alert'), h('span', {}, x.message)); lockFor(btn, x.retryAfter || 60, 'Создать аккаунт');
+      } else {
+        gerr.replaceChildren(ic('alert'), h('span', {}, x.status === 0 || x.status >= 500 && x.code !== 'setup' ? 'Не удалось связаться с сервером. Проверьте интернет и попробуйте ещё раз' : x.message));
+      }
+    }
+  });
+
+  card.replaceChildren(h('div', {}, h('h1', {}, 'Создайте аккаунт'), h('p', { class: 'sub' }, 'Проект будет храниться в аккаунте и откроется на любом устройстве.')), form);
+  $('#foot').replaceChildren('Уже есть аккаунт? ', h('a', { href: '/login' + nextQ(), onclick: (e) => { e.preventDefault(); switchMode('login', email.input.value); } }, 'Войти'));
+  if (!matchMedia('(pointer:coarse)').matches) (S.email ? pw.inp : name.input).focus();
+}
+
+/* ---------- вход ---------- */
+function renderLogin() {
+  document.title = 'Вход — Планировка';
+  const card = $('#card');
+  const email = field('email', 'Почта', h('input', { type: 'email', name: 'email', autocomplete: 'username', inputmode: 'email', spellcheck: 'false', autocapitalize: 'off', maxlength: '254', placeholder: 'name@example.com' }));
+  email.input.value = S.email;
+  const pw = pwInput('current-password');
+  const pass = field('password', 'Пароль', pw.inp, [pw.caps]);
+  pass.el.replaceChild(pw.box, pw.inp); pw.box.prepend(pw.inp);
+  const gerr = h('div', { class: 'gerr', role: 'alert' });
+  const btn = h('button', { type: 'submit', class: 'primary' }, 'Войти');
+  const forgot = h('div', { class: 'forgot', hidden: true }, h('button', { type: 'button', onclick: () => Site.modal('Восстановление пароля', (dlg, close) => {
+    dlg.append(h('p', {}, 'Восстановление пароля по почте появится скоро. Пока напишите нам — поможем вручную:'),
+      h('p', {}, h('a', { class: 'tlink', href: 'mailto:' + S.cfg.contactEmail }, S.cfg.contactEmail)),
+      h('div', { class: 'sdlg-btns' }, h('button', { type: 'button', class: 'primary', onclick: close }, 'Понятно')));
+  }) }, 'Забыли пароль?'));
+  forgot.hidden = !S.cfg.contactEmail;
+  const form = h('form', { novalidate: true }, email.el, pass.el, forgot, storageWarn(), gerr, btn);
+  email.input.addEventListener('input', () => { S.email = email.input.value; gerr.textContent = ''; if (email.err.textContent) setErr(email, ''); });
+  pw.inp.addEventListener('input', () => { gerr.textContent = ''; if (pass.err.textContent) setErr(pass, ''); });
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (S.busy || Date.now() < S.lockUntil) return;
+    gerr.replaceChildren();
+    const em = V.validateEmail(email.input.value);
+    setErr(email, em); setErr(pass, pw.inp.value ? '' : 'Введите пароль');
+    if (em) { email.input.focus(); return; }
+    if (!pw.inp.value) { pw.inp.focus(); return; }
+    S.busy = true; busyBtn(btn, true, 'Входим…');
+    try {
+      const r = await Session.api('POST', '/auth/login', { email: email.input.value, password: pw.inp.value });
+      Session.set(r.token, r.user);
+      flash('С возвращением' + (r.user.name ? ', ' + r.user.name : ''));
+      location.replace(NEXT);
+      return;
+    } catch (x) {
+      S.busy = false; busyBtn(btn, false, 'Войти');
+      if (x.status === 401) {
+        gerr.replaceChildren(ic('alert'), h('span', {}, 'Неверная почта или пароль. Проверьте раскладку и Caps Lock.'));
+        pw.inp.setAttribute('aria-invalid', 'true'); pw.inp.focus(); pw.inp.select();
+      } else if (x.status === 429) {
+        gerr.replaceChildren(ic('alert'), h('span', {}, x.message)); lockFor(btn, x.retryAfter || 60, 'Войти');
+      } else {
+        gerr.replaceChildren(ic('alert'), h('span', {}, x.status === 0 || (x.status >= 500 && x.code !== 'setup') ? 'Не удалось связаться с сервером. Проверьте интернет и попробуйте ещё раз' : x.message));
+      }
+    }
+  });
+
+  card.replaceChildren(h('div', {}, h('h1', {}, 'Вход'), h('p', { class: 'sub' }, 'Войдите, чтобы открыть проект из аккаунта.')), form);
+  $('#foot').replaceChildren();
+  if (S.cfg.registration) $('#foot').append('Нет аккаунта? ', h('a', { href: '/register' + nextQ(), onclick: (e) => { e.preventDefault(); switchMode('register', email.input.value); } }, 'Зарегистрироваться'));
+  if (!matchMedia('(pointer:coarse)').matches) (S.email ? pw.inp : email.input).focus();
+}
+
+function render() { S.lockUntil = 0; S.mode === 'login' ? renderLogin() : renderRegister(); }
+
+(async function init() {
+  // уже вошли — сразу туда, куда шли
+  if (Session.token) {
+    try { const u = await Session.me(); if (u) { location.replace(NEXT); return; } } catch { /* нет сети — показываем форму */ }
+  }
+  S.cfg = await Site.config();
+  render();
+})();
+</script>
+</body>
+</html>

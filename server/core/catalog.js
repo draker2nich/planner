@@ -12,7 +12,7 @@ const LIMITS = { glbBytes: 50 * 1024 * 1024, imageBytes: 15 * 1024 * 1024, image
 const COUNT = 'CAST(COUNT(*) AS INTEGER)';
 const searchText = (name, brand) => `${name || ''} ${brand || ''}`.toLowerCase().replace(/ё/g, 'е').trim();
 
-class ApiError extends Error { constructor(status, code, message, details) { super(message); this.status = status; this.code = code; this.details = details; } }
+class ApiError extends Error { constructor(status, code, message, details, headers) { super(message); this.status = status; this.code = code; this.details = details; this.headers = headers; } }
 
 const IMG_SIG = [['image/jpeg', b => b[0] === 0xff && b[1] === 0xd8, 'jpg'], ['image/png', b => b.readUInt32BE(0) === 0x89504e47, 'png'], ['image/webp', b => b.toString('ascii', 0, 4) === 'RIFF' && b.toString('ascii', 8, 12) === 'WEBP', 'webp']];
 const sniffImage = (buf) => buf.length > 12 ? IMG_SIG.find(([, f]) => f(buf)) : null;

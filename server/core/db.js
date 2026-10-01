@@ -84,6 +84,32 @@ const MIGRATIONS = [
   ["ALTER TABLE products ADD COLUMN search TEXT NOT NULL DEFAULT ''"],
   // v3: служебные настройки (отпечаток ADMIN_EMAIL/ADMIN_PASSWORD и т. п.)
   ["CREATE TABLE IF NOT EXISTS settings (key TEXT PRIMARY KEY, value TEXT NOT NULL)"],
+  // v4: регистрация клиентов, проекты в аккаунте, ограничение частоты запросов
+  [
+    'ALTER TABLE users ADD COLUMN email_verified_at TEXT',
+    'ALTER TABLE users ADD COLUMN terms_accepted_at TEXT',
+    "ALTER TABLE users ADD COLUMN terms_version TEXT NOT NULL DEFAULT ''",
+    'ALTER TABLE users ADD COLUMN marketing_opt_in INTEGER NOT NULL DEFAULT 0',
+    'ALTER TABLE users ADD COLUMN last_login_at TEXT',
+    'ALTER TABLE users ADD COLUMN updated_at TEXT',
+    `CREATE TABLE IF NOT EXISTS projects (
+      id TEXT PRIMARY KEY,
+      user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      name TEXT NOT NULL,
+      data TEXT NOT NULL,
+      size INTEGER NOT NULL DEFAULT 0,
+      rev INTEGER NOT NULL DEFAULT 1,
+      created_at TEXT NOT NULL,
+      updated_at TEXT NOT NULL,
+      deleted_at TEXT)`,
+    'CREATE INDEX IF NOT EXISTS projects_user ON projects(user_id, updated_at)',
+    `CREATE TABLE IF NOT EXISTS rate_limits (
+      key TEXT PRIMARY KEY,
+      window_start TEXT NOT NULL,
+      count INTEGER NOT NULL)`,
+    'CREATE INDEX IF NOT EXISTS sessions_user ON sessions(user_id)',
+    'CREATE INDEX IF NOT EXISTS sessions_expires ON sessions(expires_at)',
+  ],
 ];
 const SCHEMA_VERSION = 1 + MIGRATIONS.length;
 

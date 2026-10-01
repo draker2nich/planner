@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Документы — Планировка</title>
+<meta name="description" content="Условия использования и политика конфиденциальности сервиса Планировка.">
+<script>try{var t=localStorage.getItem('planner.theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="/shared/ui.css">
+<link rel="stylesheet" href="/shared/site.css">
+<style>
+.draft{display:flex;gap:10px;align-items:flex-start;margin:0 0 24px}
+.doc-tabs{margin:0 0 24px;height:auto;min-height:36px;flex-wrap:wrap;max-width:100%}
+.doc-tabs a{display:inline-flex;align-items:center;height:30px;padding:0 12px;border-radius:var(--radius-md);text-decoration:none;color:var(--muted-foreground);font-size:14px;font-weight:500}
+.doc-tabs a[aria-current="page"]{background:var(--seg-on);color:var(--foreground);box-shadow:var(--shadow-sm)}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Перейти к содержимому</a>
+<header class="site-h">
+  <div class="wrap">
+    <a class="brand" href="/" translate="no"><span class="logo"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l9 5v10l-9 5-9-5V7z"/><path d="M12 22V12M21 7l-9 5-9-5"/></svg></span>Планировка</a>
+    <span class="sp"></span>
+    <div class="acct"><span class="skel" aria-hidden="true"></span></div>
+    <button class="burger ghost iconbtn" type="button" aria-expanded="false" aria-controls="mnav" aria-label="Открыть меню"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  </div>
+  <nav class="mnav" id="mnav" hidden aria-label="Меню"><a href="/">Главная</a><a href="/editor">Редактор</a><div class="row"></div></nav>
+</header>
+<main id="main" class="page-narrow">
+  <nav class="seg doc-tabs" aria-label="Документы"><a href="/terms" id="tabTerms">Условия использования</a><a href="/privacy" id="tabPrivacy">Конфиденциальность</a></nav>
+
+  <article id="terms" hidden>
+    <h1>Условия использования</h1>
+    <p class="meta">Редакция от <span class="tv">1 октября 2026</span></p>
+    <div class="callout warn draft" role="note"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l10 18H2z"/><path d="M12 10v4M12 17v1"/></svg><span>Черновик. Текст будет согласован с юристом до публичного запуска.</span></div>
+    <h2>1. Что это за сервис</h2>
+    <p>«Планировка» — онлайн‑редактор, в котором можно нарисовать план комнаты, расставить мебель из каталога и посмотреть результат в 3D. Сервис предоставляется бесплатно и «как есть».</p>
+    <h2>2. Аккаунт</h2>
+    <p>Для работы в редакторе аккаунт не нужен: без него проект хранится только в вашем браузере. Аккаунт позволяет хранить проект на сервере и открывать его на других устройствах. Вы отвечаете за сохранность пароля и за действия, совершённые под вашим аккаунтом.</p>
+    <h2>3. Ваши проекты</h2>
+    <p>Планы и бриф, которые вы создаёте, принадлежат вам. Мы храним их только для того, чтобы показывать вам и сохранять между сеансами, и не передаём третьим лицам.</p>
+    <h2>4. Каталог</h2>
+    <p>Товары в каталоге добавляют платформа и компании‑продавцы. Размеры, цены и наличие нужно уточнять у продавца перед покупкой; ссылки на магазины ведут на сторонние сайты.</p>
+    <h2>5. Ограничения</h2>
+    <p>Нельзя пытаться получить доступ к чужим данным, нарушать работу сервиса, автоматически регистрировать аккаунты или перебирать пароли. Мы можем заблокировать аккаунт при таких нарушениях.</p>
+    <h2>6. Изменения условий</h2>
+    <p>Мы можем обновлять эти условия. Дата текущей редакции указана вверху страницы; при существенных изменениях попросим принять новую редакцию.</p>
+    <h2>7. Связь</h2>
+    <p class="contact muted">Адрес для связи будет указан здесь.</p>
+  </article>
+
+  <article id="privacy" hidden>
+    <h1>Политика конфиденциальности</h1>
+    <p class="meta">Редакция от <span class="tv">1 октября 2026</span></p>
+    <div class="callout warn draft" role="note"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l10 18H2z"/><path d="M12 10v4M12 17v1"/></svg><span>Черновик. Текст будет согласован с юристом до публичного запуска.</span></div>
+    <h2>Какие данные мы храним</h2>
+    <ul>
+      <li>Имя и адрес почты, которые вы указали при регистрации.</li>
+      <li>Пароль — только в виде необратимого хеша (scrypt); сам пароль мы не знаем.</li>
+      <li>Время согласия с условиями и его редакцию, согласие на новости (если вы его дали).</li>
+      <li>Время последнего входа и ваши проекты.</li>
+    </ul>
+    <h2>Чего мы не храним</h2>
+    <p>IP‑адрес в открытом виде (для защиты от перебора паролей храним только его одностороннюю метку на сутки), данные браузера, сторонние счётчики и рекламные cookie. Фото‑референсы из брифа пока хранятся только в вашем браузере.</p>
+    <h2>Где хранится вход</h2>
+    <p>Ключ сеанса хранится в памяти браузера (localStorage) 30 дней или до выхода из аккаунта.</p>
+    <h2>Удаление данных</h2>
+    <p>Вы можете попросить удалить аккаунт — вместе с ним удаляются все проекты и сеансы. Напишите нам с адреса, указанного в аккаунте.</p>
+    <p class="contact muted">Адрес для связи будет указан здесь.</p>
+  </article>
+</main>
+<footer class="site-f">
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Планировка</span>
+    <nav aria-label="Ссылки"><a href="/terms">Условия использования</a><a href="/privacy">Политика конфиденциальности</a><a href="/editor">Редактор</a></nav>
+    <span class="sp"></span>
+    <div class="seg theme-sw" role="group" aria-label="Тема оформления"></div>
+  </div>
+</footer>
+<script src="/shared/icons.js"></script>
+<script src="/shared/validation.js" defer></script>
+<script src="/shared/session.js"></script>
+<script src="/shared/site.js"></script>
+<script>
+'use strict';
+(function () {
+  const doc = location.pathname.replace(/\/+$/, '') === '/privacy' ? 'privacy' : 'terms';
+  document.getElementById(doc).hidden = false;
+  document.getElementById(doc === 'terms' ? 'tabTerms' : 'tabPrivacy').setAttribute('aria-current', 'page');
+  document.title = (doc === 'terms' ? 'Условия использования' : 'Политика конфиденциальности') + ' — Планировка';
+  Site.init();
+  Site.config().then(c => {
+    if (!c.contactEmail) return;
+    document.querySelectorAll('.contact').forEach(p => { p.classList.remove('muted'); p.replaceChildren('Пишите на ', h('a', { class: 'tlink', href: 'mailto:' + c.contactEmail }, c.contactEmail), '.'); });
+  });
+})();
+</script>
+</body>
+</html>

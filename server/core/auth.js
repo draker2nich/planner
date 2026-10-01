@@ -19,20 +19,30 @@ function verifyPassword(pw, stored) {
   return exp.length === key.length && crypto.timingSafeEqual(exp, key);
 }
 
-async function createUser(db, { email, password, role, companyId = null, name = '' }) {
+/* terms — { acceptedAt, version } для клиентов; у администратора согласия нет */
+async function createUser(db, { email, password, role, companyId = null, name = '', terms = null, marketing = false }) {
   const id = crypto.randomUUID();
-  await db.run('INSERT INTO users (id,email,password_hash,role,company_id,name,created_at) VALUES (?,?,?,?,?,?,?)',
-    [id, email.toLowerCase().trim(), hashPassword(password), role, companyId, name, now()]);
+  await db.run('INSERT INTO users (id,email,password_hash,role,company_id,name,created_at,terms_accepted_at,terms_version,marketing_opt_in,updated_at) VALUES (?,?,?,?,?,?,?,?,?,?,?)',
+    [id, email.toLowerCase().trim(), hashPassword(password), role, companyId, name, now(), terms ? terms.acceptedAt : null, terms ? terms.version : '', marketing ? 1 : 0, now()]);
   return id;
 }
 
-async function login(db, email, password) {
-  const u = await db.get('SELECT * FROM users WHERE email = ?', [String(email || '').toLowerCase().trim()]);
-  if (!u || Number(u.disabled) || !verifyPassword(String(password || ''), u.password_hash)) return null;
+/* Сессия без проверки пароля — после регистрации и после успешного входа */
+async function createSession(db, u) {
   const token = crypto.randomBytes(32).toString('hex');
   const exp = new Date(Date.now() + SESSION_DAYS * 864e5).toISOString();
   await db.run('INSERT INTO sessions (token,user_id,created_at,expires_at) VALUES (?,?,?,?)', [token, u.id, now(), exp]);
+  try { await db.run('UPDATE users SET last_login_at=? WHERE id=?', [now(), u.id]); } catch { /* колонка появится после миграции v4 */ }
+  if (Math.random() < 0.02) { try { await db.run('DELETE FROM sessions WHERE expires_at < ?', [now()]); } catch {} }
   return { token, user: publicUser(u), expiresAt: exp };
+}
+
+async function login(db, email, password) {
+  const pw = String(password || '');
+  if (pw.length > 1024) return null; // не гоняем scrypt по огромным строкам
+  const u = await db.get('SELECT * FROM users WHERE email = ?', [String(email || '').toLowerCase().trim()]);
+  if (!u || Number(u.disabled) || !verifyPassword(pw, u.password_hash)) return null;
+  return createSession(db, u);
 }
 async function logout(db, token) { await db.run('DELETE FROM sessions WHERE token = ?', [token]); }
 
@@ -64,4 +74,11 @@ function can(user, action, product) {
   return false; // client: только публичный каталог
 }
 
-module.exports = { hashPassword, verifyPassword, createUser, login, logout, userFromToken, can };
+/* Проекты редактора: только владелец (администратор чужие проекты через этот API не видит) */
+function canProject(user, action, project) {
+  if (!user) return false;
+  if (action === 'project.create' || action === 'project.list') return true;
+  return !!project && project.user_id === user.id;
+}
+
+module.exports = { hashPassword, verifyPassword, createUser, createSession, login, logout, userFromToken, can, canProject, publicUser };

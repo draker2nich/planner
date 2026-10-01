@@ -1,0 +1,100 @@
+/* =====================================================================
+   Страницы сайта: главная, вход и регистрация, документы, 404.
+   Только токены из ui.css. Редактор и админ‑панель этот файл не грузят.
+   ===================================================================== */
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{font-size:16px;line-height:1.5;min-height:100dvh;display:flex;flex-direction:column}
+main{flex:1}
+.wrap{width:100%;max-width:1120px;margin:0 auto;padding:0 calc(16px + var(--safe-right)) 0 calc(16px + var(--safe-left))}
+@media (min-width:600px){.wrap{padding:0 24px}}
+@media (min-width:900px){.wrap{padding:0 32px}}
+.skip{position:absolute;left:12px;top:-60px;z-index:200;background:var(--primary);color:var(--primary-foreground);padding:8px 14px;border-radius:var(--radius-md);text-decoration:none;font-size:14px}
+.skip:focus{top:12px}
+
+/* ---------- ссылки‑кнопки (повторяют Button из ui.css) ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;white-space:nowrap;height:36px;padding:0 16px;border-radius:var(--radius-md);font-size:14px;font-weight:500;line-height:1;
+  background:var(--background);color:var(--foreground);border:1px solid var(--border);box-shadow:var(--shadow-xs);text-decoration:none;transition:background-color .15s,color .15s,border-color .15s}
+.btn:hover{background:var(--accent)}
+.btn.primary{background:var(--primary);color:var(--primary-foreground);border-color:transparent}
+.btn.primary:hover{background:color-mix(in srgb,var(--primary) 90%,var(--background))}
+.btn.ghost{background:transparent;border-color:transparent;box-shadow:none}
+.btn.ghost:hover{background:var(--accent)}
+.btn.lg,button.lg{height:44px;padding:0 20px;font-size:15px;border-radius:var(--radius-lg)}
+.btn .ic,button.lg .ic{width:16px;height:16px}
+a.tlink{color:var(--foreground);text-decoration:underline;text-underline-offset:4px;text-decoration-color:color-mix(in srgb,var(--foreground) 35%,transparent)}
+a.tlink:hover{text-decoration-color:currentColor}
+
+/* ---------- логотип ---------- */
+.brand{display:inline-flex;align-items:center;gap:10px;font-weight:600;font-size:16px;letter-spacing:-.01em;text-decoration:none;color:var(--foreground);border-radius:var(--radius-md)}
+.brand .logo{width:28px;height:28px;border-radius:var(--radius-md);background:var(--primary);color:var(--primary-foreground);display:inline-flex;align-items:center;justify-content:center;flex:none}
+.brand .logo .ic{width:16px;height:16px}
+
+/* ---------- шапка ---------- */
+.site-h{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--background) 88%,transparent);backdrop-filter:saturate(1.4) blur(10px);-webkit-backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid var(--border);padding-top:var(--safe-top)}
+.site-h .wrap{display:flex;align-items:center;gap:16px;height:56px}
+.site-h nav.anchors{display:flex;gap:4px;margin-left:16px}
+.site-h nav.anchors a{font-size:14px;color:var(--muted-foreground);text-decoration:none;padding:6px 10px;border-radius:var(--radius-md)}
+.site-h nav.anchors a:hover{color:var(--foreground);background:var(--accent)}
+.site-h .sp{flex:1}
+.acct{display:flex;align-items:center;gap:8px;min-width:120px;justify-content:flex-end}
+.acct .skel{width:120px;height:32px;border-radius:var(--radius-md);background:var(--muted)}
+.ava{width:32px;height:32px;padding:0;border-radius:50%;background:var(--muted);color:var(--foreground);font-weight:600;font-size:13px;border:1px solid var(--border);box-shadow:none}
+.ava:hover{background:var(--accent)}
+.amenu{position:absolute;right:0;top:44px;min-width:240px;z-index:60}
+.amenu .who{padding:8px 8px 6px;font-size:14px;line-height:1.35;overflow:hidden}
+.amenu .who b{display:block;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.amenu .who span{display:block;color:var(--muted-foreground);font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.amenu a.mi{text-decoration:none}
+.burger{display:none}
+.mnav{display:none}
+@media (max-width:899px){
+  .site-h .wrap{gap:8px}
+  .acct{min-width:0}
+  .acct .skel{display:none}
+  .site-h nav.anchors,.site-h .acct .hide-sm{display:none}
+  .burger{display:inline-flex}
+  .mnav:not([hidden]){display:flex;flex-direction:column;gap:4px;position:absolute;left:0;right:0;top:calc(56px + var(--safe-top));background:var(--background);border-bottom:1px solid var(--border);box-shadow:var(--shadow-md);padding:8px 16px 16px;animation:fade-in .12s ease-out}
+  .mnav a{display:flex;align-items:center;min-height:44px;padding:0 8px;border-radius:var(--radius-md);text-decoration:none;color:var(--foreground);font-size:16px}
+  .mnav a:hover{background:var(--accent)}
+  .mnav .row{display:flex;gap:8px;margin-top:8px}
+  .mnav .row .btn{flex:1;height:44px}
+}
+
+/* ---------- подвал ---------- */
+.site-f{border-top:1px solid var(--border);padding:32px 0 calc(32px + var(--safe-bottom));font-size:14px;color:var(--muted-foreground);margin-top:auto}
+.site-f .wrap{display:flex;flex-wrap:wrap;gap:16px 32px;align-items:center}
+.site-f nav{display:flex;flex-wrap:wrap;gap:8px 20px}
+.site-f a{color:var(--muted-foreground);text-decoration:none}
+.site-f a:hover{color:var(--foreground);text-decoration:underline;text-underline-offset:4px}
+.site-f .sp{flex:1}
+.theme-sw{height:32px}
+.theme-sw button{height:100%;padding:0 10px;gap:6px;font-size:13px}
+.theme-sw button .ic{width:14px;height:14px}
+
+/* ---------- плашки на всю страницу (документы, 404) ---------- */
+.page-narrow{width:100%;min-width:0;max-width:720px;margin:0 auto;padding:48px 16px 80px;overflow-wrap:break-word}
+.page-narrow h1{font-size:32px;line-height:40px;letter-spacing:-.02em;margin:0 0 8px}
+.page-narrow .meta{color:var(--muted-foreground);font-size:14px;margin:0 0 24px}
+.page-narrow h2{font-size:20px;line-height:28px;margin:32px 0 8px;letter-spacing:-.01em}
+.page-narrow p,.page-narrow li{color:var(--foreground);font-size:16px;line-height:26px}
+.page-narrow .muted{color:var(--muted-foreground)}
+
+/* ---------- toast поверх страниц сайта ---------- */
+#toasts .toast{font-size:14px}
+
+/* ---------- модальное окно ---------- */
+.site-dlg{width:min(400px,calc(100vw - 32px));padding:24px;border:1px solid var(--border);color:var(--card-foreground);box-shadow:var(--shadow-lg)}
+.site-dlg::backdrop{background:var(--overlay)}
+.site-dlg h2{margin:0 0 16px;font-size:18px;line-height:24px;letter-spacing:-.01em}
+.site-dlg p{margin:0 0 16px;color:var(--muted-foreground);font-size:14px}
+.sdlg-form{display:flex;flex-direction:column;gap:16px}
+.sdlg-form input{width:100%}
+.sdlg-btns{display:flex;justify-content:flex-end;gap:8px}
+.theme-sw .lbl-t{display:none}
+@media (min-width:600px){.theme-sw .lbl-t{display:inline}}
+
+/* ---------- Web Interface Guidelines: касания, листы, прокрутка ---------- */
+a,.btn,summary{touch-action:manipulation}
+.mnav,.site-dlg{overscroll-behavior:contain}
+.shelf:focus-visible{outline:none;box-shadow:0 0 0 3px color-mix(in srgb,var(--ring) 50%,transparent);border-radius:var(--radius-xl)}
+.site-h .acct{font-variant-numeric:tabular-nums}
