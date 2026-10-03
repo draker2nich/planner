@@ -7,6 +7,9 @@
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#09090b">
 <title>Редактор — furnitech</title>
 <meta name="robots" content="noindex">
+<script>/* Редактор только для вошедших (исключение — просмотр проекта поддержкой, ?view=). Гость уходит на вход ещё до загрузки редактора. */
+(function(){if(/[?&]view=/.test(location.search))return;var ok=false;try{ok=!!localStorage.getItem('planner.token')}catch(e){}
+if(!ok){try{document.documentElement.style.visibility='hidden'}catch(e){}location.replace('/login?next='+encodeURIComponent(location.pathname+location.search));}})();</script>
 <script>try{var t=localStorage.getItem('planner.theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">

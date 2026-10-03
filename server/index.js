@@ -11,6 +11,18 @@ const ROOT = path.resolve(__dirname, '..');
 const PUBLIC = path.join(ROOT, 'public');
 const DATA = path.resolve(process.env.DATA_DIR || path.join(ROOT, 'data'));
 const PORT = +process.env.PORT || 8080;
+/* За обратным прокси (nginx, Caddy) адрес клиента берётся из заголовка, который ставит прокси: TRUST_PROXY=1.
+   Без прокси заголовкам верить нельзя — используется адрес соединения. */
+const TRUST_PROXY = String(process.env.TRUST_PROXY || '').trim() === '1';
+function clientAddress(req) {
+  if (TRUST_PROXY) {
+    const real = String(req.headers['x-real-ip'] || '').trim();
+    if (real) return real;
+    const chain = String(req.headers['x-forwarded-for'] || '').split(',').map((s) => s.trim()).filter(Boolean);
+    if (chain.length) return chain[chain.length - 1]; // последний адрес добавил наш прокси; первые присылает клиент
+  }
+  return req.socket.remoteAddress;
+}
 
 const app = createApp(() => fromEnv(process.env, { dataDir: DATA }));
 
@@ -60,7 +72,7 @@ const server = http.createServer(async (req, res) => {
   if (p.startsWith('/api/')) {
     let bodyP = null;
     const r = await app.handle({
-      method: req.method, pathname: p, query: Object.fromEntries(url.searchParams), ip: req.socket.remoteAddress,
+      method: req.method, pathname: p, query: Object.fromEntries(url.searchParams), ip: clientAddress(req), ipResolved: true,
       header: (n) => req.headers[n.toLowerCase()],
       body: async (limit) => { try { return await (bodyP ||= readBody(req, limit)); } catch (e) { throw new ApiError(e.status || 400, 'too_large', e.message); } },
       webRequest: () => new Request('http://localhost' + req.url, { method: req.method, headers: Object.entries(req.headers).filter(([, v]) => typeof v === 'string') }),
@@ -78,5 +90,6 @@ const server = http.createServer(async (req, res) => {
   return serveFile(res, PUBLIC, p.slice(1));
 });
 
-app.init().then(() => server.listen(PORT, () => console.log(`Главная: http://localhost:${PORT}/   Редактор: http://localhost:${PORT}/editor   Админ‑панель: http://localhost:${PORT}/admin`)))
+/* HOST=127.0.0.1 — слушать только локальный адрес, когда снаружи стоит обратный прокси */
+app.init().then(() => server.listen(PORT, process.env.HOST || undefined, () => console.log(`Главная: http://localhost:${PORT}/   Редактор: http://localhost:${PORT}/editor   Админ‑панель: http://localhost:${PORT}/admin`)))
   .catch(e => { console.error('Не удалось запустить:', e.message); process.exit(1); });

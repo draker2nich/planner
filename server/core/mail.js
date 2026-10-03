@@ -3,7 +3,7 @@
      RESEND_API_KEY        → Resend   (POST https://api.resend.com/emails)
      POSTMARK_SERVER_TOKEN → Postmark (POST https://api.postmarkapp.com/email)
      нет ключа, локально   → file: письмо пишется в <data>/outbox/*.json, ссылка — в консоль
-     нет ключа, Vercel     → off: почтовые функции выключены, /api/config отдаёт mail:false
+     нет ключа, Vercel или NODE_ENV=production → off: почтовые функции выключены, /api/config отдаёт mail:false
    Для resend и postmark обязателен MAIL_FROM — иначе режим off (не шлём письма с чужого домена).
    SDK не используются — только fetch. */
 const fs = require('node:fs');
@@ -79,7 +79,7 @@ function makeMailer(ctx) {
   if (String(env.MAIL_MODE || '').trim() === 'off') mode = 'off';
   else if (env.RESEND_API_KEY && from) mode = 'resend';
   else if (env.POSTMARK_SERVER_TOKEN && from) mode = 'postmark';
-  else if (!ctx.onVercel && ctx.dataDir) mode = 'file';
+  else if (!ctx.onVercel && ctx.dataDir && String(env.NODE_ENV || '').trim() !== 'production') mode = 'file'; // на боевом сервере письма в файл не пишем
   const doFetch = ctx.fetch || globalThis.fetch;
 
   async function post(url, headers, body) {

@@ -157,7 +157,7 @@ function lockFor(btn, sec, label) {
   tick();
 }
 function storageWarn() {
-  return Session.storageOk ? null : h('div', { class: 'gwarn', role: 'note' }, ic('info'), 'Браузер не даёт сохранить вход — после закрытия вкладки придётся войти снова.');
+  return Session.storageOk ? null : h('div', { class: 'gwarn', role: 'note' }, ic('info'), 'Браузер запрещает сайту хранить данные, поэтому вход не сохранится и редактор не откроется. Разрешите хранение данных для этого сайта или выйдите из приватного режима.');
 }
 function switchMode(mode, email) {
   S.mode = mode; if (email != null) S.email = email;
@@ -241,8 +241,9 @@ function renderRegister() {
   const card = $('#card');
   if (!S.cfg.registration) {
     card.replaceChildren(h('div', { class: 'closed' }, ic('lock'), h('h1', {}, 'Регистрация временно закрыта'),
-      h('p', { class: 'sub' }, 'Пока можно работать в редакторе без аккаунта — проект сохранится в этом браузере.'),
-      h('a', { class: 'btn primary', href: '/editor' }, 'Открыть редактор'), h('a', { class: 'tlink', href: '/' }, 'На главную')));
+      h('p', { class: 'sub' }, 'Новые аккаунты сейчас не создаются. Если аккаунт уже есть — войдите.'),
+      modeLink('login', 'Войти'), h('a', { class: 'tlink', href: '/' }, 'На главную')));
+    $('#card .closed a').className = 'btn primary';
     $('#foot').replaceChildren('Уже есть аккаунт? ', modeLink('login', 'Войти'));
     return;
   }

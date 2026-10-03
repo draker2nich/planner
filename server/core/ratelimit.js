@@ -42,8 +42,12 @@ function makeLimiter(db, secret) {
   };
 }
 
-/* Первый адрес из x-forwarded-for, затем x-real-ip, затем адрес сокета (локальный сервер) */
+/* Адрес клиента для лимитов.
+   server/index.js (локально и на своём сервере) определяет адрес сам и ставит ipResolved — заголовкам здесь не верим:
+   без обратного прокси их присылает сам клиент и мог бы обходить лимиты.
+   На Vercel адрес приходит в x-forwarded-for, который выставляет платформа. */
 function clientIp(req) {
+  if (req.ipResolved) return req.ip || 'unknown';
   const xf = req.header('x-forwarded-for');
   if (xf) return String(xf).split(',')[0].trim();
   return req.header('x-real-ip') || req.ip || 'unknown';
