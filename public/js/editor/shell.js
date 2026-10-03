@@ -63,7 +63,7 @@ function buildMenu(){
   const sub=h('div',{class:'sub'});Object.keys(UNITS).forEach(u=>sub.append(h('button',{class:u===P.unit?'on':'',onclick:()=>{P.unit=u;$('#unitSel').value=u;save();render();buildMenu();}},UNITS[u].l)));menu.append(sub,h('hr'));
   if(READONLY)return;
   menu.append(h('button',{type:'button',class:'mi',role:'menuitem',onclick:async()=>{menu.hidden=true;const r=await roomParamsDialog();if(!r)return;const err=apply(Q=>{Object.assign(Q,r);Q.wallParamsSet=true;Q.openings.forEach(o=>{if(o.kind==='window')o.head=Q.wallHeight-o.sill-o.height;});});if(err)toast(err,true);}},ic('settings'),'Параметры комнаты'));
-  menu.append(h('hr'),h('button',{type:'button',class:'mi danger',role:'menuitem',onclick:async()=>{menu.hidden=true;if(await confirmDlg('Очистить проект?','Все стены, проёмы и мебель будут удалены.')){const name=P.name;P=newProject();P.name=name;D=derive(P);E.sel=null;E.mode='idle';E.tool='select';snapshot();save();updateTools();updateModeUI();fitRoom();}}},ic('trash'),'Очистить проект'));
+  menu.append(h('hr'),h('button',{type:'button',class:'mi danger',role:'menuitem',onclick:async()=>{menu.hidden=true;if(await confirmDlg('Очистить проект?','Все стены, проёмы и мебель будут удалены.','Очистить проект',true)){const name=P.name;P=newProject();P.name=name;D=derive(P);E.sel=null;E.mode='idle';E.tool='select';snapshot();save();updateTools();updateModeUI();fitRoom();}}},ic('trash'),'Очистить проект'));
 }
 function lockState(){const items=P.mode==='furniture'?(P.furniture||[]):[...P.walls,...P.openings];const n=items.length;const l=items.filter(x=>x.locked).length;return {count:n,locked:l,all:n>0&&l===n};}
 function updateLockBtn(){
@@ -118,12 +118,12 @@ function compactInfo(sel){
 function updateWidget(){
   const wg=$('#widget'),pn=$('#props'); const sel=E.sel;
   if(!sel||E.drag||E.mode!=='idle'||T3.active){wg.hidden=true;pn.hidden=true;return;}
-  if(E.propsOpen){wg.hidden=true;pn.hidden=false;const r=buildFullWidget(pn);if(!r){pn.hidden=true;return;}pn.prepend(h('button',{class:'back',onclick:()=>{E.propsOpen=false;render();}},ic('chevron-left'),'Назад'));return;}
+  if(E.propsOpen){wg.hidden=true;pn.hidden=false;const r=buildFullWidget(pn);if(!r){pn.hidden=true;return;}(pn.querySelector('.ph')||pn).prepend(h('button',{type:'button',class:'back','aria-label':'Назад к плану',title:'Назад (Esc)',onclick:()=>{E.propsOpen=false;render();}},ic('chevron-left')));return;}
   pn.hidden=true; const scratch=document.createElement('div'); const r=buildFullWidget(scratch); if(!r){wg.hidden=true;return;}
   const info=compactInfo(sel); wg.hidden=false; wg.className='capsule'; wg.innerHTML='';
   wg.append(h('b',{},info.title)); if(info.sub)wg.append(h('span',{},info.sub));
-  if(info.lock)wg.append(h('button',{class:'iconbtn','aria-label':'Зафиксировать',title:'Зафиксировать (L)',onclick:(e)=>{e.stopPropagation();toggleLock(sel);}},lockIcon(isLocked(sel))));
-  wg.append(h('button',{onclick:(e)=>{e.stopPropagation();E.propsOpen=true;render();}},'Свойства',ic('chevron-right')));
+  if(info.lock){const lk=isLocked(sel),t=lk?'Снять фиксацию':'Зафиксировать';wg.append(h('button',{type:'button',class:'iconbtn','aria-pressed':String(lk),'aria-label':t,title:t+' (L)',onclick:(e)=>{e.stopPropagation();toggleLock(sel);}},lockIcon(lk)));}
+  wg.append(h('button',{type:'button',onclick:(e)=>{e.stopPropagation();E.propsOpen=true;render();}},'Свойства',ic('chevron-right')));
   const a=S(r.anchor); const n=r.n; const z=vp().zoom; const off=P.wallThickness*z+DIM_OFF*2+16; const W=wg.offsetWidth||220,H=36;
   let x=a.x+n.x*off,y=a.y+n.y*off; if(Math.abs(n.x)>Math.abs(n.y)){x=n.x>0?x:x-W;y-=H/2;}else{y=n.y>0?y:y-H;x-=W/2;}
   const padB=MQ_PHONE.matches?(P.mode==='furniture'?76:128):8; x=Math.max(8,Math.min(E.W-8-W,x)); y=Math.max(8,Math.min(E.H-padB-H,y)); wg.style.left=x+'px'; wg.style.top=y+'px';

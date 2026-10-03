@@ -137,7 +137,8 @@ td.act a{color:var(--foreground);font-size:13px;font-weight:500;text-underline-o
 .dims{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px}
 .dims .fld>span:first-child{font-size:13px}
 .ig{display:flex;align-items:stretch;border:1px solid var(--input);border-radius:var(--radius-md);background:var(--field);box-shadow:var(--shadow-xs);transition:border-color .15s,box-shadow .15s}
-.ig:focus-within{border-color:var(--ring);box-shadow:0 0 0 3px color-mix(in srgb,var(--ring) 50%,transparent)}
+.ig:focus-within{border-color:var(--focus);outline:2px solid var(--focus);outline-offset:-1px}
+.ig input:focus-visible,.ig select:focus-visible{outline:none}
 .ig input,.ig select{border:none;box-shadow:none!important;background-color:transparent;flex:1;min-width:0;width:100%}
 .ig .sfx{display:flex;align-items:center;padding:0 12px 0 0;color:var(--muted-foreground);font-size:13px}
 .ig select{flex:0 0 auto;width:auto;border-left:1px solid var(--input);border-radius:0 var(--radius-md) var(--radius-md) 0}

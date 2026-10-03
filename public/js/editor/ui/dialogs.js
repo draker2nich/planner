@@ -12,19 +12,23 @@ function dialog(build){
     build(box,api); box.appendChild(errEl);
     const btns=h('div',{class:'btns'}); box.appendChild(btns);
     const ttl=box.querySelector('h3'); if(ttl){ttl.id='dlgTitle';box.setAttribute('aria-labelledby','dlgTitle');}
-    (api.buttons||[]).forEach(b=>{const el=h('button',{type:'button',class:b.primary?'primary':''},b.label); el.onclick=()=>b.onClick(api); if(b.primary)api.primaryBtn=el; if(b.cancel)api.cancelBtn=el; btns.appendChild(el);});
+    (api.buttons||[]).forEach(b=>{const el=h('button',{type:'button',class:b.danger?'destructive':b.primary?'primary':''},b.label); el.onclick=()=>b.onClick(api); if(b.primary)api.primaryBtn=el; if(b.cancel)api.cancelBtn=el; btns.appendChild(el);});
     if(api.setup)api.setup();
     box.onkeydown=(e)=>{ if(e.key==='Enter'&&e.target.tagName!=='TEXTAREA'&&api.primaryBtn&&!api.primaryBtn.disabled){e.preventDefault();api.primaryBtn.click();} if(e.key==='Escape'&&api.cancelBtn){e.preventDefault();api.cancelBtn.click();} e.stopPropagation(); };
-    const fi=box.querySelector('input:not([readonly]):not([type=file]),select,button'); if(fi&&!IS_TOUCH){fi.focus(); if(fi.select)fi.select();} else box.focus({preventScroll:true});
+    const fi=box.querySelector('.f:not(.unit) input:not([readonly])')||box.querySelector('input:not([readonly]):not([type=file]),select:not(#dlgUnit),button'); if(fi&&!IS_TOUCH){fi.focus(); if(fi.select)fi.select();} else box.focus({preventScroll:true});
   });
 }
+let NR_ID=0;
 function numRow(label,mm,opts={}){
-  const inp=h('input',{type:'text',inputmode:'decimal',value:mm==null?'':fmt(mm,opts.unit)}); if(opts.readonly)inp.readOnly=true;
-  const row=h('div',{class:'f'},h('label',{},label),h('div',{class:'val'},inp,h('span',{},opts.unitLabel||UNITS[opts.unit||P.unit].l)));
+  const id='nr'+(++NR_ID); // подпись связана с полем: клик по ней ставит фокус, скринридер называет поле
+  const inp=h('input',{type:'text',id,inputmode:'decimal',autocomplete:'off',spellcheck:'false',value:mm==null?'':fmt(mm,opts.unit)}); if(opts.readonly)inp.readOnly=true;
+  const row=h('div',{class:'f'},h('label',{for:id},label),h('div',{class:'val'},inp,h('span',{},opts.unitLabel||UNITS[opts.unit||P.unit].l)));
   return {row,inp,get:()=>parseLen(inp.value,opts.unit||P.unit),set:(v)=>{inp.value=fmt(v,opts.unit||P.unit);},unitSpan:row.querySelector('span')};
 }
-function unitRow(){const sel=h('select',{},...Object.keys(UNITS).map(u=>h('option',{value:u},UNITS[u].l))); sel.value=P.unit; return {row:h('div',{class:'f'},h('label',{},'Единицы'),sel),sel};}
-function confirmDlg(title,text){return dialog((box,api)=>{box.append(h('h3',{},title),h('div',{class:'hint'},text)); api.buttons=[{label:'Отмена',cancel:true,onClick:a=>a.close(false)},{label:'Да',primary:true,onClick:a=>a.close(true)}];});}
+/* Единицы — компактный выбор в углу диалога рядом с заголовком (см. #dlg .f.unit), а не отдельная строка формы */
+function unitRow(){const sel=h('select',{id:'dlgUnit',title:'Единицы измерения'},...Object.keys(UNITS).map(u=>h('option',{value:u},UNITS[u].l))); sel.value=P.unit; return {row:h('div',{class:'f unit'},h('label',{for:'dlgUnit',class:'sr-only'},'Единицы измерения'),sel),sel};}
+/* ok — подпись кнопки подтверждения: называет действие («Удалить стену»), чтобы на диалог можно было ответить, не читая текст */
+function confirmDlg(title,text,ok='Да',danger=false){return dialog((box,api)=>{box.append(h('h3',{},title),h('div',{class:'hint'},text)); api.buttons=[{label:'Отмена',cancel:true,onClick:a=>a.close(false)},{label:ok,primary:true,danger,onClick:a=>a.close(true)}];});}
 
 async function wallParamsDialog(){
   return dialog((box,api)=>{
@@ -88,7 +92,7 @@ async function openingDialog(kind,init){
         minus.onclick=()=>step(-1); plus.onclick=()=>step(1);
         cnt.onkeydown=(e)=>{if(e.key==='ArrowUp'){e.preventDefault();step(1);}else if(e.key==='ArrowDown'){e.preventDefault();step(-1);}};
         cnt.oninput=()=>refreshRow();
-        const cntRow=h('div',{class:'f'},h('label',{for:'winCount'},'Количество'),h('div',{class:'val stepper'},minus,cnt,plus));
+        const cntRow=h('div',{class:'f'},h('label',{for:'winCount'},'Количество окон'),h('div',{class:'val stepper'},minus,cnt,plus));
         let layout='even';
         const seg=h('div',{class:'seg',role:'group','aria-label':'Расстановка окон'});
         const segBtn=(v,l)=>{const b=h('button',{type:'button','aria-pressed':String(layout===v)},l);b.onclick=()=>{layout=v;[...seg.children].forEach(x=>{const on=x===b;x.classList.toggle('on',on);x.setAttribute('aria-pressed',String(on));});refreshRow();};if(layout===v)b.classList.add('on');return b;};
@@ -101,7 +105,7 @@ async function openingDialog(kind,init){
           const n=getN(); const multi=n>1; rowBox.hidden=!multi; Gr.row.hidden=layout!=='gap';
           rowHint.textContent=layout==='even'?`${nWin(isNaN(n)?2:n)} одинакового размера встанут в ряд на выбранной стене с равными простенками между окнами и до углов. При изменении длины стены ряд перераспределится.`:`${nWin(isNaN(n)?2:n)} одинакового размера встанут в ряд с заданным простенком; ряд можно сдвигать вдоль стены целиком.`;
         }
-        all.push(Gr); box.append(h('hr',{style:'border:none;border-top:1px solid var(--border);margin:14px 0 4px'}),cntRow,rowBox); refreshRow();
+        all.push(Gr); box.append(h('div',{class:'fsec'},'Несколько окон в ряд'),cntRow,rowBox); refreshRow();
         api.rowParams=()=>({n:getN(),layout,gap:Gr.get()});
       }
     }

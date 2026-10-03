@@ -4,7 +4,9 @@
   --bg:#fafafa; --grid:#efeff1; --grid-strong:#e1e1e5; --wall:#27272a; --wall-fill:#a1a1aa; --locked:#a1a1aa;
   --dim-active:var(--brand); --dim-idle:rgba(113,113,122,.55);
   --fg:var(--foreground); --paper:var(--card);
-  --hdr:56px; --gap:12px;
+  --hdr:56px; --gap:12px; --panel-w:328px;
+  /* вторичный текст поверх заливки поля (единицы, подсказки в полях): чуть темнее --muted-foreground, чтобы контраст был ≥ 4.5:1 */
+  --on-fill:color-mix(in srgb,var(--foreground) 64%,transparent);
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
   --bg:#0b0b0d; --grid:#151517; --grid-strong:#212125; --wall:#e4e4e7; --wall-fill:#52525b; --locked:#71717a; --dim-idle:rgba(161,161,170,.55);
@@ -13,6 +15,18 @@
 html,body{height:100%;overflow:hidden;overscroll-behavior:none}
 body{background:var(--bg)}
 #app{display:grid;grid-template-rows:calc(var(--hdr) + var(--safe-top)) 1fr;height:100%;height:100dvh}
+
+/* ---------- тихие поля ----------
+   В редакторе десятки параметров. Рамка и тень у каждого поля складываются в «стену форм»,
+   поэтому здесь поле — плашка с лёгкой заливкой: рамки и тени нет, в фокусе — кольцо.
+   Специфичность нулевая (:where), чтобы правила панелей ниже перекрывали без !important. */
+input:where(:not([type=checkbox],[type=radio],[type=range],[type=color],[type=file])),select,textarea{background-color:var(--fill);border-color:transparent;box-shadow:none}
+input:where(:not([type=checkbox],[type=radio],[type=range],[type=color],[type=file])):hover:where(:not([readonly],:disabled)),select:hover:where(:not(:disabled)),textarea:hover:where(:not([readonly],:disabled)){background-color:var(--fill-hover)}
+input:where(:not([type=checkbox],[type=radio],[type=range],[type=color],[type=file])):focus-visible,select:focus-visible,textarea:focus-visible{background-color:var(--field);border-color:var(--focus)}
+input::placeholder,textarea::placeholder{color:var(--on-fill)}
+/* вторичные кнопки панелей и диалогов — заливкой, без рамки и тени */
+#props .acts button,#matPanel .foot button,#dlg .alt{border-color:transparent;background:var(--fill);box-shadow:none}
+#props .acts button:hover:not(:disabled),#matPanel .foot button:hover,#dlg .alt:hover{background:var(--fill-hover);color:var(--foreground)}
 
 /* ---------- шапка ---------- */
 header{display:flex;align-items:center;gap:6px;padding:var(--safe-top) calc(12px + var(--safe-right)) 0 calc(12px + var(--safe-left));
@@ -24,7 +38,6 @@ header .sp{flex:1 1 0;min-width:4px}
 #homeMark{width:30px;height:30px;flex:none;display:inline-flex;align-items:center;justify-content:center;border-radius:var(--radius-md);background:var(--primary);color:var(--primary-foreground);margin-right:2px;transition:opacity .15s}
 #homeMark:hover{opacity:.85}
 #homeMark .ic{width:18px;height:18px;stroke-width:2.4}
-#homeMark:focus-visible{box-shadow:0 0 0 3px color-mix(in srgb,var(--ring) 50%,transparent)}
 @media (max-width:640px){#homeMark{display:none}}
 body.in3d #homeMark{display:none}
 header .save{color:var(--muted-foreground);font-size:13px;white-space:nowrap;padding:0 6px}
@@ -81,36 +94,75 @@ canvas{display:block;width:100%;height:100%;touch-action:none;cursor:default;-we
 
 /* ---------- боковые панели (свойства, каталог, материалы) ---------- */
 .panel,#catalog,#matPanel,#dimlist{background:var(--card);color:var(--card-foreground);border:1px solid var(--border);border-radius:var(--radius-xl);box-shadow:var(--shadow-lg)}
-.panel{position:absolute;top:var(--gap);right:calc(var(--gap) + var(--safe-right));bottom:var(--gap);width:328px;padding:12px 16px 16px;overflow:auto;overscroll-behavior:contain;font-size:14px}
+/* панель свойств занимает столько высоты, сколько нужно параметрам, и не закрывает план пустым полотном */
+.panel{position:absolute;top:var(--gap);right:calc(var(--gap) + var(--safe-right));width:var(--panel-w);max-height:calc(100% - var(--gap)*2);padding:10px 16px 16px;overflow:auto;overscroll-behavior:contain;font-size:14px}
 #props{z-index:6}
-#props .back{height:32px;padding:0 8px 0 4px;margin:0 0 8px -4px;border:none;background:transparent;box-shadow:none;color:var(--muted-foreground);font-weight:500}
-#props .back:hover{background:var(--accent);color:var(--foreground)}
-#props h4,#matPanel h4,#catalog h4,#dimlist h4{margin:0 0 12px;font-size:16px;font-weight:600;line-height:1.3;display:flex;justify-content:space-between;align-items:center;gap:8px}
-#props .row,#matPanel .row{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:36px;margin:2px 0;font-size:14px}
-#props .row span:first-child,#matPanel .row span:first-child{color:var(--muted-foreground);flex:1;min-width:0}
-#props .row span:last-child:not(:first-child){font-variant-numeric:tabular-nums;text-align:right}
-#props .row input{width:116px;text-align:right;height:32px;font-variant-numeric:tabular-nums}
-#props .row select,#matPanel .row select{height:32px;min-width:0;max-width:170px}
-#props .row.warn{color:var(--warning);background:var(--warning-soft);border-radius:var(--radius-md);padding:6px 10px;justify-content:flex-start}
-#props .row.warn span{color:var(--warning)!important}
-#props .acts{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}
-#props .acts button{flex:1 1 30%;height:32px;padding:0 10px;font-size:13px}
-#props .acts button.del{color:var(--destructive)}
-#props .acts button.del:hover{background:var(--destructive-soft)}
-.lk{width:32px;height:32px;padding:0;border:none;background:transparent;box-shadow:none;color:var(--muted-foreground)}
-.lk:hover{background:var(--accent);color:var(--foreground)}
+/* пока панель открыта, инструменты и каталог под ней не выглядывают из‑под её края */
+@media (min-width:641px){
+  body:has(#props:not([hidden])) :is(#tools,#catalog){visibility:hidden}
+  body:has(#props:not([hidden])) #dimlist{right:calc(var(--gap)*2 + var(--panel-w) + var(--safe-right))}
+}
+/* шапка: назад · название · замок — одной строкой */
+.ph{display:flex;align-items:center;gap:2px;min-height:36px;margin:0 -8px}
+.ph-t{flex:1;min-width:0;padding:0 8px}
+.ph .back+.ph-t{padding-left:4px}
+.ph h4{margin:0;font-size:15px;font-weight:600;line-height:20px;letter-spacing:-.005em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ph-s{display:block;font-size:12px;line-height:16px;color:var(--muted-foreground);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ph .back,.lk{width:32px;height:32px;flex:none;padding:0;border:none;background:transparent;box-shadow:none;color:var(--muted-foreground)}
+.ph .back:hover,.lk:hover{background:var(--fill-hover);color:var(--foreground)}
+.lk[aria-pressed="true"]{background:var(--fill);color:var(--foreground)}
+/* группа параметров: заголовок и сетка полей; группы разделяет воздух, а не линии */
+.pg{margin-top:16px}
+.ph+.pg,.ph+.pi{margin-top:10px}
+.pg-t{font-size:12px;line-height:16px;font-weight:600;color:var(--foreground);margin-bottom:8px}
+.pg-g{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 8px}
+.pg-g:has(>:nth-child(3):last-child){grid-template-columns:repeat(3,minmax(0,1fr))}
+.pf{display:flex;flex-direction:column;gap:4px;min-width:0}
+.pf-l{font-size:12px;line-height:16px;color:var(--muted-foreground);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pf-c{display:flex;align-items:center;gap:4px;height:32px;padding-right:8px;border-radius:var(--radius-md);background:var(--fill);cursor:text;transition:background-color .15s}
+.pf-c:hover{background:var(--fill-hover)}
+.pf-c:focus-within{background:var(--field);outline:2px solid var(--focus);outline-offset:-1px}
+.pf-c input,.pf-c input:hover,.pf-c input:focus-visible{flex:1;min-width:0;width:100%;height:100%;padding:0 0 0 10px;border:0;border-radius:inherit;background:transparent;outline:none;font-variant-numeric:tabular-nums}
+.pf-c:has(input:is([readonly],:disabled)),.pf-c:has(input:is([readonly],:disabled)):hover{background:color-mix(in srgb,var(--foreground) 2.5%,transparent);cursor:default}
+.pf-c input:is([readonly],:disabled){color:var(--on-fill);opacity:1}
+.pf-u{flex:none;font-size:12px;color:var(--on-fill)}
+.pf select{height:32px;width:100%;padding:0 28px 0 10px;background-position:right 8px center}
+.pf-v{display:flex;align-items:center;min-height:32px;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+/* справочные значения: подпись — значение */
+.pi{margin:14px 0 0}
+.pi>div{display:flex;align-items:baseline;justify-content:space-between;gap:12px;padding:5px 0;font-size:13px;line-height:18px}
+.pi dt{color:var(--muted-foreground);flex:none}
+.pi dd{margin:0;min-width:0;text-align:right;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+/* пояснение (ряд окон) и предупреждение (мебель) */
+.pnote{display:flex;gap:8px;align-items:flex-start;margin-top:10px;padding:8px 10px;border-radius:var(--radius-md);background:var(--fill);font-size:12px;line-height:17px;color:var(--on-fill)}
+.pnote .ic{margin-top:1px;color:var(--brand)}
+.pnote b{display:block;font-size:13px;font-weight:500;color:var(--foreground)}
+.pnote.warn{margin-top:16px;background:var(--warning-soft);color:var(--warning);font-size:13px}
+.pnote.warn .ic{color:currentColor}
+/* действия: обычные — плашками слева, удаление — текстом справа (или строкой ниже, если не помещается) */
+.pa{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px;margin-top:16px;padding-top:12px;border-top:1px solid var(--border)}
+#props .acts{display:flex;gap:6px;flex-wrap:wrap}
+#props .acts button{height:32px;padding:0 12px;font-size:13px}
+#props .acts.danger{gap:2px;margin:0 -8px}
+#props .acts.danger button{padding:0 8px;background:transparent;color:var(--destructive)}
+#props .acts.danger button:hover:not(:disabled){background:var(--destructive-soft);color:var(--destructive)}
+/* строки панелей 3D (материал, карточка предмета) */
+#matPanel h4,#catalog h4,#dimlist h4{margin:0 0 12px;font-size:15px;font-weight:600;line-height:1.3;display:flex;justify-content:space-between;align-items:center;gap:8px}
+#matPanel .row{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:36px;margin:2px 0;font-size:13px}
+#matPanel .row span:first-child{color:var(--muted-foreground);flex:1;min-width:0}
+#matPanel .row select{height:32px;min-width:0;max-width:170px}
 
 #dimlist{position:absolute;right:calc(88px + var(--safe-right));top:var(--gap);width:248px;max-height:calc(100% - 24px);overflow:auto;padding:12px 14px;font-size:13px;box-shadow:var(--shadow-md);z-index:2}
 #dimlist h4{font-size:14px;margin-bottom:8px}
 #dimlist div{display:flex;gap:8px;margin:4px 0;align-items:flex-start;font-variant-numeric:tabular-nums}
 #dimlist b{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:var(--brand);color:#fff;font-size:11px;font-weight:600;flex:none}
 
-#status{position:absolute;left:calc(var(--gap) + var(--safe-left));bottom:calc(10px + var(--safe-bottom));max-width:calc(100% - 120px);font-size:13px;color:var(--muted-foreground);pointer-events:none;
-  background:color-mix(in srgb,var(--card) 92%,transparent);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);padding:6px 12px;border-radius:var(--radius-md);border:1px solid var(--border);box-shadow:var(--shadow-xs)}
+#status{position:absolute;left:calc(var(--gap) + var(--safe-left));bottom:calc(10px + var(--safe-bottom));max-width:calc(100% - 120px);font-size:12px;line-height:16px;color:var(--muted-foreground);pointer-events:none;
+  background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);padding:5px 10px;border-radius:var(--radius-md)}
 #status:empty{display:none}
 
 /* ---------- каталог ---------- */
-#catalog{position:absolute;top:var(--gap);right:calc(var(--gap) + var(--safe-right));bottom:var(--gap);width:336px;padding:14px 14px 8px;overflow:hidden;z-index:4;font-size:14px;display:flex;flex-direction:column}
+#catalog{position:absolute;top:var(--gap);right:calc(var(--gap) + var(--safe-right));bottom:var(--gap);width:var(--panel-w);padding:14px 14px 8px;overflow:hidden;z-index:4;font-size:14px;display:flex;flex-direction:column}
 #catalog .chead{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;gap:8px}
 #catalog .chead h4{margin:0}
 #catalog .x{width:32px;height:32px;padding:0;border:none;background:transparent;box-shadow:none;color:var(--muted-foreground)}
@@ -121,85 +173,101 @@ header .only3d.on{background:var(--accent);border-color:var(--ring)}
 #catalog .csearch .ic{position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--muted-foreground);pointer-events:none}
 #catalog input[type=search]{width:100%;padding-left:34px}
 #catalog .clist{flex:1;overflow:auto;overscroll-behavior:contain;margin:0 -14px;padding:0 14px}
-#catalog .ccat{border-top:1px solid var(--border)}
-#catalog .ccat:first-child{border-top:none}
-#catalog .ct{display:flex;width:100%;justify-content:space-between;align-items:center;height:auto;min-height:40px;padding:8px 4px;border:none;border-radius:0;background:none;box-shadow:none;font-weight:500;font-size:14px;color:var(--foreground)}
-#catalog .ct:hover{background:none;color:var(--foreground);text-decoration:underline;text-underline-offset:4px}
-#catalog .ct span{color:var(--muted-foreground);font-weight:400;display:inline-flex;align-items:center;gap:6px;font-variant-numeric:tabular-nums}
+#catalog .ct{display:flex;width:calc(100% + 16px);margin:0 -8px;justify-content:space-between;align-items:center;height:auto;min-height:38px;padding:8px;border:none;border-radius:var(--radius-md);background:none;box-shadow:none;font-weight:500;font-size:14px;color:var(--foreground)}
+#catalog button.ct:hover{background:var(--fill);color:var(--foreground)}
+#catalog .ct span{color:var(--muted-foreground);font-weight:400;font-size:13px;display:inline-flex;align-items:center;gap:6px;font-variant-numeric:tabular-nums}
 #catalog .ct .chev{transition:transform .15s}
 #catalog .ccat.open .ct .chev{transform:rotate(90deg)}
-#catalog .tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;padding:2px 0 12px}
-#catalog .tile{position:relative;display:flex;flex-direction:column;gap:4px;height:auto;min-height:92px;padding:8px 4px;border:1px solid var(--border);border-radius:var(--radius-lg);background:var(--card);box-shadow:none;
-  text-align:center;font-size:12px;font-weight:500;line-height:1.2;white-space:normal;color:var(--foreground)}
-#catalog .tile:hover{background:var(--accent);border-color:color-mix(in srgb,var(--foreground) 20%,var(--border))}
+#catalog .tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2px;padding:0 0 10px;margin:0 -4px}
+/* плитки без рамок: сетка и так читается, рамка у каждой из шестнадцати — шум */
+#catalog .tile{position:relative;display:flex;flex-direction:column;justify-content:flex-start;gap:4px;height:auto;min-height:88px;padding:10px 4px 8px;border:1px solid transparent;border-radius:var(--radius-lg);background:transparent;box-shadow:none;
+  text-align:center;font-size:12px;font-weight:500;line-height:1.25;white-space:normal;color:var(--foreground)}
+#catalog .tile:hover{background:var(--fill-hover)}
 #catalog .tile img{width:44px;height:44px;display:block;margin:0 auto}
-#catalog .tile .dot{position:absolute;right:6px;top:6px;width:7px;height:7px;border-radius:50%;background:var(--brand)}
-:root[data-theme="dark"] #catalog .tile img,:root[data-theme="dark"] #dlg .pt img,:root[data-theme="dark"] .aitable img{filter:invert(1) hue-rotate(180deg)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) #dlg .pt img{filter:invert(.92) hue-rotate(180deg)}}
+#catalog .tile .dot{position:absolute;right:10px;top:8px;width:7px;height:7px;border-radius:50%;background:var(--brand)}
+/* Значки типов рисуются цветом текста текущей темы — инвертировать их не нужно (в выбранной вручную тёмной теме они пропадали).
+   Инвертируются только нарисованные миниатюры товаров (тёмные линии на белом); фотографии товаров остаются как есть. */
+:root[data-theme="dark"] #dlg .pt img.gen{filter:invert(.92) hue-rotate(180deg)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) #dlg .pt img.gen{filter:invert(.92) hue-rotate(180deg)}}
 
 /* ---------- диалоги (Dialog) ---------- */
 #overlay{position:absolute;inset:0;z-index:20;display:flex;align-items:center;justify-content:center;padding:16px;pointer-events:none;background:transparent}
 #overlay:has(#dlg.wide),#overlay:has(#dlg.xwide){background:var(--overlay);pointer-events:auto;animation:fade-in .15s ease-out}
-#dlg{pointer-events:auto;width:400px;max-width:100%;max-height:calc(100% - 16px);overflow:auto;overscroll-behavior:contain;
+#dlg{position:relative;pointer-events:auto;width:400px;max-width:100%;max-height:calc(100% - 16px);overflow:auto;overscroll-behavior:contain;
   background:var(--popover);color:var(--popover-foreground);border:1px solid var(--border);border-radius:var(--radius-xl);box-shadow:var(--shadow-lg);padding:24px;animation:pop-in .15s var(--ease)}
 #dlg.mid{width:520px}
 #dlg.wide{width:640px}
 #dlg.xwide{width:840px}
-#dlg h3{margin:0 0 6px;font-size:18px;font-weight:600;line-height:1.3;letter-spacing:-.01em}
-#dlg h3+.hint,#dlg h3+.summary{margin-top:0}
-#dlg .f{display:grid;grid-template-columns:minmax(0,1fr) 168px;align-items:center;gap:10px;margin:10px 0}
-#dlg .f>label{font-size:14px;font-weight:500}
-#dlg .f .val{display:flex;gap:8px;align-items:center}
-#dlg .f .val span{color:var(--muted-foreground);font-size:13px;min-width:22px}
+#dlg h3{margin:0 0 12px;font-size:18px;font-weight:600;line-height:1.3;letter-spacing:-.01em}
+#dlg h3+.hint,#dlg h3+.summary{margin-top:-6px}
+/* строка формы: подпись слева, поле справа; единица измерения — внутри поля */
+#dlg .f{display:grid;grid-template-columns:minmax(0,1fr) 168px;align-items:center;gap:12px;margin:8px 0}
+#dlg .f>label{font-size:14px;line-height:20px}
+#dlg .f>label:has(select){display:flex;align-items:center;gap:8px}
+#dlg .f:has(>label select){grid-template-columns:minmax(0,1fr) 150px}
+#dlg .f>label select{flex:none;width:auto;height:32px;padding:0 28px 0 10px;font-size:13px;background-position:right 8px center;background-size:14px}
+#dlg .f .val{display:flex;gap:6px;align-items:center}
+#dlg .f .val span{color:var(--on-fill);font-size:13px;min-width:22px}
+#dlg .f .val:not(.stepper){height:36px;padding-right:10px;border-radius:var(--radius-md);background:var(--fill);cursor:text;transition:background-color .15s}
+#dlg .f .val:not(.stepper):hover{background:var(--fill-hover)}
+#dlg .f .val:not(.stepper):focus-within{background:var(--field);outline:2px solid var(--focus);outline-offset:-1px}
+#dlg .f .val:not(.stepper) input,#dlg .f .val:not(.stepper) input:hover,#dlg .f .val:not(.stepper) input:focus-visible{flex:1;min-width:0;width:100%;height:100%;padding:0 0 0 10px;border:0;border-radius:inherit;background:transparent;outline:none;text-align:right;font-variant-numeric:tabular-nums}
+/* вычисляемое поле — без заливки, тонкой рамкой: видно, что значение есть, но вводится не здесь */
+#dlg .f .val:not(.stepper):has(input:is([readonly],:disabled)),#dlg .f .val:not(.stepper):has(input:is([readonly],:disabled)):hover{background:transparent;box-shadow:inset 0 0 0 1px var(--border)}
 #dlg .f .val.stepper{gap:6px;justify-content:flex-end}
-#dlg .f .val.stepper button{width:32px;height:32px;font-size:16px;font-variant-numeric:tabular-nums}
-#props .rowinfo{display:flex;align-items:center;gap:8px;padding:8px 10px;margin:0 0 6px;border-radius:var(--radius-md);background:var(--brand-soft);color:var(--foreground);font-size:13px;font-weight:500}
-#props .rowinfo .ic{color:var(--brand)}
-#props .rowhint{margin:0 0 6px;font-size:12px;color:var(--muted-foreground)}
-#dlg .f input[type=text]{width:100%;text-align:right;font-variant-numeric:tabular-nums}
+#dlg .f .val.stepper button{width:32px;height:32px;font-size:16px;font-variant-numeric:tabular-nums;border-color:transparent;background:var(--fill);box-shadow:none}
+#dlg .f .val.stepper button:hover{background:var(--fill-hover)}
+#dlg .f .val.stepper input{height:32px}
 #dlg .f select{width:100%}
+/* единицы измерения — в углу диалога, на одной линии с заголовком */
+#dlg .f.unit{position:absolute;top:19px;right:20px;display:block;margin:0}
+#dlg .f.unit select{width:auto;height:30px;padding:0 28px 0 10px;font-size:13px;color:var(--on-fill);background-position:right 8px center;background-size:14px}
+#dlg:has(.f.unit) h3{padding-right:92px}
+/* подзаголовок раздела формы */
+#dlg .fsec{margin:20px 0 4px;padding-top:16px;border-top:1px solid var(--border);font-size:13px;font-weight:600}
 #dlg .f:has(.seg){grid-template-columns:1fr;gap:6px}
 #dlg .f .seg{width:100%}
 #dlg .f .seg{height:auto;min-height:36px;flex-wrap:wrap}
 #dlg .f .seg button{flex:1 1 auto;height:30px}
 #dlg .chk{display:flex;gap:10px;align-items:flex-start;margin:12px 0;font-size:14px;cursor:pointer}
 #dlg .chk input{margin-top:2px}
-#dlg .hint{color:var(--muted-foreground);font-size:14px;margin:4px 0 10px;line-height:1.5}
+#dlg .hint{color:var(--muted-foreground);font-size:13px;margin:4px 0 10px;line-height:1.5;text-wrap:pretty}
 #dlg .err{color:var(--destructive);font-size:13px;min-height:20px;margin:8px 0 0}
 #dlg .btns{display:flex;justify-content:flex-end;gap:8px;margin-top:16px;flex-wrap:wrap}
 #dlg .btns button:first-child:not(:only-child){margin-right:auto}
 #dlg .alt{font-size:13px;height:32px;padding:0 12px}
-#dlg .alt.on{background:var(--accent);border-color:var(--ring)}
+#dlg .alt.on,#dlg .alt.on:hover{background:var(--primary);color:var(--primary-foreground)}
 #dlg .row{display:flex;gap:8px;margin:8px 0;align-items:center}
 #dlg .row select{flex:1}
-#dlg .drow{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 10px;align-items:center;padding:10px 0;border-top:1px solid var(--border)}
-#dlg .drow .dl{grid-column:1/3;font-size:14px;font-weight:500}
-#dlg .drow .dl b{display:inline-flex;min-width:22px;height:22px;padding:0 6px;border-radius:var(--radius-sm);background:var(--muted);align-items:center;justify-content:center;font-size:12px;margin-right:4px}
-#dlg .drow .dv{display:flex;gap:6px;align-items:center}
-#dlg .drow .dv input{width:84px;text-align:right;height:32px;font-variant-numeric:tabular-nums}
-#dlg .drow .dv span{color:var(--muted-foreground);font-size:13px}
+#dlg .drow{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 12px;align-items:center;padding:5px 0}
+#dlg .drow .dl{font-size:14px}
+#dlg .drow .dl b{display:inline-flex;min-width:22px;height:22px;padding:0 6px;border-radius:var(--radius-sm);background:var(--fill);align-items:center;justify-content:center;font-size:12px;font-weight:600;margin-right:6px}
+#dlg .drow .dv{grid-column:1/3;display:flex;gap:6px;align-items:center;justify-content:flex-end}
+#dlg .drow .dv input{width:96px;text-align:right;height:32px;font-variant-numeric:tabular-nums}
+#dlg .drow .dv span{color:var(--on-fill);font-size:13px;min-width:22px}
 #dlg .drow .dv:not(:has(input:not([hidden]))){display:none}
-#dlg .drow .seg{height:32px}
-#dlg .drow .seg button{font-size:13px;padding:0 10px}
-#dlg details{border-top:1px solid var(--border)}
-#dlg details summary{cursor:pointer;color:var(--foreground);font-size:14px;font-weight:500;padding:10px 0;list-style:none;display:flex;align-items:center;gap:6px;border-radius:var(--radius-sm)}
+/* переключатели внутри строк таблиц и списков — без серой подложки: в диалоге их бывает десяток подряд */
+#dlg .drow .seg,#dlg .aitable .seg,#dlg .roomblk .seg{height:30px;padding:0;gap:2px;background:transparent}
+#dlg .drow .seg button,#dlg .aitable .seg button,#dlg .roomblk .seg button{font-size:13px;padding:0 10px;border:0;border-radius:var(--radius-md)}
+#dlg .drow .seg button:hover:not(:disabled),#dlg .aitable .seg button:hover:not(:disabled),#dlg .roomblk .seg button:hover:not(:disabled){background:var(--fill)}
+#dlg .drow .seg button.on,#dlg .aitable .seg button.on,#dlg .roomblk .seg button.on{background:color-mix(in srgb,var(--foreground) 9%,transparent);color:var(--foreground);box-shadow:none}
+#dlg details{margin-top:4px}
+#dlg details summary{cursor:pointer;color:var(--muted-foreground);font-size:13px;font-weight:500;padding:8px 0;list-style:none;display:flex;align-items:center;gap:6px;border-radius:var(--radius-sm)}
 #dlg details summary::-webkit-details-marker{display:none}
 #dlg details summary::before{content:'';width:6px;height:6px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(-45deg);transition:transform .15s;margin:0 4px 0 2px}
 #dlg details[open] summary::before{transform:rotate(45deg)}
-#dlg details .drow{border-top:none;padding-top:0}
 #dlg .pgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;max-height:56vh;overflow:auto;overscroll-behavior:contain;margin:10px -4px;padding:4px}
-#dlg .pt{display:flex;flex-direction:column;gap:2px;align-items:center;height:auto;padding:12px 10px;border:1px solid var(--border);border-radius:var(--radius-lg);background:var(--card);box-shadow:none;
+#dlg .pt{display:flex;flex-direction:column;justify-content:flex-start;gap:2px;align-items:center;height:auto;padding:12px 10px;border:1px solid transparent;border-radius:var(--radius-lg);background:transparent;box-shadow:none;
   font-size:13px;font-weight:400;text-align:center;white-space:normal;line-height:1.35;color:var(--foreground)}
-#dlg .pt:hover{background:var(--accent);border-color:color-mix(in srgb,var(--foreground) 20%,var(--border))}
+#dlg .pt:hover{background:var(--fill-hover)}
 #dlg .pt img{width:88px;height:88px;border-radius:var(--radius-md);margin-bottom:6px;background:#fff}
 #dlg .pt b{font-size:13px;font-weight:600}
 #dlg .pt span{color:var(--muted-foreground);font-size:12px;font-variant-numeric:tabular-nums}
 #dlg .pt i{font-size:11px;color:var(--muted-foreground);font-style:normal;margin-top:2px}
-#dlg .pt.ph{border-style:dashed}
+#dlg .pt.ph .q{background:transparent;box-shadow:inset 0 0 0 1.5px var(--border)}
 #dlg .pt.ph .q{width:88px;height:88px;border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;font-size:30px;font-weight:600;color:var(--muted-foreground);background:var(--muted);margin-bottom:6px}
 #dlg textarea{width:100%;display:block}
-.seg.sm,#dlg .aitable .seg,#dlg .roomblk .seg{height:32px}
-#dlg .aitable .seg button,#dlg .roomblk .seg button{font-size:13px;padding:0 10px}
+.seg.sm{height:32px}
 
 /* ---------- бриф ---------- */
 .rcards{display:flex;flex-direction:column;gap:8px;margin:8px 0}
@@ -223,7 +291,9 @@ header .only3d.on{background:var(--accent);border-color:var(--ring)}
 .roomblk{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px 12px;align-items:center;margin:12px 0 0;padding-top:12px;border-top:1px solid var(--border)}
 .roomblk h5{grid-column:1/3;margin:0 0 2px;font-size:14px;font-weight:600;color:var(--foreground)}
 .roomblk>span{font-size:14px}
-#dlg .chips{margin:6px 0 4px}
+#dlg .chips{margin:6px 0 14px}
+#dlg .chip:not(.on){border-color:transparent;background:var(--fill)}
+#dlg .chip:not(.on):hover{background:var(--fill-hover)}
 .pcard{display:grid;grid-template-columns:104px minmax(0,1fr);gap:14px;padding:12px;border:1px solid var(--border);border-radius:var(--radius-lg);margin:10px 0;align-items:start;background:var(--card)}
 .pcard.bad{border-color:var(--destructive);box-shadow:0 0 0 1px var(--destructive)}
 .pcard img{width:104px;height:104px;object-fit:cover;border-radius:var(--radius-md);background:var(--muted)}
@@ -240,7 +310,7 @@ header .only3d.on{background:var(--accent);border-color:var(--ring)}
 .drop.over{border-color:var(--brand);background:var(--brand-soft)}
 .drop .hint{margin:6px 0 0!important;font-size:13px!important}
 .lnk{color:var(--foreground);cursor:pointer;text-decoration:underline;text-underline-offset:4px;font-weight:500}
-.lnk:focus-within{box-shadow:0 0 0 3px color-mix(in srgb,var(--ring) 50%,transparent);border-radius:4px}
+.lnk:focus-within{outline:2px solid var(--focus);outline-offset:2px;border-radius:4px}
 .lnk input{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
 .infoblk{margin:8px 0}
 
@@ -278,8 +348,8 @@ header .only3d.on{background:var(--accent);border-color:var(--ring)}
 #minimap button{position:absolute;right:6px;top:6px;width:28px;height:28px;padding:0;border:none;background:color-mix(in srgb,var(--popover) 85%,transparent);box-shadow:none;border-radius:var(--radius-sm)}
 #minimap.min{width:42px;height:42px}
 #hint3d{position:absolute;left:50%;bottom:calc(16px + var(--safe-bottom));transform:translateX(-50%);max-width:calc(100% - 140px);text-align:center;background:color-mix(in srgb,var(--primary) 92%,transparent);color:var(--primary-foreground);padding:8px 14px;border-radius:var(--radius-md);font-size:13px;z-index:9;pointer-events:none;box-shadow:var(--shadow-md)}
-#matPanel{position:absolute;right:calc(var(--gap) + var(--safe-right));top:var(--gap);bottom:var(--gap);width:328px;overflow:auto;overscroll-behavior:contain;padding:12px 16px 16px;z-index:9;font-size:14px;transition:width .18s var(--ease)}
-#matPanel.collapsed{width:48px;padding:8px 6px;overflow:hidden;bottom:auto;height:48px}
+#matPanel{position:absolute;right:calc(var(--gap) + var(--safe-right));top:var(--gap);max-height:calc(100% - var(--gap)*2);width:var(--panel-w);overflow:auto;overscroll-behavior:contain;padding:12px 16px 16px;z-index:9;font-size:14px;transition:width .18s var(--ease)}
+#matPanel.collapsed{width:48px;padding:8px 6px;overflow:hidden;height:48px}
 #matPanel.collapsed > *:not(h4){display:none!important}
 #matPanel.collapsed h4>*:not(.coll){display:none!important}
 #matPanel .coll{width:32px;height:32px;padding:0;border:none;background:transparent;box-shadow:none;color:var(--muted-foreground);flex:none}
@@ -303,12 +373,12 @@ header .only3d.on{background:var(--accent);border-color:var(--ring)}
 #matPanel .ti.on{border-color:var(--primary)}
 #matPanel .ti span{position:absolute;left:0;right:0;bottom:0;font-size:11px;background:rgba(0,0,0,.55);color:#fff;padding:3px 5px;text-align:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 #matPanel .ti .x{position:absolute;right:3px;top:3px;width:24px;height:24px;background:rgba(0,0,0,.55);color:#fff;border-radius:var(--radius-sm)}
-#matPanel .foot{display:flex;gap:6px;margin-top:14px;flex-wrap:wrap}
+#matPanel .foot{display:flex;gap:6px;margin-top:16px;padding-top:12px;border-top:1px solid var(--border);flex-wrap:wrap}
 #matPanel .foot button{flex:1;height:32px;padding:0 10px;font-size:13px}
 
 /* ================= Планшеты ================= */
 @media (max-width:899px){
-  .panel,#catalog,#matPanel{width:300px}
+  :root{--panel-w:300px}
 }
 
 /* ================= Телефоны: нижние панели (Sheet) ================= */
@@ -369,6 +439,7 @@ header .only3d.on{background:var(--accent);border-color:var(--ring)}
   #dlg .btns button{flex:1 1 auto}
   #dlg .btns button:first-child:not(:only-child){margin-right:0}
   #dlg .f{grid-template-columns:minmax(0,1fr) 150px}
+  #dlg .f.unit{top:15px;right:12px}
   #dlg .pgrid{grid-template-columns:repeat(2,minmax(0,1fr));max-height:none}
   #dlg .drow .seg{grid-column:1/3}
   #dlg .drow .dv{grid-column:1/3}
@@ -396,4 +467,7 @@ header .only3d.on{background:var(--accent);border-color:var(--ring)}
 /* сенсорные экраны: подсказки под палец */
 @media (pointer:coarse){
   #tools button{min-height:48px}
+  .pf-c,.pf select,#props .acts button{height:40px}
+  .pf-v{min-height:40px}
+  .ph .back,.lk{width:40px;height:40px}
 }

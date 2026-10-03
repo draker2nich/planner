@@ -28,6 +28,10 @@
   --font:'Inter',ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
   --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
   --ease:cubic-bezier(.2,.8,.2,1);
+  /* кольцо фокуса: цвет бренда в обеих темах (var() раскрывается в момент использования); контраст с фоном ≥ 3:1 */
+  --focus:var(--brand);
+  /* «тихая» заливка полей и плашек: без рамки и тени, работает на любой подложке */
+  --fill:color-mix(in srgb,var(--foreground) 5%,transparent); --fill-hover:color-mix(in srgb,var(--foreground) 8%,transparent);
   --safe-top:env(safe-area-inset-top,0px); --safe-bottom:env(safe-area-inset-bottom,0px);
   --safe-left:env(safe-area-inset-left,0px); --safe-right:env(safe-area-inset-right,0px);
 }
@@ -40,7 +44,7 @@
   --secondary:#27272a; --secondary-foreground:#fafafa;
   --muted:#27272a; --muted-foreground:#a1a1aa;
   --accent:#27272a; --accent-foreground:#fafafa;
-  --destructive:#f87171; --destructive-foreground:#ffffff; --destructive-soft:rgba(239,68,68,.14);
+  --destructive:#f87171; --destructive-foreground:#18181b; --destructive-soft:rgba(239,68,68,.14);
   --success:#4ade80; --success-soft:rgba(34,197,94,.13);
   --warning:#fbbf24; --warning-soft:rgba(245,158,11,.13);
   --brand:#60a5fa; --brand-soft:rgba(59,130,246,.16);
@@ -58,7 +62,7 @@
   --secondary:#27272a; --secondary-foreground:#fafafa;
   --muted:#27272a; --muted-foreground:#a1a1aa;
   --accent:#27272a; --accent-foreground:#fafafa;
-  --destructive:#f87171; --destructive-foreground:#ffffff; --destructive-soft:rgba(239,68,68,.14);
+  --destructive:#f87171; --destructive-foreground:#18181b; --destructive-soft:rgba(239,68,68,.14);
   --success:#4ade80; --success-soft:rgba(34,197,94,.13);
   --warning:#fbbf24; --warning-soft:rgba(245,158,11,.13);
   --brand:#60a5fa; --brand-soft:rgba(59,130,246,.16);
@@ -113,16 +117,17 @@ button.ghost:disabled:hover{background:transparent}
 button.danger:disabled:hover{background:var(--background);color:var(--destructive)}
 
 /* ---------- фокус ---------- */
+/* Кольцо — контуром (outline), а не тенью: контур виден в режиме принудительных цветов Windows и не обрезается overflow. */
 :focus{outline:none}
-:focus-visible{outline:none;box-shadow:0 0 0 3px color-mix(in srgb,var(--ring) 50%,transparent)}
-button:focus-visible,a:focus-visible,[role=button]:focus-visible,summary:focus-visible{box-shadow:0 0 0 3px color-mix(in srgb,var(--ring) 50%,transparent);border-color:var(--ring)}
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
 
 /* ---------- поля (Input / Select / Textarea) ---------- */
 input,select,textarea{height:36px;min-width:0;padding:0 12px;border-radius:var(--radius-md);border:1px solid var(--input);
   background:var(--field);color:var(--foreground);font-size:14px;box-shadow:var(--shadow-xs);
   transition:border-color .15s,box-shadow .15s}
 input::placeholder,textarea::placeholder{color:var(--muted-foreground)}
-input:focus-visible,select:focus-visible,textarea:focus-visible,input:focus,select:focus,textarea:focus{border-color:var(--ring);box-shadow:0 0 0 3px color-mix(in srgb,var(--ring) 50%,transparent)}
+input:focus-visible,select:focus-visible,textarea:focus-visible{outline-offset:-1px;border-color:var(--focus)}
+input[type=checkbox]:focus-visible,input[type=radio]:focus-visible,input[type=range]:focus-visible,input[type=color]:focus-visible{outline-offset:2px}
 input[readonly]{background:var(--muted);color:var(--muted-foreground)}
 input:disabled,select:disabled,textarea:disabled{opacity:.5;cursor:not-allowed}
 textarea{height:auto;min-height:64px;padding:8px 12px;resize:vertical;line-height:1.5}
@@ -135,7 +140,7 @@ input[type=checkbox],input[type=radio]{width:16px;height:16px;padding:0;margin:0
 input[type=range]{height:auto;padding:0;border:none;box-shadow:none;background:transparent;accent-color:var(--primary)}
 input[type=color]{padding:2px;width:36px;cursor:pointer}
 input.bad,select.bad,textarea.bad,[aria-invalid="true"]{border-color:var(--destructive)!important}
-input.bad:focus,select.bad:focus,textarea.bad:focus,[aria-invalid="true"]:focus{box-shadow:0 0 0 3px color-mix(in srgb,var(--destructive) 20%,transparent)}
+input.bad:focus-visible,select.bad:focus-visible,textarea.bad:focus-visible,[aria-invalid="true"]:focus-visible{outline-color:var(--destructive)}
 
 /* поле с подписью (Field) */
 .fld{display:flex;flex-direction:column;gap:6px;margin:0}
@@ -186,7 +191,8 @@ input.bad:focus,select.bad:focus,textarea.bad:focus,[aria-invalid="true"]:focus{
 .dmenu{background:var(--popover);color:var(--popover-foreground);border:1px solid var(--border);border-radius:var(--radius-md);box-shadow:var(--shadow-md);padding:4px;min-width:200px;
   animation:pop-in .12s var(--ease);transform-origin:top left}
 .dmenu .mi{display:flex;align-items:center;gap:8px;width:100%;height:32px;padding:0 8px;border:none;border-radius:var(--radius-sm);background:none;box-shadow:none;justify-content:flex-start;font-weight:400;font-size:14px;color:var(--popover-foreground)}
-.dmenu .mi:hover,.dmenu .mi:focus-visible{background:var(--accent);color:var(--accent-foreground);box-shadow:none}
+.dmenu .mi:hover,.dmenu .mi:focus-visible{background:var(--accent);color:var(--accent-foreground)}
+.dmenu .mi:focus-visible{outline-offset:-2px}
 .dmenu .mi .ic{color:var(--muted-foreground)}
 .dmenu .mi.danger,.dmenu .mi.danger .ic{color:var(--destructive)}
 .dmenu .mi.danger:hover{background:var(--destructive-soft)}

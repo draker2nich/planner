@@ -8,7 +8,7 @@ function cssv(n){return getComputedStyle(document.documentElement).getPropertyVa
 let C={};
 function readColors(){C={bg:cssv('--bg'),fg:cssv('--fg'),muted:cssv('--muted-foreground'),accent:cssv('--brand'),danger:cssv('--destructive'),wall:cssv('--wall'),wallFill:cssv('--wall-fill'),grid:cssv('--grid'),gridS:cssv('--grid-strong'),dimA:cssv('--dim-active'),dimI:cssv('--dim-idle'),paper:cssv('--paper')};}
 function resize(){const r=cv.parentElement.getBoundingClientRect();E.W=r.width;E.H=r.height;E.dpr=window.devicePixelRatio||1;cv.width=E.W*E.dpr;cv.height=E.H*E.dpr;E.ctx=cv.getContext('2d');readColors();if(P){setView(vp().x,vp().y,vp().zoom);render();}}
-window.addEventListener('resize',resize); matchMedia('(prefers-color-scheme: dark)').addEventListener('change',()=>{readColors();render();});
+window.addEventListener('resize',resize); matchMedia('(prefers-color-scheme: dark)').addEventListener('change',()=>{readColors();if(typeof TYPES!=='undefined'){TYPES.forEach(t=>{t._icon=null;});if(P&&P.mode==='furniture')buildCatalog();}render();});
 
 function wallQuad(i){ // внутренняя грань a,b; наружная — со смещением t, миттер с соседями
   const t=P.wallThickness; const n={x:i.nx,y:i.ny}; let oa={x:i.a.x+n.x*t,y:i.a.y+n.y*t}, ob={x:i.b.x+n.x*t,y:i.b.y+n.y*t};
@@ -155,40 +155,73 @@ function drawDims(){
 function arrow(from,to,outside){const ctx=E.ctx;const d=sub(to,from);const L=hyp(d)||1;const ux=d.x/L,uy=d.y/L;const s=outside?-1:1;const tip=from;const b={x:tip.x+ux*8*s,y:tip.y+uy*8*s};ctx.beginPath();ctx.moveTo(tip.x,tip.y);ctx.lineTo(b.x-uy*3,b.y+ux*3);ctx.lineTo(b.x+uy*3,b.y-ux*3);ctx.closePath();ctx.fill();}
 function rr(x,y,w,h,r){const ctx=E.ctx;ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath();}
 
-/* ================= Виджет выбора ================= */
+/* ================= Строка состояния ================= */
 function updateStatus(){const s=$('#status');const m={idle:E.tool==='select'?(IS_TOUCH?'Нажмите на стену, точку или проём. Один палец по пустому месту — сдвиг, два — масштаб. Долгое нажатие — свойства':'Выбор: клик по стене, точке или проёму. Правая кнопка / два пальца — панорама, колесо — масштаб'):'',wallStart:P.vertices.length?'Кликните по свободной точке контура':'Кликните, чтобы поставить первую точку',wallStretch:'Ведите линию и кликните для ввода длины. Esc — отмена',openingPlace:(E.copyMode?'Копия: ':'')+'Ведите по стене и кликните для размещения. Esc — отмена',fPlace:'Размещение: клик — поставить, R — поворот, M — зеркало, Alt — без привязки, Esc — отмена'}[E.mode]||'';const txt=m+(P.closed?'  •  Контур замкнут':'');if(!txt){s.textContent='';return;}if(!s.firstElementChild)s.append(h('span',{}));s.firstElementChild.textContent=txt;}
+/* ================= Панель свойств =================
+   Параметров много, поэтому панель собрана из трёх спокойных слоёв:
+   · редактируемое — поля с лёгкой заливкой, сгруппированные по смыслу (по два‑три в ряд, подпись над полем, единица внутри);
+   · вычисляемое и справочное — текст без рамок (поля‑значения и список «подпись — значение»);
+   · действия — внизу, удаление отдельной строкой.
+   Набор параметров и их поведение не менялись. */
+let PF_ID=0;
+const unitSfx=()=>P.unit==='ftin'?'':UNITS[P.unit].l;
+/* Подпись + элемент ввода (input или select) + единица. Подпись связана с полем: клик по ней ставит фокус. */
+function pWrap(lbl,ctl,sfx){
+  if(!ctl.id)ctl.id='pf'+(++PF_ID);
+  const body=ctl.tagName==='SELECT'?ctl:h('span',{class:'pf-c'},ctl,sfx?h('span',{class:'pf-u'},sfx):null);
+  return h('label',{class:'pf',for:ctl.id},h('span',{class:'pf-l'},lbl),body);
+}
+/* Значение без поля: вычисляемый размер, размер товара, параметр зафиксированного объекта */
+function pValue(lbl,text){return h('div',{class:'pf ro'},h('span',{class:'pf-l'},lbl),h('span',{class:'pf-v'},text));}
+/* Длина: поле, если её можно менять, иначе значение */
+function pField(lbl,val,onSet,ro){
+  const u=unitSfx();
+  if(ro||!onSet)return pValue(lbl,val==null?'—':fmt(val)+(u?' '+u:''));
+  const inp=h('input',{type:'text',inputmode:P.unit==='ftin'?'text':'decimal',autocomplete:'off',spellcheck:'false',value:val==null?'':fmt(val)});
+  inp.onchange=()=>{const v=parseLen(inp.value);if(isNaN(v)){toast('Введите число',true);inp.value=fmt(val);return;}const err=onSet(v);if(err){toast(err,true);inp.value=fmt(val);}};
+  return pWrap(lbl,inp,u);
+}
+function pGroup(title,...kids){return h('div',{class:'pg',role:'group','aria-label':title},h('div',{class:'pg-t','aria-hidden':'true'},title),h('div',{class:'pg-g'},...kids));}
+function pInfo(...pairs){return h('dl',{class:'pi'},...pairs.filter(Boolean).map(([l,v])=>h('div',{},h('dt',{},l),h('dd',{},v))));}
+function pHead(title,sub,lock){return h('div',{class:'ph'},h('div',{class:'ph-t'},h('h4',{title},title),sub?h('span',{class:'ph-s'},sub):null),lock||null);}
+function pLock(sel,locked,what){const t=locked?'Снять фиксацию':(what||'Зафиксировать');return h('button',{type:'button',class:'lk','aria-pressed':String(!!locked),'aria-label':t,title:t+' (L)',onclick:()=>toggleLock(sel)},lockIcon(locked));}
+function pBtn(label,fn,cls,disabled){const b=h('button',{type:'button',class:cls||''},label);b.onclick=fn;b.disabled=!!disabled;return b;}
+/* Действия: обычные — плашками, удаление — отдельной строкой ниже */
+function pActs(main,danger){const el=h('div',{class:'pa'}),m=(main||[]).filter(Boolean),d=(danger||[]).filter(Boolean);if(m.length)el.append(h('div',{class:'acts'},...m));if(d.length)el.append(h('div',{class:'acts danger'},...d));return el;}
+
 function buildFullWidget(wg){
   const sel=E.sel; if(!sel||E.drag||E.mode!=='idle')return null;
   wg.hidden=false; wg.innerHTML=''; let anchor=null, n=null;
-  const row=(lbl,val,onSet,ro)=>{const inp=h('input',{type:'text',value:val==null?'':fmt(val)});if(ro||!onSet)inp.readOnly=true;else{inp.onchange=()=>{const v=parseLen(inp.value);if(isNaN(v)){toast('Введите число',true);inp.value=fmt(val);return;}const err=onSet(v);if(err){toast(err,true);inp.value=fmt(val);}};}return h('div',{class:'row'},h('span',{},lbl),inp);};
   const roSel=isLocked(sel)||(P.mode==='furniture'&&sel.type!=='furniture'&&sel.type!=='floor');
+  const fld=(lbl,val,onSet,ro)=>pField(lbl,val,onSet,ro||roSel);
   if(sel.type==='furniture'){ const f=(P.furniture||[]).find(x=>x.id===sel.id); if(!f||P.mode!=='furniture')return null; const pts=fWorldOf(f,P,D); const a=aabbOf(pts); anchor={x:a.cx,y:a.y1}; n={x:0,y:1}; furnitureWidget(wg,f); }
   else if(sel.type==='floor'){ const poly=innerPoly(); if(!poly)return null; const c=polyCentroid(poly); anchor=c; n={x:0,y:-1}; const per=P.walls.reduce((s,w)=>s+D.W.get(w.id).len,0);
-    wg.append(h('h4',{},'Пол'),h('div',{class:'row'},h('span',{},'Площадь'),h('span',{},m2(Math.abs(D.area)))),h('div',{class:'row'},h('span',{},'Периметр'),h('span',{},fmtU(Math.round(per)))),h('div',{class:'row'},h('span',{},'Материал'),h('span',{},matName(P.floor?.material))),
-      h('div',{class:'acts'},h('button',{onclick:()=>enter3D(nearestPointTo(c),{material:{type:'floor'}})},'Изменить в 3D'))); }
+    wg.append(pHead('Пол'),pInfo(['Площадь',m2(Math.abs(D.area))],['Периметр',fmtU(Math.round(per))],['Материал',matName(P.floor?.material)]),
+      pActs([pBtn('Изменить в 3D',()=>enter3D(nearestPointTo(c),{material:{type:'floor'}}))])); }
   if(sel.type==='wall'){ const i=D.W.get(sel.id); if(!i)return null; const k=kOf(sel.id); anchor={x:(i.a.x+i.b.x)/2,y:(i.a.y+i.b.y)/2}; n={x:i.nx,y:i.ny};
-    wg.append(h('h4',{},'Стена',h('button',{type:'button',class:'lk','aria-label':'Зафиксировать',title:'Зафиксировать (L)',onclick:()=>toggleLock(sel)},lockIcon(isLocked(sel)))),row('Длина внутр.',Math.round(i.len),(v)=>setWallLength(sel.id,v)),row('Длина наруж.',Math.round(i.len+P.wallThickness*k),null,true),row('Высота',P.wallHeight,null,true),row('Толщина',P.wallThickness,null,true),
-      h('div',{class:'row'},h('span',{},'Проёмов'),h('span',{},String(wallOpenings(sel.id).length))),h('div',{class:'row'},h('span',{},'Материал'),h('span',{},matName(P.walls.find(w=>w.id===sel.id)?.material))),
-      h('div',{class:'acts'},P.closed?h('button',{onclick:()=>{const mid={x:(i.a.x+i.b.x)/2,y:(i.a.y+i.b.y)/2};enter3D(nearestPointTo(mid),{lookAt:mid,material:{type:'wall',id:sel.id}});}},'Изменить в 3D'):null,h('button',{class:'del',onclick:()=>deleteWall(sel.id)},'Удалить'))); }
-  else if(sel.type==='vertex'){ const v=D.V.get(sel.id); if(!v)return null; anchor=v; const ws=D.adj.get(v.id); n={x:0,y:-1}; wg.append(h('h4',{},'Точка'));
-    ws.forEach((w,k)=>{const i=D.W.get(w.id);wg.append(row(`Стена ${k+1}`,Math.round(i.len),(val)=>setWallLength(w.id,val)));}); }
+    wg.append(pHead(`Стена ${P.walls.findIndex(w=>w.id===sel.id)+1}`,null,pLock(sel,isLocked(sel))),
+      pGroup('Длина',fld('Внутренняя',Math.round(i.len),(v)=>setWallLength(sel.id,v)),fld('Наружная',Math.round(i.len+P.wallThickness*k),null,true)),
+      pInfo(['Высота',fmtU(P.wallHeight)],['Толщина',fmtU(P.wallThickness)],['Проёмов',String(wallOpenings(sel.id).length)],['Материал',matName(P.walls.find(w=>w.id===sel.id)?.material)]),
+      pActs([P.closed?pBtn('Изменить в 3D',()=>{const mid={x:(i.a.x+i.b.x)/2,y:(i.a.y+i.b.y)/2};enter3D(nearestPointTo(mid),{lookAt:mid,material:{type:'wall',id:sel.id}});}):null],[pBtn('Удалить',()=>deleteWall(sel.id),'del')])); }
+  else if(sel.type==='vertex'){ const v=D.V.get(sel.id); if(!v)return null; anchor=v; const ws=D.adj.get(v.id); n={x:0,y:-1};
+    wg.append(pHead('Точка'),pGroup('Длины стен',...ws.map(w=>{const i=D.W.get(w.id);return fld(`Стена ${P.walls.findIndex(x=>x.id===w.id)+1}`,Math.round(i.len),(val)=>setWallLength(w.id,val));}))); }
   else if(sel.type==='opening'){ const o=P.openings.find(x=>x.id===sel.id); if(!o)return null; const i=D.W.get(o.wallId); anchor={x:i.ref.x+i.rx*(o.offset+o.width/2),y:i.ref.y+i.ry*(o.offset+o.width/2)}; n={x:i.nx,y:i.ny};
     const rw=rowOf(o), inRow=o.kind==='window'&&rw.length>1, gid=o.group;
     const upd=(fn)=>{return apply(Q=>{const ts=inRow?Q.openings.filter(x=>x.group===gid):[Q.openings.find(x=>x.id===o.id)];ts.forEach(q=>{fn(q);if(q.kind==='window')q.head=Q.wallHeight-q.sill-q.height;});});};
-    wg.append(h('h4',{},o.name,h('button',{type:'button',class:'lk','aria-label':'Зафиксировать',title:'Зафиксировать (L)',onclick:()=>toggleLock(sel)},lockIcon(o.locked))));
-    if(inRow){const ug=rowUniformGap(rw);wg.append(h('div',{class:'rowinfo'},ic('window'),h('span',{},`Ряд: ${nWin(rw.length)} · ${rw[0].groupLayout==='even'?'равномерно по стене':'с простенком'}`)),h('div',{class:'hint rowhint'},'Размеры и высота меняются у всех окон ряда сразу.'));}
-    wg.append(row('Ширина',o.width,(v)=>inRow?apply(Q=>relayoutRow(Q,gid,{width:v})):upd(q=>{q.width=v;})),row('Высота',o.height,(v)=>upd(q=>{q.height=v;})));
-    if(o.kind==='window'){wg.append(row('От пола',o.sill,(v)=>upd(q=>{q.sill=v;})),row('До потолка',o.head,(v)=>upd(q=>{q.sill=Q_head(q,v);})));}
-    if(o.kind==='arch')wg.append(row('Радиус',o.radius,(v)=>upd(q=>{q.radius=v;})));
-    if(o.kind==='door'){const sh=h('select',{},h('option',{value:'left'},'Петли слева'),h('option',{value:'right'},'Петли справа'));sh.value=o.hinge;sh.onchange=()=>upd(q=>{q.hinge=sh.value;});const ss=h('select',{},h('option',{value:'in'},'Внутрь'),h('option',{value:'out'},'Наружу'));ss.value=o.swing;ss.onchange=()=>upd(q=>{q.swing=ss.value;});wg.append(h('div',{class:'row'},h('span',{},'Петли'),sh),h('div',{class:'row'},h('span',{},'Открывание'),ss));}
+    wg.append(pHead(o.name,null,pLock(sel,o.locked)));
+    if(inRow)wg.append(h('div',{class:'pnote'},ic('window'),h('div',{},h('b',{},`Ряд: ${nWin(rw.length)} · ${rw[0].groupLayout==='even'?'равномерно по стене':'с простенком'}`),'Размеры и высота меняются у всех окон ряда сразу.')));
+    wg.append(pGroup('Размер',fld('Ширина',o.width,(v)=>inRow?apply(Q=>relayoutRow(Q,gid,{width:v})):upd(q=>{q.width=v;})),fld('Высота',o.height,(v)=>upd(q=>{q.height=v;})),
+      o.kind==='arch'?fld('Радиус',o.radius,(v)=>upd(q=>{q.radius=v;})):null));
+    if(o.kind==='window')wg.append(pGroup('По высоте стены',fld('От пола',o.sill,(v)=>upd(q=>{q.sill=v;})),fld('До потолка',o.head,(v)=>upd(q=>{q.sill=Q_head(q,v);}))));
+    if(o.kind==='door'){const sh=h('select',{},h('option',{value:'left'},'Слева'),h('option',{value:'right'},'Справа'));sh.value=o.hinge;sh.onchange=()=>upd(q=>{q.hinge=sh.value;});const ss=h('select',{},h('option',{value:'in'},'Внутрь'),h('option',{value:'out'},'Наружу'));ss.value=o.swing;ss.onchange=()=>upd(q=>{q.swing=ss.value;});wg.append(pGroup('Полотно',pWrap('Петли',sh),pWrap('Открывание',ss)));}
     if(inRow){ const sp=rowSpan(rw), ug=rowUniformGap(rw);
-      wg.append(row('Ряд от стены',rw[0].offset,(v)=>apply(Q=>relayoutRow(Q,gid,{start:v}))),row('Ряд до другой',Math.round(i.len-rw[0].offset-sp),(v)=>apply(Q=>relayoutRow(Q,gid,{start:Math.round(i.len-v-sp)}))),
-        ...(ug!=null?[row('Простенок',ug,(v)=>{if(v<0)return 'Простенок не может быть меньше 0';return apply(Q=>relayoutRow(Q,gid,{gap:v}));})]:[]),
-        h('div',{class:'acts'},rw[0].groupLayout!=='even'?h('button',{onclick:()=>{const e=apply(Q=>relayoutRow(Q,gid,{layout:'even'}));if(e)toast(e,true);else render();}},'Равномерно'):null,
-          h('button',{onclick:()=>copyOpening(o)},'Копировать ряд'),h('button',{title:'Окно станет самостоятельным, остальные останутся на месте',onclick:()=>{if(o.locked){toast('Объект зафиксирован',true);return;}const e=apply(Q=>leaveRow(Q,o.id));if(e)toast(e,true);else{toast(`${o.name} больше не в ряду`);render();}}},'Отделить'),
-          h('button',{class:'del',onclick:()=>deleteOpening(o.id)},'Удалить окно'),h('button',{class:'del',onclick:()=>deleteRow(o)},'Удалить ряд'))); }
-    else wg.append(row('От стены',o.offset,(v)=>upd(q=>{q.offset=v;})),row('До другой',Math.round(i.len-o.offset-o.width),(v)=>upd(q=>{q.offset=Math.round(i.len-v-q.width);})),
-      h('div',{class:'acts'},h('button',{onclick:()=>repositionOpening(o)},'Переставить'),h('button',{onclick:()=>copyOpening(o)},'Копировать'),h('button',{class:'del',onclick:()=>deleteOpening(o.id)},'Удалить'))); }
+      wg.append(pGroup('Ряд на стене',fld('От стены',rw[0].offset,(v)=>apply(Q=>relayoutRow(Q,gid,{start:v}))),fld('До другой',Math.round(i.len-rw[0].offset-sp),(v)=>apply(Q=>relayoutRow(Q,gid,{start:Math.round(i.len-v-sp)}))),
+          ug!=null?fld('Простенок',ug,(v)=>{if(v<0)return 'Простенок не может быть меньше 0';return apply(Q=>relayoutRow(Q,gid,{gap:v}));}):null),
+        pActs([rw[0].groupLayout!=='even'?pBtn('Равномерно',()=>{const e=apply(Q=>relayoutRow(Q,gid,{layout:'even'}));if(e)toast(e,true);else render();}):null,
+          pBtn('Копировать ряд',()=>copyOpening(o)),Object.assign(pBtn('Отделить',()=>{if(o.locked){toast('Объект зафиксирован',true);return;}const e=apply(Q=>leaveRow(Q,o.id));if(e)toast(e,true);else{toast(`${o.name} больше не в ряду`);render();}}),{title:'Окно станет самостоятельным, остальные останутся на месте'})],
+          [pBtn('Удалить окно',()=>deleteOpening(o.id),'del'),pBtn('Удалить ряд',()=>deleteRow(o),'del')])); }
+    else wg.append(pGroup('На стене',fld('От стены',o.offset,(v)=>upd(q=>{q.offset=v;})),fld('До другой',Math.round(i.len-o.offset-o.width),(v)=>upd(q=>{q.offset=Math.round(i.len-v-q.width);}))),
+      pActs([pBtn('Переставить',()=>repositionOpening(o)),pBtn('Копировать',()=>copyOpening(o))],[pBtn('Удалить',()=>deleteOpening(o.id),'del')])); }
   if(roSel){wg.querySelectorAll('input').forEach(i=>{i.readOnly=true;});wg.querySelectorAll('select').forEach(i=>{i.disabled=true;});wg.querySelectorAll('.acts button').forEach(b=>{if(!/Копировать|Изменить в 3D/.test(b.textContent))b.disabled=true;});}
   return {anchor,n};
 }

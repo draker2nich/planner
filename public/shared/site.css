@@ -13,8 +13,9 @@ main{flex:1}
 
 /* ---------- ссылки‑кнопки (повторяют Button из ui.css) ---------- */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;white-space:nowrap;height:36px;padding:0 16px;border-radius:var(--radius-md);font-size:14px;font-weight:500;line-height:1;
-  background:var(--background);color:var(--foreground);border:1px solid var(--border);box-shadow:var(--shadow-xs);text-decoration:none;transition:background-color .15s,color .15s,border-color .15s}
+  background:var(--background);color:var(--foreground);border:1px solid var(--border);box-shadow:var(--shadow-xs);text-decoration:none;transition:background-color .15s,color .15s,border-color .15s,scale .15s ease-out}
 .btn:hover{background:var(--accent)}
+.btn:active{scale:.96}
 .btn.primary{background:var(--primary);color:var(--primary-foreground);border-color:transparent}
 .btn.primary:hover{background:color-mix(in srgb,var(--primary) 90%,var(--background))}
 .btn.ghost{background:transparent;border-color:transparent;box-shadow:none}
@@ -98,7 +99,7 @@ a.tlink:hover{text-decoration-color:currentColor}
 /* ---------- Web Interface Guidelines: касания, листы, прокрутка ---------- */
 a,.btn,summary{touch-action:manipulation}
 .mnav,.site-dlg{overscroll-behavior:contain}
-.shelf:focus-visible{outline:none;box-shadow:0 0 0 3px color-mix(in srgb,var(--ring) 50%,transparent);border-radius:var(--radius-xl)}
+.shelf:focus-visible{border-radius:var(--radius-xl)}
 .site-h .acct{font-variant-numeric:tabular-nums}
 
 /* ---------- этап 2: напоминание о почте, страницы аккаунта и проектов ---------- */

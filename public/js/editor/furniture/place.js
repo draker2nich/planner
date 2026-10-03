@@ -87,20 +87,20 @@ function updateModeUI(){const fm=P.mode==='furniture';document.body.classList.to
 /* ---------- Виджет мебели ---------- */
 function furnitureWidget(wg,f){
   const t=TYPE.get(f.typeId),fo=formOf(t,f.formId),mt=mountOf(t,fo);const ro=f.locked;
-  const row=(lbl,val,onSet,readonly)=>{const inp=h('input',{type:'text',value:fmt(val)});if(readonly||ro)inp.readOnly=true;else inp.onchange=()=>{const v=parseLen(inp.value);if(isNaN(v)){toast('Введите число',true);inp.value=fmt(val);return;}const err=onSet(v);if(err){toast(err,true);inp.value=fmt(val);}};return h('div',{class:'row'},h('span',{},lbl),inp);};
-  wg.append(h('h4',{},f.name,h('button',{type:'button',class:'lk','aria-label':'Зафиксировать положение',title:'Зафиксировать положение (L)',onclick:()=>toggleLock({type:'furniture',id:f.id})},lockIcon(f.locked))));
-  wg.append(h('div',{class:'row'},h('span',{},f.productId?'Товар':'Пустышка'),h('span',{},fo.name)));
-  for(const k of [...fo.dims,'H'])wg.append(row((k==='DIA'?'Ø ':'')+DIMN[k],f.dims[k],(v)=>fUpdate(f.id,q=>{q.dims[k]=v;q.constraints[k]={mode:'exact',exact:v};}),!!f.productId));
-  if(mt==='wall')wg.append(row('От пола',f.elev??0,(v)=>fUpdate(f.id,q=>{q.elev=v;})));
-  else{const rin=h('input',{type:'text',value:String(f.rot)});rin.readOnly=ro;rin.onchange=()=>{const v=Number(rin.value);if(!isFinite(v)){rin.value=f.rot;return;}const err=fUpdate(f.id,q=>{q.rot=((v%360)+360)%360;});if(err){toast(err,true);rin.value=f.rot;}};wg.append(h('div',{class:'row'},h('span',{},'Поворот, °'),rin));}
-  if(f.warnings?.length)wg.append(h('div',{class:'row warn'},ic('alert'),h('span',{},f.warnings.map(w=>({outside:'вне комнаты',door:'мешает двери',window:'перед окном'})[w]).join(', '))));
-  const acts=h('div',{class:'acts'});
-  acts.append(h('button',{disabled:ro?'':null,onclick:()=>{const err=fUpdate(f.id,q=>{q.mirror=!q.mirror;});if(err)toast(err,true);}},'Зеркало'),h('button',{disabled:ro?'':null,onclick:()=>replaceFurniture(f)},'Заменить'),h('button',{onclick:()=>copyFurniture(f)},'Копировать'));
-  const acts2=h('div',{class:'acts'});
-  if(f.productId)acts2.append(h('button',{disabled:ro?'':null,onclick:()=>{const err=fUpdate(f.id,(q,Q)=>{q.productId=null;q.formAny=false;q.name=`${t.name} ${(Q.fseq[t.id]||0)+1}`;Q.fseq[t.id]=(Q.fseq[t.id]||0)+1;for(const k in q.dims)q.constraints[k]={mode:'exact',exact:q.dims[k]};});if(err)toast(err,true);}},'Сделать пустышкой'));
-  acts2.append(h('button',{class:'del',disabled:ro?'':null,onclick:()=>deleteFurniture(f.id)},'Удалить'));
-  wg.append(acts,acts2);
-  [...wg.querySelectorAll('button[disabled=""]')].forEach(b=>{b.disabled=true;});
+  wg.append(pHead(f.name,(f.productId?'Товар':'Пустышка')+' · '+fo.name,pLock({type:'furniture',id:f.id},f.locked,'Зафиксировать положение')));
+  /* размеры товара заданы каталогом, у зафиксированного предмета ничего не меняется — показываем значениями */
+  wg.append(pGroup('Размеры',...[...fo.dims,'H'].map(k=>pField((k==='DIA'?'Ø ':'')+DIMN[k],f.dims[k],(v)=>fUpdate(f.id,q=>{q.dims[k]=v;q.constraints[k]={mode:'exact',exact:v};}),!!f.productId||ro))));
+  if(mt==='wall')wg.append(pGroup('Положение',pField('От пола',f.elev??0,(v)=>fUpdate(f.id,q=>{q.elev=v;}),ro)));
+  else if(ro)wg.append(pGroup('Положение',pValue('Поворот',f.rot+'°')));
+  else{const rin=h('input',{type:'text',inputmode:'decimal',autocomplete:'off',spellcheck:'false',value:String(f.rot)});rin.onchange=()=>{const v=Number(rin.value);if(!isFinite(v)){rin.value=f.rot;return;}const err=fUpdate(f.id,q=>{q.rot=((v%360)+360)%360;});if(err){toast(err,true);rin.value=f.rot;}};wg.append(pGroup('Положение',pWrap('Поворот',rin,'°')));}
+  if(f.warnings?.length)wg.append(h('div',{class:'pnote warn',role:'status'},ic('alert'),h('div',{},f.warnings.map(w=>({outside:'Вне комнаты',door:'Мешает двери',window:'Стоит перед окном'})[w]).join(' · '))));
+  /* disabled задаётся свойством: h() ставит атрибут при любом значении, даже null, и кнопки оставались выключенными */
+  wg.append(pActs([
+    pBtn('Зеркало',()=>{const err=fUpdate(f.id,q=>{q.mirror=!q.mirror;});if(err)toast(err,true);},'',ro),
+    pBtn('Заменить',()=>replaceFurniture(f),'',ro),
+    pBtn('Копировать',()=>copyFurniture(f)),
+    f.productId?pBtn('Сделать пустышкой',()=>{const err=fUpdate(f.id,(q,Q)=>{q.productId=null;q.formAny=false;q.name=`${t.name} ${(Q.fseq[t.id]||0)+1}`;Q.fseq[t.id]=(Q.fseq[t.id]||0)+1;for(const k in q.dims)q.constraints[k]={mode:'exact',exact:q.dims[k]};});if(err)toast(err,true);},'',ro):null,
+  ],[pBtn('Удалить',()=>deleteFurniture(f.id),'del',ro)]));
 }
 
 /* ---------- Размеры мебели ---------- */

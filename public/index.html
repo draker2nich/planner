@@ -27,128 +27,165 @@
 <link rel="stylesheet" href="/shared/site.css">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"furnitech","url":"https://furnitech.vercel.app/","description":"Онлайн‑планировщик комнаты: стены по точным размерам, двери и окна, мебель из каталога и прогулка в 3D.","applicationCategory":"DesignApplication","operatingSystem":"Any","inLanguage":"ru","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
 <style>
-/* ================= Главная ================= */
-:root{--plan-grid:color-mix(in srgb,var(--foreground) 6%,transparent);--plan-wall:var(--foreground);--plan-floor:var(--card);--plan-furn:color-mix(in srgb,var(--foreground) 7%,var(--card));--plan-line:color-mix(in srgb,var(--foreground) 45%,transparent);
+/* ================= Главная =================
+   Язык страницы — чертёж: сетка плана, размерные линии, синий цвет выделения из редактора.
+   Типографика: одна гарнитура (Inter), шкала 13 / 14 / 15 / 17 / 24–36 / 32–52, интерлиньяж без единиц. */
+:root{--plan-grid:color-mix(in srgb,var(--foreground) 6%,transparent);--plan-wall:#27272a;--plan-wallfill:#a1a1aa;--plan-floor:var(--card);--plan-room:#f1eee9;--plan-furn:color-mix(in srgb,var(--foreground) 7%,var(--card));--plan-line:color-mix(in srgb,var(--foreground) 45%,transparent);
   --floor3d:#e6dccb;--wall3d:#f1efec;--wall3d-side:#e4e1dc;--sofa3d:#8a8f98}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--floor3d:#4a4237;--wall3d:#2a2a2e;--wall3d-side:#232327;--sofa3d:#6b7280}}
-:root[data-theme="dark"]{--floor3d:#4a4237;--wall3d:#2a2a2e;--wall3d-side:#232327;--sofa3d:#6b7280}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--plan-wall:#e4e4e7;--plan-wallfill:#52525b;--plan-room:#201f1d;--floor3d:#4a4237;--wall3d:#2a2a2e;--wall3d-side:#232327;--sofa3d:#6b7280}}
+:root[data-theme="dark"]{--plan-wall:#e4e4e7;--plan-wallfill:#52525b;--plan-room:#201f1d;--floor3d:#4a4237;--wall3d:#2a2a2e;--wall3d-side:#232327;--sofa3d:#6b7280}
 
 section{padding:64px 0}
-@media (min-width:900px){section{padding:96px 0}}
-.eyebrow{font-size:13px;font-weight:600;color:var(--brand);letter-spacing:.02em;margin:0 0 12px}
-h2.sec{font-size:24px;line-height:32px;letter-spacing:-.02em;margin:0 0 12px;font-weight:600}
-@media (min-width:600px){h2.sec{font-size:32px;line-height:40px}}
-.lead{font-size:16px;line-height:24px;color:var(--muted-foreground);margin:0;max-width:640px}
-.sec-head{margin-bottom:40px}
+@media (min-width:900px){section{padding:104px 0}}
+/* надзаголовок с размерной засечкой — тот же знак, что у размерных линий на плане */
+.eyebrow{display:flex;align-items:center;gap:8px;font-size:13px;line-height:1.4;font-weight:600;color:var(--brand);margin:0 0 12px}
+.eyebrow::before{content:'';flex:none;width:18px;height:7px;border-inline:1.5px solid currentColor;background:linear-gradient(currentColor,currentColor) center/100% 1.5px no-repeat}
+.sec{font-size:clamp(24px,1.5vw + 18px,36px);line-height:1.15;letter-spacing:-.025em;margin:0;font-weight:600;max-width:20em}
+.lead{font-size:17px;line-height:1.55;color:var(--muted-foreground);margin:16px 0 0;max-width:34em}
+.sec-head{margin-bottom:48px}
+.bg-muted{background:var(--sidebar);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+/* заголовок сбоку, содержимое справа — для списков (возможности, вопросы) */
+@media (min-width:960px){
+  .split{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:48px;align-items:start}
+  .split>.sec-head{position:sticky;top:96px;margin:0}
+}
 
-/* hero */
-.hero{padding:48px 0 64px}
-@media (min-width:900px){.hero{padding:80px 0 96px}}
-.hero .wrap{display:grid;gap:48px;align-items:center}
-@media (min-width:900px){.hero .wrap{grid-template-columns:55fr 45fr;gap:56px}}
-.hero h1{font-size:32px;line-height:40px;letter-spacing:-.025em;margin:0 0 16px;font-weight:700}
-@media (min-width:600px){.hero h1{font-size:48px;line-height:56px}}
-.hero .lead{font-size:17px;line-height:26px}
+/* ---------- первый экран ---------- */
+.hero{position:relative;isolation:isolate;overflow:hidden;padding:48px 0 72px}
+@media (min-width:900px){.hero{padding:88px 0 112px}}
+.hero::before{content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background-image:linear-gradient(var(--plan-grid) 1px,transparent 1px),linear-gradient(90deg,var(--plan-grid) 1px,transparent 1px);background-size:32px 32px;background-position:center top;
+  -webkit-mask-image:radial-gradient(ellipse 60% 78% at 74% 46%,#000 10%,transparent 72%);mask-image:radial-gradient(ellipse 60% 78% at 74% 46%,#000 10%,transparent 72%)}
+.hero .wrap{display:grid;gap:56px;align-items:center}
+@media (min-width:960px){.hero .wrap{grid-template-columns:minmax(0,1.06fr) minmax(0,1fr);gap:56px}}
+.greet{font-size:14px;line-height:1.5;color:var(--muted-foreground);margin:0 0 12px;min-height:21px}
+.hero h1{font-size:clamp(32px,2.6vw + 12px,48px);line-height:1.08;letter-spacing:-.032em;margin:0;font-weight:700}
+/* вторая часть заголовка тише: сначала — что вы сделаете, потом — чем */
+.hero h1 span{display:block;color:var(--muted-foreground)}
+.hero .lead{margin-top:20px;max-width:31em}
 .cta{display:flex;flex-wrap:wrap;gap:12px;margin:32px 0 0}
 @media (max-width:599px){.cta .btn{flex:1 1 100%}}
-.cta-note{margin:16px 0 0;font-size:14px;color:var(--muted-foreground)}
-.cta-note a{color:var(--foreground);text-underline-offset:4px}
-.greet{font-size:14px;color:var(--muted-foreground);margin:0 0 12px;min-height:21px}
-.hero-art{position:relative;max-width:560px;width:100%;justify-self:center}
-.plan-card{border:1px solid var(--border);border-radius:var(--radius-xl);background:var(--plan-floor);box-shadow:var(--shadow-lg);overflow:hidden}
-.plan-bar{display:flex;align-items:center;gap:8px;height:40px;padding:0 12px;border-bottom:1px solid var(--border);background:var(--background);font-size:12px;color:var(--muted-foreground)}
-.plan-bar i{width:8px;height:8px;border-radius:50%;background:var(--border)}
-.plan-bar .seg{height:26px;padding:2px;margin-left:auto}
-.plan-bar .seg span{display:inline-flex;align-items:center;height:100%;padding:0 10px;border-radius:var(--radius-sm);font-size:12px;font-weight:500}
-.plan-bar .seg span.on{background:var(--seg-on);color:var(--foreground);box-shadow:var(--shadow-sm)}
-.plan-card svg{display:block;width:100%;height:auto}
-.inset{position:absolute;right:-12px;bottom:-28px;width:46%;border:1px solid var(--border);border-radius:var(--radius-lg);background:var(--card);box-shadow:var(--shadow-lg);overflow:hidden}
-@media (max-width:599px){.inset{right:8px;bottom:-20px;width:52%}}
+.cta-note{margin:16px 0 0;font-size:14px;line-height:1.5;color:var(--muted-foreground);max-width:34em}
+.cta-note a{color:var(--foreground);text-underline-offset:4px;text-decoration-thickness:from-font}
+
+/* макет редактора: та же шапка, тот же план и та же панель инструментов, что в продукте */
+.hero-art{position:relative;max-width:580px;width:100%;justify-self:center;margin-bottom:28px;font-size:12px;line-height:1;color:var(--muted-foreground);user-select:none}
+.mock{border:1px solid var(--border);border-radius:var(--radius-xl);background:var(--plan-floor);box-shadow:var(--shadow-lg);overflow:hidden}
+.mock-bar{display:flex;align-items:center;gap:10px;height:44px;padding:0 10px;border-bottom:1px solid var(--border);background:var(--background)}
+.mock-logo{width:22px;height:22px;flex:none;border-radius:var(--radius-sm);background:var(--primary);color:var(--primary-foreground);display:inline-flex;align-items:center;justify-content:center}
+.mock-logo .ic{width:14px;height:14px;stroke-width:2.6}
+.mock-name{font-weight:600;color:var(--foreground);white-space:nowrap}
+.mock-seg{display:inline-flex;height:26px;padding:2px;border-radius:var(--radius-md);background:var(--muted)}
+.mock-seg span{display:inline-flex;align-items:center;padding:0 10px;border-radius:var(--radius-sm);font-weight:500;white-space:nowrap}
+.mock-seg span.on{background:var(--seg-on);color:var(--foreground);box-shadow:var(--shadow-sm)}
+.mock-area{margin-left:auto;font-variant-numeric:tabular-nums;white-space:nowrap}
+@media (max-width:419px){.mock-area{display:none}}
+.mock-body{position:relative}
+.mock-body>svg{display:block;width:100%;height:auto}
+.mock-rail{position:absolute;top:10px;right:10px;display:flex;flex-direction:column;gap:2px;padding:3px;border:1px solid var(--border);border-radius:var(--radius-lg);background:var(--card);box-shadow:var(--shadow-md)}
+.mock-rail i{display:flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:var(--radius-sm)}
+.mock-rail i.on{background:var(--primary);color:var(--primary-foreground)}
+.mock-rail .ic{width:15px;height:15px}
+@media (max-width:659px){.mock-rail{top:8px;right:8px;padding:2px}.mock-rail i{width:24px;height:24px}.mock-rail .ic{width:13px;height:13px}}
+.inset{position:absolute;right:-14px;bottom:-28px;width:43%;border:1px solid var(--border);border-radius:var(--radius-lg);background:var(--card);box-shadow:var(--shadow-lg);overflow:hidden}
+@media (max-width:659px){.inset{right:8px;bottom:-24px;width:48%}}
 .inset svg{display:block;width:100%;height:auto}
-.inset .tag{position:absolute;left:8px;top:8px;font-size:11px;font-weight:600;background:color-mix(in srgb,var(--background) 85%,transparent);border:1px solid var(--border);border-radius:999px;padding:2px 8px;color:var(--foreground)}
+.inset .tag{position:absolute;left:8px;top:8px;font-size:11px;font-weight:600;background:color-mix(in srgb,var(--background) 88%,transparent);border-radius:999px;padding:4px 8px;color:var(--foreground)}
+/* общие классы чертежа: первый экран и иллюстрации шагов */
 .p-grid{stroke:var(--plan-grid);stroke-width:1}
-.p-wall{fill:none;stroke:var(--plan-wall);stroke-width:9;stroke-linejoin:miter}
+.p-room{fill:var(--plan-room)}
+.p-wall{fill:none;stroke:var(--plan-wall);stroke-width:10;stroke-linejoin:miter}
+.p-wallf{fill:none;stroke:var(--plan-wallfill);stroke-width:7.6;stroke-linejoin:miter}
 .p-furn{fill:var(--plan-furn);stroke:var(--plan-line);stroke-width:1.25}
 .p-sel{fill:var(--brand-soft);stroke:var(--brand);stroke-width:1.75}
 .p-thin{fill:none;stroke:var(--plan-line);stroke-width:1.25}
 .p-dash{fill:none;stroke:var(--plan-line);stroke-width:1.25;stroke-dasharray:4 4}
-.p-dim{stroke:var(--brand);stroke-width:1.25}
-.p-dimt{fill:var(--brand);font:600 12px var(--font)}
-.p-win{fill:var(--plan-floor);stroke:var(--plan-wall);stroke-width:1.5}
+.p-dim{fill:none;stroke:var(--brand);stroke-width:1.25}
+.p-dimt{fill:var(--brand);font:600 12px var(--font);font-variant-numeric:tabular-nums}
+.p-rub{fill:none;stroke:var(--brand);stroke-width:2;stroke-dasharray:6 4}
+.p-dot{fill:var(--brand)}
+.p-vx{fill:var(--plan-wall)}
+.p-win{fill:var(--plan-floor);stroke:var(--plan-wall);stroke-width:1.25}
+.p-bg{fill:var(--plan-floor)}
 .p-cap rect{fill:var(--popover);stroke:var(--border)}
 .p-cap text{fill:var(--foreground);font:500 11px var(--font)}
 
-/* шаги */
-.steps{list-style:none;margin:0;padding:0;display:grid;gap:16px;counter-reset:st}
+/* ---------- шаги ---------- */
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:40px 24px}
 @media (min-width:600px){.steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (min-width:1000px){.steps{grid-template-columns:repeat(4,minmax(0,1fr))}}
-.steps li{counter-increment:st;padding:20px;border:1px solid var(--border);border-radius:var(--radius-xl);background:var(--card)}
-.steps .n{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
-.steps .n::before{content:counter(st);display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:var(--primary);color:var(--primary-foreground);font-size:13px;font-weight:600}
-.steps .n .ic{width:20px;height:20px;color:var(--muted-foreground)}
-.steps h3{font-size:16px;line-height:22px;margin:0 0 6px;font-weight:600}
-.steps p{margin:0;color:var(--muted-foreground);font-size:14px;line-height:21px}
+.step-art{border:1px solid var(--border);border-radius:var(--radius-xl);background:var(--plan-floor);overflow:hidden;margin-bottom:20px}
+.step-art svg{display:block;width:100%;height:auto}
+.step-n{display:block;font-size:13px;line-height:1.4;font-weight:600;color:var(--muted-foreground);font-variant-numeric:tabular-nums;margin-bottom:4px}
+.steps h3{font-size:17px;line-height:1.3;letter-spacing:-.01em;margin:0 0 8px;font-weight:600}
+.steps p{margin:0;color:var(--muted-foreground);font-size:15px;line-height:1.55}
 
-/* возможности */
-.feats{display:grid;gap:16px}
-@media (min-width:600px){.feats{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (min-width:900px){.feats{grid-template-columns:repeat(3,minmax(0,1fr))}}
-.feat{padding:24px;display:flex;flex-direction:column;gap:8px;box-shadow:none}
-.feat .ic{width:20px;height:20px;color:var(--foreground);margin-bottom:8px}
-.feat h3{margin:0;font-size:16px;line-height:22px;font-weight:600;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.feat p{margin:0;color:var(--muted-foreground);font-size:14px;line-height:21px}
-.bg-muted{background:var(--sidebar);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+/* ---------- возможности: список без рамок, группы разделяет воздух ---------- */
+.feats{display:grid;gap:32px 40px;margin:0;padding:0;list-style:none}
+@media (min-width:600px){.feats{grid-template-columns:repeat(2,minmax(0,1fr));gap:40px}}
+.feat{display:grid;grid-template-columns:40px minmax(0,1fr);gap:4px 16px;align-items:start;align-content:start}
+.feat .fi{grid-row:1/3;display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:var(--radius-lg);background:var(--fill);color:var(--foreground)}
+.feat .fi .ic{width:20px;height:20px;stroke-width:1.75}
+.feat h3{margin:0;padding-top:1px;font-size:17px;line-height:1.3;letter-spacing:-.01em;font-weight:600;display:flex;align-items:center;gap:4px 6px;flex-wrap:wrap}
+.feat h3 .badge{height:20px;padding:0 6px;font-size:11px}
+.feat p{margin:0;grid-column:2;color:var(--muted-foreground);font-size:15px;line-height:1.55}
 
-/* витрина */
-.shelf-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:24px}
+/* ---------- витрина ---------- */
+.shelf-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:32px}
 .shelf-nav{display:none;gap:8px}
 @media (min-width:900px) and (pointer:fine){.shelf-nav{display:flex}}
-.shelf{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(220px,calc((100% - 48px)/4));gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 2px 12px;margin:0 -2px;list-style:none;scrollbar-width:none}
+.shelf{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(220px,calc((100% - 48px)/4));gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 2px 12px;margin:0 -2px;list-style:none;scrollbar-width:none;overscroll-behavior-x:contain}
 .shelf::-webkit-scrollbar{display:none}
 @media (max-width:599px){.shelf{grid-auto-columns:72%}}
 .prod{scroll-snap-align:start;display:flex;flex-direction:column;border:1px solid var(--border);border-radius:var(--radius-xl);background:var(--card);overflow:hidden;min-height:100%}
 .prod .ph{aspect-ratio:4/3;background:#fff;display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--border)}
 .prod .ph img{width:100%;height:100%;object-fit:contain}
-.prod .bd{padding:12px 14px 14px;display:flex;flex-direction:column;gap:2px}
-.prod .nm{font-weight:600;font-size:14px;line-height:20px}
-.prod .br{font-size:13px;color:var(--muted-foreground)}
-.prod .dm{font-size:13px;color:var(--muted-foreground);font-variant-numeric:tabular-nums}
-.prod .pr{font-weight:600;font-size:15px;margin-top:6px;font-variant-numeric:tabular-nums}
+.prod .bd{padding:12px 14px 14px;display:flex;flex-direction:column;gap:2px;min-width:0}
+.prod .nm{font-weight:600;font-size:14px;line-height:1.4;overflow-wrap:anywhere}
+.prod .br{font-size:13px;line-height:1.4;color:var(--muted-foreground)}
+.prod .dm{font-size:13px;line-height:1.4;color:var(--muted-foreground);font-variant-numeric:tabular-nums}
+.prod .pr{font-weight:600;font-size:15px;line-height:1.4;margin-top:6px;font-variant-numeric:tabular-nums}
 .prod.sk .ph,.prod.sk .bar{background:var(--muted)}
 .prod.sk .bar{height:12px;border-radius:4px;margin:4px 0}
 .shelf-foot{margin-top:24px}
 
-/* блок регистрации и компаний */
-.save{display:grid;gap:32px;align-items:center;padding:32px;border-radius:var(--radius-xl);background:var(--primary);color:var(--primary-foreground)}
-@media (min-width:900px){.save{grid-template-columns:1fr auto;padding:48px}}
-.save h2{font-size:24px;line-height:32px;margin:0 0 16px;letter-spacing:-.02em}
+/* ---------- блок регистрации и компаний ---------- */
+.save{position:relative;isolation:isolate;overflow:hidden;display:grid;gap:32px;align-items:center;padding:32px 24px;border-radius:20px;background:var(--primary);color:var(--primary-foreground)}
+.save::before{content:'';position:absolute;inset:0;z-index:-1;opacity:.07;background-image:linear-gradient(currentColor 1px,transparent 1px),linear-gradient(90deg,currentColor 1px,transparent 1px);background-size:32px 32px;
+  -webkit-mask-image:linear-gradient(100deg,transparent 35%,#000);mask-image:linear-gradient(100deg,transparent 35%,#000)}
+@media (min-width:900px){.save{grid-template-columns:1fr auto;gap:48px;padding:56px}}
+.save h2{font-size:clamp(22px,1vw + 18px,28px);line-height:1.2;margin:0 0 20px;letter-spacing:-.02em;font-weight:600}
 .save ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
-.save li{display:flex;gap:10px;align-items:flex-start;font-size:15px;line-height:22px;opacity:.92}
-.save li .ic{margin-top:3px}
+.save li{display:flex;gap:10px;align-items:flex-start;font-size:15px;line-height:1.5;color:color-mix(in srgb,var(--primary-foreground) 86%,var(--primary))}
+.save li .ic{margin-top:3px;color:var(--primary-foreground)}
 .save .btn{background:var(--primary-foreground);color:var(--primary);border-color:transparent}
 .save .btn:hover{background:color-mix(in srgb,var(--primary-foreground) 88%,var(--primary))}
-.biz{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;padding:24px;box-shadow:none}
+.save .btn:focus-visible{outline-color:var(--primary-foreground)}
+.biz{display:flex;flex-wrap:wrap;gap:16px 24px;align-items:center;justify-content:space-between;padding:24px;box-shadow:none}
 .biz .t{display:flex;gap:14px;align-items:flex-start;max-width:640px}
 .biz .t .ic{width:20px;height:20px;margin-top:2px;flex:none}
-.biz h3{margin:0 0 4px;font-size:16px;display:flex;gap:8px;align-items:center}
-.biz p{margin:0;color:var(--muted-foreground);font-size:14px}
+.biz h3{margin:0 0 4px;font-size:16px;line-height:1.4;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.biz p{margin:0;color:var(--muted-foreground);font-size:14px;line-height:1.5}
 
-/* FAQ */
-.faq{max-width:760px}
+/* ---------- вопросы ---------- */
 .faq details{border-bottom:1px solid var(--border)}
 .faq details:first-of-type{border-top:1px solid var(--border)}
-.faq summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 0;font-size:16px;font-weight:500;border-radius:var(--radius-sm)}
+.faq summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 0;font-size:17px;line-height:1.4;font-weight:500;border-radius:var(--radius-sm)}
 .faq summary::-webkit-details-marker{display:none}
-.faq summary::after{content:'';width:8px;height:8px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg);transition:transform .15s;flex:none;margin-right:4px}
-.faq details[open] summary::after{transform:rotate(-135deg)}
-.faq details p{margin:0 0 18px;color:var(--muted-foreground);font-size:15px;line-height:24px;max-width:680px}
+.faq summary:hover{color:color-mix(in srgb,var(--foreground) 72%,transparent)}
+.faq summary::after{content:'';width:8px;height:8px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:translateY(-2px) rotate(45deg);transition:transform .15s ease-out;flex:none;margin-right:6px}
+.faq details[open] summary::after{transform:translateY(2px) rotate(-135deg)}
+.faq details p{margin:0 0 22px;color:var(--muted-foreground);font-size:15px;line-height:1.6;max-width:38em}
 
-/* финальный призыв */
-.final{text-align:center;display:flex;flex-direction:column;align-items:center;gap:16px}
-.final .cta{justify-content:center;margin-top:16px}
+/* ---------- финальный призыв ---------- */
+.final{position:relative;isolation:isolate;overflow:hidden}
+.final::before{content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;background-image:linear-gradient(var(--plan-grid) 1px,transparent 1px),linear-gradient(90deg,var(--plan-grid) 1px,transparent 1px);background-size:32px 32px;background-position:center;
+  -webkit-mask-image:radial-gradient(ellipse 55% 90% at 50% 50%,transparent 30%,#000 100%);mask-image:radial-gradient(ellipse 55% 90% at 50% 50%,transparent 30%,#000 100%)}
+.final .wrap{text-align:center;display:flex;flex-direction:column;align-items:center}
+.final .cta{justify-content:center}
 
-/* появление секций */
-.js .reveal{opacity:0;transform:translateY(8px);transition:opacity .2s ease-out,transform .2s ease-out}
+/* ---------- появление секций ---------- */
+.js .reveal{opacity:0;transform:translateY(8px);transition:opacity .25s ease-out,transform .25s ease-out}
 .js .reveal.in{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){.js .reveal{opacity:1;transform:none}}
 </style>
@@ -158,12 +195,12 @@ h2.sec{font-size:24px;line-height:32px;letter-spacing:-.02em;margin:0 0 12px;fon
 <header class="site-h">
   <div class="wrap">
     <a class="brand" href="/" translate="no"><span class="logo"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19V9a3 3 0 0 1 3-3h4.5M9 12.5h5.5"/></svg></span><span class="wm" translate="no">furni<span>tech</span></span></a>
-    <nav class="anchors" aria-label="Разделы"><a href="#features">Возможности</a><a href="#how">Как это работает</a><a href="#catalog" data-needs="catalog">Каталог</a><a href="#faq">Вопросы</a></nav>
+    <nav class="anchors" aria-label="Разделы"><a href="#how">Как это работает</a><a href="#features">Возможности</a><a href="#catalog" data-needs="catalog">Каталог</a><a href="#faq">Вопросы</a></nav>
     <span class="sp"></span>
     <div class="acct"><span class="skel" aria-hidden="true"></span></div>
     <button class="burger ghost iconbtn" type="button" aria-expanded="false" aria-controls="mnav" aria-label="Открыть меню"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
   </div>
-  <nav class="mnav" id="mnav" hidden aria-label="Меню"><a href="#features">Возможности</a><a href="#how">Как это работает</a><a href="#catalog" data-needs="catalog">Каталог</a><a href="#faq">Вопросы</a><div class="row"></div></nav>
+  <nav class="mnav" id="mnav" hidden aria-label="Меню"><a href="#how">Как это работает</a><a href="#features">Возможности</a><a href="#catalog" data-needs="catalog">Каталог</a><a href="#faq">Вопросы</a><div class="row"></div></nav>
 </header>
 
 <main id="main">
@@ -172,8 +209,8 @@ h2.sec{font-size:24px;line-height:32px;letter-spacing:-.02em;margin:0 0 12px;fon
     <div class="wrap">
       <div>
         <p class="greet" id="greet"></p>
-        <h1>Спланируйте комнату за вечер — с настоящей мебелью и прогулкой в 3D</h1>
-        <p class="lead">Нарисуйте стены по своим размерам, поставьте двери и окна, расставьте мебель из каталога и посмотрите на результат глазами человека, стоящего в комнате.</p>
+        <h1>Спланируйте комнату за&nbsp;вечер <span>с&nbsp;настоящей мебелью и&nbsp;прогулкой в&nbsp;3D</span></h1>
+        <p class="lead">Нарисуйте стены по&nbsp;своим размерам, поставьте двери и&nbsp;окна, расставьте мебель из&nbsp;каталога и&nbsp;посмотрите на&nbsp;результат глазами человека, стоящего в&nbsp;комнате.</p>
         <div class="cta">
           <a class="btn primary lg" id="ctaMain" href="/register?next=/editor" data-ev="cta_start_click" data-pos="hero"><span id="ctaMainT">Начать планировку</span><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
           <a class="btn lg" href="#how">Как это работает</a>
@@ -181,40 +218,56 @@ h2.sec{font-size:24px;line-height:32px;letter-spacing:-.02em;margin:0 0 12px;fon
         <p class="cta-note" id="ctaNote">Бесплатно. Регистрация займёт минуту — проекты хранятся в аккаунте и открываются на любом устройстве.</p>
       </div>
 
+      <!-- Макет редактора: декоративный, для скринридера скрыт -->
       <div class="hero-art" aria-hidden="true">
-        <div class="plan-card">
-          <div class="plan-bar"><i></i><i></i><i></i><span style="margin-left:8px">Гостиная · 21,1 м²</span><span class="seg"><span class="on">План</span><span>3D</span></span></div>
-          <svg viewBox="0 0 480 360" width="480" height="360" role="presentation">
-            <defs><pattern id="g" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" class="p-grid" fill="none"/></pattern></defs>
-            <rect width="480" height="360" fill="url(#g)"/>
-            <!-- размеры -->
-            <g class="p-dim"><path d="M60 34H420M60 28v12M420 28v12"/></g>
-            <rect x="208" y="25" width="64" height="18" rx="4" fill="var(--plan-floor)"/><text class="p-dimt" x="240" y="38" text-anchor="middle">5400 мм</text>
-            <g class="p-dim"><path d="M446 60V318M440 60h12M440 318h12"/></g>
-            <rect x="437" y="174" width="18" height="64" rx="4" fill="var(--plan-floor)"/><text class="p-dimt" x="0" y="0" text-anchor="middle" transform="translate(450 206) rotate(-90)">3900 мм</text>
-            <!-- ковёр -->
-            <ellipse cx="290" cy="190" rx="78" ry="56" class="p-dash"/>
-            <!-- стены -->
-            <path class="p-wall" d="M140 318H420V60H60V318H90"/>
-            <!-- окно -->
-            <rect class="p-win" x="170" y="55.5" width="120" height="9"/><path d="M170 60H290" class="p-thin"/>
-            <!-- дверь -->
-            <path class="p-thin" d="M90 318V268"/><path class="p-dash" d="M90 268A50 50 0 0 1 140 318"/>
-            <!-- ТВ‑тумба -->
-            <rect class="p-furn" x="68" y="150" width="20" height="90" rx="3"/>
-            <!-- кресло -->
-            <g transform="rotate(-18 170 120)"><rect class="p-furn" x="146" y="96" width="48" height="48" rx="6"/><rect class="p-furn" x="146" y="96" width="48" height="12" rx="4"/></g>
-            <!-- журнальный стол -->
-            <rect class="p-furn" x="262" y="168" width="58" height="44" rx="8"/>
-            <!-- диван (выделен) -->
-            <rect class="p-sel" x="354" y="110" width="56" height="160" rx="8"/><rect class="p-sel" x="394" y="110" width="16" height="160" rx="5"/>
-            <g class="p-cap"><rect x="250" y="78" width="154" height="24" rx="12"/><text x="327" y="94" text-anchor="middle">Диван · 2200 × 900 мм</text></g>
-            <!-- стол и стулья -->
-            <circle class="p-furn" cx="168" cy="262" r="26"/>
-            <rect class="p-furn" x="158" y="222" width="20" height="12" rx="3"/><rect class="p-furn" x="158" y="290" width="20" height="12" rx="3"/><rect class="p-furn" x="128" y="252" width="12" height="20" rx="3"/><rect class="p-furn" x="196" y="252" width="12" height="20" rx="3"/>
-            <!-- растение -->
-            <circle class="p-furn" cx="392" cy="296" r="12"/>
-          </svg>
+        <div class="mock">
+          <div class="mock-bar">
+            <span class="mock-logo"><svg class="ic" viewBox="0 0 24 24"><path d="M9 19V9a3 3 0 0 1 3-3h4.5M9 12.5h5.5"/></svg></span>
+            <span class="mock-name">Гостиная</span>
+            <span class="mock-seg"><span>Стены</span><span class="on">Мебель</span></span>
+            <span class="mock-area">21,1&nbsp;м²</span>
+          </div>
+          <div class="mock-body">
+            <svg viewBox="0 0 520 356" width="520" height="356" role="presentation">
+              <defs><pattern id="g" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" class="p-grid" fill="none"/></pattern></defs>
+              <rect width="520" height="356" fill="url(#g)"/>
+              <rect class="p-room" x="56" y="64" width="348" height="251"/>
+              <!-- размеры -->
+              <path class="p-dim" d="M56 34H404M56 28v12M404 28v12"/>
+              <rect class="p-bg" x="196" y="25" width="68" height="18" rx="4"/><text class="p-dimt" x="230" y="38" text-anchor="middle">5400 мм</text>
+              <path class="p-dim" d="M430 64V315M424 64h12M424 315h12"/>
+              <rect class="p-bg" x="421" y="156" width="18" height="68" rx="4"/><text class="p-dimt" text-anchor="middle" transform="translate(434 190) rotate(-90)">3900 мм</text>
+              <!-- ковёр -->
+              <ellipse class="p-dash" cx="278" cy="193" rx="74" ry="52"/>
+              <!-- стены: тёмный контур и серая заливка, как в редакторе -->
+              <path class="p-wall" d="M136 315H404V64H56V315H86"/><path class="p-wallf" d="M136 315H404V64H56V315H86"/>
+              <!-- окно -->
+              <rect class="p-win" x="150" y="59" width="120" height="10"/><path class="p-thin" d="M150 64H270"/>
+              <!-- дверь -->
+              <path class="p-thin" d="M86 315V265"/><path class="p-dash" d="M86 265A50 50 0 0 1 136 315"/>
+              <!-- ТВ‑тумба -->
+              <rect class="p-furn" x="63" y="150" width="18" height="90" rx="3"/>
+              <!-- кресло -->
+              <g transform="rotate(-18 160 122)"><rect class="p-furn" x="137" y="99" width="46" height="46" rx="6"/><rect class="p-furn" x="137" y="99" width="46" height="11" rx="4"/></g>
+              <!-- журнальный стол -->
+              <rect class="p-furn" x="250" y="172" width="56" height="42" rx="8"/>
+              <!-- диван (выделен) -->
+              <rect class="p-sel" x="341" y="118" width="57" height="142" rx="8"/><rect class="p-sel" x="382" y="118" width="16" height="142" rx="5"/>
+              <g class="p-cap"><rect x="222" y="84" width="152" height="24" rx="12"/><text x="298" y="100" text-anchor="middle">Диван · 2200 × 900 мм</text></g>
+              <!-- стол и стулья -->
+              <circle class="p-furn" cx="176" cy="262" r="25"/>
+              <rect class="p-furn" x="166" y="223" width="20" height="12" rx="3"/><rect class="p-furn" x="166" y="289" width="20" height="12" rx="3"/><rect class="p-furn" x="137" y="252" width="12" height="20" rx="3"/><rect class="p-furn" x="203" y="252" width="12" height="20" rx="3"/>
+              <!-- растение -->
+              <circle class="p-furn" cx="384" cy="290" r="11"/>
+            </svg>
+            <div class="mock-rail">
+              <i class="on"><svg class="ic" viewBox="0 0 24 24"><path d="M5 3l14 8-6 2-3 6z"/></svg></i>
+              <i><svg class="ic" viewBox="0 0 24 24"><path d="M4 20V6h16v14M4 13h16M12 6v7M8 13v7M16 13v7"/></svg></i>
+              <i><svg class="ic" viewBox="0 0 24 24"><path d="M3 20h18M7 20V5M7 5a12 12 0 0 1 10 10"/></svg></i>
+              <i><svg class="ic" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="1"/><path d="M3 12h18M12 5v14"/></svg></i>
+              <i><svg class="ic" viewBox="0 0 24 24"><path d="M4 20V11a8 8 0 0 1 16 0v9"/></svg></i>
+            </div>
+          </div>
         </div>
         <div class="inset">
           <svg viewBox="0 0 240 150" width="240" height="150" role="presentation">
@@ -228,7 +281,7 @@ h2.sec{font-size:24px;line-height:32px;letter-spacing:-.02em;margin:0 0 12px;fon
             <ellipse cx="118" cy="122" rx="48" ry="14" fill="color-mix(in srgb,var(--foreground) 6%,transparent)"/>
             <rect x="96" y="104" width="44" height="12" rx="3" fill="color-mix(in srgb,var(--sofa3d) 55%,var(--floor3d))"/>
           </svg>
-          <span class="tag">3D · глаза на 160 см</span>
+          <span class="tag">3D · глаза на 160&nbsp;см</span>
         </div>
       </div>
     </div>
@@ -237,28 +290,76 @@ h2.sec{font-size:24px;line-height:32px;letter-spacing:-.02em;margin:0 0 12px;fon
   <!-- ================= Как это работает ================= -->
   <section id="how" class="bg-muted">
     <div class="wrap">
-      <div class="sec-head reveal"><p class="eyebrow">Как это работает</p><h2 class="sec">Четыре шага от пустого листа до комнаты</h2><p class="lead">Рисуете один раз — дальше всё считается само: площадь, размеры проёмов, свободное место между вещами.</p></div>
-      <ol class="steps reveal">
-        <li><div class="n"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V6h16v14M4 13h16M12 6v7M8 13v7M16 13v7"/></svg></div><h3>Нарисуйте стены</h3><p>Точные размеры, привязка к углам. Миллиметры, сантиметры, метры, дюймы или футы — как удобнее.</p></li>
-        <li><div class="n"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 20h18M7 20V5M7 5a12 12 0 0 1 10 10"/></svg></div><h3>Добавьте двери, окна и арки</h3><p>С шириной, высотой и подоконником — проёмы встают в стену и не дают поставить шкаф поперёк двери.</p></li>
-        <li><div class="n"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 18v-6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v6M4 18h16M4 18v2M20 18v2M6 10V7a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v3"/></svg></div><h3>Расставьте мебель</h3><p>Каталог по комнатам: реальные товары с размерами или «пустышки» нужного габарита, если вещь ещё не выбрана.</p></li>
-        <li><div class="n"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></div><h3>Пройдитесь по комнате в 3D</h3><p>Точки обзора, высота глаз, мини‑карта, материалы стен и пола — видно, как будет на самом деле.</p></li>
+      <div class="sec-head reveal"><p class="eyebrow">Как это работает</p><h2 class="sec">Четыре шага от&nbsp;пустого листа до&nbsp;комнаты</h2><p class="lead">Рисуете один раз — дальше всё считается само: площадь, размеры проёмов, свободное место между вещами.</p></div>
+      <ol class="steps reveal" role="list">
+        <li>
+          <div class="step-art" aria-hidden="true"><svg viewBox="0 0 240 150" width="240" height="150" role="presentation">
+            <rect width="240" height="150" fill="url(#g)"/>
+            <path class="p-dim" d="M56 22H184M56 17v10M184 17v10"/><rect class="p-bg" x="98" y="13" width="44" height="18" rx="4"/><text class="p-dimt" x="120" y="26" text-anchor="middle">4200</text>
+            <path class="p-wall" d="M56 128V46H184V88"/><path class="p-wallf" d="M56 128V46H184V88"/>
+            <path class="p-rub" d="M184 94V122"/>
+            <circle cx="184" cy="126" r="9" fill="none" stroke="var(--brand)" stroke-width="1.5" opacity=".45"/><circle class="p-dot" cx="184" cy="126" r="4.5"/>
+            <circle class="p-vx" cx="56" cy="128" r="3.5"/><circle class="p-vx" cx="56" cy="46" r="3.5"/><circle class="p-vx" cx="184" cy="46" r="3.5"/>
+            <g class="p-cap"><rect x="196" y="98" width="38" height="20" rx="10"/><text x="215" y="112" text-anchor="middle">1800</text></g>
+          </svg></div>
+          <span class="step-n">Шаг&nbsp;1</span><h3>Нарисуйте стены</h3><p>Точные размеры, привязка к&nbsp;углам. Миллиметры, сантиметры, метры, дюймы или футы — как удобнее.</p>
+        </li>
+        <li>
+          <div class="step-art" aria-hidden="true"><svg viewBox="0 0 240 150" width="240" height="150" role="presentation">
+            <rect width="240" height="150" fill="url(#g)"/>
+            <rect class="p-room" y="64" width="240" height="86"/>
+            <path class="p-dim" d="M0 34H240M44 29v10M108 29v10M144 29v10M188 29v10"/>
+            <rect class="p-bg" x="57" y="25" width="38" height="18" rx="4"/><text class="p-dimt" x="76" y="38" text-anchor="middle">1200</text>
+            <rect class="p-bg" x="150" y="25" width="32" height="18" rx="4"/><text class="p-dimt" x="166" y="38" text-anchor="middle">800</text>
+            <path class="p-wall" d="M-8 64H144M188 64H248"/><path class="p-wallf" d="M-8 64H142.8M189.2 64H248"/>
+            <rect class="p-win" x="44" y="59" width="64" height="10"/><path class="p-thin" d="M44 64H108"/>
+            <path class="p-thin" d="M144 69V113"/><path class="p-dash" d="M144 113A44 44 0 0 0 188 69"/>
+            <g class="p-cap"><rect x="28" y="84" width="96" height="20" rx="10"/><text x="76" y="98" text-anchor="middle">h 1400 · пол 900</text></g>
+          </svg></div>
+          <span class="step-n">Шаг&nbsp;2</span><h3>Добавьте двери, окна и&nbsp;арки</h3><p>С&nbsp;шириной, высотой и&nbsp;подоконником — проёмы встают в&nbsp;стену и&nbsp;не&nbsp;дают поставить шкаф поперёк двери.</p>
+        </li>
+        <li>
+          <div class="step-art" aria-hidden="true"><svg viewBox="0 0 240 150" width="240" height="150" role="presentation">
+            <rect width="240" height="150" fill="url(#g)"/>
+            <rect class="p-room" x="28" y="28" width="212" height="122"/>
+            <path class="p-wall" d="M28 156V28H246"/><path class="p-wallf" d="M28 156V28H246"/>
+            <rect class="p-sel" x="72" y="35" width="100" height="42" rx="7"/><rect class="p-sel" x="72" y="35" width="100" height="12" rx="4"/>
+            <rect class="p-furn" x="96" y="94" width="52" height="28" rx="6"/>
+            <g transform="rotate(14 53 106)"><rect class="p-furn" x="38" y="91" width="30" height="30" rx="5"/><rect class="p-furn" x="38" y="91" width="9" height="30" rx="3"/></g>
+            <rect class="p-rub" x="186" y="84" width="40" height="40" rx="5" style="stroke-width:1.5"/><text x="206" y="109" text-anchor="middle" class="p-dimt" style="font-size:14px">?</text>
+          </svg></div>
+          <span class="step-n">Шаг&nbsp;3</span><h3>Расставьте мебель</h3><p>Каталог по&nbsp;комнатам: реальные товары с&nbsp;размерами или «пустышки» нужного габарита, если вещь ещё не&nbsp;выбрана.</p>
+        </li>
+        <li>
+          <div class="step-art" aria-hidden="true"><svg viewBox="0 0 240 150" width="240" height="150" role="presentation">
+            <rect width="240" height="150" fill="var(--wall3d-side)"/>
+            <polygon points="0,0 240,0 176,26 64,26" fill="var(--wall3d)"/>
+            <rect x="64" y="26" width="112" height="72" fill="var(--wall3d)"/>
+            <polygon points="64,98 176,98 240,150 0,150" fill="var(--floor3d)"/>
+            <path d="M64 26V98M176 26V98M0 0L64 26M240 0L176 26" stroke="var(--plan-line)" stroke-width=".6" fill="none" opacity=".5"/>
+            <polygon points="12,34 46,42 46,88 12,100" fill="color-mix(in srgb,var(--brand) 22%,var(--wall3d))" stroke="var(--plan-line)" stroke-width=".8"/><path d="M29 38V94" stroke="var(--plan-line)" stroke-width=".8"/>
+            <rect x="84" y="66" width="72" height="18" rx="3" fill="color-mix(in srgb,var(--sofa3d) 72%,#fff)"/><rect x="84" y="80" width="72" height="20" rx="3" fill="var(--sofa3d)"/><rect x="80" y="76" width="9" height="24" rx="3" fill="color-mix(in srgb,var(--sofa3d) 86%,#000)"/><rect x="151" y="76" width="9" height="24" rx="3" fill="color-mix(in srgb,var(--sofa3d) 86%,#000)"/>
+            <ellipse cx="120" cy="126" rx="20" ry="7" fill="var(--brand-soft)" stroke="var(--brand)" stroke-width="1.5"/><path d="M120 130v-8M116.5 125.5l3.5-3.5 3.5 3.5" fill="none" stroke="var(--brand)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <g><rect x="8" y="108" width="50" height="34" rx="5" fill="var(--popover)" stroke="var(--border)"/><rect x="15" y="114" width="36" height="22" fill="none" stroke="var(--plan-wall)" stroke-width="1.5"/><path d="M33 128l-7-9h14z" fill="var(--brand)" opacity=".3"/><circle class="p-dot" cx="33" cy="128" r="2.5"/></g>
+          </svg></div>
+          <span class="step-n">Шаг&nbsp;4</span><h3>Пройдитесь по&nbsp;комнате в&nbsp;3D</h3><p>Точки обзора, высота глаз, мини‑карта, материалы стен и&nbsp;пола — видно, как будет на&nbsp;самом деле.</p>
+        </li>
       </ol>
     </div>
   </section>
 
   <!-- ================= Возможности ================= -->
   <section id="features">
-    <div class="wrap">
+    <div class="wrap split">
       <div class="sec-head reveal"><p class="eyebrow">Возможности</p><h2 class="sec">Всё, что нужно для планировки одной комнаты</h2></div>
-      <div class="feats reveal">
-        <div class="card feat"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 8h18M3 6v4M21 6v4M8 18h8M8 16v4M16 16v4"/></svg><h3>Точные размеры</h3><p>Редактор проверяет геометрию: стена не короче 10 см, а точка не соединяет больше двух стен — план всегда собирается в комнату.</p></div>
-        <div class="card feat"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l9 5v10l-9 5-9-5V7z"/><path d="M12 22V12M21 7l-9 5-9-5"/></svg><h3>Каталог с 3D‑моделями</h3><p>Товары с настоящими габаритами и моделями — в 3D видно не прямоугольник, а сам диван.</p></div>
-        <div class="card feat"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><h3>Замки</h3><p>Зафиксируйте стены или готовую расстановку, чтобы случайно ничего не сдвинуть.</p></div>
-        <div class="card feat"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 14L4 9l5-5M4 9h10a6 6 0 0 1 0 12h-3"/></svg><h3>Отмена и повтор</h3><p>Пробуйте смело: любое действие отменяется привычным сочетанием клавиш.</p></div>
-        <div class="card feat"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg><h3>На компьютере и телефоне</h3><p>Светлая и тёмная тема. Стены удобнее рисовать мышью, а посмотреть план можно где угодно.</p></div>
-        <div class="card feat"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8zM19 17l.8 2.2 2.2.8-2.2.8L19 23l-.8-2.2L16 20l2.2-.8z"/></svg><h3>Бриф для ИИ‑дизайнера <span class="badge info">скоро</span></h3><p>Отметьте, что можно двигать и менять, приложите фото‑референсы, выберите стиль, палитру и бюджет — бриф уже сейчас сохраняется в проекте.</p></div>
-      </div>
+      <ul class="feats reveal" role="list">
+        <li class="feat"><span class="fi"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 8h18M3 6v4M21 6v4M8 18h8M8 16v4M16 16v4"/></svg></span><h3>Точные размеры</h3><p>Редактор проверяет геометрию: стена не&nbsp;короче 10&nbsp;см, а&nbsp;точка не&nbsp;соединяет больше двух стен — план всегда собирается в&nbsp;комнату.</p></li>
+        <li class="feat"><span class="fi"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l9 5v10l-9 5-9-5V7z"/><path d="M12 22V12M21 7l-9 5-9-5"/></svg></span><h3>Каталог с&nbsp;3D‑моделями</h3><p>Товары с&nbsp;настоящими габаритами и&nbsp;моделями — в&nbsp;3D видно не&nbsp;прямоугольник, а&nbsp;сам диван.</p></li>
+        <li class="feat"><span class="fi"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span><h3>Замки</h3><p>Зафиксируйте стены или готовую расстановку, чтобы случайно ничего не&nbsp;сдвинуть.</p></li>
+        <li class="feat"><span class="fi"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 14L4 9l5-5M4 9h10a6 6 0 0 1 0 12h-3"/></svg></span><h3>Отмена и&nbsp;повтор</h3><p>Пробуйте смело: любое действие отменяется привычным сочетанием клавиш.</p></li>
+        <li class="feat"><span class="fi"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg></span><h3>На&nbsp;компьютере и&nbsp;телефоне</h3><p>Светлая и&nbsp;тёмная тема. Стены удобнее рисовать мышью, а&nbsp;посмотреть план можно где угодно.</p></li>
+        <li class="feat"><span class="fi"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8zM19 17l.8 2.2 2.2.8-2.2.8L19 23l-.8-2.2L16 20l2.2-.8z"/></svg></span><h3>Бриф для ИИ‑дизайнера <span class="badge info">скоро</span></h3><p>Отметьте, что можно двигать и&nbsp;менять, приложите фото‑референсы, выберите стиль, палитру и&nbsp;бюджет — бриф уже сейчас сохраняется в&nbsp;проекте.</p></li>
+      </ul>
     </div>
   </section>
 
@@ -266,7 +367,7 @@ h2.sec{font-size:24px;line-height:32px;letter-spacing:-.02em;margin:0 0 12px;fon
   <section id="catalog" class="bg-muted" hidden>
     <div class="wrap">
       <div class="shelf-head reveal">
-        <div><p class="eyebrow">Каталог</p><h2 class="sec">Мебель с реальными размерами</h2><p class="lead">Ставьте на план те вещи, которые можно купить, — с их точными габаритами.</p></div>
+        <div><p class="eyebrow">Каталог</p><h2 class="sec">Мебель с&nbsp;реальными размерами</h2><p class="lead">Ставьте на&nbsp;план те&nbsp;вещи, которые можно купить, — с&nbsp;их&nbsp;точными габаритами.</p></div>
         <div class="shelf-nav"><button class="iconbtn" type="button" id="shPrev" aria-label="Назад"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button><button class="iconbtn" type="button" id="shNext" aria-label="Вперёд"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button></div>
       </div>
       <ul class="shelf" id="shelf" role="list" tabindex="0" aria-label="Товары каталога — прокрутите стрелками"></ul>
@@ -279,11 +380,11 @@ h2.sec{font-size:24px;line-height:32px;letter-spacing:-.02em;margin:0 0 12px;fon
     <div class="wrap">
       <div class="save reveal">
         <div>
-          <h2>Проекты хранятся в аккаунте</h2>
-          <ul>
-            <li><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l5 5 9-11"/></svg>Не пропадут, если очистить браузер или сменить устройство.</li>
-            <li><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l5 5 9-11"/></svg>Откроются на другом компьютере и телефоне.</li>
-            <li><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l5 5 9-11"/></svg>До 50 проектов: квартира, дача, варианты одной комнаты.</li>
+          <h2>Проекты хранятся в&nbsp;аккаунте</h2>
+          <ul role="list">
+            <li><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l5 5 9-11"/></svg>Не&nbsp;пропадут, если очистить браузер или сменить устройство.</li>
+            <li><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l5 5 9-11"/></svg>Откроются на&nbsp;другом компьютере и&nbsp;телефоне.</li>
+            <li><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l5 5 9-11"/></svg>До&nbsp;50&nbsp;проектов: квартира, дача, варианты одной комнаты.</li>
           </ul>
         </div>
         <a class="btn lg" href="/register?next=/editor" data-ev="register_click">Создать аккаунт</a>
@@ -295,7 +396,7 @@ h2.sec{font-size:24px;line-height:32px;letter-spacing:-.02em;margin:0 0 12px;fon
   <section id="biz" hidden style="padding-top:0">
     <div class="wrap">
       <div class="card biz reveal">
-        <div class="t"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 21V5l8-2v18M12 7l8 2v12M8 8v1M8 12v1M8 16v1M16 12v1M16 16v1M2 21h20"/></svg><div><h3>Для производителей и магазинов мебели <span class="badge muted">скоро</span></h3><p>Добавляйте товары с размерами и 3D‑моделями — их будут ставить прямо в свои комнаты.</p></div></div>
+        <div class="t"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 21V5l8-2v18M12 7l8 2v12M8 8v1M8 12v1M8 16v1M16 12v1M16 16v1M2 21h20"/></svg><div><h3>Для производителей и&nbsp;магазинов мебели <span class="badge muted">скоро</span></h3><p>Добавляйте товары с&nbsp;размерами и&nbsp;3D‑моделями — их&nbsp;будут ставить прямо в&nbsp;свои комнаты.</p></div></div>
         <a class="btn" id="bizBtn" href="#">Оставить заявку</a>
       </div>
     </div>
@@ -303,24 +404,24 @@ h2.sec{font-size:24px;line-height:32px;letter-spacing:-.02em;margin:0 0 12px;fon
 
   <!-- ================= Вопросы ================= -->
   <section id="faq">
-    <div class="wrap">
+    <div class="wrap split">
       <div class="sec-head reveal"><p class="eyebrow">Вопросы</p><h2 class="sec">Частые вопросы</h2></div>
       <div class="faq reveal">
-        <details><summary>Это бесплатно?</summary><p>Да. Редактор, каталог и 3D‑просмотр бесплатны.</p></details>
-        <details><summary>Нужна ли регистрация?</summary><p>Да. Чтобы создать проект, нужен аккаунт — это бесплатно и занимает минуту. Проекты хранятся в аккаунте и открываются на любом устройстве.</p></details>
-        <details><summary>Где хранится мой проект?</summary><p>В аккаунте, на сервере. В браузере остаётся рабочая копия открытого проекта — она выручает, если связь пропала. Фото‑референсы из брифа пока хранятся только в браузере.</p></details>
-        <details><summary>Можно ли работать с телефона?</summary><p>Да, редактор работает на телефоне и планшете. Рисовать стены удобнее на компьютере, а смотреть и двигать мебель — где угодно.</p></details>
-        <details><summary>Можно ли купить мебель из каталога?</summary><p>Если продавец указал ссылку на свой магазин, она есть в карточке товара. Размеры и наличие лучше уточнить у продавца перед покупкой.</p></details>
-        <details><summary>Что такое ИИ‑дизайнер?</summary><p>Это следующий этап: по вашему плану и брифу ИИ предложит расстановку и подбор вещей. Он ещё в разработке, но бриф — что можно двигать и менять, фото и пожелания — можно подготовить уже сейчас.</p></details>
+        <details><summary>Это бесплатно?</summary><p>Да. Редактор, каталог и&nbsp;3D‑просмотр бесплатны.</p></details>
+        <details><summary>Нужна&nbsp;ли регистрация?</summary><p>Да. Чтобы создать проект, нужен аккаунт — это бесплатно и&nbsp;занимает минуту. Проекты хранятся в&nbsp;аккаунте и&nbsp;открываются на&nbsp;любом устройстве.</p></details>
+        <details><summary>Где хранится мой проект?</summary><p>В&nbsp;аккаунте, на&nbsp;сервере. В&nbsp;браузере остаётся рабочая копия открытого проекта — она выручает, если связь пропала. Фото‑референсы из&nbsp;брифа пока хранятся только в&nbsp;браузере.</p></details>
+        <details><summary>Можно&nbsp;ли работать с&nbsp;телефона?</summary><p>Да, редактор работает на&nbsp;телефоне и&nbsp;планшете. Рисовать стены удобнее на&nbsp;компьютере, а&nbsp;смотреть и&nbsp;двигать мебель — где угодно.</p></details>
+        <details><summary>Можно&nbsp;ли купить мебель из&nbsp;каталога?</summary><p>Если продавец указал ссылку на&nbsp;свой магазин, она есть в&nbsp;карточке товара. Размеры и&nbsp;наличие лучше уточнить у&nbsp;продавца перед покупкой.</p></details>
+        <details><summary>Что такое ИИ‑дизайнер?</summary><p>Это следующий этап: по&nbsp;вашему плану и&nbsp;брифу ИИ предложит расстановку и&nbsp;подбор вещей. Он&nbsp;ещё в&nbsp;разработке, но&nbsp;бриф — что можно двигать и&nbsp;менять, фото и&nbsp;пожелания — можно подготовить уже сейчас.</p></details>
       </div>
     </div>
   </section>
 
   <!-- ================= Финальный призыв ================= -->
-  <section class="bg-muted">
-    <div class="wrap final reveal">
-      <h2 class="sec">Начните с размеров вашей комнаты</h2>
-      <p class="lead">Рулетка, пять минут — и у вас точный план, на который можно ставить мебель.</p>
+  <section class="bg-muted final">
+    <div class="wrap reveal">
+      <h2 class="sec">Начните с&nbsp;размеров вашей комнаты</h2>
+      <p class="lead">Рулетка, пять минут — и&nbsp;у&nbsp;вас точный план, на&nbsp;который можно ставить мебель.</p>
       <div class="cta"><a class="btn primary lg" id="ctaFinal" href="/register?next=/editor" data-ev="cta_start_click" data-pos="final">Начать планировку<svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
     </div>
   </section>

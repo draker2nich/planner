@@ -41,9 +41,9 @@ async function rightsDialog(st){
     const s=briefSummary(); box.append(h('div',{class:'summary'},h('span',{},'Заперто: ',h('b',{},String(s.locked))),h('span',{},'Свободно: ',h('b',{},String(s.free))),h('span',{},'Пустышек: ',h('b',{},String(s.ph)))));
     box.append(h('div',{class:'hint'},'Замок в редакторе и права ИИ — разные вещи. Замок мешает только вам случайно сдвинуть предмет; здесь вы решаете, что разрешено ИИ. Права заполнены по замкам — поменяйте, если нужно.'));
     const pol=new Map(st.policies); const items=P.furniture||[];
-    const segFor=(f)=>{const seg=h('div',{class:'seg'});const ph=!f.productId;['keep','move','replace','free'].forEach(p=>{const b=h('button',{type:'button',class:pol.get(f.id)===p?'on':'',title:AI_NAME[p],onclick:()=>{pol.set(f.id,p);[...seg.children].forEach(x=>x.classList.toggle('on',x.textContent===AI_NAME[p]));}},AI_NAME[p]);if(ph&&p==='keep'){b.disabled=true;b.title='Пустышка: ИИ обязан подобрать товар';}seg.append(b);});return seg;};
+    const segFor=(f)=>{const seg=h('div',{class:'seg',role:'group','aria-label':'Права ИИ: '+f.name});const ph=!f.productId;['keep','move','replace','free'].forEach(p=>{const b=h('button',{type:'button',class:pol.get(f.id)===p?'on':'','aria-pressed':String(pol.get(f.id)===p),title:AI_NAME[p],onclick:()=>{pol.set(f.id,p);[...seg.children].forEach(x=>{const on=x.textContent===AI_NAME[p];x.classList.toggle('on',on);x.setAttribute('aria-pressed',String(on));});}},AI_NAME[p]);if(ph&&p==='keep'){b.disabled=true;b.title='Пустышка: ИИ обязан подобрать товар';}seg.append(b);});return seg;};
     const table=h('div',{class:'aitable'});
-    const all=h('div',{class:'seg'});['keep','move','replace','free'].forEach(p=>all.append(h('button',{type:'button',onclick:()=>{items.forEach(f=>{pol.set(f.id,(p==='keep'&&!f.productId)?'replace':p);});fill();}},AI_NAME[p])));
+    const all=h('div',{class:'seg',role:'group','aria-label':'Права ИИ для всех предметов'});['keep','move','replace','free'].forEach(p=>all.append(h('button',{type:'button',onclick:()=>{items.forEach(f=>{pol.set(f.id,(p==='keep'&&!f.productId)?'replace':p);});fill();}},AI_NAME[p])));
     const fill=()=>{table.innerHTML='';
       const hd=h('div',{class:'hd'},h('span',{},`Предметы: ${items.length}`),h('span',{},'Всем: ',all));
       if(hasSavedPolicies())hd.append(h('button',{type:'button',class:'rst',onclick:()=>{items.forEach(f=>pol.set(f.id,lockPolicy(f)));fill();}},'Сбросить по замкам'));
@@ -51,7 +51,7 @@ async function rightsDialog(st){
       items.forEach(f=>{const t=TYPE.get(f.typeId),fo=formOf(t,f.formId);table.append(h('div',{class:'airow'},h('img',{src:typeIcon(t),alt:'',width:'36',height:'36'}),h('div',{class:'nm'},f.name,h('small',{},(f.productId?'Товар':'Пустышка')+' · '+fo.dims.map(k=>fmt(f.dims[k])).join('×')+' '+UNITS[P.unit].l+(f.locked?' · заперт':''))),segFor(f)));});};
     fill(); box.append(table);
     const rm=Object.assign({},st.room); const blk=h('div',{class:'roomblk'},h('h5',{},'Комната'));
-    [['walls','Материалы стен'],['floor','Пол'],['ceiling','Потолок'],['lighting','Освещение и декор']].forEach(([k,nm])=>{const seg=h('div',{class:'seg'});[['keep','Как есть'],['ai','На усмотрение ИИ']].forEach(([v,l])=>seg.append(h('button',{type:'button',class:rm[k]===v?'on':'',onclick:()=>{rm[k]=v;[...seg.children].forEach(x=>x.classList.toggle('on',x.textContent===l));}},l)));blk.append(h('span',{},nm),seg);});
+    [['walls','Материалы стен'],['floor','Пол'],['ceiling','Потолок'],['lighting','Освещение и декор']].forEach(([k,nm])=>{const seg=h('div',{class:'seg',role:'group','aria-label':nm});[['keep','Как есть'],['ai','На усмотрение ИИ']].forEach(([v,l])=>seg.append(h('button',{type:'button',class:rm[k]===v?'on':'','aria-pressed':String(rm[k]===v),onclick:()=>{rm[k]=v;[...seg.children].forEach(x=>{const on=x.textContent===l;x.classList.toggle('on',on);x.setAttribute('aria-pressed',String(on));});}},l)));blk.append(h('span',{},nm),seg);});
     box.append(blk);
     api.buttons=[{label:'Отмена',cancel:true,onClick:a=>{st.policies=pol;st.room=rm;a.close(null);}},{label:'Далее',primary:true,onClick:a=>a.close({policies:pol,room:rm})}];
   });

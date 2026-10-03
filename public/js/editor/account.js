@@ -33,7 +33,6 @@
 .lbtn:hover{background:var(--accent)}
 .lbtn.primary{background:var(--primary);color:var(--primary-foreground)}
 .lbtn.primary:hover{background:color-mix(in srgb,var(--primary) 90%,var(--background))}
-.lbtn:focus-visible{box-shadow:0 0 0 3px color-mix(in srgb,var(--ring) 50%,transparent)}
 a.mi{text-decoration:none}
 header .save{font-variant-numeric:tabular-nums}
 #acctMenu{position:absolute;right:12px;top:52px;min-width:240px;z-index:40}
@@ -513,7 +512,7 @@ body.ro #props input,body.ro #props select,body.ro #props textarea,body.ro #prop
       clearTimeout(Sync.timer); push();
       const t0 = Date.now();
       while (lsGet(LS.dirty) === '1' && Date.now() - t0 < 3000) await new Promise(r => setTimeout(r, 150));
-      if (lsGet(LS.dirty) === '1' && !(await confirmDlg('Изменения не сохранены', 'Последние изменения не дошли до аккаунта. Всё равно выйти?'))) return;
+      if (lsGet(LS.dirty) === '1' && !(await confirmDlg('Изменения не сохранены', 'Последние изменения не дошли до аккаунта. Всё равно выйти?', 'Выйти без сохранения', true))) return;
     }
     Sync.mode = 'locked'; clearTimeout(Sync.timer);
     await Session.logout();
