@@ -364,10 +364,13 @@ function paintState(user) {
   const sv = $('#save'); if (sv) sv.hidden = !!user;
   $('#footLogin').hidden = !!user;
   if (user) {
-    mainT.textContent = 'Открыть редактор'; main.dataset.ev = 'cta_start_click';
+    mainT.textContent = 'Мои проекты'; main.dataset.ev = 'cta_projects_click'; main.href = '/projects';
     greet.textContent = 'С возвращением' + (user.name ? ', ' + user.name : '');
-    note.textContent = 'Проект сохраняется в аккаунте и открывается на любом устройстве.';
-  } else if (proj) {
+    note.textContent = 'Проекты сохраняются в аккаунте и открываются на любом устройстве.';
+    return;
+  }
+  main.href = '/editor';
+  if (proj) {
     mainT.textContent = `Продолжить «${clip(proj.name, 40)}»`; main.dataset.ev = 'cta_continue_click';
     note.replaceChildren('Проект хранится только в этом браузере. ', h('a', { href: '/register?next=/editor', 'data-ev': 'register_click' }, 'Создайте аккаунт'), ', чтобы не потерять его.');
   } else {

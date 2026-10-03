@@ -18,7 +18,8 @@ const MIME = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; cha
   '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.webp': 'image/webp', '.svg': 'image/svg+xml', '.ico': 'image/x-icon', '.txt': 'text/plain; charset=utf-8' };
 
 /* Страницы сайта — те же соответствия, что rewrites в vercel.json */
-const PAGES = { '/': 'index.html', '/editor': 'editor.html', '/login': 'auth.html', '/register': 'auth.html', '/terms': 'legal.html', '/privacy': 'legal.html', '/admin': 'admin.html' };
+const PAGES = { '/': 'index.html', '/editor': 'editor.html', '/login': 'auth.html', '/register': 'auth.html', '/forgot': 'auth.html', '/reset': 'auth.html', '/verify': 'auth.html',
+  '/projects': 'projects.html', '/account': 'account.html', '/terms': 'legal.html', '/privacy': 'legal.html', '/admin': 'admin.html' };
 /* Заголовки безопасности для HTML (CSP пока в режиме Report-Only — см. ТЗ, раздел 10.3) */
 const SECURITY = {
   'Referrer-Policy': 'strict-origin-when-cross-origin',
@@ -70,7 +71,9 @@ const server = http.createServer(async (req, res) => {
   }
   if (req.method !== 'GET' && req.method !== 'HEAD') { res.writeHead(405).end(); return; }
   if (p.startsWith('/files/')) return serveFile(res, path.join(DATA, 'uploads'), p.slice(7), { 'Cache-Control': 'public, max-age=31536000, immutable' });
-  const page = PAGES[p.length > 1 ? p.replace(/\/+$/, '') : p];
+  /* страница со слэшем на конце → без слэша: относительные пути страниц рассчитаны на адрес без него */
+  if (p.length > 1 && p.endsWith('/') && PAGES[p.replace(/\/+$/, '')]) { res.writeHead(301, { Location: p.replace(/\/+$/, '') + url.search }).end(); return; }
+  const page = PAGES[p];
   if (page) return serveFile(res, PUBLIC, page);
   return serveFile(res, PUBLIC, p.slice(1));
 });

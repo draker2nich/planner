@@ -5,26 +5,84 @@
   "outputDirectory": "public",
   "cleanUrls": false,
   "functions": {
-    "api/index.mjs": { "maxDuration": 60 }
+    "api/index.mjs": {
+      "maxDuration": 60
+    }
   },
   "rewrites": [
-    { "source": "/api/:path*", "destination": "/api/index?__p=:path*" },
-    { "source": "/editor", "destination": "/editor.html" },
-    { "source": "/login", "destination": "/auth.html" },
-    { "source": "/register", "destination": "/auth.html" },
-    { "source": "/terms", "destination": "/legal.html" },
-    { "source": "/privacy", "destination": "/legal.html" },
-    { "source": "/admin", "destination": "/admin.html" }
+    {
+      "source": "/api/:path*",
+      "destination": "/api/index?__p=:path*"
+    },
+    {
+      "source": "/editor",
+      "destination": "/editor.html"
+    },
+    {
+      "source": "/login",
+      "destination": "/auth.html"
+    },
+    {
+      "source": "/register",
+      "destination": "/auth.html"
+    },
+    {
+      "source": "/forgot",
+      "destination": "/auth.html"
+    },
+    {
+      "source": "/reset",
+      "destination": "/auth.html"
+    },
+    {
+      "source": "/verify",
+      "destination": "/auth.html"
+    },
+    {
+      "source": "/projects",
+      "destination": "/projects.html"
+    },
+    {
+      "source": "/account",
+      "destination": "/account.html"
+    },
+    {
+      "source": "/terms",
+      "destination": "/legal.html"
+    },
+    {
+      "source": "/privacy",
+      "destination": "/legal.html"
+    },
+    {
+      "source": "/admin",
+      "destination": "/admin.html"
+    }
   ],
   "headers": [
     {
       "source": "/(.*)",
       "headers": [
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
-        { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=()" },
-        { "key": "X-Frame-Options", "value": "DENY" },
-        { "key": "Content-Security-Policy-Report-Only", "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob: https://*.public.blob.vercel-storage.com; connect-src 'self' https://*.public.blob.vercel-storage.com https://vercel.com https://cdn.jsdelivr.net; frame-ancestors 'none'" }
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=()"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "Content-Security-Policy-Report-Only",
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob: https://*.public.blob.vercel-storage.com; connect-src 'self' https://*.public.blob.vercel-storage.com https://vercel.com https://cdn.jsdelivr.net; frame-ancestors 'none'"
+        }
       ]
     }
   ]

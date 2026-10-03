@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#fafafa">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#111113">
+<title>Аккаунт — furnitech</title>
+<script>try{var t=localStorage.getItem('planner.theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="/shared/ui.css">
+<link rel="stylesheet" href="/shared/site.css">
+<style>
+.page.acc{max-width:760px}
+.sect{border:1px solid var(--border);border-radius:var(--radius-xl);background:var(--card);color:var(--card-foreground);box-shadow:var(--shadow-xs);padding:20px;margin:0 0 16px}
+@media (min-width:600px){.sect{padding:24px}}
+.sect h2{margin:0 0 16px;font-size:17px;line-height:24px;letter-spacing:-.01em;font-weight:600}
+.sect .lead{margin:-10px 0 16px;font-size:14px;line-height:20px;color:var(--muted-foreground)}
+.sect.danger{border-color:color-mix(in srgb,var(--destructive) 35%,var(--border))}
+.arows{display:flex;flex-direction:column}
+.arow{display:flex;align-items:center;gap:12px 16px;flex-wrap:wrap;padding:12px 0;border-top:1px solid var(--border)}
+.arow:first-child{border-top:none;padding-top:0}
+.arow:last-child{padding-bottom:0}
+.arow .k{flex:1 1 200px;min-width:0}
+.arow .k b{display:block;font-weight:500;font-size:14px;line-height:20px;overflow-wrap:anywhere}
+.arow .k span{display:block;font-size:13px;line-height:18px;color:var(--muted-foreground);overflow-wrap:anywhere}
+.arow .v{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.nameform{display:flex;gap:8px;align-items:flex-start;flex-wrap:wrap}
+.nameform .fld{flex:1 1 220px;min-width:0}
+.nameform input{width:100%;height:40px}
+.nameform button{height:40px;margin-top:23px}
+.sect.skel .line{height:14px;border-radius:7px;background:var(--muted);margin:10px 0}
+.del-form{display:flex;flex-direction:column;gap:16px}
+.del-form input{width:100%;height:40px}
+.del-form ul{margin:0;padding-left:20px;color:var(--muted-foreground);font-size:14px;line-height:22px}
+@media (prefers-reduced-motion:no-preference){.sect.skel .line{animation:pulse 1.4s ease-in-out infinite}}
+@keyframes pulse{50%{opacity:.5}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Перейти к содержимому</a>
+<header class="site-h">
+  <div class="wrap">
+    <a class="brand" href="/" translate="no"><span class="logo"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19V9a3 3 0 0 1 3-3h4.5M9 12.5h5.5"/></svg></span><span class="wm" translate="no">furni<span>tech</span></span></a>
+    <span class="sp"></span>
+    <div class="acct"><span class="skel" aria-hidden="true"></span></div>
+    <button class="burger ghost iconbtn" type="button" aria-expanded="false" aria-controls="mnav" aria-label="Открыть меню"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  </div>
+  <nav class="mnav" id="mnav" hidden aria-label="Меню"><a href="/">Главная</a><a href="/projects">Мои проекты</a><div class="row"></div></nav>
+</header>
+<main id="main" class="page acc">
+  <div class="page-head"><div><h1>Аккаунт</h1><p class="sub" id="since">&nbsp;</p></div></div>
+  <div id="body" aria-busy="true"></div>
+</main>
+<footer class="site-f">
+  <div class="wrap">
+    <span>© <span id="year">2026</span> <span translate="no">furnitech</span></span>
+    <nav aria-label="Ссылки"><a href="/terms">Условия использования</a><a href="/privacy">Политика конфиденциальности</a><a href="/editor">Редактор</a></nav>
+    <span class="sp"></span>
+    <div class="seg theme-sw" role="group" aria-label="Тема оформления"></div>
+  </div>
+</footer>
+<div id="toasts" role="status" aria-live="polite"></div>
+<script src="/shared/icons.js"></script>
+<script src="/shared/common-passwords.js"></script>
+<script src="/shared/validation.js"></script>
+<script src="/shared/session.js"></script>
+<script src="/shared/site.js"></script>
+<script>
+'use strict';
+/* =========================================================================
+   Страница аккаунта (ТЗ этапа 2, раздел 6): имя, почта и её подтверждение,
+   способы входа, сеансы, удаление аккаунта.
+   ========================================================================= */
+(function () {
+  const $ = (s, el = document) => el.querySelector(s);
+  const V = window.Validation;
+  const body = $('#body');
+  const PROVIDERS = { google: 'Google', yandex: 'Яндекс' };
+  let A = null, cfg = null;
+
+  const sect = (title, lead, ...kids) => h('section', { class: 'sect' }, h('h2', {}, title), lead ? h('p', { class: 'lead' }, lead) : null, ...kids);
+  const row = (title, desc, ...v) => h('div', { class: 'arow' }, h('div', { class: 'k' }, h('b', {}, title), desc ? h('span', {}, desc) : null), h('div', { class: 'v' }, ...v));
+  const badge = (kind, text) => h('span', { class: 'badge ' + kind }, text);
+  function lockBtn(btn, sec, label) {
+    const until = Date.now() + sec * 1000;
+    const tick = () => { const left = Math.ceil((until - Date.now()) / 1000); if (left <= 0) { btn.disabled = false; btn.textContent = label; return; } btn.disabled = true; btn.textContent = `Повторить через ${left >= 60 ? Math.ceil(left / 60) + ' мин' : left + ' с'}`; setTimeout(tick, 1000); };
+    tick();
+  }
+
+  /* ---------- профиль ---------- */
+  function profile() {
+    const u = A.user;
+    const inp = h('input', { type: 'text', name: 'name', id: 'accName', autocomplete: 'name', maxlength: '60', autocapitalize: 'words', 'aria-describedby': 'accNameErr' }); inp.value = u.name || '';
+    const err = h('div', { class: 'err', id: 'accNameErr', role: 'alert' });
+    const btn = h('button', { type: 'submit' }, 'Сохранить');
+    const form = h('form', { class: 'nameform', novalidate: true }, h('div', { class: 'fld' }, h('label', { class: 'lbl', for: 'accName' }, 'Имя'), inp, err), btn);
+    inp.addEventListener('input', () => { err.textContent = ''; inp.removeAttribute('aria-invalid'); });
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const bad = V.validateName(inp.value);
+      if (bad) { err.textContent = bad; inp.setAttribute('aria-invalid', 'true'); inp.focus(); return; }
+      if (V.normName(inp.value) === (u.name || '')) { Site.toast('Имя не изменилось'); return; }
+      btn.disabled = true; btn.textContent = 'Сохранение…';
+      try {
+        const r = await Session.api('PATCH', '/account', { name: inp.value });
+        A.user = r.user; Session.user = r.user; inp.value = r.user.name;
+        Site.refreshUser(); Site.toast('Имя сохранено');
+      } catch (x) { err.textContent = (x.details && x.details.fields && x.details.fields.name) || x.message; inp.setAttribute('aria-invalid', 'true'); inp.focus(); }
+      btn.disabled = false; btn.textContent = 'Сохранить';
+    });
+
+    let mailRow;
+    if (u.role === 'admin') mailRow = row(u.email, 'Почта администратора задаётся переменными окружения', badge('muted', 'Администратор'));
+    else if (u.emailVerified) mailRow = row(u.email, 'Почта аккаунта', badge('ok', 'Подтверждена'));
+    else if (!cfg.mail) mailRow = row(u.email, 'Почта аккаунта', badge('muted', 'Не подтверждена'));
+    else {
+      const label = 'Отправить письмо';
+      const again = h('button', { type: 'button', class: 'sm' }, label);
+      const note = h('span', { class: 'desc', role: 'status' });
+      again.addEventListener('click', async () => {
+        again.disabled = true; note.textContent = '';
+        try {
+          const r = await Session.api('POST', '/auth/verify/resend');
+          if (r.already) { await load(); Site.refreshUser(); return; }
+          note.textContent = 'Письмо отправлено'; lockBtn(again, 60, label);
+        } catch (x) { if (x.status === 429) lockBtn(again, x.retryAfter || 60, label); else again.disabled = false; note.textContent = x.status === 429 ? '' : x.message; }
+      });
+      mailRow = row(u.email, 'Перейдите по ссылке из письма. Без подтверждения мы не сможем помочь восстановить доступ.', badge('warn', 'Не подтверждена'), again, note);
+    }
+    return sect('Профиль', null, h('div', { class: 'arows' }, h('div', { class: 'arow' }, form), mailRow));
+  }
+
+  /* ---------- способы входа ---------- */
+  function signin() {
+    const u = A.user; const rows = [];
+    const pwBtn = h('button', { type: 'button', class: 'sm' }, u.hasPassword ? 'Сменить пароль' : 'Задать пароль');
+    pwBtn.addEventListener('click', () => { Session.user = A.user; Site.changePassword(() => load()); });
+    rows.push(row('Пароль', u.hasPassword ? 'Вход по почте и паролю' : 'Пароль не задан — вход только через ' + (A.providers.map((p) => PROVIDERS[p] || p).join(' или ') || 'провайдера'), badge(u.hasPassword ? 'ok' : 'muted', u.hasPassword ? 'Задан' : 'Не задан'), pwBtn));
+    for (const p of Object.keys(PROVIDERS)) {
+      const on = A.providers.includes(p);
+      if (!on && (!cfg.oauth[p] || u.role === 'admin')) continue;
+      rows.push(row(PROVIDERS[p], on ? 'Можно входить без пароля' : `Подключится сам, когда вы войдёте через ${PROVIDERS[p]} с почтой ${u.email}`, badge(on ? 'ok' : 'muted', on ? 'Подключён' : 'Не подключён')));
+    }
+    return sect('Способы входа', null, h('div', { class: 'arows' }, ...rows));
+  }
+
+  /* ---------- сеансы ---------- */
+  function sessions() {
+    const n = A.sessions;
+    const btn = h('button', { type: 'button', class: 'sm' }, 'Выйти на других устройствах');
+    btn.disabled = n <= 1;
+    btn.addEventListener('click', async () => {
+      if (!(await Site.confirm('Выйти на других устройствах?', 'Все сеансы, кроме этого, будут завершены. На других устройствах придётся войти заново.', { ok: 'Выйти на других' }))) return;
+      btn.disabled = true;
+      try { const r = await Session.api('POST', '/account/sessions/revoke'); Site.toast(r.revoked ? 'Завершено: ' + Site.plural(r.revoked, ['сеанс', 'сеанса', 'сеансов']) : 'Других сеансов не было'); await load(); }
+      catch (x) { btn.disabled = false; Site.toast(x.message, true); }
+    });
+    return sect('Сеансы', null, h('div', { class: 'arows' }, row('Активные сеансы: ' + n, n <= 1 ? 'Вы вошли только на этом устройстве' : 'Один из них — этот. Если не узнаёте устройство, завершите остальные и смените пароль.', btn)));
+  }
+
+  /* ---------- удаление аккаунта ---------- */
+  function danger() {
+    const u = A.user;
+    if (u.role !== 'client') return null;
+    const btn = h('button', { type: 'button', class: 'destructive sm' }, 'Удалить аккаунт…');
+    btn.addEventListener('click', () => Site.modal('Удалить аккаунт?', (dlg, close) => {
+      const byPw = u.hasPassword;
+      const inp = byPw ? h('input', { type: 'password', name: 'password', autocomplete: 'current-password', maxlength: '128', required: true })
+        : h('input', { type: 'email', name: 'confirmEmail', autocomplete: 'off', spellcheck: 'false', autocapitalize: 'off', maxlength: '254', required: true, placeholder: u.email });
+      const err = h('div', { class: 'err', role: 'alert' });
+      const ok = h('button', { type: 'submit', class: 'destructive' }, 'Удалить навсегда');
+      const form = h('form', { class: 'del-form', novalidate: true },
+        h('ul', {}, h('li', {}, 'Аккаунт ' + u.email + ' и все данные профиля'), h('li', {}, A.projects ? 'Все проекты в аккаунте: ' + A.projects : 'Проекты, сохранённые в аккаунте'), h('li', {}, 'Вход на всех устройствах')),
+        h('p', { style: 'margin:0' }, 'Восстановить аккаунт и проекты будет нельзя.'),
+        h('label', { class: 'fld' }, h('span', {}, byPw ? 'Пароль — для подтверждения' : 'Введите почту аккаунта — для подтверждения'), inp), err,
+        h('div', { class: 'sdlg-btns' }, h('button', { type: 'button', onclick: close }, 'Отмена'), ok));
+      inp.addEventListener('input', () => { err.textContent = ''; });
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault(); err.textContent = '';
+        if (!inp.value) { err.textContent = byPw ? 'Введите пароль' : 'Введите почту аккаунта'; inp.focus(); return; }
+        if (!byPw && V.normEmail(inp.value) !== u.email) { err.textContent = 'Почта не совпадает с почтой аккаунта'; inp.focus(); return; }
+        ok.disabled = true; ok.textContent = 'Удаление…';
+        try {
+          await Session.api('POST', '/account/delete', byPw ? { password: inp.value } : { confirmEmail: inp.value }, { keep401: true });
+          Site.leaving = true;
+          /* проект аккаунта не должен остаться в браузере; проект, начатый без аккаунта, не трогаем */
+          Session.dropLocalProject();
+          Session.clear();
+          try { sessionStorage.setItem('planner.flash', 'Аккаунт удалён'); } catch {}
+          location.replace('/');
+        } catch (x) {
+          ok.disabled = false; ok.textContent = 'Удалить навсегда';
+          err.textContent = (x.details && x.details.fields && (x.details.fields.password || x.details.fields.confirmEmail)) || x.message;
+          inp.focus(); if (inp.select) inp.select();
+        }
+      });
+      dlg.append(form); setTimeout(() => inp.focus(), 0);
+    }));
+    const s = sect('Удаление аккаунта', null, h('div', { class: 'arows' }, row('Удалить аккаунт и все проекты', 'Действие необратимо: данные удаляются сразу.', btn)));
+    s.classList.add('danger');
+    return s;
+  }
+
+  function render() {
+    body.removeAttribute('aria-busy');
+    $('#since').textContent = A.createdAt ? 'С нами с ' + new Intl.DateTimeFormat('ru', { day: 'numeric', month: 'long', year: 'numeric' }).format(new Date(A.createdAt)) : ' ';
+    body.replaceChildren(...[profile(), signin(), sessions(), danger()].filter(Boolean));
+  }
+  function skeleton() {
+    body.replaceChildren(...[0, 1].map(() => h('div', { class: 'sect skel', 'aria-hidden': 'true' }, h('div', { class: 'line', style: 'width:30%' }), h('div', { class: 'line', style: 'width:80%' }), h('div', { class: 'line', style: 'width:55%' }))));
+  }
+  async function load() {
+    try { A = await Session.api('GET', '/account'); render(); }
+    catch (x) {
+      if (x.status === 401) return; // Site.requireUser уведёт на вход
+      body.removeAttribute('aria-busy'); body.replaceChildren(Site.errorState(x.message, () => { skeleton(); load(); }));
+    }
+  }
+
+  skeleton();
+  (async function init() {
+    const u = await Site.requireUser(() => { body.removeAttribute('aria-busy'); body.replaceChildren(Site.errorState('Нет связи с сервером. Проверьте интернет.')); });
+    if (!u) return;
+    cfg = await Site.config();
+    await load();
+  })();
+})();
+</script>
+</body>
+</html>

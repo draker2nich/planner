@@ -57,8 +57,19 @@
     clear() { const had = !!read() || !!Session.user; write(null); Session.user = null; if (had) emit(null); },
     async logout() {
       try { if (read()) await Session.api('POST', '/auth/logout', undefined, { keep401: true }); } catch {}
+      Session.dropLocalProject();
       Session.clear();
     },
+    /* Явный выход и удаление аккаунта: проект аккаунта не должен оставаться в браузере.
+       Проект, начатый без аккаунта (без привязки), не трогаем. */
+    dropLocalProject() {
+      try {
+        if (!localStorage.getItem('roomEditor.projectId')) return;
+        ['roomEditor.project', 'roomEditor.projectId', 'roomEditor.projectRev', 'roomEditor.dirty', 'roomEditor.projectUser', 'roomEditor.project.backup'].forEach((k) => localStorage.removeItem(k));
+      } catch {}
+    },
+    /* В браузере остались правки проекта, не дошедшие до аккаунта */
+    hasUnsyncedProject() { try { return !!localStorage.getItem('roomEditor.projectId') && localStorage.getItem('roomEditor.dirty') === '1'; } catch { return false; } },
     initial(name) { const s = String(name || '').trim(); return (s ? s[0] : '?').toUpperCase(); },
   };
 

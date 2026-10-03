@@ -100,3 +100,23 @@ a,.btn,summary{touch-action:manipulation}
 .mnav,.site-dlg{overscroll-behavior:contain}
 .shelf:focus-visible{outline:none;box-shadow:0 0 0 3px color-mix(in srgb,var(--ring) 50%,transparent);border-radius:var(--radius-xl)}
 .site-h .acct{font-variant-numeric:tabular-nums}
+
+/* ---------- этап 2: напоминание о почте, страницы аккаунта и проектов ---------- */
+.vbanner{align-items:center;flex-wrap:wrap;margin:0 0 24px}
+.vbanner .vb-text{flex:1 1 260px;min-width:0;color:var(--foreground);overflow-wrap:anywhere}
+.vbanner .vb-act{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.vbanner .vb-note{font-size:13px;color:var(--muted-foreground)}
+.page{width:100%;max-width:1120px;margin:0 auto;padding:40px 16px 80px;min-width:0}
+@media (min-width:600px){.page{padding:48px 24px 96px}}
+@media (min-width:900px){.page{padding:56px 32px 96px}}
+.page-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px;margin:0 0 24px}
+.page-head h1{font-size:28px;line-height:36px;letter-spacing:-.02em;margin:0;font-weight:650}
+@media (min-width:600px){.page-head h1{font-size:32px;line-height:40px}}
+.page-head .sub{margin:4px 0 0;color:var(--muted-foreground);font-size:14px;font-variant-numeric:tabular-nums}
+button.lg-btn,.btn.lg-btn{height:40px;padding:0 16px}
+.empty-state{display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center;padding:56px 16px;border:1px dashed var(--border);border-radius:var(--radius-xl);color:var(--muted-foreground)}
+.empty-state .ic{width:28px;height:28px}
+.empty-state b{color:var(--foreground);font-size:16px}
+.site-dlg button.destructive{background:var(--destructive);color:var(--destructive-foreground);border-color:transparent}
+.site-dlg{max-width:calc(100vw - 32px)}
+.site-dlg p{overflow-wrap:anywhere}

@@ -37,6 +37,8 @@ function makeLimiter(db, secret) {
       } catch (e) { console.error('rate limit:', e.message); return { ok: true, retryAfter: 0 }; }
     },
     async reset(key) { try { await db.run('DELETE FROM rate_limits WHERE key=?', [key]); } catch {} },
+    /* Сбросить все ключи с данным окончанием, например счётчики входа одной почты со всех адресов */
+    async resetSuffix(prefix, suffix) { try { await db.run("DELETE FROM rate_limits WHERE key LIKE ? ESCAPE '\\'", [prefix + '%' + suffix]); } catch (e) { console.error('rate limit:', e.message); } },
   };
 }
 

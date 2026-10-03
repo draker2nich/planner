@@ -19,11 +19,16 @@ function verifyPassword(pw, stored) {
   return exp.length === key.length && crypto.timingSafeEqual(exp, key);
 }
 
-/* terms — { acceptedAt, version } для клиентов; у администратора согласия нет */
-async function createUser(db, { email, password, role, companyId = null, name = '', terms = null, marketing = false }) {
+/* Аккаунт без пароля (создан через Google или Яндекс): значение, которое не пройдёт verifyPassword ни с каким паролем */
+const NO_PASSWORD = '!';
+const hasPassword = (stored) => String(stored || '').startsWith('scrypt$');
+
+/* terms — { acceptedAt, version } для клиентов; у администратора согласия нет.
+   password: null — аккаунт без пароля; verified — почта подтверждена провайдером. */
+async function createUser(db, { email, password, role, companyId = null, name = '', terms = null, marketing = false, verified = false }) {
   const id = crypto.randomUUID();
-  await db.run('INSERT INTO users (id,email,password_hash,role,company_id,name,created_at,terms_accepted_at,terms_version,marketing_opt_in,updated_at) VALUES (?,?,?,?,?,?,?,?,?,?,?)',
-    [id, email.toLowerCase().trim(), hashPassword(password), role, companyId, name, now(), terms ? terms.acceptedAt : null, terms ? terms.version : '', marketing ? 1 : 0, now()]);
+  await db.run('INSERT INTO users (id,email,password_hash,role,company_id,name,created_at,terms_accepted_at,terms_version,marketing_opt_in,updated_at,email_verified_at) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)',
+    [id, email.toLowerCase().trim(), password == null ? NO_PASSWORD : hashPassword(password), role, companyId, name, now(), terms ? terms.acceptedAt : null, terms ? terms.version : '', marketing ? 1 : 0, now(), verified ? now() : null]);
   return id;
 }
 
@@ -32,8 +37,10 @@ async function createSession(db, u) {
   const token = crypto.randomBytes(32).toString('hex');
   const exp = new Date(Date.now() + SESSION_DAYS * 864e5).toISOString();
   await db.run('INSERT INTO sessions (token,user_id,created_at,expires_at) VALUES (?,?,?,?)', [token, u.id, now(), exp]);
-  try { await db.run('UPDATE users SET last_login_at=? WHERE id=?', [now(), u.id]); } catch { /* колонка появится после миграции v4 */ }
-  if (Math.random() < 0.02) { try { await db.run('DELETE FROM sessions WHERE expires_at < ?', [now()]); } catch {} }
+  await db.run('UPDATE users SET last_login_at=? WHERE id=?', [now(), u.id]);
+  if (Math.random() < 0.02) { // попутная очистка: фоновых задач в проекте нет
+    try { await db.run('DELETE FROM sessions WHERE expires_at < ?', [now()]); await db.run('DELETE FROM auth_tokens WHERE expires_at < ?', [new Date(Date.now() - 7 * 864e5).toISOString()]); } catch {}
+  }
   return { token, user: publicUser(u), expiresAt: exp };
 }
 
@@ -53,7 +60,7 @@ async function userFromToken(db, authHeader) {
   if (!row || Number(row.disabled) || row.expires_at < now()) return null;
   return { ...publicUser(row), token: m[1] };
 }
-function publicUser(u) { return { id: u.id, email: u.email, role: u.role, companyId: u.company_id, name: u.name }; }
+function publicUser(u) { return { id: u.id, email: u.email, role: u.role, companyId: u.company_id, name: u.name, emailVerified: !!u.email_verified_at, hasPassword: hasPassword(u.password_hash) }; }
 
 /* Права — одна точка правды для всех ролей. API сейчас открыт только admin,
    но проверки уже учитывают компанию, чтобы кабинет компании подключился без переделки. */
@@ -81,4 +88,4 @@ function canProject(user, action, project) {
   return !!project && project.user_id === user.id;
 }
 
-module.exports = { hashPassword, verifyPassword, createUser, createSession, login, logout, userFromToken, can, canProject, publicUser };
+module.exports = { hashPassword, verifyPassword, hasPassword, NO_PASSWORD, createUser, createSession, login, logout, userFromToken, can, canProject, publicUser };

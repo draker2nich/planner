@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex">
+<meta name="referrer" content="same-origin">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fafafa">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#111113">
 <title>Регистрация — furnitech</title>
@@ -58,6 +59,27 @@ body{background:var(--sidebar)}
 @keyframes spin{to{transform:rotate(360deg)}}
 .closed{text-align:center;display:flex;flex-direction:column;gap:12px;align-items:center}
 .closed .ic{width:28px;height:28px;color:var(--muted-foreground)}
+/* этап 2: вход через провайдера, восстановление пароля, подтверждение почты */
+.forgot a{color:var(--muted-foreground);text-decoration:underline;text-underline-offset:3px}
+.forgot a:hover{color:var(--foreground)}
+.oauth{display:flex;flex-direction:column;gap:8px}
+.oauth .btn{height:40px;width:100%}
+.oauth .btn[aria-busy=true]{pointer-events:none;opacity:.6}
+.oauth .note{font-size:12px;line-height:17px;color:var(--muted-foreground);margin:4px 0 0;text-align:center}
+.oauth .note a{color:inherit;text-underline-offset:3px}
+.or{display:flex;align-items:center;gap:12px;font-size:12px;color:var(--muted-foreground);text-transform:lowercase}
+.or::before,.or::after{content:"";flex:1;height:1px;background:var(--border)}
+.state{display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center}
+.state>.ic{width:32px;height:32px;color:var(--muted-foreground)}
+.state.ok>.ic{color:var(--success)}
+.state.bad>.ic{color:var(--destructive)}
+.state h1:focus{outline:none}
+.state p{margin:0;color:var(--muted-foreground);font-size:14px;line-height:21px;overflow-wrap:anywhere}
+.state p b{color:var(--foreground);font-weight:500}
+.state .btn,.state button{min-width:200px;height:40px}
+.state .note{font-size:13px}
+.state .note:empty{display:none}
+.wait{display:flex;align-items:center;justify-content:center;gap:10px;color:var(--muted-foreground);font-size:14px;padding:24px 0}
 </style>
 </head>
 <body>
@@ -75,14 +97,26 @@ body{background:var(--sidebar)}
 <script>
 'use strict';
 /* =========================================================================
-   Вход и регистрация клиента (ТЗ, разделы 6–7). Режим — по пути: /login или /register.
-   Переключение без перезагрузки (history.replaceState), почта переносится.
+   Вход, регистрация, восстановление пароля, подтверждение почты.
+   Режим — по пути: /login, /register, /forgot, /reset, /verify.
+   ТЗ этапа 1 (разделы 6–7) и ТЗ этапа 2 (разделы 3–5).
+   Токены из ссылок писем и код входа через провайдера убираются из адреса сразу при загрузке.
    ========================================================================= */
 const $ = (s, el = document) => el.querySelector(s);
 const V = window.Validation;
 const params = new URLSearchParams(location.search);
-const NEXT = V.safeNext(params.get('next'));
-const S = { mode: location.pathname.replace(/\/+$/, '') === '/login' ? 'login' : 'register', email: params.get('email') || '', busy: false, cfg: null, lockUntil: 0 };
+const PATH = location.pathname.replace(/\/+$/, '');
+const MODES = { '/login': 'login', '/register': 'register', '/forgot': 'forgot', '/reset': 'reset', '/verify': 'verify' };
+const HAS_NEXT = V.safeNext(params.get('next'), '') !== '';
+const NEXT_RAW = HAS_NEXT ? V.safeNext(params.get('next')) : '';
+/* Куда идти после входа: явный next, иначе новому пользователю — редактор, вернувшемуся — список проектов */
+const nextFor = (fresh) => NEXT_RAW || (fresh ? '/editor' : '/projects');
+const SECRET = { token: params.get('token') || '', oauth: params.get('oauth') || '', oauthError: params.get('oauth_error') || '', provider: params.get('provider') || '' };
+const S = { mode: MODES[PATH] || 'register', email: params.get('email') || '', busy: false, cfg: null, lockUntil: 0, notice: null };
+const urlFor = (mode) => '/' + mode + (NEXT_RAW && (mode === 'login' || mode === 'register') ? '?next=' + encodeURIComponent(NEXT_RAW) : '');
+if (SECRET.token || SECRET.oauth || SECRET.oauthError) history.replaceState(null, '', urlFor(S.mode));
+const PROVIDER_NAMES = { google: 'Google', yandex: 'Яндекс' };
+const netMsg = (x) => (x.status === 0 || (x.status >= 500 && x.code !== 'setup') ? 'Не удалось связаться с сервером. Проверьте интернет и попробуйте ещё раз' : x.message);
 
 /* ---------- поле с подписью и ошибкой ---------- */
 function field(name, label, input, extra = []) {
@@ -127,11 +161,64 @@ function storageWarn() {
 }
 function switchMode(mode, email) {
   S.mode = mode; if (email != null) S.email = email;
-  const q = new URLSearchParams(); if (params.get('next')) q.set('next', NEXT);
-  history.replaceState(null, '', '/' + mode + (q.toString() ? '?' + q : ''));
+  history.replaceState(null, '', urlFor(mode));
   render();
 }
-const nextQ = () => (params.get('next') ? '?next=' + encodeURIComponent(NEXT) : '');
+/* Ссылка между режимами: работает и как обычная ссылка (новая вкладка), и без перезагрузки */
+function modeLink(mode, label, getEmail) {
+  return h('a', { href: urlFor(mode), onclick: (e) => { if (e.metaKey || e.ctrlKey || e.shiftKey || e.button) return; e.preventDefault(); switchMode(mode, getEmail ? getEmail() : undefined); } }, label);
+}
+/* Центрированное состояние: значок, заголовок, текст, действия. Фокус уходит на заголовок — его прочитает скринридер. */
+function stateCard(kind, icon, title, ...body) {
+  const h1 = h('h1', { tabindex: '-1' }, title);
+  $('#card').replaceChildren(h('div', { class: 'state ' + kind }, ic(icon), h1, ...body));
+  h1.focus({ preventScroll: true });
+}
+const waitCard = (text) => $('#card').replaceChildren(h('div', { class: 'wait', role: 'status' }, h('span', { class: 'spin', 'aria-hidden': 'true' }), text));
+function contactLine() {
+  return S.cfg.contactEmail ? h('p', {}, 'Нужна помощь? Напишите нам: ', h('a', { class: 'tlink', href: 'mailto:' + S.cfg.contactEmail }, S.cfg.contactEmail)) : null;
+}
+
+/* ---------- вход через Google и Яндекс (ТЗ этапа 2, раздел 5) ---------- */
+function oauthBlock(mode) {
+  const list = Object.keys(PROVIDER_NAMES).filter((k) => S.cfg.oauth[k]);
+  if (!list.length || (mode === 'register' && !S.cfg.registration)) return null;
+  const q = NEXT_RAW ? '?next=' + encodeURIComponent(NEXT_RAW) : '';
+  const btns = list.map((k) => h('a', { class: 'btn', href: `/api/auth/oauth/${k}/start${q}`, onclick: (e) => { e.currentTarget.setAttribute('aria-busy', 'true'); } },
+    (mode === 'register' ? 'Продолжить через ' : 'Войти через ') + PROVIDER_NAMES[k]));
+  const note = h('p', { class: 'note' }, 'Входя через ' + list.map((k) => PROVIDER_NAMES[k]).join(' или ') + ', вы принимаете ',
+    h('a', { href: '/terms', target: '_blank', rel: 'noopener' }, 'условия использования'), ' и ', h('a', { href: '/privacy', target: '_blank', rel: 'noopener' }, 'политику конфиденциальности'), '.');
+  return [h('div', { class: 'oauth' }, ...btns, note), h('div', { class: 'or', role: 'separator' }, 'или по почте')];
+}
+window.addEventListener('pageshow', () => document.querySelectorAll('.oauth [aria-busy]').forEach((a) => a.removeAttribute('aria-busy')));
+function oauthErrorText(code, provider) {
+  const P = PROVIDER_NAMES[provider] || 'провайдера';
+  return ({
+    disabled: 'Этот способ входа сейчас недоступен. Войдите по почте и паролю.',
+    cancelled: `Вход через ${P} отменён.`,
+    state: 'Сеанс входа устарел. Попробуйте ещё раз.',
+    provider: `Не удалось войти через ${P}. Попробуйте ещё раз или войдите по почте.`,
+    no_email: `${P} не передал адрес почты. Разрешите доступ к почте или зарегистрируйтесь по почте.`,
+    use_password: 'Для этой учётной записи вход возможен только по почте и паролю.',
+    blocked: 'Аккаунт заблокирован.' + (S.cfg.contactEmail ? ' Напишите нам: ' + S.cfg.contactEmail : ''),
+    registration_closed: 'Регистрация временно закрыта. Войти могут только уже зарегистрированные пользователи.',
+    rate_limited: 'Слишком много попыток входа. Попробуйте позже.',
+  })[code] || 'Не удалось войти. Попробуйте ещё раз.';
+}
+async function finishOAuth(code) {
+  document.title = 'Вход — furnitech';
+  waitCard('Входим…'); $('#foot').replaceChildren();
+  try {
+    const r = await Session.api('POST', '/auth/oauth/exchange', { code });
+    Session.set(r.token, r.user);
+    if (r.created) { waitCard('Сохраняем проект…'); await migrateLocalProject(); }
+    flash(r.created ? 'Аккаунт создан' : 'С возвращением' + (r.user.name ? ', ' + r.user.name : ''));
+    location.replace(nextFor(r.created));
+  } catch (x) {
+    S.notice = x.code === 'oauth_code' ? 'Сеанс входа устарел. Попробуйте ещё раз.' : netMsg(x);
+    S.mode = 'login'; render();
+  }
+}
 
 /* ---------- перенос локального проекта в аккаунт (ТЗ 6.5) ---------- */
 async function migrateLocalProject() {
@@ -156,7 +243,7 @@ function renderRegister() {
     card.replaceChildren(h('div', { class: 'closed' }, ic('lock'), h('h1', {}, 'Регистрация временно закрыта'),
       h('p', { class: 'sub' }, 'Пока можно работать в редакторе без аккаунта — проект сохранится в этом браузере.'),
       h('a', { class: 'btn primary', href: '/editor' }, 'Открыть редактор'), h('a', { class: 'tlink', href: '/' }, 'На главную')));
-    $('#foot').replaceChildren('Уже есть аккаунт? ', h('a', { href: '/login' + nextQ(), onclick: (e) => { e.preventDefault(); switchMode('login'); } }, 'Войти'));
+    $('#foot').replaceChildren('Уже есть аккаунт? ', modeLink('login', 'Войти'));
     return;
   }
   const name = field('name', 'Имя', h('input', { type: 'text', name: 'name', autocomplete: 'name', maxlength: '60', autocapitalize: 'words' }));
@@ -220,14 +307,14 @@ function renderRegister() {
       Session.set(r.token, r.user);
       busyBtn(btn, true, 'Сохраняем проект…');
       await migrateLocalProject();
-      flash('Аккаунт создан');
-      location.replace(NEXT);
+      flash(S.cfg.mail ? 'Аккаунт создан. Мы отправили письмо для подтверждения почты' : 'Аккаунт создан');
+      location.replace(nextFor(true));
       return;
     } catch (x) {
       S.busy = false; busyBtn(btn, false, 'Создать аккаунт');
       form.querySelectorAll('input').forEach(i => { i.readOnly = false; });
       if (x.code === 'email_taken') {
-        email.err.replaceChildren('Эта почта уже зарегистрирована. ', h('a', { href: '/login?email=' + encodeURIComponent(V.normEmail(email.input.value)) + (params.get('next') ? '&next=' + encodeURIComponent(NEXT) : ''), onclick: (ev) => { ev.preventDefault(); switchMode('login', V.normEmail(email.input.value)); } }, 'Войти'));
+        email.err.replaceChildren('Эта почта уже зарегистрирована. ', modeLink('login', 'Войти', () => V.normEmail(email.input.value)), ...(S.cfg.mail ? [' или ', modeLink('forgot', 'восстановить пароль', () => V.normEmail(email.input.value))] : []));
         email.input.setAttribute('aria-invalid', 'true'); email.input.focus();
       } else if (x.code === 'validation' && x.details && x.details.fields) {
         const f = x.details.fields;
@@ -239,13 +326,13 @@ function renderRegister() {
       } else if (x.status === 429) {
         gerr.replaceChildren(ic('alert'), h('span', {}, x.message)); lockFor(btn, x.retryAfter || 60, 'Создать аккаунт');
       } else {
-        gerr.replaceChildren(ic('alert'), h('span', {}, x.status === 0 || x.status >= 500 && x.code !== 'setup' ? 'Не удалось связаться с сервером. Проверьте интернет и попробуйте ещё раз' : x.message));
+        gerr.replaceChildren(ic('alert'), h('span', {}, netMsg(x)));
       }
     }
   });
 
-  card.replaceChildren(h('div', {}, h('h1', {}, 'Создайте аккаунт'), h('p', { class: 'sub' }, 'Проект будет храниться в аккаунте и откроется на любом устройстве.')), form);
-  $('#foot').replaceChildren('Уже есть аккаунт? ', h('a', { href: '/login' + nextQ(), onclick: (e) => { e.preventDefault(); switchMode('login', email.input.value); } }, 'Войти'));
+  card.replaceChildren(h('div', {}, h('h1', {}, 'Создайте аккаунт'), h('p', { class: 'sub' }, 'Проект будет храниться в аккаунте и откроется на любом устройстве.')), ...(oauthBlock('register') || []), form);
+  $('#foot').replaceChildren('Уже есть аккаунт? ', modeLink('login', 'Войти', () => email.input.value));
   if (!matchMedia('(pointer:coarse)').matches) (S.email ? pw.inp : name.input).focus();
 }
 
@@ -260,12 +347,16 @@ function renderLogin() {
   pass.el.replaceChild(pw.box, pw.inp); pw.box.prepend(pw.inp);
   const gerr = h('div', { class: 'gerr', role: 'alert' });
   const btn = h('button', { type: 'submit', class: 'primary' }, 'Войти');
-  const forgot = h('div', { class: 'forgot', hidden: true }, h('button', { type: 'button', onclick: () => Site.modal('Восстановление пароля', (dlg, close) => {
-    dlg.append(h('p', {}, 'Восстановление пароля по почте появится скоро. Пока напишите нам — поможем вручную:'),
-      h('p', {}, h('a', { class: 'tlink', href: 'mailto:' + S.cfg.contactEmail }, S.cfg.contactEmail)),
-      h('div', { class: 'sdlg-btns' }, h('button', { type: 'button', class: 'primary', onclick: close }, 'Понятно')));
-  }) }, 'Забыли пароль?'));
-  forgot.hidden = !S.cfg.contactEmail;
+  /* С почтой — страница восстановления; без почты — подсказка, куда написать */
+  const forgot = h('div', { class: 'forgot' }, S.cfg.mail
+    ? modeLink('forgot', 'Забыли пароль?', () => email.input.value)
+    : h('button', { type: 'button', onclick: () => Site.modal('Восстановление пароля', (dlg, close) => {
+      dlg.append(h('p', {}, 'Восстановление пароля по почте сейчас недоступно. Напишите нам — поможем вручную:'),
+        h('p', {}, h('a', { class: 'tlink', href: 'mailto:' + S.cfg.contactEmail }, S.cfg.contactEmail)),
+        h('div', { class: 'sdlg-btns' }, h('button', { type: 'button', class: 'primary', onclick: close }, 'Понятно')));
+    }) }, 'Забыли пароль?'));
+  forgot.hidden = !S.cfg.mail && !S.cfg.contactEmail;
+  if (S.notice) { gerr.replaceChildren(ic('alert'), h('span', {}, S.notice)); S.notice = null; }
   const form = h('form', { novalidate: true }, email.el, pass.el, forgot, storageWarn(), gerr, btn);
   email.input.addEventListener('input', () => { S.email = email.input.value; gerr.textContent = ''; if (email.err.textContent) setErr(email, ''); });
   pw.inp.addEventListener('input', () => { gerr.textContent = ''; if (pass.err.textContent) setErr(pass, ''); });
@@ -283,7 +374,7 @@ function renderLogin() {
       const r = await Session.api('POST', '/auth/login', { email: email.input.value, password: pw.inp.value });
       Session.set(r.token, r.user);
       flash('С возвращением' + (r.user.name ? ', ' + r.user.name : ''));
-      location.replace(NEXT);
+      location.replace(nextFor(false));
       return;
     } catch (x) {
       S.busy = false; busyBtn(btn, false, 'Войти');
@@ -293,25 +384,169 @@ function renderLogin() {
       } else if (x.status === 429) {
         gerr.replaceChildren(ic('alert'), h('span', {}, x.message)); lockFor(btn, x.retryAfter || 60, 'Войти');
       } else {
-        gerr.replaceChildren(ic('alert'), h('span', {}, x.status === 0 || (x.status >= 500 && x.code !== 'setup') ? 'Не удалось связаться с сервером. Проверьте интернет и попробуйте ещё раз' : x.message));
+        gerr.replaceChildren(ic('alert'), h('span', {}, netMsg(x)));
       }
     }
   });
 
-  card.replaceChildren(h('div', {}, h('h1', {}, 'Вход'), h('p', { class: 'sub' }, 'Войдите, чтобы открыть проект из аккаунта.')), form);
+  card.replaceChildren(h('div', {}, h('h1', {}, 'Вход'), h('p', { class: 'sub' }, 'Войдите, чтобы открыть свои проекты.')), ...(oauthBlock('login') || []), form);
   $('#foot').replaceChildren();
-  if (S.cfg.registration) $('#foot').append('Нет аккаунта? ', h('a', { href: '/register' + nextQ(), onclick: (e) => { e.preventDefault(); switchMode('register', email.input.value); } }, 'Зарегистрироваться'));
+  if (S.cfg.registration) $('#foot').append('Нет аккаунта? ', modeLink('register', 'Зарегистрироваться', () => email.input.value));
   if (!matchMedia('(pointer:coarse)').matches) (S.email ? pw.inp : email.input).focus();
 }
 
-function render() { S.lockUntil = 0; S.mode === 'login' ? renderLogin() : renderRegister(); }
+/* ---------- восстановление пароля: запрос ссылки (ТЗ этапа 2, 4.1–4.2) ---------- */
+function renderForgot() {
+  document.title = 'Восстановление пароля — furnitech';
+  const card = $('#card');
+  $('#foot').replaceChildren('Вспомнили пароль? ', modeLink('login', 'Войти', () => S.email));
+  if (!S.cfg.mail) {
+    stateCard('', 'mail', 'Восстановление пароля', h('p', {}, 'Восстановление по почте сейчас недоступно.'), contactLine());
+    return;
+  }
+  const email = field('email', 'Почта', h('input', { type: 'email', name: 'email', autocomplete: 'username', inputmode: 'email', spellcheck: 'false', autocapitalize: 'off', maxlength: '254', placeholder: 'name@example.com' }));
+  email.input.value = S.email;
+  const gerr = h('div', { class: 'gerr', role: 'alert' });
+  const btn = h('button', { type: 'submit', class: 'primary' }, 'Отправить ссылку');
+  const form = h('form', { novalidate: true }, email.el, gerr, btn);
+  email.input.addEventListener('input', () => { S.email = email.input.value; gerr.replaceChildren(); if (email.err.textContent) setErr(email, ''); });
+
+  /* Ответ сервера одинаков для любой почты — экран тоже не говорит, есть ли такой аккаунт */
+  function sent(addr) {
+    const again = h('button', { type: 'button' }, 'Отправить ещё раз');
+    const note = h('p', { class: 'note', role: 'status' });
+    again.addEventListener('click', async () => {
+      if (Date.now() < S.lockUntil) return;
+      busyBtn(again, true, 'Отправляем…'); note.textContent = '';
+      try { await Session.api('POST', '/auth/password/forgot', { email: addr }); note.textContent = 'Отправили ещё раз'; lockFor(again, 60, 'Отправить ещё раз'); }
+      catch (x) { if (x.status === 429) { note.textContent = x.message; lockFor(again, x.retryAfter || 60, 'Отправить ещё раз'); } else { busyBtn(again, false, 'Отправить ещё раз'); note.textContent = netMsg(x); } }
+    });
+    stateCard('ok', 'mail', 'Проверьте почту',
+      h('p', {}, 'Если аккаунт с почтой ', h('b', {}, addr), ' существует, мы отправили на неё ссылку для нового пароля. Ссылка действует 1 час.'),
+      h('p', {}, 'Письма нет? Загляните в «Спам» или отправьте ещё раз.'), again, note);
+    lockFor(again, 60, 'Отправить ещё раз');
+  }
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (S.busy || Date.now() < S.lockUntil) return;
+    gerr.replaceChildren();
+    const em = V.validateEmail(email.input.value); setErr(email, em);
+    if (em) { email.input.focus(); return; }
+    const addr = V.normEmail(email.input.value);
+    S.busy = true; busyBtn(btn, true, 'Отправляем…');
+    try { await Session.api('POST', '/auth/password/forgot', { email: addr }); S.busy = false; sent(addr); }
+    catch (x) {
+      S.busy = false; busyBtn(btn, false, 'Отправить ссылку');
+      if (x.code === 'validation' && x.details && x.details.fields && x.details.fields.email) { setErr(email, x.details.fields.email); email.input.focus(); }
+      else if (x.code === 'mail_disabled') { S.cfg.mail = false; renderForgot(); }
+      else if (x.status === 429) { gerr.replaceChildren(ic('alert'), h('span', {}, x.message)); lockFor(btn, x.retryAfter || 60, 'Отправить ссылку'); }
+      else gerr.replaceChildren(ic('alert'), h('span', {}, netMsg(x)));
+    }
+  });
+  card.replaceChildren(h('div', {}, h('h1', {}, 'Восстановление пароля'), h('p', { class: 'sub' }, 'Укажите почту аккаунта — пришлём ссылку для нового пароля.')), form);
+  if (!matchMedia('(pointer:coarse)').matches) email.input.focus();
+}
+
+/* Ссылка из письма не сработала: устарела, уже использована или обрезана почтовой программой */
+function linkProblem(x, what, action) {
+  if (x.status === 410) stateCard('bad', 'alert', 'Ссылка устарела', h('p', {}, what.expired), action);
+  else if (x.status === 404 || x.code === 'no_token') stateCard('bad', 'alert', 'Ссылка недействительна', h('p', {}, what.invalid), action);
+  else if (x.status === 429) stateCard('bad', 'alert', 'Слишком много попыток', h('p', {}, x.message));
+  else stateCard('bad', 'alert', 'Не получилось', h('p', {}, netMsg(x)), h('button', { type: 'button', onclick: () => render() }, 'Попробовать ещё раз'));
+}
+
+/* ---------- восстановление пароля: новый пароль (ТЗ этапа 2, 4.3) ---------- */
+async function renderReset() {
+  document.title = 'Новый пароль — furnitech';
+  $('#foot').replaceChildren(modeLink('login', 'Вернуться ко входу'));
+  const what = { expired: 'Ссылка для смены пароля действует 1 час. Запросите новую.', invalid: 'Возможно, ссылка уже использована, запрошена более новая или адрес скопирован не целиком.' };
+  const action = h('a', { class: 'btn primary', href: '/forgot' }, 'Запросить новую ссылку');
+  if (!SECRET.token) return linkProblem({ code: 'no_token' }, what, action);
+  waitCard('Проверяем ссылку…');
+  let info;
+  try { info = await Session.api('POST', '/auth/password/reset/check', { token: SECRET.token }, { keep401: true }); }
+  catch (x) { return linkProblem(x, what, action); }
+
+  const pw = pwInput('new-password');
+  const meter = h('div', { class: 'meter', 'aria-live': 'polite' }, h('span', { class: 'bars', 'aria-hidden': 'true' }, h('i'), h('i'), h('i')), h('span', {}, 'Не короче 8 символов'));
+  const pass = field('password', 'Новый пароль', pw.inp, [meter, pw.caps]);
+  pass.el.replaceChild(pw.box, pw.inp); pw.box.prepend(pw.inp);
+  const gerr = h('div', { class: 'gerr', role: 'alert' });
+  const btn = h('button', { type: 'submit', class: 'primary' }, 'Сохранить пароль');
+  const form = h('form', { novalidate: true }, pass.el, storageWarn(), gerr, btn);
+  pw.inp.addEventListener('input', () => {
+    gerr.replaceChildren(); if (pass.err.textContent) setErr(pass, V.validatePassword(pw.inp.value, ''));
+    const v = pw.inp.value;
+    if (!v) { meter.removeAttribute('data-s'); meter.lastChild.textContent = 'Не короче 8 символов'; return; }
+    const s = V.passwordStrength(v); meter.dataset.s = String(s); meter.lastChild.textContent = ['Слабый пароль', 'Нормальный пароль', 'Хороший пароль'][s];
+  });
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (S.busy || Date.now() < S.lockUntil) return;
+    gerr.replaceChildren();
+    const bad = V.validatePassword(pw.inp.value, ''); setErr(pass, bad);
+    if (bad) { pw.inp.focus(); return; }
+    S.busy = true; busyBtn(btn, true, 'Сохраняем…');
+    try {
+      const r = await Session.api('POST', '/auth/password/reset', { token: SECRET.token, password: pw.inp.value }, { keep401: true });
+      SECRET.token = '';
+      Session.set(r.token, r.user);
+      flash('Пароль изменён. На других устройствах выполнен выход');
+      location.replace('/projects');
+    } catch (x) {
+      S.busy = false; busyBtn(btn, false, 'Сохранить пароль');
+      if (x.code === 'validation') { setErr(pass, (x.details && x.details.fields && x.details.fields.password) || x.message); pw.inp.focus(); }
+      else if (x.status === 410 || x.status === 404) linkProblem(x, what, action);
+      else if (x.status === 429) { gerr.replaceChildren(ic('alert'), h('span', {}, x.message)); lockFor(btn, x.retryAfter || 60, 'Сохранить пароль'); }
+      else gerr.replaceChildren(ic('alert'), h('span', {}, netMsg(x)));
+    }
+  });
+  $('#card').replaceChildren(h('div', {}, h('h1', {}, 'Новый пароль'), h('p', { class: 'sub' }, 'Для аккаунта ' + info.email + '. После сохранения на остальных устройствах выполнится выход.')), form);
+  if (!matchMedia('(pointer:coarse)').matches) pw.inp.focus();
+}
+
+/* ---------- подтверждение почты по ссылке из письма (ТЗ этапа 2, 3.2) ---------- */
+async function renderVerify() {
+  document.title = 'Подтверждение почты — furnitech';
+  $('#foot').replaceChildren();
+  let me = null;
+  if (Session.token) { try { me = await Session.me(); } catch { /* нет сети — считаем гостем */ } }
+  const go = me ? h('a', { class: 'btn primary', href: '/projects' }, 'К моим проектам') : h('a', { class: 'btn primary', href: '/login' }, 'Войти');
+  const what = { expired: 'Ссылка из письма действует 48 часов.', invalid: 'Возможно, запрошено более новое письмо или адрес скопирован не целиком.' };
+  let action;
+  if (me && !me.emailVerified && S.cfg.mail) {
+    const note = h('p', { class: 'note', role: 'status' });
+    const again = h('button', { type: 'button', class: 'primary' }, 'Отправить письмо ещё раз');
+    again.addEventListener('click', async () => {
+      busyBtn(again, true, 'Отправляем…'); note.textContent = '';
+      try { const r = await Session.api('POST', '/auth/verify/resend'); if (r.already) { location.replace('/account'); return; } busyBtn(again, false, 'Отправить письмо ещё раз'); note.textContent = 'Письмо отправлено на ' + me.email; lockFor(again, 60, 'Отправить письмо ещё раз'); }
+      catch (x) { busyBtn(again, false, 'Отправить письмо ещё раз'); if (x.status === 429) lockFor(again, x.retryAfter || 60, 'Отправить письмо ещё раз'); note.textContent = netMsg(x); }
+    });
+    action = [again, note];
+  } else if (me) action = [go];
+  else action = [h('p', {}, 'Войдите в аккаунт — на странице «Аккаунт» можно запросить новое письмо.'), h('a', { class: 'btn primary', href: '/login?next=%2Faccount' }, 'Войти')];
+  if (!SECRET.token) return linkProblem({ code: 'no_token' }, what, action);
+  waitCard('Подтверждаем почту…');
+  try {
+    const r = await Session.api('POST', '/auth/verify', { token: SECRET.token }, { keep401: true });
+    SECRET.token = '';
+    stateCard('ok', 'check', r.already ? 'Почта уже подтверждена' : 'Почта подтверждена', h('p', {}, 'Адрес ', h('b', {}, r.email), r.already ? ' был подтверждён раньше.' : ' подтверждён. Теперь мы сможем помочь восстановить доступ к аккаунту.'), go);
+  } catch (x) { linkProblem(x, what, action); }
+}
+
+function render() {
+  S.lockUntil = 0; S.busy = false;
+  ({ login: renderLogin, register: renderRegister, forgot: renderForgot, reset: renderReset, verify: renderVerify })[S.mode]();
+}
 
 (async function init() {
-  // уже вошли — сразу туда, куда шли
-  if (Session.token) {
-    try { const u = await Session.me(); if (u) { location.replace(NEXT); return; } } catch { /* нет сети — показываем форму */ }
-  }
   S.cfg = await Site.config();
+  if (SECRET.oauth) return finishOAuth(SECRET.oauth);
+  if (SECRET.oauthError) { S.notice = oauthErrorText(SECRET.oauthError, SECRET.provider); S.mode = 'login'; }
+  // уже вошли — сразу туда, куда шли (ссылки из писем работают и для вошедшего пользователя)
+  else if (Session.token && (S.mode === 'login' || S.mode === 'register')) {
+    try { const u = await Session.me(); if (u) { location.replace(nextFor(false)); return; } } catch { /* нет сети — показываем форму */ }
+  }
   render();
 })();
 </script>

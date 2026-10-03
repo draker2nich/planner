@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#fafafa">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#111113">
+<title>Мои проекты — furnitech</title>
+<script>try{var t=localStorage.getItem('planner.theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="/shared/ui.css">
+<link rel="stylesheet" href="/shared/site.css">
+<style>
+.ptools{display:flex;gap:12px;align-items:center;margin:0 0 20px}
+.psearch{position:relative;flex:1;max-width:360px}
+.psearch .ic{position:absolute;left:12px;top:50%;width:16px;height:16px;margin-top:-8px;color:var(--muted-foreground);pointer-events:none}
+.psearch input{width:100%;height:40px;padding-left:36px}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;list-style:none;margin:0;padding:0}
+.pcard{position:relative;display:flex;flex-direction:column;min-width:0;border:1px solid var(--border);border-radius:var(--radius-xl);background:var(--card);color:var(--card-foreground);box-shadow:var(--shadow-xs);transition:border-color .15s,box-shadow .15s}
+.pcard:hover{border-color:color-mix(in srgb,var(--foreground) 25%,var(--border));box-shadow:var(--shadow-sm)}
+.pcard:focus-within{border-color:var(--ring)}
+.pcard .thumb{aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;background:var(--muted);color:var(--muted-foreground);border-radius:calc(var(--radius-xl) - 1px) calc(var(--radius-xl) - 1px) 0 0;border-bottom:1px solid var(--border);overflow:hidden}
+.pcard .thumb svg.plan{width:100%;height:100%;padding:20px;color:var(--foreground)}
+.pcard .thumb svg.plan line{stroke:currentColor;stroke-width:2.5;stroke-linecap:round;vector-effect:non-scaling-stroke}
+.pcard .thumb .blank{display:flex;flex-direction:column;align-items:center;gap:6px;font-size:13px}
+.pcard .thumb .blank .ic{width:24px;height:24px}
+.pcard .thumb{position:relative}
+.pcard .thumb .here{position:absolute;left:10px;top:10px;background:var(--card)}
+.pcard .body{display:flex;align-items:flex-start;gap:4px;padding:12px 8px 12px 16px}
+.pcard .txt{flex:1;min-width:0}
+.pcard .name{display:block;font-weight:600;font-size:15px;line-height:22px;color:var(--foreground);text-decoration:none;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;border-radius:var(--radius-sm)}
+.pcard .name::after{content:"";position:absolute;inset:0;border-radius:var(--radius-xl)}
+.pcard .name:focus-visible{outline:none}
+.pcard .name:focus-visible::after{box-shadow:0 0 0 3px color-mix(in srgb,var(--ring) 50%,transparent)}
+.pcard .meta{margin:2px 0 0;font-size:13px;line-height:18px;color:var(--muted-foreground);font-variant-numeric:tabular-nums;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pcard .more{position:relative;z-index:2;flex:none}
+.pcard .more>button{width:32px;height:32px;padding:0;border:none;background:transparent;box-shadow:none;color:var(--muted-foreground)}
+.pcard .more>button:hover,.pcard .more>button[aria-expanded=true]{background:var(--accent);color:var(--foreground)}
+.pcard .pmenu{position:absolute;right:0;top:36px;z-index:20;min-width:200px}
+.pcard.busy{opacity:.6;pointer-events:none}
+.pcard.skel{pointer-events:none}
+.pcard.skel .line{height:12px;border-radius:6px;background:var(--muted);margin:5px 0}
+.local-note{align-items:center;flex-wrap:wrap;margin:0 0 24px}
+.local-note .ln-text{flex:1 1 260px;min-width:0;overflow-wrap:anywhere}
+.local-note .ln-act{display:flex;gap:8px;flex-wrap:wrap}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+@media (prefers-reduced-motion:no-preference){.pcard.skel .thumb,.pcard.skel .line{animation:pulse 1.4s ease-in-out infinite}}
+@keyframes pulse{50%{opacity:.5}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Перейти к содержимому</a>
+<header class="site-h">
+  <div class="wrap">
+    <a class="brand" href="/" translate="no"><span class="logo"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19V9a3 3 0 0 1 3-3h4.5M9 12.5h5.5"/></svg></span><span class="wm" translate="no">furni<span>tech</span></span></a>
+    <span class="sp"></span>
+    <div class="acct"><span class="skel" aria-hidden="true"></span></div>
+    <button class="burger ghost iconbtn" type="button" aria-expanded="false" aria-controls="mnav" aria-label="Открыть меню"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  </div>
+  <nav class="mnav" id="mnav" hidden aria-label="Меню"><a href="/">Главная</a><a href="/projects" aria-current="page">Мои проекты</a><div class="row"></div></nav>
+</header>
+<main id="main" class="page">
+  <div id="banner"></div>
+  <div class="page-head">
+    <div>
+      <h1>Мои проекты</h1>
+      <p class="sub" id="count" aria-live="polite">&nbsp;</p>
+    </div>
+    <button type="button" class="primary lg-btn" id="newBtn" disabled><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>Новый проект</button>
+  </div>
+  <div id="local"></div>
+  <div class="ptools" id="tools" hidden>
+    <label class="psearch"><span class="sr">Поиск по названию</span><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg>
+      <input type="search" id="q" name="q" autocomplete="off" spellcheck="false" maxlength="80" placeholder="Поиск по названию…"></label>
+  </div>
+  <div id="list" aria-busy="true"></div>
+</main>
+<footer class="site-f">
+  <div class="wrap">
+    <span>© <span id="year">2026</span> <span translate="no">furnitech</span></span>
+    <nav aria-label="Ссылки"><a href="/terms">Условия использования</a><a href="/privacy">Политика конфиденциальности</a><a href="/editor">Редактор</a></nav>
+    <span class="sp"></span>
+    <div class="seg theme-sw" role="group" aria-label="Тема оформления"></div>
+  </div>
+</footer>
+<div id="toasts" role="status" aria-live="polite"></div>
+<script src="/shared/icons.js"></script>
+<script src="/shared/validation.js"></script>
+<script src="/shared/session.js"></script>
+<script src="/shared/site.js"></script>
+<script>
+'use strict';
+/* =========================================================================
+   «Мои проекты» (ТЗ этапа 2, раздел 7): список, создание, переименование, копия, удаление.
+   Карточка — ссылка на /editor?project=<id>; редактор сам переключит проект.
+   ========================================================================= */
+(function () {
+  const $ = (s, el = document) => el.querySelector(s);
+  const LS = { project: 'roomEditor.project', id: 'roomEditor.projectId', rev: 'roomEditor.projectRev', dirty: 'roomEditor.dirty', owner: 'roomEditor.projectUser' };
+  const lsGet = (k) => { try { return localStorage.getItem(k); } catch { return null; } };
+  const lsSet = (k, v) => { try { v == null ? localStorage.removeItem(k) : localStorage.setItem(k, String(v)); } catch {} };
+  const S = { projects: [], limit: 50, q: new URLSearchParams(location.search).get('q') || '', loaded: false };
+  const list = $('#list'), countEl = $('#count'), newBtn = $('#newBtn'), tools = $('#tools'), qInp = $('#q');
+  const SVG = 'http://www.w3.org/2000/svg';
+
+  /* ---------- миниатюра плана: отрезки стен из preview ---------- */
+  function thumb(p) {
+    const walls = p.preview && Array.isArray(p.preview.walls) ? p.preview.walls.filter((w) => Array.isArray(w) && w.length === 4 && w.every(Number.isFinite)) : [];
+    const box = h('div', { class: 'thumb' });
+    if (!walls.length) { box.append(h('div', { class: 'blank' }, ic('plan'), 'Пустой проект')); return box; }
+    let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
+    for (const [ax, ay, bx, by] of walls) { x0 = Math.min(x0, ax, bx); y0 = Math.min(y0, ay, by); x1 = Math.max(x1, ax, bx); y1 = Math.max(y1, ay, by); }
+    const w = Math.max(x1 - x0, 1), hh = Math.max(y1 - y0, 1), pad = Math.max(w, hh) * 0.04;
+    const svg = document.createElementNS(SVG, 'svg');
+    svg.setAttribute('class', 'plan'); svg.setAttribute('aria-hidden', 'true'); svg.setAttribute('viewBox', `${x0 - pad} ${y0 - pad} ${w + pad * 2} ${hh + pad * 2}`); svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+    for (const [ax, ay, bx, by] of walls) {
+      const l = document.createElementNS(SVG, 'line');
+      l.setAttribute('x1', ax); l.setAttribute('y1', ay); l.setAttribute('x2', bx); l.setAttribute('y2', by); svg.append(l);
+    }
+    box.append(svg); return box;
+  }
+  function metaText(p) {
+    const c = (p.preview && p.preview.counts) || {};
+    const w = Site.when(p.updatedAt); const parts = [w.charAt(0).toUpperCase() + w.slice(1)];
+    if (c.walls) parts.push(Site.plural(c.walls, ['стена', 'стены', 'стен']));
+    if (c.furniture) parts.push(Site.plural(c.furniture, ['предмет', 'предмета', 'предметов']));
+    return parts.join(' · ');
+  }
+
+  /* ---------- меню карточки ---------- */
+  let openMenu = null;
+  function closeMenu(focusBtn) {
+    if (!openMenu) return;
+    const { menu, btn } = openMenu; openMenu = null;
+    menu.remove(); btn.setAttribute('aria-expanded', 'false'); if (focusBtn) btn.focus();
+  }
+  document.addEventListener('pointerdown', (e) => { if (openMenu && !openMenu.menu.contains(e.target) && !openMenu.btn.contains(e.target)) closeMenu(false); });
+  function cardMenu(p, btn) {
+    if (openMenu && openMenu.btn === btn) return closeMenu(true);
+    closeMenu(false);
+    const menu = h('div', { class: 'dmenu pmenu', role: 'menu', 'aria-label': 'Действия с проектом «' + p.name + '»' });
+    const it = (icon, label, fn, cls) => h('button', { type: 'button', class: 'mi' + (cls ? ' ' + cls : ''), role: 'menuitem', onclick: () => { closeMenu(true); fn(p, btn); } }, ic(icon), label); // фокус возвращается на кнопку «…»: после закрытия диалога браузер вернёт его туда же
+    menu.append(it('edit', 'Переименовать…', rename), it('copy', 'Сделать копию', copy), h('hr'), it('trash', 'Удалить…', remove, 'danger'));
+    menu.addEventListener('keydown', (e) => {
+      const its = [...menu.querySelectorAll('.mi')]; const i = its.indexOf(document.activeElement);
+      if (e.key === 'Escape') { e.preventDefault(); closeMenu(true); }
+      else if (e.key === 'ArrowDown') { e.preventDefault(); (its[i + 1] || its[0]).focus(); }
+      else if (e.key === 'ArrowUp') { e.preventDefault(); (its[i - 1] || its[its.length - 1]).focus(); }
+      else if (e.key === 'Tab') closeMenu(false);
+    });
+    btn.after(menu); btn.setAttribute('aria-expanded', 'true'); openMenu = { menu, btn };
+    menu.querySelector('.mi').focus();
+  }
+
+  /* ---------- отрисовка ---------- */
+  function card(p) {
+    const more = h('button', { type: 'button', 'aria-haspopup': 'menu', 'aria-expanded': 'false', 'aria-label': 'Действия с проектом «' + p.name + '»' }, ic('dots'));
+    more.addEventListener('click', () => cardMenu(p, more));
+    const th = thumb(p);
+    if (lsGet(LS.id) === p.id) th.append(h('span', { class: 'badge outline here' }, 'Открыт в этом браузере'));
+    return h('li', { class: 'pcard', 'data-id': p.id }, th,
+      h('div', { class: 'body' },
+        h('div', { class: 'txt' }, h('a', { class: 'name', href: '/editor?project=' + encodeURIComponent(p.id), title: p.name }, p.name),
+          h('p', { class: 'meta', title: 'Изменён ' + Site.when(p.updatedAt) }, h('time', { datetime: p.updatedAt }, metaText(p)))),
+        h('div', { class: 'more' }, more)));
+  }
+  function skeleton() {
+    list.setAttribute('aria-busy', 'true');
+    list.replaceChildren(h('ul', { class: 'pgrid', 'aria-hidden': 'true' }, ...[0, 1, 2].map(() => h('li', { class: 'pcard skel' }, h('div', { class: 'thumb' }),
+      h('div', { class: 'body' }, h('div', { class: 'txt' }, h('div', { class: 'line', style: 'width:60%' }), h('div', { class: 'line', style: 'width:85%' })))))));
+  }
+  function setQuery(q) {
+    S.q = q;
+    const u = new URL(location.href); if (q) u.searchParams.set('q', q); else u.searchParams.delete('q');
+    history.replaceState(null, '', u.pathname + u.search);
+  }
+  function render() {
+    list.removeAttribute('aria-busy'); closeMenu(false);
+    const n = S.projects.length;
+    countEl.textContent = n ? `${n} из ${S.limit}` : 'Пока нет ни одного проекта';
+    newBtn.disabled = false;
+    tools.hidden = n <= 6 && !S.q;
+    if (!n) {
+      list.replaceChildren(h('div', { class: 'empty-state' }, ic('folder'), h('b', {}, 'Проектов пока нет'),
+        h('span', {}, 'Нарисуйте план комнаты, расставьте мебель — проект сохранится в аккаунте и откроется на любом устройстве.'),
+        h('button', { type: 'button', class: 'primary', onclick: create }, ic('plus'), 'Создать первый проект')));
+      return;
+    }
+    const q = S.q.trim().toLowerCase();
+    const shown = q ? S.projects.filter((p) => p.name.toLowerCase().includes(q)) : S.projects;
+    if (!shown.length) {
+      list.replaceChildren(h('div', { class: 'empty-state' }, ic('search'), h('b', {}, 'Ничего не найдено'), h('span', {}, `Нет проектов с «${S.q.trim()}» в названии.`),
+        h('button', { type: 'button', onclick: () => { qInp.value = ''; setQuery(''); render(); qInp.focus(); } }, 'Сбросить поиск')));
+      return;
+    }
+    list.replaceChildren(h('ul', { class: 'pgrid' }, ...shown.map(card)));
+  }
+  qInp.value = S.q;
+  qInp.addEventListener('input', () => { setQuery(qInp.value); render(); });
+
+  async function load() {
+    skeleton();
+    try {
+      const r = await Session.api('GET', '/projects');
+      S.projects = r.projects; S.limit = r.limit || 50; S.loaded = true;
+      render(); localNote();
+    } catch (x) {
+      if (x.status === 401) return; // сессия закончилась — Site.requireUser уведёт на вход
+      list.removeAttribute('aria-busy'); countEl.textContent = ' ';
+      list.replaceChildren(Site.errorState(x.message, load));
+    }
+  }
+
+  /* ---------- локальная копия редактора ---------- */
+  function localProject() { try { const s = lsGet(LS.project); const p = s ? JSON.parse(s) : null; return p && typeof p === 'object' ? p : null; } catch { return null; } }
+  const dropLocal = () => { lsSet(LS.project, null); lsSet(LS.id, null); lsSet(LS.rev, null); lsSet(LS.dirty, null); lsSet(LS.owner, null); };
+  /* Проект, начатый без аккаунта, в аккаунт сам не попадает — предлагаем сохранить (иначе его заменит первый открытый проект) */
+  function localNote() {
+    const box = $('#local'); box.replaceChildren();
+    const p = localProject();
+    if (!p || lsGet(LS.id) || !Array.isArray(p.walls) || !p.walls.length) return;
+    const save = h('button', { type: 'button', class: 'primary sm' }, 'Сохранить в аккаунт');
+    save.addEventListener('click', async () => {
+      save.disabled = true;
+      try {
+        const r = await Session.api('POST', '/projects', { name: p.name || 'Новый проект', data: p });
+        lsSet(LS.id, r.id); lsSet(LS.rev, r.rev); lsSet(LS.dirty, null); lsSet(LS.owner, Site.user.id);
+        S.projects.unshift(r); render(); box.replaceChildren(); Site.toast('Проект сохранён в аккаунт');
+      } catch (x) { save.disabled = false; Site.toast(x.message, true); }
+    });
+    box.append(h('div', { class: 'callout info local-note', role: 'note' }, ic('info'),
+      h('div', { class: 'ln-text' }, h('b', {}, `В этом браузере есть проект «${p.name || 'Новый проект'}»`), ' — его нет в аккаунте. Сохраните, чтобы он не потерялся.'),
+      h('div', { class: 'ln-act' }, save, h('a', { class: 'btn', style: 'height:32px;font-size:13px', href: '/editor' }, 'Открыть'))));
+  }
+
+  /* ---------- действия ---------- */
+  function fail(x) { Site.toast(x.status === 0 ? x.message : (x.message || 'Не удалось выполнить действие'), true); }
+  function create() {
+    if (S.projects.length >= S.limit) { Site.modal('Достигнут предел', (dlg, close) => dlg.append(h('p', {}, `В аккаунте можно хранить не больше ${S.limit} проектов. Удалите ненужные, чтобы создать новый.`), h('div', { class: 'sdlg-btns' }, h('button', { type: 'button', class: 'primary', onclick: close }, 'Понятно')))); return; }
+    Site.prompt('Новый проект', { label: 'Название', value: 'Новый проект', ok: 'Создать', submit: async (name) => {
+      if (!name.trim()) return 'Введите название';
+      const r = await Session.api('POST', '/projects', { name });
+      location.href = '/editor?project=' + encodeURIComponent(r.id);
+      return '';
+    } });
+  }
+  newBtn.addEventListener('click', create);
+
+  function rename(p, btn) {
+    Site.prompt('Переименовать проект', { label: 'Название', value: p.name, ok: 'Сохранить', submit: async (name) => {
+      if (!name.trim()) return 'Введите название';
+      if (name.replace(/\s+/g, ' ').trim() === p.name) return '';
+      const r = await Session.api('PATCH', '/projects/' + p.id, { name });
+      /* локальная копия этого проекта: если она была основана на версии до переименования — переносим имя и версию,
+         чтобы редактор не увидел «изменения с другого устройства» */
+      if (lsGet(LS.id) === p.id && Number(lsGet(LS.rev)) === p.rev) {
+        const lp = localProject(); if (lp) { lp.name = r.name; lsSet(LS.project, JSON.stringify(lp)); }
+        lsSet(LS.rev, r.rev);
+      }
+      Object.assign(p, r);
+      S.projects.sort((a, b) => (a.updatedAt < b.updatedAt ? 1 : -1));
+      render(); Site.toast('Проект переименован');
+      const again = list.querySelector(`[data-id="${CSS.escape(p.id)}"] .more button`); if (again) again.focus();
+      return '';
+    } });
+  }
+  async function copy(p, btn) {
+    const li = btn.closest('.pcard'); li.classList.add('busy');
+    try {
+      const r = await Session.api('POST', '/projects/' + p.id + '/copy');
+      S.projects.unshift(r); render(); Site.toast('Копия создана');
+      const a = list.querySelector(`[data-id="${CSS.escape(r.id)}"] .name`); if (a) a.focus();
+    } catch (x) { li.classList.remove('busy'); fail(x); }
+  }
+  async function remove(p, btn) {
+    const ok = await Site.confirm('Удалить проект?', `Проект «${p.name}» будет удалён из аккаунта на всех устройствах. Отменить удаление нельзя.`, { ok: 'Удалить', danger: true });
+    if (!ok) { btn.focus(); return; }
+    const li = btn.closest('.pcard'); if (li) li.classList.add('busy');
+    try {
+      await Session.api('DELETE', '/projects/' + p.id);
+      if (lsGet(LS.id) === p.id) dropLocal(); // удалённый проект не должен «воскреснуть» из браузера
+      const i = S.projects.indexOf(p); S.projects.splice(i, 1); render(); Site.toast('Проект удалён');
+      const next = list.querySelectorAll('.pcard .name')[Math.min(i, S.projects.length - 1)]; (next || newBtn).focus();
+    } catch (x) {
+      if (x.status === 404) { S.projects.splice(S.projects.indexOf(p), 1); render(); return; } // уже удалён в другой вкладке
+      if (li) li.classList.remove('busy'); fail(x);
+    }
+  }
+
+  /* ---------- запуск ---------- */
+  skeleton();
+  (async function init() {
+    const u = await Site.requireUser(() => { list.removeAttribute('aria-busy'); list.replaceChildren(Site.errorState('Нет связи с сервером. Проверьте интернет.')); });
+    if (!u) return;
+    Site.verifyBanner().then((b) => { if (b) $('#banner').replaceChildren(b); });
+    await load();
+    /* вернулись на вкладку — список мог измениться на другом устройстве */
+    let last = Date.now();
+    document.addEventListener('visibilitychange', () => { if (!document.hidden && Date.now() - last > 60000 && !document.querySelector('dialog[open]') && !openMenu) { last = Date.now(); Session.api('GET', '/projects').then((r) => { S.projects = r.projects; render(); localNote(); }).catch(() => {}); } });
+  })();
+})();
+</script>
+</body>
+</html>

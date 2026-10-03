@@ -9,7 +9,7 @@
   const COMMON = (typeof module !== 'undefined' && module.exports) ? require('./common-passwords.js') : (root.COMMON_PASSWORDS || []);
   const COMMON_SET = new Set(COMMON);
 
-  const TERMS_VERSION = '2026-10-01';
+  const TERMS_VERSION = '2026-10-02';
   const LIMITS = { nameMax: 60, emailMax: 254, emailLocalMax: 64, pwMin: 8, pwMax: 128, projectNameMax: 80 };
   const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
@@ -88,7 +88,7 @@
     if (/[\u0000-\u001f\\]/.test(s)) return fallback;
     const firstSeg = s.split(/[/?#]/)[1] || '';
     if (firstSeg.includes(':')) return fallback;
-    if (/^\/(login|register)(\/|\?|#|$)/.test(s)) return fallback;
+    if (/^\/(login|register|forgot|reset|verify|api)(\/|\?|#|$)/.test(s)) return fallback;
     return s;
   }
 

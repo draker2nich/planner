@@ -13,6 +13,10 @@ const T = require('../../public/shared/catalog-types.js');
 const V = require('../../public/shared/validation.js');
 const { makeLimiter, clientIp } = require('./ratelimit.js');
 const { makeProjects, PROJECT_MAX_BYTES } = require('./projects.js');
+const { makeMailer, baseUrl, maskEmail } = require('./mail.js');
+const { makeTokens } = require('./tokens.js');
+const { makeOAuth, OAuthError, PROVIDERS } = require('./oauth.js');
+const { makeUsers } = require('./users.js');
 
 /* ---------- сборка окружения ---------- */
 async function fromEnv(env = process.env, { dataDir } = {}) {
@@ -83,8 +87,15 @@ async function authSecret(ctx) {
 async function bootstrap(ctx) {
   const { db, env } = ctx;
   await migrate(db);
-  ctx.limiter = makeLimiter(db, await authSecret(ctx));
+  const secret = await authSecret(ctx);
+  ctx.limiter = makeLimiter(db, secret);
   ctx.projects = makeProjects(db);
+  ctx.users = makeUsers(db);
+  ctx.tokens = makeTokens(db);
+  ctx.mailer = makeMailer(ctx);
+  ctx.baseUrl = baseUrl(ctx);
+  ctx.audit = (userId, action, entity, entityId, data = {}) => db.run('INSERT INTO audit_log (user_id, action, entity, entity_id, data, at) VALUES (?,?,?,?,?,?)', [userId, action, entity, entityId, JSON.stringify(data), new Date().toISOString()]);
+  ctx.oauth = makeOAuth(ctx, { baseUrl: ctx.baseUrl, secret, audit: ctx.audit, registrationOpen: () => registrationOpen(ctx) });
   await syncEnvAdmin(ctx);
   await ctx.catalog.backfillSearch();
   const products = Number((await db.get('SELECT CAST(COUNT(*) AS INTEGER) AS c FROM products')).c);
@@ -92,6 +103,11 @@ async function bootstrap(ctx) {
 }
 
 const registrationOpen = (ctx) => String(ctx.env.REGISTRATION_ENABLED ?? '1').trim() !== '0';
+/* Жёсткий режим: без подтверждённой почты проекты в аккаунт не сохраняются. При выключенной почте игнорируется. */
+const requireVerified = (ctx) => String(ctx.env.REQUIRE_VERIFIED_EMAIL || '').trim() === '1' && ctx.mailer.enabled;
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+/* Ответ с произвольным статусом и заголовками (перенаправления входа через провайдера) */
+class Reply { constructor(status, headers = {}, body = null) { this.status = status; this.headers = headers; this.body = body; } }
 const contactEmail = (ctx) => { const s = String(ctx.env.CONTACT_EMAIL || '').trim(); return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s) ? s : null; };
 
 /* makeCtx — функция, возвращающая Promise контекста (вызывается лениво, при первом запросе) */
@@ -127,7 +143,8 @@ function createApp(makeCtx) {
   // служебное
   route('GET', '/api/health', async (ctx) => ({ ok: true, db: ctx.db.dialect, storage: ctx.storage.kind, setup: ctx.setupProblem || null }));
   route('GET', '/api/config', async (ctx) => ({ uploads: ctx.storage.kind === 'blob' ? 'blob' : 'direct', blobAuth: ctx.storage.auth || null, maxModelMb: 50, maxImageMb: 15,
-    registration: registrationOpen(ctx), contactEmail: contactEmail(ctx), termsVersion: V.TERMS_VERSION }));
+    registration: registrationOpen(ctx), contactEmail: contactEmail(ctx), termsVersion: V.TERMS_VERSION,
+    mail: ctx.mailer.enabled, oauth: ctx.oauth.list(), requireVerifiedEmail: requireVerified(ctx) }));
 
   // авторизация
   const tooMany = (retryAfter) => {
@@ -150,15 +167,138 @@ function createApp(makeCtx) {
   });
   route('POST', '/api/auth/logout', async (ctx, req) => { const u = await requireUser(ctx, req); await auth.logout(ctx.db, u.token); return { ok: true }; });
   route('GET', '/api/auth/me', async (ctx, req) => ({ user: await requireUser(ctx, req) }));
+  /* Смена пароля; у аккаунта без пароля (вход через провайдера) текущий пароль не требуется */
   route('POST', '/api/auth/password', async (ctx, req) => {
-    const u = await requireUser(ctx, req); const b = await readJson(req);
+    const u = await requireUser(ctx, req); const b = await readJson(req, 16 * 1024);
     const row = await ctx.db.get('SELECT password_hash FROM users WHERE id=?', [u.id]);
-    if (!auth.verifyPassword(String(b.current || ''), row.password_hash)) throw new ApiError(422, 'bad_credentials', 'Текущий пароль неверен');
-    if (String(b.next || '').length < 8) throw new ApiError(422, 'validation', 'Новый пароль — от 8 символов');
-    await ctx.db.run('UPDATE users SET password_hash=? WHERE id=?', [auth.hashPassword(b.next), u.id]);
+    if (auth.hasPassword(row.password_hash)) {
+      const cur = String(b.current || '');
+      if (!cur || cur.length > 1024 || !auth.verifyPassword(cur, row.password_hash)) throw new ApiError(422, 'bad_credentials', 'Текущий пароль неверен', { fields: { current: 'Текущий пароль неверен' } });
+    }
+    const err = V.validatePassword(b.next, u.email);
+    if (err) throw new ApiError(422, 'validation', err, { fields: { next: err } });
+    await ctx.db.run('UPDATE users SET password_hash=?, updated_at=? WHERE id=?', [auth.hashPassword(V.normPassword(b.next)), new Date().toISOString(), u.id]);
     await ctx.db.run('DELETE FROM sessions WHERE user_id=? AND token<>?', [u.id, u.token]);
+    await ctx.tokens.dropUnused(u.id, ['reset']);
+    await ctx.mailer.sendQuiet('password_changed', u, {});
     return { ok: true };
   });
+
+  /* ---------- подтверждение почты (ТЗ этапа 2, раздел 3) ---------- */
+  const sendVerify = async (ctx, u, quiet) => {
+    const raw = await ctx.tokens.create(u.id, 'verify');
+    const link = `${ctx.baseUrl}/verify?token=${raw}`;
+    return quiet ? ctx.mailer.sendQuiet('verify', u, { link }) : ctx.mailer.send('verify', u, { link });
+  };
+  const tokenError = (state) => state === 'expired' ? new ApiError(410, 'token_expired', 'Ссылка устарела') : new ApiError(404, 'token_invalid', 'Ссылка недействительна');
+  const tokenLimit = async (ctx, req) => { const lim = await ctx.limiter.hit(`tok:ip:${ctx.limiter.tag(clientIp(req))}`, 20, 900); if (!lim.ok) throw tooMany(lim.retryAfter); };
+
+  route('POST', '/api/auth/verify', async (ctx, req) => {
+    await tokenLimit(ctx, req);
+    const b = await readJson(req, 16 * 1024);
+    const f = await ctx.tokens.find(b.token, 'verify');
+    if (f.state === 'used' && f.user.email_verified_at) return { ok: true, already: true, email: maskEmail(f.user.email) };
+    if (f.state !== 'ok') throw tokenError(f.state);
+    if (!(await ctx.tokens.consume(b.token, 'verify'))) throw tokenError('invalid');
+    const already = !!f.user.email_verified_at;
+    if (!already) {
+      await ctx.db.run('UPDATE users SET email_verified_at=?, updated_at=? WHERE id=?', [new Date().toISOString(), new Date().toISOString(), f.user.id]);
+      await ctx.audit(f.user.id, 'user.verify', 'user', f.user.id);
+    }
+    return { ok: true, already, email: maskEmail(f.user.email) };
+  });
+  route('POST', '/api/auth/verify/resend', async (ctx, req) => {
+    const u = await requireUser(ctx, req);
+    if (u.emailVerified) return { ok: true, already: true };
+    if (!ctx.mailer.enabled) throw new ApiError(503, 'mail_disabled', 'Отправка писем не настроена');
+    for (const [k, lim, win] of [[`verify:min:${u.id}`, 1, 60], [`verify:day:${u.id}`, 5, 86400]]) { const c = await ctx.limiter.peek(k, lim, win); if (!c.ok) throw tooMany(c.retryAfter); }
+    await ctx.limiter.hit(`verify:min:${u.id}`, 1, 60); await ctx.limiter.hit(`verify:day:${u.id}`, 5, 86400);
+    try { await sendVerify(ctx, u, false); }
+    catch (e) { console.error(`Не удалось отправить письмо verify для ${maskEmail(u.email)}: ${e.message}`); throw new ApiError(502, 'mail_failed', 'Не удалось отправить письмо, попробуйте позже'); }
+    return { ok: true };
+  });
+
+  /* ---------- восстановление пароля (ТЗ этапа 2, раздел 4) ---------- */
+  route('POST', '/api/auth/password/forgot', async (ctx, req) => {
+    if (!ctx.mailer.enabled) throw new ApiError(503, 'mail_disabled', 'Восстановление пароля по почте не настроено');
+    const L = ctx.limiter;
+    const lim = await L.hit(`forgot:ip:${L.tag(clientIp(req))}`, 5, 3600);
+    if (!lim.ok) throw tooMany(lim.retryAfter);
+    const b = await readJson(req, 16 * 1024);
+    const email = V.normEmail(b.email);
+    const bad = V.validateEmail(email);
+    if (bad) throw new ApiError(422, 'validation', bad, { fields: { email: bad } });
+    /* ответ одинаков по тексту, коду и времени — существование аккаунта не раскрывается */
+    const pad = ctx.env.AUTH_PAD_MS != null ? Number(ctx.env.AUTH_PAD_MS) : 600 + Math.floor(Math.random() * 200);
+    const work = (async () => {
+      const perEmail = await L.hit(`forgot:em:${L.tag(email)}`, 3, 3600);
+      if (!perEmail.ok) return; // чужой ящик нельзя завалить письмами
+      const u = await ctx.db.get('SELECT * FROM users WHERE email=?', [email]);
+      if (!u || Number(u.disabled)) return;
+      const raw = await ctx.tokens.create(u.id, 'reset');
+      await ctx.mailer.sendQuiet('reset', u, { link: `${ctx.baseUrl}/reset?token=${raw}` });
+    })().catch((e) => console.error('forgot:', e.message));
+    await Promise.all([work, sleep(pad)]);
+    return { ok: true };
+  });
+  route('POST', '/api/auth/password/reset/check', async (ctx, req) => {
+    await tokenLimit(ctx, req);
+    const b = await readJson(req, 16 * 1024);
+    const f = await ctx.tokens.find(b.token, 'reset');
+    if (f.state !== 'ok') throw tokenError(f.state === 'used' ? 'invalid' : f.state);
+    return { ok: true, email: maskEmail(f.user.email) };
+  });
+  route('POST', '/api/auth/password/reset', async (ctx, req) => {
+    await tokenLimit(ctx, req);
+    const b = await readJson(req, 16 * 1024);
+    const f = await ctx.tokens.find(b.token, 'reset');
+    if (f.state !== 'ok') throw tokenError(f.state === 'used' ? 'invalid' : f.state);
+    const err = V.validatePassword(b.password, f.user.email);
+    if (err) throw new ApiError(422, 'validation', err, { fields: { password: err } });
+    if (!(await ctx.tokens.consume(b.token, 'reset'))) throw tokenError('invalid');
+    const t = new Date().toISOString();
+    await ctx.db.run('UPDATE users SET password_hash=?, email_verified_at=COALESCE(email_verified_at, ?), updated_at=? WHERE id=?', [auth.hashPassword(V.normPassword(b.password)), t, t, f.user.id]);
+    await ctx.db.run('DELETE FROM sessions WHERE user_id=?', [f.user.id]);
+    await ctx.tokens.dropUnused(f.user.id, ['verify']);
+    await ctx.limiter.resetSuffix('login:pair:', ':' + ctx.limiter.tag(f.user.email));
+    await ctx.audit(f.user.id, 'user.password_reset', 'user', f.user.id);
+    await ctx.mailer.sendQuiet('password_changed', f.user, {});
+    return auth.createSession(ctx.db, await ctx.db.get('SELECT * FROM users WHERE id=?', [f.user.id]));
+  });
+
+  /* ---------- вход через Google и Яндекс (ТЗ этапа 2, раздел 5) ---------- */
+  const loginRedirect = (ctx, params, cookie) => new Reply(302, { Location: `${ctx.baseUrl}/login?${new URLSearchParams(params)}`, ...(cookie ? { 'Set-Cookie': cookie } : {}) });
+  route('GET', '/api/auth/oauth/:provider/start', async (ctx, req, p, q) => {
+    if (!PROVIDERS[p.provider]) throw new ApiError(404, 'not_found', 'Нет такого способа входа');
+    try { const s = ctx.oauth.start(p.provider, q.next); return new Reply(302, { Location: s.url, 'Set-Cookie': s.cookie }); }
+    catch (e) { if (e instanceof OAuthError) return loginRedirect(ctx, { oauth_error: e.code, provider: p.provider }); throw e; }
+  });
+  route('GET', '/api/auth/oauth/:provider/callback', async (ctx, req, p, q) => {
+    if (!PROVIDERS[p.provider]) throw new ApiError(404, 'not_found', 'Нет такого способа входа');
+    const clear = ctx.oauth.clearCookie();
+    try {
+      const lim = await ctx.limiter.hit(`oauth:ip:${ctx.limiter.tag(clientIp(req))}`, 30, 3600);
+      if (!lim.ok) throw new OAuthError('rate_limited');
+      if (ctx.setupProblem) throw new OAuthError('provider');
+      const { profile, next } = await ctx.oauth.callback(p.provider, q, req.header('cookie'));
+      const { user, created } = await ctx.oauth.resolve(p.provider, profile);
+      const code = await ctx.tokens.create(user.id, 'oauth', { created });
+      return loginRedirect(ctx, { oauth: code, ...(next ? { next } : {}) }, clear);
+    } catch (e) {
+      if (e instanceof OAuthError) return loginRedirect(ctx, { oauth_error: e.code, provider: p.provider }, clear);
+      console.error(e);
+      return loginRedirect(ctx, { oauth_error: 'provider', provider: p.provider }, clear);
+    }
+  });
+  route('POST', '/api/auth/oauth/exchange', async (ctx, req) => {
+    const lim = await ctx.limiter.hit(`oauth:ip:${ctx.limiter.tag(clientIp(req))}`, 30, 3600);
+    if (!lim.ok) throw tooMany(lim.retryAfter);
+    const b = await readJson(req, 16 * 1024);
+    const f = await ctx.tokens.find(b.code, 'oauth');
+    if (f.state !== 'ok' || !(await ctx.tokens.consume(b.code, 'oauth'))) throw new ApiError(400, 'oauth_code', 'Сеанс входа устарел. Попробуйте ещё раз');
+    return { ...(await auth.createSession(ctx.db, f.user)), created: !!f.meta.created };
+  });
+
   /* Регистрация клиента. Роль всегда client; после успеха — сразу сессия (ответ как у входа). */
   route('POST', '/api/auth/register', async (ctx, req) => {
     if (ctx.setupProblem) throw new ApiError(503, 'setup', ctx.setupProblem);
@@ -168,7 +308,7 @@ function createApp(makeCtx) {
     if (!lim.ok) throw tooMany(lim.retryAfter);
     const b = await readJson(req, 16 * 1024);
     if (b.website) {
-      await ctx.db.run('INSERT INTO audit_log (user_id, action, entity, entity_id, data, at) VALUES (?,?,?,?,?,?)', [null, 'user.register_rejected', 'user', null, JSON.stringify({ ip: ipTag.slice(0, 12), reason: 'honeypot' }), new Date().toISOString()]);
+      await ctx.audit(null, 'user.register_rejected', 'user', null, { ip: ipTag.slice(0, 12), reason: 'honeypot' });
       throw new ApiError(422, 'rejected', 'Не удалось создать аккаунт');
     }
     const v = V.validateRegistration(b);
@@ -181,20 +321,48 @@ function createApp(makeCtx) {
         terms: { acceptedAt: new Date().toISOString(), version: V.TERMS_VERSION }, marketing: v.values.marketing });
     } catch (e) { if (/unique|duplicate/i.test(e.message)) throw taken(); throw e; }
     const u = await ctx.db.get('SELECT * FROM users WHERE id=?', [id]);
-    await ctx.db.run('INSERT INTO audit_log (user_id, action, entity, entity_id, data, at) VALUES (?,?,?,?,?,?)', [id, 'user.register', 'user', id, JSON.stringify({ ip: ipTag.slice(0, 12) }), new Date().toISOString()]);
+    await ctx.audit(id, 'user.register', 'user', id, { ip: ipTag.slice(0, 12) });
+    if (ctx.mailer.enabled) await sendVerify(ctx, u, true); // сбой письма регистрацию не отменяет
     return auth.createSession(ctx.db, u);
   });
 
+  /* ---------- аккаунт (ТЗ этапа 2, раздел 6) ---------- */
+  route('GET', '/api/account', async (ctx, req) => ctx.users.account(await requireUser(ctx, req)));
+  route('PATCH', '/api/account', async (ctx, req) => ctx.users.rename(await requireUser(ctx, req), await readJson(req, 16 * 1024)));
+  route('POST', '/api/account/sessions/revoke', async (ctx, req) => ctx.users.revokeOtherSessions(await requireUser(ctx, req)));
+  route('POST', '/api/account/delete', async (ctx, req) => {
+    const u = await requireUser(ctx, req);
+    if (u.role !== 'client') throw new ApiError(403, 'forbidden', u.role === 'admin' ? 'Учётная запись администратора управляется переменными окружения' : 'Удаление аккаунта компании появится вместе с кабинетом компании');
+    const key = `del:${u.id}`;
+    const peek = await ctx.limiter.peek(key, 5, 900); if (!peek.ok) throw tooMany(peek.retryAfter);
+    const c = await ctx.users.confirmDeletion(u, await readJson(req, 16 * 1024));
+    if (!c.ok) { await ctx.limiter.hit(key, 5, 900); throw new ApiError(422, 'bad_credentials', c.message, { fields: { [c.field]: c.message } }); }
+    await ctx.users.remove(u.id);
+    await ctx.limiter.reset(key);
+    await ctx.audit(u.id, 'user.delete', 'user', u.id); // без почты и имени
+    await ctx.mailer.sendQuiet('account_deleted', { email: c.row.email, name: c.row.name }, {});
+    return { ok: true };
+  });
+
   // проекты редактора в аккаунте
+  const writer = async (ctx, req) => {
+    const u = await requireUser(ctx, req);
+    if (requireVerified(ctx) && !u.emailVerified && u.role !== 'admin') throw new ApiError(403, 'email_unverified', 'Подтвердите почту, чтобы сохранять проекты в аккаунт');
+    return u;
+  };
+  const createLimit = async (ctx, u) => { const lim = await ctx.limiter.hit(`proj:new:${u.id}`, 30, 3600); if (!lim.ok) throw tooMany(lim.retryAfter); };
+  const BODY = PROJECT_MAX_BYTES + 64 * 1024;
   route('GET', '/api/projects', async (ctx, req) => ctx.projects.list(await requireUser(ctx, req)));
-  route('POST', '/api/projects', async (ctx, req) => { const u = await requireUser(ctx, req); return ctx.projects.create(u, await readJson(req, PROJECT_MAX_BYTES + 64 * 1024)); });
+  route('POST', '/api/projects', async (ctx, req) => { const u = await writer(ctx, req); await createLimit(ctx, u); return ctx.projects.create(u, await readJson(req, BODY)); });
   route('GET', '/api/projects/:id', async (ctx, req, p) => ctx.projects.get(await requireUser(ctx, req), p.id));
   route('PUT', '/api/projects/:id', async (ctx, req, p) => {
-    const u = await requireUser(ctx, req);
+    const u = await writer(ctx, req);
     const lim = await ctx.limiter.hit(`proj:put:${u.id}`, 120, 60);
     if (!lim.ok) throw tooMany(lim.retryAfter);
-    return ctx.projects.update(u, p.id, await readJson(req, PROJECT_MAX_BYTES + 64 * 1024));
+    return ctx.projects.update(u, p.id, await readJson(req, BODY));
   });
+  route('PATCH', '/api/projects/:id', async (ctx, req, p) => ctx.projects.rename(await writer(ctx, req), p.id, await readJson(req, 16 * 1024)));
+  route('POST', '/api/projects/:id/copy', async (ctx, req, p) => { const u = await writer(ctx, req); await createLimit(ctx, u); return ctx.projects.copy(u, p.id); });
   route('DELETE', '/api/projects/:id', async (ctx, req, p) => ctx.projects.remove(await requireUser(ctx, req), p.id));
 
   // публичный каталог
@@ -202,7 +370,33 @@ function createApp(makeCtx) {
   route('GET', '/api/catalog/products', async (ctx) => ({ products: await ctx.catalog.publicList() }));
 
   // админ: товары
-  route('GET', '/api/admin/stats', admin((ctx) => ctx.catalog.stats()));
+  route('GET', '/api/admin/stats', admin(async (ctx) => ({ ...(await ctx.catalog.stats()), users: await ctx.users.total() })));
+
+  // админ: пользователи (ТЗ этапа 2, раздел 8)
+  route('GET', '/api/admin/users', admin((ctx, u, req, p, q) => ctx.users.list(q)));
+  route('GET', '/api/admin/users/:id', admin((ctx, u, req, p) => ctx.users.get(p.id, ctx.projects)));
+  route('POST', '/api/admin/users/:id/block', admin(async (ctx, u, req, p) => {
+    const b = await readJson(req, 16 * 1024);
+    const r = await ctx.users.block(u, p.id, b);
+    await ctx.audit(u.id, 'user.block', 'user', r.row.id, { reason: r.reason });
+    if (b.notify === true) await ctx.mailer.sendQuiet('blocked', r.row, { reason: r.reason });
+    return ctx.users.get(p.id, ctx.projects);
+  }));
+  route('POST', '/api/admin/users/:id/unblock', admin(async (ctx, u, req, p) => {
+    const row = await ctx.users.unblock(p.id);
+    await ctx.audit(u.id, 'user.unblock', 'user', row.id);
+    return ctx.users.get(p.id, ctx.projects);
+  }));
+  route('POST', '/api/admin/users/:id/sessions/revoke', admin(async (ctx, u, req, p) => {
+    const r = await ctx.users.revokeSessions(p.id);
+    await ctx.audit(u.id, 'user.sessions_revoke', 'user', r.row.id, { revoked: r.revoked });
+    return ctx.users.get(p.id, ctx.projects);
+  }));
+  route('GET', '/api/admin/projects/:id', admin(async (ctx, u, req, p) => {
+    const pr = await ctx.projects.adminGet(p.id);
+    await ctx.audit(u.id, 'project.view', 'project', pr.id, { owner: pr.owner.id });
+    return pr;
+  }));
   route('GET', '/api/admin/products', admin((ctx, u, req, p, q) => ctx.catalog.list(q)));
   route('POST', '/api/admin/products', admin(async (ctx, u, req) => ctx.catalog.create(u, await readJson(req))));
   route('GET', '/api/admin/products/:id', admin((ctx, u, req, p) => withDetails(ctx, p.id)));
@@ -277,7 +471,8 @@ function createApp(makeCtx) {
       if (!r) throw new ApiError(405, 'method_not_allowed', 'Метод не поддерживается');
       const ctx = await init();
       const m = r.re.exec(req.pathname); const params = {}; r.keys.forEach((k, i) => params[k] = decodeURIComponent(m[i + 1]));
-      const body = await r.handler(ctx, req, params, req.query);
+      const body = await r.handler(ctx, req, params, req.query || {});
+      if (body instanceof Reply) return { status: body.status, body: body.body, headers: { 'Cache-Control': 'no-store', ...body.headers } };
       return { status: 200, body, headers: { 'Cache-Control': 'no-store' } };
     } catch (e) {
       if (e instanceof ApiError) return { status: e.status, body: { error: { code: e.code, message: e.message, details: e.details } }, headers: { 'Cache-Control': 'no-store', ...(e.headers || {}) } };

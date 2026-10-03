@@ -110,6 +110,28 @@ const MIGRATIONS = [
     'CREATE INDEX IF NOT EXISTS sessions_user ON sessions(user_id)',
     'CREATE INDEX IF NOT EXISTS sessions_expires ON sessions(expires_at)',
   ],
+  // v5: почтовые токены, вход через провайдеров, причина блокировки, миниатюры проектов
+  [
+    `CREATE TABLE IF NOT EXISTS auth_tokens (
+      token_hash TEXT PRIMARY KEY,
+      user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      kind TEXT NOT NULL CHECK (kind IN ('verify','reset','oauth')),
+      meta TEXT NOT NULL DEFAULT '{}',
+      created_at TEXT NOT NULL,
+      expires_at TEXT NOT NULL,
+      used_at TEXT)`,
+    'CREATE INDEX IF NOT EXISTS auth_tokens_user ON auth_tokens(user_id, kind)',
+    `CREATE TABLE IF NOT EXISTS user_identities (
+      provider TEXT NOT NULL CHECK (provider IN ('google','yandex')),
+      subject TEXT NOT NULL,
+      user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      email TEXT NOT NULL DEFAULT '',
+      created_at TEXT NOT NULL,
+      PRIMARY KEY (provider, subject))`,
+    'CREATE INDEX IF NOT EXISTS user_identities_user ON user_identities(user_id)',
+    "ALTER TABLE users ADD COLUMN disabled_reason TEXT NOT NULL DEFAULT ''",
+    'ALTER TABLE projects ADD COLUMN preview TEXT',
+  ],
 ];
 const SCHEMA_VERSION = 1 + MIGRATIONS.length;
 

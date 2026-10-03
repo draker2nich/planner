@@ -101,6 +101,19 @@ a.rowlink:hover{text-decoration:underline;text-underline-offset:4px}
 .num{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
 .pager{display:flex;gap:8px;align-items:center;justify-content:space-between;padding:10px 12px;color:var(--muted-foreground);font-size:13px;border-top:1px solid var(--border)}
 .pager .pg{display:flex;align-items:center;gap:8px;font-variant-numeric:tabular-nums}
+/* пользователи (ТЗ этапа 2, раздел 8) */
+.ucard{padding:20px;margin-bottom:16px;display:flex;flex-direction:column;gap:16px}
+.ucard h3{margin:0;font-size:16px;font-weight:600;letter-spacing:-.01em}
+.ugrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px 24px;margin:0}
+.ugrid dt{font-size:13px;color:var(--muted-foreground);margin:0 0 2px}
+.ugrid dd{margin:0;font-size:14px;overflow-wrap:anywhere;font-variant-numeric:tabular-nums}
+.uacts{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.uacts .note{font-size:13px;color:var(--muted-foreground)}
+td.act{text-align:right;white-space:nowrap}
+td.act a{color:var(--foreground);font-size:13px;font-weight:500;text-underline-offset:3px}
+#modal textarea{width:100%;height:auto;min-height:84px;padding:8px 12px;resize:vertical;line-height:1.45}
+#modal .chk{display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:20px;cursor:pointer}
+#modal .chk input{margin-top:2px}
 .empty{padding:48px 24px;text-align:center;color:var(--muted-foreground);display:flex;flex-direction:column;align-items:center;gap:8px}
 .empty .ic{width:24px;height:24px}
 .empty b{color:var(--foreground);font-weight:600;font-size:15px}
@@ -281,7 +294,7 @@ details.more .fld{margin-top:12px}
    ========================================================================= */
 const $=s=>document.querySelector(s);
 function h(tag,attrs={},...kids){const el=document.createElement(tag);for(const k in attrs){const v=attrs[k];if(v==null||v===false)continue;if(k==='class')el.className=v;else if(k.startsWith('on'))el.addEventListener(k.slice(2),v);else if(k==='html')el.innerHTML=v;else el.setAttribute(k,v===true?'':v);}for(const c of kids.flat()){if(c==null||c===false)continue;el.append(c instanceof Node?c:document.createTextNode(String(c)));}return el;}
-const ICONS={fmark:'<path d="M9 19V9a3 3 0 0 1 3-3h4.5M9 12.5h5.5"/>',box:'<path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8M12 13v8"/>',grid:'<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>',
+const ICONS={users:'<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M16 4.6a3.5 3.5 0 0 1 0 6.8M18 14.2a6.5 6.5 0 0 1 3.5 5.8"/>',eye:'<path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',lock:'<rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>',fmark:'<path d="M9 19V9a3 3 0 0 1 3-3h4.5M9 12.5h5.5"/>',box:'<path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8M12 13v8"/>',grid:'<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>',
  building:'<path d="M4 21V5l8-2v18M12 7l8 2v12M8 8v1M8 12v1M8 16v1M16 12v1M16 16v1M2 21h20"/>',check:'<path d="M5 12l5 5 9-11"/>',shield:'<path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/>',
  list:'<path d="M8 6h13M8 12h13M8 18h13M3 6h1M3 12h1M3 18h1"/>',plus:'<path d="M12 5v14M5 12h14"/>',upload:'<path d="M12 16V4M6 10l6-6 6 6M4 20h16"/>',trash:'<path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/>',
  back:'<path d="M15 6l-6 6 6 6"/>',left:'<path d="M15 6l-6 6 6 6"/>',right:'<path d="M9 6l6 6-6 6"/>',alert:'<path d="M12 3l10 18H2z"/><path d="M12 10v4M12 17v1"/>',info:'<circle cx="12" cy="12" r="9"/><path d="M12 8v1M12 11v5"/>',
@@ -361,7 +374,7 @@ async function refreshStats(){try{S.stats=await api('GET','/admin/stats');}catch
 
 /* ---------- навигация ---------- */
 function renderNav(){
-  const cur=location.hash.split('/')[1]||'products';const st=S.stats||{};
+  const cur=(location.hash.split('/')[1]||'products').split('?')[0];const st=S.stats||{};
   const link=(id,icon,label,extra)=>h('a',{href:'#/'+id,class:'item'+(cur===id?' on':''),'aria-current':cur===id?'page':null},ic(icon),h('span',{},label),extra);
   const em=S.user?.email||'';
   $('#nav').replaceChildren(
@@ -370,6 +383,7 @@ function renderNav(){
     link('products','box','Товары',h('span',{class:'cnt'},st.total??'')),
     link('categories','grid','Категории'),
     h('div',{class:'grp'},'Платформа'),
+    link('users','users','Пользователи',h('span',{class:'cnt'},st.users??'')),
     link('companies','building','Компании',h('span',{class:'soon'},'скоро')),
     link('moderation','shield','Модерация',st.review?h('span',{class:'cnt'},st.review):h('span',{class:'soon'},'скоро')),
     link('audit','list','Журнал'),
@@ -391,13 +405,14 @@ let lastHash=location.hash;
 async function route(){
   if(S.dirty&&location.hash!==lastHash){if(!(await confirmDlg('Уйти без сохранения?','Изменения в карточке товара не сохранены.','Уйти',true))){history.replaceState(null,'',lastHash);return;}S.dirty=false;}
   lastHash=location.hash;setNav(false);window.scrollTo(0,0);
-  const parts=location.hash.replace(/^#\/?/,'').split('/');renderNav();
+  const [hp,hq='']=location.hash.replace(/^#\/?/,'').split('?');const parts=hp.split('/');S.hq=new URLSearchParams(hq);renderNav();
   const main=$('#main');main.replaceChildren();
   switch(parts[0]||'products'){
     case 'products': if(parts[1])return productPage(parts[1]); return productsPage();
     case 'categories': return categoriesPage();
     case 'companies': return soonPage('Компании',companiesSoon());
     case 'moderation': return soonPage('Модерация',moderationSoon());
+    case 'users': if(parts[1])return userPage(parts[1]); return usersPage();
     case 'audit': return auditPage();
     default: location.hash='#/products';
   }
@@ -644,12 +659,98 @@ function companiesSoon(){return [h('h3',{},'Компании‑продавцы'
   h('p',{class:'hint',style:'color:var(--muted)'},'Подробно — ТЗ, раздел 68.')];}
 function moderationSoon(){return [h('h3',{},'Модерация товаров компаний'),h('p',{},'Очередь товаров со статусом «На модерации»: проверка фото, размеров и 3D‑модели, кнопки «Опубликовать» и «Отклонить» с причиной. Статусы и переходы уже работают в API; очередь появится вместе с кабинетом компании.')];}
 
+/* ---------- пользователи (ТЗ этапа 2, раздел 8) ---------- */
+const ROLE={client:'Клиент',company:'Компания',admin:'Администратор'};
+const PROVIDER={google:'Google',yandex:'Яндекс'};
+const userStatus=u=>u.disabled?h('span',{class:'badge bad'},'Заблокирован'):u.role==='admin'||u.emailVerified?h('span',{class:'badge ok'},'Активен'):h('span',{class:'badge warn'},'Почта не подтверждена');
+const fmtDay=d=>d?new Intl.DateTimeFormat('ru',{day:'numeric',month:'short',year:'numeric'}).format(new Date(d)):'—';
+/* Фильтры списка живут в адресе (#/users?q=…&role=…&status=…&page=…): их переживают обновление страницы, «Назад» и ссылка коллеге */
+function usersHash(q){const p=new URLSearchParams();for(const k of ['q','role','status','page'])if(q[k]&&!(k==='page'&&String(q[k])==='1'))p.set(k,q[k]);const s=p.toString();return '#/users'+(s?'?'+s:'');}
+async function usersPage(){
+  const main=$('#main');
+  const UQ={q:S.hq.get('q')||'',role:S.hq.get('role')||'',status:S.hq.get('status')||'',page:Math.max(1,parseInt(S.hq.get('page'),10)||1)};
+  const sync=()=>{const hsh=usersHash(UQ);S.usersBack=hsh;if(location.hash!==hsh){history.replaceState(null,'',hsh);lastHash=hsh;}};
+  const head=h('div',{class:'ph'},h('div',{class:'tt'},h('h2',{},'Пользователи'),h('p',{class:'desc'},'Аккаунты сервиса: поиск, блокировка и проекты — для поддержки.')));
+  const q=h('input',{type:'search',name:'q',placeholder:'Почта или имя…',value:UQ.q,'aria-label':'Поиск по почте или имени',autocomplete:'off',spellcheck:'false',maxlength:'100'});let qt;q.oninput=()=>{clearTimeout(qt);qt=setTimeout(()=>{UQ.q=q.value.trim();UQ.page=1;load();},250);};
+  const role=h('select',{'aria-label':'Роль'},h('option',{value:''},'Все роли'),...Object.entries(ROLE).map(([k,n])=>h('option',{value:k,selected:UQ.role===k},n)));role.onchange=()=>{UQ.role=role.value;UQ.page=1;load();};
+  const sts=h('select',{'aria-label':'Статус'},h('option',{value:''},'Любой статус'),...[['active','Не заблокированные'],['unverified','Почта не подтверждена'],['blocked','Заблокированные']].map(([k,n])=>h('option',{value:k,selected:UQ.status===k},n)));sts.onchange=()=>{UQ.status=sts.value;UQ.page=1;load();};
+  const box=h('div',{class:'card tcard','aria-live':'polite'});
+  main.replaceChildren(head,h('div',{class:'toolbar'},h('div',{class:'search'},ic('search'),q),role,sts),box);
+  let seq=0;
+  async function load(){
+    sync();const my=++seq;
+    box.setAttribute('aria-busy','true');if(!box.firstChild)box.replaceChildren(h('div',{class:'empty'},'Загрузка…'));
+    const qs=new URLSearchParams(Object.entries(UQ).filter(([,v])=>v!==''&&v!=null));
+    let r;try{r=await api('GET','/admin/users?'+qs);}catch(e){if(my!==seq)return;box.removeAttribute('aria-busy');box.replaceChildren(h('div',{class:'empty',role:'alert'},ic('alert'),h('b',{},'Не удалось загрузить пользователей'),e.message,h('button',{type:'button',class:'sm',style:'margin-top:8px',onclick:load},'Повторить')));return;}
+    if(my!==seq)return; // пришёл ответ на устаревший запрос
+    box.removeAttribute('aria-busy');
+    if(r.page!==UQ.page){UQ.page=r.page;sync();}
+    const filtered=UQ.q||UQ.role||UQ.status;
+    if(!r.users.length){box.replaceChildren(h('div',{class:'empty'},ic(filtered?'search':'users'),h('b',{},filtered?'Никого не нашли':'Пользователей пока нет'),filtered?'Измените или сбросьте фильтры.':'',filtered?h('button',{type:'button',class:'sm',style:'margin-top:8px',onclick:()=>{Object.assign(UQ,{q:'',role:'',status:'',page:1});q.value='';role.value='';sts.value='';load();}},'Сбросить фильтры'):null));return;}
+    const tb=h('tbody');
+    for(const u of r.users)tb.append(h('tr',{class:'clk',onclick:e=>{if(!e.target.closest('a'))location.hash='#/users/'+u.id;}},
+      h('td',{},h('a',{class:'rowlink',href:'#/users/'+u.id},u.name||'Без имени'),h('div',{class:'sub',translate:'no'},u.email)),
+      h('td',{class:'hide-sm'},ROLE[u.role]||u.role),
+      h('td',{},userStatus(u)),
+      h('td',{class:'num'},u.projects??0),
+      h('td',{class:'sub hide-sm tnum'},fmtDay(u.createdAt)),
+      h('td',{class:'sub hide-sm hide-md tnum'},u.lastLoginAt?fmtDate(u.lastLoginAt):'—')));
+    box.replaceChildren(h('table',{},h('thead',{},h('tr',{},h('th',{},'Пользователь'),h('th',{class:'hide-sm'},'Роль'),h('th',{},'Статус'),h('th',{class:'num'},'Проекты'),h('th',{class:'hide-sm'},'Регистрация'),h('th',{class:'hide-sm hide-md'},'Последний вход'))),tb),
+      h('div',{class:'pager'},h('span',{class:'tnum'},plural(r.total,'пользователь','пользователя','пользователей')),r.pages>1?h('div',{class:'pg'},h('button',{type:'button',class:'sm icon','aria-label':'Предыдущая страница',disabled:r.page<=1,onclick:()=>{UQ.page=r.page-1;load();window.scrollTo(0,0);}},ic('left')),`Стр. ${r.page} из ${r.pages}`,h('button',{type:'button',class:'sm icon','aria-label':'Следующая страница',disabled:r.page>=r.pages,onclick:()=>{UQ.page=r.page+1;load();window.scrollTo(0,0);}},ic('right'))):null));
+  }
+  load();
+}
+async function userPage(id){
+  const main=$('#main');main.replaceChildren(h('div',{class:'empty',role:'status'},'Загрузка…'));
+  const back=S.usersBack||'#/users';
+  let r;try{r=await api('GET','/admin/users/'+encodeURIComponent(id));}
+  catch(e){main.replaceChildren(h('div',{class:'stickybar'},h('a',{href:back,'aria-label':'К списку пользователей',class:'backlnk'},ic('back')),h('h2',{},'Пользователь')),h('div',{class:'card'},h('div',{class:'empty',role:'alert'},ic('alert'),h('b',{},e.status===404?'Пользователь не найден':'Не удалось загрузить'),e.status===404?'Возможно, аккаунт удалён.':e.message)));return;}
+  draw(r);
+  function draw(r){
+    const u=r.user;const me=S.user&&S.user.id===u.id;
+    const act=async(fn,okMsg)=>{try{const nr=await fn();toast(okMsg);await refreshStats();draw(nr);}catch(e){toast(e.message,true);}};
+    const blockBtn=u.role==='admin'?null:u.disabled
+      ?h('button',{type:'button',onclick:async()=>{if(await confirmDlg('Разблокировать пользователя?',`${u.email} снова сможет войти и работать с проектами.`,'Разблокировать'))act(()=>api('POST',`/admin/users/${u.id}/unblock`),'Пользователь разблокирован');}},'Разблокировать')
+      :h('button',{type:'button',class:'danger',onclick:()=>blockDialog(u,(body)=>act(()=>api('POST',`/admin/users/${u.id}/block`,body),'Пользователь заблокирован'))},ic('lock'),'Заблокировать…');
+    const revoke=h('button',{type:'button',disabled:!u.sessions||me,onclick:async()=>{if(await confirmDlg('Завершить все сеансы?',`${u.email} выйдет на всех устройствах и должен будет войти заново.`,'Завершить',true))act(()=>api('POST',`/admin/users/${u.id}/sessions/revoke`),'Сеансы завершены');}},ic('logout'),'Завершить сеансы');
+    const methods=[u.hasPassword?'Пароль':null,...(u.providers||[]).map(p=>PROVIDER[p]||p)].filter(Boolean).join(', ')||'—';
+    const dl=(k,v)=>h('div',{},h('dt',{},k),h('dd',{},v));
+    const info=h('div',{class:'card ucard'},h('h3',{},'Аккаунт'),
+      u.disabled?h('div',{class:'callout bad',role:'note'},ic('lock'),h('div',{},h('b',{},'Заблокирован. '),u.disabledReason?'Причина: '+u.disabledReason:'Причина не указана.')):null,
+      h('dl',{class:'ugrid'},dl('Почта',h('span',{translate:'no'},u.email)),dl('Имя',u.name||'—'),dl('Роль',ROLE[u.role]||u.role),dl('Почта подтверждена',u.role==='admin'?'не требуется':u.emailVerified?'да':'нет'),
+        dl('Способы входа',methods),dl('Активные сеансы',String(u.sessions??0)),dl('Регистрация',fmtDate(u.createdAt)),dl('Последний вход',u.lastLoginAt?fmtDate(u.lastLoginAt):'—'),
+        dl('Условия приняты',u.termsAcceptedAt?fmtDay(u.termsAcceptedAt)+(u.termsVersion?' · ред. '+u.termsVersion:''):'—'),dl('Рассылка',u.marketing?'согласен':'нет')),
+      h('div',{class:'uacts'},blockBtn,revoke,u.role==='admin'?h('span',{class:'note'},'Администраторы управляются переменными окружения.'):null));
+    const pr=r.projects||[];
+    const projects=h('div',{class:'card ucard'},h('h3',{},'Проекты',pr.length?' · '+pr.length:''),
+      pr.length?h('div',{class:'tcard',style:'margin:0 -20px'},h('table',{},h('thead',{},h('tr',{},h('th',{},'Название'),h('th',{class:'hide-sm'},'Изменён'),h('th',{class:'num hide-sm'},'Размер'),h('th',{},h('span',{class:'sr-only'},'Действия')))),
+        h('tbody',{},...pr.map(p=>h('tr',{},h('td',{},h('div',{class:'nm'},p.name),h('div',{class:'sub show-sm tnum'},fmtDate(p.updatedAt))),h('td',{class:'sub hide-sm tnum'},fmtDate(p.updatedAt)),h('td',{class:'num sub hide-sm'},Math.max(1,Math.round(p.size/1024)).toLocaleString('ru')+' КБ'),
+          h('td',{class:'act'},h('a',{href:'/editor?view='+encodeURIComponent(p.id),target:'_blank',rel:'noopener'},'Открыть для просмотра'))))))):h('div',{class:'sub'},'У пользователя нет проектов в аккаунте.'),
+      pr.length?h('div',{class:'sub',style:'font-size:13px'},'Проект открывается в редакторе только для чтения. Каждый просмотр записывается в журнал.'):null);
+    main.replaceChildren(h('div',{class:'stickybar'},h('a',{href:back,'aria-label':'К списку пользователей',class:'backlnk'},ic('back')),h('h2',{},u.name||u.email),userStatus(u)),info,projects);
+  }
+}
+function blockDialog(u,onOk){modal((b,close)=>{
+  const reason=h('textarea',{name:'reason',maxlength:'300',rows:'3',placeholder:'Например: спам‑регистрация…',autocomplete:'off'});
+  const notify=h('input',{type:'checkbox',name:'notify'});
+  const form=h('form',{style:'display:flex;flex-direction:column;gap:16px',onsubmit:e=>{e.preventDefault();close();onOk({reason:reason.value,notify:notify.checked&&!!S.config?.mail});}},
+    h('p',{style:'margin:0'},`${u.email} выйдет на всех устройствах и не сможет войти. Проекты сохранятся; блокировку можно снять.`),
+    h('label',{class:'fld'},h('span',{},'Причина'),reason,h('span',{class:'desc'},'Видна в админ‑панели и в журнале'+(S.config?.mail?', попадёт в письмо пользователю':'')+'. До 300 символов.')),
+    S.config?.mail?h('label',{class:'chk'},notify,h('span',{},'Сообщить пользователю письмом')):null,
+    h('div',{class:'btns'},h('button',{type:'button',onclick:()=>close()},'Отмена'),h('button',{type:'submit',class:'destructive'},'Заблокировать')));
+  b.append(h('h3',{},'Заблокировать пользователя?'),form);});}
+
 /* ---------- журнал ---------- */
-async function auditPage(){const main=$('#main');main.replaceChildren(h('div',{class:'ph'},h('div',{class:'tt'},h('h2',{},'Журнал действий'),h('p',{class:'desc'},'Последние 200 изменений каталога.'))),h('div',{class:'empty',role:'status'},'Загрузка…'));
+async function auditPage(){const main=$('#main');main.replaceChildren(h('div',{class:'ph'},h('div',{class:'tt'},h('h2',{},'Журнал действий'),h('p',{class:'desc'},'Последние 200 событий: каталог, аккаунты, доступ поддержки к проектам.'))),h('div',{class:'empty',role:'status'},'Загрузка…'));
   let r;try{r=await api('GET','/admin/audit?limit=200');}catch(e){main.lastChild.textContent=e.message;return;}
-  const A={create:'создал товар',update:'изменил товар',delete:'удалил товар',publish:'опубликовал',unpublish:'снял с публикации',archive:'в архив',reject:'отклонил',submit:'отправил на модерацию','model.upload':'загрузил 3D‑модель','model.delete':'удалил 3D‑модель','image.add':'добавил фото','image.delete':'удалил фото','demo.purge':'удалил демо‑товары'};
-  main.lastChild.replaceWith(r.items.length?h('div',{class:'card tcard'},h('table',{},h('thead',{},h('tr',{},h('th',{},'Когда'),h('th',{},'Кто'),h('th',{},'Действие'),h('th',{},'Товар'))),
-    h('tbody',{},...r.items.map(a=>h('tr',{class:a.entity_id&&a.action!=='delete'?'clk':'',onclick:()=>{if(a.entity_id&&a.action!=='delete')location.hash='#/products/'+a.entity_id;}},h('td',{class:'sub tnum'},fmtDate(a.at)),h('td',{},a.email||'—'),h('td',{},A[a.action]||a.action),h('td',{class:'sub'},(()=>{try{const d=JSON.parse(a.data);return d.name||(d.count!=null?String(d.count):'');}catch(e){return '';}})()||(a.entity_id||'').slice(0,8))))))):h('div',{class:'card'},h('div',{class:'empty'},ic('list'),h('b',{},'Действий пока нет'),'Здесь появятся изменения товаров.')));}
+  const A={create:'создал товар',update:'изменил товар',delete:'удалил товар',publish:'опубликовал',unpublish:'снял с публикации',archive:'в архив',reject:'отклонил',submit:'отправил на модерацию','model.upload':'загрузил 3D‑модель','model.delete':'удалил 3D‑модель','image.add':'добавил фото','image.delete':'удалил фото','demo.purge':'удалил демо‑товары',
+    'user.register':'зарегистрировался','user.register_rejected':'регистрация отклонена (бот)','user.verify':'подтвердил почту','user.password_reset':'сбросил пароль по письму','user.delete':'удалил свой аккаунт','user.block':'заблокировал пользователя','user.unblock':'разблокировал пользователя','user.sessions_revoke':'завершил сеансы пользователя','user.oauth_link':'подключил вход через провайдера','user.oauth_register':'зарегистрировался через провайдера','project.view':'открыл проект пользователя'};
+  const parse=a=>{try{return JSON.parse(a.data)||{};}catch(e){return {};}};
+  /* куда ведёт строка: товар, пользователь или владелец просмотренного проекта */
+  const target=(a,d)=>a.entity==='user'?(a.entity_id&&a.action!=='user.delete'?'#/users/'+a.entity_id:null):a.entity==='project'?(d.owner?'#/users/'+d.owner:null):(a.entity_id&&a.action!=='delete'?'#/products/'+a.entity_id:null);
+  const detail=(a,d)=>a.entity==='user'||a.entity==='project'?(d.reason||(d.provider?PROVIDER[d.provider]||d.provider:'')||(d.revoked!=null?'сеансов: '+d.revoked:'')||(a.entity_id||'').slice(0,8)):(d.name||(d.count!=null?String(d.count):'')||(a.entity_id||'').slice(0,8));
+  main.lastChild.replaceWith(r.items.length?h('div',{class:'card tcard'},h('table',{},h('thead',{},h('tr',{},h('th',{},'Когда'),h('th',{},'Кто'),h('th',{},'Действие'),h('th',{},'Объект'))),
+    h('tbody',{},...r.items.map(a=>{const d=parse(a),to=target(a,d);return h('tr',{class:to?'clk':'',onclick:e=>{if(to&&!e.target.closest('a'))location.hash=to;}},h('td',{class:'sub tnum'},fmtDate(a.at)),h('td',{},a.email||'—'),h('td',{},A[a.action]||a.action),h('td',{class:'sub'},to?h('a',{class:'rowlink',style:'font-weight:400',href:to},detail(a,d)||'открыть'):detail(a,d)));})))):h('div',{class:'card'},h('div',{class:'empty'},ic('list'),h('b',{},'Действий пока нет'),'Здесь появятся изменения товаров и действия с аккаунтами.')));}
 
 start();
 </script>
