@@ -482,7 +482,7 @@ async function productsPage(){
   load();
 }
 async function purgeDemo(){if(!(await confirmDlg('Удалить демо‑товары?',`Будут удалены ${S.stats.demo} сгенерированных товаров. В редакторе останутся только товары, загруженные вами. Действие нельзя отменить.`,'Удалить',true)))return;
-  try{const r=await api('POST','/admin/demo/purge');toast(`Удалено: ${r.deleted}`);await refreshStats();productsPage();}catch(e){toast(e.message,true);}}
+  try{const r=await api('POST','/admin/demo/purge');toast(r.restored?`Удалено: ${r.deleted}. Набор каталога из проекта записан заново: ${r.restored}`:`Удалено: ${r.deleted}`);await refreshStats();productsPage();}catch(e){toast(e.message,true);}}
 
 /* ---------- карточка товара ---------- */
 async function productPage(id){

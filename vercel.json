@@ -6,7 +6,8 @@
   "cleanUrls": false,
   "functions": {
     "api/index.mjs": {
-      "maxDuration": 60
+      "maxDuration": 60,
+      "includeFiles": "public/catalog-pack/manifest.json"
     }
   },
   "rewrites": [

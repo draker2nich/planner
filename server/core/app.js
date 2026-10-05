@@ -17,6 +17,7 @@ const { makeMailer, baseUrl, maskEmail } = require('./mail.js');
 const { makeTokens } = require('./tokens.js');
 const { makeOAuth, OAuthError, PROVIDERS } = require('./oauth.js');
 const { makeUsers } = require('./users.js');
+const { syncPack } = require('./pack.js');
 
 /* ---------- сборка окружения ---------- */
 async function fromEnv(env = process.env, { dataDir } = {}) {
@@ -98,6 +99,8 @@ async function bootstrap(ctx) {
   ctx.oauth = makeOAuth(ctx, { baseUrl: ctx.baseUrl, secret, audit: ctx.audit, registrationOpen: () => registrationOpen(ctx) });
   await syncEnvAdmin(ctx);
   await ctx.catalog.backfillSearch();
+  /* набор каталога из public/catalog-pack; сбой записи набора не должен останавливать сайт */
+  await syncPack(ctx).catch((e) => console.error('Набор каталога не записан в базу:', e.message));
   const products = Number((await db.get('SELECT CAST(COUNT(*) AS INTEGER) AS c FROM products')).c);
   if (!products && env.SEED_DEMO !== '0') { await ctx.catalog.seedDemo(); console.log('Каталог заполнен демо‑товарами.'); }
 }
@@ -425,7 +428,13 @@ function createApp(makeCtx) {
   }));
   route('DELETE', '/api/admin/products/:id/images/:img', admin((ctx, u, req, p) => ctx.catalog.deleteImage(u, p.id, p.img)));
   route('POST', '/api/admin/products/:id/images/:img/move', admin(async (ctx, u, req, p) => ctx.catalog.moveImage(u, p.id, p.img, (await readJson(req)).dir)));
-  route('POST', '/api/admin/demo/purge', admin(async (ctx, u) => ({ deleted: await ctx.catalog.purgeDemo(u) })));
+  /* Демо удаляется целиком; набор каталога, лежащий в проекте (public/catalog-pack), сразу записывается заново.
+     Так кнопка убирает сгенерированные демо‑товары, а чтобы убрать и набор — сначала удалите его папку из проекта. */
+  route('POST', '/api/admin/demo/purge', admin(async (ctx, u) => {
+    const deleted = await ctx.catalog.purgeDemo(u);
+    const pack = await syncPack(ctx, { force: true }).catch((e) => { console.error('Набор каталога не записан в базу:', e.message); return null; });
+    return { deleted, restored: pack ? pack.imported : 0 };
+  }));
   route('GET', '/api/admin/audit', admin(async (ctx, u, req, p, q) => ({ items: await ctx.db.all('SELECT a.*, u.email FROM audit_log a LEFT JOIN users u ON u.id=a.user_id ORDER BY a.at DESC, a.id DESC LIMIT ?', [Math.min(+q.limit || 100, 500)]) })));
 
   /* Загрузка файлов из браузера прямо в Vercel Blob (обход лимита 4,5 МБ на запрос к функции).

@@ -373,7 +373,9 @@ function makeCatalog(db, storage) {
         WHERE products.source = 'demo'`, args);
       await db.run(`DELETE FROM product_images WHERE product_id IN (${marks(liveIds.length)})`, liveIds);
       const im = part.flatMap(r => r.imgs.map(g => [g.id, r.id, g.file, g.mime, g.sort, t]));
-      if (im.length) await db.run(`INSERT INTO product_images (id,product_id,file,mime,sort,created_at) VALUES ${im.map(() => '(?,?,?,?,?,?)').join(',')}`, im.flat());
+      // ON CONFLICT: два одновременных запуска (параллельный холодный старт) не должны мешать друг другу
+      if (im.length) await db.run(`INSERT INTO product_images (id,product_id,file,mime,sort,created_at) VALUES ${im.map(() => '(?,?,?,?,?,?)').join(',')}
+        ON CONFLICT (id) DO UPDATE SET product_id=excluded.product_id, file=excluded.file, mime=excluded.mime, sort=excluded.sort`, im.flat());
       const keep = new Set(part.flatMap(r => [r.modelFile, ...r.imgs.map(g => g.file)]));
       stale.push(...oldFiles.filter(f => !keep.has(f)));
       res.imported += part.length;
