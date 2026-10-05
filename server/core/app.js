@@ -367,7 +367,8 @@ function createApp(makeCtx) {
 
   // публичный каталог
   route('GET', '/api/catalog/types', async () => ({ cats: T.CATS, dimNames: T.DIMN, types: T.TYPES.map(t => ({ id: t.id, name: t.name, cats: t.cats, mount: t.mount, forms: t.forms.map(f => ({ id: f.id, name: f.name, fp: f.fp, dims: T.formDimKeys(f), typical: f.typical })) })) }));
-  route('GET', '/api/catalog/products', async (ctx) => ({ products: await ctx.catalog.publicList() }));
+  /* без параметров — весь каталог одним ответом (как раньше); с limit/offset — порциями, так его читает редактор */
+  route('GET', '/api/catalog/products', async (ctx, req, p, q) => (q.limit != null || q.offset != null) ? ctx.catalog.publicPage(q) : ({ products: await ctx.catalog.publicList() }));
 
   // админ: товары
   route('GET', '/api/admin/stats', admin(async (ctx) => ({ ...(await ctx.catalog.stats()), users: await ctx.users.total() })));

@@ -12,7 +12,7 @@ function ensureRenderer(){
   const ground=new THREE.Mesh(new THREE.PlaneGeometry(200,200),new THREE.MeshStandardMaterial({color:'#8a9a7a',roughness:1})); ground.rotation.x=-Math.PI/2; ground.position.y=-0.01; T3.scene.add(ground);
   T3.raycaster=new THREE.Raycaster(); T3.ready=true;
   // модели glb (лениво, с заглушкой)
-  ['door','window','arch'].forEach(k=>{T3.models[k]=null; if(THREE.GLTFLoader){try{new THREE.GLTFLoader().load(`assets/models/${k}.glb`,g=>{T3.models[k]=g.scene;T3.dirty=true;},undefined,()=>{});}catch(e){}}});
+  ['door','window','arch'].forEach(k=>{T3.models[k]=null; if(THREE.GLTFLoader){try{gltfLoader().load(`assets/models/${k}.glb`,g=>{T3.models[k]=g.scene;T3.dirty=true;},undefined,()=>{});}catch(e){}}});
 }
 function disposeObj(o){o.traverse(x=>{if(x.geometry)x.geometry.dispose();if(x.material){[].concat(x.material).forEach(m=>{if(m.map&&m.map!==T3.arrowTex)m.map.dispose();m.dispose();});}});}
 function rebuildScene(){

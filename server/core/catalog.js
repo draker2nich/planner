@@ -282,6 +282,18 @@ function makeCatalog(db, storage) {
     return rows.map(p => publicDto(p, by.get(p.id)));
   }
 
+  /* Каталог порциями: ответ функции Vercel ограничен 4,5 МБ, а несколько тысяч товаров одним ответом в него не помещаются.
+     Порядок тот же, что у publicList. → { products, total, next } (next — смещение следующей порции или null). */
+  async function publicPage(q = {}) {
+    const limit = Math.min(Math.max(parseInt(q.limit) || 1000, 1), 2000), offset = Math.max(parseInt(q.offset) || 0, 0);
+    const total = N((await db.get(`SELECT ${COUNT} AS c FROM products WHERE status = 'published'`)).c);
+    const rows = await db.all("SELECT * FROM products WHERE status = 'published' ORDER BY type_id, price, id LIMIT ? OFFSET ?", [limit, offset]);
+    const ids = rows.map(r => r.id);
+    const imgs = ids.length ? await db.all(`SELECT * FROM product_images WHERE product_id IN (${ids.map(() => '?').join(',')}) ORDER BY sort, created_at`, ids) : [];
+    const by = new Map(); for (const i of imgs) { if (!by.has(i.product_id)) by.set(i.product_id, []); by.get(i.product_id).push(i); }
+    return { products: rows.map(p => publicDto(p, by.get(p.id))), total, next: offset + rows.length < total ? offset + rows.length : null };
+  }
+
   async function stats() {
     const c = async (w) => N((await db.get(`SELECT ${COUNT} AS c FROM products ${w}`)).c);
     const byType = Object.fromEntries((await db.all(`SELECT type_id, ${COUNT} AS c FROM products GROUP BY type_id`)).map(r => [r.type_id, N(r.c)]));
@@ -299,8 +311,86 @@ function makeCatalog(db, storage) {
       await db.run(`INSERT INTO products (id,source,type_id,form_id,name,brand,price,currency,dims,status,created_at,updated_at,search) VALUES ${vals} ON CONFLICT (id) DO NOTHING`, args);
     }
   }
+  /* Массовый импорт набора товаров (tools/catalog). Идемпотентен по id: повторный запуск обновляет те же строки.
+     Товары получают source='demo' — их видно в админ‑панели как «Демо» и можно убрать кнопкой «Удалить демо».
+     Строки с тем же id, но не демо (созданные админом или компанией), не трогаются.
+     items: [{ id, typeId, formId, name, brand, price, currency, dims, colors, materials, styleTags, url,
+               model: { url, info } | null, images: [{ url, mime }] }]
+     model.info — результат glb.analyze() для файла по этому адресу; сверка с размерами товара — та же, что при загрузке из админ‑панели.
+     Адреса файлов могут быть внешними (любой статический хостинг) — хранилище платформы при этом не расходуется. */
+  async function importBatch(items, { publish = true, batch = 50 } = {}) {
+    const res = { total: items.length, imported: 0, published: 0, drafts: 0, mismatch: 0, errors: [] };
+    const t = now(), rows = [], seen = new Set();
+    for (const it of items) {
+      try {
+        const id = String(it?.id ?? '');
+        if (!/^[A-Za-z0-9][A-Za-z0-9._-]{2,79}$/.test(id)) throw new ApiError(422, 'validation', 'Некорректный id товара');
+        if (seen.has(id)) throw new ApiError(422, 'validation', 'Повтор id в наборе');
+        const v = normalize(it, null);
+        const p = { name: v.name, type_id: v.typeId, form_id: v.formId, dims: JSON.stringify(v.dims), price: v.price, model_status: 'none' };
+        let modelFile = null, modelInfo = {};
+        if (it.model && it.model.url) {
+          const info = it.model.info;
+          if (!info || !info.bbox || !Array.isArray(info.bbox.size)) throw new ApiError(422, 'validation', 'Нет данных о габарите модели');
+          const check = glb.checkAgainst(info, expectedExtents(p));
+          p.model_status = check.ok ? 'ready' : 'mismatch';
+          modelFile = String(it.model.url); modelInfo = { ...info, check, uploadedAt: t };
+          if (!check.ok) res.mismatch++;
+        }
+        const imgs = (Array.isArray(it.images) ? it.images : []).filter(i => i && i.url).slice(0, LIMITS.images)
+          .map((i, k) => ({ id: `${id}:${k}`, file: String(i.url), mime: IMG_SIG.some(([m]) => m === i.mime) ? i.mime : 'image/jpeg', sort: k }));
+        const status = publish && !publishProblems(p).length ? 'published' : 'draft';
+        seen.add(id);
+        rows.push({ id, v, status, modelStatus: p.model_status, modelFile, modelInfo, imgs });
+      } catch (e) {
+        if (!(e instanceof ApiError)) throw e;
+        res.errors.push({ id: it?.id ?? null, message: e.message, details: e.details });
+      }
+    }
+    const marks = (n) => Array(n).fill('?').join(',');
+    const stale = [];
+    for (let i = 0; i < rows.length; i += batch) {
+      let part = rows.slice(i, i + batch);
+      const ids = part.map(r => r.id);
+      const old = await db.all(`SELECT id, source, model_file FROM products WHERE id IN (${marks(ids.length)})`, ids);
+      const foreign = new Set(old.filter(o => o.source !== 'demo').map(o => o.id));
+      for (const fid of foreign) res.errors.push({ id: fid, message: 'Товар с таким id уже есть в каталоге и он не демо — пропущен' });
+      part = part.filter(r => !foreign.has(r.id));
+      if (!part.length) continue;
+      const liveIds = part.map(r => r.id);
+      const oldFiles = [...old.filter(o => !foreign.has(o.id)).map(o => o.model_file),
+        ...(await db.all(`SELECT file FROM product_images WHERE product_id IN (${marks(liveIds.length)})`, liveIds)).map(r => r.file)].filter(Boolean);
+      const vals = part.map(() => `(?, 'demo', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`).join(',');
+      const args = part.flatMap(r => [r.id, r.v.typeId, r.v.formId, r.v.name, r.v.brand || '', r.v.price ?? 0, r.v.currency || 'RUB',
+        JSON.stringify(r.v.dims), JSON.stringify(r.v.colors || []), JSON.stringify(r.v.materials || []), JSON.stringify(r.v.styleTags || []), r.v.url || '',
+        r.status, r.modelStatus, r.modelFile ? 'upload' : null, r.modelFile, JSON.stringify(r.modelInfo), t, t, searchText(r.v.name, r.v.brand)]);
+      await db.run(`INSERT INTO products (id,source,type_id,form_id,name,brand,price,currency,dims,colors,materials,style_tags,url,status,model_status,model_source,model_file,model_info,created_at,updated_at,search)
+        VALUES ${vals}
+        ON CONFLICT (id) DO UPDATE SET type_id=excluded.type_id, form_id=excluded.form_id, name=excluded.name, brand=excluded.brand, price=excluded.price, currency=excluded.currency,
+          dims=excluded.dims, colors=excluded.colors, materials=excluded.materials, style_tags=excluded.style_tags, url=excluded.url, status=excluded.status, reject_reason='',
+          model_status=excluded.model_status, model_source=excluded.model_source, model_file=excluded.model_file, model_info=excluded.model_info,
+          updated_at=excluded.updated_at, search=excluded.search
+        WHERE products.source = 'demo'`, args);
+      await db.run(`DELETE FROM product_images WHERE product_id IN (${marks(liveIds.length)})`, liveIds);
+      const im = part.flatMap(r => r.imgs.map(g => [g.id, r.id, g.file, g.mime, g.sort, t]));
+      if (im.length) await db.run(`INSERT INTO product_images (id,product_id,file,mime,sort,created_at) VALUES ${im.map(() => '(?,?,?,?,?,?)').join(',')}`, im.flat());
+      const keep = new Set(part.flatMap(r => [r.modelFile, ...r.imgs.map(g => g.file)]));
+      stale.push(...oldFiles.filter(f => !keep.has(f)));
+      res.imported += part.length;
+      for (const r of part) r.status === 'published' ? res.published++ : res.drafts++;
+    }
+    await storage.removeMany(stale); // прежние файлы этих товаров, если они лежали в хранилище платформы
+    await db.run('INSERT INTO audit_log (user_id,action,entity,entity_id,data,at) VALUES (?,?,?,?,?,?)', [null, 'catalog.import', 'product', null, JSON.stringify({ imported: res.imported, published: res.published, errors: res.errors.length }), now()]);
+    return res;
+  }
+
   async function purgeDemo(user) {
+    /* файлы демо‑товаров: то, что лежит в хранилище платформы, удаляется; внешние адреса хранилище пропускает */
+    const files = [...(await db.all("SELECT model_file AS f FROM products WHERE source='demo' AND model_file IS NOT NULL")),
+      ...(await db.all("SELECT i.file AS f FROM product_images i JOIN products p ON p.id = i.product_id WHERE p.source='demo'"))].map(r => r.f).filter(Boolean);
+    await db.run("DELETE FROM product_images WHERE product_id IN (SELECT id FROM products WHERE source='demo')");
     const r = await db.run("DELETE FROM products WHERE source='demo'");
+    await storage.removeMany(files);
     await db.run('INSERT INTO audit_log (user_id,action,entity,entity_id,data,at) VALUES (?,?,?,?,?,?)', [user.id, 'demo.purge', 'product', null, JSON.stringify({ count: r.changes }), now()]);
     return r.changes;
   }
@@ -312,7 +402,7 @@ function makeCatalog(db, storage) {
     return rows.length;
   }
 
-  return { backfillSearch, ApiError, row, dto, list, create, update, remove, transition, publishProblems, attachModel, deleteModel, fitDimsToModel, requestGeneration, attachImage, deleteImage, moveImage, publicList, stats, seedDemo, purgeDemo, LIMITS, CURRENCIES };
+  return { backfillSearch, ApiError, row, dto, list, create, update, remove, transition, publishProblems, attachModel, deleteModel, fitDimsToModel, requestGeneration, attachImage, deleteImage, moveImage, publicList, publicPage, stats, seedDemo, importBatch, purgeDemo, LIMITS, CURRENCIES };
 }
 
 module.exports = { makeCatalog, ApiError, LIMITS };
