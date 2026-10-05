@@ -2,7 +2,7 @@
 /* Хранилище файлов (3D‑модели, фото). Один интерфейс для двух драйверов:
    - fs   — локально, папка data/uploads, файлы раздаются сервером по /files/…;
    - blob — на Vercel, Vercel Blob (публичный store), файлы раздаются с *.public.blob.vercel-storage.com.
-   put(key, buffer, contentType) → url;  remove(url);  read(url) → Buffer;  owns(url, prefix) → файл наш и лежит в prefix. */
+   put(key, buffer, contentType) → url;  remove(url);  removeMany(urls);  read(url) → Buffer;  owns(url, prefix) → файл наш и лежит в prefix. */
 const fs = require('node:fs');
 const path = require('node:path');
 
@@ -20,6 +20,7 @@ function fsStorage(dir) {
     kind: 'fs', dir, urlOf: toUrl,
     async put(key, buf) { const p = toPath(key); fs.mkdirSync(path.dirname(p), { recursive: true }); fs.writeFileSync(p, buf); return toUrl(key); },
     async remove(ref) { if (!ref) return; try { fs.rmSync(toPath(ref), { force: true }); } catch {} },
+    async removeMany(refs) { for (const r of refs || []) await this.remove(r); },
     async removePrefix(prefix) { fs.rmSync(path.join(dir, prefix), { recursive: true, force: true }); },
     async read(ref) { return fs.readFileSync(toPath(ref)); },
     owns(ref, prefix) { try { return toUrl(ref).startsWith('/files/' + prefix); } catch { return false; } },
@@ -36,6 +37,11 @@ function blobStorage(blobSdk, fetchFn = fetch) {
       return r.url;
     },
     async remove(url) { if (url && isOurs(url)) { try { await blobSdk.del(url); } catch (e) { console.warn('blob del', e.message); } } },
+    /* Пачками: удаление бесплатно, но каждый файл — отдельная операция в лимите частоты */
+    async removeMany(urls) {
+      const ours = (urls || []).filter(u => u && isOurs(u));
+      for (let i = 0; i < ours.length; i += 200) { try { await blobSdk.del(ours.slice(i, i + 200)); } catch (e) { console.warn('blob del', e.message); } }
+    },
     async removePrefix(prefix) {
       let cursor;
       do { const r = await blobSdk.list({ prefix, cursor, limit: 1000 }); if (r.blobs.length) await blobSdk.del(r.blobs.map(b => b.url)); cursor = r.hasMore ? r.cursor : undefined; } while (cursor);

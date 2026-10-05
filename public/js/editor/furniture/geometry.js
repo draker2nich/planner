@@ -11,7 +11,8 @@ let PRODUCTS=demoProducts(); let PRODUCT_BY_ID=new Map(PRODUCTS.map(p=>[p.id,p])
 function setProducts(list,src){PRODUCTS=list;PRODUCT_BY_ID=new Map(list.map(p=>[p.id,p]));CATALOG_SOURCE=src;}
 async function loadCatalog(){
   if(location.protocol==='file:')return;
-  try{const r=await fetch('api/catalog/products',{headers:{Accept:'application/json'}});if(!r.ok)throw new Error(r.status);const j=await r.json();setProducts(j.products||[],'server');
+  /* порциями: тысячи товаров одним ответом не помещаются в предел ответа функции Vercel (4,5 МБ) */
+  try{let all=[],off=0;for(;;){const r=await fetch('api/catalog/products?limit=2000&offset='+off,{headers:{Accept:'application/json'}});if(!r.ok)throw new Error(r.status);const j=await r.json();all=all.concat(j.products||[]);if(j.next==null||!(j.next>off))break;off=j.next;}setProducts(all,'server');
     if(typeof T3!=='undefined'&&T3.active)T3.dirty=true; render();
   }catch(e){console.warn('Каталог сервера недоступен, используется демо‑набор',e);}
 }

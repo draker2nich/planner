@@ -114,8 +114,10 @@ function collectFurnitureDims(items){
 
 /* ---------- 3D мебель ---------- */
 const GLB_CACHE=new Map();
+/* Загрузчик glTF с декодером meshopt: модели каталога сжаты gltfpack (EXT_meshopt_compression) */
+function gltfLoader(){const L=new THREE.GLTFLoader();if(typeof MeshoptDecoder!=='undefined'&&L.setMeshoptDecoder)L.setMeshoptDecoder(MeshoptDecoder);return L;}
 function glbFor(url){let c=GLB_CACHE.get(url);if(c)return c;c={state:'loading',scene:null};GLB_CACHE.set(url,c);
-  if(typeof THREE!=='undefined'&&THREE.GLTFLoader){try{new THREE.GLTFLoader().load(url,g=>{c.state='ready';c.scene=g.scene;T3.dirty=true;},undefined,()=>{c.state='error';});}catch(e){c.state='error';}}else c.state='error';return c;}
+  if(typeof THREE!=='undefined'&&THREE.GLTFLoader){try{gltfLoader().load(url,g=>{c.state='ready';c.scene=g.scene;T3.dirty=true;},undefined,()=>{c.state='error';});}catch(e){c.state='error';}}else c.state='error';return c;}
 /* Модель товара (glTF: Y вверх, метры, перед по +Z) вписывается в габарит предмета w×H×d и ставится на пол по центру футпринта */
 function productModel3D(f,wM,hM,dM){const pr=f.productId&&PRODUCT_BY_ID.get(f.productId);if(!pr||!pr.model||!pr.model.url)return null;const c=glbFor(pr.model.url);if(c.state!=='ready')return null;
   const m=c.scene.clone(true);const box=new THREE.Box3().setFromObject(m);const sz=new THREE.Vector3();box.getSize(sz);if(sz.x<=0||sz.y<=0||sz.z<=0)return null;

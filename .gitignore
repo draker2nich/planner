@@ -2,3 +2,5 @@ data/
 node_modules/
 .env*
 .vercel/
+/catalog-work/
+/catalog-pack/

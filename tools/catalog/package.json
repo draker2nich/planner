@@ -1,0 +1,17 @@
+{
+  "name": "planner-catalog-tools",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Наполнение каталога набором товаров с 3D‑моделями: отбор, сжатие, импорт в базу",
+  "engines": {
+    "node": ">=22.5"
+  },
+  "scripts": {
+    "test": "node --test"
+  },
+  "dependencies": {
+    "gltfpack": "^1.2.0",
+    "sharp": "^0.34.0"
+  }
+}

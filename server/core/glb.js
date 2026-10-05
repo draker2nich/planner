@@ -3,7 +3,9 @@
    Соглашение платформы для моделей: Y вверх, метры, перед по +Z, начало координат — центр низа футпринта. */
 
 const MAGIC = 0x46546c67, CHUNK_JSON = 0x4e4f534a, CHUNK_BIN = 0x004e4942;
-const UNSUPPORTED_EXT = { KHR_draco_mesh_compression: 'сжатие Draco', EXT_meshopt_compression: 'сжатие meshopt' };
+/* EXT_meshopt_compression поддерживается: редактор подключает MeshoptDecoder (three r128), а габарит берётся из min/max вершин,
+   которые остаются в JSON‑части и при сжатии. Draco и более новый KHR_meshopt_compression загрузчик r128 не читает. */
+const UNSUPPORTED_EXT = { KHR_draco_mesh_compression: 'сжатие Draco', KHR_meshopt_compression: 'сжатие KHR_meshopt (нужен вариант EXT_meshopt: gltfpack -cc)' };
 
 class GlbError extends Error { constructor(code, message) { super(message); this.code = code; } }
 

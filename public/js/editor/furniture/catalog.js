@@ -65,7 +65,11 @@ async function productDialog(t,formId,cons,opts={}){
       let list=PRODUCTS.filter(pr=>pr.typeId===t.id&&(fid==='any'||pr.formId===fid)&&matchProduct(pr,formOf(t,pr.formId),cons));
       const rel=(pr)=>{let s=0;for(const k in pr.dims){const tg=target(k);if(tg!=null)s+=Math.abs(pr.dims[k]-tg);}return s;};
       list.sort((a,b)=>sort==='price'?(a.price-b.price):sort==='size'?(Object.values(a.dims).reduce((x,y)=>x+y,0)-Object.values(b.dims).reduce((x,y)=>x+y,0)):(rel(a)-rel(b)));
-      list.forEach(pr=>{const f=formOf(t,pr.formId);const dims=f.dims.map(k=>fmt(pr.dims[k])).join('×')+'×'+fmt(pr.dims.H);grid.append(h('button',{type:'button',class:'pt',onclick:()=>api.close({product:pr})},h('img',{src:productThumb(pr),class:pr.images&&pr.images.length?'':'gen',alt:'',width:'88',height:'88',loading:'lazy'}),h('b',{},pr.name),h('span',{},dims+' '+UNITS[P.unit].l),h('span',{},pr.price?fmtPrice(pr.price,pr.currency):''),h('i',{},f.name+(pr.model?' · 3D':''))));});
+      /* товаров одного типа может быть тысяча и больше — плитки добавляются порциями */
+      const PAGE=120;let shown=0;const more=h('button',{type:'button',class:'pt ph',onclick:()=>addPage()},h('div',{class:'q'},'…'),h('b',{},'Показать ещё'),h('span',{}));
+      const addTile=pr=>{const f=formOf(t,pr.formId);const dims=f.dims.map(k=>fmt(pr.dims[k])).join('×')+'×'+fmt(pr.dims.H);grid.append(h('button',{type:'button',class:'pt',onclick:()=>api.close({product:pr})},h('img',{src:productThumb(pr),class:pr.images&&pr.images.length?'':'gen',alt:'',width:'88',height:'88',loading:'lazy'}),h('b',{},pr.name),h('span',{},dims+' '+UNITS[P.unit].l),h('span',{},pr.price?fmtPrice(pr.price,pr.currency):''),h('i',{},f.name+(pr.model?' · 3D':''))));};
+      const addPage=()=>{more.remove();list.slice(shown,shown+PAGE).forEach(addTile);shown=Math.min(list.length,shown+PAGE);if(shown<list.length){more.lastChild.textContent=`осталось ${list.length-shown}`;grid.append(more);}};
+      addPage();
       if(!list.length)grid.append(h('div',{class:'hint'},'Ничего не подходит — ослабьте ограничения'));};
     fill();
     api.buttons=[{label:'← Изменить размеры',onClick:a=>a.close({back:true})},{label:'Отмена',cancel:true,onClick:a=>a.close(null)}];
