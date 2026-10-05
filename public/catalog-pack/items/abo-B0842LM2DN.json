@@ -1,0 +1,74 @@
+{
+ "id": "abo-B0842LM2DN",
+ "source": "abo",
+ "typeId": "plant",
+ "formId": "round",
+ "name": "Stone & Beam Large Windowpane Footed Stoneware Planter",
+ "brand": "Stone & Beam",
+ "price": 3090,
+ "currency": "RUB",
+ "dims": {
+  "H": 235,
+  "DIA": 228
+ },
+ "colors": [
+  "белый"
+ ],
+ "materials": [
+  "камень"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B0842LM2DN",
+ "model": {
+  "file": "models/abo-B0842LM2DN.glb",
+  "bytes": 198340,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.114,
+     0,
+     -0.114000358
+    ],
+    "max": [
+     0.114000079868,
+     0.2350000194072,
+     0.113999721868
+    ],
+    "size": [
+     0.228000079868,
+     0.2350000194072,
+     0.228000079868
+    ]
+   },
+   "tris": 7584,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 27363704,
+  "bytes": 198340,
+  "srcTris": 7584,
+  "tris": 7584,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 27185045,
+   "after": 154602,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0009,
+   1.0006,
+   1.0009
+  ]
+ },
+ "image": {
+  "file": "images/abo-B0842LM2DN.jpg",
+  "bytes": 8967,
+  "mime": "image/jpeg"
+ }
+}

@@ -1,0 +1,75 @@
+{
+ "id": "abo-B084W2S61W",
+ "source": "abo",
+ "typeId": "bar-stool",
+ "formId": "round",
+ "name": "Stone & Beam Elise Upholstered Barstool",
+ "brand": "Stone & Beam",
+ "price": 15990,
+ "currency": "RUB",
+ "dims": {
+  "H": 1078,
+  "DIA": 577
+ },
+ "colors": [
+  "серый",
+  "синий"
+ ],
+ "materials": [
+  "ткань"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B084W2S61W",
+ "model": {
+  "file": "models/abo-B084W2S61W.glb",
+  "bytes": 233656,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.288499981,
+     0,
+     -0.325446039
+    ],
+    "max": [
+     0.2884994446973,
+     1.0779999533811,
+     0.2515533866973
+    ],
+    "size": [
+     0.5769994256973,
+     1.0779999533811,
+     0.5769994256973
+    ]
+   },
+   "tris": 25688,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 43611160,
+  "bytes": 233656,
+  "srcTris": 25688,
+  "tris": 25688,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 43008678,
+   "after": 108542,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.2279,
+   1.0001,
+   1.0007
+  ]
+ },
+ "image": {
+  "file": "images/abo-B084W2S61W.jpg",
+  "bytes": 4503,
+  "mime": "image/jpeg"
+ }
+}

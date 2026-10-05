@@ -1,0 +1,77 @@
+{
+ "id": "abo-B07DBDPMRS",
+ "source": "abo",
+ "typeId": "console",
+ "formId": "rect",
+ "name": "Ravenna Home Angela Modern Turned Leg Console Entry Table",
+ "brand": "Ravenna Home",
+ "price": 25890,
+ "currency": "RUB",
+ "dims": {
+  "H": 808,
+  "W": 1197,
+  "D": 384
+ },
+ "colors": [
+  "серый"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07DBDPMRS",
+ "model": {
+  "file": "models/abo-B07DBDPMRS.glb",
+  "bytes": 126512,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.598504543,
+     0,
+     -0.176290512
+    ],
+    "max": [
+     0.5984954950754,
+     0.8080097308842,
+     0.20773147421279997
+    ],
+    "size": [
+     1.1970000380754,
+     0.8080097308842,
+     0.3840219862128
+    ]
+   },
+   "tris": 19002,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 718476,
+  "bytes": 126512,
+  "srcTris": 19002,
+  "tris": 19002,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 202166,
+   "after": 7034,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9998,
+   0.9997,
+   1.0001
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07DBDPMRS.jpg",
+  "bytes": 5201,
+  "mime": "image/jpeg"
+ }
+}

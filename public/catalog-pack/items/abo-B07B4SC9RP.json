@@ -1,0 +1,78 @@
+{
+ "id": "abo-B07B4SC9RP",
+ "source": "abo",
+ "typeId": "bench",
+ "formId": "rect",
+ "name": "Stone & Beam Contemporary Metal Bedroom Bench with Cushion",
+ "brand": "Stone & Beam",
+ "price": 23990,
+ "currency": "RUB",
+ "dims": {
+  "H": 488,
+  "W": 1488,
+  "D": 479
+ },
+ "colors": [
+  "белый",
+  "бежевый"
+ ],
+ "materials": [
+  "металл"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07B4SC9RP",
+ "model": {
+  "file": "models/abo-B07B4SC9RP.glb",
+  "bytes": 140632,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.744749904,
+     0,
+     -0.239499971
+    ],
+    "max": [
+     0.7432500244010999,
+     0.48800730118409996,
+     0.23951557086579997
+    ],
+    "size": [
+     1.4879999284010998,
+     0.48800730118409996,
+     0.4790155418658
+    ]
+   },
+   "tris": 14168,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 1859588,
+  "bytes": 140632,
+  "srcTris": 14168,
+  "tris": 14168,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 1489429,
+   "after": 60538,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9999,
+   0.9997,
+   0.9995
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07B4SC9RP.jpg",
+  "bytes": 6075,
+  "mime": "image/jpeg"
+ }
+}

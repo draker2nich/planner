@@ -1,0 +1,69 @@
+{
+ "id": "abo-B07TR68JS4",
+ "source": "abo",
+ "typeId": "beanbag",
+ "formId": "round",
+ "name": "AmazonBasics Memory Foam Filled Bean Bag Chair with Microfiber Cover",
+ "brand": "AmazonBasics",
+ "price": 7890,
+ "currency": "RUB",
+ "dims": {
+  "H": 788,
+  "DIA": 1218
+ },
+ "colors": [
+  "розовый"
+ ],
+ "materials": [
+  "ткань"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B07TR68JS4",
+ "model": {
+  "file": "models/abo-B07TR68JS4.glb",
+  "bytes": 430932,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.610932946,
+     0.000287927862,
+     -0.606264353
+    ],
+    "max": [
+     0.6070448584256,
+     0.7878882977628001,
+     0.6111186994
+    ],
+    "size": [
+     1.2179778044256,
+     0.7876003699008001,
+     1.2173830524
+    ]
+   },
+   "tris": 30000,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 48508956,
+  "bytes": 430932,
+  "srcTris": 369030,
+  "tris": 30000,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 38107299,
+   "after": 269726,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0094,
+   1.0003,
+   0.9996
+  ]
+ }
+}

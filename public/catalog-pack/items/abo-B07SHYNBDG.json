@@ -1,0 +1,73 @@
+{
+ "id": "abo-B07SHYNBDG",
+ "source": "abo",
+ "typeId": "sofa",
+ "formId": "straight",
+ "name": "Marque Amazon",
+ "brand": "Alkove",
+ "price": 95990,
+ "currency": "RUB",
+ "dims": {
+  "H": 820,
+  "W": 1450,
+  "D": 1002
+ },
+ "colors": [
+  "серый"
+ ],
+ "materials": [],
+ "styleTags": [],
+ "url": "https://www.amazon.fr/dp/B07SHYNBDG",
+ "model": {
+  "file": "models/abo-B07SHYNBDG.glb",
+  "bytes": 316068,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.72502625,
+     0,
+     -0.514916122
+    ],
+    "max": [
+     0.7249715995159001,
+     0.8200103812345,
+     0.48706310368329997
+    ],
+    "size": [
+     1.4499978495159,
+     0.8200103812345,
+     1.0019792256833
+    ]
+   },
+   "tris": 29998,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 11247140,
+  "bytes": 316068,
+  "srcTris": 34340,
+  "tris": 29998,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 10456146,
+   "after": 164530,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   1,
+   1.0003
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07SHYNBDG.jpg",
+  "bytes": 5331,
+  "mime": "image/jpeg"
+ }
+}

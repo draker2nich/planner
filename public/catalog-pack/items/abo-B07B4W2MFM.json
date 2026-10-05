@@ -1,0 +1,77 @@
+{
+ "id": "abo-B07B4W2MFM",
+ "source": "abo",
+ "typeId": "dresser",
+ "formId": "rect",
+ "name": "Stone & Beam Bishop Modern Wood Bedroom Dresser",
+ "brand": "Stone & Beam",
+ "price": 32690,
+ "currency": "RUB",
+ "dims": {
+  "H": 1295,
+  "W": 967,
+  "D": 483
+ },
+ "colors": [
+  "натуральное дерево"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07B4W2MFM",
+ "model": {
+  "file": "models/abo-B07B4W2MFM.glb",
+  "bytes": 356224,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.483500004,
+     0,
+     -0.241888806
+    ],
+    "max": [
+     0.4834617466471,
+     1.2949999477521,
+     0.24107827455699998
+    ],
+    "size": [
+     0.9669617506471,
+     1.2949999477521,
+     0.482967080557
+    ]
+   },
+   "tris": 28252,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 4178700,
+  "bytes": 356224,
+  "srcTris": 28252,
+  "tris": 28252,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 3008944,
+   "after": 177358,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   0.9998,
+   1.0002
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07B4W2MFM.jpg",
+  "bytes": 10979,
+  "mime": "image/jpeg"
+ }
+}

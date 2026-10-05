@@ -1,0 +1,77 @@
+{
+ "id": "abo-B07SG5G5JJ",
+ "source": "abo",
+ "typeId": "coffee-table",
+ "formId": "rect",
+ "name": "Alkove Hayes Coffee Table with Shelf",
+ "brand": "Alkove",
+ "price": 19990,
+ "currency": "RUB",
+ "dims": {
+  "H": 490,
+  "W": 1040,
+  "D": 690
+ },
+ "colors": [
+  "коричневый"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.co.uk/dp/B07SG5G5JJ",
+ "model": {
+  "file": "models/abo-B07SG5G5JJ.glb",
+  "bytes": 219456,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.519999981,
+     -2.93438562e-9,
+     -0.345000029
+    ],
+    "max": [
+     0.5200000396689,
+     0.49000550030331436,
+     0.34496885488269996
+    ],
+    "size": [
+     1.0400000206689,
+     0.4900055032377,
+     0.6899688838827
+    ]
+   },
+   "tris": 30000,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 20861524,
+  "bytes": 219456,
+  "srcTris": 37296,
+  "tris": 30000,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 19751775,
+   "after": 76578,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   1,
+   1
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07SG5G5JJ.jpg",
+  "bytes": 5914,
+  "mime": "image/jpeg"
+ }
+}

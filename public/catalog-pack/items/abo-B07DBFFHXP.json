@@ -1,0 +1,77 @@
+{
+ "id": "abo-B07DBFFHXP",
+ "source": "abo",
+ "typeId": "tv-stand",
+ "formId": "rect",
+ "name": "Ravenna Home Peterson Modern Glass Cabinet Storage TV Media Entertainment Console Stand",
+ "brand": "Ravenna Home",
+ "price": 25590,
+ "currency": "RUB",
+ "dims": {
+  "H": 603,
+  "W": 1167,
+  "D": 344
+ },
+ "colors": [
+  "серый"
+ ],
+ "materials": [
+  "стекло"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07DBFFHXP",
+ "model": {
+  "file": "models/abo-B07DBFFHXP.glb",
+  "bytes": 89784,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.58383739,
+     0,
+     -0.167027727
+    ],
+    "max": [
+     0.5831627193911,
+     0.6029821110905,
+     0.1769534442293
+    ],
+    "size": [
+     1.1670001093911,
+     0.6029821110905,
+     0.3439811712293
+    ]
+   },
+   "tris": 16248,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 615060,
+  "bytes": 89784,
+  "srcTris": 16248,
+  "tris": 16248,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 200759,
+   "after": 8268,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9997,
+   0.9993,
+   0.9986
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07DBFFHXP.jpg",
+  "bytes": 3644,
+  "mime": "image/jpeg"
+ }
+}

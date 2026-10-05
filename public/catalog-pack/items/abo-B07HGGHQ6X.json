@@ -1,0 +1,75 @@
+{
+ "id": "abo-B07HGGHQ6X",
+ "source": "abo",
+ "typeId": "pouf",
+ "formId": "rect",
+ "name": "Rivet Audrey Large Ottoman/Footstool",
+ "brand": "Rivet",
+ "price": 21890,
+ "currency": "RUB",
+ "dims": {
+  "H": 455,
+  "W": 1005,
+  "D": 1005
+ },
+ "colors": [
+  "серый"
+ ],
+ "materials": [],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.co.uk/dp/B07HGGHQ6X",
+ "model": {
+  "file": "models/abo-B07HGGHQ6X.glb",
+  "bytes": 659640,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.502499998,
+     8.94069672e-8,
+     -0.502500057
+    ],
+    "max": [
+     0.5025001645763001,
+     0.45498917601066724,
+     0.5025001055763001
+    ],
+    "size": [
+     1.0050001625763,
+     0.4549890866037,
+     1.0050001625763
+    ]
+   },
+   "tris": 11016,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 40029860,
+  "bytes": 659640,
+  "srcTris": 11016,
+  "tris": 11016,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 39689264,
+   "after": 598916,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9999,
+   1.0002,
+   0.9999
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07HGGHQ6X.jpg",
+  "bytes": 6595,
+  "mime": "image/jpeg"
+ }
+}

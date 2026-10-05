@@ -1,0 +1,77 @@
+{
+ "id": "abo-B07B7B5NXQ",
+ "source": "abo",
+ "typeId": "bar-counter",
+ "formId": "rect",
+ "name": "Stone & Beam Ariana Rustic Farmhouse Metal Counter-Height Bar Table",
+ "brand": "Stone & Beam",
+ "price": 47290,
+ "currency": "RUB",
+ "dims": {
+  "H": 902,
+  "W": 1700,
+  "D": 551
+ },
+ "colors": [
+  "коричневый"
+ ],
+ "materials": [
+  "металл"
+ ],
+ "styleTags": [
+  "кантри"
+ ],
+ "url": "https://www.amazon.com/dp/B07B7B5NXQ",
+ "model": {
+  "file": "models/abo-B07B7B5NXQ.glb",
+  "bytes": 126060,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.850000024,
+     0,
+     -0.2755
+    ],
+    "max": [
+     0.8499999759170002,
+     0.902038698607,
+     0.27549798569
+    ],
+    "size": [
+     1.6999999999170001,
+     0.902038698607,
+     0.55099798569
+    ]
+   },
+   "tris": 4702,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 3263468,
+  "bytes": 126060,
+  "srcTris": 4702,
+  "tris": 4702,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 3111484,
+   "after": 90038,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   0.9995,
+   1.0005
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07B7B5NXQ.jpg",
+  "bytes": 6444,
+  "mime": "image/jpeg"
+ }
+}

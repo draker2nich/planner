@@ -1,0 +1,78 @@
+{
+ "id": "abo-B084L7SNDG",
+ "source": "abo",
+ "typeId": "small-table",
+ "formId": "rect",
+ "name": "Stone & Beam Solid Pine Rustic Farmhouse End Table",
+ "brand": "Stone & Beam",
+ "price": 8990,
+ "currency": "RUB",
+ "dims": {
+  "H": 610,
+  "W": 558,
+  "D": 559
+ },
+ "colors": [
+  "натуральное дерево"
+ ],
+ "materials": [
+  "дерево",
+  "камень"
+ ],
+ "styleTags": [
+  "кантри"
+ ],
+ "url": "https://www.amazon.com/dp/B084L7SNDG",
+ "model": {
+  "file": "models/abo-B084L7SNDG.glb",
+  "bytes": 306060,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.278999984,
+     0,
+     -0.279500008
+    ],
+    "max": [
+     0.2789845424214,
+     0.6100000331216999,
+     0.27948982885869994
+    ],
+    "size": [
+     0.5579845264214,
+     0.6100000331216999,
+     0.5589898368587
+    ]
+   },
+   "tris": 9652,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 34081340,
+  "bytes": 306060,
+  "srcTris": 9652,
+  "tris": 9652,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 33817123,
+   "after": 243350,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9993,
+   1.0008,
+   0.9998
+  ]
+ },
+ "image": {
+  "file": "images/abo-B084L7SNDG.jpg",
+  "bytes": 6268,
+  "mime": "image/jpeg"
+ }
+}

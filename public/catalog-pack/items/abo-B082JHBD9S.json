@@ -1,0 +1,78 @@
+{
+ "id": "abo-B082JHBD9S",
+ "source": "abo",
+ "typeId": "sconce",
+ "formId": "wall",
+ "name": "Stone & Beam Contemporary Outdoor Wall Sconce with Frosted Glass Shade",
+ "brand": "Stone & Beam",
+ "price": 7590,
+ "currency": "RUB",
+ "dims": {
+  "H": 345,
+  "W": 222,
+  "D": 252,
+  "E": 1700
+ },
+ "colors": [
+  "чёрный"
+ ],
+ "materials": [
+  "стекло"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B082JHBD9S",
+ "model": {
+  "file": "models/abo-B082JHBD9S.glb",
+  "bytes": 186020,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.110999987,
+     -0.172499985,
+     0
+    ],
+    "max": [
+     0.11099776489480001,
+     0.17249993620020002,
+     0.2520059852898
+    ],
+    "size": [
+     0.2219977518948,
+     0.3449999212002,
+     0.2520059852898
+    ]
+   },
+   "tris": 29997,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 13467972,
+  "bytes": 186020,
+  "srcTris": 89704,
+  "tris": 29997,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 11369264,
+   "after": 14974,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9989,
+   1.0002,
+   1.0009
+  ]
+ },
+ "image": {
+  "file": "images/abo-B082JHBD9S.jpg",
+  "bytes": 4052,
+  "mime": "image/jpeg"
+ }
+}

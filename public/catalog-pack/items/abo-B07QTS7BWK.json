@@ -1,0 +1,76 @@
+{
+ "id": "abo-B07QTS7BWK",
+ "source": "abo",
+ "typeId": "bookcase",
+ "formId": "rect",
+ "name": "Movian Martin Geometric Bookcase/Shelving unit with 3-Shelves",
+ "brand": "Movian",
+ "price": 20490,
+ "currency": "RUB",
+ "dims": {
+  "H": 1138,
+  "W": 770,
+  "D": 350
+ },
+ "colors": [
+  "натуральное дерево"
+ ],
+ "materials": [
+  "дерево",
+  "ЛДСП / МДФ"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.co.uk/dp/B07QTS7BWK",
+ "model": {
+  "file": "models/abo-B07QTS7BWK.glb",
+  "bytes": 237164,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.384993553,
+     5.96046448e-8,
+     -0.174999997
+    ],
+    "max": [
+     0.3849954926840001,
+     1.1380001079078448,
+     0.17502028276560003
+    ],
+    "size": [
+     0.7699890456840001,
+     1.1380000483032,
+     0.3500202797656
+    ]
+   },
+   "tris": 29996,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 19998484,
+  "bytes": 237164,
+  "srcTris": 46236,
+  "tris": 29996,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 18508965,
+   "after": 86646,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   1,
+   1
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07QTS7BWK.jpg",
+  "bytes": 3997,
+  "mime": "image/jpeg"
+ }
+}

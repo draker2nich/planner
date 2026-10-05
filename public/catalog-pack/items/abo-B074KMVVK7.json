@@ -1,0 +1,75 @@
+{
+ "id": "abo-B074KMVVK7",
+ "source": "abo",
+ "typeId": "sideboard",
+ "formId": "rect",
+ "name": "Stone & Beam Fremont 3-Door Cabinet",
+ "brand": "Stone & Beam",
+ "price": 41890,
+ "currency": "RUB",
+ "dims": {
+  "H": 805,
+  "W": 1204,
+  "D": 403
+ },
+ "colors": [
+  "серый"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B074KMVVK7",
+ "model": {
+  "file": "models/abo-B074KMVVK7.glb",
+  "bytes": 245748,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.601999998,
+     0,
+     -0.201499999
+    ],
+    "max": [
+     0.6019999405916999,
+     0.8050183316446,
+     0.20152360249159998
+    ],
+    "size": [
+     1.2039999385917,
+     0.8050183316446,
+     0.4030236014916
+    ]
+   },
+   "tris": 19272,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 25005828,
+  "bytes": 245748,
+  "srcTris": 19272,
+  "tris": 19272,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 24278329,
+   "after": 133408,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   0.9998,
+   1.0011
+  ]
+ },
+ "image": {
+  "file": "images/abo-B074KMVVK7.jpg",
+  "bytes": 11288,
+  "mime": "image/jpeg"
+ }
+}

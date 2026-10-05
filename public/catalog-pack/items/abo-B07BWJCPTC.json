@@ -1,0 +1,78 @@
+{
+ "id": "abo-B07BWJCPTC",
+ "source": "abo",
+ "typeId": "sofa",
+ "formId": "straight",
+ "name": "Rivet Revolve Modern Upholstered Sofa Bed",
+ "brand": "Rivet",
+ "price": 90190,
+ "currency": "RUB",
+ "dims": {
+  "H": 866,
+  "W": 1713,
+  "D": 940
+ },
+ "colors": [
+  "серый"
+ ],
+ "materials": [
+  "дерево",
+  "ткань"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07BWJCPTC",
+ "model": {
+  "file": "models/abo-B07BWJCPTC.glb",
+  "bytes": 322636,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.856428325,
+     0,
+     -0.448645502
+    ],
+    "max": [
+     0.856559560295,
+     0.86595651993,
+     0.49102501775499996
+    ],
+    "size": [
+     1.712987885295,
+     0.86595651993,
+     0.9396705197549999
+    ]
+   },
+   "tris": 30013,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 19155900,
+  "bytes": 322636,
+  "srcTris": 562080,
+  "tris": 30013,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 3099359,
+   "after": 152670,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0001,
+   1.0001,
+   0.9996
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07BWJCPTC.jpg",
+  "bytes": 3711,
+  "mime": "image/jpeg"
+ }
+}

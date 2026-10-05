@@ -1,0 +1,80 @@
+{
+ "id": "abo-B072ZMT5SD",
+ "source": "abo",
+ "typeId": "console",
+ "formId": "rect",
+ "name": "Rivet King Street Industrial TV Media Console Table with Three Drawers",
+ "brand": "Rivet",
+ "price": 31490,
+ "currency": "RUB",
+ "dims": {
+  "H": 395,
+  "W": 1486,
+  "D": 399
+ },
+ "colors": [
+  "чёрный"
+ ],
+ "materials": [
+  "дерево",
+  "ЛДСП / МДФ",
+  "металл",
+  "стекло"
+ ],
+ "styleTags": [
+  "лофт"
+ ],
+ "url": "https://www.amazon.com/dp/B072ZMT5SD",
+ "model": {
+  "file": "models/abo-B072ZMT5SD.glb",
+  "bytes": 239012,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.742999971,
+     0,
+     -0.199499995
+    ],
+    "max": [
+     0.7429999846548,
+     0.395014942738,
+     0.1995059138644
+    ],
+    "size": [
+     1.4859999556548,
+     0.395014942738,
+     0.3990059088644
+    ]
+   },
+   "tris": 29999,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 22394716,
+  "bytes": 239012,
+  "srcTris": 46460,
+  "tris": 29999,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 20571945,
+   "after": 52160,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9999,
+   0.9989,
+   1.0009
+  ]
+ },
+ "image": {
+  "file": "images/abo-B072ZMT5SD.jpg",
+  "bytes": 6411,
+  "mime": "image/jpeg"
+ }
+}

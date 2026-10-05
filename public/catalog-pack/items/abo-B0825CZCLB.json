@@ -1,0 +1,76 @@
+{
+ "id": "abo-B0825CZCLB",
+ "source": "abo",
+ "typeId": "table-lamp",
+ "formId": "round",
+ "name": "Stone & Beam Contemporary 2-Tone Textured Ceramic Table Lamp",
+ "brand": "Stone & Beam",
+ "price": 7190,
+ "currency": "RUB",
+ "dims": {
+  "H": 452,
+  "DIA": 254
+ },
+ "colors": [
+  "синий"
+ ],
+ "materials": [
+  "камень"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B0825CZCLB",
+ "model": {
+  "file": "models/abo-B0825CZCLB.glb",
+  "bytes": 325152,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.127010226,
+     0,
+     -0.12697053
+    ],
+    "max": [
+     0.126979396847,
+     0.4519999990335,
+     0.127019092847
+    ],
+    "size": [
+     0.253989622847,
+     0.4519999990335,
+     0.253989622847
+    ]
+   },
+   "tris": 29997,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 4,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 33342412,
+  "bytes": 325152,
+  "srcTris": 67640,
+  "tris": 29997,
+  "textures": {
+   "images": 4,
+   "resized": 4,
+   "before": 31781876,
+   "after": 157590,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0008,
+   0.9997,
+   1.0008
+  ]
+ },
+ "image": {
+  "file": "images/abo-B0825CZCLB.jpg",
+  "bytes": 4717,
+  "mime": "image/jpeg"
+ }
+}

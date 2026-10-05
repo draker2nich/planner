@@ -1,0 +1,79 @@
+{
+ "id": "abo-B075X4VWKK",
+ "source": "abo",
+ "typeId": "armchair",
+ "formId": "rect",
+ "name": "Stone & Beam Cameron Classic Oversized Chair",
+ "brand": "Stone & Beam",
+ "price": 40990,
+ "currency": "RUB",
+ "dims": {
+  "H": 1178,
+  "W": 964,
+  "D": 1060
+ },
+ "colors": [
+  "синий",
+  "зелёный"
+ ],
+ "materials": [
+  "камень"
+ ],
+ "styleTags": [
+  "классика",
+  "бохо"
+ ],
+ "url": "https://www.amazon.com/dp/B075X4VWKK",
+ "model": {
+  "file": "models/abo-B075X4VWKK.glb",
+  "bytes": 611896,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.482000053,
+     0,
+     -0.587185502
+    ],
+    "max": [
+     0.48201419091860004,
+     1.1779999521234,
+     0.4728203146516
+    ],
+    "size": [
+     0.9640142439186,
+     1.1779999521234,
+     1.0600058166516
+    ]
+   },
+   "tris": 21180,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 4358948,
+  "bytes": 611896,
+  "srcTris": 21180,
+  "tris": 21180,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 3840349,
+   "after": 488236,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9997,
+   1.0002,
+   1
+  ]
+ },
+ "image": {
+  "file": "images/abo-B075X4VWKK.jpg",
+  "bytes": 8607,
+  "mime": "image/jpeg"
+ }
+}

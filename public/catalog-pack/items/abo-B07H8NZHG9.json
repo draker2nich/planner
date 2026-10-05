@@ -1,0 +1,71 @@
+{
+ "id": "abo-B07H8NZHG9",
+ "source": "abo",
+ "typeId": "shelving",
+ "formId": "rect",
+ "name": "Movian Oker.",
+ "brand": "Movian",
+ "price": 24590,
+ "currency": "RUB",
+ "dims": {
+  "H": 780,
+  "W": 1490,
+  "D": 400
+ },
+ "colors": [],
+ "materials": [],
+ "styleTags": [],
+ "url": "https://www.amazon.de/dp/B07H8NZHG9",
+ "model": {
+  "file": "models/abo-B07H8NZHG9.glb",
+  "bytes": 68596,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.744974494,
+     0,
+     -0.199999988
+    ],
+    "max": [
+     0.745025525105,
+     0.77996949056,
+     0.19998903013
+    ],
+    "size": [
+     1.490000019105,
+     0.77996949056,
+     0.39998901813
+    ]
+   },
+   "tris": 2576,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 13971788,
+  "bytes": 68596,
+  "srcTris": 2576,
+  "tris": 2576,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 13884047,
+   "after": 47528,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   1,
+   1
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07H8NZHG9.jpg",
+  "bytes": 2945,
+  "mime": "image/jpeg"
+ }
+}

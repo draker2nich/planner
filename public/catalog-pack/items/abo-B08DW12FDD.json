@@ -1,0 +1,75 @@
+{
+ "id": "abo-B08DW12FDD",
+ "source": "abo",
+ "typeId": "desk",
+ "formId": "rect",
+ "name": "AmazonBasics 55\" L-Shape Office Corner Desk",
+ "brand": "AmazonBasics",
+ "price": 32590,
+ "currency": "RUB",
+ "dims": {
+  "H": 762,
+  "W": 1400,
+  "D": 1400
+ },
+ "colors": [
+  "коричневый"
+ ],
+ "materials": [],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B08DW12FDD",
+ "model": {
+  "file": "models/abo-B08DW12FDD.glb",
+  "bytes": 212716,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.705351532,
+     0,
+     -0.700300097
+    ],
+    "max": [
+     0.6946483439026999,
+     0.7619971246673,
+     0.6996997789027
+    ],
+    "size": [
+     1.3999998759027,
+     0.7619971246673,
+     1.3999998759027
+    ]
+   },
+   "tris": 29999,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 30542680,
+  "bytes": 212716,
+  "srcTris": 37472,
+  "tris": 29999,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 29628592,
+   "after": 67636,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0003,
+   1,
+   1.0003
+  ]
+ },
+ "image": {
+  "file": "images/abo-B08DW12FDD.jpg",
+  "bytes": 2722,
+  "mime": "image/jpeg"
+ }
+}

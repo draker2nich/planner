@@ -1,0 +1,78 @@
+{
+ "id": "abo-B073WH7PZ7",
+ "source": "abo",
+ "typeId": "mirror",
+ "formId": "wall",
+ "name": "Stone & Beam Antique-Style Metal Frame Hanging Wall Mirror Decor",
+ "brand": "Stone & Beam",
+ "price": 14190,
+ "currency": "RUB",
+ "dims": {
+  "H": 811,
+  "W": 462,
+  "D": 66,
+  "E": 1200
+ },
+ "colors": [
+  "коричневый"
+ ],
+ "materials": [
+  "стекло"
+ ],
+ "styleTags": [
+  "классика"
+ ],
+ "url": "https://www.amazon.com/dp/B073WH7PZ7",
+ "model": {
+  "file": "models/abo-B073WH7PZ7.glb",
+  "bytes": 96364,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.231000006,
+     -0.405499995,
+     0
+    ],
+    "max": [
+     0.2310071456886,
+     0.4055000227986,
+     0.0659868780886
+    ],
+    "size": [
+     0.4620071516886,
+     0.8110000177986,
+     0.0659868780886
+    ]
+   },
+   "tris": 9808,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 1010256,
+  "bytes": 96364,
+  "srcTris": 9808,
+  "tris": 9808,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 758211,
+   "after": 39628,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0005,
+   0.9998,
+   1.0043
+  ]
+ },
+ "image": {
+  "file": "images/abo-B073WH7PZ7.jpg",
+  "bytes": 4725,
+  "mime": "image/jpeg"
+ }
+}

@@ -1,0 +1,80 @@
+{
+ "id": "abo-B07B7J8FV9",
+ "source": "abo",
+ "typeId": "small-table",
+ "formId": "rect",
+ "name": "Rivet Modern White Marble and Wood Double Storage Wood Shelf Side End Table",
+ "brand": "Rivet",
+ "price": 6890,
+ "currency": "RUB",
+ "dims": {
+  "H": 493,
+  "W": 430,
+  "D": 456
+ },
+ "colors": [
+  "белый",
+  "коричневый",
+  "жёлтый"
+ ],
+ "materials": [
+  "металл"
+ ],
+ "styleTags": [
+  "современный",
+  "классика"
+ ],
+ "url": "https://www.amazon.com/dp/B07B7J8FV9",
+ "model": {
+  "file": "models/abo-B07B7J8FV9.glb",
+  "bytes": 231860,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.215007231,
+     0,
+     -0.241148233
+    ],
+    "max": [
+     0.2149797761277,
+     0.4930000096419,
+     0.21483840840290003
+    ],
+    "size": [
+     0.4299870071277,
+     0.4930000096419,
+     0.4559866414029
+    ]
+   },
+   "tris": 12838,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 4578728,
+  "bytes": 231860,
+  "srcTris": 12838,
+  "tris": 12838,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 4241778,
+   "after": 152828,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   1.0006,
+   0.9993
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07B7J8FV9.jpg",
+  "bytes": 6362,
+  "mime": "image/jpeg"
+ }
+}

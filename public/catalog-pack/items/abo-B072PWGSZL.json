@@ -1,0 +1,75 @@
+{
+ "id": "abo-B072PWGSZL",
+ "source": "abo",
+ "typeId": "bed",
+ "formId": "double",
+ "name": "Rivet Ventura Mid-Century Louvered Queen Bed",
+ "brand": "Rivet",
+ "price": 69690,
+ "currency": "RUB",
+ "dims": {
+  "H": 1270,
+  "W": 1600,
+  "L": 2184
+ },
+ "colors": [
+  "коричневый"
+ ],
+ "materials": [],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B072PWGSZL",
+ "model": {
+  "file": "models/abo-B072PWGSZL.glb",
+  "bytes": 161104,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.800000012,
+     0,
+     -1.09200001
+    ],
+    "max": [
+     0.7999736098339999,
+     1.270034052259,
+     1.091999977211
+    ],
+    "size": [
+     1.599973621834,
+     1.270034052259,
+     2.183999987211
+    ]
+   },
+   "tris": 23184,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 16288316,
+  "bytes": 161104,
+  "srcTris": 23184,
+  "tris": 23184,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 15563710,
+   "after": 59064,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9999,
+   1,
+   0.9998
+  ]
+ },
+ "image": {
+  "file": "images/abo-B072PWGSZL.jpg",
+  "bytes": 6555,
+  "mime": "image/jpeg"
+ }
+}

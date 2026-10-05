@@ -1,0 +1,75 @@
+{
+ "id": "abo-B07F3XM8M3",
+ "source": "abo",
+ "typeId": "console",
+ "formId": "rect",
+ "name": "Ravenna Home Anne Marie Round Wood Shelf Storage Curved Leg Entry Console Table",
+ "brand": "Ravenna Home",
+ "price": 37090,
+ "currency": "RUB",
+ "dims": {
+  "H": 457,
+  "W": 914,
+  "D": 914
+ },
+ "colors": [
+  "чёрный"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B07F3XM8M3",
+ "model": {
+  "file": "models/abo-B07F3XM8M3.glb",
+  "bytes": 99340,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.456982493,
+     0,
+     -0.457212746
+    ],
+    "max": [
+     0.4570175424583,
+     0.4570279124992,
+     0.4567872894583
+    ],
+    "size": [
+     0.9140000354583,
+     0.4570279124992,
+     0.9140000354583
+    ]
+   },
+   "tris": 18704,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 1035976,
+  "bytes": 99340,
+  "srcTris": 18704,
+  "tris": 18704,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 580840,
+   "after": 5820,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9996,
+   0.9998,
+   0.9995
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07F3XM8M3.jpg",
+  "bytes": 5310,
+  "mime": "image/jpeg"
+ }
+}

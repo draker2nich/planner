@@ -1,0 +1,77 @@
+{
+ "id": "abo-B07B8FHTJ4",
+ "source": "abo",
+ "typeId": "sideboard",
+ "formId": "rect",
+ "name": "Stone & Beam Farmhouse Wall Mounted Cabinet Storage Organzier",
+ "brand": "Stone & Beam",
+ "price": 31190,
+ "currency": "RUB",
+ "dims": {
+  "H": 590,
+  "W": 489,
+  "D": 184
+ },
+ "colors": [
+  "бежевый"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "кантри"
+ ],
+ "url": "https://www.amazon.com/dp/B07B8FHTJ4",
+ "model": {
+  "file": "models/abo-B07B8FHTJ4.glb",
+  "bytes": 418116,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.244499996,
+     0,
+     -0.0827562287
+    ],
+    "max": [
+     0.24448372504479998,
+     0.5900000222327999,
+     0.10123388993439998
+    ],
+    "size": [
+     0.4889837210448,
+     0.5900000222327999,
+     0.18399011863439999
+    ]
+   },
+   "tris": 4824,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 3357964,
+  "bytes": 418116,
+  "srcTris": 4824,
+  "tris": 4824,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 3138429,
+   "after": 369690,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   0.9994,
+   1.001
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07B8FHTJ4.jpg",
+  "bytes": 14494,
+  "mime": "image/jpeg"
+ }
+}

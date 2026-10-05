@@ -1,0 +1,77 @@
+{
+ "id": "abo-B07BZPL164",
+ "source": "abo",
+ "typeId": "office-chair",
+ "formId": "round",
+ "name": "Rivet Modern Upholstered Orb Office Chair",
+ "brand": "Rivet",
+ "price": 22690,
+ "currency": "RUB",
+ "dims": {
+  "H": 852,
+  "DIA": 623
+ },
+ "colors": [
+  "синий"
+ ],
+ "materials": [
+  "ткань"
+ ],
+ "styleTags": [
+  "современный",
+  "классика"
+ ],
+ "url": "https://www.amazon.com.mx/dp/B07BZPL164",
+ "model": {
+  "file": "models/abo-B07BZPL164.glb",
+  "bytes": 367580,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.318711579,
+     0,
+     -0.360527158
+    ],
+    "max": [
+     0.30430986642,
+     0.852000028407,
+     0.26249428742
+    ],
+    "size": [
+     0.62302144542,
+     0.852000028407,
+     0.62302144542
+    ]
+   },
+   "tris": 15872,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2118084,
+  "bytes": 367580,
+  "srcTris": 15872,
+  "tris": 15872,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 1738460,
+   "after": 276622,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9995,
+   0.9995,
+   1.0867
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07BZPL164.jpg",
+  "bytes": 7855,
+  "mime": "image/jpeg"
+ }
+}

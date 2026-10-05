@@ -1,0 +1,78 @@
+{
+ "id": "abo-B084DQ6BV4",
+ "source": "abo",
+ "typeId": "mirror",
+ "formId": "wall",
+ "name": "Ravenna Home Vintage Windowpane Metal Mantel Mirror",
+ "brand": "Ravenna Home",
+ "price": 8290,
+ "currency": "RUB",
+ "dims": {
+  "H": 635,
+  "W": 513,
+  "D": 18,
+  "E": 1200
+ },
+ "colors": [
+  "жёлтый"
+ ],
+ "materials": [
+  "металл"
+ ],
+ "styleTags": [
+  "ретро"
+ ],
+ "url": "https://www.amazon.com/dp/B084DQ6BV4",
+ "model": {
+  "file": "models/abo-B084DQ6BV4.glb",
+  "bytes": 117636,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.256500006,
+     -0.317500025,
+     -1.05839714e-18
+    ],
+    "max": [
+     0.25648451762,
+     0.317500009036,
+     0.017984497087999998
+    ],
+    "size": [
+     0.51298452362,
+     0.635000034036,
+     0.017984497087999998
+    ]
+   },
+   "tris": 10440,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 5482100,
+  "bytes": 117636,
+  "srcTris": 10440,
+  "tris": 10440,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 5171963,
+   "after": 45808,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9992,
+   1.0007,
+   0.991
+  ]
+ },
+ "image": {
+  "file": "images/abo-B084DQ6BV4.jpg",
+  "bytes": 6565,
+  "mime": "image/jpeg"
+ }
+}

@@ -1,0 +1,77 @@
+{
+ "id": "abo-B075Z8M22B",
+ "source": "abo",
+ "typeId": "office-chair",
+ "formId": "round",
+ "name": "Rivet Mid-Century Open Back Swivel Office Desk Chair",
+ "brand": "Rivet",
+ "price": 23690,
+ "currency": "RUB",
+ "dims": {
+  "H": 875,
+  "DIA": 629
+ },
+ "colors": [
+  "серый"
+ ],
+ "materials": [
+  "дерево",
+  "ткань"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B075Z8M22B",
+ "model": {
+  "file": "models/abo-B075Z8M22B.glb",
+  "bytes": 703752,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.314513832,
+     0,
+     -0.313458771
+    ],
+    "max": [
+     0.31448421185010006,
+     0.8749999959579,
+     0.3155392728501
+    ],
+    "size": [
+     0.6289980438501,
+     0.8749999959579,
+     0.6289980438501
+    ]
+   },
+   "tris": 15512,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 3557504,
+  "bytes": 703752,
+  "srcTris": 15512,
+  "tris": 15512,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 3187629,
+   "after": 616302,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0351,
+   0.9999,
+   1.0002
+  ]
+ },
+ "image": {
+  "file": "images/abo-B075Z8M22B.jpg",
+  "bytes": 9776,
+  "mime": "image/jpeg"
+ }
+}

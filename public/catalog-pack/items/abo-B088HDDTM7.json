@@ -1,0 +1,74 @@
+{
+ "id": "abo-B088HDDTM7",
+ "source": "abo",
+ "typeId": "wall-shelf",
+ "formId": "wall",
+ "name": "AmazonBasics Floating Shelves",
+ "brand": "AmazonBasics",
+ "price": 1490,
+ "currency": "RUB",
+ "dims": {
+  "H": 20,
+  "W": 610,
+  "D": 140,
+  "E": 1500
+ },
+ "colors": [
+  "белый"
+ ],
+ "materials": [],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B088HDDTM7",
+ "model": {
+  "file": "models/abo-B088HDDTM7.glb",
+  "bytes": 81872,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.305000007,
+     -0.00999999978,
+     0
+    ],
+    "max": [
+     0.3050000261216999,
+     0.0099945078063,
+     0.139998786824
+    ],
+    "size": [
+     0.6100000331216999,
+     0.0199945075863,
+     0.139998786824
+    ]
+   },
+   "tris": 12994,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 17313672,
+  "bytes": 81872,
+  "srcTris": 12994,
+  "tris": 12994,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 16686164,
+   "after": 17708,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0007,
+   0.9967,
+   1.0003
+  ]
+ },
+ "image": {
+  "file": "images/abo-B088HDDTM7.jpg",
+  "bytes": 1794,
+  "mime": "image/jpeg"
+ }
+}

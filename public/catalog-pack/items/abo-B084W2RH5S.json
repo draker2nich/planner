@@ -1,0 +1,75 @@
+{
+ "id": "abo-B084W2RH5S",
+ "source": "abo",
+ "typeId": "chair",
+ "formId": "rect",
+ "name": "Stone & Beam Vivianne Modern Upholstered Armless Dining Chair with Casters",
+ "brand": "Stone & Beam",
+ "price": 14790,
+ "currency": "RUB",
+ "dims": {
+  "H": 927,
+  "W": 503,
+  "D": 698
+ },
+ "colors": [],
+ "materials": [
+  "ткань"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B084W2RH5S",
+ "model": {
+  "file": "models/abo-B084W2RH5S.glb",
+  "bytes": 232256,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.25150001,
+     0,
+     -0.377646893
+    ],
+    "max": [
+     0.251523228046,
+     0.9269999672562,
+     0.3203615057104
+    ],
+    "size": [
+     0.503023238046,
+     0.9269999672562,
+     0.6980083987104
+    ]
+   },
+   "tris": 19484,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 54512144,
+  "bytes": 232256,
+  "srcTris": 19484,
+  "tris": 19484,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 54057827,
+   "after": 128134,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0008,
+   0.9998,
+   0.9993
+  ]
+ },
+ "image": {
+  "file": "images/abo-B084W2RH5S.jpg",
+  "bytes": 2928,
+  "mime": "image/jpeg"
+ }
+}

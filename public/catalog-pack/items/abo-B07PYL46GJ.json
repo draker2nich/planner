@@ -1,0 +1,79 @@
+{
+ "id": "abo-B07PYL46GJ",
+ "source": "abo",
+ "typeId": "desk",
+ "formId": "rect",
+ "name": "AmazonBasics Classic L-Shaped Desk with Open Bookshelves",
+ "brand": "AmazonBasics",
+ "price": 29890,
+ "currency": "RUB",
+ "dims": {
+  "H": 716,
+  "W": 1361,
+  "D": 1303
+ },
+ "colors": [
+  "белый",
+  "бежевый"
+ ],
+ "materials": [
+  "дерево",
+  "ЛДСП / МДФ"
+ ],
+ "styleTags": [
+  "классика"
+ ],
+ "url": "https://www.amazon.com/dp/B07PYL46GJ",
+ "model": {
+  "file": "models/abo-B07PYL46GJ.glb",
+  "bytes": 147048,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.727006018,
+     0,
+     -0.637206435
+    ],
+    "max": [
+     0.6339940575941001,
+     0.7160141397513,
+     0.6658080425495001
+    ],
+    "size": [
+     1.3610000755941,
+     0.7160141397513,
+     1.3030144775495
+    ]
+   },
+   "tris": 13464,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 26786500,
+  "bytes": 147048,
+  "srcTris": 13464,
+  "tris": 13464,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 26439443,
+   "after": 83588,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9997,
+   0.9997,
+   1
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07PYL46GJ.jpg",
+  "bytes": 3540,
+  "mime": "image/jpeg"
+ }
+}

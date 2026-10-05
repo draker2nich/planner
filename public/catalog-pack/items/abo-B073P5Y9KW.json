@@ -1,0 +1,76 @@
+{
+ "id": "abo-B073P5Y9KW",
+ "source": "abo",
+ "typeId": "picture",
+ "formId": "wall",
+ "name": "Rivet Pineapple Speck Print Wall Art in Gold Wood Frame",
+ "brand": "Rivet",
+ "price": 4090,
+ "currency": "RUB",
+ "dims": {
+  "H": 760,
+  "W": 762,
+  "D": 37,
+  "E": 1300
+ },
+ "colors": [
+  "разноцветный"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B073P5Y9KW",
+ "model": {
+  "file": "models/abo-B073P5Y9KW.glb",
+  "bytes": 59600,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.380999982,
+     -0.379999995,
+     0
+    ],
+    "max": [
+     0.3809999621835,
+     0.3799999493300001,
+     0.037023253102
+    ],
+    "size": [
+     0.7619999441835,
+     0.7599999443300001,
+     0.037023253102
+    ]
+   },
+   "tris": 244,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 546196,
+  "bytes": 59600,
+  "srcTris": 244,
+  "tris": 244,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 536440,
+   "after": 54572,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0003,
+   0.9997,
+   0.9902
+  ]
+ },
+ "image": {
+  "file": "images/abo-B073P5Y9KW.jpg",
+  "bytes": 11605,
+  "mime": "image/jpeg"
+ }
+}

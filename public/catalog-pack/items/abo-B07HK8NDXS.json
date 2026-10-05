@@ -1,0 +1,77 @@
+{
+ "id": "abo-B07HK8NDXS",
+ "source": "abo",
+ "typeId": "shelving",
+ "formId": "rect",
+ "name": "Stone & Beam Rustic Storage Space/Shelving Unit Pull Chain Switch Floor Lamp with Bulb",
+ "brand": "Stone & Beam",
+ "price": 14890,
+ "currency": "RUB",
+ "dims": {
+  "H": 1474,
+  "W": 427,
+  "D": 384
+ },
+ "colors": [
+  "чёрный"
+ ],
+ "materials": [
+  "ткань"
+ ],
+ "styleTags": [
+  "кантри"
+ ],
+ "url": "https://www.amazon.com/dp/B07HK8NDXS",
+ "model": {
+  "file": "models/abo-B07HK8NDXS.glb",
+  "bytes": 140308,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.213499993,
+     0,
+     -0.192000002
+    ],
+    "max": [
+     0.2135038551758,
+     1.4740000094109,
+     0.19199755889639997
+    ],
+    "size": [
+     0.4270038481758,
+     1.4740000094109,
+     0.38399756089639997
+    ]
+   },
+   "tris": 16904,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 4,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 1968012,
+  "bytes": 140308,
+  "srcTris": 16904,
+  "tris": 16904,
+  "textures": {
+   "images": 4,
+   "resized": 4,
+   "before": 1544274,
+   "after": 45896,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0001,
+   1,
+   0.9994
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07HK8NDXS.jpg",
+  "bytes": 4126,
+  "mime": "image/jpeg"
+ }
+}

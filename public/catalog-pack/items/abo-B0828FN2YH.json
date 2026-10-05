@@ -1,0 +1,77 @@
+{
+ "id": "abo-B0828FN2YH",
+ "source": "abo",
+ "typeId": "sconce",
+ "formId": "wall",
+ "name": "Ravenna Home Single-Light Swing-Arm Wall Sconce with White Linen Shade",
+ "brand": "Ravenna Home",
+ "price": 9590,
+ "currency": "RUB",
+ "dims": {
+  "H": 651,
+  "W": 203,
+  "D": 516,
+  "E": 1700
+ },
+ "colors": [
+  "белый",
+  "бежевый"
+ ],
+ "materials": [
+  "ткань"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B0828FN2YH",
+ "model": {
+  "file": "models/abo-B0828FN2YH.glb",
+  "bytes": 196324,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.101500005,
+     -0.325500011,
+     -8.34029557e-9
+    ],
+    "max": [
+     0.10151282629140002,
+     0.3255000310918001,
+     0.5160157730553044
+    ],
+    "size": [
+     0.20301283129140002,
+     0.6510000420918001,
+     0.5160157813956
+    ]
+   },
+   "tris": 30000,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 33478240,
+  "bytes": 196324,
+  "srcTris": 40460,
+  "tris": 30000,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 32456256,
+   "after": 40028,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0006,
+   0.9993,
+   0.9995
+  ]
+ },
+ "image": {
+  "file": "images/abo-B0828FN2YH.jpg",
+  "bytes": 3114,
+  "mime": "image/jpeg"
+ }
+}

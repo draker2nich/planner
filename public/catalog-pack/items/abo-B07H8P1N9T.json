@@ -1,0 +1,76 @@
+{
+ "id": "abo-B07H8P1N9T",
+ "source": "abo",
+ "typeId": "bookcase",
+ "formId": "rect",
+ "name": "Movian Moselle 2-Door Cabinet/Bookcase with 8 Shelves",
+ "brand": "Movian",
+ "price": 24190,
+ "currency": "RUB",
+ "dims": {
+  "H": 1390,
+  "W": 1000,
+  "D": 450
+ },
+ "colors": [
+  "белый",
+  "натуральное дерево"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.co.uk/dp/B07H8P1N9T",
+ "model": {
+  "file": "models/abo-B07H8P1N9T.glb",
+  "bytes": 126252,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.5,
+     -2.98023224e-8,
+     -0.225000054
+    ],
+    "max": [
+     0.4999720216225999,
+     1.3900001085179776,
+     0.22501280894639997
+    ],
+    "size": [
+     0.9999720216225999,
+     1.3900001383203,
+     0.45001286294639997
+    ]
+   },
+   "tris": 2128,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 22623116,
+  "bytes": 126252,
+  "srcTris": 2128,
+  "tris": 2128,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 22525267,
+   "after": 103966,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   1.0001,
+   1.0004
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07H8P1N9T.jpg",
+  "bytes": 4590,
+  "mime": "image/jpeg"
+ }
+}

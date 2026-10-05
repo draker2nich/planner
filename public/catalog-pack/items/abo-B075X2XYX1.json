@@ -1,0 +1,74 @@
+{
+ "id": "abo-B075X2XYX1",
+ "source": "abo",
+ "typeId": "floor-lamp",
+ "formId": "round",
+ "name": "Rivet Boulevard Industrial Studio Lámpara de piso trípode con foco",
+ "brand": "Adesso",
+ "price": 13990,
+ "currency": "RUB",
+ "dims": {
+  "H": 1512,
+  "DIA": 920
+ },
+ "colors": [],
+ "materials": [
+  "металл"
+ ],
+ "styleTags": [
+  "лофт"
+ ],
+ "url": "https://www.amazon.com.mx/dp/B075X2XYX1",
+ "model": {
+  "file": "models/abo-B075X2XYX1.glb",
+  "bytes": 185536,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.460209399,
+     0.00118630298,
+     -0.459786057
+    ],
+    "max": [
+     0.45983497731270007,
+     1.5131821919489001,
+     0.4601660287744
+    ],
+    "size": [
+     0.9200443763127001,
+     1.5119958889689,
+     0.9199520857744
+    ]
+   },
+   "tris": 29992,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 17312176,
+  "bytes": 185536,
+  "srcTris": 196176,
+  "tris": 29992,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 11688296,
+   "after": 28926,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.1255,
+   0.9999,
+   0.9996
+  ]
+ },
+ "image": {
+  "file": "images/abo-B075X2XYX1.jpg",
+  "bytes": 4698,
+  "mime": "image/jpeg"
+ }
+}

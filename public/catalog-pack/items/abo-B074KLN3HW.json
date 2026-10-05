@@ -1,0 +1,76 @@
+{
+ "id": "abo-B074KLN3HW",
+ "source": "abo",
+ "typeId": "coffee-table",
+ "formId": "rect",
+ "name": "Stone & Beam Parson Coffee Table",
+ "brand": "Stone & Beam",
+ "price": 25990,
+ "currency": "RUB",
+ "dims": {
+  "H": 480,
+  "W": 1150,
+  "D": 635
+ },
+ "colors": [
+  "коричневый",
+  "натуральное дерево"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B074KLN3HW",
+ "model": {
+  "file": "models/abo-B074KLN3HW.glb",
+  "bytes": 228512,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.574375749,
+     -1.15338407e-19,
+     -0.308658808
+    ],
+    "max": [
+     0.5756242471854,
+     0.4799914529644,
+     0.32632257303479995
+    ],
+    "size": [
+     1.1499999961854,
+     0.4799914529644,
+     0.6349813810348
+    ]
+   },
+   "tris": 20618,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2708980,
+  "bytes": 228512,
+  "srcTris": 20618,
+  "tris": 20618,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 2144229,
+   "after": 119258,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0002,
+   0.9997,
+   0.9998
+  ]
+ },
+ "image": {
+  "file": "images/abo-B074KLN3HW.jpg",
+  "bytes": 9410,
+  "mime": "image/jpeg"
+ }
+}

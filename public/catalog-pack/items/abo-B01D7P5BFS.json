@@ -1,0 +1,77 @@
+{
+ "id": "abo-B01D7P5BFS",
+ "source": "abo",
+ "typeId": "chair",
+ "formId": "rect",
+ "name": "AmazonBasics Low-Back",
+ "brand": "AmazonBasics",
+ "price": 6990,
+ "currency": "RUB",
+ "dims": {
+  "H": 970,
+  "W": 475,
+  "D": 450
+ },
+ "colors": [
+  "чёрный"
+ ],
+ "materials": [
+  "ткань"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B01D7P5BFS",
+ "model": {
+  "file": "models/abo-B01D7P5BFS.glb",
+  "bytes": 355768,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.237499982,
+     0,
+     -0.25676325
+    ],
+    "max": [
+     0.2375234929806,
+     0.9699999489726,
+     0.19321536272
+    ],
+    "size": [
+     0.4750234749806,
+     0.9699999489726,
+     0.44997861272
+    ]
+   },
+   "tris": 16350,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 20657004,
+  "bytes": 355768,
+  "srcTris": 16350,
+  "tris": 16350,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 20009300,
+   "after": 234196,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   1,
+   0.9998
+  ]
+ },
+ "image": {
+  "file": "images/abo-B01D7P5BFS.jpg",
+  "bytes": 5567,
+  "mime": "image/jpeg"
+ }
+}

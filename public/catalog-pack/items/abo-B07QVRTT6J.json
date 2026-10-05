@@ -1,0 +1,71 @@
+{
+ "id": "abo-B07QVRTT6J",
+ "source": "abo",
+ "typeId": "bookcase",
+ "formId": "rect",
+ "name": "Movian Martin Bookshelf",
+ "brand": "Movian",
+ "price": 24990,
+ "currency": "RUB",
+ "dims": {
+  "H": 780,
+  "W": 1140,
+  "D": 350
+ },
+ "colors": [],
+ "materials": [],
+ "styleTags": [],
+ "url": "https://www.amazon.de/dp/B07QVRTT6J",
+ "model": {
+  "file": "models/abo-B07QVRTT6J.glb",
+  "bytes": 221676,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.569999993,
+     0,
+     -0.174999997
+    ],
+    "max": [
+     0.5700000264111998,
+     0.7799707146175999,
+     0.175009164792
+    ],
+    "size": [
+     1.1400000194111999,
+     0.7799707146175999,
+     0.350009161792
+    ]
+   },
+   "tris": 22616,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 36685648,
+  "bytes": 221676,
+  "srcTris": 22616,
+  "tris": 22616,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 36148279,
+   "after": 117936,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   1,
+   1
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07QVRTT6J.jpg",
+  "bytes": 6025,
+  "mime": "image/jpeg"
+ }
+}

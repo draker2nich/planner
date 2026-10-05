@@ -1,0 +1,75 @@
+{
+ "id": "abo-B082VSYX39",
+ "source": "abo",
+ "typeId": "coffee-table",
+ "formId": "rect",
+ "name": "Ravenna Home Archer Outdoor Patio Steel Coffee Table with Panel Top",
+ "brand": "Ravenna Home",
+ "price": 20190,
+ "currency": "RUB",
+ "dims": {
+  "H": 460,
+  "W": 965,
+  "D": 559
+ },
+ "colors": [
+  "серый"
+ ],
+ "materials": [
+  "металл"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B082VSYX39",
+ "model": {
+  "file": "models/abo-B082VSYX39.glb",
+  "bytes": 172796,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.482500017,
+     0,
+     -0.279500008
+    ],
+    "max": [
+     0.48250000256430003,
+     0.460028697601,
+     0.279484926729
+    ],
+    "size": [
+     0.9650000195643,
+     0.460028697601,
+     0.558984934729
+    ]
+   },
+   "tris": 29974,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 31880580,
+  "bytes": 172796,
+  "srcTris": 65720,
+  "tris": 29974,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 30103243,
+   "after": 20692,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9999,
+   1.0006,
+   1.0006
+  ]
+ },
+ "image": {
+  "file": "images/abo-B082VSYX39.jpg",
+  "bytes": 3696,
+  "mime": "image/jpeg"
+ }
+}

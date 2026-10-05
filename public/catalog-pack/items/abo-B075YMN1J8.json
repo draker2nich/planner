@@ -1,0 +1,76 @@
+{
+ "id": "abo-B075YMN1J8",
+ "source": "abo",
+ "typeId": "bar-stool",
+ "formId": "round",
+ "name": "Stone & Beam Sophia Modern Swivel Kitchen Counter Height Stool",
+ "brand": "Stone & Beam",
+ "price": 13690,
+ "currency": "RUB",
+ "dims": {
+  "H": 1019,
+  "DIA": 570
+ },
+ "colors": [
+  "серый"
+ ],
+ "materials": [
+  "камень"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B075YMN1J8",
+ "model": {
+  "file": "models/abo-B075YMN1J8.glb",
+  "bytes": 304424,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.285000026,
+     0,
+     -0.306433946
+    ],
+    "max": [
+     0.284988178082,
+     1.0190000815665,
+     0.263554258082
+    ],
+    "size": [
+     0.569988204082,
+     1.0190000815665,
+     0.569988204082
+    ]
+   },
+   "tris": 13644,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 4393824,
+  "bytes": 304424,
+  "srcTris": 13644,
+  "tris": 13644,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 4037369,
+   "after": 222354,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.2424,
+   1.0001,
+   1.0006
+  ]
+ },
+ "image": {
+  "file": "images/abo-B075YMN1J8.jpg",
+  "bytes": 7414,
+  "mime": "image/jpeg"
+ }
+}

@@ -1,0 +1,73 @@
+{
+ "id": "abo-B07B4ZFC7S",
+ "source": "abo",
+ "typeId": "bed",
+ "formId": "king",
+ "name": "Stone & Beam Tisbury Nailhead Trim King Bed",
+ "brand": "Stone & Beam",
+ "price": 75090,
+ "currency": "RUB",
+ "dims": {
+  "H": 1457,
+  "W": 1713,
+  "L": 2381
+ },
+ "colors": [],
+ "materials": [
+  "камень"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B07B4ZFC7S",
+ "model": {
+  "file": "models/abo-B07B4ZFC7S.glb",
+  "bytes": 205296,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.85649997,
+     0,
+     -1.19050002
+    ],
+    "max": [
+     0.8565470081820001,
+     1.45696919965,
+     1.190500119438
+    ],
+    "size": [
+     1.7130469781820001,
+     1.45696919965,
+     2.381000139438
+    ]
+   },
+   "tris": 23430,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 1305124,
+  "bytes": 205296,
+  "srcTris": 23430,
+  "tris": 23430,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 741127,
+   "after": 79724,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0001,
+   0.9998,
+   1
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07B4ZFC7S.jpg",
+  "bytes": 5721,
+  "mime": "image/jpeg"
+ }
+}

@@ -1,0 +1,77 @@
+{
+ "id": "abo-B07B7J8GGS",
+ "source": "abo",
+ "typeId": "bookcase",
+ "formId": "rect",
+ "name": "Rivet Mid-Century Modern Wood and Metal Bookcase",
+ "brand": "Rivet",
+ "price": 31490,
+ "currency": "RUB",
+ "dims": {
+  "H": 765,
+  "W": 1201,
+  "D": 361
+ },
+ "colors": [
+  "натуральное дерево"
+ ],
+ "materials": [
+  "металл"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07B7J8GGS",
+ "model": {
+  "file": "models/abo-B07B7J8GGS.glb",
+  "bytes": 131076,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.600329399,
+     0,
+     -0.180499986
+    ],
+    "max": [
+     0.6006705829296999,
+     0.7649658067165,
+     0.18046710861159998
+    ],
+    "size": [
+     1.2009999819297,
+     0.7649658067165,
+     0.3609670946116
+    ]
+   },
+   "tris": 5570,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 3105064,
+  "bytes": 131076,
+  "srcTris": 5570,
+  "tris": 5570,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 2937955,
+   "after": 99338,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9998,
+   1.0001,
+   1.001
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07B7J8GGS.jpg",
+  "bytes": 9369,
+  "mime": "image/jpeg"
+ }
+}

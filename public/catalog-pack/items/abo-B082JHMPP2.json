@@ -1,0 +1,76 @@
+{
+ "id": "abo-B082JHMPP2",
+ "source": "abo",
+ "typeId": "floor-lamp",
+ "formId": "round",
+ "name": "Stone & Beam Contemporary Adjustable Height Floor Lamp with Rectangular Linen Shade",
+ "brand": "Stone & Beam",
+ "price": 25190,
+ "currency": "RUB",
+ "dims": {
+  "H": 1600,
+  "DIA": 774
+ },
+ "colors": [
+  "коричневый"
+ ],
+ "materials": [
+  "ткань"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B082JHMPP2",
+ "model": {
+  "file": "models/abo-B082JHMPP2.glb",
+  "bytes": 186208,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.184971198,
+     0,
+     -0.63432467
+    ],
+    "max": [
+     0.5890017623599999,
+     1.5999998750256,
+     0.13964829035999993
+    ],
+    "size": [
+     0.7739729603599999,
+     1.5999998750256,
+     0.77397296036
+    ]
+   },
+   "tris": 29996,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 48259660,
+  "bytes": 186208,
+  "srcTris": 74844,
+  "tris": 29996,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 46460701,
+   "after": 34220,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.1096,
+   0.9999,
+   0.9998
+  ]
+ },
+ "image": {
+  "file": "images/abo-B082JHMPP2.jpg",
+  "bytes": 2391,
+  "mime": "image/jpeg"
+ }
+}

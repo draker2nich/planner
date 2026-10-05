@@ -1,0 +1,77 @@
+{
+ "id": "abo-B07HSLG6WN",
+ "source": "abo",
+ "typeId": "plant",
+ "formId": "round",
+ "name": "Stone & Beam Emerick Rustic Stoneware Planter Pot",
+ "brand": "Stone & Beam",
+ "price": 4690,
+ "currency": "RUB",
+ "dims": {
+  "H": 303,
+  "DIA": 317
+ },
+ "colors": [
+  "белый",
+  "коричневый"
+ ],
+ "materials": [
+  "камень"
+ ],
+ "styleTags": [
+  "кантри"
+ ],
+ "url": "https://www.amazon.com/dp/B07HSLG6WN",
+ "model": {
+  "file": "models/abo-B07HSLG6WN.glb",
+  "bytes": 232508,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.158499971,
+     0,
+     -0.158500001
+    ],
+    "max": [
+     0.1584999926239,
+     0.30299105355469996,
+     0.15849996262389998
+    ],
+    "size": [
+     0.3169999636239,
+     0.30299105355469996,
+     0.3169999636239
+    ]
+   },
+   "tris": 3200,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2369852,
+  "bytes": 232508,
+  "srcTris": 3200,
+  "tris": 3200,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 2289725,
+   "after": 210344,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0027,
+   1.0007,
+   1.0013
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07HSLG6WN.jpg",
+  "bytes": 10392,
+  "mime": "image/jpeg"
+ }
+}

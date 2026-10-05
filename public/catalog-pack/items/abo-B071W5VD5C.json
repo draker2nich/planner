@@ -1,0 +1,77 @@
+{
+ "id": "abo-B071W5VD5C",
+ "source": "abo",
+ "typeId": "armchair",
+ "formId": "rect",
+ "name": "Rivet Hawthorne Mid-Century Tufted Modern Accent Chair",
+ "brand": "Rivet",
+ "price": 35490,
+ "currency": "RUB",
+ "dims": {
+  "H": 1063,
+  "W": 878,
+  "D": 904
+ },
+ "colors": [
+  "серый",
+  "серебристый"
+ ],
+ "materials": [],
+ "styleTags": [
+  "современный",
+  "классика"
+ ],
+ "url": "https://www.amazon.com/dp/B071W5VD5C",
+ "model": {
+  "file": "models/abo-B071W5VD5C.glb",
+  "bytes": 517128,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.438999176,
+     0,
+     -0.485878527
+    ],
+    "max": [
+     0.4390156357476001,
+     1.0630000488369,
+     0.4180900184676001
+    ],
+    "size": [
+     0.8780148117476001,
+     1.0630000488369,
+     0.9039685454676001
+    ]
+   },
+   "tris": 19446,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2477828,
+  "bytes": 517128,
+  "srcTris": 19446,
+  "tris": 19446,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 1864318,
+   "after": 383672,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9995,
+   0.9996,
+   0.9998
+  ]
+ },
+ "image": {
+  "file": "images/abo-B071W5VD5C.jpg",
+  "bytes": 11415,
+  "mime": "image/jpeg"
+ }
+}

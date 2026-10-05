@@ -1,0 +1,77 @@
+{
+ "id": "abo-B07B78G443",
+ "source": "abo",
+ "typeId": "table",
+ "formId": "rect",
+ "name": "Stone & Beam Jon Casual Farmhouse Expandable Wood Dining Table",
+ "brand": "Stone & Beam",
+ "price": 53990,
+ "currency": "RUB",
+ "dims": {
+  "H": 768,
+  "W": 1881,
+  "D": 1016
+ },
+ "colors": [
+  "бежевый"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "кантри"
+ ],
+ "url": "https://www.amazon.com/dp/B07B78G443",
+ "model": {
+  "file": "models/abo-B07B78G443.glb",
+  "bytes": 150276,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.940500021,
+     0,
+     -0.508000195
+    ],
+    "max": [
+     0.9405000018540001,
+     0.7679917690820001,
+     0.507990112162
+    ],
+    "size": [
+     1.881000022854,
+     0.7679917690820001,
+     1.015990307162
+    ]
+   },
+   "tris": 5220,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2383900,
+  "bytes": 150276,
+  "srcTris": 5220,
+  "tris": 5220,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 2225094,
+   "after": 114998,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9998,
+   1.0006,
+   1
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07B78G443.jpg",
+  "bytes": 5939,
+  "mime": "image/jpeg"
+ }
+}

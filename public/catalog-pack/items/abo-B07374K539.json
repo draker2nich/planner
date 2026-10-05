@@ -1,0 +1,76 @@
+{
+ "id": "abo-B07374K539",
+ "source": "abo",
+ "typeId": "chandelier",
+ "formId": "round",
+ "name": "Stone & Beam Modern Ceiling Pendant Light Chandelier Fixture With Glass Shade",
+ "brand": "Stone & Beam",
+ "price": 12290,
+ "currency": "RUB",
+ "dims": {
+  "H": 1145,
+  "DIA": 292
+ },
+ "colors": [
+  "чёрный"
+ ],
+ "materials": [
+  "металл"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07374K539",
+ "model": {
+  "file": "models/abo-B07374K539.glb",
+  "bytes": 114504,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.145999894,
+     -1.14499998,
+     -0.146000028
+    ],
+    "max": [
+     0.145998505937,
+     -3.11804999597598e-8,
+     0.145998371937
+    ],
+    "size": [
+     0.291998399937,
+     1.1449999488195,
+     0.291998399937
+    ]
+   },
+   "tris": 13014,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 4,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 1986624,
+  "bytes": 114504,
+  "srcTris": 13014,
+  "tris": 13014,
+  "textures": {
+   "images": 4,
+   "resized": 4,
+   "before": 1644382,
+   "after": 39486,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0006,
+   1.0003,
+   1.0006
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07374K539.jpg",
+  "bytes": 2568,
+  "mime": "image/jpeg"
+ }
+}

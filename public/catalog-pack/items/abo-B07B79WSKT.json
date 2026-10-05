@@ -1,0 +1,77 @@
+{
+ "id": "abo-B07B79WSKT",
+ "source": "abo",
+ "typeId": "sideboard",
+ "formId": "rect",
+ "name": "Rivet Federal Mid-Century Modern Wood Dining Buffet Sideboard",
+ "brand": "Rivet",
+ "price": 49790,
+ "currency": "RUB",
+ "dims": {
+  "H": 940,
+  "W": 1575,
+  "D": 505
+ },
+ "colors": [
+  "коричневый"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07B79WSKT",
+ "model": {
+  "file": "models/abo-B07B79WSKT.glb",
+  "bytes": 284164,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.787500024,
+     0,
+     -0.241316915
+    ],
+    "max": [
+     0.7874999697072002,
+     0.9400201390752001,
+     0.2636867453152001
+    ],
+    "size": [
+     1.5749999937072001,
+     0.9400201390752001,
+     0.5050036603152
+    ]
+   },
+   "tris": 29986,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 4533324,
+  "bytes": 284164,
+  "srcTris": 55178,
+  "tris": 29986,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 3028557,
+   "after": 103814,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   1.0003,
+   1
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07B79WSKT.jpg",
+  "bytes": 8547,
+  "mime": "image/jpeg"
+ }
+}

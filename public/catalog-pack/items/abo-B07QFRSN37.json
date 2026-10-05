@@ -1,0 +1,75 @@
+{
+ "id": "abo-B07QFRSN37",
+ "source": "abo",
+ "typeId": "bar-stool",
+ "formId": "round",
+ "name": "Stone & Beam Leather Barstool with Brass Nailhead Trim",
+ "brand": "Stone & Beam",
+ "price": 14890,
+ "currency": "RUB",
+ "dims": {
+  "H": 1092,
+  "DIA": 563
+ },
+ "colors": [
+  "коричневый"
+ ],
+ "materials": [
+  "металл",
+  "кожа"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B07QFRSN37",
+ "model": {
+  "file": "models/abo-B07QFRSN37.glb",
+  "bytes": 240312,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.281499207,
+     0,
+     -0.27720806
+    ],
+    "max": [
+     0.28153100310479995,
+     1.0919999919671999,
+     0.28582215010479994
+    ],
+    "size": [
+     0.5630302101047999,
+     1.0919999919671999,
+     0.5630302101047999
+    ]
+   },
+   "tris": 21488,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 41790988,
+  "bytes": 240312,
+  "srcTris": 21488,
+  "tris": 21488,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 41271991,
+   "after": 124518,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0699,
+   1.0003,
+   0.9991
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07QFRSN37.jpg",
+  "bytes": 5468,
+  "mime": "image/jpeg"
+ }
+}

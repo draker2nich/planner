@@ -1,0 +1,77 @@
+{
+ "id": "abo-B07MBF93P1",
+ "source": "abo",
+ "typeId": "desk",
+ "formId": "rect",
+ "name": "Ravenna Home Contemporary Banker's Desk Lamp with LED Light Bulb",
+ "brand": "Ravenna Home",
+ "price": 15490,
+ "currency": "RUB",
+ "dims": {
+  "H": 339,
+  "W": 264,
+  "D": 243
+ },
+ "colors": [
+  "серебристый"
+ ],
+ "materials": [
+  "металл"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07MBF93P1",
+ "model": {
+  "file": "models/abo-B07MBF93P1.glb",
+  "bytes": 231768,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.131910086,
+     0,
+     -0.0895598531
+    ],
+    "max": [
+     0.13191522684999998,
+     0.3390000078762,
+     0.15344912526159998
+    ],
+    "size": [
+     0.26382531285,
+     0.3390000078762,
+     0.2430089783616
+    ]
+   },
+   "tris": 30000,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 4,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 19244200,
+  "bytes": 231768,
+  "srcTris": 43454,
+  "tris": 30000,
+  "textures": {
+   "images": 4,
+   "resized": 4,
+   "before": 18164395,
+   "after": 52598,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9986,
+   1.0008,
+   0.9992
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07MBF93P1.jpg",
+  "bytes": 2649,
+  "mime": "image/jpeg"
+ }
+}

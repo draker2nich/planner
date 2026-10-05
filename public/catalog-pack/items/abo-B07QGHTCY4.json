@@ -1,0 +1,70 @@
+{
+ "id": "abo-B07QGHTCY4",
+ "source": "abo",
+ "typeId": "ceiling-light",
+ "formId": "round",
+ "name": "Ravenna Home Casual Flush Mount",
+ "brand": "Ravenna Home",
+ "price": 9690,
+ "currency": "RUB",
+ "dims": {
+  "H": 100,
+  "DIA": 368
+ },
+ "colors": [],
+ "materials": [],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B07QGHTCY4",
+ "model": {
+  "file": "models/abo-B07QGHTCY4.glb",
+  "bytes": 50904,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.184,
+     -0.100000001,
+     -0.184
+    ],
+    "max": [
+     0.18400000998529997,
+     0.000002199113199999325,
+     0.18400000998529997
+    ],
+    "size": [
+     0.36800000998529997,
+     0.1000022001132,
+     0.36800000998529997
+    ]
+   },
+   "tris": 3584,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 4,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 14463360,
+  "bytes": 50904,
+  "srcTris": 3584,
+  "tris": 3584,
+  "textures": {
+   "images": 4,
+   "resized": 4,
+   "before": 14376352,
+   "after": 27150,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9996,
+   0.9955,
+   0.9996
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07QGHTCY4.jpg",
+  "bytes": 2887,
+  "mime": "image/jpeg"
+ }
+}

@@ -1,0 +1,79 @@
+{
+ "id": "abo-B085FJSG58",
+ "source": "abo",
+ "typeId": "armchair",
+ "formId": "rect",
+ "name": "Ravenna Home Breckenridge Upholstered Rocking Recliner Chair with Swivel",
+ "brand": "Ravenna Home",
+ "price": 43890,
+ "currency": "RUB",
+ "dims": {
+  "H": 1013,
+  "W": 812,
+  "D": 940
+ },
+ "colors": [
+  "синий"
+ ],
+ "materials": [
+  "металл",
+  "ткань"
+ ],
+ "styleTags": [
+  "современный",
+  "классика"
+ ],
+ "url": "https://www.amazon.com/dp/B085FJSG58",
+ "model": {
+  "file": "models/abo-B085FJSG58.glb",
+  "bytes": 453704,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.417209685,
+     0,
+     -0.56516844
+    ],
+    "max": [
+     0.3947719249556001,
+     1.0129983792189001,
+     0.37480600673660003
+    ],
+    "size": [
+     0.8119816099556001,
+     1.0129983792189001,
+     0.9399744467366
+    ]
+   },
+   "tris": 30000,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 71197088,
+  "bytes": 453704,
+  "srcTris": 45790,
+  "tris": 30000,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 70115240,
+   "after": 283832,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9995,
+   1.0002,
+   0.9995
+  ]
+ },
+ "image": {
+  "file": "images/abo-B085FJSG58.jpg",
+  "bytes": 4120,
+  "mime": "image/jpeg"
+ }
+}

@@ -1,0 +1,75 @@
+{
+ "id": "abo-B07B4DBBVX",
+ "source": "abo",
+ "typeId": "pouf",
+ "formId": "rect",
+ "name": "Stone & Beam Bartow Ottoman with Slipcover",
+ "brand": "Stone & Beam",
+ "price": 19490,
+ "currency": "RUB",
+ "dims": {
+  "H": 552,
+  "W": 1677,
+  "D": 939
+ },
+ "colors": [
+  "бежевый"
+ ],
+ "materials": [
+  "камень"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B07B4DBBVX",
+ "model": {
+  "file": "models/abo-B07B4DBBVX.glb",
+  "bytes": 251392,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.840657532,
+     0,
+     -0.469500035
+    ],
+    "max": [
+     0.8363424397489998,
+     0.552039360779,
+     0.46946845311899993
+    ],
+    "size": [
+     1.6769999717489998,
+     0.552039360779,
+     0.9389684881189999
+    ]
+   },
+   "tris": 17786,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2991112,
+  "bytes": 251392,
+  "srcTris": 17786,
+  "tris": 17786,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 2566734,
+   "after": 156786,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0002,
+   1.0002,
+   1.0005
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07B4DBBVX.jpg",
+  "bytes": 2899,
+  "mime": "image/jpeg"
+ }
+}

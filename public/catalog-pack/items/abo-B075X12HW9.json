@@ -1,0 +1,70 @@
+{
+ "id": "abo-B075X12HW9",
+ "source": "abo",
+ "typeId": "floor-lamp",
+ "formId": "round",
+ "name": "Rivetto Lampada da terra moderna con lampadina",
+ "brand": "Rivet",
+ "price": 16890,
+ "currency": "RUB",
+ "dims": {
+  "H": 1447,
+  "DIA": 420
+ },
+ "colors": [],
+ "materials": [],
+ "styleTags": [],
+ "url": "https://www.amazon.it/dp/B075X12HW9",
+ "model": {
+  "file": "models/abo-B075X12HW9.glb",
+  "bytes": 335600,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.209999502,
+     0,
+     -0.209998503
+    ],
+    "max": [
+     0.209977619271,
+     1.4470000373886,
+     0.209978618271
+    ],
+    "size": [
+     0.419977121271,
+     1.4470000373886,
+     0.419977121271
+    ]
+   },
+   "tris": 15644,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 4,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2913604,
+  "bytes": 335600,
+  "srcTris": 15644,
+  "tris": 15644,
+  "textures": {
+   "images": 4,
+   "resized": 4,
+   "before": 2483982,
+   "after": 250312,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9995,
+   1.0002,
+   0.9995
+  ]
+ },
+ "image": {
+  "file": "images/abo-B075X12HW9.jpg",
+  "bytes": 2150,
+  "mime": "image/jpeg"
+ }
+}

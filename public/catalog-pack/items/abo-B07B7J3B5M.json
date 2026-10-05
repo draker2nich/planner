@@ -1,0 +1,78 @@
+{
+ "id": "abo-B07B7J3B5M",
+ "source": "abo",
+ "typeId": "small-table",
+ "formId": "rect",
+ "name": "Stone & Beam Bernice Industrial Reclaimed Fir Wood Side End Table",
+ "brand": "Stone & Beam",
+ "price": 9990,
+ "currency": "RUB",
+ "dims": {
+  "H": 563,
+  "W": 503,
+  "D": 503
+ },
+ "colors": [
+  "бежевый",
+  "чёрный"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "лофт"
+ ],
+ "url": "https://www.amazon.com/dp/B07B7J3B5M",
+ "model": {
+  "file": "models/abo-B07B7J3B5M.glb",
+  "bytes": 159820,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.25150001,
+     0,
+     -0.25150001
+    ],
+    "max": [
+     0.25149893615950003,
+     0.5630000502105,
+     0.25149893615950003
+    ],
+    "size": [
+     0.5029989461595,
+     0.5630000502105,
+     0.5029989461595
+    ]
+   },
+   "tris": 1728,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2024024,
+  "bytes": 159820,
+  "srcTris": 1728,
+  "tris": 1728,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 1968155,
+   "after": 142942,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   0.9994,
+   1.0008
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07B7J3B5M.jpg",
+  "bytes": 8885,
+  "mime": "image/jpeg"
+ }
+}

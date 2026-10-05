@@ -1,0 +1,79 @@
+{
+ "id": "abo-B072ZNMKGM",
+ "source": "abo",
+ "typeId": "console",
+ "formId": "rect",
+ "name": "Rivet King Street Industrial Cabinet Media Console Table With Functional Storage",
+ "brand": "Rivet",
+ "price": 24690,
+ "currency": "RUB",
+ "dims": {
+  "H": 800,
+  "W": 1199,
+  "D": 399
+ },
+ "colors": [
+  "коричневый"
+ ],
+ "materials": [
+  "дерево",
+  "ЛДСП / МДФ",
+  "металл"
+ ],
+ "styleTags": [
+  "лофт"
+ ],
+ "url": "https://www.amazon.com/dp/B072ZNMKGM",
+ "model": {
+  "file": "models/abo-B072ZNMKGM.glb",
+  "bytes": 101892,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.5995,
+     2.98023224e-8,
+     -0.199499995
+    ],
+    "max": [
+     0.5995000091834001,
+     0.7999920398361224,
+     0.1995080041496
+    ],
+    "size": [
+     1.1990000091834,
+     0.7999920100338,
+     0.3990079991496
+    ]
+   },
+   "tris": 1676,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 18057644,
+  "bytes": 101892,
+  "srcTris": 1676,
+  "tris": 1676,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 17972583,
+   "after": 82622,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0001,
+   0.9999,
+   1.0006
+  ]
+ },
+ "image": {
+  "file": "images/abo-B072ZNMKGM.jpg",
+  "bytes": 7342,
+  "mime": "image/jpeg"
+ }
+}

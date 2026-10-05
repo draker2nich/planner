@@ -1,0 +1,77 @@
+{
+ "id": "abo-B07QC876WJ",
+ "source": "abo",
+ "typeId": "shelving",
+ "formId": "rect",
+ "name": "Rivet Davenport Contemporary Shelf",
+ "brand": "Rivet",
+ "price": 18290,
+ "currency": "RUB",
+ "dims": {
+  "H": 1803,
+  "W": 874,
+  "D": 386
+ },
+ "colors": [
+  "бежевый"
+ ],
+ "materials": [
+  "металл"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07QC876WJ",
+ "model": {
+  "file": "models/abo-B07QC876WJ.glb",
+  "bytes": 126864,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.437000006,
+     0,
+     -0.193000004
+    ],
+    "max": [
+     0.437041722142,
+     1.802999953683,
+     0.192956221207
+    ],
+    "size": [
+     0.874041728142,
+     1.802999953683,
+     0.385956225207
+    ]
+   },
+   "tris": 7436,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 16415928,
+  "bytes": 126864,
+  "srcTris": 7436,
+  "tris": 7436,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 16147507,
+   "after": 72322,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0003,
+   0.9998,
+   0.9998
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07QC876WJ.jpg",
+  "bytes": 6408,
+  "mime": "image/jpeg"
+ }
+}

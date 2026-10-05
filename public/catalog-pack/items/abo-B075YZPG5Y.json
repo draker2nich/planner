@@ -1,0 +1,77 @@
+{
+ "id": "abo-B075YZPG5Y",
+ "source": "abo",
+ "typeId": "dresser",
+ "formId": "rect",
+ "name": "Rivet Eastport Industrial 7-Drawer Wood Dresser",
+ "brand": "Rivet",
+ "price": 35890,
+ "currency": "RUB",
+ "dims": {
+  "H": 825,
+  "W": 1261,
+  "D": 479
+ },
+ "colors": [
+  "коричневый"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "лофт"
+ ],
+ "url": "https://www.amazon.com/dp/B075YZPG5Y",
+ "model": {
+  "file": "models/abo-B075YZPG5Y.glb",
+  "bytes": 267420,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.630499959,
+     0,
+     -0.241533339
+    ],
+    "max": [
+     0.6304999982559001,
+     0.8249647526014,
+     0.23745114088790004
+    ],
+    "size": [
+     1.2609999572559,
+     0.8249647526014,
+     0.47898447988790005
+    ]
+   },
+   "tris": 21840,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 3898124,
+  "bytes": 267420,
+  "srcTris": 21840,
+  "tris": 21840,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 3281895,
+   "after": 146114,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0003,
+   0.9995,
+   1.0001
+  ]
+ },
+ "image": {
+  "file": "images/abo-B075YZPG5Y.jpg",
+  "bytes": 12102,
+  "mime": "image/jpeg"
+ }
+}

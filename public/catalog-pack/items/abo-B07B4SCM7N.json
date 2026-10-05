@@ -1,0 +1,75 @@
+{
+ "id": "abo-B07B4SCM7N",
+ "source": "abo",
+ "typeId": "dresser",
+ "formId": "rect",
+ "name": "Stone & Beam Chase Casual Wood Dresser",
+ "brand": "Stone & Beam",
+ "price": 51490,
+ "currency": "RUB",
+ "dims": {
+  "H": 892,
+  "W": 1583,
+  "D": 468
+ },
+ "colors": [
+  "бежевый"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B07B4SCM7N",
+ "model": {
+  "file": "models/abo-B07B4SCM7N.glb",
+  "bytes": 327080,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.791499972,
+     0,
+     -0.230248794
+    ],
+    "max": [
+     0.7915000273734001,
+     0.8920378437536001,
+     0.2377039006814
+    ],
+    "size": [
+     1.5829999993734,
+     0.8920378437536001,
+     0.4679526946814
+    ]
+   },
+   "tris": 30000,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 4424564,
+  "bytes": 327080,
+  "srcTris": 41192,
+  "tris": 30000,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 3372255,
+   "after": 160204,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0002,
+   1.0002,
+   0.9994
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07B4SCM7N.jpg",
+  "bytes": 10422,
+  "mime": "image/jpeg"
+ }
+}

@@ -1,0 +1,78 @@
+{
+ "id": "abo-B075YPKYM1",
+ "source": "abo",
+ "typeId": "chair",
+ "formId": "rect",
+ "name": "Rivet Roger Set of 2 Mid-Century Modern 2-Tone Accent Dining Room Kitchen Chairs",
+ "brand": "Rivet",
+ "price": 10490,
+ "currency": "RUB",
+ "dims": {
+  "H": 855,
+  "W": 488,
+  "D": 550
+ },
+ "colors": [
+  "серый",
+  "синий"
+ ],
+ "materials": [
+  "ткань"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B075YPKYM1",
+ "model": {
+  "file": "models/abo-B075YPKYM1.glb",
+  "bytes": 307084,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.244102746,
+     0,
+     -0.310634077
+    ],
+    "max": [
+     0.2439095479566,
+     0.8550000440478,
+     0.23937785391739996
+    ],
+    "size": [
+     0.4880122939566,
+     0.8550000440478,
+     0.5500119309174
+    ]
+   },
+   "tris": 29168,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 3292504,
+  "bytes": 307084,
+  "srcTris": 29168,
+  "tris": 29168,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 2609625,
+   "after": 159772,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9999,
+   1.0001,
+   0.9993
+  ]
+ },
+ "image": {
+  "file": "images/abo-B075YPKYM1.jpg",
+  "bytes": 7785,
+  "mime": "image/jpeg"
+ }
+}

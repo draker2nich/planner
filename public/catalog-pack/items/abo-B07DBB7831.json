@@ -1,0 +1,78 @@
+{
+ "id": "abo-B07DBB7831",
+ "source": "abo",
+ "typeId": "nightstand",
+ "formId": "rect",
+ "name": "Ravenna Home Angela Modern Turned Wood Leg Side Table Nightstand",
+ "brand": "Ravenna Home",
+ "price": 15190,
+ "currency": "RUB",
+ "dims": {
+  "H": 555,
+  "W": 505,
+  "D": 459
+ },
+ "colors": [
+  "серый"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "современный",
+  "классика"
+ ],
+ "url": "https://www.amazon.com/dp/B07DBB7831",
+ "model": {
+  "file": "models/abo-B07DBB7831.glb",
+  "bytes": 114488,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.252499998,
+     0,
+     -0.229499996
+    ],
+    "max": [
+     0.2524981576995,
+     0.5549999855655,
+     0.22949376609649993
+    ],
+    "size": [
+     0.5049981556995,
+     0.5549999855655,
+     0.45899376209649995
+    ]
+   },
+   "tris": 14932,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 731596,
+  "bytes": 114488,
+  "srcTris": 14932,
+  "tris": 14932,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 325989,
+   "after": 15676,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9997,
+   1.0005,
+   0.9991
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07DBB7831.jpg",
+  "bytes": 4104,
+  "mime": "image/jpeg"
+ }
+}

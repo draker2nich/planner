@@ -1,0 +1,76 @@
+{
+ "id": "abo-B07DBGKSJC",
+ "source": "abo",
+ "typeId": "bench",
+ "formId": "rect",
+ "name": "Ravenna Home Barrow Nailhead Storage Ottoman Bench",
+ "brand": "Ravenna Home",
+ "price": 17290,
+ "currency": "RUB",
+ "dims": {
+  "H": 449,
+  "W": 887,
+  "D": 500
+ },
+ "colors": [
+  "бежевый"
+ ],
+ "materials": [
+  "дерево",
+  "ткань"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B07DBGKSJC",
+ "model": {
+  "file": "models/abo-B07DBGKSJC.glb",
+  "bytes": 168704,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.443500012,
+     0,
+     -0.25
+    ],
+    "max": [
+     0.44349999245719995,
+     0.4489953633012,
+     0.24999664537399996
+    ],
+    "size": [
+     0.8870000044572,
+     0.4489953633012,
+     0.49999664537399996
+    ]
+   },
+   "tris": 11454,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2713816,
+  "bytes": 168704,
+  "srcTris": 11454,
+  "tris": 11454,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 2417673,
+   "after": 99338,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0005,
+   0.9993,
+   1.0008
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07DBGKSJC.jpg",
+  "bytes": 3814,
+  "mime": "image/jpeg"
+ }
+}

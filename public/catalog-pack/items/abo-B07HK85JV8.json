@@ -1,0 +1,74 @@
+{
+ "id": "abo-B07HK85JV8",
+ "source": "abo",
+ "typeId": "chandelier",
+ "formId": "round",
+ "name": "Rivet Rustic Natural Material Construction Pendant Light with Bulb",
+ "brand": "Rivet",
+ "price": 20090,
+ "currency": "RUB",
+ "dims": {
+  "H": 1009,
+  "DIA": 643
+ },
+ "colors": [
+  "коричневый"
+ ],
+ "materials": [],
+ "styleTags": [
+  "кантри"
+ ],
+ "url": "https://www.amazon.com/dp/B07HK85JV8",
+ "model": {
+  "file": "models/abo-B07HK85JV8.glb",
+  "bytes": 319304,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.319368124,
+     -1.00894153,
+     -0.321027786
+    ],
+    "max": [
+     0.32105081461430013,
+     4.816310017474734e-8,
+     0.3206228459283001
+    ],
+    "size": [
+     0.6404189386143001,
+     1.0089415781631002,
+     0.6416506319283001
+    ]
+   },
+   "tris": 30004,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 4,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 6618688,
+  "bytes": 319304,
+  "srcTris": 169716,
+  "tris": 30004,
+  "textures": {
+   "images": 4,
+   "resized": 4,
+   "before": 1434826,
+   "after": 110132,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   1.0004,
+   1
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07HK85JV8.jpg",
+  "bytes": 5710,
+  "mime": "image/jpeg"
+ }
+}

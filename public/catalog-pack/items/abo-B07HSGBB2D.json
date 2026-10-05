@@ -1,0 +1,75 @@
+{
+ "id": "abo-B07HSGBB2D",
+ "source": "abo",
+ "typeId": "bookcase",
+ "formId": "rect",
+ "name": "Stone & Beam Rylee Modern Bookcase 27.6\"W x 76.8”H",
+ "brand": "Stone & Beam",
+ "price": 13990,
+ "currency": "RUB",
+ "dims": {
+  "H": 1342,
+  "W": 491,
+  "D": 267
+ },
+ "colors": [
+  "серый"
+ ],
+ "materials": [],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07HSGBB2D",
+ "model": {
+  "file": "models/abo-B07HSGBB2D.glb",
+  "bytes": 139000,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.245499998,
+     0,
+     -0.133499995
+    ],
+    "max": [
+     0.2454935891278,
+     1.3419999896421,
+     0.13354022756199999
+    ],
+    "size": [
+     0.4909935871278,
+     1.3419999896421,
+     0.267040222562
+    ]
+   },
+   "tris": 2274,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2155896,
+  "bytes": 139000,
+  "srcTris": 2274,
+  "tris": 2274,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 2065330,
+   "after": 116312,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.999,
+   1,
+   0.9989
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07HSGBB2D.jpg",
+  "bytes": 4718,
+  "mime": "image/jpeg"
+ }
+}

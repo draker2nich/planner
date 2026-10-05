@@ -1,0 +1,76 @@
+{
+ "id": "abo-B07HSKV2QT",
+ "source": "abo",
+ "typeId": "coffee-table",
+ "formId": "rect",
+ "name": "Rivet Stevens Modern Storage Coffee Table",
+ "brand": "Rivet",
+ "price": 25190,
+ "currency": "RUB",
+ "dims": {
+  "H": 347,
+  "W": 1088,
+  "D": 643
+ },
+ "colors": [
+  "серый",
+  "коричневый"
+ ],
+ "materials": [],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07HSKV2QT",
+ "model": {
+  "file": "models/abo-B07HSKV2QT.glb",
+  "bytes": 235544,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.541781545,
+     0,
+     -0.321035951
+    ],
+    "max": [
+     0.5462185031129,
+     0.34699385041749997,
+     0.3219486345966
+    ],
+    "size": [
+     1.0880000481129,
+     0.34699385041749997,
+     0.6429845855966
+    ]
+   },
+   "tris": 6092,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2835272,
+  "bytes": 235544,
+  "srcTris": 6092,
+  "tris": 6092,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 2664071,
+   "after": 197608,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0001,
+   1.0014,
+   1.0006
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07HSKV2QT.jpg",
+  "bytes": 3747,
+  "mime": "image/jpeg"
+ }
+}

@@ -1,0 +1,77 @@
+{
+ "id": "abo-B07DBDX15Y",
+ "source": "abo",
+ "typeId": "armchair",
+ "formId": "rect",
+ "name": "Ravenna Home Hughes Curved Back Tufted Patterned Accent Chair",
+ "brand": "Ravenna Home",
+ "price": 28190,
+ "currency": "RUB",
+ "dims": {
+  "H": 858,
+  "W": 686,
+  "D": 613
+ },
+ "colors": [
+  "белый"
+ ],
+ "materials": [
+  "ткань"
+ ],
+ "styleTags": [
+  "классика"
+ ],
+ "url": "https://www.amazon.com/dp/B07DBDX15Y",
+ "model": {
+  "file": "models/abo-B07DBDX15Y.glb",
+  "bytes": 463564,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.342999995,
+     0,
+     -0.354670048
+    ],
+    "max": [
+     0.3430124588093001,
+     0.8580000023481,
+     0.2583367289935
+    ],
+    "size": [
+     0.6860124538093001,
+     0.8580000023481,
+     0.6130067769935
+    ]
+   },
+   "tris": 21858,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 3227804,
+  "bytes": 463564,
+  "srcTris": 21858,
+  "tris": 21858,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 2709341,
+   "after": 343986,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9994,
+   0.9994,
+   1.0008
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07DBDX15Y.jpg",
+  "bytes": 4386,
+  "mime": "image/jpeg"
+ }
+}

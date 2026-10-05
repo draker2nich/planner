@@ -1,0 +1,76 @@
+{
+ "id": "abo-B07B8445B5",
+ "source": "abo",
+ "typeId": "bar-stool",
+ "formId": "round",
+ "name": "Rivet Stevie Mid-Century Modern Bar Stool",
+ "brand": "Rivet",
+ "price": 13290,
+ "currency": "RUB",
+ "dims": {
+  "H": 595,
+  "DIA": 472
+ },
+ "colors": [
+  "жёлтый"
+ ],
+ "materials": [
+  "металл"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07B8445B5",
+ "model": {
+  "file": "models/abo-B07B8445B5.glb",
+  "bytes": 171596,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.2338337,
+     0,
+     -0.236000001
+    ],
+    "max": [
+     0.23815673827360004,
+     0.5949999500028,
+     0.23599043727360006
+    ],
+    "size": [
+     0.47199043827360004,
+     0.5949999500028,
+     0.47199043827360004
+    ]
+   },
+   "tris": 10300,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 1916504,
+  "bytes": 171596,
+  "srcTris": 10300,
+  "tris": 10300,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 1663350,
+   "after": 109606,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0776,
+   0.9993,
+   1.0003
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07B8445B5.jpg",
+  "bytes": 6010,
+  "mime": "image/jpeg"
+ }
+}

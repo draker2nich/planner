@@ -1,0 +1,78 @@
+{
+ "id": "abo-B07B8FN8TP",
+ "source": "abo",
+ "typeId": "console",
+ "formId": "rect",
+ "name": "Stone & Beam Traditional Oak Wood Media TV Console Table",
+ "brand": "Stone & Beam",
+ "price": 29090,
+ "currency": "RUB",
+ "dims": {
+  "H": 852,
+  "W": 1478,
+  "D": 461
+ },
+ "colors": [
+  "коричневый"
+ ],
+ "materials": [
+  "дерево",
+  "камень"
+ ],
+ "styleTags": [
+  "классика"
+ ],
+ "url": "https://www.amazon.com/dp/B07B8FN8TP",
+ "model": {
+  "file": "models/abo-B07B8FN8TP.glb",
+  "bytes": 148112,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.740145624,
+     0,
+     -0.230499998
+    ],
+    "max": [
+     0.7378543276268998,
+     0.8519948448492,
+     0.23050102457299995
+    ],
+    "size": [
+     1.4779999516268998,
+     0.8519948448492,
+     0.46100102257299996
+    ]
+   },
+   "tris": 10316,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2522356,
+  "bytes": 148112,
+  "srcTris": 10316,
+  "tris": 10316,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 2227953,
+   "after": 84964,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0002,
+   1.0002,
+   0.9991
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07B8FN8TP.jpg",
+  "bytes": 5404,
+  "mime": "image/jpeg"
+ }
+}

@@ -1,0 +1,76 @@
+{
+ "id": "abo-B07B78M4DN",
+ "source": "abo",
+ "typeId": "bar-stool",
+ "formId": "round",
+ "name": "Stone & Beam Cottage Wood Bar Stool",
+ "brand": "Hillsdale Furniture",
+ "price": 7190,
+ "currency": "RUB",
+ "dims": {
+  "H": 737,
+  "DIA": 476
+ },
+ "colors": [
+  "зелёный"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "кантри"
+ ],
+ "url": "https://www.amazon.com/dp/B07B78M4DN",
+ "model": {
+  "file": "models/abo-B07B78M4DN.glb",
+  "bytes": 59228,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.237999991,
+     0,
+     -0.237999991
+    ],
+    "max": [
+     0.23799323619410004,
+     0.7370000038863,
+     0.23799323619410004
+    ],
+    "size": [
+     0.47599322719410003,
+     0.7370000038863,
+     0.47599322719410003
+    ]
+   },
+   "tris": 9322,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 464452,
+  "bytes": 59228,
+  "srcTris": 9322,
+  "tris": 9322,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 245592,
+   "after": 13012,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0405,
+   0.9995,
+   1.0001
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07B78M4DN.jpg",
+  "bytes": 5130,
+  "mime": "image/jpeg"
+ }
+}

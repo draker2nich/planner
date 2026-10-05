@@ -1,0 +1,77 @@
+{
+ "id": "abo-B07B8J8LXH",
+ "source": "abo",
+ "typeId": "small-table",
+ "formId": "rect",
+ "name": "Stone & Beam Bruckner Casual Wood Side Table",
+ "brand": "Stone & Beam",
+ "price": 11090,
+ "currency": "RUB",
+ "dims": {
+  "H": 638,
+  "W": 612,
+  "D": 610
+ },
+ "colors": [
+  "коричневый"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "классика"
+ ],
+ "url": "https://www.amazon.com/dp/B07B8J8LXH",
+ "model": {
+  "file": "models/abo-B07B8J8LXH.glb",
+  "bytes": 145236,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.305750579,
+     0,
+     -0.305000097
+    ],
+    "max": [
+     0.30623561728999993,
+     0.637999990698,
+     0.3050000161839999
+    ],
+    "size": [
+     0.61198619629,
+     0.637999990698,
+     0.6100001131839999
+    ]
+   },
+   "tris": 1778,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2726972,
+  "bytes": 145236,
+  "srcTris": 1778,
+  "tris": 1778,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 2660660,
+   "after": 126296,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0002,
+   1.0006,
+   1.0004
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07B8J8LXH.jpg",
+  "bytes": 12037,
+  "mime": "image/jpeg"
+ }
+}

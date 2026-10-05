@@ -1,0 +1,75 @@
+{
+ "id": "abo-B07JGY5LNV",
+ "source": "abo",
+ "typeId": "bookcase",
+ "formId": "rect",
+ "name": "Alkove Velle Bookcase",
+ "brand": "Alkove",
+ "price": 25690,
+ "currency": "RUB",
+ "dims": {
+  "H": 2020,
+  "W": 950,
+  "D": 420
+ },
+ "colors": [
+  "натуральное дерево"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.co.uk/dp/B07JGY5LNV",
+ "model": {
+  "file": "models/abo-B07JGY5LNV.glb",
+  "bytes": 190996,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.475000054,
+     0,
+     -0.209999979
+    ],
+    "max": [
+     0.47501518129,
+     2.019999948054,
+     0.20995484142800003
+    ],
+    "size": [
+     0.95001523529,
+     2.019999948054,
+     0.41995482042800003
+    ]
+   },
+   "tris": 2424,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 43393876,
+  "bytes": 190996,
+  "srcTris": 2424,
+  "tris": 2424,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 43273996,
+   "after": 167096,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   1.0001,
+   1.0003
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07JGY5LNV.jpg",
+  "bytes": 7911,
+  "mime": "image/jpeg"
+ }
+}

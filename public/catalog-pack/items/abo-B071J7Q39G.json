@@ -1,0 +1,79 @@
+{
+ "id": "abo-B071J7Q39G",
+ "source": "abo",
+ "typeId": "armchair",
+ "formId": "rect",
+ "name": "Stone & Beam Dalton Performance Fabric Living Room Accent Arm Chair",
+ "brand": "Stone & Beam",
+ "price": 51990,
+ "currency": "RUB",
+ "dims": {
+  "H": 934,
+  "W": 999,
+  "D": 1044
+ },
+ "colors": [
+  "серый"
+ ],
+ "materials": [
+  "ткань",
+  "камень"
+ ],
+ "styleTags": [
+  "современный",
+  "классика"
+ ],
+ "url": "https://www.amazon.com/dp/B071J7Q39G",
+ "model": {
+  "file": "models/abo-B071J7Q39G.glb",
+  "bytes": 268872,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.499499977,
+     0,
+     -0.521997035
+    ],
+    "max": [
+     0.4995104251331001,
+     0.9340113200271001,
+     0.5220029278849001
+    ],
+    "size": [
+     0.9990104021331001,
+     0.9340113200271001,
+     1.0439999628849002
+    ]
+   },
+   "tris": 10920,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 3653272,
+  "bytes": 268872,
+  "srcTris": 10920,
+  "tris": 10920,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 3370622,
+   "after": 199304,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0005,
+   0.9998,
+   0.9999
+  ]
+ },
+ "image": {
+  "file": "images/abo-B071J7Q39G.jpg",
+  "bytes": 8316,
+  "mime": "image/jpeg"
+ }
+}

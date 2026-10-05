@@ -1,0 +1,72 @@
+{
+ "id": "abo-B07ML7NZQG",
+ "source": "abo",
+ "typeId": "chandelier",
+ "formId": "round",
+ "name": "Ravenna Home Classic 4 Light Semi-flush Mount Chandelier",
+ "brand": "Ravenna Home",
+ "price": 30090,
+ "currency": "RUB",
+ "dims": {
+  "H": 925,
+  "DIA": 1069
+ },
+ "colors": [],
+ "materials": [],
+ "styleTags": [
+  "классика"
+ ],
+ "url": "https://www.amazon.com/dp/B07ML7NZQG",
+ "model": {
+  "file": "models/abo-B07ML7NZQG.glb",
+  "bytes": 243116,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.534378827,
+     -0.925000012,
+     -0.534483552
+    ],
+    "max": [
+     0.5345000271100001,
+     0.00001765225999994513,
+     0.5343953021100001
+    ],
+    "size": [
+     1.06887885411,
+     0.92501766426,
+     1.06887885411
+    ]
+   },
+   "tris": 29952,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 4,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 6047536,
+  "bytes": 243116,
+  "srcTris": 53700,
+  "tris": 29952,
+  "textures": {
+   "images": 4,
+   "resized": 4,
+   "before": 4747993,
+   "after": 65370,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0004,
+   0.9998,
+   1.0004
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07ML7NZQG.jpg",
+  "bytes": 3145,
+  "mime": "image/jpeg"
+ }
+}

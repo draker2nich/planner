@@ -1,0 +1,76 @@
+{
+ "id": "abo-B07RPZSM4W",
+ "source": "abo",
+ "typeId": "table",
+ "formId": "rect",
+ "name": "AmazonBasics",
+ "brand": "AmazonBasics",
+ "price": 16890,
+ "currency": "RUB",
+ "dims": {
+  "H": 530,
+  "W": 450,
+  "D": 380
+ },
+ "colors": [
+  "бежевый",
+  "серый"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.co.uk/dp/B07RPZSM4W",
+ "model": {
+  "file": "models/abo-B07RPZSM4W.glb",
+  "bytes": 113448,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.224999994,
+     0,
+     -0.190000042
+    ],
+    "max": [
+     0.22499694241500004,
+     0.5299999862895001,
+     0.189990181949
+    ],
+    "size": [
+     0.44999693641500005,
+     0.5299999862895001,
+     0.379990223949
+    ]
+   },
+   "tris": 13504,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 9908256,
+  "bytes": 113448,
+  "srcTris": 13504,
+  "tris": 13504,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 9454540,
+   "after": 36114,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   1,
+   1
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07RPZSM4W.jpg",
+  "bytes": 3972,
+  "mime": "image/jpeg"
+ }
+}

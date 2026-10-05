@@ -1,0 +1,77 @@
+{
+ "id": "abo-B07DMGM9T6",
+ "source": "abo",
+ "typeId": "island",
+ "formId": "rect",
+ "name": "2L Lifestyle Newbury Wood Kitchen Cart",
+ "brand": "2L Lifestyle",
+ "price": 11590,
+ "currency": "RUB",
+ "dims": {
+  "H": 878,
+  "W": 690,
+  "D": 449
+ },
+ "colors": [
+  "коричневый"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "скандинавский"
+ ],
+ "url": "https://www.amazon.com/dp/B07DMGM9T6",
+ "model": {
+  "file": "models/abo-B07DMGM9T6.glb",
+  "bytes": 193472,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.331188411,
+     0,
+     -0.219773829
+    ],
+    "max": [
+     0.3588103786249999,
+     0.8780000132369999,
+     0.229221111542
+    ],
+    "size": [
+     0.6899987896249999,
+     0.8780000132369999,
+     0.448994940542
+    ]
+   },
+   "tris": 30000,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 13730572,
+  "bytes": 193472,
+  "srcTris": 33746,
+  "tris": 30000,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 12872754,
+   "after": 36052,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9994,
+   0.9997,
+   0.9999
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07DMGM9T6.jpg",
+  "bytes": 8028,
+  "mime": "image/jpeg"
+ }
+}

@@ -1,0 +1,75 @@
+{
+ "id": "abo-B07Q5SBTK5",
+ "source": "abo",
+ "typeId": "chair",
+ "formId": "rect",
+ "name": "AmazonBasics Adjustable High-Back Mesh Chair with Flip-Up Arms and Head Rest",
+ "brand": "AmazonBasics",
+ "price": 9690,
+ "currency": "RUB",
+ "dims": {
+  "H": 1104,
+  "W": 650,
+  "D": 651
+ },
+ "colors": [
+  "чёрный"
+ ],
+ "materials": [],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07Q5SBTK5",
+ "model": {
+  "file": "models/abo-B07Q5SBTK5.glb",
+  "bytes": 431404,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.312376618,
+     0,
+     -0.373713225
+    ],
+    "max": [
+     0.33716134058240005,
+     1.1034197817768001,
+     0.27683500622640006
+    ],
+    "size": [
+     0.6495379585824,
+     1.1034197817768001,
+     0.6505482312264
+    ]
+   },
+   "tris": 29993,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 34052976,
+  "bytes": 431404,
+  "srcTris": 302050,
+  "tris": 29993,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 25258099,
+   "after": 242054,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0005,
+   1.0001,
+   1.0001
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07Q5SBTK5.jpg",
+  "bytes": 5615,
+  "mime": "image/jpeg"
+ }
+}

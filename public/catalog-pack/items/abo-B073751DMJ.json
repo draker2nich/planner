@@ -1,0 +1,78 @@
+{
+ "id": "abo-B073751DMJ",
+ "source": "abo",
+ "typeId": "nightstand",
+ "formId": "rect",
+ "name": "Rivet Gold Bedside Table Desk Lamp with Light Bulb",
+ "brand": "Rivet",
+ "price": 8490,
+ "currency": "RUB",
+ "dims": {
+  "H": 458,
+  "W": 253,
+  "D": 252
+ },
+ "colors": [
+  "жёлтый"
+ ],
+ "materials": [
+  "металл",
+  "ткань"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B073751DMJ",
+ "model": {
+  "file": "models/abo-B073751DMJ.glb",
+  "bytes": 163004,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.126572639,
+     0,
+     -0.125628367
+    ],
+    "max": [
+     0.12642740711,
+     0.4579999729746,
+     0.1263652700868
+    ],
+    "size": [
+     0.25300004611,
+     0.4579999729746,
+     0.2519936370868
+    ]
+   },
+   "tris": 24058,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 4,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2342852,
+  "bytes": 163004,
+  "srcTris": 24058,
+  "tris": 24058,
+  "textures": {
+   "images": 4,
+   "resized": 4,
+   "before": 1731635,
+   "after": 36920,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0019,
+   1.0002,
+   0.9999
+  ]
+ },
+ "image": {
+  "file": "images/abo-B073751DMJ.jpg",
+  "bytes": 3926,
+  "mime": "image/jpeg"
+ }
+}

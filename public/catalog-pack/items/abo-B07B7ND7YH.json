@@ -1,0 +1,78 @@
+{
+ "id": "abo-B07B7ND7YH",
+ "source": "abo",
+ "typeId": "small-table",
+ "formId": "rect",
+ "name": "Rivet Mid-Century Nesting Metal Side Table",
+ "brand": "Rivet",
+ "price": 10690,
+ "currency": "RUB",
+ "dims": {
+  "H": 555,
+  "W": 532,
+  "D": 751
+ },
+ "colors": [
+  "коричневый",
+  "жёлтый"
+ ],
+ "materials": [
+  "металл"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07B7ND7YH",
+ "model": {
+  "file": "models/abo-B07B7ND7YH.glb",
+  "bytes": 189316,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.265711069,
+     0,
+     -0.333524287
+    ],
+    "max": [
+     0.26631028291520004,
+     0.5549872917144,
+     0.4174756964936001
+    ],
+    "size": [
+     0.5320213519152001,
+     0.5549872917144,
+     0.7509999834936001
+    ]
+   },
+   "tris": 16656,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2436540,
+  "bytes": 189316,
+  "srcTris": 16656,
+  "tris": 16656,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 1999356,
+   "after": 95416,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0003,
+   0.9994,
+   0.9994
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07B7ND7YH.jpg",
+  "bytes": 9226,
+  "mime": "image/jpeg"
+ }
+}

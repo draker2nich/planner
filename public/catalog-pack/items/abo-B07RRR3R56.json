@@ -1,0 +1,76 @@
+{
+ "id": "abo-B07RRR3R56",
+ "source": "abo",
+ "typeId": "mirror",
+ "formId": "wall",
+ "name": "Amazon Basics Rectangular Wall Mirror 16\" x 20\"",
+ "brand": "Amazon Basics",
+ "price": 4490,
+ "currency": "RUB",
+ "dims": {
+  "H": 508,
+  "W": 405,
+  "D": 41,
+  "E": 1200
+ },
+ "colors": [
+  "серебристый"
+ ],
+ "materials": [
+  "металл"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B07RRR3R56",
+ "model": {
+  "file": "models/abo-B07RRR3R56.glb",
+  "bytes": 95848,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.202500001,
+     -0.254000008,
+     0
+    ],
+    "max": [
+     0.20249224917809996,
+     0.2539999946543,
+     0.040992248276199995
+    ],
+    "size": [
+     0.4049922501781,
+     0.5080000026543,
+     0.040992248276199995
+    ]
+   },
+   "tris": 12880,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 20487780,
+  "bytes": 95848,
+  "srcTris": 12880,
+  "tris": 12880,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 20160150,
+   "after": 32512,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9993,
+   1.0005,
+   1.01
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07RRR3R56.jpg",
+  "bytes": 2923,
+  "mime": "image/jpeg"
+ }
+}

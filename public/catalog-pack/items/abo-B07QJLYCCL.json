@@ -1,0 +1,76 @@
+{
+ "id": "abo-B07QJLYCCL",
+ "source": "abo",
+ "typeId": "office-chair",
+ "formId": "round",
+ "name": "Rivet Mid-Century Bonded Leather Swivel Chair",
+ "brand": "Rivet",
+ "price": 18690,
+ "currency": "RUB",
+ "dims": {
+  "H": 777,
+  "DIA": 640
+ },
+ "colors": [
+  "коричневый"
+ ],
+ "materials": [
+  "кожа"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07QJLYCCL",
+ "model": {
+  "file": "models/abo-B07QJLYCCL.glb",
+  "bytes": 228132,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.317392349,
+     0,
+     -0.34574452
+    ],
+    "max": [
+     0.3225904119448,
+     0.7769999683236,
+     0.2942382409448
+    ],
+    "size": [
+     0.6399827609448,
+     0.7769999683236,
+     0.6399827609448
+    ]
+   },
+   "tris": 28078,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 39749536,
+  "bytes": 228132,
+  "srcTris": 28078,
+  "tris": 28078,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 39080515,
+   "after": 77220,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0823,
+   1.0003,
+   0.9996
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07QJLYCCL.jpg",
+  "bytes": 7452,
+  "mime": "image/jpeg"
+ }
+}

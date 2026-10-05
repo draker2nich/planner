@@ -1,0 +1,74 @@
+{
+ "id": "abo-B07DBCMTD3",
+ "source": "abo",
+ "typeId": "floor-lamp",
+ "formId": "round",
+ "name": "Ravenna Home Metal Living Room Slim Standing Floor Lamp With LED Light Bulb",
+ "brand": "Ravenna Home",
+ "price": 12590,
+ "currency": "RUB",
+ "dims": {
+  "H": 1506,
+  "DIA": 327
+ },
+ "colors": [
+  "белый"
+ ],
+ "materials": [
+  "ткань"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B07DBCMTD3",
+ "model": {
+  "file": "models/abo-B07DBCMTD3.glb",
+  "bytes": 116164,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.163500056,
+     0,
+     -0.163500026
+    ],
+    "max": [
+     0.16347556977279998,
+     1.5059999092032,
+     0.1634755997728
+    ],
+    "size": [
+     0.3269756257728,
+     1.5059999092032,
+     0.3269756257728
+    ]
+   },
+   "tris": 18216,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 4,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 1798452,
+  "bytes": 116164,
+  "srcTris": 18216,
+  "tris": 18216,
+  "textures": {
+   "images": 4,
+   "resized": 4,
+   "before": 1368307,
+   "after": 19340,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0003,
+   1,
+   1.0003
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07DBCMTD3.jpg",
+  "bytes": 1954,
+  "mime": "image/jpeg"
+ }
+}

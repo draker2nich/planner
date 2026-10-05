@@ -1,0 +1,78 @@
+{
+ "id": "abo-B076HF77HC",
+ "source": "abo",
+ "typeId": "dressing-table",
+ "formId": "rect",
+ "name": "AmazonBasics Classic Compact Vanity Table Set with Stool and Mirror",
+ "brand": "AmazonBasics",
+ "price": 26490,
+ "currency": "RUB",
+ "dims": {
+  "H": 1631,
+  "W": 876,
+  "D": 1211
+ },
+ "colors": [
+  "коричневый"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "современный",
+  "классика"
+ ],
+ "url": "https://www.amazon.com/dp/B076HF77HC",
+ "model": {
+  "file": "models/abo-B076HF77HC.glb",
+  "bytes": 249564,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.437704772,
+     0,
+     -0.60740912
+    ],
+    "max": [
+     0.43827455022219997,
+     1.6310000268174,
+     0.6035708181192001
+    ],
+    "size": [
+     0.8759793222222,
+     1.6310000268174,
+     1.2109799381192001
+    ]
+   },
+   "tris": 9925,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2963416,
+  "bytes": 249564,
+  "srcTris": 9925,
+  "tris": 9925,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 2695511,
+   "after": 187946,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9996,
+   0.9999,
+   0.9997
+  ]
+ },
+ "image": {
+  "file": "images/abo-B076HF77HC.jpg",
+  "bytes": 5528,
+  "mime": "image/jpeg"
+ }
+}

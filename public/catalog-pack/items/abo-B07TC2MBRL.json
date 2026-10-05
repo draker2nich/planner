@@ -1,0 +1,75 @@
+{
+ "id": "abo-B07TC2MBRL",
+ "source": "abo",
+ "typeId": "chair",
+ "formId": "rect",
+ "name": "Movian Arendsee",
+ "brand": "Movian",
+ "price": 12890,
+ "currency": "RUB",
+ "dims": {
+  "H": 850,
+  "W": 485,
+  "D": 550
+ },
+ "colors": [
+  "чёрный"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.it/dp/B07TC2MBRL",
+ "model": {
+  "file": "models/abo-B07TC2MBRL.glb",
+  "bytes": 406124,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.242499992,
+     0,
+     -0.274977058
+    ],
+    "max": [
+     0.2425027192036,
+     0.8499999377031,
+     0.27498322642
+    ],
+    "size": [
+     0.4850027112036,
+     0.8499999377031,
+     0.54996028442
+    ]
+   },
+   "tris": 30000,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 29450800,
+  "bytes": 406124,
+  "srcTris": 38018,
+  "tris": 30000,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 26927318,
+   "after": 57362,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   1,
+   1
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07TC2MBRL.jpg",
+  "bytes": 4626,
+  "mime": "image/jpeg"
+ }
+}

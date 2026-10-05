@@ -1,0 +1,72 @@
+{
+ "id": "abo-B0853KM5Q3",
+ "source": "abo",
+ "typeId": "bar-stool",
+ "formId": "round",
+ "name": "Rivet Eli Modern Curved-Back Counter-Height Barstool",
+ "brand": "Rivet",
+ "price": 15990,
+ "currency": "RUB",
+ "dims": {
+  "H": 969,
+  "DIA": 568
+ },
+ "colors": [],
+ "materials": [],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B0853KM5Q3",
+ "model": {
+  "file": "models/abo-B0853KM5Q3.glb",
+  "bytes": 847136,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.284706771,
+     0,
+     -0.286823034
+    ],
+    "max": [
+     0.28327874134259995,
+     0.9689999634186,
+     0.2811624783426
+    ],
+    "size": [
+     0.5679855123426,
+     0.9689999634186,
+     0.5679855123426
+    ]
+   },
+   "tris": 7210,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 82204376,
+  "bytes": 847136,
+  "srcTris": 7210,
+  "tris": 7210,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 82031293,
+   "after": 805014,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.1818,
+   0.9995,
+   1
+  ]
+ },
+ "image": {
+  "file": "images/abo-B0853KM5Q3.jpg",
+  "bytes": 3140,
+  "mime": "image/jpeg"
+ }
+}

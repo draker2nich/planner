@@ -1,0 +1,76 @@
+{
+ "id": "abo-B07QC6354F",
+ "source": "abo",
+ "typeId": "desk",
+ "formId": "rect",
+ "name": "AmazonBasics Retro Hairpin Compact Computer Desk",
+ "brand": "AmazonBasics",
+ "price": 15290,
+ "currency": "RUB",
+ "dims": {
+  "H": 660,
+  "W": 991,
+  "D": 499
+ },
+ "colors": [
+  "чёрный",
+  "жёлтый"
+ ],
+ "materials": [],
+ "styleTags": [
+  "ретро"
+ ],
+ "url": "https://www.amazon.com/dp/B07QC6354F",
+ "model": {
+  "file": "models/abo-B07QC6354F.glb",
+  "bytes": 95712,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.495499969,
+     2.98023224e-8,
+     -0.249499992
+    ],
+    "max": [
+     0.4954999780537999,
+     0.6600012763569224,
+     0.24947812942139996
+    ],
+    "size": [
+     0.9909999470537999,
+     0.6600012465546,
+     0.49897812142139997
+    ]
+   },
+   "tris": 5340,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 9042596,
+  "bytes": 95712,
+  "srcTris": 5340,
+  "tris": 5340,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 8835858,
+   "after": 55550,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0004,
+   0.9994,
+   1.0008
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07QC6354F.jpg",
+  "bytes": 3962,
+  "mime": "image/jpeg"
+ }
+}

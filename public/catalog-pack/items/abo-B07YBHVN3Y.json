@@ -1,0 +1,75 @@
+{
+ "id": "abo-B07YBHVN3Y",
+ "source": "abo",
+ "typeId": "chair",
+ "formId": "rect",
+ "name": "AmazonBasics Solid Wood Kid Desk and Chair",
+ "brand": "AmazonBasics",
+ "price": 6790,
+ "currency": "RUB",
+ "dims": {
+  "H": 673,
+  "W": 599,
+  "D": 463
+ },
+ "colors": [
+  "коричневый"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B07YBHVN3Y",
+ "model": {
+  "file": "models/abo-B07YBHVN3Y.glb",
+  "bytes": 218864,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.299499959,
+     0,
+     -0.19783397
+    ],
+    "max": [
+     0.29951643086280005,
+     0.6729999667482001,
+     0.26516930322340004
+    ],
+    "size": [
+     0.5990163898628,
+     0.6729999667482001,
+     0.46300327322340007
+    ]
+   },
+   "tris": 30230,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 42431304,
+  "bytes": 218864,
+  "srcTris": 30230,
+  "tris": 30230,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 41686722,
+   "after": 66774,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9995,
+   0.9998,
+   1.0003
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07YBHVN3Y.jpg",
+  "bytes": 9150,
+  "mime": "image/jpeg"
+ }
+}

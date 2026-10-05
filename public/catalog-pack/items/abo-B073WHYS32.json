@@ -1,0 +1,78 @@
+{
+ "id": "abo-B073WHYS32",
+ "source": "abo",
+ "typeId": "mirror",
+ "formId": "wall",
+ "name": "Rivet Modern Round Iron Circle Metal Hanging Wall Mirror",
+ "brand": "Rivet",
+ "price": 15690,
+ "currency": "RUB",
+ "dims": {
+  "H": 703,
+  "W": 703,
+  "D": 67,
+  "E": 1200
+ },
+ "colors": [
+  "прозрачный"
+ ],
+ "materials": [
+  "металл"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B073WHYS32",
+ "model": {
+  "file": "models/abo-B073WHYS32.glb",
+  "bytes": 119512,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.351500005,
+     -0.351500005,
+     0
+    ],
+    "max": [
+     0.3515000083901,
+     0.3515000083901,
+     0.06698303246670001
+    ],
+    "size": [
+     0.7030000133901,
+     0.7030000133901,
+     0.06698303246670001
+    ]
+   },
+   "tris": 15632,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 1227080,
+  "bytes": 119512,
+  "srcTris": 15632,
+  "tris": 15632,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 795686,
+   "after": 14204,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   0.9998,
+   0.9994
+  ]
+ },
+ "image": {
+  "file": "images/abo-B073WHYS32.jpg",
+  "bytes": 14990,
+  "mime": "image/jpeg"
+ }
+}

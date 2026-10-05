@@ -1,0 +1,76 @@
+{
+ "id": "abo-B07B4ZXKBD",
+ "source": "abo",
+ "typeId": "chandelier",
+ "formId": "round",
+ "name": "Stone & Beam Contemporary Ribbed Glass Shade Ceiling Pendant Fixture With Light Bulb",
+ "brand": "Stone & Beam",
+ "price": 12990,
+ "currency": "RUB",
+ "dims": {
+  "H": 753,
+  "DIA": 326
+ },
+ "colors": [
+  "прозрачный"
+ ],
+ "materials": [
+  "стекло"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07B4ZXKBD",
+ "model": {
+  "file": "models/abo-B07B4ZXKBD.glb",
+  "bytes": 199788,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.163909718,
+     -0.753000021,
+     -0.16021353
+    ],
+    "max": [
+     0.16210072552839996,
+     -7.419600045466268e-9,
+     0.16579691352839998
+    ],
+    "size": [
+     0.3260104435284,
+     0.7530000135803999,
+     0.3260104435284
+    ]
+   },
+   "tris": 19774,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 4,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2611508,
+  "bytes": 199788,
+  "srcTris": 19774,
+  "tris": 19774,
+  "textures": {
+   "images": 4,
+   "resized": 4,
+   "before": 1937208,
+   "after": 41286,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0101,
+   1,
+   0.9989
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07B4ZXKBD.jpg",
+  "bytes": 4710,
+  "mime": "image/jpeg"
+ }
+}

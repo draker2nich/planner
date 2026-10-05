@@ -1,0 +1,74 @@
+{
+ "id": "abo-B07MBFDHMH",
+ "source": "abo",
+ "typeId": "table-lamp",
+ "formId": "round",
+ "name": "Stone & Beam Table Lamp with Textured Ceramic Base",
+ "brand": "Stone & Beam",
+ "price": 5190,
+ "currency": "RUB",
+ "dims": {
+  "H": 369,
+  "DIA": 186
+ },
+ "colors": [
+  "белый"
+ ],
+ "materials": [
+  "камень"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B07MBFDHMH",
+ "model": {
+  "file": "models/abo-B07MBFDHMH.glb",
+  "bytes": 126856,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.0930000469,
+     0,
+     -0.0930002108
+    ],
+    "max": [
+     0.09299776831620002,
+     0.3690000250287,
+     0.09299760441620002
+    ],
+    "size": [
+     0.1859978152162,
+     0.3690000250287,
+     0.1859978152162
+    ]
+   },
+   "tris": 14548,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 4,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 16821104,
+  "bytes": 126856,
+  "srcTris": 14548,
+  "tris": 14548,
+  "textures": {
+   "images": 4,
+   "resized": 4,
+   "before": 16462895,
+   "after": 45258,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.999,
+   0.9987,
+   0.999
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07MBFDHMH.jpg",
+  "bytes": 2463,
+  "mime": "image/jpeg"
+ }
+}

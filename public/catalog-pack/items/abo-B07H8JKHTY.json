@@ -1,0 +1,76 @@
+{
+ "id": "abo-B07H8JKHTY",
+ "source": "abo",
+ "typeId": "shelving",
+ "formId": "rect",
+ "name": "Movian Moselle Shelf",
+ "brand": "Movian",
+ "price": 14290,
+ "currency": "RUB",
+ "dims": {
+  "H": 300,
+  "W": 1020,
+  "D": 200
+ },
+ "colors": [
+  "белый",
+  "натуральное дерево"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.co.uk/dp/B07H8JKHTY",
+ "model": {
+  "file": "models/abo-B07H8JKHTY.glb",
+  "bytes": 43040,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.50999999,
+     0,
+     -0.100000016
+    ],
+    "max": [
+     0.5099999591629,
+     0.3000292837097,
+     0.0999780000356
+    ],
+    "size": [
+     1.0199999491629,
+     0.3000292837097,
+     0.1999780160356
+    ]
+   },
+   "tris": 540,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 15419716,
+  "bytes": 43040,
+  "srcTris": 540,
+  "tris": 540,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 15398473,
+   "after": 35466,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0002,
+   1.0001,
+   1.0005
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07H8JKHTY.jpg",
+  "bytes": 7127,
+  "mime": "image/jpeg"
+ }
+}

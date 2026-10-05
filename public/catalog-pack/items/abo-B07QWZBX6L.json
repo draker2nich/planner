@@ -1,0 +1,73 @@
+{
+ "id": "abo-B07QWZBX6L",
+ "source": "abo",
+ "typeId": "coffee-table",
+ "formId": "rect",
+ "name": "Movian Segre Coffee Table 70 x 70 x 29 cm",
+ "brand": "Movian",
+ "price": 18590,
+ "currency": "RUB",
+ "dims": {
+  "H": 289,
+  "W": 700,
+  "D": 700
+ },
+ "colors": [
+  "белый"
+ ],
+ "materials": [],
+ "styleTags": [],
+ "url": "https://www.amazon.de/dp/B07QWZBX6L",
+ "model": {
+  "file": "models/abo-B07QWZBX6L.glb",
+  "bytes": 77496,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.349999994,
+     1.49011612e-8,
+     -0.350000024
+    ],
+    "max": [
+     0.3500000627281001,
+     0.2890069357159612,
+     0.35000003272810004
+    ],
+    "size": [
+     0.7000000567281001,
+     0.2890069208148,
+     0.7000000567281001
+    ]
+   },
+   "tris": 7300,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2897076,
+  "bytes": 77496,
+  "srcTris": 7300,
+  "tris": 7300,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 2607843,
+   "after": 27774,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0003,
+   1.0007,
+   1.0003
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07QWZBX6L.jpg",
+  "bytes": 11165,
+  "mime": "image/jpeg"
+ }
+}

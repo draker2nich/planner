@@ -1,0 +1,78 @@
+{
+ "id": "abo-B07HKGY4F2",
+ "source": "abo",
+ "typeId": "sconce",
+ "formId": "wall",
+ "name": "Rivet Modern Concrete Cubic Outdoor Porch Light Wall Sconce with Integrated LED Light",
+ "brand": "Rivet",
+ "price": 4690,
+ "currency": "RUB",
+ "dims": {
+  "H": 121,
+  "W": 121,
+  "D": 143,
+  "E": 1700
+ },
+ "colors": [
+  "чёрный"
+ ],
+ "materials": [
+  "металл"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07HKGY4F2",
+ "model": {
+  "file": "models/abo-B07HKGY4F2.glb",
+  "bytes": 163968,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.0605000034,
+     -0.0604999997,
+     4.77472373e-9
+    ],
+    "max": [
+     0.060504033861359996,
+     0.06050403756136,
+     0.1430000150504837
+    ],
+    "size": [
+     0.12100403726136,
+     0.12100403726136,
+     0.14300001027575998
+    ]
+   },
+   "tris": 1990,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 4,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 3239404,
+  "bytes": 163968,
+  "srcTris": 1990,
+  "tris": 1990,
+  "textures": {
+   "images": 4,
+   "resized": 4,
+   "before": 3182279,
+   "after": 148060,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0032,
+   0.996,
+   1.0013
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07HKGY4F2.jpg",
+  "bytes": 5009,
+  "mime": "image/jpeg"
+ }
+}

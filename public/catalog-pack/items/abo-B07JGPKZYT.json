@@ -1,0 +1,76 @@
+{
+ "id": "abo-B07JGPKZYT",
+ "source": "abo",
+ "typeId": "wardrobe",
+ "formId": "rect",
+ "name": "Movian Mira 4-Door Wardrobe with Mirrors",
+ "brand": "Movian",
+ "price": 77490,
+ "currency": "RUB",
+ "dims": {
+  "H": 2070,
+  "W": 1810,
+  "D": 580
+ },
+ "colors": [
+  "коричневый",
+  "натуральное дерево"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.co.uk/dp/B07JGPKZYT",
+ "model": {
+  "file": "models/abo-B07JGPKZYT.glb",
+  "bytes": 227140,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.904999912,
+     0,
+     -0.290000021
+    ],
+    "max": [
+     0.9049709432,
+     2.070000175968,
+     0.28994875564
+    ],
+    "size": [
+     1.8099708552,
+     2.070000175968,
+     0.57994877664
+    ]
+   },
+   "tris": 6160,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 43865700,
+  "bytes": 227140,
+  "srcTris": 6160,
+  "tris": 6160,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 43631503,
+   "after": 186752,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0001,
+   1.0001,
+   1.0002
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07JGPKZYT.jpg",
+  "bytes": 8282,
+  "mime": "image/jpeg"
+ }
+}

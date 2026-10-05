@@ -1,0 +1,76 @@
+{
+ "id": "abo-B073G7WNB1",
+ "source": "abo",
+ "typeId": "pouf",
+ "formId": "rect",
+ "name": "Stone & Beam Carrigan Ottoman with Slipcover",
+ "brand": "Stone & Beam",
+ "price": 19990,
+ "currency": "RUB",
+ "dims": {
+  "H": 479,
+  "W": 944,
+  "D": 703
+ },
+ "colors": [
+  "бежевый",
+  "серый"
+ ],
+ "materials": [
+  "камень"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B073G7WNB1",
+ "model": {
+  "file": "models/abo-B073G7WNB1.glb",
+  "bytes": 198480,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.471999973,
+     0,
+     -0.351500005
+    ],
+    "max": [
+     0.47199998950429994,
+     0.4790008965573,
+     0.35147256062
+    ],
+    "size": [
+     0.9439999625043,
+     0.4790008965573,
+     0.70297256562
+    ]
+   },
+   "tris": 13808,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2118776,
+  "bytes": 198480,
+  "srcTris": 13808,
+  "tris": 13808,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 1784410,
+   "after": 122086,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0005,
+   0.9998,
+   0.9998
+  ]
+ },
+ "image": {
+  "file": "images/abo-B073G7WNB1.jpg",
+  "bytes": 5840,
+  "mime": "image/jpeg"
+ }
+}

@@ -1,0 +1,72 @@
+{
+ "id": "abo-B073P25SYK",
+ "source": "abo",
+ "typeId": "floor-lamp",
+ "formId": "round",
+ "name": "Rivet Adjustable Modern 3-Arm Floor Lamp with Bulb and Burlap Shade",
+ "brand": "Rivet",
+ "price": 23790,
+ "currency": "RUB",
+ "dims": {
+  "H": 1950,
+  "DIA": 951
+ },
+ "colors": [],
+ "materials": [],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.de/dp/B073P25SYK",
+ "model": {
+  "file": "models/abo-B073P25SYK.glb",
+  "bytes": 154016,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.461030632,
+     0,
+     -0.166918665
+    ],
+    "max": [
+     0.48998571774000005,
+     1.950000107358,
+     0.7840976847400001
+    ],
+    "size": [
+     0.95101634974,
+     1.950000107358,
+     0.95101634974
+    ]
+   },
+   "tris": 21082,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 4,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 16339880,
+  "bytes": 154016,
+  "srcTris": 21082,
+  "tris": 21082,
+  "textures": {
+   "images": 4,
+   "resized": 4,
+   "before": 15821976,
+   "after": 40934,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9997,
+   1.0001,
+   1.0291
+  ]
+ },
+ "image": {
+  "file": "images/abo-B073P25SYK.jpg",
+  "bytes": 2951,
+  "mime": "image/jpeg"
+ }
+}

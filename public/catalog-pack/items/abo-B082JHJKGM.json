@@ -1,0 +1,75 @@
+{
+ "id": "abo-B082JHJKGM",
+ "source": "abo",
+ "typeId": "chandelier",
+ "formId": "round",
+ "name": "Stone & Beam Traditional Pendant Light with Woven Shade",
+ "brand": "Stone & Beam",
+ "price": 12590,
+ "currency": "RUB",
+ "dims": {
+  "H": 1919,
+  "DIA": 355
+ },
+ "colors": [
+  "бежевый"
+ ],
+ "materials": [],
+ "styleTags": [
+  "современный",
+  "классика"
+ ],
+ "url": "https://www.amazon.com/dp/B082JHJKGM",
+ "model": {
+  "file": "models/abo-B082JHJKGM.glb",
+  "bytes": 377828,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.177453175,
+     -1.91802931,
+     -0.17757836
+    ],
+    "max": [
+     0.17739922228400004,
+     -4.587999979932533e-9,
+     0.17715696292000005
+    ],
+    "size": [
+     0.35485239728400003,
+     1.9180293054120001,
+     0.35473532292000004
+    ]
+   },
+   "tris": 29803,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 51124516,
+  "bytes": 377828,
+  "srcTris": 330952,
+  "tris": 29803,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 40891232,
+   "after": 137160,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9999,
+   1.0002,
+   1.0005
+  ]
+ },
+ "image": {
+  "file": "images/abo-B082JHJKGM.jpg",
+  "bytes": 6308,
+  "mime": "image/jpeg"
+ }
+}

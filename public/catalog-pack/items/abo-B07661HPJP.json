@@ -1,0 +1,78 @@
+{
+ "id": "abo-B07661HPJP",
+ "source": "abo",
+ "typeId": "picture",
+ "formId": "wall",
+ "name": "Rivet Modern Abstract Shapes on Canvas",
+ "brand": "Rivet",
+ "price": 5290,
+ "currency": "RUB",
+ "dims": {
+  "H": 1014,
+  "W": 759,
+  "D": 45,
+  "E": 1300
+ },
+ "colors": [
+  "разноцветный"
+ ],
+ "materials": [
+  "ткань"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07661HPJP",
+ "model": {
+  "file": "models/abo-B07661HPJP.glb",
+  "bytes": 105392,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.379499972,
+     -0.506999969,
+     0
+    ],
+    "max": [
+     0.3794990484967001,
+     0.5069999456047001,
+     0.044996516994300004
+    ],
+    "size": [
+     0.7589990204967001,
+     1.0139999146047,
+     0.044996516994300004
+    ]
+   },
+   "tris": 3976,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 12530500,
+  "bytes": 105392,
+  "srcTris": 3976,
+  "tris": 3976,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 12413101,
+   "after": 79766,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0005,
+   0.9996,
+   1.0048
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07661HPJP.jpg",
+  "bytes": 9440,
+  "mime": "image/jpeg"
+ }
+}

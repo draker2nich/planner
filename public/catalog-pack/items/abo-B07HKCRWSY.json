@@ -1,0 +1,80 @@
+{
+ "id": "abo-B07HKCRWSY",
+ "source": "abo",
+ "typeId": "sconce",
+ "formId": "wall",
+ "name": "Rivet Modern Frosted Opal Glass Outdoor Wall Mount Sconce with Light Bulb",
+ "brand": "Rivet",
+ "price": 4690,
+ "currency": "RUB",
+ "dims": {
+  "H": 347,
+  "W": 153,
+  "D": 146,
+  "E": 1700
+ },
+ "colors": [
+  "серебристый",
+  "прозрачный"
+ ],
+ "materials": [
+  "стекло"
+ ],
+ "styleTags": [
+  "современный",
+  "классика"
+ ],
+ "url": "https://www.amazon.com/dp/B07HKCRWSY",
+ "model": {
+  "file": "models/abo-B07HKCRWSY.glb",
+  "bytes": 57400,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.0764999986,
+     -0.173499987,
+     0
+    ],
+    "max": [
+     0.07650786766159999,
+     0.1734999954147,
+     0.1459971237737
+    ],
+    "size": [
+     0.15300786626159998,
+     0.3469999824147,
+     0.1459971237737
+    ]
+   },
+   "tris": 2140,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 4,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2406644,
+  "bytes": 57400,
+  "srcTris": 2140,
+  "tris": 2140,
+  "textures": {
+   "images": 4,
+   "resized": 4,
+   "before": 2349378,
+   "after": 40826,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9978,
+   1.0011,
+   1.0003
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07HKCRWSY.jpg",
+  "bytes": 4105,
+  "mime": "image/jpeg"
+ }
+}

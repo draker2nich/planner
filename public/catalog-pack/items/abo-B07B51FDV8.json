@@ -1,0 +1,70 @@
+{
+ "id": "abo-B07B51FDV8",
+ "source": "abo",
+ "typeId": "floor-lamp",
+ "formId": "round",
+ "name": "Stone & Beam",
+ "brand": "Stone & Beam",
+ "price": 24690,
+ "currency": "RUB",
+ "dims": {
+  "H": 1510,
+  "DIA": 604
+ },
+ "colors": [],
+ "materials": [],
+ "styleTags": [],
+ "url": "https://www.amazon.com.mx/dp/B07B51FDV8",
+ "model": {
+  "file": "models/abo-B07B51FDV8.glb",
+  "bytes": 357036,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.25300312,
+     0,
+     -0.30415225
+    ],
+    "max": [
+     0.35097843466409995,
+     1.5099999710151,
+     0.29982930466409996
+    ],
+    "size": [
+     0.6039815546641,
+     1.5099999710151,
+     0.6039815546641
+    ]
+   },
+   "tris": 30001,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 4,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 4306400,
+  "bytes": 357036,
+  "srcTris": 58268,
+  "tris": 30001,
+  "textures": {
+   "images": 4,
+   "resized": 4,
+   "before": 2766444,
+   "after": 174786,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.029,
+   0.9999,
+   1.0001
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07B51FDV8.jpg",
+  "bytes": 4403,
+  "mime": "image/jpeg"
+ }
+}

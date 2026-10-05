@@ -1,0 +1,79 @@
+{
+ "id": "abo-B07QJJXBV8",
+ "source": "abo",
+ "typeId": "console",
+ "formId": "rect",
+ "name": "AmazonBasics Retro Hairpin Console Table",
+ "brand": "AmazonBasics",
+ "price": 16190,
+ "currency": "RUB",
+ "dims": {
+  "H": 660,
+  "W": 991,
+  "D": 498
+ },
+ "colors": [
+  "белый",
+  "жёлтый"
+ ],
+ "materials": [
+  "дерево",
+  "ЛДСП / МДФ"
+ ],
+ "styleTags": [
+  "ретро"
+ ],
+ "url": "https://www.amazon.com/dp/B07QJJXBV8",
+ "model": {
+  "file": "models/abo-B07QJJXBV8.glb",
+  "bytes": 140628,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.496465564,
+     0,
+     -0.247221828
+    ],
+    "max": [
+     0.4945345010114,
+     0.6600013251137999,
+     0.25078852024139997
+    ],
+    "size": [
+     0.9910000650114,
+     0.6600013251137999,
+     0.4980103482414
+    ]
+   },
+   "tris": 24624,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 5546268,
+  "bytes": 140628,
+  "srcTris": 24624,
+  "tris": 24624,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 4923104,
+   "after": 18676,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0004,
+   0.9994,
+   1.0003
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07QJJXBV8.jpg",
+  "bytes": 3543,
+  "mime": "image/jpeg"
+ }
+}

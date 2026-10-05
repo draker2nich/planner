@@ -1,0 +1,76 @@
+{
+ "id": "abo-B07HK3F2GG",
+ "source": "abo",
+ "typeId": "floor-lamp",
+ "formId": "round",
+ "name": "Rivet Modern Metal Floor Lamp with Bulb",
+ "brand": "Rivet",
+ "price": 11990,
+ "currency": "RUB",
+ "dims": {
+  "H": 1500,
+  "DIA": 306
+ },
+ "colors": [
+  "серебристый"
+ ],
+ "materials": [
+  "ткань"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07HK3F2GG",
+ "model": {
+  "file": "models/abo-B07HK3F2GG.glb",
+  "bytes": 152788,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.153000176,
+     0,
+     -0.153000206
+    ],
+    "max": [
+     0.15298773712660002,
+     1.4999999942409,
+     0.1529877071266
+    ],
+    "size": [
+     0.3059879131266,
+     1.4999999942409,
+     0.3059879131266
+    ]
+   },
+   "tris": 20476,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 16960596,
+  "bytes": 152788,
+  "srcTris": 20476,
+  "tris": 20476,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 16437192,
+   "after": 43120,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0014,
+   1.0001,
+   1.0048
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07HK3F2GG.jpg",
+  "bytes": 1822,
+  "mime": "image/jpeg"
+ }
+}

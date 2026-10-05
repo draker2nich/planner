@@ -1,0 +1,79 @@
+{
+ "id": "abo-B07QGG24Z5",
+ "source": "abo",
+ "typeId": "console",
+ "formId": "rect",
+ "name": "Rivet Industrial Plank-Topped Console Table with Metal Hairpin Legs",
+ "brand": "Rivet",
+ "price": 24490,
+ "currency": "RUB",
+ "dims": {
+  "H": 799,
+  "W": 1400,
+  "D": 399
+ },
+ "colors": [
+  "бежевый",
+  "чёрный"
+ ],
+ "materials": [
+  "дерево",
+  "металл"
+ ],
+ "styleTags": [
+  "лофт"
+ ],
+ "url": "https://www.amazon.com/dp/B07QGG24Z5",
+ "model": {
+  "file": "models/abo-B07QGG24Z5.glb",
+  "bytes": 165016,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.70057565,
+     0,
+     -0.20186393
+    ],
+    "max": [
+     0.6994243454986,
+     0.7989989597699999,
+     0.1971228232798
+    ],
+    "size": [
+     1.3999999954986,
+     0.7989989597699999,
+     0.3989867532798
+    ]
+   },
+   "tris": 3960,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 30210936,
+  "bytes": 165016,
+  "srcTris": 3960,
+  "tris": 3960,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 30095865,
+   "after": 136350,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   0.9999,
+   0.9989
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07QGG24Z5.jpg",
+  "bytes": 4075,
+  "mime": "image/jpeg"
+ }
+}

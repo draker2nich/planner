@@ -1,0 +1,77 @@
+{
+ "id": "abo-B073G6GTKL",
+ "source": "abo",
+ "typeId": "armchair",
+ "formId": "rect",
+ "name": "Stone & Beam Modern Sweeping Arm Accent Chair",
+ "brand": "Stone & Beam",
+ "price": 29190,
+ "currency": "RUB",
+ "dims": {
+  "H": 792,
+  "W": 663,
+  "D": 743
+ },
+ "colors": [
+  "зелёный"
+ ],
+ "materials": [
+  "камень"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B073G6GTKL",
+ "model": {
+  "file": "models/abo-B073G6GTKL.glb",
+  "bytes": 182540,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.33290571,
+     0,
+     -0.384245425
+    ],
+    "max": [
+     0.3301157083385,
+     0.7919999924637,
+     0.3587349744491
+    ],
+    "size": [
+     0.6630214183385,
+     0.7919999924637,
+     0.7429803994491
+    ]
+   },
+   "tris": 16948,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 1701136,
+  "bytes": 182540,
+  "srcTris": 16948,
+  "tris": 16948,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 1286689,
+   "after": 83958,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0006,
+   0.9998,
+   0.9994
+  ]
+ },
+ "image": {
+  "file": "images/abo-B073G6GTKL.jpg",
+  "bytes": 8325,
+  "mime": "image/jpeg"
+ }
+}

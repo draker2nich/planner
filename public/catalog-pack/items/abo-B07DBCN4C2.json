@@ -1,0 +1,74 @@
+{
+ "id": "abo-B07DBCN4C2",
+ "source": "abo",
+ "typeId": "table-lamp",
+ "formId": "round",
+ "name": "Ravenna Home Classic Traditional Matte Table Lamp with LED Light Bulb",
+ "brand": "Ravenna Home",
+ "price": 9790,
+ "currency": "RUB",
+ "dims": {
+  "H": 726,
+  "DIA": 383
+ },
+ "colors": [
+  "чёрный"
+ ],
+ "materials": [],
+ "styleTags": [
+  "классика"
+ ],
+ "url": "https://www.amazon.com/dp/B07DBCN4C2",
+ "model": {
+  "file": "models/abo-B07DBCN4C2.glb",
+  "bytes": 181576,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.191499993,
+     0,
+     -0.191500127
+    ],
+    "max": [
+     0.19150787182530002,
+     0.7259999825793,
+     0.19150773782530003
+    ],
+    "size": [
+     0.3830078648253,
+     0.7259999825793,
+     0.3830078648253
+    ]
+   },
+   "tris": 16070,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 4,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 3675240,
+  "bytes": 181576,
+  "srcTris": 16070,
+  "tris": 16070,
+  "textures": {
+   "images": 4,
+   "resized": 4,
+   "before": 3269942,
+   "after": 86704,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9993,
+   0.9997,
+   0.9993
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07DBCN4C2.jpg",
+  "bytes": 3171,
+  "mime": "image/jpeg"
+ }
+}

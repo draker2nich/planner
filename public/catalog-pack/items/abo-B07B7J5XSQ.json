@@ -1,0 +1,76 @@
+{
+ "id": "abo-B07B7J5XSQ",
+ "source": "abo",
+ "typeId": "small-table",
+ "formId": "round",
+ "name": "Rivet Modern Round Metal Side End Accent Table",
+ "brand": "Rivet",
+ "price": 6190,
+ "currency": "RUB",
+ "dims": {
+  "H": 548,
+  "DIA": 415
+ },
+ "colors": [
+  "чёрный"
+ ],
+ "materials": [
+  "металл"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07B7J5XSQ",
+ "model": {
+  "file": "models/abo-B07B7J5XSQ.glb",
+  "bytes": 54560,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.209648505,
+     0,
+     -0.231344789
+    ],
+    "max": [
+     0.2053570246164,
+     0.5479999670916,
+     0.18366074061640003
+    ],
+    "size": [
+     0.4150055296164,
+     0.5479999670916,
+     0.4150055296164
+    ]
+   },
+   "tris": 8780,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 411128,
+  "bytes": 54560,
+  "srcTris": 8780,
+  "tris": 8780,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 196896,
+   "after": 6546,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0306,
+   0.9994,
+   1.0008
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07B7J5XSQ.jpg",
+  "bytes": 6369,
+  "mime": "image/jpeg"
+ }
+}

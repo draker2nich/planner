@@ -1,0 +1,75 @@
+{
+ "id": "abo-B07GFWLSS4",
+ "source": "abo",
+ "typeId": "desk",
+ "formId": "rect",
+ "name": "Movian Inari 1-Drawer Desk",
+ "brand": "Movian",
+ "price": 25190,
+ "currency": "RUB",
+ "dims": {
+  "H": 724,
+  "W": 893,
+  "D": 498
+ },
+ "colors": [
+  "натуральное дерево"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.co.uk/dp/B07GFWLSS4",
+ "model": {
+  "file": "models/abo-B07GFWLSS4.glb",
+  "bytes": 266504,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.446492702,
+     -1.566937e-17,
+     -0.235331774
+    ],
+    "max": [
+     0.4465072763983,
+     0.7240260460883,
+     0.2626507568336
+    ],
+    "size": [
+     0.8929999783983,
+     0.7240260460883,
+     0.4979825308336
+    ]
+   },
+   "tris": 768,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 3088064,
+  "bytes": 266504,
+  "srcTris": 768,
+  "tris": 768,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 3058506,
+   "after": 257022,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0001,
+   0.9995,
+   1.0006
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07GFWLSS4.jpg",
+  "bytes": 3969,
+  "mime": "image/jpeg"
+ }
+}

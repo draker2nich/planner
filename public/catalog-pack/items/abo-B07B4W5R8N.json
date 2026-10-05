@@ -1,0 +1,79 @@
+{
+ "id": "abo-B07B4W5R8N",
+ "source": "abo",
+ "typeId": "mirror",
+ "formId": "wall",
+ "name": "Rivet Jonathan Mid-Century Modern Mirror Wood Frame",
+ "brand": "Rivet",
+ "price": 21990,
+ "currency": "RUB",
+ "dims": {
+  "H": 1018,
+  "W": 1329,
+  "D": 45,
+  "E": 1200
+ },
+ "colors": [
+  "бежевый",
+  "коричневый"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07B4W5R8N",
+ "model": {
+  "file": "models/abo-B07B4W5R8N.glb",
+  "bytes": 68620,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.664500058,
+     -0.509000003,
+     0
+    ],
+    "max": [
+     0.6644999998441998,
+     0.5089833776925999,
+     0.045021975957
+    ],
+    "size": [
+     1.3290000578441998,
+     1.0179833806926,
+     0.045021975957
+    ]
+   },
+   "tris": 4362,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2198356,
+  "bytes": 68620,
+  "srcTris": 4362,
+  "tris": 4362,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 2089344,
+   "after": 42550,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0003,
+   1.0003,
+   1.0039
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07B4W5R8N.jpg",
+  "bytes": 4959,
+  "mime": "image/jpeg"
+ }
+}

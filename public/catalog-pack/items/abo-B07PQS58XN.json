@@ -1,0 +1,77 @@
+{
+ "id": "abo-B07PQS58XN",
+ "source": "abo",
+ "typeId": "bookcase",
+ "formId": "rect",
+ "name": "AmazonBasics Classic 5-Shelf Open Bookcase Organizer with Solid Rubber Wood Frame",
+ "brand": "AmazonBasics",
+ "price": 14990,
+ "currency": "RUB",
+ "dims": {
+  "H": 1892,
+  "W": 660,
+  "D": 381
+ },
+ "colors": [
+  "коричневый"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "классика"
+ ],
+ "url": "https://www.amazon.com/dp/B07PQS58XN",
+ "model": {
+  "file": "models/abo-B07PQS58XN.glb",
+  "bytes": 267216,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.329937369,
+     0,
+     -0.190499991
+    ],
+    "max": [
+     0.32994714369600003,
+     1.8919999950120001,
+     0.19048688463600003
+    ],
+    "size": [
+     0.659884512696,
+     1.8919999950120001,
+     0.38098687563600003
+    ]
+   },
+   "tris": 30000,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 11661068,
+  "bytes": 267216,
+  "srcTris": 54996,
+  "tris": 30000,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 9275844,
+   "after": 47050,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9994,
+   0.9998,
+   1
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07PQS58XN.jpg",
+  "bytes": 5867,
+  "mime": "image/jpeg"
+ }
+}

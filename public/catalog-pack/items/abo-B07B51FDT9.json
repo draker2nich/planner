@@ -1,0 +1,79 @@
+{
+ "id": "abo-B07B51FDT9",
+ "source": "abo",
+ "typeId": "vanity",
+ "formId": "rect",
+ "name": "Stone & Beam Vintage Bathroom Vanity Fixture With 3 Light Bulbs And Glass Shade",
+ "brand": "Stone & Beam",
+ "price": 18890,
+ "currency": "RUB",
+ "dims": {
+  "H": 292,
+  "W": 638,
+  "D": 177
+ },
+ "colors": [
+  "чёрный"
+ ],
+ "materials": [
+  "металл",
+  "стекло",
+  "камень"
+ ],
+ "styleTags": [
+  "ретро"
+ ],
+ "url": "https://www.amazon.com/dp/B07B51FDT9",
+ "model": {
+  "file": "models/abo-B07B51FDT9.glb",
+  "bytes": 209196,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.318999976,
+     -0.145999998,
+     -0.0885000005
+    ],
+    "max": [
+     0.31899995408090004,
+     0.14599313364540004,
+     0.08849503595350001
+    ],
+    "size": [
+     0.6379999300809001,
+     0.29199313164540003,
+     0.1769950364535
+    ]
+   },
+   "tris": 30850,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 1601720,
+  "bytes": 209196,
+  "srcTris": 30850,
+  "tris": 30850,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 786748,
+   "after": 28564,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0006,
+   0.9996,
+   0.9984
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07B51FDT9.jpg",
+  "bytes": 4458,
+  "mime": "image/jpeg"
+ }
+}

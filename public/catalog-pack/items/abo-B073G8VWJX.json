@@ -1,0 +1,78 @@
+{
+ "id": "abo-B073G8VWJX",
+ "source": "abo",
+ "typeId": "pouf",
+ "formId": "rect",
+ "name": "Stone & Beam Edgewood Modern Storage Ottoman",
+ "brand": "Stone & Beam",
+ "price": 18090,
+ "currency": "RUB",
+ "dims": {
+  "H": 454,
+  "W": 948,
+  "D": 497
+ },
+ "colors": [
+  "красный"
+ ],
+ "materials": [
+  "ткань",
+  "камень"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B073G8VWJX",
+ "model": {
+  "file": "models/abo-B073G8VWJX.glb",
+  "bytes": 173500,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.474927753,
+     0,
+     -0.248325899
+    ],
+    "max": [
+     0.47307221233739993,
+     0.45400767429879996,
+     0.2486753646442
+    ],
+    "size": [
+     0.9479999653373999,
+     0.45400767429879996,
+     0.4970012636442
+    ]
+   },
+   "tris": 6810,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2942400,
+  "bytes": 173500,
+  "srcTris": 6810,
+  "tris": 6810,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 2757289,
+   "after": 129876,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9998,
+   1.0001,
+   0.9997
+  ]
+ },
+ "image": {
+  "file": "images/abo-B073G8VWJX.jpg",
+  "bytes": 5600,
+  "mime": "image/jpeg"
+ }
+}

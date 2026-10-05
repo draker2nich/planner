@@ -1,0 +1,78 @@
+{
+ "id": "abo-B07HSGCNGT",
+ "source": "abo",
+ "typeId": "sideboard",
+ "formId": "rect",
+ "name": "Rivet Industrial Wood Bar Cabinet",
+ "brand": "Rivet",
+ "price": 33090,
+ "currency": "RUB",
+ "dims": {
+  "H": 758,
+  "W": 647,
+  "D": 473
+ },
+ "colors": [
+  "серый"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "лофт",
+  "классика"
+ ],
+ "url": "https://www.amazon.com/dp/B07HSGCNGT",
+ "model": {
+  "file": "models/abo-B07HSGCNGT.glb",
+  "bytes": 486196,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.323500007,
+     0,
+     -0.234300107
+    ],
+    "max": [
+     0.32350432844000004,
+     0.7580000019675,
+     0.2386922643675
+    ],
+    "size": [
+     0.64700433544,
+     0.7580000019675,
+     0.4729923713675
+    ]
+   },
+   "tris": 15604,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 4397516,
+  "bytes": 486196,
+  "srcTris": 15604,
+  "tris": 15604,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 3939732,
+   "after": 385816,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9998,
+   1.0003,
+   0.9999
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07HSGCNGT.jpg",
+  "bytes": 11568,
+  "mime": "image/jpeg"
+ }
+}

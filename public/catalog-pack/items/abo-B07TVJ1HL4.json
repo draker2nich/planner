@@ -1,0 +1,77 @@
+{
+ "id": "abo-B07TVJ1HL4",
+ "source": "abo",
+ "typeId": "bar-stool",
+ "formId": "round",
+ "name": "Rivet Mid-Century Modern Upholstered Low Back Kitchen Counter Height Stool",
+ "brand": "Rivet",
+ "price": 12190,
+ "currency": "RUB",
+ "dims": {
+  "H": 945,
+  "DIA": 516
+ },
+ "colors": [
+  "синий"
+ ],
+ "materials": [
+  "велюр",
+  "ткань"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07TVJ1HL4",
+ "model": {
+  "file": "models/abo-B07TVJ1HL4.glb",
+  "bytes": 193488,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.260378867,
+     0,
+     -0.269852817
+    ],
+    "max": [
+     0.25564201303479994,
+     0.9450000086753999,
+     0.24616806303479993
+    ],
+    "size": [
+     0.5160208800348,
+     0.9450000086753999,
+     0.5160208800348
+    ]
+   },
+   "tris": 22948,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 25462864,
+  "bytes": 193488,
+  "srcTris": 22948,
+  "tris": 22948,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 24925109,
+   "after": 82242,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0104,
+   1,
+   0.9999
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07TVJ1HL4.jpg",
+  "bytes": 5038,
+  "mime": "image/jpeg"
+ }
+}

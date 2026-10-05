@@ -1,0 +1,76 @@
+{
+ "id": "abo-B07M6PHS9P",
+ "source": "abo",
+ "typeId": "bar-stool",
+ "formId": "round",
+ "name": "Stone & Beam Classic Tufted Counter-Height Barstool",
+ "brand": "Stone & Beam",
+ "price": 14690,
+ "currency": "RUB",
+ "dims": {
+  "H": 938,
+  "DIA": 626
+ },
+ "colors": [
+  "бежевый"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "классика"
+ ],
+ "url": "https://www.amazon.com/dp/B07M6PHS9P",
+ "model": {
+  "file": "models/abo-B07M6PHS9P.glb",
+  "bytes": 365584,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.313000023,
+     0,
+     -0.341292173
+    ],
+    "max": [
+     0.3130203968094,
+     0.9380000491803,
+     0.28472824680940007
+    ],
+    "size": [
+     0.6260204198094,
+     0.9380000491803,
+     0.6260204198094
+    ]
+   },
+   "tris": 17846,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 46210868,
+  "bytes": 365584,
+  "srcTris": 17846,
+  "tris": 17846,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 45752008,
+   "after": 258788,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.1944,
+   1.0004,
+   1
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07M6PHS9P.jpg",
+  "bytes": 6813,
+  "mime": "image/jpeg"
+ }
+}

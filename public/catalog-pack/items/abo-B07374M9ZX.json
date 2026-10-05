@@ -1,0 +1,76 @@
+{
+ "id": "abo-B07374M9ZX",
+ "source": "abo",
+ "typeId": "chandelier",
+ "formId": "round",
+ "name": "Rivet Concrete Globe Pendant Light Chandelier Fixture",
+ "brand": "Rivet",
+ "price": 11890,
+ "currency": "RUB",
+ "dims": {
+  "H": 764,
+  "DIA": 139
+ },
+ "colors": [
+  "серый"
+ ],
+ "materials": [
+  "металл",
+  "камень",
+  "пластик"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B07374M9ZX",
+ "model": {
+  "file": "models/abo-B07374M9ZX.glb",
+  "bytes": 144764,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.0694999993,
+     -0.763999999,
+     -0.0695000663
+    ],
+    "max": [
+     0.06951507292020001,
+     -2.3091400014330077e-8,
+     0.06951500592020002
+    ],
+    "size": [
+     0.13901507222020001,
+     0.7639999759086,
+     0.13901507222020001
+    ]
+   },
+   "tris": 13216,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 4,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2096156,
+  "bytes": 144764,
+  "srcTris": 13216,
+  "tris": 13216,
+  "textures": {
+   "images": 4,
+   "resized": 4,
+   "before": 1791657,
+   "after": 77574,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9971,
+   1.0002,
+   0.9971
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07374M9ZX.jpg",
+  "bytes": 3889,
+  "mime": "image/jpeg"
+ }
+}

@@ -1,0 +1,76 @@
+{
+ "id": "abo-B07DBDMN5F",
+ "source": "abo",
+ "typeId": "coffee-table",
+ "formId": "rect",
+ "name": "Ravenna Home Parker Coffee Table",
+ "brand": "Ravenna Home",
+ "price": 25690,
+ "currency": "RUB",
+ "dims": {
+  "H": 398,
+  "W": 1206,
+  "D": 580
+ },
+ "colors": [
+  "прозрачный"
+ ],
+ "materials": [
+  "металл",
+  "стекло"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B07DBDMN5F",
+ "model": {
+  "file": "models/abo-B07DBDMN5F.glb",
+  "bytes": 168816,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.602991402,
+     0,
+     -0.289796531
+    ],
+    "max": [
+     0.6030086272956001,
+     0.39802491353240005,
+     0.29019945452280005
+    ],
+    "size": [
+     1.2060000292956001,
+     0.39802491353240005,
+     0.5799959855228001
+    ]
+   },
+   "tris": 2156,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 7546036,
+  "bytes": 168816,
+  "srcTris": 2156,
+  "tris": 2156,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 7449109,
+   "after": 146078,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0001,
+   1.0003,
+   1.0001
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07DBDMN5F.jpg",
+  "bytes": 3884,
+  "mime": "image/jpeg"
+ }
+}

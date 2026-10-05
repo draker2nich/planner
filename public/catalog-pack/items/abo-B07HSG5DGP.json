@@ -1,0 +1,78 @@
+{
+ "id": "abo-B07HSG5DGP",
+ "source": "abo",
+ "typeId": "tv-stand",
+ "formId": "rect",
+ "name": "Rivet Roxmere Mid-Century Modern TV Media Console Center Stand",
+ "brand": "Rivet",
+ "price": 27690,
+ "currency": "RUB",
+ "dims": {
+  "H": 506,
+  "W": 1480,
+  "D": 454
+ },
+ "colors": [
+  "натуральное дерево"
+ ],
+ "materials": [
+  "дерево",
+  "металл"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07HSG5DGP",
+ "model": {
+  "file": "models/abo-B07HSG5DGP.glb",
+  "bytes": 96920,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.74000001,
+     0,
+     -0.227049783
+    ],
+    "max": [
+     0.7400000323307999,
+     0.5059806041076,
+     0.2269867312376
+    ],
+    "size": [
+     1.4800000423308,
+     0.5059806041076,
+     0.4540365142376
+    ]
+   },
+   "tris": 7546,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 785356,
+  "bytes": 96920,
+  "srcTris": 7546,
+  "tris": 7546,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 569020,
+   "after": 47268,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9999,
+   0.999,
+   0.9994
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07HSG5DGP.jpg",
+  "bytes": 4943,
+  "mime": "image/jpeg"
+ }
+}

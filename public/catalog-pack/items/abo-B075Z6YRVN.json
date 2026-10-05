@@ -1,0 +1,76 @@
+{
+ "id": "abo-B075Z6YRVN",
+ "source": "abo",
+ "typeId": "bar-stool",
+ "formId": "round",
+ "name": "Rivet Mid-Century Modern Microfiber Kitchen Bar Stools",
+ "brand": "Rivet",
+ "price": 16490,
+ "currency": "RUB",
+ "dims": {
+  "H": 1082,
+  "DIA": 561
+ },
+ "colors": [
+  "чёрный"
+ ],
+ "materials": [
+  "ткань"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B075Z6YRVN",
+ "model": {
+  "file": "models/abo-B075Z6YRVN.glb",
+  "bytes": 213588,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.281339884,
+     0,
+     -0.31204313
+    ],
+    "max": [
+     0.279638455074,
+     1.0820000151929998,
+     0.24893520907399996
+    ],
+    "size": [
+     0.560978339074,
+     1.0820000151929998,
+     0.560978339074
+    ]
+   },
+   "tris": 25076,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 1257036,
+  "bytes": 213588,
+  "srcTris": 25076,
+  "tris": 25076,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 654867,
+   "after": 87470,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0922,
+   0.9999,
+   0.9993
+  ]
+ },
+ "image": {
+  "file": "images/abo-B075Z6YRVN.jpg",
+  "bytes": 8066,
+  "mime": "image/jpeg"
+ }
+}

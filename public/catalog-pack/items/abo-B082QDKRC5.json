@@ -1,0 +1,77 @@
+{
+ "id": "abo-B082QDKRC5",
+ "source": "abo",
+ "typeId": "sofa",
+ "formId": "straight",
+ "name": "Rivet Bayard Contemporary Leather Couch with Curved Back and Armrests",
+ "brand": "Rivet",
+ "price": 85690,
+ "currency": "RUB",
+ "dims": {
+  "H": 830,
+  "W": 1928,
+  "D": 869
+ },
+ "colors": [
+  "коричневый"
+ ],
+ "materials": [
+  "кожа"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B082QDKRC5",
+ "model": {
+  "file": "models/abo-B082QDKRC5.glb",
+  "bytes": 226672,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.963390946,
+     0,
+     -0.469019562
+    ],
+    "max": [
+     0.9646090040630001,
+     0.830017923933,
+     0.39995142202399997
+    ],
+    "size": [
+     1.927999950063,
+     0.830017923933,
+     0.868970984024
+    ]
+   },
+   "tris": 24560,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 39480920,
+  "bytes": 226672,
+  "srcTris": 24560,
+  "tris": 24560,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 38889841,
+   "after": 96336,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9998,
+   1.0003,
+   1.0001
+  ]
+ },
+ "image": {
+  "file": "images/abo-B082QDKRC5.jpg",
+  "bytes": 3624,
+  "mime": "image/jpeg"
+ }
+}

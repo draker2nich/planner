@@ -1,0 +1,77 @@
+{
+ "id": "abo-B07MF1SRM6",
+ "source": "abo",
+ "typeId": "bench",
+ "formId": "rect",
+ "name": "Ravenna Home Classic Solid Pine Storage Bench",
+ "brand": "Ravenna Home",
+ "price": 20490,
+ "currency": "RUB",
+ "dims": {
+  "H": 501,
+  "W": 1185,
+  "D": 402
+ },
+ "colors": [
+  "чёрный"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "классика"
+ ],
+ "url": "https://www.amazon.com/dp/B07MF1SRM6",
+ "model": {
+  "file": "models/abo-B07MF1SRM6.glb",
+  "bytes": 213636,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.592500031,
+     -4.70036284e-19,
+     -0.201000005
+    ],
+    "max": [
+     0.5925000591931998,
+     0.5009650628504,
+     0.20101613986319997
+    ],
+    "size": [
+     1.1850000901931999,
+     0.5009650628504,
+     0.4020161448632
+    ]
+   },
+   "tris": 29999,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 74333628,
+  "bytes": 213636,
+  "srcTris": 35108,
+  "tris": 29999,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 73433738,
+   "after": 52706,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0004,
+   1.0002,
+   0.9991
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07MF1SRM6.jpg",
+  "bytes": 4443,
+  "mime": "image/jpeg"
+ }
+}

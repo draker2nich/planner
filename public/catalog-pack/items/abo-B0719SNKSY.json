@@ -1,0 +1,77 @@
+{
+ "id": "abo-B0719SNKSY",
+ "source": "abo",
+ "typeId": "bed",
+ "formId": "double",
+ "name": "Rivet West, Mid-Century, Oak Platform Bed With Inlays, Queen (86\"L), Dark Oak Finish",
+ "brand": "Rivet",
+ "price": 74290,
+ "currency": "RUB",
+ "dims": {
+  "H": 1169,
+  "W": 1613,
+  "L": 2221
+ },
+ "colors": [
+  "коричневый"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B0719SNKSY",
+ "model": {
+  "file": "models/abo-B0719SNKSY.glb",
+  "bytes": 210572,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.806500018,
+     0,
+     -1.11049998
+    ],
+    "max": [
+     0.8064804193819998,
+     1.168997336657,
+     1.1105000624969998
+    ],
+    "size": [
+     1.6129804373819998,
+     1.168997336657,
+     2.221000042497
+    ]
+   },
+   "tris": 19136,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2842224,
+  "bytes": 210572,
+  "srcTris": 19136,
+  "tris": 19136,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 2338640,
+   "after": 101112,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0001,
+   0.9999,
+   1.0001
+  ]
+ },
+ "image": {
+  "file": "images/abo-B0719SNKSY.jpg",
+  "bytes": 5674,
+  "mime": "image/jpeg"
+ }
+}

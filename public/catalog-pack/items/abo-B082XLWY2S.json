@@ -1,0 +1,74 @@
+{
+ "id": "abo-B082XLWY2S",
+ "source": "abo",
+ "typeId": "floor-lamp",
+ "formId": "round",
+ "name": "Rivet Globe Stick Floor Lamp",
+ "brand": "Rivet",
+ "price": 10090,
+ "currency": "RUB",
+ "dims": {
+  "H": 1748,
+  "DIA": 229
+ },
+ "colors": [
+  "розовый"
+ ],
+ "materials": [
+  "пластик"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B082XLWY2S",
+ "model": {
+  "file": "models/abo-B082XLWY2S.glb",
+  "bytes": 202368,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.114500023,
+     0,
+     -0.114500023
+    ],
+    "max": [
+     0.11446952218200002,
+     1.7480000273610001,
+     0.11446952218200002
+    ],
+    "size": [
+     0.22896954518200002,
+     1.7480000273610001,
+     0.22896954518200002
+    ]
+   },
+   "tris": 15784,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 24345844,
+  "bytes": 202368,
+  "srcTris": 15784,
+  "tris": 15784,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 23954630,
+   "after": 126228,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0017,
+   1.0002,
+   1.0017
+  ]
+ },
+ "image": {
+  "file": "images/abo-B082XLWY2S.jpg",
+  "bytes": 1749,
+  "mime": "image/jpeg"
+ }
+}

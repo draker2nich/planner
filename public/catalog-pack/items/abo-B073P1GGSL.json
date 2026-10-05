@@ -1,0 +1,76 @@
+{
+ "id": "abo-B073P1GGSL",
+ "source": "abo",
+ "typeId": "picture",
+ "formId": "wall",
+ "name": "Stone & Beam Modern Black and White Photo of Bull Wall Art in Charcoal Frame",
+ "brand": "Stone & Beam",
+ "price": 2790,
+ "currency": "RUB",
+ "dims": {
+  "H": 330,
+  "W": 378,
+  "D": 33,
+  "E": 1300
+ },
+ "colors": [
+  "чёрный"
+ ],
+ "materials": [],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B073P1GGSL",
+ "model": {
+  "file": "models/abo-B073P1GGSL.glb",
+  "bytes": 100464,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.188999996,
+     -0.165000007,
+     0
+    ],
+    "max": [
+     0.18899998912119997,
+     0.16500876960919997,
+     0.032993955852
+    ],
+    "size": [
+     0.3779999851212,
+     0.33000877660919997,
+     0.032993955852
+    ]
+   },
+   "tris": 236,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 1051808,
+  "bytes": 100464,
+  "srcTris": 236,
+  "tris": 236,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 1039045,
+   "after": 95106,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.999,
+   0.9998,
+   1.0089
+  ]
+ },
+ "image": {
+  "file": "images/abo-B073P1GGSL.jpg",
+  "bytes": 14677,
+  "mime": "image/jpeg"
+ }
+}

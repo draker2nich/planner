@@ -1,0 +1,78 @@
+{
+ "id": "abo-B07B7L147Y",
+ "source": "abo",
+ "typeId": "small-table",
+ "formId": "rect",
+ "name": "Rivet Mid-Century Modern Wood and Metal 2-Tiered Side End Accent Table",
+ "brand": "Rivet",
+ "price": 10590,
+ "currency": "RUB",
+ "dims": {
+  "H": 538,
+  "W": 759,
+  "D": 442
+ },
+ "colors": [
+  "бежевый",
+  "коричневый"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07B7L147Y",
+ "model": {
+  "file": "models/abo-B07B7L147Y.glb",
+  "bytes": 201624,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.441291809,
+     0,
+     -0.221261933
+    ],
+    "max": [
+     0.3177082375003,
+     0.5380130342432999,
+     0.2207584200281
+    ],
+    "size": [
+     0.7590000465003,
+     0.5380130342432999,
+     0.4420203530281
+    ]
+   },
+   "tris": 25840,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 1455604,
+  "bytes": 201624,
+  "srcTris": 25840,
+  "tris": 25840,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 844598,
+   "after": 79656,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0005,
+   0.9992,
+   0.9999
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07B7L147Y.jpg",
+  "bytes": 6049,
+  "mime": "image/jpeg"
+ }
+}

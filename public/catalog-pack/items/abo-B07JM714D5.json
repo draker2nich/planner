@@ -1,0 +1,75 @@
+{
+ "id": "abo-B07JM714D5",
+ "source": "abo",
+ "typeId": "mirror",
+ "formId": "wall",
+ "name": "Rivet Industrial Framed Bathroom Wall Vanity Mirror",
+ "brand": "Rivet",
+ "price": 10890,
+ "currency": "RUB",
+ "dims": {
+  "H": 689,
+  "W": 839,
+  "D": 28,
+  "E": 1200
+ },
+ "colors": [],
+ "materials": [],
+ "styleTags": [
+  "современный",
+  "лофт"
+ ],
+ "url": "https://www.amazon.com/dp/B07JM714D5",
+ "model": {
+  "file": "models/abo-B07JM714D5.glb",
+  "bytes": 218396,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.419500023,
+     -0.344499975,
+     0
+    ],
+    "max": [
+     0.41950001135369996,
+     0.34450121295059993,
+     0.0280127582733
+    ],
+    "size": [
+     0.8390000343537,
+     0.6890011879506,
+     0.0280127582733
+    ]
+   },
+   "tris": 588,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 1679724,
+  "bytes": 218396,
+  "srcTris": 588,
+  "tris": 588,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 1658801,
+   "after": 210734,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0001,
+   1.0005,
+   1.0181
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07JM714D5.jpg",
+  "bytes": 4655,
+  "mime": "image/jpeg"
+ }
+}

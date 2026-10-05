@@ -1,0 +1,75 @@
+{
+ "id": "abo-B07B79SZV1",
+ "source": "abo",
+ "typeId": "chair",
+ "formId": "rect",
+ "name": "Stone & Beam Hughes Casual Wood Dining Room Kitchen Chairs",
+ "brand": "Stone & Beam",
+ "price": 14090,
+ "currency": "RUB",
+ "dims": {
+  "H": 939,
+  "W": 497,
+  "D": 610
+ },
+ "colors": [
+  "бежевый"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B07B79SZV1",
+ "model": {
+  "file": "models/abo-B07B79SZV1.glb",
+  "bytes": 240764,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.248499975,
+     0,
+     -0.316288739
+    ],
+    "max": [
+     0.24848279920349994,
+     0.9389999757555,
+     0.29372021796549996
+    ],
+    "size": [
+     0.49698277420349996,
+     0.9389999757555,
+     0.6100089569655
+    ]
+   },
+   "tris": 5588,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2992340,
+  "bytes": 240764,
+  "srcTris": 5588,
+  "tris": 5588,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 2831070,
+   "after": 202090,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9997,
+   1.0001,
+   1.0005
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07B79SZV1.jpg",
+  "bytes": 8825,
+  "mime": "image/jpeg"
+ }
+}

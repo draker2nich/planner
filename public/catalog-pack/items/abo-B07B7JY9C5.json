@@ -1,0 +1,78 @@
+{
+ "id": "abo-B07B7JY9C5",
+ "source": "abo",
+ "typeId": "pedestal",
+ "formId": "rect",
+ "name": "Rivet Anne Mid-Century Modern Wood Filing Cabinet with Wheels",
+ "brand": "Rivet",
+ "price": 14690,
+ "currency": "RUB",
+ "dims": {
+  "H": 455,
+  "W": 402,
+  "D": 500
+ },
+ "colors": [
+  "бежевый",
+  "коричневый"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07B7JY9C5",
+ "model": {
+  "file": "models/abo-B07B7JY9C5.glb",
+  "bytes": 157168,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.201000005,
+     0,
+     -0.243065178
+    ],
+    "max": [
+     0.20100206921759997,
+     0.4550143428872,
+     0.2569348206264
+    ],
+    "size": [
+     0.4020020742176,
+     0.4550143428872,
+     0.4999999986264
+    ]
+   },
+   "tris": 11874,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 1092640,
+  "bytes": 157168,
+  "srcTris": 11874,
+  "tris": 11874,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 781922,
+   "after": 85620,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0003,
+   0.9999,
+   0.9992
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07B7JY9C5.jpg",
+  "bytes": 10078,
+  "mime": "image/jpeg"
+ }
+}

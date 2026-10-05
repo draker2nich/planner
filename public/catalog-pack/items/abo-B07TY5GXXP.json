@@ -1,0 +1,71 @@
+{
+ "id": "abo-B07TY5GXXP",
+ "source": "abo",
+ "typeId": "shelving",
+ "formId": "rect",
+ "name": "Iris Shelf Unit",
+ "brand": "Movian",
+ "price": 12990,
+ "currency": "RUB",
+ "dims": {
+  "H": 600,
+  "W": 250,
+  "D": 290
+ },
+ "colors": [],
+ "materials": [],
+ "styleTags": [],
+ "url": "https://www.amazon.de/dp/B07TY5GXXP",
+ "model": {
+  "file": "models/abo-B07TY5GXXP.glb",
+  "bytes": 231968,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.124957681,
+     0,
+     -0.145000026
+    ],
+    "max": [
+     0.1249965141725,
+     0.5999999383899001,
+     0.1449834637254
+    ],
+    "size": [
+     0.2499541951725,
+     0.5999999383899001,
+     0.2899834897254
+    ]
+   },
+   "tris": 30001,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 27536180,
+  "bytes": 231968,
+  "srcTris": 60088,
+  "tris": 30001,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 25711055,
+   "after": 77392,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   1,
+   1
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07TY5GXXP.jpg",
+  "bytes": 1879,
+  "mime": "image/jpeg"
+ }
+}

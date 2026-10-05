@@ -1,0 +1,77 @@
+{
+ "id": "abo-B075Z93NHP",
+ "source": "abo",
+ "typeId": "desk",
+ "formId": "rect",
+ "name": "Stone & Beam Rustic Parson Office Computer Desk with 7 Drawers",
+ "brand": "Stone & Beam",
+ "price": 39090,
+ "currency": "RUB",
+ "dims": {
+  "H": 751,
+  "W": 1567,
+  "D": 685
+ },
+ "colors": [
+  "натуральное дерево"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "кантри"
+ ],
+ "url": "https://www.amazon.com/dp/B075Z93NHP",
+ "model": {
+  "file": "models/abo-B075Z93NHP.glb",
+  "bytes": 386180,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.783500016,
+     0,
+     -0.333316058
+    ],
+    "max": [
+     0.7834999736793001,
+     0.7510275235892,
+     0.3517143958902
+    ],
+    "size": [
+     1.5669999896793,
+     0.7510275235892,
+     0.6850304538902
+    ]
+   },
+   "tris": 15714,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 3246224,
+  "bytes": 386180,
+  "srcTris": 15714,
+  "tris": 15714,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 2829609,
+   "after": 298478,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0003,
+   1.0006,
+   1.0002
+  ]
+ },
+ "image": {
+  "file": "images/abo-B075Z93NHP.jpg",
+  "bytes": 8971,
+  "mime": "image/jpeg"
+ }
+}

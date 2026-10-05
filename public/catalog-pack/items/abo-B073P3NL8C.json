@@ -1,0 +1,76 @@
+{
+ "id": "abo-B073P3NL8C",
+ "source": "abo",
+ "typeId": "floor-lamp",
+ "formId": "round",
+ "name": "Rivet Harper Mid-Century Marble and Brass Floor Lamp",
+ "brand": "Rivet",
+ "price": 10490,
+ "currency": "RUB",
+ "dims": {
+  "H": 1813,
+  "DIA": 232
+ },
+ "colors": [
+  "жёлтый"
+ ],
+ "materials": [
+  "металл"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.ca/dp/B073P3NL8C",
+ "model": {
+  "file": "models/abo-B073P3NL8C.glb",
+  "bytes": 115560,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.116000004,
+     0,
+     -0.116000004
+    ],
+    "max": [
+     0.115950666848,
+     1.812999923904,
+     0.115950666848
+    ],
+    "size": [
+     0.231950670848,
+     1.812999923904,
+     0.231950670848
+    ]
+   },
+   "tris": 16832,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 4,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 1122260,
+  "bytes": 115560,
+  "srcTris": 16832,
+  "tris": 16832,
+  "textures": {
+   "images": 4,
+   "resized": 4,
+   "before": 722446,
+   "after": 27930,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9995,
+   0.9998,
+   1.0142
+  ]
+ },
+ "image": {
+  "file": "images/abo-B073P3NL8C.jpg",
+  "bytes": 1692,
+  "mime": "image/jpeg"
+ }
+}

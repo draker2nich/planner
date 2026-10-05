@@ -1,0 +1,78 @@
+{
+ "id": "abo-B075X4VW5G",
+ "source": "abo",
+ "typeId": "pouf",
+ "formId": "rect",
+ "name": "Rivet Lawson Modern Angled Leather Ottoman",
+ "brand": "Rivet",
+ "price": 14690,
+ "currency": "RUB",
+ "dims": {
+  "H": 418,
+  "W": 665,
+  "D": 501
+ },
+ "colors": [
+  "коричневый"
+ ],
+ "materials": [
+  "кожа"
+ ],
+ "styleTags": [
+  "современный",
+  "кантри"
+ ],
+ "url": "https://www.amazon.com/dp/B075X4VW5G",
+ "model": {
+  "file": "models/abo-B075X4VW5G.glb",
+  "bytes": 254996,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.33705467,
+     0,
+     -0.25187397
+    ],
+    "max": [
+     0.3279453516991,
+     0.4180046525946,
+     0.2491389865911
+    ],
+    "size": [
+     0.6650000216991,
+     0.4180046525946,
+     0.5010129565911
+    ]
+   },
+   "tris": 20286,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 3553960,
+  "bytes": 254996,
+  "srcTris": 20286,
+  "tris": 20286,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 3073779,
+   "after": 145956,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9993,
+   0.9995,
+   0.9999
+  ]
+ },
+ "image": {
+  "file": "images/abo-B075X4VW5G.jpg",
+  "bytes": 9019,
+  "mime": "image/jpeg"
+ }
+}

@@ -1,0 +1,78 @@
+{
+ "id": "abo-B082QBZB1Q",
+ "source": "abo",
+ "typeId": "armchair",
+ "formId": "rect",
+ "name": "Rivet Theresa Modern Upholstered Accent Chair",
+ "brand": "Rivet",
+ "price": 39890,
+ "currency": "RUB",
+ "dims": {
+  "H": 838,
+  "W": 762,
+  "D": 787
+ },
+ "colors": [
+  "белый",
+  "бежевый"
+ ],
+ "materials": [
+  "ткань"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B082QBZB1Q",
+ "model": {
+  "file": "models/abo-B082QBZB1Q.glb",
+  "bytes": 460116,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.379446,
+     0,
+     -0.430873424
+    ],
+    "max": [
+     0.38254422452309994,
+     0.8379999898209,
+     0.3561294352678
+    ],
+    "size": [
+     0.7619902245231,
+     0.8379999898209,
+     0.7870028592678
+    ]
+   },
+   "tris": 19428,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 65030436,
+  "bytes": 460116,
+  "srcTris": 19428,
+  "tris": 19428,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 64563042,
+   "after": 350500,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   0.9998,
+   0.9995
+  ]
+ },
+ "image": {
+  "file": "images/abo-B082QBZB1Q.jpg",
+  "bytes": 4433,
+  "mime": "image/jpeg"
+ }
+}

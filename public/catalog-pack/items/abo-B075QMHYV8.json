@@ -1,0 +1,75 @@
+{
+ "id": "abo-B075QMHYV8",
+ "source": "abo",
+ "typeId": "bed",
+ "formId": "double",
+ "name": "Stone & Beam Ainsley Geometric Steel Bed Frame",
+ "brand": "Stone & Beam",
+ "price": 60990,
+ "currency": "RUB",
+ "dims": {
+  "H": 1222,
+  "W": 1597,
+  "L": 2063
+ },
+ "colors": [
+  "серый"
+ ],
+ "materials": [
+  "металл"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B075QMHYV8",
+ "model": {
+  "file": "models/abo-B075QMHYV8.glb",
+  "bytes": 186788,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.798500001,
+     0,
+     -1.0321182
+    ],
+    "max": [
+     0.7984581355380002,
+     1.221958820136,
+     1.0308817330470001
+    ],
+    "size": [
+     1.5969581365380001,
+     1.221958820136,
+     2.062999933047
+    ]
+   },
+   "tris": 29999,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2918268,
+  "bytes": 186788,
+  "srcTris": 56106,
+  "tris": 29999,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 1580788,
+   "after": 26554,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9998,
+   1.0001,
+   1.0001
+  ]
+ },
+ "image": {
+  "file": "images/abo-B075QMHYV8.jpg",
+  "bytes": 9654,
+  "mime": "image/jpeg"
+ }
+}

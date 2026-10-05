@@ -1,0 +1,74 @@
+{
+ "id": "abo-B01D7P5NI8",
+ "source": "abo",
+ "typeId": "office-chair",
+ "formId": "round",
+ "name": "AmazonBasics Low-Back Computer Task Office Desk Chair with Swivel Casters",
+ "brand": "AmazonBasics",
+ "price": 11690,
+ "currency": "RUB",
+ "dims": {
+  "H": 812,
+  "DIA": 533
+ },
+ "colors": [
+  "синий"
+ ],
+ "materials": [],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B01D7P5NI8",
+ "model": {
+  "file": "models/abo-B01D7P5NI8.glb",
+  "bytes": 354948,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.266499996,
+     2.98023224e-8,
+     -0.304121792
+    ],
+    "max": [
+     0.2665066992286,
+     0.8120000937720223,
+     0.2288849032286
+    ],
+    "size": [
+     0.5330066952286,
+     0.8120000639696999,
+     0.5330066952286
+    ]
+   },
+   "tris": 16350,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 20093536,
+  "bytes": 354948,
+  "srcTris": 16350,
+  "tris": 16350,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 19446189,
+   "after": 232382,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9992,
+   1.0003,
+   1.1044
+  ]
+ },
+ "image": {
+  "file": "images/abo-B01D7P5NI8.jpg",
+  "bytes": 5831,
+  "mime": "image/jpeg"
+ }
+}

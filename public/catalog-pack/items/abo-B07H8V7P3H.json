@@ -1,0 +1,76 @@
+{
+ "id": "abo-B07H8V7P3H",
+ "source": "abo",
+ "typeId": "wardrobe",
+ "formId": "rect",
+ "name": "Movian Moselle 2-Door Wardrobe",
+ "brand": "Movian",
+ "price": 57490,
+ "currency": "RUB",
+ "dims": {
+  "H": 1960,
+  "W": 1000,
+  "D": 600
+ },
+ "colors": [
+  "белый",
+  "натуральное дерево"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.co.uk/dp/B07H8V7P3H",
+ "model": {
+  "file": "models/abo-B07H8V7P3H.glb",
+  "bytes": 133772,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.49999997,
+     0,
+     -0.300000012
+    ],
+    "max": [
+     0.500039142826,
+     1.9600000939620001,
+     0.29997560121000005
+    ],
+    "size": [
+     1.000039112826,
+     1.9600000939620001,
+     0.59997561321
+    ]
+   },
+   "tris": 1620,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 39484288,
+  "bytes": 133772,
+  "srcTris": 1620,
+  "tris": 1620,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 39413620,
+   "after": 117316,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   1.0001,
+   1.0001
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07H8V7P3H.jpg",
+  "bytes": 3455,
+  "mime": "image/jpeg"
+ }
+}

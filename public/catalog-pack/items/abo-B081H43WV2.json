@@ -1,0 +1,76 @@
+{
+ "id": "abo-B081H43WV2",
+ "source": "abo",
+ "typeId": "office-chair",
+ "formId": "round",
+ "name": "AmazonBasics Classic Puresoft PU-Padded Mid-Back Office Computer Desk Chair with Armrest",
+ "brand": "AmazonBasics",
+ "price": 14790,
+ "currency": "RUB",
+ "dims": {
+  "H": 1072,
+  "DIA": 655
+ },
+ "colors": [
+  "коричневый"
+ ],
+ "materials": [
+  "кожа"
+ ],
+ "styleTags": [
+  "классика"
+ ],
+ "url": "https://www.amazon.com/dp/B081H43WV2",
+ "model": {
+  "file": "models/abo-B081H43WV2.glb",
+  "bytes": 277152,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.327704668,
+     0,
+     -0.356582761
+    ],
+    "max": [
+     0.3272772119617,
+     1.0716636511947,
+     0.29839911896169996
+    ],
+    "size": [
+     0.6549818799617,
+     1.0716636511947,
+     0.6549818799617
+    ]
+   },
+   "tris": 30003,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 36591884,
+  "bytes": 277152,
+  "srcTris": 128495,
+  "tris": 30003,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 32776435,
+   "after": 90448,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0649,
+   0.9999,
+   1.0006
+  ]
+ },
+ "image": {
+  "file": "images/abo-B081H43WV2.jpg",
+  "bytes": 6120,
+  "mime": "image/jpeg"
+ }
+}

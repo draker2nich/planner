@@ -1,0 +1,77 @@
+{
+ "id": "abo-B07B4SMHQ1",
+ "source": "abo",
+ "typeId": "rug",
+ "formId": "rect",
+ "name": "Stone & Beam Striped Leather Runner Rug",
+ "brand": "Stone & Beam",
+ "price": 11990,
+ "currency": "RUB",
+ "dims": {
+  "H": 10,
+  "W": 2438,
+  "D": 783
+ },
+ "colors": [
+  "бежевый"
+ ],
+ "materials": [
+  "кожа"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07B4SMHQ1",
+ "model": {
+  "file": "models/abo-B07B4SMHQ1.glb",
+  "bytes": 750868,
+  "info": {
+   "bbox": {
+    "min": [
+     -1.21899998,
+     -1.97310183e-18,
+     -0.391499847
+    ],
+    "max": [
+     1.2189999421870001,
+     0.009970456862999999,
+     0.39155304871799995
+    ],
+    "size": [
+     2.437999922187,
+     0.009970456863,
+     0.783052895718
+    ]
+   },
+   "tris": 860,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 4096216,
+  "bytes": 750868,
+  "srcTris": 860,
+  "tris": 860,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 4063656,
+   "after": 742152,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   1.5744,
+   0.9996
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07B4SMHQ1.jpg",
+  "bytes": 12787,
+  "mime": "image/jpeg"
+ }
+}

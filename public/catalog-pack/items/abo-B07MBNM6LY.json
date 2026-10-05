@@ -1,0 +1,73 @@
+{
+ "id": "abo-B07MBNM6LY",
+ "source": "abo",
+ "typeId": "island",
+ "formId": "rect",
+ "name": "AmazonBasics Multifunction Rolling Kitchen Cart Island with Open Shelves",
+ "brand": "AmazonBasics",
+ "price": 18890,
+ "currency": "RUB",
+ "dims": {
+  "H": 927,
+  "W": 899,
+  "D": 457
+ },
+ "colors": [
+  "чёрный"
+ ],
+ "materials": [],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B07MBNM6LY",
+ "model": {
+  "file": "models/abo-B07MBNM6LY.glb",
+  "bytes": 184040,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.42064786,
+     0,
+     -0.228495374
+    ],
+    "max": [
+     0.47834350176320006,
+     0.9269999672562,
+     0.2285258513878
+    ],
+    "size": [
+     0.8989913617632,
+     0.9269999672562,
+     0.4570212253878
+    ]
+   },
+   "tris": 29996,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 12327448,
+  "bytes": 184040,
+  "srcTris": 96208,
+  "tris": 29996,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 9978900,
+   "after": 20316,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9999,
+   0.9997,
+   0.9995
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07MBNM6LY.jpg",
+  "bytes": 9894,
+  "mime": "image/jpeg"
+ }
+}

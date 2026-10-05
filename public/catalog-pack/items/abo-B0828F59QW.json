@@ -1,0 +1,76 @@
+{
+ "id": "abo-B0828F59QW",
+ "source": "abo",
+ "typeId": "ceiling-light",
+ "formId": "round",
+ "name": "Ravenna Home 2-Light Semiflush-Mount Ceiling Light with Frosted Glass Shade",
+ "brand": "Ravenna Home",
+ "price": 10090,
+ "currency": "RUB",
+ "dims": {
+  "H": 212,
+  "DIA": 331
+ },
+ "colors": [
+  "прозрачный"
+ ],
+ "materials": [
+  "стекло"
+ ],
+ "styleTags": [
+  "классика"
+ ],
+ "url": "https://www.amazon.com/dp/B0828F59QW",
+ "model": {
+  "file": "models/abo-B0828F59QW.glb",
+  "bytes": 156812,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.165477067,
+     -0.212000012,
+     -0.16549097
+    ],
+    "max": [
+     0.1655229646994,
+     -7.85202599967727e-7,
+     0.16550906169940002
+    ],
+    "size": [
+     0.3310000316994,
+     0.21199922679740002,
+     0.3310000316994
+    ]
+   },
+   "tris": 23160,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 18684896,
+  "bytes": 156812,
+  "srcTris": 23160,
+  "tris": 23160,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 18111368,
+   "after": 26554,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0006,
+   1.0014,
+   1.0006
+  ]
+ },
+ "image": {
+  "file": "images/abo-B0828F59QW.jpg",
+  "bytes": 1971,
+  "mime": "image/jpeg"
+ }
+}

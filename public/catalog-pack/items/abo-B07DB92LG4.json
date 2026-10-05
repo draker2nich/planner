@@ -1,0 +1,77 @@
+{
+ "id": "abo-B07DB92LG4",
+ "source": "abo",
+ "typeId": "console",
+ "formId": "rect",
+ "name": "Ravenna Home Dora Classic Shelf Storage Wood Console Table",
+ "brand": "Ravenna Home",
+ "price": 26990,
+ "currency": "RUB",
+ "dims": {
+  "H": 739,
+  "W": 1188,
+  "D": 392
+ },
+ "colors": [
+  "коричневый"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "классика"
+ ],
+ "url": "https://www.amazon.com/dp/B07DB92LG4",
+ "model": {
+  "file": "models/abo-B07DB92LG4.glb",
+  "bytes": 195744,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.594463408,
+     0,
+     -0.19546105
+    ],
+    "max": [
+     0.5935365208976,
+     0.7389920817552,
+     0.19655064600320002
+    ],
+    "size": [
+     1.1879999288976,
+     0.7389920817552,
+     0.3920116960032
+    ]
+   },
+   "tris": 29997,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2735644,
+  "bytes": 195744,
+  "srcTris": 42496,
+  "tris": 29997,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 1305051,
+   "after": 34158,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   1,
+   1.0005
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07DB92LG4.jpg",
+  "bytes": 5610,
+  "mime": "image/jpeg"
+ }
+}

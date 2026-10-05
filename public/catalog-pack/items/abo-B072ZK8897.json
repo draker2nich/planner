@@ -1,0 +1,77 @@
+{
+ "id": "abo-B072ZK8897",
+ "source": "abo",
+ "typeId": "sideboard",
+ "formId": "rect",
+ "name": "Rivet Modern Lacquer and Wood Cabinet",
+ "brand": "Rivet",
+ "price": 27690,
+ "currency": "RUB",
+ "dims": {
+  "H": 772,
+  "W": 591,
+  "D": 344
+ },
+ "colors": [
+  "белый"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B072ZK8897",
+ "model": {
+  "file": "models/abo-B072ZK8897.glb",
+  "bytes": 268276,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.29549998,
+     0,
+     -0.157688171
+    ],
+    "max": [
+     0.295504338401,
+     0.7719999799365,
+     0.18630254215000003
+    ],
+    "size": [
+     0.591004318401,
+     0.7719999799365,
+     0.34399071315
+    ]
+   },
+   "tris": 29998,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 11581512,
+  "bytes": 268276,
+  "srcTris": 37786,
+  "tris": 29998,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 10469336,
+   "after": 79088,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0008,
+   1.0005,
+   1.0007
+  ]
+ },
+ "image": {
+  "file": "images/abo-B072ZK8897.jpg",
+  "bytes": 5470,
+  "mime": "image/jpeg"
+ }
+}

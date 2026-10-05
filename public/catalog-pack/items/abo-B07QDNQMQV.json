@@ -1,0 +1,75 @@
+{
+ "id": "abo-B07QDNQMQV",
+ "source": "abo",
+ "typeId": "bench",
+ "formId": "rect",
+ "name": "Ravenna Home Haraden Modern Bench with Nailhead Trim",
+ "brand": "Ravenna Home",
+ "price": 19690,
+ "currency": "RUB",
+ "dims": {
+  "H": 457,
+  "W": 1219,
+  "D": 410
+ },
+ "colors": [
+  "бежевый"
+ ],
+ "materials": [],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07QDNQMQV",
+ "model": {
+  "file": "models/abo-B07QDNQMQV.glb",
+  "bytes": 315704,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.609842718,
+     0,
+     -0.205204234
+    ],
+    "max": [
+     0.6091572447318,
+     0.45700407563320006,
+     0.204775000246
+    ],
+    "size": [
+     1.2189999627318,
+     0.45700407563320006,
+     0.409979234246
+    ]
+   },
+   "tris": 24688,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 48304404,
+  "bytes": 315704,
+  "srcTris": 24688,
+  "tris": 24688,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 47694179,
+   "after": 185506,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9997,
+   1,
+   1.0004
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07QDNQMQV.jpg",
+  "bytes": 4135,
+  "mime": "image/jpeg"
+ }
+}

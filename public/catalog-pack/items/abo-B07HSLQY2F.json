@@ -1,0 +1,79 @@
+{
+ "id": "abo-B07HSLQY2F",
+ "source": "abo",
+ "typeId": "shelving",
+ "formId": "rect",
+ "name": "Rivet Modern Corner Floating Triangle 5 Shelf Wall Unit Decor",
+ "brand": "Rivet",
+ "price": 13590,
+ "currency": "RUB",
+ "dims": {
+  "H": 913,
+  "W": 564,
+  "D": 294
+ },
+ "colors": [
+  "бежевый",
+  "натуральное дерево",
+  "жёлтый"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07HSLQY2F",
+ "model": {
+  "file": "models/abo-B07HSLQY2F.glb",
+  "bytes": 107028,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.281999975,
+     -0.456499994,
+     4.76625006e-9
+    ],
+    "max": [
+     0.28197242880800005,
+     0.45649999528720003,
+     0.29402356232465005
+    ],
+    "size": [
+     0.5639724038080001,
+     0.9129999892872,
+     0.2940235575584
+    ]
+   },
+   "tris": 6212,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 1782144,
+  "bytes": 107028,
+  "srcTris": 6212,
+  "tris": 6212,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 1598139,
+   "after": 60176,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0002,
+   0.9999,
+   0.9996
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07HSLQY2F.jpg",
+  "bytes": 5368,
+  "mime": "image/jpeg"
+ }
+}

@@ -1,0 +1,75 @@
+{
+ "id": "abo-B07B874GDK",
+ "source": "abo",
+ "typeId": "table",
+ "formId": "rect",
+ "name": "Stone & Beam Hughes Casual Wood and Metal Extendable Dining Table",
+ "brand": "Stone & Beam",
+ "price": 58890,
+ "currency": "RUB",
+ "dims": {
+  "H": 757,
+  "W": 1867,
+  "D": 931
+ },
+ "colors": [
+  "коричневый"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B07B874GDK",
+ "model": {
+  "file": "models/abo-B07B874GDK.glb",
+  "bytes": 237204,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.932993054,
+     0,
+     -0.465500057
+    ],
+    "max": [
+     0.934007056417,
+     0.757033616157,
+     0.46554986683000005
+    ],
+    "size": [
+     1.867000110417,
+     0.757033616157,
+     0.9310499238300001
+    ]
+   },
+   "tris": 6921,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2885456,
+  "bytes": 237204,
+  "srcTris": 6921,
+  "tris": 6921,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 2682652,
+   "after": 194558,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9999,
+   1.0004,
+   0.9998
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07B874GDK.jpg",
+  "bytes": 4316,
+  "mime": "image/jpeg"
+ }
+}

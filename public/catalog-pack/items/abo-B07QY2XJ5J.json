@@ -1,0 +1,74 @@
+{
+ "id": "abo-B07QY2XJ5J",
+ "source": "abo",
+ "typeId": "bookcase",
+ "formId": "rect",
+ "name": "Movian Ercina Bookcase",
+ "brand": "Movian",
+ "price": 20590,
+ "currency": "RUB",
+ "dims": {
+  "H": 1650,
+  "W": 890,
+  "D": 250
+ },
+ "colors": [
+  "белый",
+  "натуральное дерево"
+ ],
+ "materials": [],
+ "styleTags": [],
+ "url": "https://www.amazon.de/dp/B07QY2XJ5J",
+ "model": {
+  "file": "models/abo-B07QY2XJ5J.glb",
+  "bytes": 87272,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.444999993,
+     0.124792621,
+     -0.124999985
+    ],
+    "max": [
+     0.44501105659400003,
+     1.7747927370460002,
+     0.12497256508400002
+    ],
+    "size": [
+     0.890011049594,
+     1.650000116046,
+     0.24997255008400002
+    ]
+   },
+   "tris": 10956,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 15348200,
+  "bytes": 87272,
+  "srcTris": 10956,
+  "tris": 10956,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 14973359,
+   "after": 22584,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0003,
+   1,
+   1.0003
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07QY2XJ5J.jpg",
+  "bytes": 3570,
+  "mime": "image/jpeg"
+ }
+}

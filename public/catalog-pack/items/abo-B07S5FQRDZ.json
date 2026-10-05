@@ -1,0 +1,71 @@
+{
+ "id": "abo-B07S5FQRDZ",
+ "source": "abo",
+ "typeId": "sideboard",
+ "formId": "rect",
+ "name": "Marca Amazon",
+ "brand": "AmazonBasics",
+ "price": 16790,
+ "currency": "RUB",
+ "dims": {
+  "H": 1770,
+  "W": 643,
+  "D": 192
+ },
+ "colors": [],
+ "materials": [],
+ "styleTags": [],
+ "url": "https://www.amazon.es/dp/B07S5FQRDZ",
+ "model": {
+  "file": "models/abo-B07S5FQRDZ.glb",
+  "bytes": 80472,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.321500003,
+     0,
+     -0.0907110497
+    ],
+    "max": [
+     0.32154703578400007,
+     1.769999938911,
+     0.101273928109
+    ],
+    "size": [
+     0.643047038784,
+     1.769999938911,
+     0.191984977809
+    ]
+   },
+   "tris": 11564,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 20129076,
+  "bytes": 80472,
+  "srcTris": 11564,
+  "tris": 11564,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 19805610,
+   "after": 21080,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0003,
+   1,
+   1.0012
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07S5FQRDZ.jpg",
+  "bytes": 2248,
+  "mime": "image/jpeg"
+ }
+}

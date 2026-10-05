@@ -1,0 +1,75 @@
+{
+ "id": "abo-B07TTY39K8",
+ "source": "abo",
+ "typeId": "shelving",
+ "formId": "rect",
+ "name": "Marque Amazon",
+ "brand": "Movian",
+ "price": 9890,
+ "currency": "RUB",
+ "dims": {
+  "H": 594,
+  "W": 290,
+  "D": 297
+ },
+ "colors": [
+  "бежевый"
+ ],
+ "materials": [
+  "ЛДСП / МДФ"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.fr/dp/B07TTY39K8",
+ "model": {
+  "file": "models/abo-B07TTY39K8.glb",
+  "bytes": 208436,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.144972444,
+     0,
+     -0.148499921
+    ],
+    "max": [
+     0.14501179061279998,
+     0.5939999644488,
+     0.1484819326776
+    ],
+    "size": [
+     0.2899842346128,
+     0.5939999644488,
+     0.2969818536776
+    ]
+   },
+   "tris": 30002,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 28112032,
+  "bytes": 208436,
+  "srcTris": 61848,
+  "tris": 30002,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 26237130,
+   "after": 47748,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   1,
+   1
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07TTY39K8.jpg",
+  "bytes": 1895,
+  "mime": "image/jpeg"
+ }
+}

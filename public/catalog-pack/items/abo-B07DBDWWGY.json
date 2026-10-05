@@ -1,0 +1,76 @@
+{
+ "id": "abo-B07DBDWWGY",
+ "source": "abo",
+ "typeId": "bench",
+ "formId": "rect",
+ "name": "Ravenna Home Tolt Upholstered Storage Ottoman Bench",
+ "brand": "Ravenna Home",
+ "price": 21690,
+ "currency": "RUB",
+ "dims": {
+  "H": 438,
+  "W": 1269,
+  "D": 446
+ },
+ "colors": [
+  "бежевый",
+  "коричневый"
+ ],
+ "materials": [
+  "ткань"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B07DBDWWGY",
+ "model": {
+  "file": "models/abo-B07DBDWWGY.glb",
+  "bytes": 408536,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.634500027,
+     0,
+     -0.22299999
+    ],
+    "max": [
+     0.6345000538797,
+     0.4380269460645,
+     0.2230051656922
+    ],
+    "size": [
+     1.2690000808797,
+     0.4380269460645,
+     0.4460051556922
+    ]
+   },
+   "tris": 7218,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 3029256,
+  "bytes": 408536,
+  "srcTris": 7218,
+  "tris": 7218,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 2857182,
+   "after": 369642,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9997,
+   1.0002,
+   0.9992
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07DBDWWGY.jpg",
+  "bytes": 3946,
+  "mime": "image/jpeg"
+ }
+}

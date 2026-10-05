@@ -1,0 +1,78 @@
+{
+ "id": "abo-B07HSJDN75",
+ "source": "abo",
+ "typeId": "desk",
+ "formId": "rect",
+ "name": "Rivet Modern Computer Desk",
+ "brand": "Rivet",
+ "price": 20190,
+ "currency": "RUB",
+ "dims": {
+  "H": 761,
+  "W": 1069,
+  "D": 409
+ },
+ "colors": [
+  "белый"
+ ],
+ "materials": [
+  "дерево",
+  "ЛДСП / МДФ"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07HSJDN75",
+ "model": {
+  "file": "models/abo-B07HSJDN75.glb",
+  "bytes": 67608,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.534170985,
+     0,
+     -0.199494585
+    ],
+    "max": [
+     0.5348289771609,
+     0.7610173081049001,
+     0.20949593949640005
+    ],
+    "size": [
+     1.0689999621609,
+     0.7610173081049001,
+     0.40899052449640005
+    ]
+   },
+   "tris": 1134,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 1868884,
+  "bytes": 67608,
+  "srcTris": 1134,
+  "tris": 1134,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 1819281,
+   "after": 53300,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0003,
+   1.0004,
+   1.001
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07HSJDN75.jpg",
+  "bytes": 3825,
+  "mime": "image/jpeg"
+ }
+}

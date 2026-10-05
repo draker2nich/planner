@@ -1,0 +1,75 @@
+{
+ "id": "abo-B07HSGP5Q5",
+ "source": "abo",
+ "typeId": "picture",
+ "formId": "wall",
+ "name": "Rivet Abstract Multicolor Stripes Framed Wall Art Decor",
+ "brand": "Rivet",
+ "price": 4590,
+ "currency": "RUB",
+ "dims": {
+  "H": 642,
+  "W": 537,
+  "D": 48,
+  "E": 1300
+ },
+ "colors": [
+  "жёлтый",
+  "разноцветный"
+ ],
+ "materials": [],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B07HSGP5Q5",
+ "model": {
+  "file": "models/abo-B07HSGP5Q5.glb",
+  "bytes": 125768,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.2685,
+     -0.32100001,
+     0
+    ],
+    "max": [
+     0.26851812313679996,
+     0.32099998353109993,
+     0.0480040280825
+    ],
+    "size": [
+     0.5370181231368,
+     0.6419999935310999,
+     0.0480040280825
+    ]
+   },
+   "tris": 588,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2158872,
+  "bytes": 125768,
+  "srcTris": 588,
+  "tris": 588,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 2136298,
+   "after": 117782,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0004,
+   1.0001,
+   1.0052
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07HSGP5Q5.jpg",
+  "bytes": 7606,
+  "mime": "image/jpeg"
+ }
+}

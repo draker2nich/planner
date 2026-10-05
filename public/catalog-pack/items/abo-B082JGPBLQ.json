@@ -1,0 +1,75 @@
+{
+ "id": "abo-B082JGPBLQ",
+ "source": "abo",
+ "typeId": "pedestal",
+ "formId": "rect",
+ "name": "Stone & Beam 2-Drawer Rolling File Cabinet",
+ "brand": "Stone & Beam",
+ "price": 12190,
+ "currency": "RUB",
+ "dims": {
+  "H": 579,
+  "W": 409,
+  "D": 401
+ },
+ "colors": [
+  "натуральное дерево"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B082JGPBLQ",
+ "model": {
+  "file": "models/abo-B082JGPBLQ.glb",
+  "bytes": 271396,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.204500005,
+     0,
+     -0.18911688
+    ],
+    "max": [
+     0.20450732031980004,
+     0.5790000009258001,
+     0.21186792195960003
+    ],
+    "size": [
+     0.40900732531980005,
+     0.5790000009258001,
+     0.4009848019596
+    ]
+   },
+   "tris": 30002,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 37714792,
+  "bytes": 271396,
+  "srcTris": 50628,
+  "tris": 30002,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 36286341,
+   "after": 74136,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0001,
+   0.9998,
+   0.9994
+  ]
+ },
+ "image": {
+  "file": "images/abo-B082JGPBLQ.jpg",
+  "bytes": 6081,
+  "mime": "image/jpeg"
+ }
+}

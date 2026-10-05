@@ -1,0 +1,75 @@
+{
+ "id": "abo-B07MBFDQLY",
+ "source": "abo",
+ "typeId": "chair",
+ "formId": "rect",
+ "name": "Ravenna Home Modern Dining Chair",
+ "brand": "Ravenna Home",
+ "price": 14090,
+ "currency": "RUB",
+ "dims": {
+  "H": 976,
+  "W": 452,
+  "D": 708
+ },
+ "colors": [
+  "белый"
+ ],
+ "materials": [],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07MBFDQLY",
+ "model": {
+  "file": "models/abo-B07MBFDQLY.glb",
+  "bytes": 208024,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.228604168,
+     0,
+     -0.404426575
+    ],
+    "max": [
+     0.2233833716825,
+     0.9759999818925,
+     0.30355021708999996
+    ],
+    "size": [
+     0.4519875396825,
+     0.9759999818925,
+     0.70797679209
+    ]
+   },
+   "tris": 24644,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 48238028,
+  "bytes": 208024,
+  "srcTris": 24644,
+  "tris": 24644,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 47662160,
+   "after": 85342,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0004,
+   1,
+   1.0005
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07MBFDQLY.jpg",
+  "bytes": 3699,
+  "mime": "image/jpeg"
+ }
+}

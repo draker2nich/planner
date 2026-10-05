@@ -1,0 +1,75 @@
+{
+ "id": "abo-B07DBDZC9N",
+ "source": "abo",
+ "typeId": "nightstand",
+ "formId": "rect",
+ "name": "Ravenna Home Naomi 3-Drawer Storage Side End Table Nightstand",
+ "brand": "Ravenna Home",
+ "price": 13290,
+ "currency": "RUB",
+ "dims": {
+  "H": 681,
+  "W": 435,
+  "D": 351
+ },
+ "colors": [
+  "белый"
+ ],
+ "materials": [
+  "металл"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B07DBDZC9N",
+ "model": {
+  "file": "models/abo-B07DBDZC9N.glb",
+  "bytes": 53452,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.217500001,
+     0,
+     -0.172276855
+    ],
+    "max": [
+     0.21750368138600001,
+     0.6810000313932001,
+     0.17871894949760003
+    ],
+    "size": [
+     0.435003682386,
+     0.6810000313932001,
+     0.35099580449760004
+    ]
+   },
+   "tris": 6762,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 403252,
+  "bytes": 53452,
+  "srcTris": 6762,
+  "tris": 6762,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 217609,
+   "after": 8530,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   1.0003,
+   0.9994
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07DBDZC9N.jpg",
+  "bytes": 3230,
+  "mime": "image/jpeg"
+ }
+}

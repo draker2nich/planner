@@ -1,0 +1,77 @@
+{
+ "id": "abo-B084ZB8Z79",
+ "source": "abo",
+ "typeId": "bed",
+ "formId": "double",
+ "name": "Stone & Beam Rustic Solid Pine Platform Bed",
+ "brand": "Stone & Beam",
+ "price": 57490,
+ "currency": "RUB",
+ "dims": {
+  "H": 510,
+  "W": 1460,
+  "L": 1985
+ },
+ "colors": [
+  "серый"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "кантри"
+ ],
+ "url": "https://www.amazon.com/dp/B084ZB8Z79",
+ "model": {
+  "file": "models/abo-B084ZB8Z79.glb",
+  "bytes": 128564,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.729999959,
+     0,
+     -0.992500007
+    ],
+    "max": [
+     0.7300042858999999,
+     0.509971607202,
+     0.992499955174
+    ],
+    "size": [
+     1.4600042449,
+     0.509971607202,
+     1.984999962174
+    ]
+   },
+   "tris": 14870,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 22004240,
+  "bytes": 128564,
+  "srcTris": 14870,
+  "tris": 14870,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 21522702,
+   "after": 30558,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0002,
+   1.0005,
+   1
+  ]
+ },
+ "image": {
+  "file": "images/abo-B084ZB8Z79.jpg",
+  "bytes": 3512,
+  "mime": "image/jpeg"
+ }
+}

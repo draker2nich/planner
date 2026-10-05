@@ -1,0 +1,76 @@
+{
+ "id": "abo-B075YM2VXJ",
+ "source": "abo",
+ "typeId": "picture",
+ "formId": "wall",
+ "name": "Rivet Modern Black and White Floating Woman Photo Print Framed Wall Art Decor",
+ "brand": "Rivet",
+ "price": 3090,
+ "currency": "RUB",
+ "dims": {
+  "H": 379,
+  "W": 308,
+  "D": 30,
+  "E": 1300
+ },
+ "colors": [
+  "чёрный"
+ ],
+ "materials": [],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B075YM2VXJ",
+ "model": {
+  "file": "models/abo-B075YM2VXJ.glb",
+  "bytes": 200940,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.153999999,
+     -0.189500004,
+     5.9135169e-10
+    ],
+    "max": [
+     0.15400256476680002,
+     0.1894999961646,
+     0.030004456442751692
+    ],
+    "size": [
+     0.3080025637668,
+     0.3790000001646,
+     0.030004455851400002
+    ]
+   },
+   "tris": 3916,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 1063628,
+  "bytes": 200940,
+  "srcTris": 3916,
+  "tris": 3916,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 963576,
+   "after": 178358,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9986,
+   1.0008,
+   0.9921
+  ]
+ },
+ "image": {
+  "file": "images/abo-B075YM2VXJ.jpg",
+  "bytes": 14192,
+  "mime": "image/jpeg"
+ }
+}

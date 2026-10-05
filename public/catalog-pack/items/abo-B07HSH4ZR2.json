@@ -1,0 +1,77 @@
+{
+ "id": "abo-B07HSH4ZR2",
+ "source": "abo",
+ "typeId": "dresser",
+ "formId": "rect",
+ "name": "Rivet Kingston Modern Dresser 19.69\"W",
+ "brand": "Rivet",
+ "price": 26990,
+ "currency": "RUB",
+ "dims": {
+  "H": 568,
+  "W": 503,
+  "D": 414
+ },
+ "colors": [
+  "белый"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07HSH4ZR2",
+ "model": {
+  "file": "models/abo-B07HSH4ZR2.glb",
+  "bytes": 114408,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.250957191,
+     0,
+     -0.19614701
+    ],
+    "max": [
+     0.2520364340976,
+     0.5680000385976,
+     0.2178485012552
+    ],
+    "size": [
+     0.5029936250976,
+     0.5680000385976,
+     0.4139955112552
+    ]
+   },
+   "tris": 8150,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2385100,
+  "bytes": 114408,
+  "srcTris": 8150,
+  "tris": 8150,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 1877733,
+   "after": 29706,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0007,
+   1.0002,
+   1.0011
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07HSH4ZR2.jpg",
+  "bytes": 6377,
+  "mime": "image/jpeg"
+ }
+}

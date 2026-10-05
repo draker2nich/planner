@@ -1,0 +1,78 @@
+{
+ "id": "abo-B087CQ3FTY",
+ "source": "abo",
+ "typeId": "desk",
+ "formId": "rect",
+ "name": "AmazonBasics Multipurpose Foldable Training/Computer Table",
+ "brand": "AmazonBasics",
+ "price": 18490,
+ "currency": "RUB",
+ "dims": {
+  "H": 750,
+  "W": 1397,
+  "D": 447
+ },
+ "colors": [
+  "чёрный",
+  "натуральное дерево"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "классика"
+ ],
+ "url": "https://www.amazon.com/dp/B087CQ3FTY",
+ "model": {
+  "file": "models/abo-B087CQ3FTY.glb",
+  "bytes": 163420,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.69410193,
+     0,
+     -0.223403513
+    ],
+    "max": [
+     0.7028979892406999,
+     0.7499611969555,
+     0.22358870922179996
+    ],
+    "size": [
+     1.3969999192406999,
+     0.7499611969555,
+     0.44699222222179996
+    ]
+   },
+   "tris": 29998,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 15731568,
+  "bytes": 163420,
+  "srcTris": 29998,
+  "tris": 29998,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 14956884,
+   "after": 22406,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9998,
+   1.0005,
+   0.9996
+  ]
+ },
+ "image": {
+  "file": "images/abo-B087CQ3FTY.jpg",
+  "bytes": 4480,
+  "mime": "image/jpeg"
+ }
+}

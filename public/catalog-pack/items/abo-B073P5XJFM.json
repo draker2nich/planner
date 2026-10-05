@@ -1,0 +1,76 @@
+{
+ "id": "abo-B073P5XJFM",
+ "source": "abo",
+ "typeId": "picture",
+ "formId": "wall",
+ "name": "Rivet Watercolor Green Leaf Print Wall Art in a Black Wood Frame",
+ "brand": "Rivet",
+ "price": 3090,
+ "currency": "RUB",
+ "dims": {
+  "H": 304,
+  "W": 304,
+  "D": 38,
+  "E": 1300
+ },
+ "colors": [
+  "зелёный"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B073P5XJFM",
+ "model": {
+  "file": "models/abo-B073P5XJFM.glb",
+  "bytes": 86560,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.15200001,
+     -0.15200001,
+     0
+    ],
+    "max": [
+     0.152000021826,
+     0.152000021826,
+     0.038002323456
+    ],
+    "size": [
+     0.304000031826,
+     0.304000031826,
+     0.038002323456
+    ]
+   },
+   "tris": 252,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 1277984,
+  "bytes": 86560,
+  "srcTris": 252,
+  "tris": 252,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 1267526,
+   "after": 81328,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0005,
+   1.0005,
+   0.9879
+  ]
+ },
+ "image": {
+  "file": "images/abo-B073P5XJFM.jpg",
+  "bytes": 10856,
+  "mime": "image/jpeg"
+ }
+}

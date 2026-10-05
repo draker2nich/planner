@@ -1,0 +1,73 @@
+{
+ "id": "abo-B07K7K7GLP",
+ "source": "abo",
+ "typeId": "chair",
+ "formId": "rect",
+ "name": "Alkove - Hayes - Set de 2 sillas de madera maciza con asiento tapizado (haya lacada)",
+ "brand": "Alkove",
+ "price": 10590,
+ "currency": "RUB",
+ "dims": {
+  "H": 912,
+  "W": 439,
+  "D": 492
+ },
+ "colors": [
+  "бежевый"
+ ],
+ "materials": [],
+ "styleTags": [],
+ "url": "https://www.amazon.es/dp/B07K7K7GLP",
+ "model": {
+  "file": "models/abo-B07K7K7GLP.glb",
+  "bytes": 156968,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.217218623,
+     0,
+     -0.249410897
+    ],
+    "max": [
+     0.22177496971439997,
+     0.9120000037332,
+     0.2425781180152
+    ],
+    "size": [
+     0.43899359271439997,
+     0.9120000037332,
+     0.4919890150152
+    ]
+   },
+   "tris": 11400,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 24316448,
+  "bytes": 156968,
+  "srcTris": 11400,
+  "tris": 11400,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 24044659,
+   "after": 96674,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   1.0005,
+   1.0006
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07K7K7GLP.jpg",
+  "bytes": 6770,
+  "mime": "image/jpeg"
+ }
+}

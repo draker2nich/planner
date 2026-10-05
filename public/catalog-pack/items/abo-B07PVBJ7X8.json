@@ -1,0 +1,78 @@
+{
+ "id": "abo-B07PVBJ7X8",
+ "source": "abo",
+ "typeId": "dresser",
+ "formId": "rect",
+ "name": "Ameriwood Home Classic 6 Drawer Dresser",
+ "brand": "Ameriwood Home",
+ "price": 21490,
+ "currency": "RUB",
+ "dims": {
+  "H": 755,
+  "W": 1360,
+  "D": 401
+ },
+ "colors": [
+  "коричневый"
+ ],
+ "materials": [
+  "дерево",
+  "ЛДСП / МДФ"
+ ],
+ "styleTags": [
+  "классика"
+ ],
+ "url": "https://www.amazon.co.uk/dp/B07PVBJ7X8",
+ "model": {
+  "file": "models/abo-B07PVBJ7X8.glb",
+  "bytes": 235364,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.681471288,
+     0,
+     -0.200860545
+    ],
+    "max": [
+     0.6785285644865999,
+     0.755002054469,
+     0.200091618066
+    ],
+    "size": [
+     1.3599998524866,
+     0.755002054469,
+     0.400952163066
+    ]
+   },
+   "tris": 30002,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 42026616,
+  "bytes": 235364,
+  "srcTris": 85796,
+  "tris": 30002,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 39818232,
+   "after": 69812,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   1.0004,
+   1.0012
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07PVBJ7X8.jpg",
+  "bytes": 3992,
+  "mime": "image/jpeg"
+ }
+}

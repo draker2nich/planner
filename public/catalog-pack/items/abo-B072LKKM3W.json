@@ -1,0 +1,78 @@
+{
+ "id": "abo-B072LKKM3W",
+ "source": "abo",
+ "typeId": "chandelier",
+ "formId": "round",
+ "name": "Rivet Modern Pendant Light With Bulb",
+ "brand": "Rivet",
+ "price": 13090,
+ "currency": "RUB",
+ "dims": {
+  "H": 1535,
+  "DIA": 303
+ },
+ "colors": [
+  "серый",
+  "серебристый"
+ ],
+ "materials": [
+  "металл",
+  "стекло"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B072LKKM3W",
+ "model": {
+  "file": "models/abo-B072LKKM3W.glb",
+  "bytes": 188464,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.151500002,
+     -1.53500009,
+     -0.151500002
+    ],
+    "max": [
+     0.151508622226,
+     -1.1300005375858291e-10,
+     0.151508622226
+    ],
+    "size": [
+     0.303008624226,
+     1.535000089887,
+     0.303008624226
+    ]
+   },
+   "tris": 19426,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 3561580,
+  "bytes": 188464,
+  "srcTris": 19426,
+  "tris": 19426,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 3023482,
+   "after": 73246,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9988,
+   1.0002,
+   0.9988
+  ]
+ },
+ "image": {
+  "file": "images/abo-B072LKKM3W.jpg",
+  "bytes": 2723,
+  "mime": "image/jpeg"
+ }
+}

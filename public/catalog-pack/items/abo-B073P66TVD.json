@@ -1,0 +1,76 @@
+{
+ "id": "abo-B073P66TVD",
+ "source": "abo",
+ "typeId": "picture",
+ "formId": "wall",
+ "name": "Rivet Modern Black and White Map of New York City",
+ "brand": "Rivet",
+ "price": 2990,
+ "currency": "RUB",
+ "dims": {
+  "H": 305,
+  "W": 305,
+  "D": 37,
+  "E": 1300
+ },
+ "colors": [
+  "чёрный"
+ ],
+ "materials": [],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B073P66TVD",
+ "model": {
+  "file": "models/abo-B073P66TVD.glb",
+  "bytes": 228412,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.152500004,
+     -0.152500004,
+     0
+    ],
+    "max": [
+     0.15250001338,
+     0.15250001338,
+     0.036991700819999994
+    ],
+    "size": [
+     0.30500001738,
+     0.30500001738,
+     0.036991700819999994
+    ]
+   },
+   "tris": 444,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 1310584,
+  "bytes": 228412,
+  "srcTris": 444,
+  "tris": 444,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 1293054,
+   "after": 221744,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9987,
+   0.9987,
+   1.0107
+  ]
+ },
+ "image": {
+  "file": "images/abo-B073P66TVD.jpg",
+  "bytes": 29623,
+  "mime": "image/jpeg"
+ }
+}

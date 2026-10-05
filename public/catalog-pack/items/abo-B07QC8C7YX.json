@@ -1,0 +1,76 @@
+{
+ "id": "abo-B07QC8C7YX",
+ "source": "abo",
+ "typeId": "plant",
+ "formId": "round",
+ "name": "Rivet Mid-Century Diamond-Patterned Stoneware Planter",
+ "brand": "Rivet",
+ "price": 3790,
+ "currency": "RUB",
+ "dims": {
+  "H": 203,
+  "DIA": 224
+ },
+ "colors": [
+  "белый",
+  "синий",
+  "разноцветный"
+ ],
+ "materials": [],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07QC8C7YX",
+ "model": {
+  "file": "models/abo-B07QC8C7YX.glb",
+  "bytes": 255340,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.112000003,
+     4.17661639e-9,
+     -0.112000003
+    ],
+    "max": [
+     0.11200000984489998,
+     0.20299873400071639,
+     0.11200000984489998
+    ],
+    "size": [
+     0.22400001284489998,
+     0.2029987298241,
+     0.22400001284489998
+    ]
+   },
+   "tris": 2320,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 17661160,
+  "bytes": 255340,
+  "srcTris": 2320,
+  "tris": 2320,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 17604603,
+   "after": 238826,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9999,
+   1.001,
+   0.9999
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07QC8C7YX.jpg",
+  "bytes": 10259,
+  "mime": "image/jpeg"
+ }
+}

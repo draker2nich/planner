@@ -1,0 +1,75 @@
+{
+ "id": "abo-B07GFS1R5B",
+ "source": "abo",
+ "typeId": "wardrobe",
+ "formId": "rect",
+ "name": "Movian Indre 3-Door 3-Drawer Wardrobe",
+ "brand": "Movian",
+ "price": 66890,
+ "currency": "RUB",
+ "dims": {
+  "H": 1910,
+  "W": 1290,
+  "D": 510
+ },
+ "colors": [
+  "серый"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.co.uk/dp/B07GFS1R5B",
+ "model": {
+  "file": "models/abo-B07GFS1R5B.glb",
+  "bytes": 104496,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.644999981,
+     0,
+     -0.254999995
+    ],
+    "max": [
+     0.64500496655,
+     1.91000009541,
+     0.25505618625
+    ],
+    "size": [
+     1.29000494755,
+     1.91000009541,
+     0.51005618125
+    ]
+   },
+   "tris": 8400,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 19472156,
+  "bytes": 104496,
+  "srcTris": 8400,
+  "tris": 8400,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 19121400,
+   "after": 57856,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0001,
+   1.0001,
+   1.0004
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07GFS1R5B.jpg",
+  "bytes": 2721,
+  "mime": "image/jpeg"
+ }
+}

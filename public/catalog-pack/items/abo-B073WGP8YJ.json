@@ -1,0 +1,78 @@
+{
+ "id": "abo-B073WGP8YJ",
+ "source": "abo",
+ "typeId": "mirror",
+ "formId": "wall",
+ "name": "Stone & Beam Curved Vintage-Look Wood Frame Wall Mirror",
+ "brand": "Stone & Beam",
+ "price": 7290,
+ "currency": "RUB",
+ "dims": {
+  "H": 717,
+  "W": 403,
+  "D": 22,
+  "E": 1200
+ },
+ "colors": [
+  "белый"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "ретро"
+ ],
+ "url": "https://www.amazon.com/dp/B073WGP8YJ",
+ "model": {
+  "file": "models/abo-B073WGP8YJ.glb",
+  "bytes": 117996,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.201499999,
+     -0.358500004,
+     5.93408211e-10
+    ],
+    "max": [
+     0.2014869957824,
+     0.35849998899740004,
+     0.022013734126808213
+    ],
+    "size": [
+     0.4029869947824,
+     0.7169999929974,
+     0.022013733533400002
+    ]
+   },
+   "tris": 6060,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 813864,
+  "bytes": 117996,
+  "srcTris": 6060,
+  "tris": 6060,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 673978,
+   "after": 84362,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9991,
+   0.9995,
+   1.0123
+  ]
+ },
+ "image": {
+  "file": "images/abo-B073WGP8YJ.jpg",
+  "bytes": 4327,
+  "mime": "image/jpeg"
+ }
+}

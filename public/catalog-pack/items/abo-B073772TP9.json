@@ -1,0 +1,79 @@
+{
+ "id": "abo-B073772TP9",
+ "source": "abo",
+ "typeId": "desk",
+ "formId": "rect",
+ "name": "Stone & Beam Modern Slate Rock Table Desk Lamp with Light Bulb And Linen Shade",
+ "brand": "Stone & Beam",
+ "price": 14890,
+ "currency": "RUB",
+ "dims": {
+  "H": 411,
+  "W": 294,
+  "D": 180
+ },
+ "colors": [
+  "серый",
+  "серебристый"
+ ],
+ "materials": [
+  "металл",
+  "ткань"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B073772TP9",
+ "model": {
+  "file": "models/abo-B073772TP9.glb",
+  "bytes": 805212,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.147,
+     0,
+     -0.0899999961
+    ],
+    "max": [
+     0.1469943162762,
+     0.4109999900634,
+     0.08999908396500002
+    ],
+    "size": [
+     0.2939943162762,
+     0.4109999900634,
+     0.179999080065
+    ]
+   },
+   "tris": 11834,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 4,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 5182580,
+  "bytes": 805212,
+  "srcTris": 11834,
+  "tris": 11834,
+  "textures": {
+   "images": 4,
+   "resized": 4,
+   "before": 4872684,
+   "after": 737300,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0004,
+   1,
+   0.9999
+  ]
+ },
+ "image": {
+  "file": "images/abo-B073772TP9.jpg",
+  "bytes": 5999,
+  "mime": "image/jpeg"
+ }
+}

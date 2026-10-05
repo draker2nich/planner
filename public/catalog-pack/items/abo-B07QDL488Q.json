@@ -1,0 +1,78 @@
+{
+ "id": "abo-B07QDL488Q",
+ "source": "abo",
+ "typeId": "armchair",
+ "formId": "rect",
+ "name": "Ravenna Home Margaret Modern Living Room Chair",
+ "brand": "Ravenna Home",
+ "price": 37590,
+ "currency": "RUB",
+ "dims": {
+  "H": 930,
+  "W": 710,
+  "D": 760
+ },
+ "colors": [
+  "бежевый"
+ ],
+ "materials": [
+  "ткань"
+ ],
+ "styleTags": [
+  "современный",
+  "классика"
+ ],
+ "url": "https://www.amazon.com/dp/B07QDL488Q",
+ "model": {
+  "file": "models/abo-B07QDL488Q.glb",
+  "bytes": 254568,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.354993701,
+     0,
+     -0.379999995
+    ],
+    "max": [
+     0.35498060583850005,
+     0.9299999255565,
+     0.37998529483400006
+    ],
+    "size": [
+     0.7099743068385,
+     0.9299999255565,
+     0.759985289834
+    ]
+   },
+   "tris": 30002,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 31582476,
+  "bytes": 254568,
+  "srcTris": 58668,
+  "tris": 30002,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 29788361,
+   "after": 85198,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   1,
+   1
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07QDL488Q.jpg",
+  "bytes": 6124,
+  "mime": "image/jpeg"
+ }
+}

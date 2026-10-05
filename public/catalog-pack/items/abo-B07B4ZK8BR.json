@@ -1,0 +1,76 @@
+{
+ "id": "abo-B07B4ZK8BR",
+ "source": "abo",
+ "typeId": "floor-lamp",
+ "formId": "round",
+ "name": "Rivet Mid-Century Modern Floor Lamp with Wireless USB Port Charging Wood Table",
+ "brand": "Rivet",
+ "price": 20290,
+ "currency": "RUB",
+ "dims": {
+  "H": 1517,
+  "DIA": 573
+ },
+ "colors": [
+  "чёрный"
+ ],
+ "materials": [
+  "ткань"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07B4ZK8BR",
+ "model": {
+  "file": "models/abo-B07B4ZK8BR.glb",
+  "bytes": 200572,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.286304086,
+     0,
+     -0.258692503
+    ],
+    "max": [
+     0.28667990197640003,
+     1.5170001090849001,
+     0.3142914849764
+    ],
+    "size": [
+     0.5729839879764,
+     1.5170001090849001,
+     0.5729839879764
+    ]
+   },
+   "tris": 22484,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 4,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2481216,
+  "bytes": 200572,
+  "srcTris": 22484,
+  "tris": 22484,
+  "textures": {
+   "images": 4,
+   "resized": 4,
+   "before": 1909207,
+   "after": 78148,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9999,
+   0.9998,
+   0.9999
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07B4ZK8BR.jpg",
+  "bytes": 3108,
+  "mime": "image/jpeg"
+ }
+}

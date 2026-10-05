@@ -1,0 +1,74 @@
+{
+ "id": "abo-B07QCMB9WC",
+ "source": "abo",
+ "typeId": "armchair",
+ "formId": "rect",
+ "name": "Ravenna Home Maplewood Rocker Recliner",
+ "brand": "Ravenna Home",
+ "price": 41590,
+ "currency": "RUB",
+ "dims": {
+  "H": 1093,
+  "W": 990,
+  "D": 1041
+ },
+ "colors": [],
+ "materials": [
+  "дерево",
+  "кожа"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B07QCMB9WC",
+ "model": {
+  "file": "models/abo-B07QCMB9WC.glb",
+  "bytes": 229556,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.492145211,
+     0,
+     -0.624422073
+    ],
+    "max": [
+     0.49784604007960004,
+     1.0929999775212,
+     0.4166065328256
+    ],
+    "size": [
+     0.9899912510796001,
+     1.0929999775212,
+     1.0410286058256
+    ]
+   },
+   "tris": 29999,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 29924648,
+  "bytes": 229556,
+  "srcTris": 34818,
+  "tris": 29999,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 29105856,
+   "after": 64638,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0003,
+   1.0001,
+   0.9999
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07QCMB9WC.jpg",
+  "bytes": 8409,
+  "mime": "image/jpeg"
+ }
+}

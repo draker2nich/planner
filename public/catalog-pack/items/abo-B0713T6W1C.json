@@ -1,0 +1,80 @@
+{
+ "id": "abo-B0713T6W1C",
+ "source": "abo",
+ "typeId": "mirror",
+ "formId": "wall",
+ "name": "Rivet Beveled Metal Mirror",
+ "brand": "Rivet",
+ "price": 11690,
+ "currency": "RUB",
+ "dims": {
+  "H": 610,
+  "W": 610,
+  "D": 32,
+  "E": 1200
+ },
+ "colors": [
+  "коричневый",
+  "прозрачный"
+ ],
+ "materials": [
+  "металл",
+  "стекло"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B0713T6W1C",
+ "model": {
+  "file": "models/abo-B0713T6W1C.glb",
+  "bytes": 76716,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.305000007,
+     -0.305000007,
+     0.00396719715
+    ],
+    "max": [
+     0.3050000261216999,
+     0.3050000261216999,
+     0.0359509625441
+    ],
+    "size": [
+     0.6100000331216999,
+     0.6100000331216999,
+     0.0319837653941
+    ]
+   },
+   "tris": 2412,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 1405364,
+  "bytes": 76716,
+  "srcTris": 2412,
+  "tris": 2412,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 1337252,
+   "after": 58972,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0001,
+   1.0001,
+   0.9918
+  ]
+ },
+ "image": {
+  "file": "images/abo-B0713T6W1C.jpg",
+  "bytes": 7403,
+  "mime": "image/jpeg"
+ }
+}

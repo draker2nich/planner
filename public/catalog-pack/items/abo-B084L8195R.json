@@ -1,0 +1,78 @@
+{
+ "id": "abo-B084L8195R",
+ "source": "abo",
+ "typeId": "console",
+ "formId": "rect",
+ "name": "Stone & Beam Solid Pine Rustic Farmhouse Console Table",
+ "brand": "Stone & Beam",
+ "price": 23890,
+ "currency": "RUB",
+ "dims": {
+  "H": 762,
+  "W": 1320,
+  "D": 381
+ },
+ "colors": [
+  "натуральное дерево"
+ ],
+ "materials": [
+  "дерево",
+  "камень"
+ ],
+ "styleTags": [
+  "кантри"
+ ],
+ "url": "https://www.amazon.com/dp/B084L8195R",
+ "model": {
+  "file": "models/abo-B084L8195R.glb",
+  "bytes": 338696,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.660000026,
+     0,
+     -0.190499991
+    ],
+    "max": [
+     0.660000040624,
+     0.761963048896,
+     0.19052181911200003
+    ],
+    "size": [
+     1.320000066624,
+     0.761963048896,
+     0.38102181011200004
+    ]
+   },
+   "tris": 19132,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 32900696,
+  "bytes": 338696,
+  "srcTris": 19132,
+  "tris": 19132,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 32356233,
+   "after": 213470,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9999,
+   0.9996,
+   1.0009
+  ]
+ },
+ "image": {
+  "file": "images/abo-B084L8195R.jpg",
+  "bytes": 9077,
+  "mime": "image/jpeg"
+ }
+}

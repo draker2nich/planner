@@ -1,0 +1,77 @@
+{
+ "id": "abo-B075X33T21",
+ "source": "abo",
+ "typeId": "armchair",
+ "formId": "rect",
+ "name": "Rivet Parks Mid-Century Modern Wingback Leather Accent Chair",
+ "brand": "Rivet",
+ "price": 38890,
+ "currency": "RUB",
+ "dims": {
+  "H": 1068,
+  "W": 819,
+  "D": 954
+ },
+ "colors": [
+  "чёрный"
+ ],
+ "materials": [
+  "кожа"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B075X33T21",
+ "model": {
+  "file": "models/abo-B075X33T21.glb",
+  "bytes": 187252,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.409500003,
+     0,
+     -0.621074498
+    ],
+    "max": [
+     0.4094759907808999,
+     1.0679999766069,
+     0.3329090006061999
+    ],
+    "size": [
+     0.8189759937808999,
+     1.0679999766069,
+     0.9539834986061999
+    ]
+   },
+   "tris": 15544,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2859316,
+  "bytes": 187252,
+  "srcTris": 15544,
+  "tris": 15544,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 2501870,
+   "after": 101120,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0006,
+   1.0004,
+   0.9999
+  ]
+ },
+ "image": {
+  "file": "images/abo-B075X33T21.jpg",
+  "bytes": 6628,
+  "mime": "image/jpeg"
+ }
+}

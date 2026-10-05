@@ -1,0 +1,75 @@
+{
+ "id": "abo-B01DA8QZFM",
+ "source": "abo",
+ "typeId": "console",
+ "formId": "rect",
+ "name": "Movian Corona Console Table",
+ "brand": "Vida Designs",
+ "price": 9190,
+ "currency": "RUB",
+ "dims": {
+  "H": 730,
+  "W": 1240,
+  "D": 350
+ },
+ "colors": [
+  "натуральное дерево"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.co.uk/dp/B01DA8QZFM",
+ "model": {
+  "file": "models/abo-B01DA8QZFM.glb",
+  "bytes": 179704,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.620000005,
+     -2.98023224e-8,
+     -0.175000012
+    ],
+    "max": [
+     0.6200000147918,
+     0.7300128000146776,
+     0.1749822923104
+    ],
+    "size": [
+     1.2400000197918,
+     0.730012829817,
+     0.3499823043104
+    ]
+   },
+   "tris": 10534,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 46091208,
+  "bytes": 179704,
+  "srcTris": 10534,
+  "tris": 10534,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 45695398,
+   "after": 110676,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0002,
+   1,
+   1.0007
+  ]
+ },
+ "image": {
+  "file": "images/abo-B01DA8QZFM.jpg",
+  "bytes": 11466,
+  "mime": "image/jpeg"
+ }
+}

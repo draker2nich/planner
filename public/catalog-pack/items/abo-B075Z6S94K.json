@@ -1,0 +1,77 @@
+{
+ "id": "abo-B075Z6S94K",
+ "source": "abo",
+ "typeId": "office-chair",
+ "formId": "round",
+ "name": "Rivet Mid-Century Swope Curved Arm Swivel Office Chair",
+ "brand": "Rivet",
+ "price": 22290,
+ "currency": "RUB",
+ "dims": {
+  "H": 874,
+  "DIA": 677
+ },
+ "colors": [
+  "синий"
+ ],
+ "materials": [
+  "металл",
+  "ткань"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B075Z6S94K",
+ "model": {
+  "file": "models/abo-B075Z6S94K.glb",
+  "bytes": 466808,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.338499993,
+     0,
+     -0.341995716
+    ],
+    "max": [
+     0.338485915077,
+     0.8740000104039,
+     0.334990192077
+    ],
+    "size": [
+     0.676985908077,
+     0.8740000104039,
+     0.676985908077
+    ]
+   },
+   "tris": 18980,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 4015404,
+  "bytes": 466808,
+  "srcTris": 18980,
+  "tris": 18980,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 3574539,
+   "after": 363572,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.055,
+   1,
+   1.0005
+  ]
+ },
+ "image": {
+  "file": "images/abo-B075Z6S94K.jpg",
+  "bytes": 8826,
+  "mime": "image/jpeg"
+ }
+}

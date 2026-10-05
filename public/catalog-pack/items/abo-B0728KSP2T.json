@@ -1,0 +1,76 @@
+{
+ "id": "abo-B0728KSP2T",
+ "source": "abo",
+ "typeId": "dresser",
+ "formId": "rect",
+ "name": "Stone & Beam Parson Chest of Drawers",
+ "brand": "Stone & Beam",
+ "price": 46690,
+ "currency": "RUB",
+ "dims": {
+  "H": 1431,
+  "W": 1081,
+  "D": 558
+ },
+ "colors": [
+  "коричневый"
+ ],
+ "materials": [
+  "дерево",
+  "металл"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B0728KSP2T",
+ "model": {
+  "file": "models/abo-B0728KSP2T.glb",
+  "bytes": 250476,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.540501535,
+     0,
+     -0.279589474
+    ],
+    "max": [
+     0.540500500204,
+     1.4310000276945,
+     0.278380871902
+    ],
+    "size": [
+     1.081002035204,
+     1.4310000276945,
+     0.557970345902
+    ]
+   },
+   "tris": 16200,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 3609524,
+  "bytes": 250476,
+  "srcTris": 16200,
+  "tris": 16200,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 3203400,
+   "after": 164094,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0002,
+   0.9997,
+   1.0006
+  ]
+ },
+ "image": {
+  "file": "images/abo-B0728KSP2T.jpg",
+  "bytes": 12226,
+  "mime": "image/jpeg"
+ }
+}

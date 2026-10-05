@@ -1,0 +1,75 @@
+{
+ "id": "abo-B00NUS53CY",
+ "source": "abo",
+ "typeId": "shelving",
+ "formId": "rect",
+ "name": "Amazon Basics 4 Tier Assembled Shelf",
+ "brand": "Amazonベーシック(AmazonBasics)",
+ "price": 12590,
+ "currency": "RUB",
+ "dims": {
+  "H": 1360,
+  "W": 907,
+  "D": 352
+ },
+ "colors": [
+  "серебристый"
+ ],
+ "materials": [
+  "металл"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.co.jp/dp/B00NUS53CY",
+ "model": {
+  "file": "models/abo-B00NUS53CY.glb",
+  "bytes": 193196,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.453500003,
+     0,
+     -0.175999999
+    ],
+    "max": [
+     0.4534986954724,
+     1.3599999704441998,
+     0.17597460117599997
+    ],
+    "size": [
+     0.9069986984724,
+     1.3599999704441998,
+     0.35197460017599996
+    ]
+   },
+   "tris": 28976,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 1591784,
+  "bytes": 193196,
+  "srcTris": 28976,
+  "tris": 28976,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 774772,
+   "after": 18436,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9998,
+   1.0002,
+   1.0005
+  ]
+ },
+ "image": {
+  "file": "images/abo-B00NUS53CY.jpg",
+  "bytes": 5107,
+  "mime": "image/jpeg"
+ }
+}

@@ -1,0 +1,77 @@
+{
+ "id": "abo-B072C5WP1M",
+ "source": "abo",
+ "typeId": "rug",
+ "formId": "rect",
+ "name": "Stone & Beam Contemporary Interlocking Rings Wool Area Rug",
+ "brand": "Stone & Beam",
+ "price": 16090,
+ "currency": "RUB",
+ "dims": {
+  "H": 10,
+  "W": 1748,
+  "D": 1142
+ },
+ "colors": [
+  "коричневый"
+ ],
+ "materials": [
+  "ковровое волокно"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B072C5WP1M",
+ "model": {
+  "file": "models/abo-B072C5WP1M.glb",
+  "bytes": 516480,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.874000072,
+     -1.16625911e-18,
+     -0.571284235
+    ],
+    "max": [
+     0.8739999553610002,
+     0.010029420898,
+     0.570682699801
+    ],
+    "size": [
+     1.7480000273610001,
+     0.010029420898000001,
+     1.141966934801
+    ]
+   },
+   "tris": 1256,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 57937452,
+  "bytes": 516480,
+  "srcTris": 1256,
+  "tris": 1256,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 57905677,
+   "after": 506548,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9999,
+   1.0505,
+   0.9997
+  ]
+ },
+ "image": {
+  "file": "images/abo-B072C5WP1M.jpg",
+  "bytes": 14346,
+  "mime": "image/jpeg"
+ }
+}

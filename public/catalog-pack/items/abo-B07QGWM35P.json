@@ -1,0 +1,74 @@
+{
+ "id": "abo-B07QGWM35P",
+ "source": "abo",
+ "typeId": "bar-stool",
+ "formId": "round",
+ "name": "Stone & Beam Mid-Century Counter Stool",
+ "brand": "Stone & Beam",
+ "price": 17290,
+ "currency": "RUB",
+ "dims": {
+  "H": 952,
+  "DIA": 635
+ },
+ "colors": [
+  "бежевый"
+ ],
+ "materials": [],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07QGWM35P",
+ "model": {
+  "file": "models/abo-B07QGWM35P.glb",
+  "bytes": 353724,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.317499995,
+     0,
+     -0.337394893
+    ],
+    "max": [
+     0.3175153045280001,
+     0.9519999681705,
+     0.2976204065280001
+    ],
+    "size": [
+     0.6350152995280001,
+     0.9519999681705,
+     0.6350152995280001
+    ]
+   },
+   "tris": 12508,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 49225924,
+  "bytes": 353724,
+  "srcTris": 12508,
+  "tris": 12508,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 48926556,
+   "after": 281994,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.1364,
+   0.9995,
+   1
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07QGWM35P.jpg",
+  "bytes": 6195,
+  "mime": "image/jpeg"
+ }
+}

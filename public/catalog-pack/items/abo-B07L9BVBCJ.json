@@ -1,0 +1,74 @@
+{
+ "id": "abo-B07L9BVBCJ",
+ "source": "abo",
+ "typeId": "shelving",
+ "formId": "rect",
+ "name": "AmazonBasics 2-Tier Stackable Storage Shelf",
+ "brand": "AmazonBasics",
+ "price": 8790,
+ "currency": "RUB",
+ "dims": {
+  "H": 564,
+  "W": 589,
+  "D": 338
+ },
+ "colors": [],
+ "materials": [
+  "дерево",
+  "ЛДСП / МДФ"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B07L9BVBCJ",
+ "model": {
+  "file": "models/abo-B07L9BVBCJ.glb",
+  "bytes": 204760,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.294499993,
+     0,
+     -0.168999985
+    ],
+    "max": [
+     0.29449998306169994,
+     0.5640134056312,
+     0.1689838259599
+    ],
+    "size": [
+     0.5889999760617,
+     0.5640134056312,
+     0.3379838109599
+    ]
+   },
+   "tris": 24972,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 13841404,
+  "bytes": 204760,
+  "srcTris": 24972,
+  "tris": 24972,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 12967479,
+   "after": 49780,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9995,
+   1.0002,
+   1.0005
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07L9BVBCJ.jpg",
+  "bytes": 9841,
+  "mime": "image/jpeg"
+ }
+}

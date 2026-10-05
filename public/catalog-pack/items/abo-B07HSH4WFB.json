@@ -1,0 +1,78 @@
+{
+ "id": "abo-B07HSH4WFB",
+ "source": "abo",
+ "typeId": "dresser",
+ "formId": "rect",
+ "name": "Rivet Modern Chest of Drawers with Diamond Pattern",
+ "brand": "Rivet",
+ "price": 36790,
+ "currency": "RUB",
+ "dims": {
+  "H": 801,
+  "W": 923,
+  "D": 453
+ },
+ "colors": [
+  "бежевый",
+  "разноцветный"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07HSH4WFB",
+ "model": {
+  "file": "models/abo-B07HSH4WFB.glb",
+  "bytes": 396828,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.461499989,
+     0,
+     -0.221856505
+    ],
+    "max": [
+     0.4614999770614,
+     0.8010262783044,
+     0.2311644757178
+    ],
+    "size": [
+     0.9229999660614,
+     0.8010262783044,
+     0.4530209807178
+    ]
+   },
+   "tris": 4364,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 3677008,
+  "bytes": 396828,
+  "srcTris": 4366,
+  "tris": 4364,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 3539555,
+   "after": 364284,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0003,
+   0.9997,
+   1
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07HSH4WFB.jpg",
+  "bytes": 11212,
+  "mime": "image/jpeg"
+ }
+}

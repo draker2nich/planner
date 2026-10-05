@@ -1,0 +1,73 @@
+{
+ "id": "abo-B084W368M8",
+ "source": "abo",
+ "typeId": "bar-stool",
+ "formId": "round",
+ "name": "Stone & Beam Louise Memory Swivel Counter-Height Barstool",
+ "brand": "Stone & Beam",
+ "price": 16190,
+ "currency": "RUB",
+ "dims": {
+  "H": 972,
+  "DIA": 615
+ },
+ "colors": [
+  "серый",
+  "синий"
+ ],
+ "materials": [],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B084W368M8",
+ "model": {
+  "file": "models/abo-B084W368M8.glb",
+  "bytes": 482596,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.307668149,
+     0,
+     -0.343081892
+    ],
+    "max": [
+     0.3069238140669,
+     0.9718038925707,
+     0.2719252958272
+    ],
+    "size": [
+     0.6145919630669,
+     0.9718038925707,
+     0.6150071878272
+    ]
+   },
+   "tris": 29998,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 66075544,
+  "bytes": 482596,
+  "srcTris": 202150,
+  "tris": 29998,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 60277860,
+   "after": 311124,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9997,
+   1.0004,
+   1.0304
+  ]
+ },
+ "image": {
+  "file": "images/abo-B084W368M8.jpg",
+  "bytes": 4898,
+  "mime": "image/jpeg"
+ }
+}

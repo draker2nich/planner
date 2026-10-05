@@ -1,0 +1,76 @@
+{
+ "id": "abo-B075X463M1",
+ "source": "abo",
+ "typeId": "pouf",
+ "formId": "rect",
+ "name": "Stone & Beam Stella Storage Ottoman on Wheels",
+ "brand": "Stone & Beam",
+ "price": 23090,
+ "currency": "RUB",
+ "dims": {
+  "H": 494,
+  "W": 1173,
+  "D": 681
+ },
+ "colors": [
+  "синий"
+ ],
+ "materials": [
+  "ткань",
+  "камень"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B075X463M1",
+ "model": {
+  "file": "models/abo-B075X463M1.glb",
+  "bytes": 288124,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.586499989,
+     0,
+     -0.340499997
+    ],
+    "max": [
+     0.5865000353533998,
+     0.49403040761999995,
+     0.3404743808077999
+    ],
+    "size": [
+     1.1730000243533998,
+     0.49403040761999995,
+     0.6809743778077999
+    ]
+   },
+   "tris": 24140,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2807072,
+  "bytes": 288124,
+  "srcTris": 24140,
+  "tris": 24140,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 2201366,
+   "after": 154080,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9999,
+   0.9996,
+   0.9995
+  ]
+ },
+ "image": {
+  "file": "images/abo-B075X463M1.jpg",
+  "bytes": 5804,
+  "mime": "image/jpeg"
+ }
+}

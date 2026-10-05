@@ -1,0 +1,77 @@
+{
+ "id": "abo-B07DBHF136",
+ "source": "abo",
+ "typeId": "console",
+ "formId": "rect",
+ "name": "Ravenna Home Wheeler Farmhouse 3-Shelf Wood Storage TV Console Table Stand",
+ "brand": "Ravenna Home",
+ "price": 28290,
+ "currency": "RUB",
+ "dims": {
+  "H": 762,
+  "W": 1372,
+  "D": 381
+ },
+ "colors": [
+  "натуральное дерево"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "кантри"
+ ],
+ "url": "https://www.amazon.com/dp/B07DBHF136",
+ "model": {
+  "file": "models/abo-B07DBHF136.glb",
+  "bytes": 81588,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.68599999,
+     0,
+     -0.190499991
+    ],
+    "max": [
+     0.6860000479223001,
+     0.7619989223619,
+     0.190541342855
+    ],
+    "size": [
+     1.3720000379223,
+     0.7619989223619,
+     0.381041333855
+    ]
+   },
+   "tris": 4856,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 18330336,
+  "bytes": 81588,
+  "srcTris": 4856,
+  "tris": 4856,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 18119596,
+   "after": 39334,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0003,
+   1,
+   1
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07DBHF136.jpg",
+  "bytes": 9029,
+  "mime": "image/jpeg"
+ }
+}

@@ -1,0 +1,77 @@
+{
+ "id": "abo-B075QFCZ1Z",
+ "source": "abo",
+ "typeId": "bench",
+ "formId": "rect",
+ "name": "Rivet Modern Nailhead Upholstered Storage Bench",
+ "brand": "Rivet",
+ "price": 19990,
+ "currency": "RUB",
+ "dims": {
+  "H": 447,
+  "W": 1482,
+  "D": 470
+ },
+ "colors": [
+  "бежевый"
+ ],
+ "materials": [
+  "ткань"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B075QFCZ1Z",
+ "model": {
+  "file": "models/abo-B075QFCZ1Z.glb",
+  "bytes": 377572,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.741081178,
+     0,
+     -0.234999985
+    ],
+    "max": [
+     0.7409188354388001,
+     0.4469610002076,
+     0.2350282192256
+    ],
+    "size": [
+     1.4820000134388,
+     0.4469610002076,
+     0.4700282042256
+    ]
+   },
+   "tris": 30000,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 3054776,
+  "bytes": 377572,
+  "srcTris": 40109,
+  "tris": 30000,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 2099078,
+   "after": 224330,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9999,
+   0.9999,
+   1
+  ]
+ },
+ "image": {
+  "file": "images/abo-B075QFCZ1Z.jpg",
+  "bytes": 5161,
+  "mime": "image/jpeg"
+ }
+}

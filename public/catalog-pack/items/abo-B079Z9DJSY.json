@@ -1,0 +1,77 @@
+{
+ "id": "abo-B079Z9DJSY",
+ "source": "abo",
+ "typeId": "dressing-table",
+ "formId": "rect",
+ "name": "Movian Hulio High Gloss 3 Drawer Dressing Table",
+ "brand": "Vida Designs",
+ "price": 8990,
+ "currency": "RUB",
+ "dims": {
+  "H": 790,
+  "W": 930,
+  "D": 380
+ },
+ "colors": [
+  "чёрный"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.co.uk/dp/B079Z9DJSY",
+ "model": {
+  "file": "models/abo-B079Z9DJSY.glb",
+  "bytes": 125396,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.465000004,
+     2.98023224e-8,
+     -0.189999998
+    ],
+    "max": [
+     0.46499998053529995,
+     0.7900146659970224,
+     0.18999267101539996
+    ],
+    "size": [
+     0.9299999845353,
+     0.7900146361947,
+     0.37999266901539996
+    ]
+   },
+   "tris": 21852,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 12185688,
+  "bytes": 125396,
+  "srcTris": 21852,
+  "tris": 21852,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 11313336,
+   "after": 21960,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   1,
+   1
+  ]
+ },
+ "image": {
+  "file": "images/abo-B079Z9DJSY.jpg",
+  "bytes": 8251,
+  "mime": "image/jpeg"
+ }
+}

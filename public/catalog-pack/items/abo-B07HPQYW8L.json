@@ -1,0 +1,77 @@
+{
+ "id": "abo-B07HPQYW8L",
+ "source": "abo",
+ "typeId": "sofa",
+ "formId": "straight",
+ "name": "Alkove Holt Hand-Crafted Leather Sofa",
+ "brand": "Alkove",
+ "price": 80690,
+ "currency": "RUB",
+ "dims": {
+  "H": 893,
+  "W": 1726,
+  "D": 833
+ },
+ "colors": [
+  "чёрный"
+ ],
+ "materials": [
+  "кожа"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.co.uk/dp/B07HPQYW8L",
+ "model": {
+  "file": "models/abo-B07HPQYW8L.glb",
+  "bytes": 241800,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.862999976,
+     0,
+     -0.416489899
+    ],
+    "max": [
+     0.863000008747,
+     0.892972951884,
+     0.41653713386300006
+    ],
+    "size": [
+     1.725999984747,
+     0.892972951884,
+     0.8330270328630001
+    ]
+   },
+   "tris": 29998,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 4063656,
+  "bytes": 241800,
+  "srcTris": 43516,
+  "tris": 29998,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 3053577,
+   "after": 78904,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0002,
+   1.0005,
+   0.9997
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07HPQYW8L.jpg",
+  "bytes": 3793,
+  "mime": "image/jpeg"
+ }
+}

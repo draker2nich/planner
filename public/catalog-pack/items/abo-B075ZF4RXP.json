@@ -1,0 +1,77 @@
+{
+ "id": "abo-B075ZF4RXP",
+ "source": "abo",
+ "typeId": "mirror",
+ "formId": "wall",
+ "name": "Stone & Beam Bateman Casual Mirror Wood Frame",
+ "brand": "Stone & Beam",
+ "price": 16490,
+ "currency": "RUB",
+ "dims": {
+  "H": 942,
+  "W": 1046,
+  "D": 46,
+  "E": 1200
+ },
+ "colors": [
+  "коричневый"
+ ],
+ "materials": [
+  "дерево",
+  "камень"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B075ZF4RXP",
+ "model": {
+  "file": "models/abo-B075ZF4RXP.glb",
+  "bytes": 102684,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.523000002,
+     -0.471000016,
+     -7.42241546e-10
+    ],
+    "max": [
+     0.5230000515887999,
+     0.47099380629439996,
+     0.04596960424975845
+    ],
+    "size": [
+     1.0460000535887999,
+     0.9419938222944,
+     0.04596960499199999
+    ]
+   },
+   "tris": 756,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 23999908,
+  "bytes": 102684,
+  "srcTris": 756,
+  "tris": 756,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 23974965,
+   "after": 94284,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9996,
+   1.0003,
+   0.9962
+  ]
+ },
+ "image": {
+  "file": "images/abo-B075ZF4RXP.jpg",
+  "bytes": 6369,
+  "mime": "image/jpeg"
+ }
+}

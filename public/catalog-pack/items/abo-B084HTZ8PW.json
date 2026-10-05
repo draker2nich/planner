@@ -1,0 +1,79 @@
+{
+ "id": "abo-B084HTZ8PW",
+ "source": "abo",
+ "typeId": "mirror",
+ "formId": "wall",
+ "name": "Rivet Modern Round Hanging Mirror with Shelf",
+ "brand": "Rivet",
+ "price": 18090,
+ "currency": "RUB",
+ "dims": {
+  "H": 457,
+  "W": 457,
+  "D": 133,
+  "E": 1200
+ },
+ "colors": [
+  "чёрный"
+ ],
+ "materials": [
+  "металл",
+  "стекло"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B084HTZ8PW",
+ "model": {
+  "file": "models/abo-B084HTZ8PW.glb",
+  "bytes": 74368,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.228499994,
+     -0.228499994,
+     -3.23808805e-18
+    ],
+    "max": [
+     0.22849999342060004,
+     0.22849999342060004,
+     0.1330022547776
+    ],
+    "size": [
+     0.45699998742060005,
+     0.45699998742060005,
+     0.1330022547776
+    ]
+   },
+   "tris": 9198,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 18417440,
+  "bytes": 74368,
+  "srcTris": 9198,
+  "tris": 9198,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 18175070,
+   "after": 20998,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9996,
+   0.9996,
+   0.9974
+  ]
+ },
+ "image": {
+  "file": "images/abo-B084HTZ8PW.jpg",
+  "bytes": 5370,
+  "mime": "image/jpeg"
+ }
+}

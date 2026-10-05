@@ -1,0 +1,75 @@
+{
+ "id": "abo-B07HSBHY2P",
+ "source": "abo",
+ "typeId": "console",
+ "formId": "rect",
+ "name": "Stone & Beam Casual Narrow Console Table 47.83\"W",
+ "brand": "Stone & Beam",
+ "price": 28090,
+ "currency": "RUB",
+ "dims": {
+  "H": 873,
+  "W": 1330,
+  "D": 522
+ },
+ "colors": [
+  "бежевый"
+ ],
+ "materials": [
+  "камень"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B07HSBHY2P",
+ "model": {
+  "file": "models/abo-B07HSBHY2P.glb",
+  "bytes": 367960,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.664999902,
+     0,
+     -0.260749578
+    ],
+    "max": [
+     0.6650000218023001,
+     0.8730280889074,
+     0.2612488050830001
+    ],
+    "size": [
+     1.3299999238023001,
+     0.8730280889074,
+     0.5219983830830001
+    ]
+   },
+   "tris": 2764,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2841364,
+  "bytes": 367960,
+  "srcTris": 2764,
+  "tris": 2764,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 2759251,
+   "after": 346262,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9997,
+   0.9995,
+   1.0004
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07HSBHY2P.jpg",
+  "bytes": 5852,
+  "mime": "image/jpeg"
+ }
+}

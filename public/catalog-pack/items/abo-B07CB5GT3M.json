@@ -1,0 +1,75 @@
+{
+ "id": "abo-B07CB5GT3M",
+ "source": "abo",
+ "typeId": "armchair",
+ "formId": "rect",
+ "name": "Stone & Beam Cheyanne Modern Living Room Accent Arm Chair",
+ "brand": "Stone & Beam",
+ "price": 44190,
+ "currency": "RUB",
+ "dims": {
+  "H": 919,
+  "W": 780,
+  "D": 899
+ },
+ "colors": [],
+ "materials": [
+  "камень"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07CB5GT3M",
+ "model": {
+  "file": "models/abo-B07CB5GT3M.glb",
+  "bytes": 351052,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.389999986,
+     0,
+     -0.449499995
+    ],
+    "max": [
+     0.3899972860985,
+     0.9190000222071,
+     0.4494742072762001
+    ],
+    "size": [
+     0.7799972720985,
+     0.9190000222071,
+     0.8989742022762001
+    ]
+   },
+   "tris": 29998,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 11218256,
+  "bytes": 351052,
+  "srcTris": 37940,
+  "tris": 29998,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 10075481,
+   "after": 190880,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0003,
+   0.9995,
+   0.9998
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07CB5GT3M.jpg",
+  "bytes": 6072,
+  "mime": "image/jpeg"
+ }
+}

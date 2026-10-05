@@ -1,0 +1,77 @@
+{
+ "id": "abo-B075X2LLTY",
+ "source": "abo",
+ "typeId": "table-lamp",
+ "formId": "round",
+ "name": "Stone & Beam Rustic Farmhouse Jug Living Room Table Lamp With LED Light Bulb and Drum Shade",
+ "brand": "Stone & Beam",
+ "price": 8990,
+ "currency": "RUB",
+ "dims": {
+  "H": 486,
+  "DIA": 318
+ },
+ "colors": [
+  "серый"
+ ],
+ "materials": [
+  "металл"
+ ],
+ "styleTags": [
+  "кантри",
+  "ретро"
+ ],
+ "url": "https://www.amazon.com/dp/B075X2LLTY",
+ "model": {
+  "file": "models/abo-B075X2LLTY.glb",
+  "bytes": 485212,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.159064785,
+     0,
+     -0.159130216
+    ],
+    "max": [
+     0.15894289904800002,
+     0.48599998952969997,
+     0.15887746804800001
+    ],
+    "size": [
+     0.318007684048,
+     0.48599998952969997,
+     0.318007684048
+    ]
+   },
+   "tris": 15114,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 4,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 6219632,
+  "bytes": 485212,
+  "srcTris": 15114,
+  "tris": 15114,
+  "textures": {
+   "images": 4,
+   "resized": 4,
+   "before": 5815945,
+   "after": 394792,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0006,
+   0.9998,
+   1.0006
+  ]
+ },
+ "image": {
+  "file": "images/abo-B075X2LLTY.jpg",
+  "bytes": 4898,
+  "mime": "image/jpeg"
+ }
+}

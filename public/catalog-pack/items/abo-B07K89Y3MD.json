@@ -1,0 +1,77 @@
+{
+ "id": "abo-B07K89Y3MD",
+ "source": "abo",
+ "typeId": "wardrobe",
+ "formId": "rect",
+ "name": "Alveare Home Louisa Locking Jewelry Armoire",
+ "brand": "Alveare Home",
+ "price": 21290,
+ "currency": "RUB",
+ "dims": {
+  "H": 1011,
+  "W": 444,
+  "D": 295
+ },
+ "colors": [
+  "чёрный"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "классика"
+ ],
+ "url": "https://www.amazon.com/dp/B07K89Y3MD",
+ "model": {
+  "file": "models/abo-B07K89Y3MD.glb",
+  "bytes": 217444,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.221999988,
+     0,
+     -0.147499993
+    ],
+    "max": [
+     0.22200567014550002,
+     1.0109999579427,
+     0.14747527398200005
+    ],
+    "size": [
+     0.4440056581455,
+     1.0109999579427,
+     0.29497526698200005
+    ]
+   },
+   "tris": 30000,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 8174252,
+  "bytes": 217444,
+  "srcTris": 36181,
+  "tris": 30000,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 7052789,
+   "after": 57632,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9989,
+   1.0001,
+   1.0012
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07K89Y3MD.jpg",
+  "bytes": 5139,
+  "mime": "image/jpeg"
+ }
+}

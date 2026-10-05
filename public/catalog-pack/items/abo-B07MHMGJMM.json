@@ -1,0 +1,77 @@
+{
+ "id": "abo-B07MHMGJMM",
+ "source": "abo",
+ "typeId": "small-table",
+ "formId": "rect",
+ "name": "Ravenna Home Traditional Solid Pine End Table",
+ "brand": "Ravenna Home",
+ "price": 10090,
+ "currency": "RUB",
+ "dims": {
+  "H": 618,
+  "W": 597,
+  "D": 596
+ },
+ "colors": [
+  "чёрный"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "классика"
+ ],
+ "url": "https://www.amazon.com/dp/B07MHMGJMM",
+ "model": {
+  "file": "models/abo-B07MHMGJMM.glb",
+  "bytes": 74928,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.298499912,
+     0,
+     -0.297999918
+    ],
+    "max": [
+     0.2984888967976,
+     0.6179999781708,
+     0.29800811808
+    ],
+    "size": [
+     0.5969888087976,
+     0.6179999781708,
+     0.59600803608
+    ]
+   },
+   "tris": 11180,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 5424656,
+  "bytes": 74928,
+  "srcTris": 11180,
+  "tris": 11180,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 5135988,
+   "after": 6704,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   1.0001,
+   1.0001
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07MHMGJMM.jpg",
+  "bytes": 5937,
+  "mime": "image/jpeg"
+ }
+}

@@ -1,0 +1,73 @@
+{
+ "id": "abo-B07B4SC7DG",
+ "source": "abo",
+ "typeId": "dresser",
+ "formId": "rect",
+ "name": "Rivet A8910 Chest of Drawers",
+ "brand": "Rivet",
+ "price": 31190,
+ "currency": "RUB",
+ "dims": {
+  "H": 1243,
+  "W": 966,
+  "D": 480
+ },
+ "colors": [],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B07B4SC7DG",
+ "model": {
+  "file": "models/abo-B07B4SC7DG.glb",
+  "bytes": 572364,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.482604384,
+     0,
+     -0.239999995
+    ],
+    "max": [
+     0.48338937173519997,
+     1.2429999764538,
+     0.2400379010522
+    ],
+    "size": [
+     0.9659937557352,
+     1.2429999764538,
+     0.4800378960522
+    ]
+   },
+   "tris": 7714,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 56780324,
+  "bytes": 572364,
+  "srcTris": 7714,
+  "tris": 7714,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 56520910,
+   "after": 515706,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0001,
+   0.9997,
+   0.999
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07B4SC7DG.jpg",
+  "bytes": 14167,
+  "mime": "image/jpeg"
+ }
+}

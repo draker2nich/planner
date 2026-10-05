@@ -1,0 +1,75 @@
+{
+ "id": "abo-B084W368ML",
+ "source": "abo",
+ "typeId": "bar-stool",
+ "formId": "round",
+ "name": "Stone & Beam Elise Upholstered Counter-Height Bar Stool",
+ "brand": "Stone & Beam",
+ "price": 13190,
+ "currency": "RUB",
+ "dims": {
+  "H": 981,
+  "DIA": 577
+ },
+ "colors": [
+  "серый",
+  "синий"
+ ],
+ "materials": [
+  "ткань"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B084W368ML",
+ "model": {
+  "file": "models/abo-B084W368ML.glb",
+  "bytes": 234180,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.288499981,
+     0,
+     -0.325563401
+    ],
+    "max": [
+     0.28849545829280004,
+     0.9810000292584,
+     0.2514320382928001
+    ],
+    "size": [
+     0.5769954392928001,
+     0.9810000292584,
+     0.5769954392928001
+    ]
+   },
+   "tris": 25688,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 43512224,
+  "bytes": 234180,
+  "srcTris": 25688,
+  "tris": 25688,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 42909737,
+   "after": 108578,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.2279,
+   0.9998,
+   1.0007
+  ]
+ },
+ "image": {
+  "file": "images/abo-B084W368ML.jpg",
+  "bytes": 4059,
+  "mime": "image/jpeg"
+ }
+}

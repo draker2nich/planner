@@ -1,0 +1,75 @@
+{
+ "id": "abo-B07GG34GWD",
+ "source": "abo",
+ "typeId": "nightstand",
+ "formId": "rect",
+ "name": "Movian Kolva 2-Drawer Bedside Table",
+ "brand": "Movian",
+ "price": 13790,
+ "currency": "RUB",
+ "dims": {
+  "H": 461,
+  "W": 442,
+  "D": 325
+ },
+ "colors": [
+  "натуральное дерево"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.co.uk/dp/B07GG34GWD",
+ "model": {
+  "file": "models/abo-B07GG34GWD.glb",
+  "bytes": 122760,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.221000016,
+     0,
+     -0.154032141
+    ],
+    "max": [
+     0.22100622889559998,
+     0.46100001974309995,
+     0.17097245083499996
+    ],
+    "size": [
+     0.4420062448956,
+     0.46100001974309995,
+     0.32500459183499997
+    ]
+   },
+   "tris": 212,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2311704,
+  "bytes": 122760,
+  "srcTris": 212,
+  "tris": 212,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 2295740,
+   "after": 116086,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.001,
+   1.0003,
+   0.9987
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07GG34GWD.jpg",
+  "bytes": 3303,
+  "mime": "image/jpeg"
+ }
+}

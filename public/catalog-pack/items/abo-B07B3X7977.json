@@ -1,0 +1,75 @@
+{
+ "id": "abo-B07B3X7977",
+ "source": "abo",
+ "typeId": "wardrobe",
+ "formId": "rect",
+ "name": "Vida Designs Corona Wardrobe",
+ "brand": "Vida Designs",
+ "price": 15990,
+ "currency": "RUB",
+ "dims": {
+  "H": 1870,
+  "W": 590,
+  "D": 570
+ },
+ "colors": [
+  "чёрный"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.co.uk/dp/B07B3X7977",
+ "model": {
+  "file": "models/abo-B07B3X7977.glb",
+  "bytes": 245016,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.294999987,
+     0,
+     -0.284999996
+    ],
+    "max": [
+     0.295003660314,
+     1.869999952398,
+     0.28502867776400004
+    ],
+    "size": [
+     0.590003647314,
+     1.869999952398,
+     0.570028673764
+    ]
+   },
+   "tris": 27666,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 33063376,
+  "bytes": 245016,
+  "srcTris": 27666,
+  "tris": 27666,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 32140444,
+   "after": 107022,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0004,
+   1,
+   1
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07B3X7977.jpg",
+  "bytes": 11605,
+  "mime": "image/jpeg"
+ }
+}

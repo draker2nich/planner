@@ -1,0 +1,75 @@
+{
+ "id": "abo-B072Z1WN4S",
+ "source": "abo",
+ "typeId": "bench",
+ "formId": "rect",
+ "name": "AmazonBasics Flat Weight Workout Exercise Bench",
+ "brand": "AmazonBasics",
+ "price": 11490,
+ "currency": "RUB",
+ "dims": {
+  "H": 453,
+  "W": 439,
+  "D": 1072
+ },
+ "colors": [
+  "чёрный"
+ ],
+ "materials": [
+  "металл"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B072Z1WN4S",
+ "model": {
+  "file": "models/abo-B072Z1WN4S.glb",
+  "bytes": 154440,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.21949999,
+     0,
+     -0.536669374
+    ],
+    "max": [
+     0.21949459327240003,
+     0.45299739156280006,
+     0.5353306644188002
+    ],
+    "size": [
+     0.43899458327240004,
+     0.45299739156280006,
+     1.0720000384188002
+    ]
+   },
+   "tris": 14872,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 15680304,
+  "bytes": 154440,
+  "srcTris": 14872,
+  "tris": 14872,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 15155339,
+   "after": 53252,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9997,
+   1,
+   1.0004
+  ]
+ },
+ "image": {
+  "file": "images/abo-B072Z1WN4S.jpg",
+  "bytes": 7415,
+  "mime": "image/jpeg"
+ }
+}

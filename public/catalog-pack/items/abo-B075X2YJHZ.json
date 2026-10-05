@@ -1,0 +1,77 @@
+{
+ "id": "abo-B075X2YJHZ",
+ "source": "abo",
+ "typeId": "floor-lamp",
+ "formId": "round",
+ "name": "Stone & Beam Vintage Industrial Spotlight Tripod Floor Lamp With LED Light Bulb",
+ "brand": "Stone & Beam",
+ "price": 29490,
+ "currency": "RUB",
+ "dims": {
+  "H": 1504,
+  "DIA": 884
+ },
+ "colors": [
+  "чёрный"
+ ],
+ "materials": [
+  "металл"
+ ],
+ "styleTags": [
+  "лофт",
+  "ретро"
+ ],
+ "url": "https://www.amazon.com/dp/B075X2YJHZ",
+ "model": {
+  "file": "models/abo-B075X2YJHZ.glb",
+  "bytes": 203340,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.441857576,
+     0.000195836386,
+     -0.441788226
+    ],
+    "max": [
+     0.44189815707940006,
+     1.5041503575286,
+     0.44187570737720006
+    ],
+    "size": [
+     0.8837557330794,
+     1.5039545211426,
+     0.8836639333772001
+    ]
+   },
+   "tris": 30004,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 4,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 5606664,
+  "bytes": 203340,
+  "srcTris": 153008,
+  "tris": 30004,
+  "textures": {
+   "images": 4,
+   "resized": 4,
+   "before": 1197708,
+   "after": 42542,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0055,
+   0.9999,
+   1
+  ]
+ },
+ "image": {
+  "file": "images/abo-B075X2YJHZ.jpg",
+  "bytes": 3858,
+  "mime": "image/jpeg"
+ }
+}

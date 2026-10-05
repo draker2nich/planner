@@ -1,0 +1,78 @@
+{
+ "id": "abo-B07B7B244W",
+ "source": "abo",
+ "typeId": "chair",
+ "formId": "rect",
+ "name": "Rivet Allie Leather Industrial Mid-Century Dining Room Kitchen Chair",
+ "brand": "Rivet",
+ "price": 12690,
+ "currency": "RUB",
+ "dims": {
+  "H": 832,
+  "W": 571,
+  "D": 677
+ },
+ "colors": [
+  "коричневый"
+ ],
+ "materials": [
+  "кожа"
+ ],
+ "styleTags": [
+  "современный",
+  "лофт"
+ ],
+ "url": "https://www.amazon.com/dp/B07B7B244W",
+ "model": {
+  "file": "models/abo-B07B7B244W.glb",
+  "bytes": 184132,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.28549999,
+     0,
+     -0.33642599
+    ],
+    "max": [
+     0.2855192481464,
+     0.8320000158798,
+     0.34058018784859995
+    ],
+    "size": [
+     0.5710192381464,
+     0.8320000158798,
+     0.6770061778486
+    ]
+   },
+   "tris": 10610,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 1464952,
+  "bytes": 184132,
+  "srcTris": 10610,
+  "tris": 10610,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 1206422,
+   "after": 120660,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0004,
+   0.9994,
+   0.9996
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07B7B244W.jpg",
+  "bytes": 6708,
+  "mime": "image/jpeg"
+ }
+}

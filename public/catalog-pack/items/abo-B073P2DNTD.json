@@ -1,0 +1,78 @@
+{
+ "id": "abo-B073P2DNTD",
+ "source": "abo",
+ "typeId": "desk",
+ "formId": "rect",
+ "name": "Rivet Mid-Century Modern Needle Sloped Table Desk Lamp with Light Bulb and White Drum Shade",
+ "brand": "Rivet",
+ "price": 17090,
+ "currency": "RUB",
+ "dims": {
+  "H": 479,
+  "W": 268,
+  "D": 268
+ },
+ "colors": [
+  "жёлтый"
+ ],
+ "materials": [
+  "металл",
+  "ткань"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B073P2DNTD",
+ "model": {
+  "file": "models/abo-B073P2DNTD.glb",
+  "bytes": 194556,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.134009108,
+     0,
+     -0.133970916
+    ],
+    "max": [
+     0.13398295725040005,
+     0.47900000054520003,
+     0.13402114925040004
+    ],
+    "size": [
+     0.26799206525040004,
+     0.47900000054520003,
+     0.26799206525040004
+    ]
+   },
+   "tris": 13018,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 4,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2354432,
+  "bytes": 194556,
+  "srcTris": 13018,
+  "tris": 13018,
+  "textures": {
+   "images": 4,
+   "resized": 4,
+   "before": 2033625,
+   "after": 123088,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0001,
+   1.0006,
+   1.0001
+  ]
+ },
+ "image": {
+  "file": "images/abo-B073P2DNTD.jpg",
+  "bytes": 2894,
+  "mime": "image/jpeg"
+ }
+}

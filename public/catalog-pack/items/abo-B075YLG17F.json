@@ -1,0 +1,76 @@
+{
+ "id": "abo-B075YLG17F",
+ "source": "abo",
+ "typeId": "picture",
+ "formId": "wall",
+ "name": "Stone & Beam Modern Blue and Purple Succulent Plant Print II Wall Art Decor",
+ "brand": "Stone & Beam",
+ "price": 2790,
+ "currency": "RUB",
+ "dims": {
+  "H": 506,
+  "W": 503,
+  "D": 30,
+  "E": 1300
+ },
+ "colors": [
+  "разноцветный"
+ ],
+ "materials": [],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B075YLG17F",
+ "model": {
+  "file": "models/abo-B075YLG17F.glb",
+  "bytes": 47912,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.25150001,
+     -0.252999991,
+     0
+    ],
+    "max": [
+     0.25150405233500006,
+     0.2529999815675001,
+     0.029989987997500002
+    ],
+    "size": [
+     0.5030040623350001,
+     0.5059999725675001,
+     0.029989987997500002
+    ]
+   },
+   "tris": 236,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 421016,
+  "bytes": 47912,
+  "srcTris": 236,
+  "tris": 236,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 411044,
+   "after": 42810,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.999,
+   0.9992,
+   0.9983
+  ]
+ },
+ "image": {
+  "file": "images/abo-B075YLG17F.jpg",
+  "bytes": 12544,
+  "mime": "image/jpeg"
+ }
+}

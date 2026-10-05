@@ -1,0 +1,78 @@
+{
+ "id": "abo-B07HSJYKXY",
+ "source": "abo",
+ "typeId": "shelving",
+ "formId": "rect",
+ "name": "Rivet Rustic Round Wood 2-Tier Shelf Floating Hanging Wall Unit- 30 Inch",
+ "brand": "Rivet",
+ "price": 11190,
+ "currency": "RUB",
+ "dims": {
+  "H": 725,
+  "W": 601,
+  "D": 125
+ },
+ "colors": [
+  "натуральное дерево"
+ ],
+ "materials": [
+  "дерево",
+  "металл"
+ ],
+ "styleTags": [
+  "кантри"
+ ],
+ "url": "https://www.amazon.com/dp/B07HSJYKXY",
+ "model": {
+  "file": "models/abo-B07HSJYKXY.glb",
+  "bytes": 82264,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.300500005,
+     -0.362499982,
+     0
+    ],
+    "max": [
+     0.30050250727550004,
+     0.3624999560465,
+     0.1250152490375
+    ],
+    "size": [
+     0.6010025122755001,
+     0.7249999380465,
+     0.1250152490375
+    ]
+   },
+   "tris": 5106,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 1257096,
+  "bytes": 82264,
+  "srcTris": 5106,
+  "tris": 5106,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 1130144,
+   "after": 51210,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9997,
+   0.9996,
+   1.0011
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07HSJYKXY.jpg",
+  "bytes": 6074,
+  "mime": "image/jpeg"
+ }
+}

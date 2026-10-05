@@ -1,0 +1,76 @@
+{
+ "id": "abo-B084S1DM72",
+ "source": "abo",
+ "typeId": "chair",
+ "formId": "rect",
+ "name": "Stone & Beam Bergen Upholstered Dining Chair with Wood Legs",
+ "brand": "Stone & Beam",
+ "price": 10990,
+ "currency": "RUB",
+ "dims": {
+  "H": 832,
+  "W": 508,
+  "D": 572
+ },
+ "colors": [
+  "серый"
+ ],
+ "materials": [
+  "дерево",
+  "ткань"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B084S1DM72",
+ "model": {
+  "file": "models/abo-B084S1DM72.glb",
+  "bytes": 328432,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.254000008,
+     3.38874292e-23,
+     -0.323652238
+    ],
+    "max": [
+     0.253995815041,
+     0.831999956901,
+     0.248331862261
+    ],
+    "size": [
+     0.507995823041,
+     0.831999956901,
+     0.571984100261
+    ]
+   },
+   "tris": 8316,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 64080552,
+  "bytes": 328432,
+  "srcTris": 8316,
+  "tris": 8316,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 63864626,
+   "after": 275022,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   1.0002,
+   1.0009
+  ]
+ },
+ "image": {
+  "file": "images/abo-B084S1DM72.jpg",
+  "bytes": 5129,
+  "mime": "image/jpeg"
+ }
+}

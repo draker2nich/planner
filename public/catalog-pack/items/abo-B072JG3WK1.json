@@ -1,0 +1,79 @@
+{
+ "id": "abo-B072JG3WK1",
+ "source": "abo",
+ "typeId": "armchair",
+ "formId": "rect",
+ "name": "Stone & Beam Ashbury Modern Exposed Wood Accent Chair",
+ "brand": "Stone & Beam",
+ "price": 37790,
+ "currency": "RUB",
+ "dims": {
+  "H": 876,
+  "W": 803,
+  "D": 735
+ },
+ "colors": [
+  "синий"
+ ],
+ "materials": [
+  "дерево",
+  "ткань"
+ ],
+ "styleTags": [
+  "современный",
+  "классика"
+ ],
+ "url": "https://www.amazon.com/dp/B072JG3WK1",
+ "model": {
+  "file": "models/abo-B072JG3WK1.glb",
+  "bytes": 527952,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.401499987,
+     0,
+     -0.380138725
+    ],
+    "max": [
+     0.4015133650692,
+     0.8759999831502,
+     0.35486071151240006
+    ],
+    "size": [
+     0.8030133520692,
+     0.8759999831502,
+     0.7349994365124001
+    ]
+   },
+   "tris": 18572,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 3243360,
+  "bytes": 527952,
+  "srcTris": 18572,
+  "tris": 18572,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 2784773,
+   "after": 418630,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0002,
+   1.0003,
+   0.9998
+  ]
+ },
+ "image": {
+  "file": "images/abo-B072JG3WK1.jpg",
+  "bytes": 11161,
+  "mime": "image/jpeg"
+ }
+}

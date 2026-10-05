@@ -1,0 +1,77 @@
+{
+ "id": "abo-B07B82PXCW",
+ "source": "abo",
+ "typeId": "table",
+ "formId": "rect",
+ "name": "Rivet Federal Mid-Century Modern Drop Leaf Dining Kitchen Table",
+ "brand": "Rivet",
+ "price": 37890,
+ "currency": "RUB",
+ "dims": {
+  "H": 763,
+  "W": 843,
+  "D": 812
+ },
+ "colors": [
+  "коричневый"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07B82PXCW",
+ "model": {
+  "file": "models/abo-B07B82PXCW.glb",
+  "bytes": 233152,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.421507388,
+     0,
+     -0.40722695
+    ],
+    "max": [
+     0.4214925295909,
+     0.7629861916644001,
+     0.4047965926663001
+    ],
+    "size": [
+     0.8429999175909,
+     0.7629861916644001,
+     0.8120235426663001
+    ]
+   },
+   "tris": 15724,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 3764140,
+  "bytes": 233152,
+  "srcTris": 15724,
+  "tris": 15724,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 3187714,
+   "after": 120370,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0004,
+   1.0001,
+   1.0006
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07B82PXCW.jpg",
+  "bytes": 7987,
+  "mime": "image/jpeg"
+ }
+}

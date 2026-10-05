@@ -1,0 +1,73 @@
+{
+ "id": "abo-B084QWW4LR",
+ "source": "abo",
+ "typeId": "console",
+ "formId": "rect",
+ "name": "Rivet Mid-Century Modern Two-Door Media Console Table",
+ "brand": "Rivet",
+ "price": 22090,
+ "currency": "RUB",
+ "dims": {
+  "H": 698,
+  "W": 1220,
+  "D": 308
+ },
+ "colors": [
+  "коричневый"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "современный",
+  "классика"
+ ],
+ "url": "https://www.amazon.com/dp/B084QWW4LR",
+ "model": {
+  "file": "models/abo-B084QWW4LR.glb",
+  "bytes": 298232,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.610000014,
+     0,
+     -0.146572396
+    ],
+    "max": [
+     0.6100000522433998,
+     0.6979833132454,
+     0.16142493501279997
+    ],
+    "size": [
+     1.2200000662433998,
+     0.6979833132454,
+     0.30799733101279997
+    ]
+   },
+   "tris": 29252,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 40514172,
+  "bytes": 298232,
+  "srcTris": 29252,
+  "tris": 29252,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 39777245,
+   "after": 146904,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0003,
+   1.0006,
+   1.0015
+  ]
+ }
+}

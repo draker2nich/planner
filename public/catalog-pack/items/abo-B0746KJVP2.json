@@ -1,0 +1,79 @@
+{
+ "id": "abo-B0746KJVP2",
+ "source": "abo",
+ "typeId": "armchair",
+ "formId": "rect",
+ "name": "Rivet Charlotte Mid-Century Modern Upholstered Gold Accent Chair",
+ "brand": "Rivet",
+ "price": 35890,
+ "currency": "RUB",
+ "dims": {
+  "H": 966,
+  "W": 805,
+  "D": 813
+ },
+ "colors": [
+  "белый",
+  "бежевый"
+ ],
+ "materials": [
+  "металл"
+ ],
+ "styleTags": [
+  "современный",
+  "гламур"
+ ],
+ "url": "https://www.amazon.com/dp/B0746KJVP2",
+ "model": {
+  "file": "models/abo-B0746KJVP2.glb",
+  "bytes": 245556,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.402500004,
+     0,
+     -0.387992799
+    ],
+    "max": [
+     0.40252948341059996,
+     0.9660000067566,
+     0.42499676903760003
+    ],
+    "size": [
+     0.8050294874106,
+     0.9660000067566,
+     0.8129895680376
+    ]
+   },
+   "tris": 24428,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 30484996,
+  "bytes": 245556,
+  "srcTris": 24428,
+  "tris": 24428,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 29819371,
+   "after": 105748,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9998,
+   0.9996,
+   1.0003
+  ]
+ },
+ "image": {
+  "file": "images/abo-B0746KJVP2.jpg",
+  "bytes": 9100,
+  "mime": "image/jpeg"
+ }
+}

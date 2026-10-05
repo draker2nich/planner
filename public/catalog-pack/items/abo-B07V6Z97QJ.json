@@ -1,0 +1,74 @@
+{
+ "id": "abo-B07V6Z97QJ",
+ "source": "abo",
+ "typeId": "office-chair",
+ "formId": "round",
+ "name": "AmazonBasics Modern LeatherSoft Executive Chair",
+ "brand": "AmazonBasics",
+ "price": 15790,
+ "currency": "RUB",
+ "dims": {
+  "H": 1099,
+  "DIA": 745
+ },
+ "colors": [
+  "белый"
+ ],
+ "materials": [],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07V6Z97QJ",
+ "model": {
+  "file": "models/abo-B07V6Z97QJ.glb",
+  "bytes": 217112,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.400728315,
+     0.0001357734,
+     -0.372183383
+    ],
+    "max": [
+     0.3441243084431999,
+     1.0989040544975999,
+     0.37253510526879996
+    ],
+    "size": [
+     0.7448526234431999,
+     1.0987682810975998,
+     0.7447184882687999
+    ]
+   },
+   "tris": 30004,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 32886000,
+  "bytes": 217112,
+  "srcTris": 208662,
+  "tris": 30004,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 26837341,
+   "after": 43536,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0246,
+   0.9998,
+   1.0003
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07V6Z97QJ.jpg",
+  "bytes": 4872,
+  "mime": "image/jpeg"
+ }
+}

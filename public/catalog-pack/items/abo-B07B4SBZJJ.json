@@ -1,0 +1,77 @@
+{
+ "id": "abo-B07B4SBZJJ",
+ "source": "abo",
+ "typeId": "nightstand",
+ "formId": "rect",
+ "name": "Stone & Beam Gould Contemporary Wood Bedside Nightstand Table",
+ "brand": "Stone & Beam",
+ "price": 17590,
+ "currency": "RUB",
+ "dims": {
+  "H": 660,
+  "W": 660,
+  "D": 413
+ },
+ "colors": [
+  "синий"
+ ],
+ "materials": [
+  "камень"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07B4SBZJJ",
+ "model": {
+  "file": "models/abo-B07B4SBZJJ.glb",
+  "bytes": 225560,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.329999983,
+     0,
+     -0.205007523
+    ],
+    "max": [
+     0.3299999913332,
+     0.6599999743332,
+     0.20800106742080002
+    ],
+    "size": [
+     0.6599999743332,
+     0.6599999743332,
+     0.4130085904208
+    ]
+   },
+   "tris": 26908,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 3468608,
+  "bytes": 225560,
+  "srcTris": 26908,
+  "tris": 26908,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 1876436,
+   "after": 51878,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9996,
+   1.0001,
+   1.0005
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07B4SBZJJ.jpg",
+  "bytes": 9447,
+  "mime": "image/jpeg"
+ }
+}

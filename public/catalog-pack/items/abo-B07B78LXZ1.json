@@ -1,0 +1,76 @@
+{
+ "id": "abo-B07B78LXZ1",
+ "source": "abo",
+ "typeId": "island",
+ "formId": "rect",
+ "name": "Stone & Beam Alejandra Unfinished Wood Kitchen Island Bar Cart with Wheels",
+ "brand": "Stone & Beam",
+ "price": 41090,
+ "currency": "RUB",
+ "dims": {
+  "H": 830,
+  "W": 1065,
+  "D": 445
+ },
+ "colors": [
+  "коричневый"
+ ],
+ "materials": [
+  "дерево",
+  "камень"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B07B78LXZ1",
+ "model": {
+  "file": "models/abo-B07B78LXZ1.glb",
+  "bytes": 229424,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.536216855,
+     0,
+     -0.214227334
+    ],
+    "max": [
+     0.528783045349,
+     0.830001753504,
+     0.23074149453499998
+    ],
+    "size": [
+     1.064999900349,
+     0.830001753504,
+     0.44496882853499997
+    ]
+   },
+   "tris": 12136,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2088952,
+  "bytes": 229424,
+  "srcTris": 12136,
+  "tris": 12136,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 1716139,
+   "after": 152404,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0003,
+   1.0004,
+   0.9994
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07B78LXZ1.jpg",
+  "bytes": 13810,
+  "mime": "image/jpeg"
+ }
+}

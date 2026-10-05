@@ -1,0 +1,81 @@
+{
+ "id": "abo-B073WH6N3Q",
+ "source": "abo",
+ "typeId": "mirror",
+ "formId": "wall",
+ "name": "Stone & Beam Square Vintage-Look Sliding Mirror",
+ "brand": "Stone & Beam",
+ "price": 18090,
+ "currency": "RUB",
+ "dims": {
+  "H": 800,
+  "W": 805,
+  "D": 54,
+  "E": 1200
+ },
+ "colors": [
+  "бежевый",
+  "прозрачный"
+ ],
+ "materials": [
+  "дерево",
+  "металл",
+  "стекло"
+ ],
+ "styleTags": [
+  "ретро"
+ ],
+ "url": "https://www.amazon.com/dp/B073WH6N3Q",
+ "model": {
+  "file": "models/abo-B073WH6N3Q.glb",
+  "bytes": 216180,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.402500004,
+     -0.400000006,
+     1.50140761e-10
+    ],
+    "max": [
+     0.4024999808786999,
+     0.3999880763909,
+     0.05400079264124076
+    ],
+    "size": [
+     0.8049999848787,
+     0.7999880823909,
+     0.0540007924911
+    ]
+   },
+   "tris": 18566,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2421444,
+  "bytes": 216180,
+  "srcTris": 18566,
+  "tris": 18566,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 1935080,
+   "after": 117694,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0006,
+   1,
+   1.0076
+  ]
+ },
+ "image": {
+  "file": "images/abo-B073WH6N3Q.jpg",
+  "bytes": 9481,
+  "mime": "image/jpeg"
+ }
+}

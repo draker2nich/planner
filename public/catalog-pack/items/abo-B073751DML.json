@@ -1,0 +1,78 @@
+{
+ "id": "abo-B073751DML",
+ "source": "abo",
+ "typeId": "table-lamp",
+ "formId": "round",
+ "name": "Stone & Beam Round Ceramic Table Lamp With Light Bulb and White Shade",
+ "brand": "Stone & Beam",
+ "price": 8290,
+ "currency": "RUB",
+ "dims": {
+  "H": 528,
+  "DIA": 340
+ },
+ "colors": [
+  "синий"
+ ],
+ "materials": [
+  "металл",
+  "ткань",
+  "камень"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B073751DML",
+ "model": {
+  "file": "models/abo-B073751DML.glb",
+  "bytes": 226188,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.170772344,
+     0,
+     -0.170552924
+    ],
+    "max": [
+     0.16923865277499997,
+     0.5280000151815,
+     0.16945807277499997
+    ],
+    "size": [
+     0.34001099677499996,
+     0.5280000151815,
+     0.34001099677499996
+    ]
+   },
+   "tris": 30610,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 4,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2860804,
+  "bytes": 226188,
+  "srcTris": 30610,
+  "tris": 30610,
+  "textures": {
+   "images": 4,
+   "resized": 4,
+   "before": 2099654,
+   "after": 70090,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0003,
+   0.9997,
+   1.0003
+  ]
+ },
+ "image": {
+  "file": "images/abo-B073751DML.jpg",
+  "bytes": 3259,
+  "mime": "image/jpeg"
+ }
+}

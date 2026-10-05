@@ -1,0 +1,79 @@
+{
+ "id": "abo-B075X463HQ",
+ "source": "abo",
+ "typeId": "pouf",
+ "formId": "rect",
+ "name": "Stone & Beam Cameron Classic Ottoman",
+ "brand": "Stone & Beam",
+ "price": 15090,
+ "currency": "RUB",
+ "dims": {
+  "H": 450,
+  "W": 747,
+  "D": 622
+ },
+ "colors": [
+  "серебристый"
+ ],
+ "materials": [
+  "металл",
+  "ткань",
+  "камень"
+ ],
+ "styleTags": [
+  "классика"
+ ],
+ "url": "https://www.amazon.com/dp/B075X463HQ",
+ "model": {
+  "file": "models/abo-B075X463HQ.glb",
+  "bytes": 542116,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.378365636,
+     0,
+     -0.319796532
+    ],
+    "max": [
+     0.36863440363930006,
+     0.4499873888299,
+     0.3022247425382
+    ],
+    "size": [
+     0.7470000396393001,
+     0.4499873888299,
+     0.6220212745382
+    ]
+   },
+   "tris": 21884,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 3959720,
+  "bytes": 542116,
+  "srcTris": 21884,
+  "tris": 21884,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 3424525,
+   "after": 418552,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0005,
+   0.9992,
+   0.9994
+  ]
+ },
+ "image": {
+  "file": "images/abo-B075X463HQ.jpg",
+  "bytes": 8658,
+  "mime": "image/jpeg"
+ }
+}

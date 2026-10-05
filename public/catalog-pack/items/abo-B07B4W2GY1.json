@@ -1,0 +1,76 @@
+{
+ "id": "abo-B07B4W2GY1",
+ "source": "abo",
+ "typeId": "table-lamp",
+ "formId": "round",
+ "name": "Rivet Modern Ceramic Table Lamp",
+ "brand": "Rivet",
+ "price": 10590,
+ "currency": "RUB",
+ "dims": {
+  "H": 582,
+  "DIA": 355
+ },
+ "colors": [
+  "синий"
+ ],
+ "materials": [
+  "камень"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com.au/dp/B07B4W2GY1",
+ "model": {
+  "file": "models/abo-B07B4W2GY1.glb",
+  "bytes": 349436,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.177499995,
+     0,
+     -0.177499965
+    ],
+    "max": [
+     0.1774976345886,
+     0.5820000165666,
+     0.17749766458859997
+    ],
+    "size": [
+     0.3549976295886,
+     0.5820000165666,
+     0.3549976295886
+    ]
+   },
+   "tris": 8120,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 37781200,
+  "bytes": 349436,
+  "srcTris": 8120,
+  "tris": 8120,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 37575484,
+   "after": 302142,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0014,
+   0.9999,
+   1.0014
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07B4W2GY1.jpg",
+  "bytes": 4263,
+  "mime": "image/jpeg"
+ }
+}

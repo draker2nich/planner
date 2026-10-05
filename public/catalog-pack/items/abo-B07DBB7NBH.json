@@ -1,0 +1,73 @@
+{
+ "id": "abo-B07DBB7NBH",
+ "source": "abo",
+ "typeId": "tv-stand",
+ "formId": "rect",
+ "name": "Ravenna Home Sara TV Media Console Entertainment Storage Stand",
+ "brand": "Ravenna Home",
+ "price": 28090,
+ "currency": "RUB",
+ "dims": {
+  "H": 872,
+  "W": 1362,
+  "D": 410
+ },
+ "colors": [
+  "коричневый"
+ ],
+ "materials": [],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B07DBB7NBH",
+ "model": {
+  "file": "models/abo-B07DBB7NBH.glb",
+  "bytes": 153748,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.684446454,
+     0,
+     -0.199280143
+    ],
+    "max": [
+     0.6775534891905001,
+     0.8720025272615001,
+     0.210741447662
+    ],
+    "size": [
+     1.3619999431905,
+     0.8720025272615001,
+     0.410021590662
+    ]
+   },
+   "tris": 8860,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2304988,
+  "bytes": 153748,
+  "srcTris": 8860,
+  "tris": 8860,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 2004410,
+   "after": 84162,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0002,
+   1.0003,
+   0.9992
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07DBB7NBH.jpg",
+  "bytes": 6099,
+  "mime": "image/jpeg"
+ }
+}

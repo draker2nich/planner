@@ -1,0 +1,72 @@
+{
+ "id": "abo-B075X2BH3Z",
+ "source": "abo",
+ "typeId": "table-lamp",
+ "formId": "round",
+ "name": "White Table Lamp",
+ "brand": "Stone & Beam",
+ "price": 8790,
+ "currency": "RUB",
+ "dims": {
+  "H": 559,
+  "DIA": 282
+ },
+ "colors": [
+  "прозрачный"
+ ],
+ "materials": [],
+ "styleTags": [],
+ "url": "https://www.amazon.in/dp/B075X2BH3Z",
+ "model": {
+  "file": "models/abo-B075X2BH3Z.glb",
+  "bytes": 162076,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.141000032,
+     0,
+     -0.141000062
+    ],
+    "max": [
+     0.14100783616300006,
+     0.5589999883986001,
+     0.14100780616300004
+    ],
+    "size": [
+     0.28200786816300005,
+     0.5589999883986001,
+     0.28200786816300005
+    ]
+   },
+   "tris": 15952,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 4,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2923068,
+  "bytes": 162076,
+  "srcTris": 15952,
+  "tris": 15952,
+  "textures": {
+   "images": 4,
+   "resized": 4,
+   "before": 2520716,
+   "after": 69488,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9987,
+   0.9998,
+   1.0054
+  ]
+ },
+ "image": {
+  "file": "images/abo-B075X2BH3Z.jpg",
+  "bytes": 2737,
+  "mime": "image/jpeg"
+ }
+}

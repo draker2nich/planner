@@ -1,0 +1,75 @@
+{
+ "id": "abo-B07M7NSYD8",
+ "source": "abo",
+ "typeId": "island",
+ "formId": "rect",
+ "name": "Ravenna Home 2-Drawer Kitchen Cart",
+ "brand": "Ravenna Home",
+ "price": 38390,
+ "currency": "RUB",
+ "dims": {
+  "H": 920,
+  "W": 797,
+  "D": 567
+ },
+ "colors": [
+  "чёрный"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B07M7NSYD8",
+ "model": {
+  "file": "models/abo-B07M7NSYD8.glb",
+  "bytes": 233324,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.385277689,
+     0.00000131950605,
+     -0.280835003
+    ],
+    "max": [
+     0.41174004329810004,
+     0.9200000166271499,
+     0.2861690160948999
+    ],
+    "size": [
+     0.7970177322981,
+     0.9199986971210999,
+     0.5670040190949
+    ]
+   },
+   "tris": 30002,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 9785284,
+  "bytes": 233324,
+  "srcTris": 53356,
+  "tris": 30002,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 8454301,
+   "after": 64704,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9998,
+   0.9996,
+   0.9997
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07M7NSYD8.jpg",
+  "bytes": 6115,
+  "mime": "image/jpeg"
+ }
+}

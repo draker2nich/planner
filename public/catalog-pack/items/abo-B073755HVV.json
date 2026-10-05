@@ -1,0 +1,80 @@
+{
+ "id": "abo-B073755HVV",
+ "source": "abo",
+ "typeId": "desk",
+ "formId": "rect",
+ "name": "Stone & Beam Industrial Round Concrete Table Desk Lamp with Light Bulb and Beige Shade",
+ "brand": "Stone & Beam",
+ "price": 15790,
+ "currency": "RUB",
+ "dims": {
+  "H": 409,
+  "W": 269,
+  "D": 269
+ },
+ "colors": [
+  "серый",
+  "серебристый"
+ ],
+ "materials": [
+  "металл",
+  "ткань"
+ ],
+ "styleTags": [
+  "современный",
+  "лофт"
+ ],
+ "url": "https://www.amazon.com/dp/B073755HVV",
+ "model": {
+  "file": "models/abo-B073755HVV.glb",
+  "bytes": 221728,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.134500086,
+     0,
+     -0.134499997
+    ],
+    "max": [
+     0.134496752445,
+     0.4090000189554,
+     0.134496841445
+    ],
+    "size": [
+     0.268996838445,
+     0.4090000189554,
+     0.268996838445
+    ]
+   },
+   "tris": 11628,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 4,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 76944164,
+  "bytes": 221728,
+  "srcTris": 11628,
+  "tris": 11628,
+  "textures": {
+   "images": 4,
+   "resized": 4,
+   "before": 76638649,
+   "after": 154596,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9997,
+   0.9994,
+   1.0017
+  ]
+ },
+ "image": {
+  "file": "images/abo-B073755HVV.jpg",
+  "bytes": 4236,
+  "mime": "image/jpeg"
+ }
+}

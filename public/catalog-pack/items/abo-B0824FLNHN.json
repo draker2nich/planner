@@ -1,0 +1,78 @@
+{
+ "id": "abo-B0824FLNHN",
+ "source": "abo",
+ "typeId": "sconce",
+ "formId": "wall",
+ "name": "Ravenna Home Traditional Wall Sconce with Linen Shade",
+ "brand": "Ravenna Home",
+ "price": 5490,
+ "currency": "RUB",
+ "dims": {
+  "H": 462,
+  "W": 128,
+  "D": 208,
+  "E": 1700
+ },
+ "colors": [
+  "серебристый"
+ ],
+ "materials": [
+  "металл"
+ ],
+ "styleTags": [
+  "классика"
+ ],
+ "url": "https://www.amazon.com/dp/B0824FLNHN",
+ "model": {
+  "file": "models/abo-B0824FLNHN.glb",
+  "bytes": 126460,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.0639999956,
+     -0.231000006,
+     9.5455972e-9
+    ],
+    "max": [
+     0.0639996396343,
+     0.2309999992971,
+     0.2080029417967972
+    ],
+    "size": [
+     0.1279996352343,
+     0.4620000052971,
+     0.2080029322512
+    ]
+   },
+   "tris": 17360,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 20342204,
+  "bytes": 126460,
+  "srcTris": 17360,
+  "tris": 17360,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 19877219,
+   "after": 26390,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0016,
+   1.0009,
+   1.0009
+  ]
+ },
+ "image": {
+  "file": "images/abo-B0824FLNHN.jpg",
+  "bytes": 2240,
+  "mime": "image/jpeg"
+ }
+}

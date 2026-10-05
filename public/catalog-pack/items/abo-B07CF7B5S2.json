@@ -1,0 +1,77 @@
+{
+ "id": "abo-B07CF7B5S2",
+ "source": "abo",
+ "typeId": "plant",
+ "formId": "round",
+ "name": "Rivet Mid-Century Ceramic Planter with Stand",
+ "brand": "Rivet",
+ "price": 3490,
+ "currency": "RUB",
+ "dims": {
+  "H": 362,
+  "DIA": 267
+ },
+ "colors": [
+  "белый"
+ ],
+ "materials": [
+  "металл",
+  "камень"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07CF7B5S2",
+ "model": {
+  "file": "models/abo-B07CF7B5S2.glb",
+  "bytes": 184124,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.14600943,
+     0,
+     -0.148005277
+    ],
+    "max": [
+     0.12099952459079999,
+     0.3619999754271,
+     0.1190036775908
+    ],
+    "size": [
+     0.2670089545908,
+     0.3619999754271,
+     0.2670089545908
+    ]
+   },
+   "tris": 4836,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 4,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2621028,
+  "bytes": 184124,
+  "srcTris": 4836,
+  "tris": 4836,
+  "textures": {
+   "images": 4,
+   "resized": 4,
+   "before": 2493572,
+   "after": 151542,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0136,
+   1.001,
+   1.0013
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07CF7B5S2.jpg",
+  "bytes": 6411,
+  "mime": "image/jpeg"
+ }
+}

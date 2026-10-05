@@ -1,0 +1,77 @@
+{
+ "id": "abo-B07HSK7Y5G",
+ "source": "abo",
+ "typeId": "bar-stool",
+ "formId": "round",
+ "name": "Rivet Whit Contemporary Upholstered Bar Stool with Gold Accents",
+ "brand": "Rivet",
+ "price": 11990,
+ "currency": "RUB",
+ "dims": {
+  "H": 1016,
+  "DIA": 515
+ },
+ "colors": [
+  "синий"
+ ],
+ "materials": [
+  "велюр",
+  "ткань"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07HSK7Y5G",
+ "model": {
+  "file": "models/abo-B07HSK7Y5G.glb",
+  "bytes": 390028,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.258045912,
+     8.00212874e-8,
+     -0.287910134
+    ],
+    "max": [
+     0.25693077508800005,
+     1.0159999673722875,
+     0.22706655308800006
+    ],
+    "size": [
+     0.514976687088,
+     1.015999887351,
+     0.514976687088
+    ]
+   },
+   "tris": 12676,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2711120,
+  "bytes": 390028,
+  "srcTris": 12676,
+  "tris": 12676,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 2397753,
+   "after": 316526,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0022,
+   1,
+   1.0001
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07HSK7Y5G.jpg",
+  "bytes": 6214,
+  "mime": "image/jpeg"
+ }
+}

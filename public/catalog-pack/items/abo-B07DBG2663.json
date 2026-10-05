@@ -1,0 +1,78 @@
+{
+ "id": "abo-B07DBG2663",
+ "source": "abo",
+ "typeId": "armchair",
+ "formId": "rect",
+ "name": "Ravenna Home Belgrove Modern Wood Spindle Frame Accent Chair",
+ "brand": "Ravenna Home",
+ "price": 28090,
+ "currency": "RUB",
+ "dims": {
+  "H": 703,
+  "W": 555,
+  "D": 657
+ },
+ "colors": [
+  "натуральное дерево"
+ ],
+ "materials": [
+  "дерево",
+  "ткань"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07DBG2663",
+ "model": {
+  "file": "models/abo-B07DBG2663.glb",
+  "bytes": 484788,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.277500004,
+     0,
+     -0.355592668
+    ],
+    "max": [
+     0.27750226500979996,
+     0.7030000133901,
+     0.3003776185589
+    ],
+    "size": [
+     0.5550022690098,
+     0.7030000133901,
+     0.6559702865589
+    ]
+   },
+   "tris": 29998,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 4535892,
+  "bytes": 484788,
+  "srcTris": 51502,
+  "tris": 29998,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 3252154,
+   "after": 299532,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9993,
+   0.9993,
+   0.9994
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07DBG2663.jpg",
+  "bytes": 7740,
+  "mime": "image/jpeg"
+ }
+}

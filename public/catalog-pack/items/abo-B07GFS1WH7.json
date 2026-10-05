@@ -1,0 +1,78 @@
+{
+ "id": "abo-B07GFS1WH7",
+ "source": "abo",
+ "typeId": "shoe-rack",
+ "formId": "rect",
+ "name": "Movian Adour 3-Door Shoe Cabinet/Cupboard/Organizer",
+ "brand": "Movian",
+ "price": 10490,
+ "currency": "RUB",
+ "dims": {
+  "H": 1280,
+  "W": 750,
+  "D": 250
+ },
+ "colors": [
+  "белый",
+  "натуральное дерево"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "ретро"
+ ],
+ "url": "https://www.amazon.co.uk/dp/B07GFS1WH7",
+ "model": {
+  "file": "models/abo-B07GFS1WH7.glb",
+  "bytes": 94056,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.375,
+     0,
+     -0.118181333
+    ],
+    "max": [
+     0.374967604636,
+     1.2799999236119999,
+     0.13183391179999998
+    ],
+    "size": [
+     0.749967604636,
+     1.2799999236119999,
+     0.2500152448
+    ]
+   },
+   "tris": 2562,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2081416,
+  "bytes": 94056,
+  "srcTris": 2562,
+  "tris": 2562,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 2006189,
+   "after": 76328,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   1,
+   1
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07GFS1WH7.jpg",
+  "bytes": 4377,
+  "mime": "image/jpeg"
+ }
+}

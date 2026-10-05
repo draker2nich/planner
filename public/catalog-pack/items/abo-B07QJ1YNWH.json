@@ -1,0 +1,73 @@
+{
+ "id": "abo-B07QJ1YNWH",
+ "source": "abo",
+ "typeId": "chair",
+ "formId": "rect",
+ "name": "Stone & Beam Channel-Back Dining Chairs",
+ "brand": "Stone & Beam",
+ "price": 15090,
+ "currency": "RUB",
+ "dims": {
+  "H": 1016,
+  "W": 511,
+  "D": 647
+ },
+ "colors": [],
+ "materials": [
+  "ткань"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B07QJ1YNWH",
+ "model": {
+  "file": "models/abo-B07QJ1YNWH.glb",
+  "bytes": 640012,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.255422264,
+     0,
+     -0.316541165
+    ],
+    "max": [
+     0.25558543128,
+     1.015999887351,
+     0.33046651520099996
+    ],
+    "size": [
+     0.51100769528,
+     1.015999887351,
+     0.647007680201
+    ]
+   },
+   "tris": 30000,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 62397504,
+  "bytes": 640012,
+  "srcTris": 45872,
+  "tris": 30000,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 61256311,
+   "after": 452098,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0005,
+   1.0001,
+   1.0007
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07QJ1YNWH.jpg",
+  "bytes": 5987,
+  "mime": "image/jpeg"
+ }
+}

@@ -1,0 +1,78 @@
+{
+ "id": "abo-B07RGR6XYT",
+ "source": "abo",
+ "typeId": "kids-bed",
+ "formId": "bunk",
+ "name": "Max & Finn Twin Floor Bunk Bed",
+ "brand": "Max & Finn",
+ "price": 17990,
+ "currency": "RUB",
+ "dims": {
+  "H": 1206,
+  "W": 2013,
+  "L": 1105
+ },
+ "colors": [
+  "серый"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "современный",
+  "классика"
+ ],
+ "url": "https://www.amazon.com/dp/B07RGR6XYT",
+ "model": {
+  "file": "models/abo-B07RGR6XYT.glb",
+  "bytes": 183676,
+  "info": {
+   "bbox": {
+    "min": [
+     -1.00650001,
+     0,
+     -0.552478075
+    ],
+    "max": [
+     1.0064999081120005,
+     1.2059814561600002,
+     0.552503202152
+    ],
+    "size": [
+     2.0129999181120004,
+     1.2059814561600002,
+     1.104981277152
+    ]
+   },
+   "tris": 29998,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 6446840,
+  "bytes": 183676,
+  "srcTris": 43744,
+  "tris": 29998,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 5303677,
+   "after": 17830,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   0.9999,
+   0.9996
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07RGR6XYT.jpg",
+  "bytes": 5950,
+  "mime": "image/jpeg"
+ }
+}

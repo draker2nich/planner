@@ -1,0 +1,71 @@
+{
+ "id": "abo-B07RMYWYN9",
+ "source": "abo",
+ "typeId": "table",
+ "formId": "rect",
+ "name": "Movian Semme",
+ "brand": "AmazonBasics",
+ "price": 18690,
+ "currency": "RUB",
+ "dims": {
+  "H": 855,
+  "W": 1200,
+  "D": 400
+ },
+ "colors": [],
+ "materials": [],
+ "styleTags": [],
+ "url": "https://www.amazon.fr/dp/B07RMYWYN9",
+ "model": {
+  "file": "models/abo-B07RMYWYN9.glb",
+  "bytes": 480080,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.599999905,
+     0,
+     -0.199999988
+    ],
+    "max": [
+     0.5999998521839001,
+     0.8550080672409001,
+     0.1999999310613
+    ],
+    "size": [
+     1.1999997571839,
+     0.8550080672409001,
+     0.3999999190613
+    ]
+   },
+   "tris": 29998,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 39416824,
+  "bytes": 480080,
+  "srcTris": 39328,
+  "tris": 29998,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 38218836,
+   "after": 350234,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   1,
+   1
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07RMYWYN9.jpg",
+  "bytes": 5823,
+  "mime": "image/jpeg"
+ }
+}

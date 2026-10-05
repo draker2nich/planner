@@ -1,0 +1,75 @@
+{
+ "id": "abo-B01M0ZVGCQ",
+ "source": "abo",
+ "typeId": "bed",
+ "formId": "double",
+ "name": "Movian Belaya",
+ "brand": "Movian",
+ "price": 62190,
+ "currency": "RUB",
+ "dims": {
+  "H": 629,
+  "W": 1450,
+  "L": 1950
+ },
+ "colors": [],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.de/dp/B01M0ZVGCQ",
+ "model": {
+  "file": "models/abo-B01M0ZVGCQ.glb",
+  "bytes": 197676,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.724999964,
+     0,
+     -0.974999964
+    ],
+    "max": [
+     0.7249724777840001,
+     0.62905141642,
+     0.974999913996
+    ],
+    "size": [
+     1.449972441784,
+     0.62905141642,
+     1.949999877996
+    ]
+   },
+   "tris": 30000,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 13003612,
+  "bytes": 197676,
+  "srcTris": 63280,
+  "tris": 30000,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 11146458,
+   "after": 10726,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   0.9998,
+   1
+  ]
+ },
+ "image": {
+  "file": "images/abo-B01M0ZVGCQ.jpg",
+  "bytes": 5270,
+  "mime": "image/jpeg"
+ }
+}

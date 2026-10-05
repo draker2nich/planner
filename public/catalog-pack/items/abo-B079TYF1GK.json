@@ -1,0 +1,76 @@
+{
+ "id": "abo-B079TYF1GK",
+ "source": "abo",
+ "typeId": "wardrobe",
+ "formId": "rect",
+ "name": "Movian Hulio 2 Door Wardrobe",
+ "brand": "Vida Designs",
+ "price": 15990,
+ "currency": "RUB",
+ "dims": {
+  "H": 1700,
+  "W": 760,
+  "D": 470
+ },
+ "colors": [
+  "белый"
+ ],
+ "materials": [
+  "дерево",
+  "ЛДСП / МДФ"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.co.uk/dp/B079TYF1GK",
+ "model": {
+  "file": "models/abo-B079TYF1GK.glb",
+  "bytes": 131956,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.380000025,
+     0,
+     -0.235000014
+    ],
+    "max": [
+     0.37998309647199996,
+     1.700000475024,
+     0.234956779712
+    ],
+    "size": [
+     0.759983121472,
+     1.700000475024,
+     0.469956793712
+    ]
+   },
+   "tris": 24886,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 3427180,
+  "bytes": 131956,
+  "srcTris": 24886,
+  "tris": 24886,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 2608513,
+   "after": 10708,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   1,
+   1
+  ]
+ },
+ "image": {
+  "file": "images/abo-B079TYF1GK.jpg",
+  "bytes": 2838,
+  "mime": "image/jpeg"
+ }
+}

@@ -1,0 +1,77 @@
+{
+ "id": "abo-B07DMJQM3H",
+ "source": "abo",
+ "typeId": "bar-counter",
+ "formId": "rect",
+ "name": "2L Lifestyle Ashland Square Dinning Pub Table",
+ "brand": "2L Lifestyle",
+ "price": 15790,
+ "currency": "RUB",
+ "dims": {
+  "H": 770,
+  "W": 749,
+  "D": 749
+ },
+ "colors": [
+  "коричневый"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07DMJQM3H",
+ "model": {
+  "file": "models/abo-B07DMJQM3H.glb",
+  "bytes": 49244,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.37487942,
+     0,
+     -0.37408334
+    ],
+    "max": [
+     0.37411167483519997,
+     0.7700000694456,
+     0.3749077548352
+    ],
+    "size": [
+     0.7489910948352,
+     0.7700000694456,
+     0.7489910948352
+    ]
+   },
+   "tris": 2812,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 30606768,
+  "bytes": 49244,
+  "srcTris": 2812,
+  "tris": 2812,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 30523496,
+   "after": 28478,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9996,
+   1.0004,
+   0.9996
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07DMJQM3H.jpg",
+  "bytes": 12037,
+  "mime": "image/jpeg"
+ }
+}

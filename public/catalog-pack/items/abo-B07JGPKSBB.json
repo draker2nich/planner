@@ -1,0 +1,76 @@
+{
+ "id": "abo-B07JGPKSBB",
+ "source": "abo",
+ "typeId": "tv-stand",
+ "formId": "rect",
+ "name": "Movian TV Unit with Storage",
+ "brand": "Movian",
+ "price": 24790,
+ "currency": "RUB",
+ "dims": {
+  "H": 440,
+  "W": 1550,
+  "D": 400
+ },
+ "colors": [
+  "белый",
+  "натуральное дерево"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.co.uk/dp/B07JGPKSBB",
+ "model": {
+  "file": "models/abo-B07JGPKSBB.glb",
+  "bytes": 182020,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.775000036,
+     0,
+     -0.200000003
+    ],
+    "max": [
+     0.7749999584312002,
+     0.44003234902640004,
+     0.20001220333920003
+    ],
+    "size": [
+     1.5499999944312002,
+     0.44003234902640004,
+     0.40001220633920004
+    ]
+   },
+   "tris": 21576,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 27778424,
+  "bytes": 182020,
+  "srcTris": 21576,
+  "tris": 21576,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 27071046,
+   "after": 78366,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   1,
+   1
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07JGPKSBB.jpg",
+  "bytes": 7480,
+  "mime": "image/jpeg"
+ }
+}

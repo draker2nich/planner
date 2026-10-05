@@ -1,0 +1,71 @@
+{
+ "id": "abo-B07GDKZWCK",
+ "source": "abo",
+ "typeId": "table",
+ "formId": "rect",
+ "name": "Marque Amazon",
+ "brand": "Rivet",
+ "price": 29490,
+ "currency": "RUB",
+ "dims": {
+  "H": 564,
+  "W": 442,
+  "D": 455
+ },
+ "colors": [],
+ "materials": [],
+ "styleTags": [],
+ "url": "https://www.amazon.fr/dp/B07GDKZWCK",
+ "model": {
+  "file": "models/abo-B07GDKZWCK.glb",
+  "bytes": 120732,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.22071892,
+     0,
+     -0.283843219
+    ],
+    "max": [
+     0.2212756145285,
+     0.5640000357645,
+     0.17116431763550005
+    ],
+    "size": [
+     0.4419945345285,
+     0.5640000357645,
+     0.45500753663550003
+    ]
+   },
+   "tris": 5496,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 10659320,
+  "bytes": 120732,
+  "srcTris": 5496,
+  "tris": 5496,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 10477154,
+   "after": 83860,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0001,
+   1.0002,
+   1.0004
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07GDKZWCK.jpg",
+  "bytes": 4061,
+  "mime": "image/jpeg"
+ }
+}

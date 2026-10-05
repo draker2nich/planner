@@ -1,0 +1,78 @@
+{
+ "id": "abo-B07QB8LPQ6",
+ "source": "abo",
+ "typeId": "plant",
+ "formId": "round",
+ "name": "Rivet Mid-Century Stoneware Planter with Wood Stand",
+ "brand": "Rivet",
+ "price": 3990,
+ "currency": "RUB",
+ "dims": {
+  "H": 404,
+  "DIA": 265
+ },
+ "colors": [
+  "натуральное дерево",
+  "зелёный"
+ ],
+ "materials": [
+  "дерево",
+  "камень"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07QB8LPQ6",
+ "model": {
+  "file": "models/abo-B07QB8LPQ6.glb",
+  "bytes": 113812,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.132500067,
+     0,
+     -0.132500008
+    ],
+    "max": [
+     0.132493139049,
+     0.4039999715895,
+     0.132493198049
+    ],
+    "size": [
+     0.264993206049,
+     0.4039999715895,
+     0.264993206049
+    ]
+   },
+   "tris": 8400,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 16761204,
+  "bytes": 113812,
+  "srcTris": 8400,
+  "tris": 8400,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 16555771,
+   "after": 63498,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9983,
+   1.0009,
+   0.9983
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07QB8LPQ6.jpg",
+  "bytes": 3142,
+  "mime": "image/jpeg"
+ }
+}

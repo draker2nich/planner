@@ -1,0 +1,78 @@
+{
+ "id": "abo-B07B4ZPH19",
+ "source": "abo",
+ "typeId": "nightstand",
+ "formId": "rect",
+ "name": "Rivet Mid-Century Modern Industrial Geometric Carved Wood Bedroom Nightstand",
+ "brand": "Rivet",
+ "price": 16890,
+ "currency": "RUB",
+ "dims": {
+  "H": 610,
+  "W": 610,
+  "D": 437
+ },
+ "colors": [
+  "коричневый"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "современный",
+  "лофт"
+ ],
+ "url": "https://www.amazon.com/dp/B07B4ZPH19",
+ "model": {
+  "file": "models/abo-B07B4ZPH19.glb",
+  "bytes": 207048,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.305573106,
+     0,
+     -0.203618571
+    ],
+    "max": [
+     0.30442692712169994,
+     0.6100000331216999,
+     0.23339359946629998
+    ],
+    "size": [
+     0.6100000331216999,
+     0.6100000331216999,
+     0.4370121704663
+    ]
+   },
+   "tris": 11182,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2346960,
+  "bytes": 207048,
+  "srcTris": 11182,
+  "tris": 11182,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 1967230,
+   "after": 122770,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9998,
+   1.0007,
+   0.9995
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07B4ZPH19.jpg",
+  "bytes": 15417,
+  "mime": "image/jpeg"
+ }
+}

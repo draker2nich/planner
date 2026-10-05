@@ -1,0 +1,76 @@
+{
+ "id": "abo-B082XLN2ZK",
+ "source": "abo",
+ "typeId": "sconce",
+ "formId": "wall",
+ "name": "Rivet Scandinavian Wall Sconce",
+ "brand": "Rivet",
+ "price": 5190,
+ "currency": "RUB",
+ "dims": {
+  "H": 199,
+  "W": 127,
+  "D": 209,
+  "E": 1700
+ },
+ "colors": [
+  "белый"
+ ],
+ "materials": [],
+ "styleTags": [
+  "скандинавский"
+ ],
+ "url": "https://www.amazon.com/dp/B082XLN2ZK",
+ "model": {
+  "file": "models/abo-B082XLN2ZK.glb",
+  "bytes": 183252,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.0634993762,
+     0.0107054096,
+     -0.104500003
+    ],
+    "max": [
+     0.063497819103,
+     0.2097038274334,
+     0.10450000208779998
+    ],
+    "size": [
+     0.126997195303,
+     0.1989984178334,
+     0.20900000508779998
+    ]
+   },
+   "tris": 29999,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 12509848,
+  "bytes": 183252,
+  "srcTris": 55732,
+  "tris": 29999,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 11193700,
+   "after": 16732,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9974,
+   1,
+   1.0004
+  ]
+ },
+ "image": {
+  "file": "images/abo-B082XLN2ZK.jpg",
+  "bytes": 3038,
+  "mime": "image/jpeg"
+ }
+}

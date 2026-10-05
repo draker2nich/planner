@@ -1,0 +1,75 @@
+{
+ "id": "abo-B07QCPZTFJ",
+ "source": "abo",
+ "typeId": "bar-stool",
+ "formId": "round",
+ "name": "Stone & Beam Leather Counter-Height Barstool with Brass Nailhead Trim",
+ "brand": "Stone & Beam",
+ "price": 12790,
+ "currency": "RUB",
+ "dims": {
+  "H": 982,
+  "DIA": 563
+ },
+ "colors": [
+  "коричневый"
+ ],
+ "materials": [
+  "металл",
+  "кожа"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B07QCPZTFJ",
+ "model": {
+  "file": "models/abo-B07QCPZTFJ.glb",
+  "bytes": 240564,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.281499207,
+     0,
+     -0.287292868
+    ],
+    "max": [
+     0.2815189300404001,
+     0.9820000148124001,
+     0.27572526904040007
+    ],
+    "size": [
+     0.5630181370404,
+     0.9820000148124001,
+     0.5630181370404
+    ]
+   },
+   "tris": 21488,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 41749444,
+  "bytes": 240564,
+  "srcTris": 21488,
+  "tris": 21488,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 41230448,
+   "after": 123732,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0699,
+   0.9996,
+   0.9991
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07QCPZTFJ.jpg",
+  "bytes": 5705,
+  "mime": "image/jpeg"
+ }
+}

@@ -1,0 +1,78 @@
+{
+ "id": "abo-B075QFCHM9",
+ "source": "abo",
+ "typeId": "bed",
+ "formId": "king",
+ "name": "Rivet York Modern Extended Platform Queen Bed",
+ "brand": "Rivet",
+ "price": 79990,
+ "currency": "RUB",
+ "dims": {
+  "H": 1067,
+  "W": 1840,
+  "L": 2368
+ },
+ "colors": [
+  "серый",
+  "серебристый"
+ ],
+ "materials": [
+  "ткань"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B075QFCHM9",
+ "model": {
+  "file": "models/abo-B075QFCHM9.glb",
+  "bytes": 245104,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.921309173,
+     0,
+     -1.209481
+    ],
+    "max": [
+     0.9186859181000002,
+     1.0669947967400002,
+     1.1585189668100002
+    ],
+    "size": [
+     1.8399950911000003,
+     1.0669947967400002,
+     2.3679999668100002
+    ]
+   },
+   "tris": 19568,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2467084,
+  "bytes": 245104,
+  "srcTris": 19568,
+  "tris": 19568,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 1963850,
+   "after": 130724,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   1.0001,
+   1.0002
+  ]
+ },
+ "image": {
+  "file": "images/abo-B075QFCHM9.jpg",
+  "bytes": 4400,
+  "mime": "image/jpeg"
+ }
+}

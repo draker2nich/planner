@@ -1,0 +1,76 @@
+{
+ "id": "abo-B075YPTF9H",
+ "source": "abo",
+ "typeId": "bar-stool",
+ "formId": "round",
+ "name": "Rivet Malida Mid-Century Modern Open Back Swivel Kitchen Bar Stool",
+ "brand": "Rivet",
+ "price": 14090,
+ "currency": "RUB",
+ "dims": {
+  "H": 961,
+  "DIA": 556
+ },
+ "colors": [
+  "синий"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B075YPTF9H",
+ "model": {
+  "file": "models/abo-B075YPTF9H.glb",
+  "bytes": 413444,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.277875632,
+     0,
+     -0.310186952
+    ],
+    "max": [
+     0.2781470240535,
+     0.9610000183695,
+     0.24583570405349997
+    ],
+    "size": [
+     0.5560226560535,
+     0.9610000183695,
+     0.5560226560535
+    ]
+   },
+   "tris": 12958,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 3689596,
+  "bytes": 413444,
+  "srcTris": 12958,
+  "tris": 12958,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 3339626,
+   "after": 329870,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0146,
+   1.0004,
+   1.0004
+  ]
+ },
+ "image": {
+  "file": "images/abo-B075YPTF9H.jpg",
+  "bytes": 8580,
+  "mime": "image/jpeg"
+ }
+}

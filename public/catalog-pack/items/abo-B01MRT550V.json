@@ -1,0 +1,78 @@
+{
+ "id": "abo-B01MRT550V",
+ "source": "abo",
+ "typeId": "coat-rack",
+ "formId": "wall",
+ "name": "AmazonBasics Wall-Mounted Farmhouse Coat Rack",
+ "brand": "AmazonBasics",
+ "price": 2890,
+ "currency": "RUB",
+ "dims": {
+  "H": 117,
+  "W": 571,
+  "D": 71,
+  "E": 1600
+ },
+ "colors": [
+  "чёрный"
+ ],
+ "materials": [
+  "металл"
+ ],
+ "styleTags": [
+  "кантри"
+ ],
+ "url": "https://www.amazon.com/dp/B01MRT550V",
+ "model": {
+  "file": "models/abo-B01MRT550V.glb",
+  "bytes": 118944,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.28549999,
+     -0.0306765661,
+     4.09781933e-8
+    ],
+    "max": [
+     0.2855000052596,
+     0.0863256303284,
+     0.0709960118225933
+    ],
+    "size": [
+     0.5709999952596,
+     0.1170021964284,
+     0.0709959708444
+    ]
+   },
+   "tris": 14380,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 10944896,
+  "bytes": 118944,
+  "srcTris": 14380,
+  "tris": 14380,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 10417412,
+   "after": 30012,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9991,
+   1.0014,
+   0.9983
+  ]
+ },
+ "image": {
+  "file": "images/abo-B01MRT550V.jpg",
+  "bytes": 4177,
+  "mime": "image/jpeg"
+ }
+}

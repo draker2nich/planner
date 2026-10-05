@@ -1,0 +1,77 @@
+{
+ "id": "abo-B07DTLWMPR",
+ "source": "abo",
+ "typeId": "chandelier",
+ "formId": "round",
+ "name": "Rivet Mid-Century Modern Opal Glass Globe Hanging Ceiling Pendant Chandelier Fixture With 5 LED Light Bulbs",
+ "brand": "Rivet",
+ "price": 24090,
+ "currency": "RUB",
+ "dims": {
+  "H": 1331,
+  "DIA": 815
+ },
+ "colors": [
+  "жёлтый"
+ ],
+ "materials": [
+  "металл",
+  "стекло"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07DTLWMPR",
+ "model": {
+  "file": "models/abo-B07DTLWMPR.glb",
+  "bytes": 153764,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.407511503,
+     -1.33099997,
+     -0.375393182
+    ],
+    "max": [
+     0.40751579910880004,
+     5.895220001050916e-8,
+     0.43963412010880004
+    ],
+    "size": [
+     0.8150273021088,
+     1.3310000289522,
+     0.8150273021088
+    ]
+   },
+   "tris": 21032,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 4,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 1556048,
+  "bytes": 153764,
+  "srcTris": 21032,
+  "tris": 21032,
+  "textures": {
+   "images": 4,
+   "resized": 4,
+   "before": 960547,
+   "after": 21296,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0005,
+   0.9998,
+   1.0381
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07DTLWMPR.jpg",
+  "bytes": 4726,
+  "mime": "image/jpeg"
+ }
+}

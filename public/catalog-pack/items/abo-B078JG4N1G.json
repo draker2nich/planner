@@ -1,0 +1,77 @@
+{
+ "id": "abo-B078JG4N1G",
+ "source": "abo",
+ "typeId": "plant",
+ "formId": "round",
+ "name": "Rivet Ceramic Planter with Leather Strap",
+ "brand": "Rivet",
+ "price": 3190,
+ "currency": "RUB",
+ "dims": {
+  "H": 753,
+  "DIA": 157
+ },
+ "colors": [
+  "синий"
+ ],
+ "materials": [
+  "кожа",
+  "камень"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B078JG4N1G",
+ "model": {
+  "file": "models/abo-B078JG4N1G.glb",
+  "bytes": 196828,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.0785000026,
+     0,
+     -0.0785000026
+    ],
+    "max": [
+     0.0785071417808,
+     0.7530000135803999,
+     0.0785071417808
+    ],
+    "size": [
+     0.1570071443808,
+     0.7530000135803999,
+     0.1570071443808
+    ]
+   },
+   "tris": 14640,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 1485856,
+  "bytes": 196828,
+  "srcTris": 14640,
+  "tris": 14640,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 1128129,
+   "after": 112470,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0011,
+   0.9999,
+   1.0274
+  ]
+ },
+ "image": {
+  "file": "images/abo-B078JG4N1G.jpg",
+  "bytes": 4257,
+  "mime": "image/jpeg"
+ }
+}

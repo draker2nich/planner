@@ -1,0 +1,76 @@
+{
+ "id": "abo-B07MF1TQW9",
+ "source": "abo",
+ "typeId": "table-lamp",
+ "formId": "round",
+ "name": "Ravenna Home Table Lamp with Ceramic Base",
+ "brand": "Ravenna Home",
+ "price": 6290,
+ "currency": "RUB",
+ "dims": {
+  "H": 493,
+  "DIA": 212
+ },
+ "colors": [
+  "бежевый"
+ ],
+ "materials": [
+  "камень"
+ ],
+ "styleTags": [
+  "ретро"
+ ],
+ "url": "https://www.amazon.com/dp/B07MF1TQW9",
+ "model": {
+  "file": "models/abo-B07MF1TQW9.glb",
+  "bytes": 155640,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.105999999,
+     0,
+     -0.106000029
+    ],
+    "max": [
+     0.1059993337185,
+     0.4930000096419,
+     0.1059993037185
+    ],
+    "size": [
+     0.2119993327185,
+     0.4930000096419,
+     0.2119993327185
+    ]
+   },
+   "tris": 21444,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 4,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 19218256,
+  "bytes": 155640,
+  "srcTris": 21444,
+  "tris": 21444,
+  "textures": {
+   "images": 4,
+   "resized": 4,
+   "before": 18703282,
+   "after": 42588,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0003,
+   1,
+   1.0003
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07MF1TQW9.jpg",
+  "bytes": 2587,
+  "mime": "image/jpeg"
+ }
+}

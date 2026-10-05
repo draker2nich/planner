@@ -1,0 +1,79 @@
+{
+ "id": "abo-B072ZNPRTC",
+ "source": "abo",
+ "typeId": "console",
+ "formId": "rect",
+ "name": "Rivet King Street Industrial Four-Drawer Media Console Table",
+ "brand": "Rivet",
+ "price": 21990,
+ "currency": "RUB",
+ "dims": {
+  "H": 800,
+  "W": 1199,
+  "D": 401
+ },
+ "colors": [
+  "коричневый"
+ ],
+ "materials": [
+  "дерево",
+  "ЛДСП / МДФ",
+  "металл"
+ ],
+ "styleTags": [
+  "лофт"
+ ],
+ "url": "https://www.amazon.com/dp/B072ZNPRTC",
+ "model": {
+  "file": "models/abo-B072ZNPRTC.glb",
+  "bytes": 151508,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.5995,
+     2.98023224e-8,
+     -0.200499997
+    ],
+    "max": [
+     0.5995000091834001,
+     0.7999920398361224,
+     0.20048401388420004
+    ],
+    "size": [
+     1.1990000091834,
+     0.7999920100338,
+     0.40098401088420005
+    ]
+   },
+   "tris": 2708,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 28564044,
+  "bytes": 151508,
+  "srcTris": 2708,
+  "tris": 2708,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 28450372,
+   "after": 127210,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0001,
+   0.9999,
+   0.9992
+  ]
+ },
+ "image": {
+  "file": "images/abo-B072ZNPRTC.jpg",
+  "bytes": 9939,
+  "mime": "image/jpeg"
+ }
+}

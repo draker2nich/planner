@@ -1,0 +1,78 @@
+{
+ "id": "abo-B075X3SHX2",
+ "source": "abo",
+ "typeId": "sofa",
+ "formId": "straight",
+ "name": "Rivet Uptown Mid-Century Tufted Customizable Daybed Sofa",
+ "brand": "Rivet",
+ "price": 89690,
+ "currency": "RUB",
+ "dims": {
+  "H": 641,
+  "W": 1985,
+  "D": 746
+ },
+ "colors": [
+  "серебристый"
+ ],
+ "materials": [
+  "велюр"
+ ],
+ "styleTags": [
+  "современный",
+  "классика"
+ ],
+ "url": "https://www.amazon.com/dp/B075X3SHX2",
+ "model": {
+  "file": "models/abo-B075X3SHX2.glb",
+  "bytes": 621756,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.992500007,
+     0,
+     -0.372999817
+    ],
+    "max": [
+     0.992499955174,
+     0.64094792162,
+     0.3729957129459999
+    ],
+    "size": [
+     1.984999962174,
+     0.64094792162,
+     0.7459955299459999
+    ]
+   },
+   "tris": 29999,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 5280280,
+  "bytes": 621756,
+  "srcTris": 32386,
+  "tris": 29999,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 4507797,
+   "after": 461966,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   1.0007,
+   0.9998
+  ]
+ },
+ "image": {
+  "file": "images/abo-B075X3SHX2.jpg",
+  "bytes": 4689,
+  "mime": "image/jpeg"
+ }
+}

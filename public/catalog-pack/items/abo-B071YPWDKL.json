@@ -1,0 +1,78 @@
+{
+ "id": "abo-B071YPWDKL",
+ "source": "abo",
+ "typeId": "mirror",
+ "formId": "floor",
+ "name": "Stone & Beam Classic Rectangular Flat Frame Mirror",
+ "brand": "Stone & Beam",
+ "price": 10490,
+ "currency": "RUB",
+ "dims": {
+  "H": 2032,
+  "W": 812,
+  "D": 25
+ },
+ "colors": [
+  "коричневый"
+ ],
+ "materials": [
+  "стекло",
+  "пластик"
+ ],
+ "styleTags": [
+  "классика"
+ ],
+ "url": "https://www.amazon.com/dp/B071YPWDKL",
+ "model": {
+  "file": "models/abo-B071YPWDKL.glb",
+  "bytes": 74744,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.405999988,
+     -1.01599991,
+     0
+    ],
+    "max": [
+     0.4060309297180001,
+     1.0159998647020003,
+     0.025054260788
+    ],
+    "size": [
+     0.8120309177180001,
+     2.031999774702,
+     0.025054260788
+    ]
+   },
+   "tris": 412,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 918164,
+  "bytes": 74744,
+  "srcTris": 412,
+  "tris": 412,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 902434,
+   "after": 68958,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9996,
+   1,
+   0.9843
+  ]
+ },
+ "image": {
+  "file": "images/abo-B071YPWDKL.jpg",
+  "bytes": 5002,
+  "mime": "image/jpeg"
+ }
+}

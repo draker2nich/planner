@@ -1,0 +1,71 @@
+{
+ "id": "abo-B07H8JWNLV",
+ "source": "abo",
+ "typeId": "sideboard",
+ "formId": "rect",
+ "name": "Movian Morava",
+ "brand": "Movian",
+ "price": 67690,
+ "currency": "RUB",
+ "dims": {
+  "H": 2120,
+  "W": 1327,
+  "D": 1094
+ },
+ "colors": [],
+ "materials": [],
+ "styleTags": [],
+ "url": "https://www.amazon.de/dp/B07H8JWNLV",
+ "model": {
+  "file": "models/abo-B07H8JWNLV.glb",
+  "bytes": 127436,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.663499951,
+     0,
+     -0.546999991
+    ],
+    "max": [
+     0.6635220814549999,
+     2.120000190903,
+     0.546968245214
+    ],
+    "size": [
+     1.327022032455,
+     2.120000190903,
+     1.093968236214
+    ]
+   },
+   "tris": 9380,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 25027884,
+  "bytes": 127436,
+  "srcTris": 9380,
+  "tris": 9380,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 24673713,
+   "after": 69970,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9999,
+   1.0001,
+   1.0003
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07H8JWNLV.jpg",
+  "bytes": 6901,
+  "mime": "image/jpeg"
+ }
+}

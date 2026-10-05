@@ -1,0 +1,77 @@
+{
+ "id": "abo-B07B79WTSL",
+ "source": "abo",
+ "typeId": "armchair",
+ "formId": "rect",
+ "name": "Rivet Fir Mid-Century Modern Velvet Dining Kitchen Chair",
+ "brand": "Rivet",
+ "price": 35490,
+ "currency": "RUB",
+ "dims": {
+  "H": 1081,
+  "W": 683,
+  "D": 794
+ },
+ "colors": [
+  "зелёный"
+ ],
+ "materials": [
+  "велюр"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07B79WTSL",
+ "model": {
+  "file": "models/abo-B07B79WTSL.glb",
+  "bytes": 379548,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.341694832,
+     0,
+     -0.475546807
+    ],
+    "max": [
+     0.3412956181453,
+     1.0810001492349,
+     0.31842711692989994
+    ],
+    "size": [
+     0.6829904501453,
+     1.0810001492349,
+     0.7939739239299
+    ]
+   },
+   "tris": 18324,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2028572,
+  "bytes": 379548,
+  "srcTris": 18324,
+  "tris": 18324,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 1597415,
+   "after": 278216,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0001,
+   1.0004,
+   1.0001
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07B79WTSL.jpg",
+  "bytes": 4504,
+  "mime": "image/jpeg"
+ }
+}

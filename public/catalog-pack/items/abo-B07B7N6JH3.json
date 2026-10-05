@@ -1,0 +1,78 @@
+{
+ "id": "abo-B07B7N6JH3",
+ "source": "abo",
+ "typeId": "small-table",
+ "formId": "rect",
+ "name": "Rivet Nesting Side Table",
+ "brand": "Rivet",
+ "price": 6890,
+ "currency": "RUB",
+ "dims": {
+  "H": 550,
+  "W": 507,
+  "D": 400
+ },
+ "colors": [
+  "белый",
+  "жёлтый"
+ ],
+ "materials": [
+  "металл"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07B7N6JH3",
+ "model": {
+  "file": "models/abo-B07B7N6JH3.glb",
+  "bytes": 279676,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.222491428,
+     0.0000180683401,
+     -0.199967667
+    ],
+    "max": [
+     0.28446159428460005,
+     0.5500088877619,
+     0.19996156645980004
+    ],
+    "size": [
+     0.5069530222846,
+     0.5499908194218001,
+     0.3999292334598
+    ]
+   },
+   "tris": 29998,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 4969852,
+  "bytes": 279676,
+  "srcTris": 132736,
+  "tris": 29998,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 1063232,
+   "after": 108800,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0001,
+   0.9993,
+   0.999
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07B7N6JH3.jpg",
+  "bytes": 8607,
+  "mime": "image/jpeg"
+ }
+}

@@ -1,0 +1,78 @@
+{
+ "id": "abo-B084MM451K",
+ "source": "abo",
+ "typeId": "console",
+ "formId": "rect",
+ "name": "Ravenna Home Classic Console Table with Storage Drawers",
+ "brand": "Ravenna Home",
+ "price": 22090,
+ "currency": "RUB",
+ "dims": {
+  "H": 749,
+  "W": 1118,
+  "D": 399
+ },
+ "colors": [
+  "синий"
+ ],
+ "materials": [
+  "дерево",
+  "ротанг"
+ ],
+ "styleTags": [
+  "классика"
+ ],
+ "url": "https://www.amazon.com/dp/B084MM451K",
+ "model": {
+  "file": "models/abo-B084MM451K.glb",
+  "bytes": 163020,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.559000015,
+     0.0000150541246,
+     -0.190719381
+    ],
+    "max": [
+     0.5589999617972002,
+     0.7489651698146,
+     0.20822024326640007
+    ],
+    "size": [
+     1.1179999767972002,
+     0.74895011569,
+     0.39893962426640006
+    ]
+   },
+   "tris": 29998,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 16754780,
+  "bytes": 163020,
+  "srcTris": 67400,
+  "tris": 29998,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 15159299,
+   "after": 7924,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0003,
+   0.9996,
+   1.0012
+  ]
+ },
+ "image": {
+  "file": "images/abo-B084MM451K.jpg",
+  "bytes": 5607,
+  "mime": "image/jpeg"
+ }
+}

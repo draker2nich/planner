@@ -1,0 +1,77 @@
+{
+ "id": "abo-B071F6WK9K",
+ "source": "abo",
+ "typeId": "chandelier",
+ "formId": "round",
+ "name": "Rivet Mid Century Modern Glass Ceiling Pendant Chandelier Fixture With Edison Light Bulb",
+ "brand": "Rivet",
+ "price": 12790,
+ "currency": "RUB",
+ "dims": {
+  "H": 1055,
+  "DIA": 265
+ },
+ "colors": [
+  "чёрный"
+ ],
+ "materials": [
+  "металл",
+  "стекло"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B071F6WK9K",
+ "model": {
+  "file": "models/abo-B071F6WK9K.glb",
+  "bytes": 115888,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.132499993,
+     -1.05499995,
+     -0.132499993
+    ],
+    "max": [
+     0.13248961160550002,
+     -2.4786900088002994e-8,
+     0.13248961160550002
+    ],
+    "size": [
+     0.26498960460550003,
+     1.0549999252131,
+     0.26498960460550003
+    ]
+   },
+   "tris": 16246,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 4,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 1194764,
+  "bytes": 115888,
+  "srcTris": 16246,
+  "tris": 16246,
+  "textures": {
+   "images": 4,
+   "resized": 4,
+   "before": 797076,
+   "after": 31820,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9997,
+   1,
+   0.9997
+  ]
+ },
+ "image": {
+  "file": "images/abo-B071F6WK9K.jpg",
+  "bytes": 3375,
+  "mime": "image/jpeg"
+ }
+}

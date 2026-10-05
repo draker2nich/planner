@@ -1,0 +1,76 @@
+{
+ "id": "abo-B07JGY5LPJ",
+ "source": "abo",
+ "typeId": "wardrobe",
+ "formId": "rect",
+ "name": "Movian Loue Sliding Door Wardrobe",
+ "brand": "Movian",
+ "price": 85790,
+ "currency": "RUB",
+ "dims": {
+  "H": 2020,
+  "W": 1830,
+  "D": 600
+ },
+ "colors": [
+  "белый",
+  "натуральное дерево"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.co.uk/dp/B07JGY5LPJ",
+ "model": {
+  "file": "models/abo-B07JGY5LPJ.glb",
+  "bytes": 152864,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.914999962,
+     0,
+     -0.299999982
+    ],
+    "max": [
+     0.9149971467839999,
+     2.020000177416,
+     0.29997077203199995
+    ],
+    "size": [
+     1.829997108784,
+     2.020000177416,
+     0.599970754032
+    ]
+   },
+   "tris": 15972,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 16652860,
+  "bytes": 152864,
+  "srcTris": 15972,
+  "tris": 15972,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 16141754,
+   "after": 79390,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   1,
+   1
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07JGY5LPJ.jpg",
+  "bytes": 5714,
+  "mime": "image/jpeg"
+ }
+}

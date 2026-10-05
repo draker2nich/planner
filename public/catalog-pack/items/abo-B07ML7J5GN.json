@@ -1,0 +1,77 @@
+{
+ "id": "abo-B07ML7J5GN",
+ "source": "abo",
+ "typeId": "tv-stand",
+ "formId": "rect",
+ "name": "Ravenna Home Classic Solid Wood Media Center",
+ "brand": "Ravenna Home",
+ "price": 27690,
+ "currency": "RUB",
+ "dims": {
+  "H": 624,
+  "W": 1187,
+  "D": 424
+ },
+ "colors": [
+  "белый"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "классика"
+ ],
+ "url": "https://www.amazon.com/dp/B07ML7J5GN",
+ "model": {
+  "file": "models/abo-B07ML7J5GN.glb",
+  "bytes": 68012,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.594204664,
+     0,
+     -0.244169369
+    ],
+    "max": [
+     0.5927953989395001,
+     0.6239665837780001,
+     0.17982650283800003
+    ],
+    "size": [
+     1.1870000629395001,
+     0.6239665837780001,
+     0.423995871838
+    ]
+   },
+   "tris": 6238,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 14418404,
+  "bytes": 68012,
+  "srcTris": 6238,
+  "tris": 6238,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 14231401,
+   "after": 24860,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9997,
+   1.0003,
+   1.001
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07ML7J5GN.jpg",
+  "bytes": 5253,
+  "mime": "image/jpeg"
+ }
+}

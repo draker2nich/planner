@@ -1,0 +1,72 @@
+{
+ "id": "abo-B07DBHLX1W",
+ "source": "abo",
+ "typeId": "floor-lamp",
+ "formId": "round",
+ "name": "Ravenna Home Swing Arm Standing Floor Lamp With LED Light Bulb",
+ "brand": "Ravenna Home",
+ "price": 16390,
+ "currency": "RUB",
+ "dims": {
+  "H": 1473,
+  "DIA": 348
+ },
+ "colors": [
+  "белый"
+ ],
+ "materials": [],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B07DBHLX1W",
+ "model": {
+  "file": "models/abo-B07DBHLX1W.glb",
+  "bytes": 127672,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.174000099,
+     0,
+     -0.174000129
+    ],
+    "max": [
+     0.174042544557,
+     1.472999904261,
+     0.17404251455699998
+    ],
+    "size": [
+     0.348042643557,
+     1.472999904261,
+     0.348042643557
+    ]
+   },
+   "tris": 16494,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 4,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 1339372,
+  "bytes": 127672,
+  "srcTris": 16494,
+  "tris": 16494,
+  "textures": {
+   "images": 4,
+   "resized": 4,
+   "before": 892658,
+   "after": 33020,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0005,
+   1.0001,
+   1.0005
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07DBHLX1W.jpg",
+  "bytes": 1904,
+  "mime": "image/jpeg"
+ }
+}

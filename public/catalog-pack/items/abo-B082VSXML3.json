@@ -1,0 +1,75 @@
+{
+ "id": "abo-B082VSXML3",
+ "source": "abo",
+ "typeId": "table",
+ "formId": "rect",
+ "name": "Ravenna Home Archer Outdoor Patio Steel Dining Table with Panel Top",
+ "brand": "Ravenna Home",
+ "price": 50290,
+ "currency": "RUB",
+ "dims": {
+  "H": 735,
+  "W": 1680,
+  "D": 914
+ },
+ "colors": [
+  "серый"
+ ],
+ "materials": [
+  "металл"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B082VSXML3",
+ "model": {
+  "file": "models/abo-B082VSXML3.glb",
+  "bytes": 207664,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.840000033,
+     0,
+     -0.456999987
+    ],
+    "max": [
+     0.8400000100919999,
+     0.735044882432,
+     0.45698648581199997
+    ],
+    "size": [
+     1.680000043092,
+     0.735044882432,
+     0.913986472812
+    ]
+   },
+   "tris": 30000,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 32302140,
+  "bytes": 207664,
+  "srcTris": 73136,
+  "tris": 30000,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 30154001,
+   "after": 26092,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0001,
+   1.0002,
+   1
+  ]
+ },
+ "image": {
+  "file": "images/abo-B082VSXML3.jpg",
+  "bytes": 2889,
+  "mime": "image/jpeg"
+ }
+}

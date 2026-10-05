@@ -1,0 +1,77 @@
+{
+ "id": "abo-B082JHT8Z6",
+ "source": "abo",
+ "typeId": "ceiling-light",
+ "formId": "round",
+ "name": "Stone & Beam Traditional Semiflush-Mount Ceiling Light with Clear Glass Shade",
+ "brand": "Stone & Beam",
+ "price": 7490,
+ "currency": "RUB",
+ "dims": {
+  "H": 269,
+  "DIA": 304
+ },
+ "colors": [
+  "прозрачный"
+ ],
+ "materials": [
+  "стекло"
+ ],
+ "styleTags": [
+  "современный",
+  "классика"
+ ],
+ "url": "https://www.amazon.com/dp/B082JHT8Z6",
+ "model": {
+  "file": "models/abo-B082JHT8Z6.glb",
+  "bytes": 267868,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.142860934,
+     -0.268999994,
+     -0.1357252
+    ],
+    "max": [
+     0.16106236149230002,
+     -0.000008491549999989356,
+     0.16819809549230003
+    ],
+    "size": [
+     0.3039232954923,
+     0.26899150245000003,
+     0.3039232954923
+    ]
+   },
+   "tris": 30003,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 39108040,
+  "bytes": 267868,
+  "srcTris": 69084,
+  "tris": 30003,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 37340772,
+   "after": 69648,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9994,
+   0.9989,
+   0.9991
+  ]
+ },
+ "image": {
+  "file": "images/abo-B082JHT8Z6.jpg",
+  "bytes": 4207,
+  "mime": "image/jpeg"
+ }
+}

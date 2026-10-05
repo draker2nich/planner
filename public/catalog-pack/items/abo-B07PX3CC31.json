@@ -1,0 +1,79 @@
+{
+ "id": "abo-B07PX3CC31",
+ "source": "abo",
+ "typeId": "nightstand",
+ "formId": "rect",
+ "name": "AmazonBasics Classic Wood Nightstand End Table with Cabinet",
+ "brand": "AmazonBasics",
+ "price": 8590,
+ "currency": "RUB",
+ "dims": {
+  "H": 635,
+  "W": 480,
+  "D": 381
+ },
+ "colors": [
+  "чёрный",
+  "натуральное дерево"
+ ],
+ "materials": [
+  "дерево",
+  "ЛДСП / МДФ"
+ ],
+ "styleTags": [
+  "классика"
+ ],
+ "url": "https://www.amazon.com/dp/B07PX3CC31",
+ "model": {
+  "file": "models/abo-B07PX3CC31.glb",
+  "bytes": 85548,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.24000001,
+     0,
+     -0.190500021
+    ],
+    "max": [
+     0.23999996990720004,
+     0.6349999734189,
+     0.19050771498900002
+    ],
+    "size": [
+     0.47999997990720006,
+     0.6349999734189,
+     0.381007735989
+    ]
+   },
+   "tris": 5444,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 18416512,
+  "bytes": 85548,
+  "srcTris": 5444,
+  "tris": 5444,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 18197114,
+   "after": 45358,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9999,
+   1,
+   1
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07PX3CC31.jpg",
+  "bytes": 5368,
+  "mime": "image/jpeg"
+ }
+}

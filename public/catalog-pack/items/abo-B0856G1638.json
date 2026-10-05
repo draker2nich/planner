@@ -1,0 +1,75 @@
+{
+ "id": "abo-B0856G1638",
+ "source": "abo",
+ "typeId": "chair",
+ "formId": "rect",
+ "name": "AmazonBasics Armless Slot-Back Dining Chair",
+ "brand": "AmazonBasics",
+ "price": 7790,
+ "currency": "RUB",
+ "dims": {
+  "H": 800,
+  "W": 531,
+  "D": 511
+ },
+ "colors": [
+  "серый"
+ ],
+ "materials": [
+  "пластик"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B0856G1638",
+ "model": {
+  "file": "models/abo-B0856G1638.glb",
+  "bytes": 180168,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.265500009,
+     0,
+     -0.26309675
+    ],
+    "max": [
+     0.26548942894480004,
+     0.7999999964915999,
+     0.24792076591799994
+    ],
+    "size": [
+     0.5309894379448,
+     0.7999999964915999,
+     0.5110175159179999
+    ]
+   },
+   "tris": 26012,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 32080612,
+  "bytes": 180168,
+  "srcTris": 26012,
+  "tris": 26012,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 31477174,
+   "after": 49054,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0002,
+   0.9998,
+   1.0009
+  ]
+ },
+ "image": {
+  "file": "images/abo-B0856G1638.jpg",
+  "bytes": 5023,
+  "mime": "image/jpeg"
+ }
+}

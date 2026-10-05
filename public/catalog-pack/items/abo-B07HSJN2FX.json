@@ -1,0 +1,80 @@
+{
+ "id": "abo-B07HSJN2FX",
+ "source": "abo",
+ "typeId": "shelving",
+ "formId": "rect",
+ "name": "Rivet Contemporary Cubic Iron 3-Shelf Floating Unit",
+ "brand": "Rivet",
+ "price": 28090,
+ "currency": "RUB",
+ "dims": {
+  "H": 972,
+  "W": 1781,
+  "D": 275
+ },
+ "colors": [
+  "бежевый",
+  "чёрный",
+  "натуральное дерево"
+ ],
+ "materials": [
+  "дерево",
+  "металл"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07HSJN2FX",
+ "model": {
+  "file": "models/abo-B07HSJN2FX.glb",
+  "bytes": 159412,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.890500069,
+     -0.485999972,
+     0
+    ],
+    "max": [
+     0.8905000714309999,
+     0.48597843583699996,
+     0.27503695021
+    ],
+    "size": [
+     1.7810001404309999,
+     0.971978407837,
+     0.27503695021
+    ]
+   },
+   "tris": 11038,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 1412244,
+  "bytes": 159412,
+  "srcTris": 11038,
+  "tris": 11038,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 1107814,
+   "after": 93866,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0001,
+   0.9995,
+   0.9988
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07HSJN2FX.jpg",
+  "bytes": 3638,
+  "mime": "image/jpeg"
+ }
+}

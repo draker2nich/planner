@@ -1,0 +1,71 @@
+{
+ "id": "abo-B07PYKJYLQ",
+ "source": "abo",
+ "typeId": "dresser",
+ "formId": "rect",
+ "name": "Ameriwood Commode classique 4 tiroirs Commode à 5 tiroirs. noir",
+ "brand": "Ameriwood Home",
+ "price": 15490,
+ "currency": "RUB",
+ "dims": {
+  "H": 1255,
+  "W": 704,
+  "D": 399
+ },
+ "colors": [],
+ "materials": [],
+ "styleTags": [],
+ "url": "https://www.amazon.fr/dp/B07PYKJYLQ",
+ "model": {
+  "file": "models/abo-B07PYKJYLQ.glb",
+  "bytes": 141588,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.352000028,
+     0,
+     -0.199499995
+    ],
+    "max": [
+     0.35198888664799993,
+     1.2550000422936,
+     0.1995291950328
+    ],
+    "size": [
+     0.703988914648,
+     1.2550000422936,
+     0.3990291900328
+    ]
+   },
+   "tris": 25648,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 27084644,
+  "bytes": 141588,
+  "srcTris": 25648,
+  "tris": 25648,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 26459012,
+   "after": 30926,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0007,
+   1.0002,
+   1.0009
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07PYKJYLQ.jpg",
+  "bytes": 2801,
+  "mime": "image/jpeg"
+ }
+}

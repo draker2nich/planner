@@ -1,0 +1,75 @@
+{
+ "id": "abo-B07QB8DQ45",
+ "source": "abo",
+ "typeId": "tv-stand",
+ "formId": "rect",
+ "name": "Rivet Corban Contemporary 2-Drawer Media Console",
+ "brand": "Rivet",
+ "price": 27690,
+ "currency": "RUB",
+ "dims": {
+  "H": 787,
+  "W": 1804,
+  "D": 405
+ },
+ "colors": [
+  "серый"
+ ],
+ "materials": [],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07QB8DQ45",
+ "model": {
+  "file": "models/abo-B07QB8DQ45.glb",
+  "bytes": 222876,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.902186513,
+     0,
+     -0.186163321
+    ],
+    "max": [
+     0.9018135409179999,
+     0.7869858014619999,
+     0.21883650798799997
+    ],
+    "size": [
+     1.804000053918,
+     0.7869858014619999,
+     0.40499982898799997
+    ]
+   },
+   "tris": 25480,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 42575200,
+  "bytes": 222876,
+  "srcTris": 25480,
+  "tris": 25480,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 41936600,
+   "after": 111588,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   1,
+   0.999
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07QB8DQ45.jpg",
+  "bytes": 6369,
+  "mime": "image/jpeg"
+ }
+}

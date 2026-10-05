@@ -1,0 +1,78 @@
+{
+ "id": "abo-B075ZBL75Z",
+ "source": "abo",
+ "typeId": "console",
+ "formId": "rect",
+ "name": "Stone & Beam Ferndale Rustic Console Table",
+ "brand": "Stone & Beam",
+ "price": 34990,
+ "currency": "RUB",
+ "dims": {
+  "H": 762,
+  "W": 1599,
+  "D": 442
+ },
+ "colors": [
+  "коричневый"
+ ],
+ "materials": [
+  "дерево",
+  "камень"
+ ],
+ "styleTags": [
+  "кантри"
+ ],
+ "url": "https://www.amazon.com/dp/B075ZBL75Z",
+ "model": {
+  "file": "models/abo-B075ZBL75Z.glb",
+  "bytes": 226756,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.799500108,
+     0,
+     -0.202494606
+    ],
+    "max": [
+     0.7995000190250999,
+     0.7619724099179,
+     0.2395411368613
+    ],
+    "size": [
+     1.5990001270251,
+     0.7619724099179,
+     0.4420357428613
+    ]
+   },
+   "tris": 5598,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 3609444,
+  "bytes": 226756,
+  "srcTris": 5598,
+  "tris": 5598,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 3412890,
+   "after": 181212,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0003,
+   1,
+   0.9998
+  ]
+ },
+ "image": {
+  "file": "images/abo-B075ZBL75Z.jpg",
+  "bytes": 7287,
+  "mime": "image/jpeg"
+ }
+}

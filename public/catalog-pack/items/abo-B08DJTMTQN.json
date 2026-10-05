@@ -1,0 +1,78 @@
+{
+ "id": "abo-B08DJTMTQN",
+ "source": "abo",
+ "typeId": "desk",
+ "formId": "rect",
+ "name": "AmazonBasics L-Shape Computer Desk with Shelves for Storage",
+ "brand": "AmazonBasics",
+ "price": 30290,
+ "currency": "RUB",
+ "dims": {
+  "H": 739,
+  "W": 1379,
+  "D": 1379
+ },
+ "colors": [
+  "белый",
+  "бежевый"
+ ],
+ "materials": [
+  "металл"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B08DJTMTQN",
+ "model": {
+  "file": "models/abo-B08DJTMTQN.glb",
+  "bytes": 317500,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.689420879,
+     0,
+     -0.688644052
+    ],
+    "max": [
+     0.6895790594386,
+     0.7390355526760001,
+     0.6903558864386
+    ],
+    "size": [
+     1.3789999384386,
+     0.7390355526760001,
+     1.3789999384386
+    ]
+   },
+   "tris": 30000,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 35597584,
+  "bytes": 317500,
+  "srcTris": 36308,
+  "tris": 30000,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 34324686,
+   "after": 121086,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9998,
+   0.9996,
+   0.9998
+  ]
+ },
+ "image": {
+  "file": "images/abo-B08DJTMTQN.jpg",
+  "bytes": 4480,
+  "mime": "image/jpeg"
+ }
+}

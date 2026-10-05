@@ -1,0 +1,78 @@
+{
+ "id": "abo-B075ZDWPHC",
+ "source": "abo",
+ "typeId": "coffee-table",
+ "formId": "rect",
+ "name": "Stone & Beam Miramar Elm Wood Cutout Coffee Table",
+ "brand": "Stone & Beam",
+ "price": 24390,
+ "currency": "RUB",
+ "dims": {
+  "H": 450,
+  "W": 974,
+  "D": 974
+ },
+ "colors": [
+  "серый"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "современный",
+  "классика"
+ ],
+ "url": "https://www.amazon.com/dp/B075ZDWPHC",
+ "model": {
+  "file": "models/abo-B075ZDWPHC.glb",
+  "bytes": 591248,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.487000018,
+     0,
+     -0.487000018
+    ],
+    "max": [
+     0.48699999278449996,
+     0.4499912153835,
+     0.48699999278449996
+    ],
+    "size": [
+     0.9740000107844999,
+     0.4499912153835,
+     0.9740000107844999
+    ]
+   },
+   "tris": 19860,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 3703216,
+  "bytes": 591248,
+  "srcTris": 19860,
+  "tris": 19860,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 3225751,
+   "after": 482618,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9998,
+   0.9998,
+   0.9998
+  ]
+ },
+ "image": {
+  "file": "images/abo-B075ZDWPHC.jpg",
+  "bytes": 11663,
+  "mime": "image/jpeg"
+ }
+}

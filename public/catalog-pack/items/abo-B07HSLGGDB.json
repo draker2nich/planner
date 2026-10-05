@@ -1,0 +1,80 @@
+{
+ "id": "abo-B07HSLGGDB",
+ "source": "abo",
+ "typeId": "picture",
+ "formId": "wall",
+ "name": "Rivet Contemporary Thick-Texture Print with Gold Leaf Wall Art Decor on Canvas",
+ "brand": "Rivet",
+ "price": 6590,
+ "currency": "RUB",
+ "dims": {
+  "H": 878,
+  "W": 878,
+  "D": 66,
+  "E": 1300
+ },
+ "colors": [
+  "белый",
+  "оранжевый",
+  "жёлтый"
+ ],
+ "materials": [
+  "ткань"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07HSLGGDB",
+ "model": {
+  "file": "models/abo-B07HSLGGDB.glb",
+  "bytes": 103232,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.43900001,
+     -0.438999981,
+     0
+    ],
+    "max": [
+     0.43900000323699995,
+     0.43900003223699996,
+     0.066025515248
+    ],
+    "size": [
+     0.8780000132369999,
+     0.8780000132369999,
+     0.066025515248
+    ]
+   },
+   "tris": 2920,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 1413520,
+  "bytes": 103232,
+  "srcTris": 2920,
+  "tris": 2920,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 1340070,
+   "after": 83776,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   1.0001,
+   1.0069
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07HSLGGDB.jpg",
+  "bytes": 14301,
+  "mime": "image/jpeg"
+ }
+}

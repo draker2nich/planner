@@ -1,0 +1,76 @@
+{
+ "id": "abo-B07HKC3S7C",
+ "source": "abo",
+ "typeId": "chandelier",
+ "formId": "round",
+ "name": "Rivet Mid-Century Outer Frosted Glass Finish Pendant Light with Bulb",
+ "brand": "Rivet",
+ "price": 12490,
+ "currency": "RUB",
+ "dims": {
+  "H": 962,
+  "DIA": 242
+ },
+ "colors": [
+  "зелёный"
+ ],
+ "materials": [
+  "стекло"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07HKC3S7C",
+ "model": {
+  "file": "models/abo-B07HKC3S7C.glb",
+  "bytes": 132616,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.121000051,
+     -0.962000012,
+     -0.120999999
+    ],
+    "max": [
+     0.1209826149445,
+     -8.07649991330095e-9,
+     0.1209826669445
+    ],
+    "size": [
+     0.2419826659445,
+     0.9620000039235,
+     0.2419826659445
+    ]
+   },
+   "tris": 13304,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 4,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 4516820,
+  "bytes": 132616,
+  "srcTris": 13304,
+  "tris": 13304,
+  "textures": {
+   "images": 4,
+   "resized": 4,
+   "before": 4185416,
+   "after": 59546,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9987,
+   0.9997,
+   0.9987
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07HKC3S7C.jpg",
+  "bytes": 3242,
+  "mime": "image/jpeg"
+ }
+}

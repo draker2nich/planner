@@ -1,0 +1,75 @@
+{
+ "id": "abo-B01557LJIO",
+ "source": "abo",
+ "typeId": "sideboard",
+ "formId": "rect",
+ "name": "Movian Minho 2-Door 4-Drawer Sideboard Storage Cabinet",
+ "brand": "Movian",
+ "price": 37090,
+ "currency": "RUB",
+ "dims": {
+  "H": 900,
+  "W": 1450,
+  "D": 380
+ },
+ "colors": [
+  "натуральное дерево"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.co.uk/dp/B01557LJIO",
+ "model": {
+  "file": "models/abo-B01557LJIO.glb",
+  "bytes": 189860,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.724999964,
+     -2.98023224e-8,
+     -0.189999983
+    ],
+    "max": [
+     0.724999912093,
+     0.9000212568966777,
+     0.18995786770300002
+    ],
+    "size": [
+     1.449999876093,
+     0.9000212866990001,
+     0.37995785070300003
+    ]
+   },
+   "tris": 3638,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 34806796,
+  "bytes": 189860,
+  "srcTris": 3638,
+  "tris": 3638,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 34653995,
+   "after": 161122,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0001,
+   1.0001,
+   1
+  ]
+ },
+ "image": {
+  "file": "images/abo-B01557LJIO.jpg",
+  "bytes": 8654,
+  "mime": "image/jpeg"
+ }
+}

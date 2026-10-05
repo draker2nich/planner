@@ -1,0 +1,77 @@
+{
+ "id": "abo-B078JH73F4",
+ "source": "abo",
+ "typeId": "plant",
+ "formId": "round",
+ "name": "Rivet Mid-Century Modern Ceramic Stoneware Indoor Planter Flower Pot",
+ "brand": "Rivet",
+ "price": 2990,
+ "currency": "RUB",
+ "dims": {
+  "H": 202,
+  "DIA": 230
+ },
+ "colors": [
+  "красный",
+  "оранжевый"
+ ],
+ "materials": [
+  "камень"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B078JH73F4",
+ "model": {
+  "file": "models/abo-B078JH73F4.glb",
+  "bytes": 53936,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.115000017,
+     0,
+     -0.115000054
+    ],
+    "max": [
+     0.11499999927539999,
+     0.2020063623382,
+     0.11499996227539998
+    ],
+    "size": [
+     0.23000001627539998,
+     0.2020063623382,
+     0.23000001627539998
+    ]
+   },
+   "tris": 3920,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 1783396,
+  "bytes": 53936,
+  "srcTris": 3920,
+  "tris": 3920,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 1689031,
+   "after": 29154,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9986,
+   0.9992,
+   0.9986
+  ]
+ },
+ "image": {
+  "file": "images/abo-B078JH73F4.jpg",
+  "bytes": 13972,
+  "mime": "image/jpeg"
+ }
+}

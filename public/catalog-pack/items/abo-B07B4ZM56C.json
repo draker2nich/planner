@@ -1,0 +1,75 @@
+{
+ "id": "abo-B07B4ZM56C",
+ "source": "abo",
+ "typeId": "bed",
+ "formId": "double",
+ "name": "Stone & Beam Prudence Tufted Queen Bed",
+ "brand": "Stone & Beam",
+ "price": 73890,
+ "currency": "RUB",
+ "dims": {
+  "H": 1426,
+  "W": 1696,
+  "L": 2233
+ },
+ "colors": [],
+ "materials": [
+  "камень"
+ ],
+ "styleTags": [
+  "классика"
+ ],
+ "url": "https://www.amazon.com/dp/B07B4ZM56C",
+ "model": {
+  "file": "models/abo-B07B4ZM56C.glb",
+  "bytes": 245712,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.847950757,
+     0,
+     -1.11648738
+    ],
+    "max": [
+     0.8480086539389999,
+     1.425952532126,
+     1.116487226559
+    ],
+    "size": [
+     1.695959410939,
+     1.425952532126,
+     2.232974606559
+    ]
+   },
+   "tris": 29997,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2401592,
+  "bytes": 245712,
+  "srcTris": 65470,
+  "tris": 29997,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 828390,
+   "after": 77772,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0001,
+   1.0001,
+   1
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07B4ZM56C.jpg",
+  "bytes": 5886,
+  "mime": "image/jpeg"
+ }
+}

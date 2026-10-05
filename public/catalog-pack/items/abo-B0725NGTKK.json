@@ -1,0 +1,78 @@
+{
+ "id": "abo-B0725NGTKK",
+ "source": "abo",
+ "typeId": "chandelier",
+ "formId": "round",
+ "name": "Stone & Beam Modern Smoked Glass Hanging Pendant With Light Bulb",
+ "brand": "Stone & Beam",
+ "price": 12790,
+ "currency": "RUB",
+ "dims": {
+  "H": 1457,
+  "DIA": 374
+ },
+ "colors": [
+  "чёрный",
+  "серебристый"
+ ],
+ "materials": [
+  "металл",
+  "стекло"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B0725NGTKK",
+ "model": {
+  "file": "models/abo-B0725NGTKK.glb",
+  "bytes": 152856,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.186999992,
+     -1.45700002,
+     -0.186999992
+    ],
+    "max": [
+     0.18696601297799997,
+     -5.837199834601847e-9,
+     0.18696601297799997
+    ],
+    "size": [
+     0.373966004978,
+     1.4570000141628001,
+     0.373966004978
+    ]
+   },
+   "tris": 19874,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 3020320,
+  "bytes": 152856,
+  "srcTris": 19874,
+  "tris": 19874,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 2467481,
+   "after": 36716,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0002,
+   0.9998,
+   1.0002
+  ]
+ },
+ "image": {
+  "file": "images/abo-B0725NGTKK.jpg",
+  "bytes": 3324,
+  "mime": "image/jpeg"
+ }
+}

@@ -1,0 +1,74 @@
+{
+ "id": "abo-B073P13J54",
+ "source": "abo",
+ "typeId": "picture",
+ "formId": "wall",
+ "name": "Rivet Patterned Color Circles Wall Art in White Frame",
+ "brand": "Rivet",
+ "price": 3090,
+ "currency": "RUB",
+ "dims": {
+  "H": 940,
+  "W": 659,
+  "D": 13,
+  "E": 1300
+ },
+ "colors": [
+  "разноцветный"
+ ],
+ "materials": [],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B073P13J54",
+ "model": {
+  "file": "models/abo-B073P13J54.glb",
+  "bytes": 57472,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.32949999,
+     -0.469999969,
+     0
+    ],
+    "max": [
+     0.329527023099,
+     0.4699999923095,
+     0.0130244760555
+    ],
+    "size": [
+     0.659027013099,
+     0.9399999613095,
+     0.0130244760555
+    ]
+   },
+   "tris": 244,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 817892,
+  "bytes": 57472,
+  "srcTris": 244,
+  "tris": 244,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 808126,
+   "after": 52564,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0002,
+   1.0001,
+   0.9964
+  ]
+ },
+ "image": {
+  "file": "images/abo-B073P13J54.jpg",
+  "bytes": 6551,
+  "mime": "image/jpeg"
+ }
+}

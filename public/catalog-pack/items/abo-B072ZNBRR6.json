@@ -1,0 +1,78 @@
+{
+ "id": "abo-B072ZNBRR6",
+ "source": "abo",
+ "typeId": "tv-stand",
+ "formId": "rect",
+ "name": "Rivet Industrial Metal Leg TV Media Console",
+ "brand": "Rivet",
+ "price": 36990,
+ "currency": "RUB",
+ "dims": {
+  "H": 415,
+  "W": 1796,
+  "D": 467
+ },
+ "colors": [
+  "коричневый"
+ ],
+ "materials": [
+  "дерево",
+  "ЛДСП / МДФ"
+ ],
+ "styleTags": [
+  "лофт"
+ ],
+ "url": "https://www.amazon.com/dp/B072ZNBRR6",
+ "model": {
+  "file": "models/abo-B072ZNBRR6.glb",
+  "bytes": 188288,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.897963464,
+     0,
+     -0.233499989
+    ],
+    "max": [
+     0.8980365908050001,
+     0.41504341131,
+     0.23350606810000005
+    ],
+    "size": [
+     1.7960000548050001,
+     0.41504341131,
+     0.46700605710000004
+    ]
+   },
+   "tris": 17910,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 35393340,
+  "bytes": 188288,
+  "srcTris": 17910,
+  "tris": 17910,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 34948604,
+   "after": 103542,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0001,
+   0.9991,
+   1.0003
+  ]
+ },
+ "image": {
+  "file": "images/abo-B072ZNBRR6.jpg",
+  "bytes": 3815,
+  "mime": "image/jpeg"
+ }
+}

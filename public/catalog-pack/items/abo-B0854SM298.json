@@ -1,0 +1,76 @@
+{
+ "id": "abo-B0854SM298",
+ "source": "abo",
+ "typeId": "office-chair",
+ "formId": "round",
+ "name": "Rivet Coen Contemporary Modern Upholstered Accent Swivel Chair",
+ "brand": "Rivet",
+ "price": 22790,
+ "currency": "RUB",
+ "dims": {
+  "H": 698,
+  "DIA": 773
+ },
+ "colors": [
+  "зелёный"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B0854SM298",
+ "model": {
+  "file": "models/abo-B0854SM298.glb",
+  "bytes": 300116,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.386479139,
+     1.58372176e-10,
+     -0.458069056
+    ],
+    "max": [
+     0.38652082649049996,
+     0.6979789105838722,
+     0.3149309094905
+    ],
+    "size": [
+     0.7729999654905,
+     0.6979789104255,
+     0.7729999654905
+    ]
+   },
+   "tris": 29984,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 48953816,
+  "bytes": 300116,
+  "srcTris": 471448,
+  "tris": 29984,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 35666502,
+   "after": 141112,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9996,
+   1.0003,
+   1.008
+  ]
+ },
+ "image": {
+  "file": "images/abo-B0854SM298.jpg",
+  "bytes": 3949,
+  "mime": "image/jpeg"
+ }
+}

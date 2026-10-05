@@ -1,0 +1,79 @@
+{
+ "id": "abo-B07J2WK7QG",
+ "source": "abo",
+ "typeId": "armchair",
+ "formId": "rect",
+ "name": "Rivet Abel Modern Contemporary Accent Chair",
+ "brand": "Rivet",
+ "price": 44790,
+ "currency": "RUB",
+ "dims": {
+  "H": 828,
+  "W": 847,
+  "D": 849
+ },
+ "colors": [
+  "синий"
+ ],
+ "materials": [
+  "металл",
+  "ткань"
+ ],
+ "styleTags": [
+  "современный",
+  "классика"
+ ],
+ "url": "https://www.amazon.com/dp/B07J2WK7QG",
+ "model": {
+  "file": "models/abo-B07J2WK7QG.glb",
+  "bytes": 717020,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.423500031,
+     0,
+     -0.453719854
+    ],
+    "max": [
+     0.4234788628488,
+     0.8280120390306,
+     0.3952800981491
+    ],
+    "size": [
+     0.8469788938488,
+     0.8280120390306,
+     0.8489999521491
+    ]
+   },
+   "tris": 29999,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 4139880,
+  "bytes": 717020,
+  "srcTris": 32866,
+  "tris": 29999,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 3348521,
+   "after": 559400,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0005,
+   1,
+   0.9998
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07J2WK7QG.jpg",
+  "bytes": 5088,
+  "mime": "image/jpeg"
+ }
+}

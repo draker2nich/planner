@@ -1,0 +1,75 @@
+{
+ "id": "abo-B07RT64HF7",
+ "source": "abo",
+ "typeId": "small-table",
+ "formId": "rect",
+ "name": "Movian Ljungan 2-Tier Side Table",
+ "brand": "Movian",
+ "price": 7490,
+ "currency": "RUB",
+ "dims": {
+  "H": 532,
+  "W": 418,
+  "D": 418
+ },
+ "colors": [
+  "чёрный"
+ ],
+ "materials": [
+  "металл"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.co.uk/dp/B07RT64HF7",
+ "model": {
+  "file": "models/abo-B07RT64HF7.glb",
+  "bytes": 281912,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.209000051,
+     0,
+     -0.209000051
+    ],
+    "max": [
+     0.20898836447919997,
+     0.5320000163763,
+     0.20898836447919997
+    ],
+    "size": [
+     0.41798841547919996,
+     0.5320000163763,
+     0.41798841547919996
+    ]
+   },
+   "tris": 29994,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 34160036,
+  "bytes": 281912,
+  "srcTris": 177696,
+  "tris": 29994,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 29094553,
+   "after": 117382,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0003,
+   0.9994,
+   1.0003
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07RT64HF7.jpg",
+  "bytes": 4256,
+  "mime": "image/jpeg"
+ }
+}

@@ -1,0 +1,76 @@
+{
+ "id": "abo-B07B7BRXDH",
+ "source": "abo",
+ "typeId": "bar-stool",
+ "formId": "round",
+ "name": "Stone & Beam Alaina Contemporary High-Back Swivel Seat Bar Stool",
+ "brand": "Stone & Beam",
+ "price": 13590,
+ "currency": "RUB",
+ "dims": {
+  "H": 1068,
+  "DIA": 572
+ },
+ "colors": [
+  "синий"
+ ],
+ "materials": [
+  "камень"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07B7BRXDH",
+ "model": {
+  "file": "models/abo-B07B7BRXDH.glb",
+  "bytes": 359136,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.29097864,
+     0,
+     -0.330274642
+    ],
+    "max": [
+     0.28099424620819996,
+     1.0679999766069,
+     0.24169824420819996
+    ],
+    "size": [
+     0.5719728862082,
+     1.0679999766069,
+     0.5719728862082
+    ]
+   },
+   "tris": 24060,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 4429024,
+  "bytes": 359136,
+  "srcTris": 24060,
+  "tris": 24060,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 3868886,
+   "after": 236366,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.1707,
+   1.0004,
+   0.9992
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07B7BRXDH.jpg",
+  "bytes": 7712,
+  "mime": "image/jpeg"
+ }
+}

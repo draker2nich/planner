@@ -1,0 +1,76 @@
+{
+ "id": "abo-B071J7Q32V",
+ "source": "abo",
+ "typeId": "pouf",
+ "formId": "rect",
+ "name": "Stone & Beam Kristin Round Arm Ottoman",
+ "brand": "Stone & Beam",
+ "price": 16790,
+ "currency": "RUB",
+ "dims": {
+  "H": 504,
+  "W": 843,
+  "D": 619
+ },
+ "colors": [
+  "серый"
+ ],
+ "materials": [
+  "ткань",
+  "камень"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B071J7Q32V",
+ "model": {
+  "file": "models/abo-B071J7Q32V.glb",
+  "bytes": 217264,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.42160219,
+     0,
+     -0.309500009
+    ],
+    "max": [
+     0.42139784718680007,
+     0.504009361182,
+     0.309513019588
+    ],
+    "size": [
+     0.8430000371868,
+     0.504009361182,
+     0.619013028588
+    ]
+   },
+   "tris": 3772,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 3609900,
+  "bytes": 217264,
+  "srcTris": 3772,
+  "tris": 3772,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 3504775,
+   "after": 189616,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9998,
+   1.0006,
+   1.0004
+  ]
+ },
+ "image": {
+  "file": "images/abo-B071J7Q32V.jpg",
+  "bytes": 6310,
+  "mime": "image/jpeg"
+ }
+}

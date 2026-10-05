@@ -1,0 +1,74 @@
+{
+ "id": "abo-B0842HBF31",
+ "source": "abo",
+ "typeId": "plant",
+ "formId": "round",
+ "name": "Rivet Geometric Ceramic Planter",
+ "brand": "Rivet",
+ "price": 4190,
+ "currency": "RUB",
+ "dims": {
+  "H": 220,
+  "DIA": 260
+ },
+ "colors": [
+  "бежевый"
+ ],
+ "materials": [
+  "камень"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B0842HBF31",
+ "model": {
+  "file": "models/abo-B0842HBF31.glb",
+  "bytes": 291608,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.129999995,
+     0,
+     -0.13000001
+    ],
+    "max": [
+     0.1300000400662,
+     0.22000735433819998,
+     0.1300000250662
+    ],
+    "size": [
+     0.2600000350662,
+     0.22000735433819998,
+     0.2600000350662
+    ]
+   },
+   "tris": 5120,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 36601644,
+  "bytes": 291608,
+  "srcTris": 5120,
+  "tris": 5120,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 36478408,
+   "after": 259066,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9993,
+   1.002,
+   0.9993
+  ]
+ },
+ "image": {
+  "file": "images/abo-B0842HBF31.jpg",
+  "bytes": 12601,
+  "mime": "image/jpeg"
+ }
+}

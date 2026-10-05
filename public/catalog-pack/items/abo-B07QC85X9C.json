@@ -1,0 +1,78 @@
+{
+ "id": "abo-B07QC85X9C",
+ "source": "abo",
+ "typeId": "bookcase",
+ "formId": "rect",
+ "name": "Ravenna Home Springdale Modern Bookcase with Decorative Open Sides",
+ "brand": "Ravenna Home",
+ "price": 24990,
+ "currency": "RUB",
+ "dims": {
+  "H": 1869,
+  "W": 761,
+  "D": 361
+ },
+ "colors": [
+  "белый"
+ ],
+ "materials": [
+  "дерево",
+  "ЛДСП / МДФ"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07QC85X9C",
+ "model": {
+  "file": "models/abo-B07QC85X9C.glb",
+  "bytes": 207256,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.380500019,
+     0,
+     -0.185546488
+    ],
+    "max": [
+     0.3805388349249999,
+     1.8690000815249999,
+     0.17540793169999996
+    ],
+    "size": [
+     0.7610388539249999,
+     1.8690000815249999,
+     0.3609544197
+    ]
+   },
+   "tris": 29996,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 15726168,
+  "bytes": 207256,
+  "srcTris": 94008,
+  "tris": 29996,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 13380664,
+   "after": 21826,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9995,
+   0.9997,
+   1.0011
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07QC85X9C.jpg",
+  "bytes": 4253,
+  "mime": "image/jpeg"
+ }
+}

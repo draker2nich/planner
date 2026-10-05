@@ -1,0 +1,79 @@
+{
+ "id": "abo-B07HSCJZQM",
+ "source": "abo",
+ "typeId": "bookcase",
+ "formId": "rect",
+ "name": "Rivet Roxmere Modern Ladder Bookcase",
+ "brand": "Rivet",
+ "price": 22190,
+ "currency": "RUB",
+ "dims": {
+  "H": 2005,
+  "W": 652,
+  "D": 454
+ },
+ "colors": [
+  "разноцветный"
+ ],
+ "materials": [
+  "дерево",
+  "ЛДСП / МДФ",
+  "металл"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07HSCJZQM",
+ "model": {
+  "file": "models/abo-B07HSCJZQM.glb",
+  "bytes": 249500,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.326000005,
+     0,
+     -0.228721127
+    ],
+    "max": [
+     0.32605640588,
+     2.00500003368,
+     0.2253196546
+    ],
+    "size": [
+     0.65205641088,
+     2.00500003368,
+     0.4540407816
+    ]
+   },
+   "tris": 17976,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2906528,
+  "bytes": 249500,
+  "srcTris": 17976,
+  "tris": 17976,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 2375149,
+   "after": 147414,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9998,
+   1,
+   1.0007
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07HSCJZQM.jpg",
+  "bytes": 5154,
+  "mime": "image/jpeg"
+ }
+}

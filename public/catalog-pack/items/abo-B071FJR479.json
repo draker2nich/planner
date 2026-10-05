@@ -1,0 +1,77 @@
+{
+ "id": "abo-B071FJR479",
+ "source": "abo",
+ "typeId": "dresser",
+ "formId": "rect",
+ "name": "Rivet West, Mid-Century, Oak Distinct Grain, 6-Drawer Dresser, 60\"W, Dark Oak Finish",
+ "brand": "Rivet",
+ "price": 40990,
+ "currency": "RUB",
+ "dims": {
+  "H": 889,
+  "W": 1523,
+  "D": 512
+ },
+ "colors": [
+  "коричневый"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B071FJR479",
+ "model": {
+  "file": "models/abo-B071FJR479.glb",
+  "bytes": 124476,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.76148659,
+     0,
+     -0.239142701
+    ],
+    "max": [
+     0.7615134324089002,
+     0.8889976936029,
+     0.27289319739640006
+    ],
+    "size": [
+     1.5230000224089002,
+     0.8889976936029,
+     0.5120358983964001
+    ]
+   },
+   "tris": 5920,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 3002480,
+  "bytes": 124476,
+  "srcTris": 5920,
+  "tris": 5920,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 2810866,
+   "after": 79836,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9998,
+   1.0003,
+   0.9993
+  ]
+ },
+ "image": {
+  "file": "images/abo-B071FJR479.jpg",
+  "bytes": 8369,
+  "mime": "image/jpeg"
+ }
+}

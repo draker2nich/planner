@@ -1,0 +1,78 @@
+{
+ "id": "abo-B075QDQXW1",
+ "source": "abo",
+ "typeId": "bench",
+ "formId": "rect",
+ "name": "Stone & Beam Nori Tufted Storage Bench",
+ "brand": "Stone & Beam",
+ "price": 21990,
+ "currency": "RUB",
+ "dims": {
+  "H": 467,
+  "W": 1480,
+  "D": 455
+ },
+ "colors": [
+  "бежевый"
+ ],
+ "materials": [
+  "дерево",
+  "ткань"
+ ],
+ "styleTags": [
+  "классика"
+ ],
+ "url": "https://www.amazon.com/dp/B075QDQXW1",
+ "model": {
+  "file": "models/abo-B075QDQXW1.glb",
+  "bytes": 446432,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.739951193,
+     0,
+     -0.225453466
+    ],
+    "max": [
+     0.7399999755651998,
+     0.467029697948,
+     0.22956173488279996
+    ],
+    "size": [
+     1.4799511685651998,
+     0.467029697948,
+     0.45501520088279995
+    ]
+   },
+   "tris": 30000,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 3210836,
+  "bytes": 446432,
+  "srcTris": 39706,
+  "tris": 30000,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 2225589,
+   "after": 279594,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9997,
+   0.9995,
+   1.0009
+  ]
+ },
+ "image": {
+  "file": "images/abo-B075QDQXW1.jpg",
+  "bytes": 4769,
+  "mime": "image/jpeg"
+ }
+}

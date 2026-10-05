@@ -1,0 +1,75 @@
+{
+ "id": "abo-B07GFFKRXS",
+ "source": "abo",
+ "typeId": "dresser",
+ "formId": "rect",
+ "name": "Movian Havel Chest of 4 Drawers",
+ "brand": "Movian",
+ "price": 29690,
+ "currency": "RUB",
+ "dims": {
+  "H": 816,
+  "W": 994,
+  "D": 404
+ },
+ "colors": [
+  "натуральное дерево"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.co.uk/dp/B07GFFKRXS",
+ "model": {
+  "file": "models/abo-B07GFFKRXS.glb",
+  "bytes": 120588,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.496999979,
+     0,
+     -0.200998783
+    ],
+    "max": [
+     0.4969999836946,
+     0.8159864187438001,
+     0.2030203680458
+    ],
+    "size": [
+     0.9939999626946,
+     0.8159864187438001,
+     0.4040191510458
+    ]
+   },
+   "tris": 1788,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2319720,
+  "bytes": 120588,
+  "srcTris": 1788,
+  "tris": 1788,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 2254098,
+   "after": 102626,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0002,
+   1.0005,
+   0.9995
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07GFFKRXS.jpg",
+  "bytes": 4936,
+  "mime": "image/jpeg"
+ }
+}

@@ -1,0 +1,76 @@
+{
+ "id": "abo-B07DBB7FVL",
+ "source": "abo",
+ "typeId": "small-table",
+ "formId": "round",
+ "name": "Ravenna Home Morley Classic Round Pedestal Side End Table",
+ "brand": "Ravenna Home",
+ "price": 7890,
+ "currency": "RUB",
+ "dims": {
+  "H": 665,
+  "DIA": 481
+ },
+ "colors": [
+  "чёрный"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "классика"
+ ],
+ "url": "https://www.amazon.com/dp/B07DBB7FVL",
+ "model": {
+  "file": "models/abo-B07DBB7FVL.glb",
+  "bytes": 94748,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.240500003,
+     0,
+     -0.240500003
+    ],
+    "max": [
+     0.24050161690000002,
+     0.664999961082,
+     0.24050161690000002
+    ],
+    "size": [
+     0.4810016199,
+     0.664999961082,
+     0.4810016199
+    ]
+   },
+   "tris": 15008,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2227236,
+  "bytes": 94748,
+  "srcTris": 15008,
+  "tris": 15008,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 1853610,
+   "after": 7532,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.999,
+   1.0006,
+   0.999
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07DBB7FVL.jpg",
+  "bytes": 4943,
+  "mime": "image/jpeg"
+ }
+}

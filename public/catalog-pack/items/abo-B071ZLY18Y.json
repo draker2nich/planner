@@ -1,0 +1,78 @@
+{
+ "id": "abo-B071ZLY18Y",
+ "source": "abo",
+ "typeId": "sofa",
+ "formId": "straight",
+ "name": "Rivet North End Modern Wood Accent Loveseat Sofa Couch",
+ "brand": "Rivet",
+ "price": 86990,
+ "currency": "RUB",
+ "dims": {
+  "H": 903,
+  "W": 1489,
+  "D": 955
+ },
+ "colors": [
+  "синий"
+ ],
+ "materials": [
+  "ткань"
+ ],
+ "styleTags": [
+  "современный",
+  "классика"
+ ],
+ "url": "https://www.amazon.com/dp/B071ZLY18Y",
+ "model": {
+  "file": "models/abo-B071ZLY18Y.glb",
+  "bytes": 244668,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.744500041,
+     0,
+     -0.466642886
+    ],
+    "max": [
+     0.7444999909126999,
+     0.9029613207015,
+     0.48839662662520006
+    ],
+    "size": [
+     1.4890000319127,
+     0.9029613207015,
+     0.9550395126252
+    ]
+   },
+   "tris": 18888,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 3637896,
+  "bytes": 244668,
+  "srcTris": 18888,
+  "tris": 18888,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 3181857,
+   "after": 140306,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9997,
+   1.0005,
+   0.9996
+  ]
+ },
+ "image": {
+  "file": "images/abo-B071ZLY18Y.jpg",
+  "bytes": 6308,
+  "mime": "image/jpeg"
+ }
+}

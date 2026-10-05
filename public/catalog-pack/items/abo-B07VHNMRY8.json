@@ -1,0 +1,76 @@
+{
+ "id": "abo-B07VHNMRY8",
+ "source": "abo",
+ "typeId": "tv-stand",
+ "formId": "rect",
+ "name": "Movian 2-Door 1-Shelf TV Stand",
+ "brand": "Movian",
+ "price": 28990,
+ "currency": "RUB",
+ "dims": {
+  "H": 580,
+  "W": 1760,
+  "D": 400
+ },
+ "colors": [
+  "бежевый"
+ ],
+ "materials": [
+  "ЛДСП / МДФ",
+  "металл"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.co.uk/dp/B07VHNMRY8",
+ "model": {
+  "file": "models/abo-B07VHNMRY8.glb",
+  "bytes": 88152,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.880000055,
+     0,
+     -0.200000003
+    ],
+    "max": [
+     0.8800000283710001,
+     0.580006131363,
+     0.199956067951
+    ],
+    "size": [
+     1.7600000833710001,
+     0.580006131363,
+     0.399956070951
+    ]
+   },
+   "tris": 8972,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 18572212,
+  "bytes": 88152,
+  "srcTris": 8972,
+  "tris": 8972,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 18274864,
+   "after": 38508,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   1,
+   1
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07VHNMRY8.jpg",
+  "bytes": 4103,
+  "mime": "image/jpeg"
+ }
+}

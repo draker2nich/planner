@@ -1,0 +1,78 @@
+{
+ "id": "abo-B07P8ST73W",
+ "source": "abo",
+ "typeId": "sofa",
+ "formId": "straight",
+ "name": "Stone & Beam Lauren Down-Filled Oversized Leather Sofa Couch with Hardwood Frame",
+ "brand": "Stone & Beam",
+ "price": 100490,
+ "currency": "RUB",
+ "dims": {
+  "H": 980,
+  "W": 1855,
+  "D": 962
+ },
+ "colors": [
+  "коричневый"
+ ],
+ "materials": [
+  "ткань"
+ ],
+ "styleTags": [
+  "современный",
+  "классика"
+ ],
+ "url": "https://www.amazon.com/dp/B07P8ST73W",
+ "model": {
+  "file": "models/abo-B07P8ST73W.glb",
+  "bytes": 286472,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.927550435,
+     0,
+     -0.481137693
+    ],
+    "max": [
+     0.9274496030239999,
+     0.97998079284,
+     0.48083998648799997
+    ],
+    "size": [
+     1.855000038024,
+     0.97998079284,
+     0.961977679488
+    ]
+   },
+   "tris": 29998,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 40798308,
+  "bytes": 286472,
+  "srcTris": 36346,
+  "tris": 29998,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 39926726,
+   "after": 121452,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0002,
+   1.0002,
+   1.0003
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07P8ST73W.jpg",
+  "bytes": 4875,
+  "mime": "image/jpeg"
+ }
+}

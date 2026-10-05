@@ -1,0 +1,77 @@
+{
+ "id": "abo-B07B4GSKS1",
+ "source": "abo",
+ "typeId": "pouf",
+ "formId": "rect",
+ "name": "Stone & Beam Andover Modern Square Ottoman",
+ "brand": "Stone & Beam",
+ "price": 21790,
+ "currency": "RUB",
+ "dims": {
+  "H": 479,
+  "W": 838,
+  "D": 838
+ },
+ "colors": [
+  "бежевый"
+ ],
+ "materials": [
+  "ткань"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07B4GSKS1",
+ "model": {
+  "file": "models/abo-B07B4GSKS1.glb",
+  "bytes": 102092,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.416170746,
+     0,
+     -0.420738667
+    ],
+    "max": [
+     0.4218292438209,
+     0.4790252032395,
+     0.41726132282089995
+    ],
+    "size": [
+     0.8379999898209,
+     0.4790252032395,
+     0.8379999898209
+    ]
+   },
+   "tris": 6096,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 1777236,
+  "bytes": 102092,
+  "srcTris": 6096,
+  "tris": 6096,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 1628665,
+   "after": 64354,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9998,
+   0.9991,
+   0.9998
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07B4GSKS1.jpg",
+  "bytes": 3181,
+  "mime": "image/jpeg"
+ }
+}

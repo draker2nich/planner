@@ -1,0 +1,76 @@
+{
+ "id": "abo-B075Z7SQND",
+ "source": "abo",
+ "typeId": "bookcase",
+ "formId": "rect",
+ "name": "Stone & Beam Bryson A-Frame Bookcase Shelf Stand",
+ "brand": "Stone & Beam",
+ "price": 33590,
+ "currency": "RUB",
+ "dims": {
+  "H": 1808,
+  "W": 1746,
+  "D": 508
+ },
+ "colors": [
+  "коричневый",
+  "натуральное дерево"
+ ],
+ "materials": [
+  "камень"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B075Z7SQND",
+ "model": {
+  "file": "models/abo-B075Z7SQND.glb",
+  "bytes": 403344,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.872999966,
+     0,
+     -0.254000008
+    ],
+    "max": [
+     0.8729787774050001,
+     1.8080001108150001,
+     0.25397926991499997
+    ],
+    "size": [
+     1.745978743405,
+     1.8080001108150001,
+     0.507979277915
+    ]
+   },
+   "tris": 2988,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 3061968,
+  "bytes": 403344,
+  "srcTris": 2988,
+  "tris": 2988,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 2946009,
+   "after": 374500,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9998,
+   1.0001,
+   1
+  ]
+ },
+ "image": {
+  "file": "images/abo-B075Z7SQND.jpg",
+  "bytes": 9534,
+  "mime": "image/jpeg"
+ }
+}

@@ -1,0 +1,75 @@
+{
+ "id": "abo-B07L48L3BH",
+ "source": "abo",
+ "typeId": "island",
+ "formId": "rect",
+ "name": "Civet Home 2-Toned Kitchen Cart",
+ "brand": "Civet Home",
+ "price": 37590,
+ "currency": "RUB",
+ "dims": {
+  "H": 878,
+  "W": 914,
+  "D": 472
+ },
+ "colors": [
+  "коричневый"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B07L48L3BH",
+ "model": {
+  "file": "models/abo-B07L48L3BH.glb",
+  "bytes": 209644,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.406305909,
+     0,
+     -0.238861203
+    ],
+    "max": [
+     0.5076940658412001,
+     0.8780157238632,
+     0.23311827494400003
+    ],
+    "size": [
+     0.9139999748412002,
+     0.8780157238632,
+     0.471979477944
+    ]
+   },
+   "tris": 30000,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 37722344,
+  "bytes": 209644,
+  "srcTris": 37812,
+  "tris": 30000,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 36704264,
+   "after": 39820,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0002,
+   0.9995,
+   0.9991
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07L48L3BH.jpg",
+  "bytes": 6750,
+  "mime": "image/jpeg"
+ }
+}

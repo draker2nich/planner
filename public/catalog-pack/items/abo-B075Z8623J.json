@@ -1,0 +1,74 @@
+{
+ "id": "abo-B075Z8623J",
+ "source": "abo",
+ "typeId": "office-chair",
+ "formId": "round",
+ "name": "Stone & Beam Benton Leather Swivel Office Chair with Wheels",
+ "brand": "Stone & Beam",
+ "price": 26490,
+ "currency": "RUB",
+ "dims": {
+  "H": 1037,
+  "DIA": 717
+ },
+ "colors": [
+  "серый"
+ ],
+ "materials": [
+  "кожа"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B075Z8623J",
+ "model": {
+  "file": "models/abo-B075Z8623J.glb",
+  "bytes": 325712,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.358135492,
+     0.000281007524,
+     -0.402583361
+    ],
+    "max": [
+     0.358279603432,
+     1.0371209817698,
+     0.31440132240540003
+    ],
+    "size": [
+     0.716415095432,
+     1.0368399742457999,
+     0.7169846834054
+    ]
+   },
+   "tris": 29999,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 11060188,
+  "bytes": 325712,
+  "srcTris": 311208,
+  "tris": 29999,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 2160387,
+   "after": 155066,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.2072,
+   0.9999,
+   0.9994
+  ]
+ },
+ "image": {
+  "file": "images/abo-B075Z8623J.jpg",
+  "bytes": 7756,
+  "mime": "image/jpeg"
+ }
+}

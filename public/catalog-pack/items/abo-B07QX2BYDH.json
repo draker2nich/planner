@@ -1,0 +1,75 @@
+{
+ "id": "abo-B07QX2BYDH",
+ "source": "abo",
+ "typeId": "desk",
+ "formId": "rect",
+ "name": "AmazonBasics Gaming Computer Desk with Storage for Controller",
+ "brand": "AmazonBasics",
+ "price": 16590,
+ "currency": "RUB",
+ "dims": {
+  "H": 880,
+  "W": 1290,
+  "D": 580
+ },
+ "colors": [
+  "чёрный"
+ ],
+ "materials": [
+  "металл"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B07QX2BYDH",
+ "model": {
+  "file": "models/abo-B07QX2BYDH.glb",
+  "bytes": 285012,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.644999981,
+     0,
+     -0.289999992
+    ],
+    "max": [
+     0.6450000373438001,
+     0.8800000125136,
+     0.2900000162476
+    ],
+    "size": [
+     1.2900000183438,
+     0.8800000125136,
+     0.5800000082476
+    ]
+   },
+   "tris": 30004,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 11404852,
+  "bytes": 285012,
+  "srcTris": 127570,
+  "tris": 30004,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 7090651,
+   "after": 55286,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   1,
+   1
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07QX2BYDH.jpg",
+  "bytes": 7649,
+  "mime": "image/jpeg"
+ }
+}

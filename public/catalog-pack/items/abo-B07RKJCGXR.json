@@ -1,0 +1,75 @@
+{
+ "id": "abo-B07RKJCGXR",
+ "source": "abo",
+ "typeId": "bench",
+ "formId": "rect",
+ "name": "AmazonBasics Premium Adjustable Padded Piano and Keyboard X-Style Bench",
+ "brand": "AmazonBasics",
+ "price": 7890,
+ "currency": "RUB",
+ "dims": {
+  "H": 561,
+  "W": 600,
+  "D": 300
+ },
+ "colors": [
+  "чёрный"
+ ],
+ "materials": [
+  "металл"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B07RKJCGXR",
+ "model": {
+  "file": "models/abo-B07RKJCGXR.glb",
+  "bytes": 186928,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.299954593,
+     0,
+     -0.150000006
+    ],
+    "max": [
+     0.2999999890544,
+     0.5609903096191999,
+     0.1499955953056
+    ],
+    "size": [
+     0.5999545820544,
+     0.5609903096191999,
+     0.2999956013056
+    ]
+   },
+   "tris": 29991,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 24771472,
+  "bytes": 186928,
+  "srcTris": 337388,
+  "tris": 29991,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 15075405,
+   "after": 26606,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0001,
+   0.9994,
+   0.9991
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07RKJCGXR.jpg",
+  "bytes": 5747,
+  "mime": "image/jpeg"
+ }
+}

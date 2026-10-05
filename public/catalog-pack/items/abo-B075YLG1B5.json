@@ -1,0 +1,78 @@
+{
+ "id": "abo-B075YLG1B5",
+ "source": "abo",
+ "typeId": "picture",
+ "formId": "wall",
+ "name": "Rivet Modern Hawaiian Coral Print",
+ "brand": "Rivet",
+ "price": 3290,
+ "currency": "RUB",
+ "dims": {
+  "H": 761,
+  "W": 1056,
+  "D": 20,
+  "E": 1300
+ },
+ "colors": [
+  "разноцветный"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B075YLG1B5",
+ "model": {
+  "file": "models/abo-B075YLG1B5.glb",
+  "bytes": 522608,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.527999997,
+     -0.380500019,
+     0
+    ],
+    "max": [
+     0.5280000317247,
+     0.38048004198540003,
+     0.019981688879000002
+    ],
+    "size": [
+     1.0560000287247,
+     0.7609800609854,
+     0.019981688879000002
+    ]
+   },
+   "tris": 260,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 3258740,
+  "bytes": 522608,
+  "srcTris": 260,
+  "tris": 260,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 3246412,
+   "after": 516914,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0003,
+   1.0004,
+   0.9823
+  ]
+ },
+ "image": {
+  "file": "images/abo-B075YLG1B5.jpg",
+  "bytes": 16222,
+  "mime": "image/jpeg"
+ }
+}

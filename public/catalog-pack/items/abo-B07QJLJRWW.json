@@ -1,0 +1,79 @@
+{
+ "id": "abo-B07QJLJRWW",
+ "source": "abo",
+ "typeId": "tv-stand",
+ "formId": "rect",
+ "name": "Rivet Campbell Mid-Century Media Console with Tapered Legs",
+ "brand": "Rivet",
+ "price": 19290,
+ "currency": "RUB",
+ "dims": {
+  "H": 559,
+  "W": 508,
+  "D": 405
+ },
+ "colors": [
+  "белый",
+  "коричневый"
+ ],
+ "materials": [
+  "дерево",
+  "ЛДСП / МДФ"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07QJLJRWW",
+ "model": {
+  "file": "models/abo-B07QJLJRWW.glb",
+  "bytes": 36944,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.254089624,
+     0,
+     -0.202519462
+    ],
+    "max": [
+     0.2538998667696001,
+     0.5589999883986001,
+     0.20249365295400004
+    ],
+    "size": [
+     0.5079894907696001,
+     0.5589999883986001,
+     0.40501311495400005
+    ]
+   },
+   "tris": 2980,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 13701440,
+  "bytes": 36944,
+  "srcTris": 2980,
+  "tris": 2980,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 13612922,
+   "after": 13630,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9995,
+   0.9999,
+   0.9993
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07QJLJRWW.jpg",
+  "bytes": 4488,
+  "mime": "image/jpeg"
+ }
+}

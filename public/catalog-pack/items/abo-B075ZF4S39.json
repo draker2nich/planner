@@ -1,0 +1,76 @@
+{
+ "id": "abo-B075ZF4S39",
+ "source": "abo",
+ "typeId": "bookcase",
+ "formId": "rect",
+ "name": "Stone & Beam Barrett Reclaimed Wood 4-Shelf Bookcase",
+ "brand": "Stone & Beam",
+ "price": 24690,
+ "currency": "RUB",
+ "dims": {
+  "H": 1878,
+  "W": 1022,
+  "D": 381
+ },
+ "colors": [
+  "белый",
+  "коричневый"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B075ZF4S39",
+ "model": {
+  "file": "models/abo-B075ZF4S39.glb",
+  "bytes": 170424,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.510999978,
+     0,
+     -0.190500006
+    ],
+    "max": [
+     0.5110502319840001,
+     1.8780000661920002,
+     0.19053351777600003
+    ],
+    "size": [
+     1.022050209984,
+     1.8780000661920002,
+     0.381033523776
+    ]
+   },
+   "tris": 10480,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2076516,
+  "bytes": 170424,
+  "srcTris": 10480,
+  "tris": 10480,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 1800165,
+   "after": 111608,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0004,
+   0.9998,
+   0.9996
+  ]
+ },
+ "image": {
+  "file": "images/abo-B075ZF4S39.jpg",
+  "bytes": 6400,
+  "mime": "image/jpeg"
+ }
+}

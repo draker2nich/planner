@@ -1,0 +1,77 @@
+{
+ "id": "abo-B082QCSFK7",
+ "source": "abo",
+ "typeId": "armchair",
+ "formId": "rect",
+ "name": "Rivet Bigelow Modern Upholstered Chair with Square Legs",
+ "brand": "Rivet",
+ "price": 47490,
+ "currency": "RUB",
+ "dims": {
+  "H": 779,
+  "W": 1115,
+  "D": 953
+ },
+ "colors": [
+  "серый"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B082QCSFK7",
+ "model": {
+  "file": "models/abo-B082QCSFK7.glb",
+  "bytes": 258528,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.557471931,
+     0,
+     -0.476919383
+    ],
+    "max": [
+     0.5575280891352001,
+     0.7789959244624001,
+     0.4761017536632001
+    ],
+    "size": [
+     1.1150000201352002,
+     0.7789959244624001,
+     0.9530211366632001
+    ]
+   },
+   "tris": 30000,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 55022852,
+  "bytes": 258528,
+  "srcTris": 34488,
+  "tris": 30000,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 54195468,
+   "after": 93724,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0001,
+   1.0001,
+   1.0003
+  ]
+ },
+ "image": {
+  "file": "images/abo-B082QCSFK7.jpg",
+  "bytes": 4599,
+  "mime": "image/jpeg"
+ }
+}

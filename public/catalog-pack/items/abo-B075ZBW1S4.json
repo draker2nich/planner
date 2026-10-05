@@ -1,0 +1,77 @@
+{
+ "id": "abo-B075ZBW1S4",
+ "source": "abo",
+ "typeId": "small-table",
+ "formId": "rect",
+ "name": "Stone & Beam Larson Industrial Wood & Metal Side End Table",
+ "brand": "Stone & Beam",
+ "price": 6790,
+ "currency": "RUB",
+ "dims": {
+  "H": 718,
+  "W": 323,
+  "D": 414
+ },
+ "colors": [
+  "коричневый"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "лофт"
+ ],
+ "url": "https://www.amazon.com/dp/B075ZBW1S4",
+ "model": {
+  "file": "models/abo-B075ZBW1S4.glb",
+  "bytes": 313760,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.161773711,
+     0,
+     -0.206999287
+    ],
+    "max": [
+     0.16122328844599998,
+     0.7179999785514,
+     0.20698031364679995
+    ],
+    "size": [
+     0.32299699944599997,
+     0.7179999785514,
+     0.41397960064679995
+    ]
+   },
+   "tris": 552,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 1849824,
+  "bytes": 313760,
+  "srcTris": 552,
+  "tris": 552,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 1812855,
+   "after": 302140,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0007,
+   1,
+   1.0012
+  ]
+ },
+ "image": {
+  "file": "images/abo-B075ZBW1S4.jpg",
+  "bytes": 5750,
+  "mime": "image/jpeg"
+ }
+}

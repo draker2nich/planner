@@ -1,0 +1,78 @@
+{
+ "id": "abo-B07L1DPX3Q",
+ "source": "abo",
+ "typeId": "nightstand",
+ "formId": "rect",
+ "name": "Solimo Uno Engineered Wood Bedside Table",
+ "brand": "Amazon Brand - Solimo",
+ "price": 4490,
+ "currency": "RUB",
+ "dims": {
+  "H": 559,
+  "W": 400,
+  "D": 356
+ },
+ "colors": [
+  "коричневый"
+ ],
+ "materials": [
+  "дерево",
+  "ЛДСП / МДФ"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.in/dp/B07L1DPX3Q",
+ "model": {
+  "file": "models/abo-B07L1DPX3Q.glb",
+  "bytes": 64312,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.200000018,
+     0,
+     -0.178000003
+    ],
+    "max": [
+     0.19999734902660005,
+     0.5589999883986001,
+     0.17801573764280001
+    ],
+    "size": [
+     0.39999736702660005,
+     0.5589999883986001,
+     0.3560157406428
+    ]
+   },
+   "tris": 1316,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 18947192,
+  "bytes": 64312,
+  "srcTris": 1316,
+  "tris": 1316,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 18904774,
+   "after": 51494,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   1.0004,
+   1.0011
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07L1DPX3Q.jpg",
+  "bytes": 10083,
+  "mime": "image/jpeg"
+ }
+}

@@ -1,0 +1,77 @@
+{
+ "id": "abo-B0861YKM8S",
+ "source": "abo",
+ "typeId": "nightstand",
+ "formId": "rect",
+ "name": "UMI. by Amazon Gold Sofa Side Table C Shaped Table Nightstand Modern with Metal Frame for Living Room Bedroom",
+ "brand": "UMI",
+ "price": 6790,
+ "currency": "RUB",
+ "dims": {
+  "H": 610,
+  "W": 400,
+  "D": 400
+ },
+ "colors": [
+  "жёлтый"
+ ],
+ "materials": [
+  "камень"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.co.uk/dp/B0861YKM8S",
+ "model": {
+  "file": "models/abo-B0861YKM8S.glb",
+  "bytes": 255200,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.200000018,
+     0,
+     -0.199999988
+    ],
+    "max": [
+     0.2000018348857,
+     0.6100000331216999,
+     0.20000186488570001
+    ],
+    "size": [
+     0.4000018528857,
+     0.6100000331216999,
+     0.4000018528857
+    ]
+   },
+   "tris": 28860,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 21658972,
+  "bytes": 255200,
+  "srcTris": 28860,
+  "tris": 28860,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 20750156,
+   "after": 102130,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   1,
+   1
+  ]
+ },
+ "image": {
+  "file": "images/abo-B0861YKM8S.jpg",
+  "bytes": 4543,
+  "mime": "image/jpeg"
+ }
+}

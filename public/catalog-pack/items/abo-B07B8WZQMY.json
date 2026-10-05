@@ -1,0 +1,79 @@
+{
+ "id": "abo-B07B8WZQMY",
+ "source": "abo",
+ "typeId": "mirror",
+ "formId": "wall",
+ "name": "Stone & Beam Modern Wood Mirror",
+ "brand": "Stone & Beam",
+ "price": 19690,
+ "currency": "RUB",
+ "dims": {
+  "H": 537,
+  "W": 758,
+  "D": 84,
+  "E": 1200
+ },
+ "colors": [
+  "чёрный",
+  "коричневый"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07B8WZQMY",
+ "model": {
+  "file": "models/abo-B07B8WZQMY.glb",
+  "bytes": 339788,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.378999978,
+     -0.2685,
+     0
+    ],
+    "max": [
+     0.3789999649887,
+     0.26848024405340004,
+     0.0840217235224
+    ],
+    "size": [
+     0.7579999429887,
+     0.5369802440534001,
+     0.0840217235224
+    ]
+   },
+   "tris": 7748,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 3555248,
+  "bytes": 339788,
+  "srcTris": 7748,
+  "tris": 7748,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 3356954,
+   "after": 294064,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   1.0008,
+   1.005
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07B8WZQMY.jpg",
+  "bytes": 6857,
+  "mime": "image/jpeg"
+ }
+}

@@ -1,0 +1,75 @@
+{
+ "id": "abo-B07DBDV67C",
+ "source": "abo",
+ "typeId": "small-table",
+ "formId": "rect",
+ "name": "Ravenna Home Accent Table Lamp with LED Light Bulb -18.5 Inches",
+ "brand": "Ravenna Home",
+ "price": 7190,
+ "currency": "RUB",
+ "dims": {
+  "H": 619,
+  "W": 328,
+  "D": 328
+ },
+ "colors": [
+  "серебристый"
+ ],
+ "materials": [
+  "металл"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B07DBDV67C",
+ "model": {
+  "file": "models/abo-B07DBDV67C.glb",
+  "bytes": 159284,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.164000005,
+     0,
+     -0.164000019
+    ],
+    "max": [
+     0.16399478747360002,
+     0.6189999637248,
+     0.16399477347360003
+    ],
+    "size": [
+     0.3279947924736,
+     0.6189999637248,
+     0.3279947924736
+    ]
+   },
+   "tris": 16312,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 4,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 1447728,
+  "bytes": 159284,
+  "srcTris": 16312,
+  "tris": 16312,
+  "textures": {
+   "images": 4,
+   "resized": 4,
+   "before": 1037924,
+   "after": 65222,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9989,
+   1.0002,
+   0.9989
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07DBDV67C.jpg",
+  "bytes": 2585,
+  "mime": "image/jpeg"
+ }
+}

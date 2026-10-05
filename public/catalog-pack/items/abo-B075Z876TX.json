@@ -1,0 +1,79 @@
+{
+ "id": "abo-B075Z876TX",
+ "source": "abo",
+ "typeId": "console",
+ "formId": "rect",
+ "name": "Stone & Beam Coastal Breeze Rustic Farmhouse Console Table",
+ "brand": "Stone & Beam",
+ "price": 26190,
+ "currency": "RUB",
+ "dims": {
+  "H": 930,
+  "W": 1400,
+  "D": 450
+ },
+ "colors": [
+  "белый",
+  "натуральное дерево"
+ ],
+ "materials": [
+  "камень"
+ ],
+ "styleTags": [
+  "кантри",
+  "прибрежный"
+ ],
+ "url": "https://www.amazon.com/dp/B075Z876TX",
+ "model": {
+  "file": "models/abo-B075Z876TX.glb",
+  "bytes": 216852,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.699999988,
+     0,
+     -0.224999994
+    ],
+    "max": [
+     0.7000000074986,
+     0.9300006073985999,
+     0.22500305649719995
+    ],
+    "size": [
+     1.3999999954986,
+     0.9300006073985999,
+     0.45000305049719996
+    ]
+   },
+   "tris": 2624,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2542232,
+  "bytes": 216852,
+  "srcTris": 2624,
+  "tris": 2624,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 2465498,
+   "after": 196230,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   0.9995,
+   0.9998
+  ]
+ },
+ "image": {
+  "file": "images/abo-B075Z876TX.jpg",
+  "bytes": 8420,
+  "mime": "image/jpeg"
+ }
+}

@@ -1,0 +1,77 @@
+{
+ "id": "abo-B07P7NVM2S",
+ "source": "abo",
+ "typeId": "pouf",
+ "formId": "rect",
+ "name": "Rivet Sloane Mid-Century Modern Ottoman with Tapered Legs",
+ "brand": "Rivet",
+ "price": 15690,
+ "currency": "RUB",
+ "dims": {
+  "H": 449,
+  "W": 811,
+  "D": 608
+ },
+ "colors": [
+  "зелёный"
+ ],
+ "materials": [
+  "ткань"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07P7NVM2S",
+ "model": {
+  "file": "models/abo-B07P7NVM2S.glb",
+  "bytes": 242824,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.408914357,
+     0,
+     -0.303592652
+    ],
+    "max": [
+     0.4020856607986,
+     0.44898798519399996,
+     0.30439747304439996
+    ],
+    "size": [
+     0.8110000177986,
+     0.44898798519399996,
+     0.6079901250444
+    ]
+   },
+   "tris": 21038,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 44813948,
+  "bytes": 242824,
+  "srcTris": 21038,
+  "tris": 21038,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 44331573,
+   "after": 132718,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0005,
+   0.999,
+   1.0003
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07P7NVM2S.jpg",
+  "bytes": 4518,
+  "mime": "image/jpeg"
+ }
+}

@@ -1,0 +1,76 @@
+{
+ "id": "abo-B07QCMBCXJ",
+ "source": "abo",
+ "typeId": "office-chair",
+ "formId": "round",
+ "name": "Rivet Slade Contemporary Living Room Accent Swivel Chair",
+ "brand": "Rivet",
+ "price": 25490,
+ "currency": "RUB",
+ "dims": {
+  "H": 723,
+  "DIA": 665
+ },
+ "colors": [
+  "жёлтый"
+ ],
+ "materials": [
+  "ткань"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07QCMBCXJ",
+ "model": {
+  "file": "models/abo-B07QCMBCXJ.glb",
+  "bytes": 337716,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.332500011,
+     0,
+     -0.332024843
+    ],
+    "max": [
+     0.3325116780555,
+     0.7229999669385,
+     0.3329868460555
+    ],
+    "size": [
+     0.6650116890555,
+     0.7229999669385,
+     0.6650116890555
+    ]
+   },
+   "tris": 29998,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 38584004,
+  "bytes": 337716,
+  "srcTris": 42450,
+  "tris": 29998,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 37592175,
+   "after": 174974,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0224,
+   1.0002,
+   1
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07QCMBCXJ.jpg",
+  "bytes": 4563,
+  "mime": "image/jpeg"
+ }
+}

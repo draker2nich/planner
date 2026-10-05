@@ -1,0 +1,76 @@
+{
+ "id": "abo-B075YLJMHK",
+ "source": "abo",
+ "typeId": "picture",
+ "formId": "wall",
+ "name": "Stone & Beam Black and White Crossed Oars Photo Wall Art Decor",
+ "brand": "Stone & Beam",
+ "price": 2790,
+ "currency": "RUB",
+ "dims": {
+  "H": 330,
+  "W": 381,
+  "D": 29,
+  "E": 1300
+ },
+ "colors": [
+  "чёрный"
+ ],
+ "materials": [],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B075YLJMHK",
+ "model": {
+  "file": "models/abo-B075YLJMHK.glb",
+  "bytes": 193188,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.190500006,
+     -0.165000007,
+     0
+    ],
+    "max": [
+     0.19049999640029996,
+     0.16499999507899998,
+     0.0290000001827
+    ],
+    "size": [
+     0.38100000240029996,
+     0.330000002079,
+     0.0290000001827
+    ]
+   },
+   "tris": 756,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 1012020,
+  "bytes": 193188,
+  "srcTris": 756,
+  "tris": 756,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 987026,
+   "after": 185222,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.999,
+   1.0006,
+   0.992
+  ]
+ },
+ "image": {
+  "file": "images/abo-B075YLJMHK.jpg",
+  "bytes": 13583,
+  "mime": "image/jpeg"
+ }
+}

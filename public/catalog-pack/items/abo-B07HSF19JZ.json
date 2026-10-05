@@ -1,0 +1,74 @@
+{
+ "id": "abo-B07HSF19JZ",
+ "source": "abo",
+ "typeId": "bar-stool",
+ "formId": "round",
+ "name": "Stone & Beam Wickstrom Upholstered Counter-Height Bar Stool with Arms",
+ "brand": "Stone & Beam",
+ "price": 14690,
+ "currency": "RUB",
+ "dims": {
+  "H": 951,
+  "DIA": 601
+ },
+ "colors": [
+  "бежевый"
+ ],
+ "materials": [
+  "камень"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B07HSF19JZ",
+ "model": {
+  "file": "models/abo-B07HSF19JZ.glb",
+  "bytes": 306156,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.29908374,
+     8.56409059e-8,
+     -0.332678139
+    ],
+    "max": [
+     0.3019450356014,
+     0.9510001272362059,
+     0.2683506366014
+    ],
+    "size": [
+     0.6010287756014,
+     0.9510000415952999,
+     0.6010287756014
+    ]
+   },
+   "tris": 24398,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 3411988,
+  "bytes": 306156,
+  "srcTris": 24398,
+  "tris": 24398,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 2810523,
+   "after": 175654,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9999,
+   0.9995,
+   1.0538
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07HSF19JZ.jpg",
+  "bytes": 6072,
+  "mime": "image/jpeg"
+ }
+}

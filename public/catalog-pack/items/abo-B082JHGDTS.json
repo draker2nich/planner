@@ -1,0 +1,80 @@
+{
+ "id": "abo-B082JHGDTS",
+ "source": "abo",
+ "typeId": "sconce",
+ "formId": "wall",
+ "name": "Stone & Beam Metal Vanity Light with Cage Shades",
+ "brand": "Stone & Beam",
+ "price": 10690,
+ "currency": "RUB",
+ "dims": {
+  "H": 254,
+  "W": 634,
+  "D": 229,
+  "E": 1700
+ },
+ "colors": [
+  "серебристый"
+ ],
+ "materials": [
+  "металл",
+  "камень"
+ ],
+ "styleTags": [
+  "современный",
+  "ретро"
+ ],
+ "url": "https://www.amazon.com/dp/B082JHGDTS",
+ "model": {
+  "file": "models/abo-B082JHGDTS.glb",
+  "bytes": 255956,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.317000002,
+     -0.126999989,
+     0
+    ],
+    "max": [
+     0.31699998586489997,
+     0.1267470610171,
+     0.2290186124754
+    ],
+    "size": [
+     0.6339999878649,
+     0.2537470500171,
+     0.2290186124754
+    ]
+   },
+   "tris": 29995,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 45832748,
+  "bytes": 255956,
+  "srcTris": 214136,
+  "tris": 29995,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 39233291,
+   "after": 55450,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9997,
+   0.9999,
+   1.0015
+  ]
+ },
+ "image": {
+  "file": "images/abo-B082JHGDTS.jpg",
+  "bytes": 4381,
+  "mime": "image/jpeg"
+ }
+}

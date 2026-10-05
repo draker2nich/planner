@@ -1,0 +1,79 @@
+{
+ "id": "abo-B07QGFYLLM",
+ "source": "abo",
+ "typeId": "small-table",
+ "formId": "rect",
+ "name": "Rivet Jaxon Rustic Side Table",
+ "brand": "Rivet",
+ "price": 6190,
+ "currency": "RUB",
+ "dims": {
+  "H": 559,
+  "W": 406,
+  "D": 406
+ },
+ "colors": [
+  "бежевый",
+  "чёрный"
+ ],
+ "materials": [
+  "дерево",
+  "металл"
+ ],
+ "styleTags": [
+  "кантри"
+ ],
+ "url": "https://www.amazon.com/dp/B07QGFYLLM",
+ "model": {
+  "file": "models/abo-B07QGFYLLM.glb",
+  "bytes": 118648,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.202999994,
+     0,
+     -0.202999979
+    ],
+    "max": [
+     0.20300262224580004,
+     0.5589999883986001,
+     0.20300263724580003
+    ],
+    "size": [
+     0.40600261624580003,
+     0.5589999883986001,
+     0.40600261624580003
+    ]
+   },
+   "tris": 9028,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 13626732,
+  "bytes": 118648,
+  "srcTris": 9028,
+  "tris": 9028,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 13349028,
+   "after": 67984,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.999,
+   1.0004,
+   0.999
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07QGFYLLM.jpg",
+  "bytes": 4680,
+  "mime": "image/jpeg"
+ }
+}

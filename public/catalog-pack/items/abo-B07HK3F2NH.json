@@ -1,0 +1,74 @@
+{
+ "id": "abo-B07HK3F2NH",
+ "source": "abo",
+ "typeId": "chandelier",
+ "formId": "round",
+ "name": "Stone & Beam Industrial Open Rectangle Frame Chandelier Pendant Light",
+ "brand": "Stone & Beam",
+ "price": 10590,
+ "currency": "RUB",
+ "dims": {
+  "H": 1366,
+  "DIA": 315
+ },
+ "colors": [
+  "чёрный"
+ ],
+ "materials": [],
+ "styleTags": [
+  "лофт"
+ ],
+ "url": "https://www.amazon.com/dp/B07HK3F2NH",
+ "model": {
+  "file": "models/abo-B07HK3F2NH.glb",
+  "bytes": 117856,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.157510966,
+     -1.36600006,
+     -0.157499939
+    ],
+    "max": [
+     0.15749532215839998,
+     -5.499760002969367e-8,
+     0.15750634915839998
+    ],
+    "size": [
+     0.3150062881584,
+     1.3660000050024,
+     0.3150062881584
+    ]
+   },
+   "tris": 14416,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 4,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 671084,
+  "bytes": 117856,
+  "srcTris": 14416,
+  "tris": 14416,
+  "textures": {
+   "images": 4,
+   "resized": 4,
+   "before": 243023,
+   "after": 27492,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0101,
+   1,
+   1.0003
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07HK3F2NH.jpg",
+  "bytes": 2631,
+  "mime": "image/jpeg"
+ }
+}

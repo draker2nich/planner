@@ -1,0 +1,79 @@
+{
+ "id": "abo-B075ZBW1RR",
+ "source": "abo",
+ "typeId": "bookcase",
+ "formId": "rect",
+ "name": "Stone & Beam Larson Industrial Wood and Metal 2-Shelf Bookcase",
+ "brand": "Stone & Beam",
+ "price": 21190,
+ "currency": "RUB",
+ "dims": {
+  "H": 947,
+  "W": 822,
+  "D": 352
+ },
+ "colors": [
+  "коричневый"
+ ],
+ "materials": [
+  "дерево",
+  "металл",
+  "камень"
+ ],
+ "styleTags": [
+  "лофт"
+ ],
+ "url": "https://www.amazon.com/dp/B075ZBW1RR",
+ "model": {
+  "file": "models/abo-B075ZBW1RR.glb",
+  "bytes": 270304,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.411422729,
+     0,
+     -0.177026451
+    ],
+    "max": [
+     0.41060539237580007,
+     0.9469999797834,
+     0.174998811582
+    ],
+    "size": [
+     0.8220281213758001,
+     0.9469999797834,
+     0.352025262582
+    ]
+   },
+   "tris": 14544,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2508796,
+  "bytes": 270304,
+  "srcTris": 14544,
+  "tris": 14544,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 2139777,
+   "after": 197814,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9994,
+   0.9995,
+   1.0005
+  ]
+ },
+ "image": {
+  "file": "images/abo-B075ZBW1RR.jpg",
+  "bytes": 8782,
+  "mime": "image/jpeg"
+ }
+}

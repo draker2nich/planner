@@ -1,0 +1,79 @@
+{
+ "id": "abo-B0828DRFTG",
+ "source": "abo",
+ "typeId": "sconce",
+ "formId": "wall",
+ "name": "Ravenna Home Single-Light Plug-In Wall Sconce with White Linen Shade",
+ "brand": "Ravenna Home",
+ "price": 10090,
+ "currency": "RUB",
+ "dims": {
+  "H": 652,
+  "W": 203,
+  "D": 514,
+  "E": 1700
+ },
+ "colors": [
+  "белый",
+  "бежевый"
+ ],
+ "materials": [
+  "ткань"
+ ],
+ "styleTags": [
+  "классика"
+ ],
+ "url": "https://www.amazon.com/dp/B0828DRFTG",
+ "model": {
+  "file": "models/abo-B0828DRFTG.glb",
+  "bytes": 214872,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.101500005,
+     -0.326000005,
+     1.41529872e-8
+    ],
+    "max": [
+     0.10150629112270002,
+     0.3260000242841001,
+     0.5139828242734873
+    ],
+    "size": [
+     0.20300629612270002,
+     0.6520000292841001,
+     0.5139828101205001
+    ]
+   },
+   "tris": 29999,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 41217528,
+  "bytes": 214872,
+  "srcTris": 41134,
+  "tris": 29999,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 40174445,
+   "after": 53384,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0006,
+   1.0005,
+   0.9998
+  ]
+ },
+ "image": {
+  "file": "images/abo-B0828DRFTG.jpg",
+  "bytes": 2716,
+  "mime": "image/jpeg"
+ }
+}

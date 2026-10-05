@@ -1,0 +1,71 @@
+{
+ "id": "abo-B07FGH9TZF",
+ "source": "abo",
+ "typeId": "table",
+ "formId": "rect",
+ "name": "Ravenna Home Dora Table Collection",
+ "brand": "Ravenna Home",
+ "price": 29590,
+ "currency": "RUB",
+ "dims": {
+  "H": 456,
+  "W": 943,
+  "D": 533
+ },
+ "colors": [],
+ "materials": [],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B07FGH9TZF",
+ "model": {
+  "file": "models/abo-B07FGH9TZF.glb",
+  "bytes": 127828,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.47186783,
+     0,
+     -0.266499996
+    ],
+    "max": [
+     0.4711321469502999,
+     0.4559876590002,
+     0.2665024935659999
+    ],
+    "size": [
+     0.9429999769502999,
+     0.4559876590002,
+     0.5330024895659999
+    ]
+   },
+   "tris": 13548,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 5953428,
+  "bytes": 127828,
+  "srcTris": 13548,
+  "tris": 13548,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 5621638,
+   "after": 55760,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0003,
+   1.0009,
+   1.0005
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07FGH9TZF.jpg",
+  "bytes": 5177,
+  "mime": "image/jpeg"
+ }
+}

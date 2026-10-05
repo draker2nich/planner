@@ -1,0 +1,79 @@
+{
+ "id": "abo-B084MLZCXZ",
+ "source": "abo",
+ "typeId": "coffee-table",
+ "formId": "rect",
+ "name": "Ravenna Home Classic Coffee Table with Storage Drawers",
+ "brand": "Ravenna Home",
+ "price": 19190,
+ "currency": "RUB",
+ "dims": {
+  "H": 457,
+  "W": 1067,
+  "D": 572
+ },
+ "colors": [
+  "синий"
+ ],
+ "materials": [
+  "дерево",
+  "металл",
+  "ротанг"
+ ],
+ "styleTags": [
+  "классика"
+ ],
+ "url": "https://www.amazon.com/dp/B084MLZCXZ",
+ "model": {
+  "file": "models/abo-B084MLZCXZ.glb",
+  "bytes": 159888,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.533469379,
+     0,
+     -0.27568081
+    ],
+    "max": [
+     0.5334999774811999,
+     0.45692834066239996,
+     0.29632626184120003
+    ],
+    "size": [
+     1.0669693564812,
+     0.45692834066239996,
+     0.5720070718412
+    ]
+   },
+   "tris": 30001,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 16084192,
+  "bytes": 159888,
+  "srcTris": 57576,
+  "tris": 30001,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 14709451,
+   "after": 8278,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9997,
+   0.9992,
+   1.0009
+  ]
+ },
+ "image": {
+  "file": "images/abo-B084MLZCXZ.jpg",
+  "bytes": 5132,
+  "mime": "image/jpeg"
+ }
+}

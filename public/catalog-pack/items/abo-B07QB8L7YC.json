@@ -1,0 +1,78 @@
+{
+ "id": "abo-B07QB8L7YC",
+ "source": "abo",
+ "typeId": "plant",
+ "formId": "round",
+ "name": "Rivet Rustic Chevron-Patterned Stoneware Planter",
+ "brand": "Rivet",
+ "price": 3090,
+ "currency": "RUB",
+ "dims": {
+  "H": 239,
+  "DIA": 250
+ },
+ "colors": [
+  "белый",
+  "серый",
+  "разноцветный"
+ ],
+ "materials": [
+  "камень"
+ ],
+ "styleTags": [
+  "кантри"
+ ],
+ "url": "https://www.amazon.com/dp/B07QB8L7YC",
+ "model": {
+  "file": "models/abo-B07QB8L7YC.glb",
+  "bytes": 146296,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.125,
+     0,
+     -0.125
+    ],
+    "max": [
+     0.1249999993132,
+     0.2389977409048,
+     0.1249999993132
+    ],
+    "size": [
+     0.2499999993132,
+     0.2389977409048,
+     0.2499999993132
+    ]
+   },
+   "tris": 5888,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 26697500,
+  "bytes": 146296,
+  "srcTris": 5888,
+  "tris": 5888,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 26556780,
+   "after": 110790,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9993,
+   1.0004,
+   0.9993
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07QB8L7YC.jpg",
+  "bytes": 7202,
+  "mime": "image/jpeg"
+ }
+}

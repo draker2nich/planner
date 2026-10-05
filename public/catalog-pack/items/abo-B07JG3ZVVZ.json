@@ -1,0 +1,78 @@
+{
+ "id": "abo-B07JG3ZVVZ",
+ "source": "abo",
+ "typeId": "showcase",
+ "formId": "rect",
+ "name": "Alkove Malvern Solid Wood Front Display Cabinet",
+ "brand": "Alkove",
+ "price": 43190,
+ "currency": "RUB",
+ "dims": {
+  "H": 1980,
+  "W": 660,
+  "D": 420
+ },
+ "colors": [
+  "чёрный",
+  "натуральное дерево",
+  "прозрачный"
+ ],
+ "materials": [
+  "дерево",
+  "ЛДСП / МДФ"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.co.uk/dp/B07JG3ZVVZ",
+ "model": {
+  "file": "models/abo-B07JG3ZVVZ.glb",
+  "bytes": 146332,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.329999983,
+     0,
+     -0.202807784
+    ],
+    "max": [
+     0.329999990241,
+     1.979999919723,
+     0.21717022497500005
+    ],
+    "size": [
+     0.659999973241,
+     1.979999919723,
+     0.41997800897500004
+    ]
+   },
+   "tris": 6756,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 28734944,
+  "bytes": 146332,
+  "srcTris": 6756,
+  "tris": 6756,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 28511119,
+   "after": 101130,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   1,
+   1
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07JG3ZVVZ.jpg",
+  "bytes": 9121,
+  "mime": "image/jpeg"
+ }
+}

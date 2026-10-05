@@ -1,0 +1,79 @@
+{
+ "id": "abo-B08554L385",
+ "source": "abo",
+ "typeId": "chair",
+ "formId": "rect",
+ "name": "Rivet Nova Modern Slatted-Back Plastic Dining Chair",
+ "brand": "Rivet",
+ "price": 11990,
+ "currency": "RUB",
+ "dims": {
+  "H": 816,
+  "W": 549,
+  "D": 597
+ },
+ "colors": [
+  "серый",
+  "зелёный"
+ ],
+ "materials": [
+  "металл",
+  "ковровое волокно"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B08554L385",
+ "model": {
+  "file": "models/abo-B08554L385.glb",
+  "bytes": 205080,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.274500012,
+     0,
+     -0.321960896
+    ],
+    "max": [
+     0.2744808056952,
+     0.8160000668028,
+     0.27493495949440006
+    ],
+    "size": [
+     0.5489808176952,
+     0.8160000668028,
+     0.5968958554944
+    ]
+   },
+   "tris": 29996,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 24451540,
+  "bytes": 205080,
+  "srcTris": 58912,
+  "tris": 29996,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 23065290,
+   "after": 34898,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0007,
+   1.0006,
+   1.0002
+  ]
+ },
+ "image": {
+  "file": "images/abo-B08554L385.jpg",
+  "bytes": 6018,
+  "mime": "image/jpeg"
+ }
+}

@@ -1,0 +1,75 @@
+{
+ "id": "abo-B008RLJR2G",
+ "source": "abo",
+ "typeId": "tv-stand",
+ "formId": "rect",
+ "name": "Movian Corona TV Cabinet",
+ "brand": "Movian",
+ "price": 23690,
+ "currency": "RUB",
+ "dims": {
+  "H": 787,
+  "W": 851,
+  "D": 430
+ },
+ "colors": [
+  "коричневый"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.co.uk/dp/B008RLJR2G",
+ "model": {
+  "file": "models/abo-B008RLJR2G.glb",
+  "bytes": 224584,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.425499976,
+     0.00000187754631,
+     -0.214999989
+    ],
+    "max": [
+     0.42549994725709994,
+     0.78700668968501,
+     0.21499313586859997
+    ],
+    "size": [
+     0.8509999232570999,
+     0.7870048121387,
+     0.4299931248686
+    ]
+   },
+   "tris": 30404,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 33711464,
+  "bytes": 224584,
+  "srcTris": 30404,
+  "tris": 30404,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 32706896,
+   "after": 68892,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0001,
+   0.9995,
+   0.9999
+  ]
+ },
+ "image": {
+  "file": "images/abo-B008RLJR2G.jpg",
+  "bytes": 10130,
+  "mime": "image/jpeg"
+ }
+}

@@ -1,0 +1,71 @@
+{
+ "id": "abo-B07K7Z6YJT",
+ "source": "abo",
+ "typeId": "table",
+ "formId": "rect",
+ "name": "Marque Amazon",
+ "brand": "Alkove",
+ "price": 55690,
+ "currency": "RUB",
+ "dims": {
+  "H": 750,
+  "W": 1797,
+  "D": 901
+ },
+ "colors": [],
+ "materials": [],
+ "styleTags": [],
+ "url": "https://www.amazon.fr/dp/B07K7Z6YJT",
+ "model": {
+  "file": "models/abo-B07K7Z6YJT.glb",
+  "bytes": 186924,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.889159143,
+     0,
+     -0.432269663
+    ],
+    "max": [
+     0.9078408973590001,
+     0.750038837574,
+     0.46869831182199995
+    ],
+    "size": [
+     1.797000040359,
+     0.750038837574,
+     0.900967974822
+    ]
+   },
+   "tris": 1524,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 21725452,
+  "bytes": 186924,
+  "srcTris": 1524,
+  "tris": 1524,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 21675702,
+   "after": 172254,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9998,
+   0.9996,
+   1.0004
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07K7Z6YJT.jpg",
+  "bytes": 4083,
+  "mime": "image/jpeg"
+ }
+}

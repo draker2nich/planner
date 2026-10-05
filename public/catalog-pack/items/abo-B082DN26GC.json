@@ -1,0 +1,80 @@
+{
+ "id": "abo-B082DN26GC",
+ "source": "abo",
+ "typeId": "sconce",
+ "formId": "wall",
+ "name": "Rivet 2-Light Plug-In Wall Sconce with Glossy White Shades",
+ "brand": "Rivet",
+ "price": 10090,
+ "currency": "RUB",
+ "dims": {
+  "H": 468,
+  "W": 642,
+  "D": 239,
+  "E": 1700
+ },
+ "colors": [
+  "белый",
+  "жёлтый"
+ ],
+ "materials": [
+  "металл"
+ ],
+ "styleTags": [
+  "современный",
+  "классика"
+ ],
+ "url": "https://www.amazon.com/dp/B082DN26GC",
+ "model": {
+  "file": "models/abo-B082DN26GC.glb",
+  "bytes": 187700,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.32100001,
+     0.0163407661,
+     -9.54590362e-9
+    ],
+    "max": [
+     0.32096058733099997,
+     0.484321930351,
+     0.23898660359709636
+    ],
+    "size": [
+     0.641960597331,
+     0.467981164251,
+     0.238986613143
+    ]
+   },
+   "tris": 30000,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 1567120,
+  "bytes": 187700,
+  "srcTris": 34828,
+  "tris": 30000,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 676191,
+   "after": 16864,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0005,
+   1.0005,
+   1.001
+  ]
+ },
+ "image": {
+  "file": "images/abo-B082DN26GC.jpg",
+  "bytes": 2956,
+  "mime": "image/jpeg"
+ }
+}

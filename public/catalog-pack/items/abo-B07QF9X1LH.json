@@ -1,0 +1,78 @@
+{
+ "id": "abo-B07QF9X1LH",
+ "source": "abo",
+ "typeId": "bookcase",
+ "formId": "rect",
+ "name": "Ravenna Home Sullivan Modern Bookcase",
+ "brand": "Ravenna Home",
+ "price": 27990,
+ "currency": "RUB",
+ "dims": {
+  "H": 1880,
+  "W": 1050,
+  "D": 432
+ },
+ "colors": [
+  "белый"
+ ],
+ "materials": [
+  "дерево",
+  "ЛДСП / МДФ"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07QF9X1LH",
+ "model": {
+  "file": "models/abo-B07QF9X1LH.glb",
+  "bytes": 44668,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.525000036,
+     0,
+     -0.211330906
+    ],
+    "max": [
+     0.524990829,
+     1.8800000372999999,
+     0.22071451549999996
+    ],
+    "size": [
+     1.049990865,
+     1.8800000372999999,
+     0.43204542149999997
+    ]
+   },
+   "tris": 5720,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 19511612,
+  "bytes": 44668,
+  "srcTris": 5720,
+  "tris": 5720,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 19355043,
+   "after": 10960,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0002,
+   1,
+   1.0004
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07QF9X1LH.jpg",
+  "bytes": 3183,
+  "mime": "image/jpeg"
+ }
+}

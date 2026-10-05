@@ -1,0 +1,77 @@
+{
+ "id": "abo-B07DBGJ3TF",
+ "source": "abo",
+ "typeId": "small-table",
+ "formId": "rect",
+ "name": "Ravenna Home Jessica Rustic Open Storage Side End Table",
+ "brand": "Ravenna Home",
+ "price": 12690,
+ "currency": "RUB",
+ "dims": {
+  "H": 400,
+  "W": 696,
+  "D": 696
+ },
+ "colors": [
+  "натуральное дерево"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "кантри"
+ ],
+ "url": "https://www.amazon.com/dp/B07DBGJ3TF",
+ "model": {
+  "file": "models/abo-B07DBGJ3TF.glb",
+  "bytes": 253512,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.34799999,
+     0,
+     -0.34799999
+    ],
+    "max": [
+     0.34800000491620003,
+     0.4000205061424,
+     0.34800000491620003
+    ],
+    "size": [
+     0.6959999949162,
+     0.4000205061424,
+     0.6959999949162
+    ]
+   },
+   "tris": 18710,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2788396,
+  "bytes": 253512,
+  "srcTris": 18710,
+  "tris": 18710,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 2336808,
+   "after": 148870,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9995,
+   1.0006,
+   0.9993
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07DBGJ3TF.jpg",
+  "bytes": 6553,
+  "mime": "image/jpeg"
+ }
+}

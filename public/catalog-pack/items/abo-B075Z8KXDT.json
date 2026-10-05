@@ -1,0 +1,76 @@
+{
+ "id": "abo-B075Z8KXDT",
+ "source": "abo",
+ "typeId": "coffee-table",
+ "formId": "round",
+ "name": "Stone & Beam Larson Industrial Wood & Metal Round Coffee Table",
+ "brand": "Stone & Beam",
+ "price": 20590,
+ "currency": "RUB",
+ "dims": {
+  "H": 462,
+  "DIA": 837
+ },
+ "colors": [
+  "коричневый"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "лофт"
+ ],
+ "url": "https://www.amazon.com/dp/B075Z8KXDT",
+ "model": {
+  "file": "models/abo-B075Z8KXDT.glb",
+  "bytes": 291496,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.418500006,
+     0,
+     -0.418499917
+    ],
+    "max": [
+     0.41849999826690004,
+     0.4620027491049,
+     0.4185000872669
+    ],
+    "size": [
+     0.8370000042669,
+     0.4620027491049,
+     0.8370000042669
+    ]
+   },
+   "tris": 16608,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2109016,
+  "bytes": 291496,
+  "srcTris": 16608,
+  "tris": 16608,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 1672725,
+   "after": 202336,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0005,
+   0.9995,
+   1.0005
+  ]
+ },
+ "image": {
+  "file": "images/abo-B075Z8KXDT.jpg",
+  "bytes": 10179,
+  "mime": "image/jpeg"
+ }
+}

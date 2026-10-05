@@ -1,0 +1,79 @@
+{
+ "id": "abo-B07QBMQFPL",
+ "source": "abo",
+ "typeId": "armchair",
+ "formId": "rect",
+ "name": "Stone & Beam Hillman Mid-Century Living Room Chair with Wood Base and Legs",
+ "brand": "Stone & Beam",
+ "price": 50790,
+ "currency": "RUB",
+ "dims": {
+  "H": 839,
+  "W": 993,
+  "D": 976
+ },
+ "colors": [
+  "серый",
+  "натуральное дерево"
+ ],
+ "materials": [
+  "дерево",
+  "ткань"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07QBMQFPL",
+ "model": {
+  "file": "models/abo-B07QBMQFPL.glb",
+  "bytes": 584488,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.496424943,
+     0,
+     -0.482851893
+    ],
+    "max": [
+     0.4964993414039999,
+     0.838982534884,
+     0.49286000681200004
+    ],
+    "size": [
+     0.9929242844039999,
+     0.838982534884,
+     0.975711899812
+    ]
+   },
+   "tris": 29998,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 87687956,
+  "bytes": 584488,
+  "srcTris": 48512,
+  "tris": 29998,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 86545195,
+   "after": 416964,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9996,
+   0.9998,
+   0.9997
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07QBMQFPL.jpg",
+  "bytes": 6736,
+  "mime": "image/jpeg"
+ }
+}

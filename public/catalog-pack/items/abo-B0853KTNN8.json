@@ -1,0 +1,77 @@
+{
+ "id": "abo-B0853KTNN8",
+ "source": "abo",
+ "typeId": "chair",
+ "formId": "rect",
+ "name": "Rivet Eli Modern Curved-Back Dining Chair",
+ "brand": "Rivet",
+ "price": 13090,
+ "currency": "RUB",
+ "dims": {
+  "H": 839,
+  "W": 491,
+  "D": 592
+ },
+ "colors": [
+  "серебристый"
+ ],
+ "materials": [
+  "ткань"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B0853KTNN8",
+ "model": {
+  "file": "models/abo-B0853KTNN8.glb",
+  "bytes": 208524,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.245467782,
+     0,
+     -0.31072551
+    ],
+    "max": [
+     0.24554923343639998,
+     0.8389999753749,
+     0.28128082066800003
+    ],
+    "size": [
+     0.4910170154364,
+     0.8389999753749,
+     0.592006330668
+    ]
+   },
+   "tris": 6328,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 45621656,
+  "bytes": 208524,
+  "srcTris": 6328,
+  "tris": 6328,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 45470313,
+   "after": 170302,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0008,
+   0.9994,
+   1.0004
+  ]
+ },
+ "image": {
+  "file": "images/abo-B0853KTNN8.jpg",
+  "bytes": 4356,
+  "mime": "image/jpeg"
+ }
+}

@@ -1,0 +1,77 @@
+{
+ "id": "abo-B07B4YC7LD",
+ "source": "abo",
+ "typeId": "bed",
+ "formId": "double",
+ "name": "Stone & Beam Bishop Modern Queen Raised Bed Frame Platform with Headboard",
+ "brand": "Stone & Beam",
+ "price": 79490,
+ "currency": "RUB",
+ "dims": {
+  "H": 1369,
+  "W": 1606,
+  "L": 2189
+ },
+ "colors": [
+  "натуральное дерево"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07B4YC7LD",
+ "model": {
+  "file": "models/abo-B07B4YC7LD.glb",
+  "bytes": 199452,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.802999973,
+     0,
+     -1.09449995
+    ],
+    "max": [
+     0.80304149698,
+     1.3690100583540001,
+     1.094499833917
+    ],
+    "size": [
+     1.60604146998,
+     1.3690100583540001,
+     2.188999783917
+    ]
+   },
+   "tris": 6822,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 8894960,
+  "bytes": 199452,
+  "srcTris": 6822,
+  "tris": 6822,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 8703666,
+   "after": 154314,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9998,
+   1.0001,
+   0.9998
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07B4YC7LD.jpg",
+  "bytes": 7377,
+  "mime": "image/jpeg"
+ }
+}

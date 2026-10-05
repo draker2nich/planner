@@ -1,0 +1,71 @@
+{
+ "id": "abo-B07QZ77FGN",
+ "source": "abo",
+ "typeId": "shelving",
+ "formId": "rect",
+ "name": "Marchio Amazon",
+ "brand": "Movian",
+ "price": 30590,
+ "currency": "RUB",
+ "dims": {
+  "H": 1810,
+  "W": 1600,
+  "D": 500
+ },
+ "colors": [],
+ "materials": [],
+ "styleTags": [],
+ "url": "https://www.amazon.it/dp/B07QZ77FGN",
+ "model": {
+  "file": "models/abo-B07QZ77FGN.glb",
+  "bytes": 187500,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.800000012,
+     5.96046448e-8,
+     -0.25
+    ],
+    "max": [
+     0.7999769814980001,
+     1.8100002725916449,
+     0.25003424061400004
+    ],
+    "size": [
+     1.5999769934980002,
+     1.810000212987,
+     0.500034240614
+    ]
+   },
+   "tris": 30000,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 12859484,
+  "bytes": 187500,
+  "srcTris": 77244,
+  "tris": 30000,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 10421296,
+   "after": 25958,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   1,
+   1
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07QZ77FGN.jpg",
+  "bytes": 4110,
+  "mime": "image/jpeg"
+ }
+}

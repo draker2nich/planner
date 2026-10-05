@@ -1,0 +1,77 @@
+{
+ "id": "abo-B07DBFM8VB",
+ "source": "abo",
+ "typeId": "bar-stool",
+ "formId": "round",
+ "name": "Ravenna Home Luna Rustic Wood Bar Stool",
+ "brand": "Ravenna Home",
+ "price": 13790,
+ "currency": "RUB",
+ "dims": {
+  "H": 1105,
+  "DIA": 487
+ },
+ "colors": [
+  "бежевый",
+  "коричневый"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "кантри"
+ ],
+ "url": "https://www.amazon.com/dp/B07DBFM8VB",
+ "model": {
+  "file": "models/abo-B07DBFM8VB.glb",
+  "bytes": 265596,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.23622787,
+     0,
+     -0.257097363
+    ],
+    "max": [
+     0.25074645174000004,
+     1.105000043361,
+     0.22987695874000003
+    ],
+    "size": [
+     0.48697432174000005,
+     1.105000043361,
+     0.48697432174000005
+    ]
+   },
+   "tris": 29998,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 4118748,
+  "bytes": 265596,
+  "srcTris": 33832,
+  "tris": 29998,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 3337063,
+   "after": 115486,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.1238,
+   0.9998,
+   1.0009
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07DBFM8VB.jpg",
+  "bytes": 10932,
+  "mime": "image/jpeg"
+ }
+}

@@ -1,0 +1,71 @@
+{
+ "id": "abo-B07SPHTGR9",
+ "source": "abo",
+ "typeId": "chair",
+ "formId": "rect",
+ "name": "AmazonBasics hopfällbar plaststol",
+ "brand": "AmazonBasics",
+ "price": 7290,
+ "currency": "RUB",
+ "dims": {
+  "H": 810,
+  "W": 494,
+  "D": 566
+ },
+ "colors": [],
+ "materials": [],
+ "styleTags": [],
+ "url": "https://www.amazon.se/dp/B07SPHTGR9",
+ "model": {
+  "file": "models/abo-B07SPHTGR9.glb",
+  "bytes": 244752,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.246948585,
+     0,
+     -0.287890047
+    ],
+    "max": [
+     0.24702053131989998,
+     0.8099986020087,
+     0.2781152020872
+    ],
+    "size": [
+     0.4939691163199,
+     0.8099986020087,
+     0.5660052490872
+    ]
+   },
+   "tris": 30000,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 36483544,
+  "bytes": 244752,
+  "srcTris": 53998,
+  "tris": 30000,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 35243740,
+   "after": 84506,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9997,
+   0.9998,
+   0.9992
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07SPHTGR9.jpg",
+  "bytes": 9423,
+  "mime": "image/jpeg"
+ }
+}

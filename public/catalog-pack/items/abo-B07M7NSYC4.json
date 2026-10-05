@@ -1,0 +1,78 @@
+{
+ "id": "abo-B07M7NSYC4",
+ "source": "abo",
+ "typeId": "coffee-table",
+ "formId": "rect",
+ "name": "Ravenna Home Classic Coffee Table with Side Cutouts",
+ "brand": "Ravenna Home",
+ "price": 24590,
+ "currency": "RUB",
+ "dims": {
+  "H": 493,
+  "W": 1068,
+  "D": 612
+ },
+ "colors": [
+  "коричневый",
+  "натуральное дерево"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "классика"
+ ],
+ "url": "https://www.amazon.com/dp/B07M7NSYC4",
+ "model": {
+  "file": "models/abo-B07M7NSYC4.glb",
+  "bytes": 213308,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.533889413,
+     0,
+     -0.299313188
+    ],
+    "max": [
+     0.5341106832028,
+     0.4930284274908,
+     0.3126861346607999
+    ],
+    "size": [
+     1.0680000962028,
+     0.4930284274908,
+     0.6119993226607999
+    ]
+   },
+   "tris": 29997,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 10007176,
+  "bytes": 213308,
+  "srcTris": 38406,
+  "tris": 29997,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 8726217,
+   "after": 9174,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0001,
+   0.9991,
+   0.9995
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07M7NSYC4.jpg",
+  "bytes": 5218,
+  "mime": "image/jpeg"
+ }
+}

@@ -1,0 +1,76 @@
+{
+ "id": "abo-B089L9ZJD9",
+ "source": "abo",
+ "typeId": "sconce",
+ "formId": "wall",
+ "name": "AmazonBasics Outdoor Wall Cylinder Wall Sconce",
+ "brand": "AmazonBasics",
+ "price": 1890,
+ "currency": "RUB",
+ "dims": {
+  "H": 400,
+  "W": 102,
+  "D": 102,
+  "E": 1700
+ },
+ "colors": [
+  "серебристый"
+ ],
+ "materials": [
+  "металл"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B089L9ZJD9",
+ "model": {
+  "file": "models/abo-B089L9ZJD9.glb",
+  "bytes": 135032,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.050999999,
+     0,
+     -0.0510000139
+    ],
+    "max": [
+     0.0510081722424,
+     0.3999999687564,
+     0.051008157342399996
+    ],
+    "size": [
+     0.1020081712424,
+     0.3999999687564,
+     0.1020081712424
+    ]
+   },
+   "tris": 23332,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 24297576,
+  "bytes": 135032,
+  "srcTris": 23332,
+  "tris": 23332,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 23747431,
+   "after": 20346,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0047,
+   0.9988,
+   1.0048
+  ]
+ },
+ "image": {
+  "file": "images/abo-B089L9ZJD9.jpg",
+  "bytes": 4480,
+  "mime": "image/jpeg"
+ }
+}

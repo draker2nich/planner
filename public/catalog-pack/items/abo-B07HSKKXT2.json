@@ -1,0 +1,79 @@
+{
+ "id": "abo-B07HSKKXT2",
+ "source": "abo",
+ "typeId": "picture",
+ "formId": "wall",
+ "name": "Rivet Contemporary Print with Sand Texture Wall Art Decor on Canvas",
+ "brand": "Rivet",
+ "price": 5090,
+ "currency": "RUB",
+ "dims": {
+  "H": 1017,
+  "W": 1017,
+  "D": 44,
+  "E": 1300
+ },
+ "colors": [
+  "бежевый",
+  "разноцветный"
+ ],
+ "materials": [
+  "ткань"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07HSKKXT2",
+ "model": {
+  "file": "models/abo-B07HSKKXT2.glb",
+  "bytes": 64228,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.50849998,
+     -0.50849998,
+     0
+    ],
+    "max": [
+     0.5085000108626002,
+     0.5085000108626002,
+     0.04401226841980001
+    ],
+    "size": [
+     1.0169999908626002,
+     1.0169999908626002,
+     0.04401226841980001
+    ]
+   },
+   "tris": 468,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 688060,
+  "bytes": 64228,
+  "srcTris": 468,
+  "tris": 468,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 670935,
+   "after": 57532,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0003,
+   1.0003,
+   1.0098
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07HSKKXT2.jpg",
+  "bytes": 8475,
+  "mime": "image/jpeg"
+ }
+}

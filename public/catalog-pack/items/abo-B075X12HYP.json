@@ -1,0 +1,74 @@
+{
+ "id": "abo-B075X12HYP",
+ "source": "abo",
+ "typeId": "chandelier",
+ "formId": "round",
+ "name": "Stone & Beam Mesh Pendant With Bulb",
+ "brand": "Stone & Beam",
+ "price": 12090,
+ "currency": "RUB",
+ "dims": {
+  "H": 982,
+  "DIA": 285
+ },
+ "colors": [
+  "чёрный"
+ ],
+ "materials": [
+  "металл"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B075X12HYP",
+ "model": {
+  "file": "models/abo-B075X12HYP.glb",
+  "bytes": 505212,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.142499998,
+     -0.981999993,
+     -0.142500237
+    ],
+    "max": [
+     0.14251557121400002,
+     2.1812400108345287e-8,
+     0.142515332214
+    ],
+    "size": [
+     0.285015569214,
+     0.9820000148124001,
+     0.285015569214
+    ]
+   },
+   "tris": 30978,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 4,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2416052,
+  "bytes": 505212,
+  "srcTris": 30978,
+  "tris": 30978,
+  "textures": {
+   "images": 4,
+   "resized": 4,
+   "before": 1649309,
+   "after": 346914,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9985,
+   0.9999,
+   0.9985
+  ]
+ },
+ "image": {
+  "file": "images/abo-B075X12HYP.jpg",
+  "bytes": 6021,
+  "mime": "image/jpeg"
+ }
+}

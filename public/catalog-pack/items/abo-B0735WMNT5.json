@@ -1,0 +1,77 @@
+{
+ "id": "abo-B0735WMNT5",
+ "source": "abo",
+ "typeId": "armchair",
+ "formId": "rect",
+ "name": "AmazonBasics Leather-Padded",
+ "brand": "AmazonBasics",
+ "price": 21090,
+ "currency": "RUB",
+ "dims": {
+  "H": 1004,
+  "W": 739,
+  "D": 717
+ },
+ "colors": [
+  "коричневый"
+ ],
+ "materials": [
+  "кожа"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B0735WMNT5",
+ "model": {
+  "file": "models/abo-B0735WMNT5.glb",
+  "bytes": 223808,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.369500011,
+     0,
+     -0.374365598
+    ],
+    "max": [
+     0.3695121780072,
+     1.0040000574264,
+     0.3426459793600001
+    ],
+    "size": [
+     0.7390121890072,
+     1.0040000574264,
+     0.7170115773600001
+    ]
+   },
+   "tris": 29999,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 9116984,
+  "bytes": 223808,
+  "srcTris": 67173,
+  "tris": 29999,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 7535791,
+   "after": 49370,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0007,
+   1.0003,
+   1.0001
+  ]
+ },
+ "image": {
+  "file": "images/abo-B0735WMNT5.jpg",
+  "bytes": 6096,
+  "mime": "image/jpeg"
+ }
+}

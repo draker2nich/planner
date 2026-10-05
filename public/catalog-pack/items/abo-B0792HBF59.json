@@ -1,0 +1,72 @@
+{
+ "id": "abo-B0792HBF59",
+ "source": "abo",
+ "typeId": "small-table",
+ "formId": "round",
+ "name": "Rivet Meeks Round Side Table with Fabric Storage Basket",
+ "brand": "Rivet",
+ "price": 6790,
+ "currency": "RUB",
+ "dims": {
+  "H": 623,
+  "DIA": 400
+ },
+ "colors": [
+  "синий",
+  "зелёный"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B0792HBF59",
+ "model": {
+  "file": "models/abo-B0792HBF59.glb",
+  "bytes": 617796,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.199280843,
+     0,
+     -0.200000018
+    ],
+    "max": [
+     0.20072753572309995,
+     0.6230000255367,
+     0.20000836072309996
+    ],
+    "size": [
+     0.40000837872309997,
+     0.6230000255367,
+     0.40000837872309997
+    ]
+   },
+   "tris": 29998,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 4381188,
+  "bytes": 617796,
+  "srcTris": 32470,
+  "tris": 29998,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 3628635,
+   "after": 465500,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9992,
+   0.9997,
+   1.0005
+  ]
+ }
+}

@@ -1,0 +1,78 @@
+{
+ "id": "abo-B071NZ281W",
+ "source": "abo",
+ "typeId": "chandelier",
+ "formId": "round",
+ "name": "Stone & Beam Modern Farmhouse Glass Cylinder Pendant Light Fixture With Light Bulb",
+ "brand": "Stone & Beam",
+ "price": 11690,
+ "currency": "RUB",
+ "dims": {
+  "H": 863,
+  "DIA": 123
+ },
+ "colors": [
+  "чёрный"
+ ],
+ "materials": [
+  "металл",
+  "стекло"
+ ],
+ "styleTags": [
+  "современный",
+  "кантри"
+ ],
+ "url": "https://www.amazon.com/dp/B071NZ281W",
+ "model": {
+  "file": "models/abo-B071NZ281W.glb",
+  "bytes": 100312,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.061499998,
+     -0.863000035,
+     -0.061499998
+    ],
+    "max": [
+     0.061499764930000006,
+     1.4714000018400952e-8,
+     0.061499764930000006
+    ],
+    "size": [
+     0.12299976293,
+     0.863000049714,
+     0.12299976293
+    ]
+   },
+   "tris": 8060,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 4,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 9572748,
+  "bytes": 100312,
+  "srcTris": 8060,
+  "tris": 8060,
+  "textures": {
+   "images": 4,
+   "resized": 4,
+   "before": 9328114,
+   "after": 45946,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9981,
+   1.0001,
+   0.9981
+  ]
+ },
+ "image": {
+  "file": "images/abo-B071NZ281W.jpg",
+  "bytes": 2693,
+  "mime": "image/jpeg"
+ }
+}

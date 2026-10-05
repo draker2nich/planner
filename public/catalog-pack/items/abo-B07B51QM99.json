@@ -1,0 +1,79 @@
+{
+ "id": "abo-B07B51QM99",
+ "source": "abo",
+ "typeId": "rug",
+ "formId": "rect",
+ "name": "Rivet Modern Geometric Wool Area Rug",
+ "brand": "Rivet",
+ "price": 18490,
+ "currency": "RUB",
+ "dims": {
+  "H": 10,
+  "W": 2423,
+  "D": 1513
+ },
+ "colors": [
+  "серый",
+  "коричневый",
+  "синий"
+ ],
+ "materials": [
+  "ковровое волокно"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07B51QM99",
+ "model": {
+  "file": "models/abo-B07B51QM99.glb",
+  "bytes": 725220,
+  "info": {
+   "bbox": {
+    "min": [
+     -1.21150005,
+     -1.30643365e-18,
+     -0.756499946
+    ],
+    "max": [
+     1.211499974196,
+     0.010057010415999998,
+     0.7564885327599998
+    ],
+    "size": [
+     2.423000024196,
+     0.010057010416,
+     1.5129884787599999
+    ]
+   },
+   "tris": 7858,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 4754596,
+  "bytes": 725220,
+  "srcTris": 7858,
+  "tris": 7858,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 4572359,
+   "after": 690340,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   1.1767,
+   1.0002
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07B51QM99.jpg",
+  "bytes": 13836,
+  "mime": "image/jpeg"
+ }
+}

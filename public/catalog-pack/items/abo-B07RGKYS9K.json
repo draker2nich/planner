@@ -1,0 +1,75 @@
+{
+ "id": "abo-B07RGKYS9K",
+ "source": "abo",
+ "typeId": "office-chair",
+ "formId": "round",
+ "name": "AmazonCommercial Ergonomic Mid-Back Mesh Desk/Computer Chair with Adjustable Seat",
+ "brand": "AmazonCommercial",
+ "price": 19290,
+ "currency": "RUB",
+ "dims": {
+  "H": 995,
+  "DIA": 654
+ },
+ "colors": [
+  "чёрный"
+ ],
+ "materials": [
+  "металл",
+  "ткань"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B07RGKYS9K",
+ "model": {
+  "file": "models/abo-B07RGKYS9K.glb",
+  "bytes": 416760,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.328033954,
+     0.000349491835,
+     -0.312733471
+    ],
+    "max": [
+     0.32564070392419997,
+     0.9947920511043999,
+     0.3408197876006
+    ],
+    "size": [
+     0.6536746579242,
+     0.9944425592694,
+     0.6535532586006
+    ]
+   },
+   "tris": 30000,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 24897668,
+  "bytes": 416760,
+  "srcTris": 96995,
+  "tris": 30000,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 21522208,
+   "after": 181948,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0001,
+   1,
+   1.0552
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07RGKYS9K.jpg",
+  "bytes": 6107,
+  "mime": "image/jpeg"
+ }
+}

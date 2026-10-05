@@ -1,0 +1,78 @@
+{
+ "id": "abo-B0735V4DXF",
+ "source": "abo",
+ "typeId": "rug",
+ "formId": "rect",
+ "name": "Stone & Beam Serene Tassled Wool Area Rug",
+ "brand": "Stone & Beam",
+ "price": 22290,
+ "currency": "RUB",
+ "dims": {
+  "H": 10,
+  "W": 2435,
+  "D": 1544
+ },
+ "colors": [
+  "разноцветный"
+ ],
+ "materials": [
+  "ковровое волокно"
+ ],
+ "styleTags": [
+  "современный",
+  "классика"
+ ],
+ "url": "https://www.amazon.com/dp/B0735V4DXF",
+ "model": {
+  "file": "models/abo-B0735V4DXF.glb",
+  "bytes": 568840,
+  "info": {
+   "bbox": {
+    "min": [
+     -1.21749985,
+     -1.39126206e-18,
+     -0.771999955
+    ],
+    "max": [
+     1.2175002302059996,
+     0.009958188693999998,
+     0.7719651816159999
+    ],
+    "size": [
+     2.4350000802059997,
+     0.009958188694,
+     1.5439651366159999
+    ]
+   },
+   "tris": 12772,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 3522880,
+  "bytes": 568840,
+  "srcTris": 12772,
+  "tris": 12772,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 3011857,
+   "after": 455270,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0001,
+   1.0125,
+   1.0001
+  ]
+ },
+ "image": {
+  "file": "images/abo-B0735V4DXF.jpg",
+  "bytes": 14081,
+  "mime": "image/jpeg"
+ }
+}

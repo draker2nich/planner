@@ -1,0 +1,77 @@
+{
+ "id": "abo-B07B7HVCMB",
+ "source": "abo",
+ "typeId": "nightstand",
+ "formId": "rect",
+ "name": "Rivet Modern White Marble and Metal Side End Table Nightstand",
+ "brand": "Rivet",
+ "price": 12690,
+ "currency": "RUB",
+ "dims": {
+  "H": 554,
+  "W": 455,
+  "D": 455
+ },
+ "colors": [
+  "серебристый"
+ ],
+ "materials": [
+  "металл"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07B7HVCMB",
+ "model": {
+  "file": "models/abo-B07B7HVCMB.glb",
+  "bytes": 103504,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.227500007,
+     0,
+     -0.227500007
+    ],
+    "max": [
+     0.2274880904275,
+     0.5540000000115001,
+     0.2274880904275
+    ],
+    "size": [
+     0.4549880974275,
+     0.5540000000115001,
+     0.4549880974275
+    ]
+   },
+   "tris": 8752,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 993136,
+  "bytes": 103504,
+  "srcTris": 8752,
+  "tris": 8752,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 757593,
+   "after": 49890,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.001,
+   1.0005,
+   1.001
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07B7HVCMB.jpg",
+  "bytes": 10748,
+  "mime": "image/jpeg"
+ }
+}

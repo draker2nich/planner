@@ -1,0 +1,77 @@
+{
+ "id": "abo-B07SQWPC7Z",
+ "source": "abo",
+ "typeId": "bed",
+ "formId": "half",
+ "name": "AmazonBasics Metal Twin Loft Bed",
+ "brand": "AmazonBasics",
+ "price": 50690,
+ "currency": "RUB",
+ "dims": {
+  "H": 1289,
+  "W": 1393,
+  "L": 1968
+ },
+ "colors": [
+  "чёрный"
+ ],
+ "materials": [
+  "металл"
+ ],
+ "styleTags": [
+  "лофт"
+ ],
+ "url": "https://www.amazon.com/dp/B07SQWPC7Z",
+ "model": {
+  "file": "models/abo-B07SQWPC7Z.glb",
+  "bytes": 215052,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.695445478,
+     0.000118829696,
+     -0.983527482
+    ],
+    "max": [
+     0.697077491552,
+     1.288989278744,
+     0.9841889066640002
+    ],
+    "size": [
+     1.392522969552,
+     1.288870449048,
+     1.9677163886640001
+    ]
+   },
+   "tris": 30001,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 16443340,
+  "bytes": 215052,
+  "srcTris": 170662,
+  "tris": 30001,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 11187800,
+   "after": 10554,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9998,
+   0.9997,
+   0.9998
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07SQWPC7Z.jpg",
+  "bytes": 14057,
+  "mime": "image/jpeg"
+ }
+}

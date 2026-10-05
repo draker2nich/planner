@@ -1,0 +1,81 @@
+{
+ "id": "abo-B07HSJX4S6",
+ "source": "abo",
+ "typeId": "bookcase",
+ "formId": "rect",
+ "name": "Rivet Modern 2-Tier Floating Bookcase Shelf Unit",
+ "brand": "Rivet",
+ "price": 13890,
+ "currency": "RUB",
+ "dims": {
+  "H": 450,
+  "W": 822,
+  "D": 150
+ },
+ "colors": [
+  "бежевый",
+  "натуральное дерево",
+  "жёлтый"
+ ],
+ "materials": [
+  "дерево",
+  "ЛДСП / МДФ",
+  "металл"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07HSJX4S6",
+ "model": {
+  "file": "models/abo-B07HSJX4S6.glb",
+  "bytes": 117868,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.410999984,
+     0,
+     -0.0749999955
+    ],
+    "max": [
+     0.4109999961268,
+     0.4500102436524,
+     0.07502014370400001
+    ],
+    "size": [
+     0.8219999801268,
+     0.4500102436524,
+     0.150020139204
+    ]
+   },
+   "tris": 7724,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2237460,
+  "bytes": 117868,
+  "srcTris": 7724,
+  "tris": 7724,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 2038319,
+   "after": 72842,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9997,
+   1.0003,
+   0.9969
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07HSJX4S6.jpg",
+  "bytes": 4617,
+  "mime": "image/jpeg"
+ }
+}

@@ -1,0 +1,78 @@
+{
+ "id": "abo-B07QHKPD35",
+ "source": "abo",
+ "typeId": "pedestal",
+ "formId": "rect",
+ "name": "Ravenna Home Sullivan Modern Filing Cabinet",
+ "brand": "Ravenna Home",
+ "price": 20890,
+ "currency": "RUB",
+ "dims": {
+  "H": 761,
+  "W": 628,
+  "D": 627
+ },
+ "colors": [
+  "белый"
+ ],
+ "materials": [
+  "дерево",
+  "ЛДСП / МДФ"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07QHKPD35",
+ "model": {
+  "file": "models/abo-B07QHKPD35.glb",
+  "bytes": 206452,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.314012229,
+     0,
+     -0.313617378
+    ],
+    "max": [
+     0.31399970048,
+     0.7609999586295,
+     0.31337263857699993
+    ],
+    "size": [
+     0.62801192948,
+     0.7609999586295,
+     0.6269900165769999
+    ]
+   },
+   "tris": 29992,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 21628480,
+  "bytes": 206452,
+  "srcTris": 33970,
+  "tris": 29992,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 20680027,
+   "after": 18732,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0001,
+   0.9996,
+   0.9993
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07QHKPD35.jpg",
+  "bytes": 5365,
+  "mime": "image/jpeg"
+ }
+}

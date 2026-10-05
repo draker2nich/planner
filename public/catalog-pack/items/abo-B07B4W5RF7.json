@@ -1,0 +1,75 @@
+{
+ "id": "abo-B07B4W5RF7",
+ "source": "abo",
+ "typeId": "nightstand",
+ "formId": "rect",
+ "name": "Stone & Beam Chase Casual Wood and Rattan Bedroom Nightstand",
+ "brand": "Stone & Beam",
+ "price": 21090,
+ "currency": "RUB",
+ "dims": {
+  "H": 700,
+  "W": 914,
+  "D": 432
+ },
+ "colors": [
+  "бежевый"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B07B4W5RF7",
+ "model": {
+  "file": "models/abo-B07B4W5RF7.glb",
+  "bytes": 207152,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.457000017,
+     0,
+     -0.215984657
+    ],
+    "max": [
+     0.4570000184583,
+     0.6999913596346999,
+     0.21599375199430002
+    ],
+    "size": [
+     0.9140000354583,
+     0.6999913596346999,
+     0.4319784089943
+    ]
+   },
+   "tris": 13444,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 39393972,
+  "bytes": 207152,
+  "srcTris": 13444,
+  "tris": 13444,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 39017050,
+   "after": 122018,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9995,
+   0.9995,
+   1.0012
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07B4W5RF7.jpg",
+  "bytes": 10006,
+  "mime": "image/jpeg"
+ }
+}

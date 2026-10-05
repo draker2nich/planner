@@ -1,0 +1,78 @@
+{
+ "id": "abo-B071F73XDB",
+ "source": "abo",
+ "typeId": "chandelier",
+ "formId": "round",
+ "name": "Rivet Hugh Mid-Century Modern Round Pendant Chandelier Ceiling Light",
+ "brand": "Rivet",
+ "price": 11790,
+ "currency": "RUB",
+ "dims": {
+  "H": 1538,
+  "DIA": 336
+ },
+ "colors": [
+  "серый",
+  "серебристый"
+ ],
+ "materials": [
+  "металл",
+  "стекло"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B071F73XDB",
+ "model": {
+  "file": "models/abo-B071F73XDB.glb",
+  "bytes": 158680,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.167999998,
+     -1.53803492,
+     -0.167999983
+    ],
+    "max": [
+     0.16798865893699996,
+     -0.00003487345100006145,
+     0.16789479613400002
+    ],
+    "size": [
+     0.335988656937,
+     1.538000046549,
+     0.335894779134
+    ]
+   },
+   "tris": 29999,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2707184,
+  "bytes": 158680,
+  "srcTris": 48000,
+  "tris": 29999,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 1598608,
+   "after": 15536,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0008,
+   0.9997,
+   1.0008
+  ]
+ },
+ "image": {
+  "file": "images/abo-B071F73XDB.jpg",
+  "bytes": 3267,
+  "mime": "image/jpeg"
+ }
+}

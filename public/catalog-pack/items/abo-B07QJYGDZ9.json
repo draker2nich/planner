@@ -1,0 +1,77 @@
+{
+ "id": "abo-B07QJYGDZ9",
+ "source": "abo",
+ "typeId": "sofa",
+ "formId": "straight",
+ "name": "Rivet Aiden Mid-Century Leather Sectional with Tapered Wood Legs",
+ "brand": "Rivet",
+ "price": 130890,
+ "currency": "RUB",
+ "dims": {
+  "H": 841,
+  "W": 1613,
+  "D": 2185
+ },
+ "colors": [
+  "коричневый"
+ ],
+ "materials": [
+  "кожа"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07QJYGDZ9",
+ "model": {
+  "file": "models/abo-B07QJYGDZ9.glb",
+  "bytes": 270920,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.804851472,
+     0,
+     -1.09241366
+    ],
+    "max": [
+     0.8073923795260001,
+     0.84086338687,
+     1.0924975005220001
+    ],
+    "size": [
+     1.612243851526,
+     0.84086338687,
+     2.184911160522
+    ]
+   },
+   "tris": 30002,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 40061536,
+  "bytes": 270920,
+  "srcTris": 103460,
+  "tris": 30002,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 37587492,
+   "after": 92112,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9998,
+   0.9997,
+   1.0001
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07QJYGDZ9.jpg",
+  "bytes": 4307,
+  "mime": "image/jpeg"
+ }
+}

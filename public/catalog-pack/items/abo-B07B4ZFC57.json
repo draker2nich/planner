@@ -1,0 +1,75 @@
+{
+ "id": "abo-B07B4ZFC57",
+ "source": "abo",
+ "typeId": "bed",
+ "formId": "double",
+ "name": "Stone & Beam Chase Casual Wood and Rattan Queen Bed with Headboard",
+ "brand": "Stone & Beam",
+ "price": 60290,
+ "currency": "RUB",
+ "dims": {
+  "H": 1387,
+  "W": 1606,
+  "L": 2184
+ },
+ "colors": [
+  "бежевый"
+ ],
+ "materials": [
+  "ротанг"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B07B4ZFC57",
+ "model": {
+  "file": "models/abo-B07B4ZFC57.glb",
+  "bytes": 273100,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.802999973,
+     0,
+     -1.09200001
+    ],
+    "max": [
+     0.802972550099,
+     1.386945972468,
+     1.091999977211
+    ],
+    "size": [
+     1.605972523099,
+     1.386945972468,
+     2.183999987211
+    ]
+   },
+   "tris": 15388,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 4906292,
+  "bytes": 273100,
+  "srcTris": 15388,
+  "tris": 15388,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 4506940,
+   "after": 186166,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9998,
+   1.0001,
+   0.9998
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07B4ZFC57.jpg",
+  "bytes": 8139,
+  "mime": "image/jpeg"
+ }
+}

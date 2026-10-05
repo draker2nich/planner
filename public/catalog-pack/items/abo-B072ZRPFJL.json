@@ -1,0 +1,78 @@
+{
+ "id": "abo-B072ZRPFJL",
+ "source": "abo",
+ "typeId": "tv-stand",
+ "formId": "rect",
+ "name": "Rivet Modern Six-Compartment TV Media Console",
+ "brand": "Rivet",
+ "price": 25290,
+ "currency": "RUB",
+ "dims": {
+  "H": 409,
+  "W": 1482,
+  "D": 366
+ },
+ "colors": [
+  "коричневый"
+ ],
+ "materials": [
+  "дерево",
+  "ЛДСП / МДФ"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B072ZRPFJL",
+ "model": {
+  "file": "models/abo-B072ZRPFJL.glb",
+  "bytes": 426956,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.740999997,
+     0,
+     -0.182851851
+    ],
+    "max": [
+     0.7410000164388001,
+     0.4089679582956,
+     0.1831477860856
+    ],
+    "size": [
+     1.4820000134388,
+     0.4089679582956,
+     0.3659996370856
+    ]
+   },
+   "tris": 19267,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 3794272,
+  "bytes": 426956,
+  "srcTris": 19267,
+  "tris": 19267,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 3205444,
+   "after": 315870,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0001,
+   0.9996,
+   1.0003
+  ]
+ },
+ "image": {
+  "file": "images/abo-B072ZRPFJL.jpg",
+  "bytes": 4110,
+  "mime": "image/jpeg"
+ }
+}

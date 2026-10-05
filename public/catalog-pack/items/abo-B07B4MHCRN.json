@@ -1,0 +1,78 @@
+{
+ "id": "abo-B07B4MHCRN",
+ "source": "abo",
+ "typeId": "pouf",
+ "formId": "rect",
+ "name": "Stone & Beam Andover Modern Rectangle Ottoman",
+ "brand": "Stone & Beam",
+ "price": 18490,
+ "currency": "RUB",
+ "dims": {
+  "H": 496,
+  "W": 826,
+  "D": 639
+ },
+ "colors": [
+  "серый",
+  "чёрный"
+ ],
+ "materials": [
+  "ткань"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07B4MHCRN",
+ "model": {
+  "file": "models/abo-B07B4MHCRN.glb",
+  "bytes": 330220,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.416344941,
+     0,
+     -0.320581526
+    ],
+    "max": [
+     0.40965504195989993,
+     0.4960134183214,
+     0.3184176673122
+    ],
+    "size": [
+     0.8259999829599,
+     0.4960134183214,
+     0.6389991933122
+    ]
+   },
+   "tris": 6656,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 4662040,
+  "bytes": 330220,
+  "srcTris": 6656,
+  "tris": 6656,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 4496792,
+   "after": 288678,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9998,
+   1.0003,
+   1.0007
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07B4MHCRN.jpg",
+  "bytes": 5656,
+  "mime": "image/jpeg"
+ }
+}

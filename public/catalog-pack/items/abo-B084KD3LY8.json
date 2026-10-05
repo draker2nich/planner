@@ -1,0 +1,78 @@
+{
+ "id": "abo-B084KD3LY8",
+ "source": "abo",
+ "typeId": "mirror",
+ "formId": "wall",
+ "name": "Stone & Beam Vintage Wooden Grid Wall Mirror",
+ "brand": "Stone & Beam",
+ "price": 10990,
+ "currency": "RUB",
+ "dims": {
+  "H": 996,
+  "W": 705,
+  "D": 25,
+  "E": 1200
+ },
+ "colors": [
+  "натуральное дерево"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "ретро"
+ ],
+ "url": "https://www.amazon.com/dp/B084KD3LY8",
+ "model": {
+  "file": "models/abo-B084KD3LY8.glb",
+  "bytes": 419708,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.352499992,
+     -0.497999996,
+     0
+    ],
+    "max": [
+     0.35247564953640004,
+     0.4979999984197,
+     0.0249866323449
+    ],
+    "size": [
+     0.7049756415364,
+     0.9959999944197,
+     0.0249866323449
+    ]
+   },
+   "tris": 13294,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 33041600,
+  "bytes": 419708,
+  "srcTris": 13294,
+  "tris": 13294,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 32253667,
+   "after": 285150,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0005,
+   1.0005,
+   0.9849
+  ]
+ },
+ "image": {
+  "file": "images/abo-B084KD3LY8.jpg",
+  "bytes": 5147,
+  "mime": "image/jpeg"
+ }
+}

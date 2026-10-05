@@ -1,0 +1,78 @@
+{
+ "id": "abo-B073P5MPW9",
+ "source": "abo",
+ "typeId": "picture",
+ "formId": "wall",
+ "name": "Stone & Beam Modern Turquoise and Orange Palm Print in Gray Frame Wall Art",
+ "brand": "Stone & Beam",
+ "price": 2890,
+ "currency": "RUB",
+ "dims": {
+  "H": 303,
+  "W": 304,
+  "D": 38,
+  "E": 1300
+ },
+ "colors": [
+  "разноцветный"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B073P5MPW9",
+ "model": {
+  "file": "models/abo-B073P5MPW9.glb",
+  "bytes": 73376,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.151999995,
+     -0.151500002,
+     0
+    ],
+    "max": [
+     0.15200000569829997,
+     0.1514979844129,
+     0.0380023195648
+    ],
+    "size": [
+     0.30400000069829997,
+     0.3029979864129,
+     0.0380023195648
+    ]
+   },
+   "tris": 60,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 740808,
+  "bytes": 73376,
+  "srcTris": 60,
+  "tris": 60,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 734970,
+   "after": 69168,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9986,
+   0.9997,
+   1.0069
+  ]
+ },
+ "image": {
+  "file": "images/abo-B073P5MPW9.jpg",
+  "bytes": 16900,
+  "mime": "image/jpeg"
+ }
+}

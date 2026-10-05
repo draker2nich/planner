@@ -1,0 +1,78 @@
+{
+ "id": "abo-B07MBFDWY5",
+ "source": "abo",
+ "typeId": "floor-lamp",
+ "formId": "round",
+ "name": "Ravenna Home Floor Lamp with Shelves",
+ "brand": "Ravenna Home",
+ "price": 9990,
+ "currency": "RUB",
+ "dims": {
+  "H": 1594,
+  "DIA": 279
+ },
+ "colors": [
+  "чёрный"
+ ],
+ "materials": [
+  "дерево",
+  "металл",
+  "ткань"
+ ],
+ "styleTags": [
+  "классика"
+ ],
+ "url": "https://www.amazon.com/dp/B07MBFDWY5",
+ "model": {
+  "file": "models/abo-B07MBFDWY5.glb",
+  "bytes": 192428,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.139500007,
+     2.53343546e-9,
+     -0.139500096
+    ],
+    "max": [
+     0.1395448495868,
+     1.5939999625967354,
+     0.13954476058680002
+    ],
+    "size": [
+     0.2790448565868,
+     1.5939999600633,
+     0.2790448565868
+    ]
+   },
+   "tris": 26358,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 4,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 25929376,
+  "bytes": 192428,
+  "srcTris": 26358,
+  "tris": 26358,
+  "textures": {
+   "images": 4,
+   "resized": 4,
+   "before": 25048199,
+   "after": 34898,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9999,
+   1.0001,
+   1.0004
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07MBFDWY5.jpg",
+  "bytes": 3586,
+  "mime": "image/jpeg"
+ }
+}

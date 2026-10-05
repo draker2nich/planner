@@ -1,0 +1,76 @@
+{
+ "id": "abo-B07JWP2Y5K",
+ "source": "abo",
+ "typeId": "dresser",
+ "formId": "rect",
+ "name": "Movian Loue Chest of 4 Drawers",
+ "brand": "Movian",
+ "price": 29790,
+ "currency": "RUB",
+ "dims": {
+  "H": 1040,
+  "W": 800,
+  "D": 380
+ },
+ "colors": [
+  "белый",
+  "натуральное дерево"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.co.uk/dp/B07JWP2Y5K",
+ "model": {
+  "file": "models/abo-B07JWP2Y5K.glb",
+  "bytes": 39424,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.400580943,
+     0,
+     -0.188542962
+    ],
+    "max": [
+     0.39939954045659987,
+     1.0400000206689,
+     0.19145094166379997
+    ],
+    "size": [
+     0.7999804834565999,
+     1.0400000206689,
+     0.3799939036638
+    ]
+   },
+   "tris": 3960,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 13181580,
+  "bytes": 39424,
+  "srcTris": 3960,
+  "tris": 3960,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 13066524,
+   "after": 13936,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0002,
+   1.0001,
+   1
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07JWP2Y5K.jpg",
+  "bytes": 5018,
+  "mime": "image/jpeg"
+ }
+}

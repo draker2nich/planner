@@ -1,0 +1,75 @@
+{
+ "id": "abo-B07TQ7T2C2",
+ "source": "abo",
+ "typeId": "desk",
+ "formId": "rect",
+ "name": "Movian Aulne",
+ "brand": "Movian",
+ "price": 21790,
+ "currency": "RUB",
+ "dims": {
+  "H": 790,
+  "W": 760,
+  "D": 440
+ },
+ "colors": [
+  "белый"
+ ],
+ "materials": [],
+ "styleTags": [
+  "скандинавский"
+ ],
+ "url": "https://www.amazon.de/dp/B07TQ7T2C2",
+ "model": {
+  "file": "models/abo-B07TQ7T2C2.glb",
+  "bytes": 89588,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.379999995,
+     2.98023224e-8,
+     -0.219999999
+    ],
+    "max": [
+     0.38000668150620004,
+     0.7899999905409224,
+     0.22001401807499998
+    ],
+    "size": [
+     0.7600066765062,
+     0.7899999607386,
+     0.440014017075
+    ]
+   },
+   "tris": 6288,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 10692292,
+  "bytes": 89588,
+  "srcTris": 6288,
+  "tris": 6288,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 10464716,
+   "after": 49382,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   1,
+   1
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07TQ7T2C2.jpg",
+  "bytes": 3579,
+  "mime": "image/jpeg"
+ }
+}

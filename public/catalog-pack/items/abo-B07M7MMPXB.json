@@ -1,0 +1,77 @@
+{
+ "id": "abo-B07M7MMPXB",
+ "source": "abo",
+ "typeId": "pouf",
+ "formId": "rect",
+ "name": "Ravenna Home Vegan Leather Classic Tufted Storage Ottoman",
+ "brand": "Ravenna Home",
+ "price": 17090,
+ "currency": "RUB",
+ "dims": {
+  "H": 442,
+  "W": 637,
+  "D": 637
+ },
+ "colors": [
+  "чёрный"
+ ],
+ "materials": [
+  "кожа"
+ ],
+ "styleTags": [
+  "классика"
+ ],
+ "url": "https://www.amazon.com/dp/B07M7MMPXB",
+ "model": {
+  "file": "models/abo-B07M7MMPXB.glb",
+  "bytes": 544240,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.317406744,
+     0,
+     -0.318453729
+    ],
+    "max": [
+     0.3194787079314,
+     0.442006200846,
+     0.3183539733798
+    ],
+    "size": [
+     0.6368854519314,
+     0.442006200846,
+     0.6368077023798
+    ]
+   },
+   "tris": 30000,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 39797124,
+  "bytes": 544240,
+  "srcTris": 62166,
+  "tris": 30000,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 38345463,
+   "after": 369196,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0005,
+   0.9991,
+   1.0004
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07M7MMPXB.jpg",
+  "bytes": 5199,
+  "mime": "image/jpeg"
+ }
+}

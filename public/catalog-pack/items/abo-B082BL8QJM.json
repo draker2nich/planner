@@ -1,0 +1,76 @@
+{
+ "id": "abo-B082BL8QJM",
+ "source": "abo",
+ "typeId": "office-chair",
+ "formId": "round",
+ "name": "Rivet Bertha Mid-Century Velvet-Upholstered Swivel Office Chair",
+ "brand": "Rivet",
+ "price": 18790,
+ "currency": "RUB",
+ "dims": {
+  "H": 908,
+  "DIA": 641
+ },
+ "colors": [
+  "синий"
+ ],
+ "materials": [
+  "велюр"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B082BL8QJM",
+ "model": {
+  "file": "models/abo-B082BL8QJM.glb",
+  "bytes": 301464,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.320465058,
+     0,
+     -0.29113102
+    ],
+    "max": [
+     0.32033919094139995,
+     0.9080000009001,
+     0.3498949221602
+    ],
+    "size": [
+     0.6408042489414,
+     0.9080000009001,
+     0.6410259421602
+    ]
+   },
+   "tris": 30002,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 47442144,
+  "bytes": 301464,
+  "srcTris": 108508,
+  "tris": 30002,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 44836881,
+   "after": 121938,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9995,
+   0.9999,
+   1.0094
+  ]
+ },
+ "image": {
+  "file": "images/abo-B082BL8QJM.jpg",
+  "bytes": 5567,
+  "mime": "image/jpeg"
+ }
+}

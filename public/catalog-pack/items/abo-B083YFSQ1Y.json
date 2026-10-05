@@ -1,0 +1,74 @@
+{
+ "id": "abo-B083YFSQ1Y",
+ "source": "abo",
+ "typeId": "plant",
+ "formId": "round",
+ "name": "Stone & Beam Large Floral-Embossed Planter",
+ "brand": "Stone & Beam",
+ "price": 3290,
+ "currency": "RUB",
+ "dims": {
+  "H": 190,
+  "DIA": 208
+ },
+ "colors": [
+  "белый"
+ ],
+ "materials": [
+  "камень"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B083YFSQ1Y",
+ "model": {
+  "file": "models/abo-B083YFSQ1Y.glb",
+  "bytes": 158764,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.104000002,
+     0,
+     -0.104000017
+    ],
+    "max": [
+     0.1040000027891,
+     0.1899969524305,
+     0.1039999877891
+    ],
+    "size": [
+     0.2080000047891,
+     0.1899969524305,
+     0.2080000047891
+    ]
+   },
+   "tris": 11040,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 35317212,
+  "bytes": 158764,
+  "srcTris": 11040,
+  "tris": 11040,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 35058941,
+   "after": 99228,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9999,
+   0.9995,
+   0.9999
+  ]
+ },
+ "image": {
+  "file": "images/abo-B083YFSQ1Y.jpg",
+  "bytes": 4987,
+  "mime": "image/jpeg"
+ }
+}

@@ -1,0 +1,77 @@
+{
+ "id": "abo-B07TSTJM5G",
+ "source": "abo",
+ "typeId": "bookcase",
+ "formId": "rect",
+ "name": "Movian 2 tier MDF modular bookcase",
+ "brand": "Movian",
+ "price": 16290,
+ "currency": "RUB",
+ "dims": {
+  "H": 600,
+  "W": 300,
+  "D": 290
+ },
+ "colors": [
+  "белый",
+  "коричневый"
+ ],
+ "materials": [
+  "дерево",
+  "ЛДСП / МДФ"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.co.uk/dp/B07TSTJM5G",
+ "model": {
+  "file": "models/abo-B07TSTJM5G.glb",
+  "bytes": 214664,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.149999991,
+     0,
+     -0.144999996
+    ],
+    "max": [
+     0.15001828985760002,
+     0.5999999383899001,
+     0.1449834937254
+    ],
+    "size": [
+     0.3000182808576,
+     0.5999999383899001,
+     0.2899834897254
+    ]
+   },
+   "tris": 29999,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 37294540,
+  "bytes": 214664,
+  "srcTris": 34032,
+  "tris": 29999,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 36402246,
+   "after": 64882,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   1,
+   1
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07TSTJM5G.jpg",
+  "bytes": 6020,
+  "mime": "image/jpeg"
+ }
+}

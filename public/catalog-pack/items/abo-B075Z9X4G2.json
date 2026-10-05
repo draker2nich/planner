@@ -1,0 +1,79 @@
+{
+ "id": "abo-B075Z9X4G2",
+ "source": "abo",
+ "typeId": "coffee-table",
+ "formId": "rect",
+ "name": "Stone & Beam Ferndale Rustic 2-Drawer Console Coffee Table",
+ "brand": "Stone & Beam",
+ "price": 20290,
+ "currency": "RUB",
+ "dims": {
+  "H": 762,
+  "W": 1599,
+  "D": 442
+ },
+ "colors": [
+  "коричневый"
+ ],
+ "materials": [
+  "камень"
+ ],
+ "styleTags": [
+  "современный",
+  "классика",
+  "кантри"
+ ],
+ "url": "https://www.amazon.com/dp/B075Z9X4G2",
+ "model": {
+  "file": "models/abo-B075Z9X4G2.glb",
+  "bytes": 150552,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.799500108,
+     0,
+     -0.202494606
+    ],
+    "max": [
+     0.7995000190250999,
+     0.7619724099179,
+     0.2395411368613
+    ],
+    "size": [
+     1.5990001270251,
+     0.7619724099179,
+     0.4420357428613
+    ]
+   },
+   "tris": 5598,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 3373640,
+  "bytes": 150552,
+  "srcTris": 5598,
+  "tris": 5598,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 3177087,
+   "after": 105058,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0003,
+   1,
+   0.9998
+  ]
+ },
+ "image": {
+  "file": "images/abo-B075Z9X4G2.jpg",
+  "bytes": 6740,
+  "mime": "image/jpeg"
+ }
+}

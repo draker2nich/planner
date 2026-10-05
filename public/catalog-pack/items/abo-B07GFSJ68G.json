@@ -1,0 +1,77 @@
+{
+ "id": "abo-B07GFSJ68G",
+ "source": "abo",
+ "typeId": "dresser",
+ "formId": "rect",
+ "name": "Movian Natura Oak Chest of Drawers",
+ "brand": "Movian",
+ "price": 35990,
+ "currency": "RUB",
+ "dims": {
+  "H": 795,
+  "W": 1590,
+  "D": 390
+ },
+ "colors": [
+  "натуральное дерево"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.de/dp/B07GFSJ68G",
+ "model": {
+  "file": "models/abo-B07GFSJ68G.glb",
+  "bytes": 204224,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.795757353,
+     0,
+     -0.194211498
+    ],
+    "max": [
+     0.7942425452513999,
+     0.7950484750336,
+     0.1957426978844
+    ],
+    "size": [
+     1.5899998982513999,
+     0.7950484750336,
+     0.3899541958844
+    ]
+   },
+   "tris": 3736,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 35946956,
+  "bytes": 204224,
+  "srcTris": 3736,
+  "tris": 3736,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 35832154,
+   "after": 178252,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   1,
+   1.0005
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07GFSJ68G.jpg",
+  "bytes": 5893,
+  "mime": "image/jpeg"
+ }
+}

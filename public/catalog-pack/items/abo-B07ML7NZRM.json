@@ -1,0 +1,74 @@
+{
+ "id": "abo-B07ML7NZRM",
+ "source": "abo",
+ "typeId": "table-lamp",
+ "formId": "round",
+ "name": "Ravenna Home Chevron-Patterned Table Lamp",
+ "brand": "Ravenna Home",
+ "price": 5490,
+ "currency": "RUB",
+ "dims": {
+  "H": 389,
+  "DIA": 203
+ },
+ "colors": [
+  "серый"
+ ],
+ "materials": [
+  "камень"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B07ML7NZRM",
+ "model": {
+  "file": "models/abo-B07ML7NZRM.glb",
+  "bytes": 213112,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.101519398,
+     0.00000292585855,
+     -0.101499431
+    ],
+    "max": [
+     0.10149135056000001,
+     0.38900001283615,
+     0.10151131756000001
+    ],
+    "size": [
+     0.20301074856,
+     0.3889970869776,
+     0.20301074856
+    ]
+   },
+   "tris": 29992,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 4,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 32415228,
+  "bytes": 213112,
+  "srcTris": 146027,
+  "tris": 29992,
+  "textures": {
+   "images": 4,
+   "resized": 4,
+   "before": 28236127,
+   "after": 46320,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0005,
+   1.0004,
+   1.0005
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07ML7NZRM.jpg",
+  "bytes": 3073,
+  "mime": "image/jpeg"
+ }
+}

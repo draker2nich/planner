@@ -1,0 +1,76 @@
+{
+ "id": "abo-B07L3XD93D",
+ "source": "abo",
+ "typeId": "office-chair",
+ "formId": "round",
+ "name": "AmazonBasics Classic Office Desk Computer Chair",
+ "brand": "AmazonBasics",
+ "price": 17690,
+ "currency": "RUB",
+ "dims": {
+  "H": 1105,
+  "DIA": 724
+ },
+ "colors": [
+  "чёрный"
+ ],
+ "materials": [
+  "ткань"
+ ],
+ "styleTags": [
+  "классика"
+ ],
+ "url": "https://www.amazon.com/dp/B07L3XD93D",
+ "model": {
+  "file": "models/abo-B07L3XD93D.glb",
+  "bytes": 339084,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.36084041,
+     0,
+     -0.416523546
+    ],
+    "max": [
+     0.36314606777800007,
+     1.105000043361,
+     0.30746293177800005
+    ],
+    "size": [
+     0.7239864777780001,
+     1.105000043361,
+     0.7239864777780001
+    ]
+   },
+   "tris": 29998,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 39001468,
+  "bytes": 339084,
+  "srcTris": 37840,
+  "tris": 29998,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 37742661,
+   "after": 158682,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0859,
+   1.0001,
+   1.0001
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07L3XD93D.jpg",
+  "bytes": 5505,
+  "mime": "image/jpeg"
+ }
+}

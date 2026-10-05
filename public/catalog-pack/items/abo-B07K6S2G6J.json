@@ -1,0 +1,75 @@
+{
+ "id": "abo-B07K6S2G6J",
+ "source": "abo",
+ "typeId": "desk",
+ "formId": "rect",
+ "name": "Movian Mjøsa",
+ "brand": "Movian",
+ "price": 20690,
+ "currency": "RUB",
+ "dims": {
+  "H": 760,
+  "W": 790,
+  "D": 446
+ },
+ "colors": [
+  "белый"
+ ],
+ "materials": [],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.de/dp/B07K6S2G6J",
+ "model": {
+  "file": "models/abo-B07K6S2G6J.glb",
+  "bytes": 38860,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.394782811,
+     0,
+     -0.245730639
+    ],
+    "max": [
+     0.3952171497386,
+     0.7600066765062,
+     0.2002627466358
+    ],
+    "size": [
+     0.7899999607386,
+     0.7600066765062,
+     0.4459933856358
+    ]
+   },
+   "tris": 5272,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 11219960,
+  "bytes": 38860,
+  "srcTris": 5272,
+  "tris": 5272,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 11080141,
+   "after": 7996,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   1,
+   0.9989
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07K6S2G6J.jpg",
+  "bytes": 3748,
+  "mime": "image/jpeg"
+ }
+}

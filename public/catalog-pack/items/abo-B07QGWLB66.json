@@ -1,0 +1,77 @@
+{
+ "id": "abo-B07QGWLB66",
+ "source": "abo",
+ "typeId": "bench",
+ "formId": "rect",
+ "name": "Ravenna Home Haraden Modern Upholstered Bench",
+ "brand": "Ravenna Home",
+ "price": 19890,
+ "currency": "RUB",
+ "dims": {
+  "H": 456,
+  "W": 1013,
+  "D": 407
+ },
+ "colors": [
+  "бежевый"
+ ],
+ "materials": [
+  "ткань"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07QGWLB66",
+ "model": {
+  "file": "models/abo-B07QGWLB66.glb",
+  "bytes": 151844,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.506228209,
+     0,
+     -0.204043299
+    ],
+    "max": [
+     0.5067718396466,
+     0.45601387772499996,
+     0.20293749329639998
+    ],
+    "size": [
+     1.0130000486466,
+     0.45601387772499996,
+     0.4069807922964
+    ]
+   },
+   "tris": 3928,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 45678808,
+  "bytes": 151844,
+  "srcTris": 3928,
+  "tris": 3928,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 45577242,
+   "after": 126638,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0004,
+   0.9992,
+   0.9994
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07QGWLB66.jpg",
+  "bytes": 3632,
+  "mime": "image/jpeg"
+ }
+}

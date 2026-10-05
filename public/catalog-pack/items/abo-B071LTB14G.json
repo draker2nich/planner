@@ -1,0 +1,77 @@
+{
+ "id": "abo-B071LTB14G",
+ "source": "abo",
+ "typeId": "sofa",
+ "formId": "straight",
+ "name": "Rivet Elliot Easy-Pull Modern Sofa Bed",
+ "brand": "Rivet",
+ "price": 98190,
+ "currency": "RUB",
+ "dims": {
+  "H": 924,
+  "W": 1812,
+  "D": 1007
+ },
+ "colors": [
+  "серый"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B071LTB14G",
+ "model": {
+  "file": "models/abo-B071LTB14G.glb",
+  "bytes": 341988,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.905278981,
+     0,
+     -0.503721118
+    ],
+    "max": [
+     0.906721072031,
+     0.9239729257779999,
+     0.503314252985
+    ],
+    "size": [
+     1.812000053031,
+     0.9239729257779999,
+     1.007035370985
+    ]
+   },
+   "tris": 31146,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 5204804,
+  "bytes": 341988,
+  "srcTris": 31146,
+  "tris": 31146,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 4454720,
+   "after": 180016,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9999,
+   1.0003,
+   1.0003
+  ]
+ },
+ "image": {
+  "file": "images/abo-B071LTB14G.jpg",
+  "bytes": 5968,
+  "mime": "image/jpeg"
+ }
+}

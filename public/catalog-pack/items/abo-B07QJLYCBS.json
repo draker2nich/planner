@@ -1,0 +1,75 @@
+{
+ "id": "abo-B07QJLYCBS",
+ "source": "abo",
+ "typeId": "tv-stand",
+ "formId": "rect",
+ "name": "Rivet Modern Media Cabinet",
+ "brand": "Rivet",
+ "price": 30990,
+ "currency": "RUB",
+ "dims": {
+  "H": 599,
+  "W": 1300,
+  "D": 500
+ },
+ "colors": [
+  "серый"
+ ],
+ "materials": [],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07QJLYCBS",
+ "model": {
+  "file": "models/abo-B07QJLYCBS.glb",
+  "bytes": 259708,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.650134385,
+     0,
+     -0.238642097
+    ],
+    "max": [
+     0.6498657297139,
+     0.5990173268617001,
+     0.2613457393433
+    ],
+    "size": [
+     1.3000001147139,
+     0.5990173268617001,
+     0.4999878363433
+    ]
+   },
+   "tris": 21782,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 33865548,
+  "bytes": 259708,
+  "srcTris": 21782,
+  "tris": 21782,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 33302977,
+   "after": 164046,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9996,
+   0.9993,
+   0.9992
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07QJLYCBS.jpg",
+  "bytes": 5653,
+  "mime": "image/jpeg"
+ }
+}

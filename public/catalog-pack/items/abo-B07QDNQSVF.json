@@ -1,0 +1,77 @@
+{
+ "id": "abo-B07QDNQSVF",
+ "source": "abo",
+ "typeId": "chair",
+ "formId": "rect",
+ "name": "Rivet Contemporary Square-Back Armless Dining Chair",
+ "brand": "Rivet",
+ "price": 12990,
+ "currency": "RUB",
+ "dims": {
+  "H": 859,
+  "W": 456,
+  "D": 570
+ },
+ "colors": [
+  "серый"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07QDNQSVF",
+ "model": {
+  "file": "models/abo-B07QDNQSVF.glb",
+  "bytes": 467376,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.228,
+     -2.89338448e-17,
+     -0.274171859
+    ],
+    "max": [
+     0.2280046028031,
+     0.8590000468809,
+     0.29582078640330006
+    ],
+    "size": [
+     0.4560046028031,
+     0.8590000468809,
+     0.5699926454033001
+    ]
+   },
+   "tris": 19296,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 47586048,
+  "bytes": 467376,
+  "srcTris": 19296,
+  "tris": 19296,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 47127689,
+   "after": 371882,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0001,
+   1.0001,
+   1.0007
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07QDNQSVF.jpg",
+  "bytes": 4943,
+  "mime": "image/jpeg"
+ }
+}

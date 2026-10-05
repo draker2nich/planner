@@ -1,0 +1,77 @@
+{
+ "id": "abo-B0825DZN66",
+ "source": "abo",
+ "typeId": "floor-lamp",
+ "formId": "round",
+ "name": "Rivet Modern Metal Dome-Shaped Skinny Stem Floor Lamp",
+ "brand": "Rivet",
+ "price": 13890,
+ "currency": "RUB",
+ "dims": {
+  "H": 1480,
+  "DIA": 328
+ },
+ "colors": [
+  "бежевый",
+  "розовый"
+ ],
+ "materials": [
+  "металл"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B0825DZN66",
+ "model": {
+  "file": "models/abo-B0825DZN66.glb",
+  "bytes": 184864,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.1639999,
+     0,
+     -0.163999945
+    ],
+    "max": [
+     0.16401570882929997,
+     1.4799999227348999,
+     0.16401566382929997
+    ],
+    "size": [
+     0.3280156088293,
+     1.4799999227348999,
+     0.3280156088293
+    ]
+   },
+   "tris": 25000,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 14539996,
+  "bytes": 184864,
+  "srcTris": 25000,
+  "tris": 25000,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 13926282,
+   "after": 50902,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0013,
+   1.0003,
+   1.0013
+  ]
+ },
+ "image": {
+  "file": "images/abo-B0825DZN66.jpg",
+  "bytes": 1779,
+  "mime": "image/jpeg"
+ }
+}

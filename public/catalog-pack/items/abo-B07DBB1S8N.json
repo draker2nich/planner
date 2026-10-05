@@ -1,0 +1,75 @@
+{
+ "id": "abo-B07DBB1S8N",
+ "source": "abo",
+ "typeId": "bench",
+ "formId": "rect",
+ "name": "Ravenna Home Upholstered Entryway Cushioned Storage Bench",
+ "brand": "Ravenna Home",
+ "price": 15690,
+ "currency": "RUB",
+ "dims": {
+  "H": 468,
+  "W": 1196,
+  "D": 367
+ },
+ "colors": [
+  "коричневый"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B07DBB1S8N",
+ "model": {
+  "file": "models/abo-B07DBB1S8N.glb",
+  "bytes": 198576,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.59799999,
+     0,
+     -0.175325871
+    ],
+    "max": [
+     0.5979999429255,
+     0.46801901788350003,
+     0.1916576889595
+    ],
+    "size": [
+     1.1959999329255,
+     0.46801901788350003,
+     0.3669835599595
+    ]
+   },
+   "tris": 13995,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2646952,
+  "bytes": 198576,
+  "srcTris": 13995,
+  "tris": 13995,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 2313991,
+   "after": 128058,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9998,
+   1.0009,
+   0.9993
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07DBB1S8N.jpg",
+  "bytes": 4506,
+  "mime": "image/jpeg"
+ }
+}

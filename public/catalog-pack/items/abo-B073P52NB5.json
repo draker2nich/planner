@@ -1,0 +1,78 @@
+{
+ "id": "abo-B073P52NB5",
+ "source": "abo",
+ "typeId": "picture",
+ "formId": "wall",
+ "name": "Rivet Purple Modern Agate Geode on Wood Wall Art",
+ "brand": "Rivet",
+ "price": 2490,
+ "currency": "RUB",
+ "dims": {
+  "H": 408,
+  "W": 508,
+  "D": 10,
+  "E": 1300
+ },
+ "colors": [
+  "разноцветный"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B073P52NB5",
+ "model": {
+  "file": "models/abo-B073P52NB5.glb",
+  "bytes": 117824,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.254000008,
+     -0.203999996,
+     0
+    ],
+    "max": [
+     0.2539999946543,
+     0.2040000061318,
+     0.0099844961762
+    ],
+    "size": [
+     0.5080000026543,
+     0.4080000021318,
+     0.0099844961762
+    ]
+   },
+   "tris": 188,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 855520,
+  "bytes": 117824,
+  "srcTris": 188,
+  "tris": 188,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 846475,
+   "after": 113096,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0006,
+   0.9997,
+   0.9676
+  ]
+ },
+ "image": {
+  "file": "images/abo-B073P52NB5.jpg",
+  "bytes": 12550,
+  "mime": "image/jpeg"
+ }
+}

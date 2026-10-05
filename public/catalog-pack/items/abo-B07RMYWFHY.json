@@ -1,0 +1,71 @@
+{
+ "id": "abo-B07RMYWFHY",
+ "source": "abo",
+ "typeId": "sideboard",
+ "formId": "rect",
+ "name": "AmazonBasics Sideboard",
+ "brand": "AmazonBasics",
+ "price": 30490,
+ "currency": "RUB",
+ "dims": {
+  "H": 1999,
+  "W": 1006,
+  "D": 571
+ },
+ "colors": [],
+ "materials": [],
+ "styleTags": [],
+ "url": "https://www.amazon.de/dp/B07RMYWFHY",
+ "model": {
+  "file": "models/abo-B07RMYWFHY.glb",
+  "bytes": 78184,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.503000021,
+     0,
+     -0.28549999
+    ],
+    "max": [
+     0.50302793434,
+     1.999000120356,
+     0.28553831575999994
+    ],
+    "size": [
+     1.00602795534,
+     1.999000120356,
+     0.5710383057599999
+    ]
+   },
+   "tris": 7224,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 21130212,
+  "bytes": 78184,
+  "srcTris": 7224,
+  "tris": 7224,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 20923068,
+   "after": 38118,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9998,
+   0.9999,
+   1.0008
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07RMYWFHY.jpg",
+  "bytes": 2862,
+  "mime": "image/jpeg"
+ }
+}

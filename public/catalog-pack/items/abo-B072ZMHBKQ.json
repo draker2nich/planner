@@ -1,0 +1,78 @@
+{
+ "id": "abo-B072ZMHBKQ",
+ "source": "abo",
+ "typeId": "nightstand",
+ "formId": "rect",
+ "name": "Rivet Mid-Century Modern Lacquer Side End Table Nightstand",
+ "brand": "Rivet",
+ "price": 9590,
+ "currency": "RUB",
+ "dims": {
+  "H": 508,
+  "W": 370,
+  "D": 288
+ },
+ "colors": [
+  "коричневый"
+ ],
+ "materials": [
+  "дерево",
+  "ЛДСП / МДФ"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B072ZMHBKQ",
+ "model": {
+  "file": "models/abo-B072ZMHBKQ.glb",
+  "bytes": 87116,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.185000002,
+     0,
+     -0.138683379
+    ],
+    "max": [
+     0.18501546085050002,
+     0.5079999436755,
+     0.149316589068
+    ],
+    "size": [
+     0.3700154628505,
+     0.5079999436755,
+     0.287999968068
+    ]
+   },
+   "tris": 9800,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 918272,
+  "bytes": 87116,
+  "srcTris": 9800,
+  "tris": 9800,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 644380,
+   "after": 29816,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   1.0004,
+   0.9995
+  ]
+ },
+ "image": {
+  "file": "images/abo-B072ZMHBKQ.jpg",
+  "bytes": 8347,
+  "mime": "image/jpeg"
+ }
+}

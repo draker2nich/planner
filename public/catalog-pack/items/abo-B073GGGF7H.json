@@ -1,0 +1,78 @@
+{
+ "id": "abo-B073GGGF7H",
+ "source": "abo",
+ "typeId": "bench",
+ "formId": "rect",
+ "name": "Rivet Martin Modern Storage Bench",
+ "brand": "Rivet",
+ "price": 18490,
+ "currency": "RUB",
+ "dims": {
+  "H": 477,
+  "W": 1016,
+  "D": 492
+ },
+ "colors": [
+  "чёрный",
+  "разноцветный"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B073GGGF7H",
+ "model": {
+  "file": "models/abo-B073GGGF7H.glb",
+  "bytes": 344028,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.508000016,
+     0,
+     -0.245999992
+    ],
+    "max": [
+     0.5079999893086,
+     0.47702325830639997,
+     0.24596900281859996
+    ],
+    "size": [
+     1.0160000053086,
+     0.47702325830639997,
+     0.49196899481859996
+    ]
+   },
+   "tris": 15456,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2849532,
+  "bytes": 344028,
+  "srcTris": 15456,
+  "tris": 15456,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 2458622,
+   "after": 259178,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0001,
+   1.0006,
+   1.0003
+  ]
+ },
+ "image": {
+  "file": "images/abo-B073GGGF7H.jpg",
+  "bytes": 13012,
+  "mime": "image/jpeg"
+ }
+}

@@ -1,0 +1,77 @@
+{
+ "id": "abo-B07DTLWJ8F",
+ "source": "abo",
+ "typeId": "floor-lamp",
+ "formId": "round",
+ "name": "Rivet Modern Glam Glass Beads Torchiere Living Room Standing Floor Lamp With LED Light Bulb",
+ "brand": "Rivet",
+ "price": 9090,
+ "currency": "RUB",
+ "dims": {
+  "H": 1805,
+  "DIA": 254
+ },
+ "colors": [
+  "жёлтый"
+ ],
+ "materials": [
+  "стекло"
+ ],
+ "styleTags": [
+  "современный",
+  "гламур"
+ ],
+ "url": "https://www.amazon.com/dp/B07DTLWJ8F",
+ "model": {
+  "file": "models/abo-B07DTLWJ8F.glb",
+  "bytes": 272176,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.127000093,
+     0,
+     -0.127000079
+    ],
+    "max": [
+     0.12695368998499998,
+     1.804999924791,
+     0.12651300327700005
+    ],
+    "size": [
+     0.253953782985,
+     1.804999924791,
+     0.25351308227700003
+    ]
+   },
+   "tris": 30002,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 4,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2229852,
+  "bytes": 272176,
+  "srcTris": 53806,
+  "tris": 30002,
+  "textures": {
+   "images": 4,
+   "resized": 4,
+   "before": 410580,
+   "after": 19706,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   1.0002,
+   1
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07DTLWJ8F.jpg",
+  "bytes": 1397,
+  "mime": "image/jpeg"
+ }
+}

@@ -1,0 +1,77 @@
+{
+ "id": "abo-B076NNYB3P",
+ "source": "abo",
+ "typeId": "table",
+ "formId": "rect",
+ "name": "Stone & Beam Dunbar Wood Dining Room Kitchen Table",
+ "brand": "Stone & Beam",
+ "price": 63790,
+ "currency": "RUB",
+ "dims": {
+  "H": 762,
+  "W": 1981,
+  "D": 1016
+ },
+ "colors": [
+  "коричневый",
+  "натуральное дерево"
+ ],
+ "materials": [
+  "дерево",
+  "камень"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B076NNYB3P",
+ "model": {
+  "file": "models/abo-B076NNYB3P.glb",
+  "bytes": 310504,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.990021408,
+     0,
+     -0.507886887
+    ],
+    "max": [
+     0.9909784972769999,
+     0.762025355738,
+     0.508066308638
+    ],
+    "size": [
+     1.980999905277,
+     0.762025355738,
+     1.015953195638
+    ]
+   },
+   "tris": 988,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 47147376,
+  "bytes": 310504,
+  "srcTris": 988,
+  "tris": 988,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 47110415,
+   "after": 299016,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9999,
+   1,
+   1
+  ]
+ },
+ "image": {
+  "file": "images/abo-B076NNYB3P.jpg",
+  "bytes": 5084,
+  "mime": "image/jpeg"
+ }
+}

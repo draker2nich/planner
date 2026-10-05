@@ -1,0 +1,75 @@
+{
+ "id": "abo-B074KKMQBG",
+ "source": "abo",
+ "typeId": "nightstand",
+ "formId": "rect",
+ "name": "Stone & Beam Cabernet Slatted 3-Drawer Side End Table Nightstand",
+ "brand": "Stone & Beam",
+ "price": 12790,
+ "currency": "RUB",
+ "dims": {
+  "H": 695,
+  "W": 465,
+  "D": 410
+ },
+ "colors": [
+  "серый"
+ ],
+ "materials": [
+  "камень"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B074KKMQBG",
+ "model": {
+  "file": "models/abo-B074KKMQBG.glb",
+  "bytes": 361672,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.232499987,
+     0,
+     -0.206559077
+    ],
+    "max": [
+     0.23248781148739997,
+     0.6950000093622,
+     0.20344977916099996
+    ],
+    "size": [
+     0.46498779848739996,
+     0.6950000093622,
+     0.41000885616099997
+    ]
+   },
+   "tris": 30000,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 4623924,
+  "bytes": 361672,
+  "srcTris": 40585,
+  "tris": 30000,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 3010712,
+   "after": 159106,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9997,
+   1,
+   1
+  ]
+ },
+ "image": {
+  "file": "images/abo-B074KKMQBG.jpg",
+  "bytes": 11882,
+  "mime": "image/jpeg"
+ }
+}

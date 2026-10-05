@@ -1,0 +1,74 @@
+{
+ "id": "abo-B07QC76NM2",
+ "source": "abo",
+ "typeId": "sconce",
+ "formId": "wall",
+ "name": "Stone & Beam Mid-Century Wall Sconce Light",
+ "brand": "Stone & Beam",
+ "price": 6090,
+ "currency": "RUB",
+ "dims": {
+  "H": 332,
+  "W": 197,
+  "D": 230,
+  "E": 1700
+ },
+ "colors": [],
+ "materials": [],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07QC76NM2",
+ "model": {
+  "file": "models/abo-B07QC76NM2.glb",
+  "bytes": 162228,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.0985000059,
+     -0.165999994,
+     -1.15897514e-9
+    ],
+    "max": [
+     0.09849516476800001,
+     0.16599999376400001,
+     0.23000670464102488
+    ],
+    "size": [
+     0.196995170668,
+     0.331999987764,
+     0.23000670580000002
+    ]
+   },
+   "tris": 24649,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 4,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 22356788,
+  "bytes": 162228,
+  "srcTris": 24649,
+  "tris": 24649,
+  "textures": {
+   "images": 4,
+   "resized": 4,
+   "before": 21765426,
+   "after": 26366,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9994,
+   1,
+   0.9982
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07QC76NM2.jpg",
+  "bytes": 4598,
+  "mime": "image/jpeg"
+ }
+}

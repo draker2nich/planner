@@ -1,0 +1,80 @@
+{
+ "id": "abo-B073WH17GB",
+ "source": "abo",
+ "typeId": "mirror",
+ "formId": "wall",
+ "name": "Rivet Modern Curved Iron Mirror with Wood Shelf",
+ "brand": "Rivet",
+ "price": 15090,
+ "currency": "RUB",
+ "dims": {
+  "H": 613,
+  "W": 323,
+  "D": 96,
+  "E": 1200
+ },
+ "colors": [
+  "жёлтый",
+  "прозрачный"
+ ],
+ "materials": [
+  "дерево",
+  "металл"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B073WH17GB",
+ "model": {
+  "file": "models/abo-B073WH17GB.glb",
+  "bytes": 109604,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.161500007,
+     -0.306500018,
+     0
+    ],
+    "max": [
+     0.16148213516320004,
+     0.3065000324008001,
+     0.09601160528160001
+    ],
+    "size": [
+     0.32298214216320004,
+     0.6130000504008001,
+     0.09601160528160001
+    ]
+   },
+   "tris": 10586,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 1420452,
+  "bytes": 109604,
+  "srcTris": 10586,
+  "tris": 10586,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 1159688,
+   "after": 52576,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0009,
+   0.9998,
+   1.0039
+  ]
+ },
+ "image": {
+  "file": "images/abo-B073WH17GB.jpg",
+  "bytes": 4467,
+  "mime": "image/jpeg"
+ }
+}

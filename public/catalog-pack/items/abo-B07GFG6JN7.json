@@ -1,0 +1,76 @@
+{
+ "id": "abo-B07GFG6JN7",
+ "source": "abo",
+ "typeId": "coffee-table",
+ "formId": "rect",
+ "name": "Movian Aggol Lift-Top Coffee Table with 1-Shelf",
+ "brand": "Movian",
+ "price": 23190,
+ "currency": "RUB",
+ "dims": {
+  "H": 570,
+  "W": 1000,
+  "D": 712
+ },
+ "colors": [
+  "серый",
+  "чёрный"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.co.uk/dp/B07GFG6JN7",
+ "model": {
+  "file": "models/abo-B07GFG6JN7.glb",
+  "bytes": 208248,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.5,
+     -1.52507248e-18,
+     -0.463648438
+    ],
+    "max": [
+     0.4999999956144999,
+     0.5699810754469999,
+     0.24837011469749992
+    ],
+    "size": [
+     0.9999999956144999,
+     0.5699810754469999,
+     0.7120185526974999
+    ]
+   },
+   "tris": 18808,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2362240,
+  "bytes": 208248,
+  "srcTris": 18808,
+  "tris": 18808,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 1755822,
+   "after": 88446,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0004,
+   0.9994,
+   1.0001
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07GFG6JN7.jpg",
+  "bytes": 4000,
+  "mime": "image/jpeg"
+ }
+}

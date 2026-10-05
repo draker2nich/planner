@@ -1,0 +1,78 @@
+{
+ "id": "abo-B07HSBDCX8",
+ "source": "abo",
+ "typeId": "bench",
+ "formId": "rect",
+ "name": "Stone & Beam Rylee Modern Farmhouse Acacia Wood Dining Bench",
+ "brand": "Stone & Beam",
+ "price": 23690,
+ "currency": "RUB",
+ "dims": {
+  "H": 431,
+  "W": 1698,
+  "D": 378
+ },
+ "colors": [
+  "серый"
+ ],
+ "materials": [
+  "камень"
+ ],
+ "styleTags": [
+  "современный",
+  "кантри"
+ ],
+ "url": "https://www.amazon.com/dp/B07HSBDCX8",
+ "model": {
+  "file": "models/abo-B07HSBDCX8.glb",
+  "bytes": 232880,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.849000037,
+     0,
+     -0.18900001
+    ],
+    "max": [
+     0.848999991809,
+     0.430951847634,
+     0.18898974188099998
+    ],
+    "size": [
+     1.698000028809,
+     0.430951847634,
+     0.377989751881
+    ]
+   },
+   "tris": 1624,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2780412,
+  "bytes": 232880,
+  "srcTris": 1624,
+  "tris": 1624,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 2728114,
+   "after": 217832,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9998,
+   1.0008,
+   1.0004
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07HSBDCX8.jpg",
+  "bytes": 3242,
+  "mime": "image/jpeg"
+ }
+}

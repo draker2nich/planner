@@ -1,0 +1,75 @@
+{
+ "id": "abo-B07TTTGQKZ",
+ "source": "abo",
+ "typeId": "small-table",
+ "formId": "rect",
+ "name": "AmazonBasics Plant Stand",
+ "brand": "AmazonBasics",
+ "price": 4190,
+ "currency": "RUB",
+ "dims": {
+  "H": 584,
+  "W": 240,
+  "D": 240
+ },
+ "colors": [
+  "чёрный"
+ ],
+ "materials": [
+  "металл"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B07TTTGQKZ",
+ "model": {
+  "file": "models/abo-B07TTTGQKZ.glb",
+  "bytes": 195448,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.120000035,
+     0,
+     -0.11999996
+    ],
+    "max": [
+     0.12000923784459999,
+     0.5839999876745999,
+     0.1200093128446
+    ],
+    "size": [
+     0.2400092728446,
+     0.5839999876745999,
+     0.2400092728446
+    ]
+   },
+   "tris": 29520,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 30362464,
+  "bytes": 195448,
+  "srcTris": 29520,
+  "tris": 29520,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 29616763,
+   "after": 46554,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0003,
+   0.9997,
+   1.0003
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07TTTGQKZ.jpg",
+  "bytes": 3625,
+  "mime": "image/jpeg"
+ }
+}

@@ -1,0 +1,76 @@
+{
+ "id": "abo-B07QFB5H6Y",
+ "source": "abo",
+ "typeId": "plant",
+ "formId": "round",
+ "name": "Stone & Beam Mid-Century 100% Stoneware Planter",
+ "brand": "Stone & Beam",
+ "price": 6590,
+ "currency": "RUB",
+ "dims": {
+  "H": 398,
+  "DIA": 440
+ },
+ "colors": [
+  "красный"
+ ],
+ "materials": [
+  "камень"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07QFB5H6Y",
+ "model": {
+  "file": "models/abo-B07QFB5H6Y.glb",
+  "bytes": 156396,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.219999999,
+     0,
+     -0.219999939
+    ],
+    "max": [
+     0.21999999317250002,
+     0.3979954760425,
+     0.22000005317250002
+    ],
+    "size": [
+     0.4399999921725,
+     0.3979954760425,
+     0.4399999921725
+    ]
+   },
+   "tris": 12800,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 16909036,
+  "bytes": 156396,
+  "srcTris": 12800,
+  "tris": 12800,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 16615789,
+   "after": 88744,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0003,
+   0.9988,
+   1.0003
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07QFB5H6Y.jpg",
+  "bytes": 5212,
+  "mime": "image/jpeg"
+ }
+}

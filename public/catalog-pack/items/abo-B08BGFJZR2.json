@@ -1,0 +1,76 @@
+{
+ "id": "abo-B08BGFJZR2",
+ "source": "abo",
+ "typeId": "beanbag",
+ "formId": "round",
+ "name": "Solimo XL Bean Bag Cover Without Beans",
+ "brand": "Amazon Brand - Solimo",
+ "price": 4790,
+ "currency": "RUB",
+ "dims": {
+  "H": 990,
+  "DIA": 1070
+ },
+ "colors": [
+  "коричневый"
+ ],
+ "materials": [
+  "кожа"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.in/dp/B08BGFJZR2",
+ "model": {
+  "file": "models/abo-B08BGFJZR2.glb",
+  "bytes": 245328,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.535152972,
+     0.0000974369032,
+     -0.540638506
+    ],
+    "max": [
+     0.5346388493595001,
+     0.9899634089467001,
+     0.5291533153595002
+    ],
+    "size": [
+     1.0697918213595001,
+     0.9898659720435001,
+     1.0697918213595001
+    ]
+   },
+   "tris": 29996,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 40167268,
+  "bytes": 245328,
+  "srcTris": 153280,
+  "tris": 29996,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 35827390,
+   "after": 84038,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   1,
+   1
+  ]
+ },
+ "image": {
+  "file": "images/abo-B08BGFJZR2.jpg",
+  "bytes": 8079,
+  "mime": "image/jpeg"
+ }
+}

@@ -1,0 +1,77 @@
+{
+ "id": "abo-B07B7J2VCD",
+ "source": "abo",
+ "typeId": "bookcase",
+ "formId": "rect",
+ "name": "Stone & Beam Casual Wood Bookcase",
+ "brand": "Stone & Beam",
+ "price": 29790,
+ "currency": "RUB",
+ "dims": {
+  "H": 1930,
+  "W": 864,
+  "D": 453
+ },
+ "colors": [
+  "бежевый"
+ ],
+ "materials": [
+  "дерево",
+  "ротанг",
+  "камень"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B07B7J2VCD",
+ "model": {
+  "file": "models/abo-B07B7J2VCD.glb",
+  "bytes": 361880,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.431999981,
+     0,
+     -0.226500005
+    ],
+    "max": [
+     0.431982160358,
+     1.929999921171,
+     0.226460362265
+    ],
+    "size": [
+     0.863982141358,
+     1.929999921171,
+     0.452960367265
+    ]
+   },
+   "tris": 29999,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 4435716,
+  "bytes": 361880,
+  "srcTris": 38530,
+  "tris": 29999,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 3310773,
+   "after": 190190,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0005,
+   0.9998,
+   1.0003
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07B7J2VCD.jpg",
+  "bytes": 8187,
+  "mime": "image/jpeg"
+ }
+}

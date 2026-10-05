@@ -1,0 +1,77 @@
+{
+ "id": "abo-B075Z8GZ9X",
+ "source": "abo",
+ "typeId": "nightstand",
+ "formId": "rect",
+ "name": "Stone & Beam Bateman Casual Rustic Wood Bedside Table Nightstand",
+ "brand": "Stone & Beam",
+ "price": 14490,
+ "currency": "RUB",
+ "dims": {
+  "H": 610,
+  "W": 610,
+  "D": 446
+ },
+ "colors": [
+  "коричневый"
+ ],
+ "materials": [
+  "камень"
+ ],
+ "styleTags": [
+  "кантри"
+ ],
+ "url": "https://www.amazon.com/dp/B075Z8GZ9X",
+ "model": {
+  "file": "models/abo-B075Z8GZ9X.glb",
+  "bytes": 230908,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.304999977,
+     0,
+     -0.217238933
+    ],
+    "max": [
+     0.30500005612169995,
+     0.6100000331216999,
+     0.22874656396219997
+    ],
+    "size": [
+     0.6100000331216999,
+     0.6100000331216999,
+     0.44598549696219997
+    ]
+   },
+   "tris": 16978,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 3702268,
+  "bytes": 230908,
+  "srcTris": 16978,
+  "tris": 16978,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 3224881,
+   "after": 131568,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0007,
+   1.0006,
+   1.0004
+  ]
+ },
+ "image": {
+  "file": "images/abo-B075Z8GZ9X.jpg",
+  "bytes": 13120,
+  "mime": "image/jpeg"
+ }
+}

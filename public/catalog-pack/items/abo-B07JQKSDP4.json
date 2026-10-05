@@ -1,0 +1,77 @@
+{
+ "id": "abo-B07JQKSDP4",
+ "source": "abo",
+ "typeId": "office-chair",
+ "formId": "round",
+ "name": "Stone & Beam Nevaeh Contemporary Swivel Chair",
+ "brand": "Stone & Beam",
+ "price": 26090,
+ "currency": "RUB",
+ "dims": {
+  "H": 993,
+  "DIA": 879
+ },
+ "colors": [
+  "белый",
+  "бежевый"
+ ],
+ "materials": [
+  "ткань"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07JQKSDP4",
+ "model": {
+  "file": "models/abo-B07JQKSDP4.glb",
+  "bytes": 284636,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.439406157,
+     0,
+     -0.514834404
+    ],
+    "max": [
+     0.4395834373235999,
+     0.9930000361193999,
+     0.3641551903235999
+    ],
+    "size": [
+     0.8789895943235999,
+     0.9930000361193999,
+     0.8789895943235999
+    ]
+   },
+   "tris": 25216,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 3963444,
+  "bytes": 284636,
+  "srcTris": 25216,
+  "tris": 25216,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 3331364,
+   "after": 141004,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.2009,
+   1.0001,
+   0.9996
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07JQKSDP4.jpg",
+  "bytes": 6241,
+  "mime": "image/jpeg"
+ }
+}

@@ -1,0 +1,78 @@
+{
+ "id": "abo-B07HK5CDRQ",
+ "source": "abo",
+ "typeId": "sconce",
+ "formId": "wall",
+ "name": "Stone & Beam Modern Indoor Outdoor Wall Mount Sconce with Light Bulb",
+ "brand": "Stone & Beam",
+ "price": 6890,
+ "currency": "RUB",
+ "dims": {
+  "H": 298,
+  "W": 170,
+  "D": 207,
+  "E": 1700
+ },
+ "colors": [
+  "чёрный"
+ ],
+ "materials": [
+  "металл"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07HK5CDRQ",
+ "model": {
+  "file": "models/abo-B07HK5CDRQ.glb",
+  "bytes": 105000,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.0849999934,
+     -0.149000004,
+     0
+    ],
+    "max": [
+     0.0849998829636,
+     0.14899999326780003,
+     0.206997495508
+    ],
+    "size": [
+     0.1699998763636,
+     0.2979999972678,
+     0.206997495508
+    ]
+   },
+   "tris": 12580,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 4,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2118388,
+  "bytes": 105000,
+  "srcTris": 12580,
+  "tris": 12580,
+  "textures": {
+   "images": 4,
+   "resized": 4,
+   "before": 1802416,
+   "after": 32662,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0003,
+   0.9988,
+   0.9979
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07HK5CDRQ.jpg",
+  "bytes": 5389,
+  "mime": "image/jpeg"
+ }
+}

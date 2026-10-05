@@ -1,0 +1,78 @@
+{
+ "id": "abo-B071PDYXRQ",
+ "source": "abo",
+ "typeId": "armchair",
+ "formId": "rect",
+ "name": "Rivet Apex Modern Oversized Living Room Accent Chair",
+ "brand": "Rivet",
+ "price": 42790,
+ "currency": "RUB",
+ "dims": {
+  "H": 646,
+  "W": 1056,
+  "D": 969
+ },
+ "colors": [
+  "серый"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "современный",
+  "лофт"
+ ],
+ "url": "https://www.amazon.com/dp/B071PDYXRQ",
+ "model": {
+  "file": "models/abo-B071PDYXRQ.glb",
+  "bytes": 374848,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.528249145,
+     0,
+     -0.490800083
+    ],
+    "max": [
+     0.5277508837247,
+     0.6459886643398001,
+     0.4781829135097001
+    ],
+    "size": [
+     1.0560000287247,
+     0.6459886643398001,
+     0.9689829965097001
+    ]
+   },
+   "tris": 29997,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 3153468,
+  "bytes": 374848,
+  "srcTris": 51972,
+  "tris": 29997,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 1919837,
+   "after": 211390,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9998,
+   0.9994,
+   1.0004
+  ]
+ },
+ "image": {
+  "file": "images/abo-B071PDYXRQ.jpg",
+  "bytes": 7470,
+  "mime": "image/jpeg"
+ }
+}

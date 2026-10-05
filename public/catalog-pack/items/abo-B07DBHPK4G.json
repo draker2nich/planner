@@ -1,0 +1,72 @@
+{
+ "id": "abo-B07DBHPK4G",
+ "source": "abo",
+ "typeId": "floor-lamp",
+ "formId": "round",
+ "name": "Ravenna Home Metal Wrought Iron Cage Living Room Standing Floor Lamp With LED Light Bulb",
+ "brand": "Ravenna Home",
+ "price": 15790,
+ "currency": "RUB",
+ "dims": {
+  "H": 1623,
+  "DIA": 379
+ },
+ "colors": [],
+ "materials": [
+  "ткань"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B07DBHPK4G",
+ "model": {
+  "file": "models/abo-B07DBHPK4G.glb",
+  "bytes": 175096,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.189500093,
+     0,
+     -0.189500138
+    ],
+    "max": [
+     0.18952680253919998,
+     1.6229999031936,
+     0.18952675753919998
+    ],
+    "size": [
+     0.3790268955392,
+     1.6229999031936,
+     0.3790268955392
+    ]
+   },
+   "tris": 22736,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 17272416,
+  "bytes": 175096,
+  "srcTris": 22736,
+  "tris": 22736,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 16694793,
+   "after": 47216,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9994,
+   1.0001,
+   0.9994
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07DBHPK4G.jpg",
+  "bytes": 2107,
+  "mime": "image/jpeg"
+ }
+}

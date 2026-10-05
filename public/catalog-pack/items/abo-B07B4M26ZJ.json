@@ -1,0 +1,77 @@
+{
+ "id": "abo-B07B4M26ZJ",
+ "source": "abo",
+ "typeId": "sofa",
+ "formId": "straight",
+ "name": "Stone & Beam Andover Modern Sofa Couch",
+ "brand": "Stone & Beam",
+ "price": 110590,
+ "currency": "RUB",
+ "dims": {
+  "H": 963,
+  "W": 2208,
+  "D": 956
+ },
+ "colors": [
+  "серый"
+ ],
+ "materials": [
+  "камень"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07B4M26ZJ",
+ "model": {
+  "file": "models/abo-B07B4M26ZJ.glb",
+  "bytes": 225288,
+  "info": {
+   "bbox": {
+    "min": [
+     -1.10401618,
+     0,
+     -0.474037886
+    ],
+    "max": [
+     1.103983935614,
+     0.96295921541,
+     0.4819130887939999
+    ],
+    "size": [
+     2.208000115614,
+     0.96295921541,
+     0.9559509747939999
+    ]
+   },
+   "tris": 19496,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 3697620,
+  "bytes": 225288,
+  "srcTris": 19496,
+  "tris": 19496,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 3231463,
+   "after": 121686,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0002,
+   0.9996,
+   0.9998
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07B4M26ZJ.jpg",
+  "bytes": 4772,
+  "mime": "image/jpeg"
+ }
+}

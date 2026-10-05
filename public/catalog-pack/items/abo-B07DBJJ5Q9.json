@@ -1,0 +1,78 @@
+{
+ "id": "abo-B07DBJJ5Q9",
+ "source": "abo",
+ "typeId": "floor-lamp",
+ "formId": "round",
+ "name": "Ravenna Home Modern Stacked Ball Standing Floor Lamp With LED Light Bulb",
+ "brand": "Ravenna Home",
+ "price": 15090,
+ "currency": "RUB",
+ "dims": {
+  "H": 1474,
+  "DIA": 394
+ },
+ "colors": [
+  "серебристый",
+  "прозрачный"
+ ],
+ "materials": [
+  "металл",
+  "стекло"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07DBJJ5Q9",
+ "model": {
+  "file": "models/abo-B07DBJJ5Q9.glb",
+  "bytes": 236168,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.196999952,
+     0,
+     -0.196999818
+    ],
+    "max": [
+     0.19698445609049994,
+     1.4740001273685,
+     0.19698459009049996
+    ],
+    "size": [
+     0.39398440809049995,
+     1.4740001273685,
+     0.39398440809049995
+    ]
+   },
+   "tris": 30001,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 4,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2757940,
+  "bytes": 236168,
+  "srcTris": 57157,
+  "tris": 30001,
+  "textures": {
+   "images": 4,
+   "resized": 4,
+   "before": 1387621,
+   "after": 68664,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9993,
+   1,
+   0.9993
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07DBJJ5Q9.jpg",
+  "bytes": 2341,
+  "mime": "image/jpeg"
+ }
+}

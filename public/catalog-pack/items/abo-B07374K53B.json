@@ -1,0 +1,79 @@
+{
+ "id": "abo-B07374K53B",
+ "source": "abo",
+ "typeId": "sconce",
+ "formId": "wall",
+ "name": "Stone & Beam Modern Metal Wall Mount Sconce Fixture With Light Bulb And Glass Shade",
+ "brand": "Stone & Beam",
+ "price": 7990,
+ "currency": "RUB",
+ "dims": {
+  "H": 268,
+  "W": 204,
+  "D": 254,
+  "E": 1700
+ },
+ "colors": [
+  "жёлтый"
+ ],
+ "materials": [
+  "металл",
+  "стекло"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07374K53B",
+ "model": {
+  "file": "models/abo-B07374K53B.glb",
+  "bytes": 98456,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.101999991,
+     -0.00546034798,
+     -0.126894966
+    ],
+    "max": [
+     0.10200587604390003,
+     0.26253966162470005,
+     0.12710223531430004
+    ],
+    "size": [
+     0.20400586704390003,
+     0.26800000960470005,
+     0.25399720131430004
+    ]
+   },
+   "tris": 13806,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 5455568,
+  "bytes": 98456,
+  "srcTris": 13806,
+  "tris": 13806,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 5087288,
+   "after": 15854,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0008,
+   0.9997,
+   0.9992
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07374K53B.jpg",
+  "bytes": 4597,
+  "mime": "image/jpeg"
+ }
+}

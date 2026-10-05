@@ -1,0 +1,74 @@
+{
+ "id": "abo-B07ML7M196",
+ "source": "abo",
+ "typeId": "table-lamp",
+ "formId": "round",
+ "name": "Rivet Cement-Textured Table Lamp",
+ "brand": "Rivet",
+ "price": 5790,
+ "currency": "RUB",
+ "dims": {
+  "H": 416,
+  "DIA": 206
+ },
+ "colors": [
+  "серый"
+ ],
+ "materials": [],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07ML7M196",
+ "model": {
+  "file": "models/abo-B07ML7M196.glb",
+  "bytes": 279348,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.103,
+     0,
+     -0.103
+    ],
+    "max": [
+     0.10300671820890002,
+     0.4160000079399,
+     0.10300671820890002
+    ],
+    "size": [
+     0.2060067182089,
+     0.4160000079399,
+     0.2060067182089
+    ]
+   },
+   "tris": 11200,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 4,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 34763772,
+  "bytes": 279348,
+  "srcTris": 11200,
+  "tris": 11200,
+  "textures": {
+   "images": 4,
+   "resized": 4,
+   "before": 34483930,
+   "after": 218378,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9995,
+   1.0009,
+   0.9995
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07ML7M196.jpg",
+  "bytes": 3195,
+  "mime": "image/jpeg"
+ }
+}

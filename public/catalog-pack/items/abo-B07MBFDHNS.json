@@ -1,0 +1,74 @@
+{
+ "id": "abo-B07MBFDHNS",
+ "source": "abo",
+ "typeId": "table-lamp",
+ "formId": "round",
+ "name": "Ravenna Home Textured Ceramic Base Table Lamp with LED Light Bulb",
+ "brand": "Ravenna Home",
+ "price": 6890,
+ "currency": "RUB",
+ "dims": {
+  "H": 466,
+  "DIA": 214
+ },
+ "colors": [
+  "белый"
+ ],
+ "materials": [
+  "камень"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B07MBFDHNS",
+ "model": {
+  "file": "models/abo-B07MBFDHNS.glb",
+  "bytes": 231084,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.107005894,
+     1.2604044e-8,
+     -0.107002646
+    ],
+    "max": [
+     0.10700766036559999,
+     0.46600002073424396,
+     0.10701090836559998
+    ],
+    "size": [
+     0.2140135543656,
+     0.4660000081302,
+     0.2140135543656
+    ]
+   },
+   "tris": 17359,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 4,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 27289280,
+  "bytes": 231084,
+  "srcTris": 17359,
+  "tris": 17359,
+  "textures": {
+   "images": 4,
+   "resized": 4,
+   "before": 26820619,
+   "after": 138200,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9979,
+   1.001,
+   0.9979
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07MBFDHNS.jpg",
+  "bytes": 2492,
+  "mime": "image/jpeg"
+ }
+}

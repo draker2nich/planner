@@ -1,0 +1,77 @@
+{
+ "id": "abo-B07DB968V1",
+ "source": "abo",
+ "typeId": "console",
+ "formId": "rect",
+ "name": "Ravenna Home Amber Rustic Farmhouse White Storage Console Table",
+ "brand": "Ravenna Home",
+ "price": 22490,
+ "currency": "RUB",
+ "dims": {
+  "H": 800,
+  "W": 1219,
+  "D": 399
+ },
+ "colors": [
+  "белый"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "кантри"
+ ],
+ "url": "https://www.amazon.com/dp/B07DB968V1",
+ "model": {
+  "file": "models/abo-B07DB968V1.glb",
+  "bytes": 164204,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.609499991,
+     0,
+     -0.185468331
+    ],
+    "max": [
+     0.6094999717318,
+     0.8000175547392001,
+     0.21349875684520003
+    ],
+    "size": [
+     1.2189999627318,
+     0.8000175547392001,
+     0.3989670878452
+    ]
+   },
+   "tris": 22728,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2617192,
+  "bytes": 164204,
+  "srcTris": 22728,
+  "tris": 22728,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 2014131,
+   "after": 35078,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9998,
+   0.9998,
+   1.0005
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07DB968V1.jpg",
+  "bytes": 5000,
+  "mime": "image/jpeg"
+ }
+}

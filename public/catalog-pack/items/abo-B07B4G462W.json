@@ -1,0 +1,75 @@
+{
+ "id": "abo-B07B4G462W",
+ "source": "abo",
+ "typeId": "pouf",
+ "formId": "rect",
+ "name": "Rivet Edgewest Modern Ottoman",
+ "brand": "Rivet",
+ "price": 20990,
+ "currency": "RUB",
+ "dims": {
+  "H": 480,
+  "W": 828,
+  "D": 683
+ },
+ "colors": [
+  "серый"
+ ],
+ "materials": [],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07B4G462W",
+ "model": {
+  "file": "models/abo-B07B4G462W.glb",
+  "bytes": 733640,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.414000005,
+     0,
+     -0.341107309
+    ],
+    "max": [
+     0.4140000080467,
+     0.4799802309653,
+     0.3418928848786
+    ],
+    "size": [
+     0.8280000130467,
+     0.4799802309653,
+     0.6830001938786
+    ]
+   },
+   "tris": 15688,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 3840188,
+  "bytes": 733640,
+  "srcTris": 15688,
+  "tris": 15688,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 3452555,
+   "after": 646104,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0003,
+   1.0003,
+   1.0006
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07B4G462W.jpg",
+  "bytes": 10481,
+  "mime": "image/jpeg"
+ }
+}

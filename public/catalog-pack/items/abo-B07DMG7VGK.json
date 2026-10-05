@@ -1,0 +1,73 @@
+{
+ "id": "abo-B07DMG7VGK",
+ "source": "abo",
+ "typeId": "bar-counter",
+ "formId": "rect",
+ "name": "2L Lifestyle Newport Square Pub Table",
+ "brand": "2L Lifestyle",
+ "price": 18990,
+ "currency": "RUB",
+ "dims": {
+  "H": 991,
+  "W": 861,
+  "D": 861
+ },
+ "colors": [
+  "коричневый"
+ ],
+ "materials": [],
+ "styleTags": [],
+ "url": "https://www.amazon.com.mx/dp/B07DMG7VGK",
+ "model": {
+  "file": "models/abo-B07DMG7VGK.glb",
+  "bytes": 42740,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.430500031,
+     0,
+     -0.430499911
+    ],
+    "max": [
+     0.43050797033480004,
+     0.9910000060326001,
+     0.43050809033480003
+    ],
+    "size": [
+     0.8610080013348,
+     0.9910000060326001,
+     0.8610080013348
+    ]
+   },
+   "tris": 3844,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 30892720,
+  "bytes": 42740,
+  "srcTris": 3844,
+  "tris": 3844,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 30777779,
+   "after": 17968,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9999,
+   1.0004,
+   0.9999
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07DMG7VGK.jpg",
+  "bytes": 8298,
+  "mime": "image/jpeg"
+ }
+}

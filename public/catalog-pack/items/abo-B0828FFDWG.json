@@ -1,0 +1,77 @@
+{
+ "id": "abo-B0828FFDWG",
+ "source": "abo",
+ "typeId": "ceiling-light",
+ "formId": "round",
+ "name": "Ravenna Home 2-Light Flush-Mount Ceiling Light with White Frosted Glass Shade",
+ "brand": "Ravenna Home",
+ "price": 10590,
+ "currency": "RUB",
+ "dims": {
+  "H": 130,
+  "DIA": 361
+ },
+ "colors": [
+  "серебристый"
+ ],
+ "materials": [
+  "металл",
+  "стекло"
+ ],
+ "styleTags": [
+  "классика"
+ ],
+ "url": "https://www.amazon.com/dp/B0828FFDWG",
+ "model": {
+  "file": "models/abo-B0828FFDWG.glb",
+  "bytes": 132220,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.180499986,
+     -0.129999995,
+     -0.18050009
+    ],
+    "max": [
+     0.18050003336250003,
+     0.000006726250000005374,
+     0.18049992936250003
+    ],
+    "size": [
+     0.36100001936250004,
+     0.13000672125,
+     0.36100001936250004
+    ]
+   },
+   "tris": 20734,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2865064,
+  "bytes": 132220,
+  "srcTris": 20734,
+  "tris": 20734,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 2368343,
+   "after": 22562,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0008,
+   0.9962,
+   1.0008
+  ]
+ },
+ "image": {
+  "file": "images/abo-B0828FFDWG.jpg",
+  "bytes": 2837,
+  "mime": "image/jpeg"
+ }
+}

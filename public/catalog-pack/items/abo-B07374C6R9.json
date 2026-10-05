@@ -1,0 +1,76 @@
+{
+ "id": "abo-B07374C6R9",
+ "source": "abo",
+ "typeId": "floor-lamp",
+ "formId": "round",
+ "name": "Stone & Beam Glass Column Living Room Standing Floor Lamp With Light Bulb and Linen Shade",
+ "brand": "Stone & Beam",
+ "price": 18090,
+ "currency": "RUB",
+ "dims": {
+  "H": 1475,
+  "DIA": 420
+ },
+ "colors": [
+  "чёрный"
+ ],
+ "materials": [
+  "металл",
+  "стекло",
+  "ткань"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B07374C6R9",
+ "model": {
+  "file": "models/abo-B07374C6R9.glb",
+  "bytes": 134980,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.209999993,
+     0,
+     -0.209999993
+    ],
+    "max": [
+     0.21000092114949998,
+     1.4749999949649,
+     0.21000092114949998
+    ],
+    "size": [
+     0.42000091414949997,
+     1.4749999949649,
+     0.42000091414949997
+    ]
+   },
+   "tris": 4796,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 25208848,
+  "bytes": 134980,
+  "srcTris": 4796,
+  "tris": 4796,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 25076314,
+   "after": 102478,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0004,
+   0.9998,
+   1.0004
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07374C6R9.jpg",
+  "bytes": 2390,
+  "mime": "image/jpeg"
+ }
+}

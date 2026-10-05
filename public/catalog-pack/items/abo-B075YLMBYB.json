@@ -1,0 +1,77 @@
+{
+ "id": "abo-B075YLMBYB",
+ "source": "abo",
+ "typeId": "picture",
+ "formId": "wall",
+ "name": "Stone & Beam Framed Rustic Black and White Cabin Photo Print Wall Art Decor",
+ "brand": "Stone & Beam",
+ "price": 3290,
+ "currency": "RUB",
+ "dims": {
+  "H": 458,
+  "W": 560,
+  "D": 35,
+  "E": 1300
+ },
+ "colors": [
+  "чёрный"
+ ],
+ "materials": [],
+ "styleTags": [
+  "классика",
+  "кантри"
+ ],
+ "url": "https://www.amazon.com/dp/B075YLMBYB",
+ "model": {
+  "file": "models/abo-B075YLMBYB.glb",
+  "bytes": 213720,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.280000001,
+     -0.229000002,
+     -9.03226605e-10
+    ],
+    "max": [
+     0.27999997295259993,
+     0.22900156370779998,
+     0.035002133829573394
+    ],
+    "size": [
+     0.5599999739525999,
+     0.4580015657078,
+     0.0350021347328
+    ]
+   },
+   "tris": 2266,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 5713640,
+  "bytes": 213720,
+  "srcTris": 2266,
+  "tris": 2266,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 5640902,
+   "after": 195050,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0009,
+   1.0005,
+   1.0102
+  ]
+ },
+ "image": {
+  "file": "images/abo-B075YLMBYB.jpg",
+  "bytes": 12251,
+  "mime": "image/jpeg"
+ }
+}

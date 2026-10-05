@@ -1,0 +1,80 @@
+{
+ "id": "abo-B078JM1J41",
+ "source": "abo",
+ "typeId": "shelving",
+ "formId": "rect",
+ "name": "Rivet Modern Wood and Metal Floating Wall Storage Shelves",
+ "brand": "Rivet",
+ "price": 14890,
+ "currency": "RUB",
+ "dims": {
+  "H": 921,
+  "W": 946,
+  "D": 183
+ },
+ "colors": [
+  "бежевый",
+  "чёрный",
+  "натуральное дерево"
+ ],
+ "materials": [
+  "дерево",
+  "металл"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B078JM1J41",
+ "model": {
+  "file": "models/abo-B078JM1J41.glb",
+  "bytes": 270780,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.47300002,
+     -0.460500002,
+     0
+    ],
+    "max": [
+     0.4730000332081999,
+     0.46049742512999997,
+     0.18298688693259998
+    ],
+    "size": [
+     0.9460000532081999,
+     0.92099742713,
+     0.18298688693259998
+    ]
+   },
+   "tris": 30001,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 18298220,
+  "bytes": 270780,
+  "srcTris": 57752,
+  "tris": 30001,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 16913142,
+   "after": 119734,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0002,
+   1.0003,
+   1.0024
+  ]
+ },
+ "image": {
+  "file": "images/abo-B078JM1J41.jpg",
+  "bytes": 8252,
+  "mime": "image/jpeg"
+ }
+}

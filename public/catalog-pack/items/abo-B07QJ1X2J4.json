@@ -1,0 +1,78 @@
+{
+ "id": "abo-B07QJ1X2J4",
+ "source": "abo",
+ "typeId": "bench",
+ "formId": "rect",
+ "name": "Rivet Modern Haraden Upholstered Button-Tufted Bench",
+ "brand": "Rivet",
+ "price": 17890,
+ "currency": "RUB",
+ "dims": {
+  "H": 432,
+  "W": 1118,
+  "D": 406
+ },
+ "colors": [
+  "синий"
+ ],
+ "materials": [
+  "ткань"
+ ],
+ "styleTags": [
+  "современный",
+  "классика"
+ ],
+ "url": "https://www.amazon.com/dp/B07QJ1X2J4",
+ "model": {
+  "file": "models/abo-B07QJ1X2J4.glb",
+  "bytes": 404140,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.559000075,
+     0,
+     -0.203030139
+    ],
+    "max": [
+     0.5589999017972002,
+     0.431968494972,
+     0.20293835651160003
+    ],
+    "size": [
+     1.1179999767972002,
+     0.431968494972,
+     0.4059684955116
+    ]
+   },
+   "tris": 12552,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 51134596,
+  "bytes": 404140,
+  "srcTris": 12552,
+  "tris": 12552,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 50833301,
+   "after": 340226,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0004,
+   1.0005,
+   0.999
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07QJ1X2J4.jpg",
+  "bytes": 4725,
+  "mime": "image/jpeg"
+ }
+}

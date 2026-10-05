@@ -1,0 +1,78 @@
+{
+ "id": "abo-B07QFB1L2P",
+ "source": "abo",
+ "typeId": "pedestal",
+ "formId": "rect",
+ "name": "Stone & Beam Sumner Modern Filing Cabinet",
+ "brand": "Stone & Beam",
+ "price": 15990,
+ "currency": "RUB",
+ "dims": {
+  "H": 775,
+  "W": 544,
+  "D": 547
+ },
+ "colors": [
+  "белый"
+ ],
+ "materials": [
+  "дерево",
+  "ЛДСП / МДФ"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07QFB1L2P",
+ "model": {
+  "file": "models/abo-B07QFB1L2P.glb",
+  "bytes": 76572,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.271999985,
+     0,
+     -0.273499995
+    ],
+    "max": [
+     0.2720090882,
+     0.7750000561944,
+     0.27348930181840003
+    ],
+    "size": [
+     0.5440090732,
+     0.7750000561944,
+     0.5469892968184
+    ]
+   },
+   "tris": 10756,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 21791120,
+  "bytes": 76572,
+  "srcTris": 10756,
+  "tris": 10756,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 21507337,
+   "after": 10876,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9993,
+   1.0006,
+   1.0004
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07QFB1L2P.jpg",
+  "bytes": 4344,
+  "mime": "image/jpeg"
+ }
+}

@@ -1,0 +1,77 @@
+{
+ "id": "abo-B072ZMSBQT",
+ "source": "abo",
+ "typeId": "small-table",
+ "formId": "round",
+ "name": "Rivet Molly Round Marble and Stainless Steel Side End Table",
+ "brand": "Rivet",
+ "price": 7090,
+ "currency": "RUB",
+ "dims": {
+  "H": 479,
+  "DIA": 445
+ },
+ "colors": [
+  "серый"
+ ],
+ "materials": [
+  "металл",
+  "камень"
+ ],
+ "styleTags": [
+  "классика"
+ ],
+ "url": "https://www.amazon.com/dp/B072ZMSBQT",
+ "model": {
+  "file": "models/abo-B072ZMSBQT.glb",
+  "bytes": 146124,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.222505629,
+     0,
+     -0.222503349
+    ],
+    "max": [
+     0.22249101436800003,
+     0.47900000054520003,
+     0.22249329436800006
+    ],
+    "size": [
+     0.44499664336800004,
+     0.47900000054520003,
+     0.44499664336800004
+    ]
+   },
+   "tris": 24120,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 1798412,
+  "bytes": 146124,
+  "srcTris": 24120,
+  "tris": 24120,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 1227960,
+   "after": 29466,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   0.9995,
+   1
+  ]
+ },
+ "image": {
+  "file": "images/abo-B072ZMSBQT.jpg",
+  "bytes": 5934,
+  "mime": "image/jpeg"
+ }
+}

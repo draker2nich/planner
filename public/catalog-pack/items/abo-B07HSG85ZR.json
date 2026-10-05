@@ -1,0 +1,77 @@
+{
+ "id": "abo-B07HSG85ZR",
+ "source": "abo",
+ "typeId": "bookcase",
+ "formId": "rect",
+ "name": "Stone & Beam Arlington Contemporary Bookcase",
+ "brand": "Stone & Beam",
+ "price": 25990,
+ "currency": "RUB",
+ "dims": {
+  "H": 712,
+  "W": 1149,
+  "D": 391
+ },
+ "colors": [
+  "натуральное дерево"
+ ],
+ "materials": [
+  "камень"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07HSG85ZR",
+ "model": {
+  "file": "models/abo-B07HSG85ZR.glb",
+  "bytes": 156152,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.574499965,
+     0,
+     -0.195500001
+    ],
+    "max": [
+     0.5744999260354999,
+     0.7119970026119999,
+     0.19549520088749997
+    ],
+    "size": [
+     1.1489998910355,
+     0.7119970026119999,
+     0.3909952018875
+    ]
+   },
+   "tris": 10974,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 1243408,
+  "bytes": 156152,
+  "srcTris": 10974,
+  "tris": 10974,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 912039,
+   "after": 86030,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0003,
+   1.0003,
+   0.9991
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07HSG85ZR.jpg",
+  "bytes": 7904,
+  "mime": "image/jpeg"
+ }
+}

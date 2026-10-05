@@ -1,0 +1,77 @@
+{
+ "id": "abo-B07QJL75KJ",
+ "source": "abo",
+ "typeId": "sconce",
+ "formId": "wall",
+ "name": "Ravenna Home 5-Piece Vanity Wall Sconce Light with Bathroom Hardware Set",
+ "brand": "Ravenna Home",
+ "price": 7890,
+ "currency": "RUB",
+ "dims": {
+  "H": 172,
+  "W": 451,
+  "D": 145,
+  "E": 1700
+ },
+ "colors": [
+  "серебристый"
+ ],
+ "materials": [
+  "металл",
+  "стекло"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B07QJL75KJ",
+ "model": {
+  "file": "models/abo-B07QJL75KJ.glb",
+  "bytes": 115860,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.225500003,
+     -0.0859999955,
+     0
+    ],
+    "max": [
+     0.22550001047949997,
+     0.08599830055199999,
+     0.1449928017455
+    ],
+    "size": [
+     0.4510000134795,
+     0.17199829605199998,
+     0.1449928017455
+    ]
+   },
+   "tris": 14280,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 4,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 19386872,
+  "bytes": 115860,
+  "srcTris": 14280,
+  "tris": 14280,
+  "textures": {
+   "images": 4,
+   "resized": 4,
+   "before": 19034739,
+   "after": 31714,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9993,
+   0.9991,
+   1.001
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07QJL75KJ.jpg",
+  "bytes": 3206,
+  "mime": "image/jpeg"
+ }
+}

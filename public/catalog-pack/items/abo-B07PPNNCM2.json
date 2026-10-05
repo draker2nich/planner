@@ -1,0 +1,77 @@
+{
+ "id": "abo-B07PPNNCM2",
+ "source": "abo",
+ "typeId": "bookcase",
+ "formId": "rect",
+ "name": "AmazonBasics Modern 5-Tier Ladder Bookshelf Organizer with Solid Rubber Wood Frame",
+ "brand": "AmazonBasics",
+ "price": 13890,
+ "currency": "RUB",
+ "dims": {
+  "H": 1779,
+  "W": 636,
+  "D": 341
+ },
+ "colors": [
+  "белый"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07PPNNCM2",
+ "model": {
+  "file": "models/abo-B07PPNNCM2.glb",
+  "bytes": 102844,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.317999989,
+     0,
+     -0.170499995
+    ],
+    "max": [
+     0.31800094611799995,
+     1.779000054642,
+     0.17046687135999997
+    ],
+    "size": [
+     0.6360009351179999,
+     1.779000054642,
+     0.34096686635999995
+    ]
+   },
+   "tris": 15748,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 1124648,
+  "bytes": 102844,
+  "srcTris": 15748,
+  "tris": 15748,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 657950,
+   "after": 10554,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   0.9997,
+   0.999
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07PPNNCM2.jpg",
+  "bytes": 2444,
+  "mime": "image/jpeg"
+ }
+}

@@ -1,0 +1,79 @@
+{
+ "id": "abo-B075X2XZDY",
+ "source": "abo",
+ "typeId": "table-lamp",
+ "formId": "round",
+ "name": "Rivet Mid-Century Modern Brass Trimmed Table Lamp with LED Light Bulb",
+ "brand": "Rivet",
+ "price": 9090,
+ "currency": "RUB",
+ "dims": {
+  "H": 639,
+  "DIA": 295
+ },
+ "colors": [
+  "коричневый",
+  "жёлтый"
+ ],
+ "materials": [
+  "металл",
+  "ткань",
+  "пластик"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B075X2XZDY",
+ "model": {
+  "file": "models/abo-B075X2XZDY.glb",
+  "bytes": 112764,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.147500008,
+     0,
+     -0.147500008
+    ],
+    "max": [
+     0.14748606417200003,
+     0.638999976252,
+     0.14748606417200003
+    ],
+    "size": [
+     0.294986072172,
+     0.638999976252,
+     0.294986072172
+    ]
+   },
+   "tris": 28760,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 0,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 752816,
+  "bytes": 112764,
+  "srcTris": 28760,
+  "tris": 28760,
+  "textures": {
+   "images": 0,
+   "resized": 0,
+   "before": 0,
+   "after": 0,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9984,
+   0.9995,
+   0.9984
+  ]
+ },
+ "image": {
+  "file": "images/abo-B075X2XZDY.jpg",
+  "bytes": 3918,
+  "mime": "image/jpeg"
+ }
+}

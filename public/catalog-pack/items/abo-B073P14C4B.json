@@ -1,0 +1,76 @@
+{
+ "id": "abo-B073P14C4B",
+ "source": "abo",
+ "typeId": "picture",
+ "formId": "wall",
+ "name": "Rivet Canvas Print Wall Art of Horses Grazing in Desert Southwest Desert",
+ "brand": "Rivet",
+ "price": 7190,
+ "currency": "RUB",
+ "dims": {
+  "H": 1016,
+  "W": 1520,
+  "D": 51,
+  "E": 1300
+ },
+ "colors": [
+  "разноцветный"
+ ],
+ "materials": [
+  "ткань"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B073P14C4B",
+ "model": {
+  "file": "models/abo-B073P14C4B.glb",
+  "bytes": 254428,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.76000005,
+     -0.508000016,
+     0
+    ],
+    "max": [
+     0.7600000157469001,
+     0.5080239551893,
+     0.051028507365
+    ],
+    "size": [
+     1.5200000657469002,
+     1.0160239711893,
+     0.051028507365
+    ]
+   },
+   "tris": 592,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2135140,
+  "bytes": 254428,
+  "srcTris": 592,
+  "tris": 592,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 2113486,
+   "after": 246714,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   0.9995,
+   1.0034
+  ]
+ },
+ "image": {
+  "file": "images/abo-B073P14C4B.jpg",
+  "bytes": 11077,
+  "mime": "image/jpeg"
+ }
+}

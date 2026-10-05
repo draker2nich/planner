@@ -1,0 +1,78 @@
+{
+ "id": "abo-B071VR5JSP",
+ "source": "abo",
+ "typeId": "chandelier",
+ "formId": "round",
+ "name": "Rivet Mid Century Modern Glass Globe Pendant Chandelier Fixture With Light Bulb",
+ "brand": "Rivet",
+ "price": 13790,
+ "currency": "RUB",
+ "dims": {
+  "H": 1606,
+  "DIA": 430
+ },
+ "colors": [
+  "чёрный",
+  "коричневый"
+ ],
+ "materials": [
+  "металл",
+  "стекло"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B071VR5JSP",
+ "model": {
+  "file": "models/abo-B071VR5JSP.glb",
+  "bytes": 222712,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.215000018,
+     -1.60599995,
+     -0.215000018
+    ],
+    "max": [
+     0.214952713261,
+     -4.205449988248233e-8,
+     0.214952713261
+    ],
+    "size": [
+     0.429952731261,
+     1.6059999079455,
+     0.429952731261
+    ]
+   },
+   "tris": 29998,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 14987340,
+  "bytes": 222712,
+  "srcTris": 299392,
+  "tris": 29998,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 6352558,
+   "after": 51304,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0006,
+   1.0002,
+   1.0006
+  ]
+ },
+ "image": {
+  "file": "images/abo-B071VR5JSP.jpg",
+  "bytes": 3573,
+  "mime": "image/jpeg"
+ }
+}

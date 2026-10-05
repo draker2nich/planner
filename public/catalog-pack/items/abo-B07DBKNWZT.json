@@ -1,0 +1,78 @@
+{
+ "id": "abo-B07DBKNWZT",
+ "source": "abo",
+ "typeId": "pouf",
+ "formId": "rect",
+ "name": "Ravenna Home Sage Diamond Tufted Ottoman",
+ "brand": "Ravenna Home",
+ "price": 18190,
+ "currency": "RUB",
+ "dims": {
+  "H": 365,
+  "W": 758,
+  "D": 764
+ },
+ "colors": [
+  "серый"
+ ],
+ "materials": [
+  "дерево",
+  "ткань"
+ ],
+ "styleTags": [
+  "классика"
+ ],
+ "url": "https://www.amazon.com/dp/B07DBKNWZT",
+ "model": {
+  "file": "models/abo-B07DBKNWZT.glb",
+  "bytes": 508432,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.380521744,
+     0.000126655243,
+     -0.37950018
+    ],
+    "max": [
+     0.3774625425812,
+     0.3649887850702,
+     0.38449985488739996
+    ],
+    "size": [
+     0.7579842865812,
+     0.3648621298272,
+     0.7640000348874
+    ]
+   },
+   "tris": 30007,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 8499200,
+  "bytes": 508432,
+  "srcTris": 187322,
+  "tris": 30007,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 3155388,
+   "after": 331034,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9998,
+   0.9995,
+   1.0005
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07DBKNWZT.jpg",
+  "bytes": 5381,
+  "mime": "image/jpeg"
+ }
+}

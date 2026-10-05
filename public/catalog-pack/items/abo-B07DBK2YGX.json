@@ -1,0 +1,77 @@
+{
+ "id": "abo-B07DBK2YGX",
+ "source": "abo",
+ "typeId": "desk",
+ "formId": "rect",
+ "name": "Ravenna Home Traditional Metal Table Desk Lamp With LED Light Bulb",
+ "brand": "Ravenna Home",
+ "price": 14990,
+ "currency": "RUB",
+ "dims": {
+  "H": 698,
+  "W": 331,
+  "D": 331
+ },
+ "colors": [
+  "чёрный"
+ ],
+ "materials": [
+  "ткань"
+ ],
+ "styleTags": [
+  "классика"
+ ],
+ "url": "https://www.amazon.com/dp/B07DBK2YGX",
+ "model": {
+  "file": "models/abo-B07DBK2YGX.glb",
+  "bytes": 144272,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.165500104,
+     0,
+     -0.165500104
+    ],
+    "max": [
+     0.1654992372059,
+     0.6980000266413,
+     0.1654992372059
+    ],
+    "size": [
+     0.3309993412059,
+     0.6980000266413,
+     0.3309993412059
+    ]
+   },
+   "tris": 18558,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 4,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 1884428,
+  "bytes": 144272,
+  "srcTris": 18558,
+  "tris": 18558,
+  "textures": {
+   "images": 4,
+   "resized": 4,
+   "before": 1398026,
+   "after": 38490,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0004,
+   0.9993,
+   1.0004
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07DBK2YGX.jpg",
+  "bytes": 2327,
+  "mime": "image/jpeg"
+ }
+}

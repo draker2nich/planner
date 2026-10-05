@@ -1,0 +1,73 @@
+{
+ "id": "abo-B07JQKSDN2",
+ "source": "abo",
+ "typeId": "office-chair",
+ "formId": "round",
+ "name": "Stone & Beam Wolcott Swivel Chair",
+ "brand": "Stone & Beam",
+ "price": 32190,
+ "currency": "RUB",
+ "dims": {
+  "H": 856,
+  "DIA": 923
+ },
+ "colors": [],
+ "materials": [
+  "ткань",
+  "камень"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B07JQKSDN2",
+ "model": {
+  "file": "models/abo-B07JQKSDN2.glb",
+  "bytes": 265468,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.460361868,
+     0,
+     -0.536809862
+    ],
+    "max": [
+     0.46263815704019995,
+     0.8560130855436,
+     0.38619016304019993
+    ],
+    "size": [
+     0.9230000250402,
+     0.8560130855436,
+     0.9230000250402
+    ]
+   },
+   "tris": 24054,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 3119156,
+  "bytes": 265468,
+  "srcTris": 24054,
+  "tris": 24054,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 2544778,
+   "after": 133092,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.068,
+   1.0002,
+   1.0005
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07JQKSDN2.jpg",
+  "bytes": 5038,
+  "mime": "image/jpeg"
+ }
+}

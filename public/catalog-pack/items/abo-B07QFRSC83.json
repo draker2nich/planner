@@ -1,0 +1,77 @@
+{
+ "id": "abo-B07QFRSC83",
+ "source": "abo",
+ "typeId": "chair",
+ "formId": "rect",
+ "name": "Rivet Contemporary Curved Channel-Back Dining Chair",
+ "brand": "Rivet",
+ "price": 14790,
+ "currency": "RUB",
+ "dims": {
+  "H": 889,
+  "W": 643,
+  "D": 575
+ },
+ "colors": [
+  "серый"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07QFRSC83",
+ "model": {
+  "file": "models/abo-B07QFRSC83.glb",
+  "bytes": 394328,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.321497858,
+     0,
+     -0.31838572
+    ],
+    "max": [
+     0.32152538014000004,
+     0.8889999755652,
+     0.2565910083824
+    ],
+    "size": [
+     0.6430232381400001,
+     0.8889999755652,
+     0.5749767283824
+    ]
+   },
+   "tris": 24844,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 34812768,
+  "bytes": 394328,
+  "srcTris": 24844,
+  "tris": 24844,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 34227090,
+   "after": 272326,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9995,
+   0.9995,
+   0.9995
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07QFRSC83.jpg",
+  "bytes": 4371,
+  "mime": "image/jpeg"
+ }
+}

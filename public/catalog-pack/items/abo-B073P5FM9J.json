@@ -1,0 +1,76 @@
+{
+ "id": "abo-B073P5FM9J",
+ "source": "abo",
+ "typeId": "picture",
+ "formId": "wall",
+ "name": "Rivet American Forest Map Wall Art Print in Gold Wood Frame",
+ "brand": "Rivet",
+ "price": 2690,
+ "currency": "RUB",
+ "dims": {
+  "H": 304,
+  "W": 304,
+  "D": 38,
+  "E": 1300
+ },
+ "colors": [
+  "разноцветный"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B073P5FM9J",
+ "model": {
+  "file": "models/abo-B073P5FM9J.glb",
+  "bytes": 78348,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.151999995,
+     -0.151999995,
+     0
+    ],
+    "max": [
+     0.15200000569829997,
+     0.15200000569829997,
+     0.0380023195648
+    ],
+    "size": [
+     0.30400000069829997,
+     0.30400000069829997,
+     0.0380023195648
+    ]
+   },
+   "tris": 420,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 1465724,
+  "bytes": 78348,
+  "srcTris": 420,
+  "tris": 420,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 1450292,
+   "after": 72392,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9991,
+   0.9991,
+   0.9973
+  ]
+ },
+ "image": {
+  "file": "images/abo-B073P5FM9J.jpg",
+  "bytes": 8524,
+  "mime": "image/jpeg"
+ }
+}

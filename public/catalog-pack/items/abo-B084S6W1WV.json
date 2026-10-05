@@ -1,0 +1,78 @@
+{
+ "id": "abo-B084S6W1WV",
+ "source": "abo",
+ "typeId": "desk",
+ "formId": "rect",
+ "name": "Movian 3-Drawer Desk",
+ "brand": "Movian",
+ "price": 30590,
+ "currency": "RUB",
+ "dims": {
+  "H": 750,
+  "W": 1100,
+  "D": 600
+ },
+ "colors": [
+  "белый",
+  "серый"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.co.uk/dp/B084S6W1WV",
+ "model": {
+  "file": "models/abo-B084S6W1WV.glb",
+  "bytes": 56348,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.550000012,
+     -2.49255834e-8,
+     -0.300000161
+    ],
+    "max": [
+     0.5499999839950999,
+     0.7499847126234166,
+     0.2999876290392
+    ],
+    "size": [
+     1.0999999959951,
+     0.749984737549,
+     0.5999877900392
+    ]
+   },
+   "tris": 5700,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 11473948,
+  "bytes": 56348,
+  "srcTris": 5700,
+  "tris": 5700,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 11257467,
+   "after": 16468,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   1,
+   1
+  ]
+ },
+ "image": {
+  "file": "images/abo-B084S6W1WV.jpg",
+  "bytes": 4447,
+  "mime": "image/jpeg"
+ }
+}

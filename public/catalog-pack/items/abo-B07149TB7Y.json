@@ -1,0 +1,77 @@
+{
+ "id": "abo-B07149TB7Y",
+ "source": "abo",
+ "typeId": "chandelier",
+ "formId": "round",
+ "name": "Rivet Modern Industrial Geometric Cage Pendant Chandelier Fixture With Light Bulb",
+ "brand": "Rivet",
+ "price": 17290,
+ "currency": "RUB",
+ "dims": {
+  "H": 1764,
+  "DIA": 487
+ },
+ "colors": [
+  "чёрный"
+ ],
+ "materials": [
+  "металл"
+ ],
+ "styleTags": [
+  "современный",
+  "лофт"
+ ],
+ "url": "https://www.amazon.com/dp/B07149TB7Y",
+ "model": {
+  "file": "models/abo-B07149TB7Y.glb",
+  "bytes": 401064,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.243500009,
+     -1.76400006,
+     -0.243499994
+    ],
+    "max": [
+     0.24350311104699998,
+     -3.4413000005173444e-8,
+     0.24350312604699997
+    ],
+    "size": [
+     0.48700312004699997,
+     1.764000025587,
+     0.48700312004699997
+    ]
+   },
+   "tris": 29997,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 7140608,
+  "bytes": 401064,
+  "srcTris": 40320,
+  "tris": 29997,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 5035703,
+   "after": 48196,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9997,
+   0.9999,
+   1.1291
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07149TB7Y.jpg",
+  "bytes": 5930,
+  "mime": "image/jpeg"
+ }
+}

@@ -1,0 +1,77 @@
+{
+ "id": "abo-B0735S1PP1",
+ "source": "abo",
+ "typeId": "rug",
+ "formId": "rect",
+ "name": "Stone & Beam Modern Multi-Colored Stripe Area Rug",
+ "brand": "Stone & Beam",
+ "price": 29190,
+ "currency": "RUB",
+ "dims": {
+  "H": 23,
+  "W": 3092,
+  "D": 2479
+ },
+ "colors": [
+  "разноцветный"
+ ],
+ "materials": [
+  "камень"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B0735S1PP1",
+ "model": {
+  "file": "models/abo-B0735S1PP1.glb",
+  "bytes": 651340,
+  "info": {
+   "bbox": {
+    "min": [
+     -1.54480529,
+     -2.21184787e-18,
+     -1.24126792
+    ],
+    "max": [
+     1.5471948177069998,
+     0.023025331937999997,
+     1.2377299079150001
+    ],
+    "size": [
+     3.092000107707,
+     0.023025331938,
+     2.4789978279150002
+    ]
+   },
+   "tris": 5000,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 61993260,
+  "bytes": 651340,
+  "srcTris": 5000,
+  "tris": 5000,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 61871680,
+   "after": 623668,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0001,
+   1.0039,
+   1.0001
+  ]
+ },
+ "image": {
+  "file": "images/abo-B0735S1PP1.jpg",
+  "bytes": 11722,
+  "mime": "image/jpeg"
+ }
+}

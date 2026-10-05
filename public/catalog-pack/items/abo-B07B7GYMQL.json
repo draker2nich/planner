@@ -1,0 +1,80 @@
+{
+ "id": "abo-B07B7GYMQL",
+ "source": "abo",
+ "typeId": "coffee-table",
+ "formId": "rect",
+ "name": "Rivet Modern Reclaimed Fir Wood Storage Coffee Table",
+ "brand": "Rivet",
+ "price": 26890,
+ "currency": "RUB",
+ "dims": {
+  "H": 395,
+  "W": 1101,
+  "D": 655
+ },
+ "colors": [
+  "бежевый",
+  "чёрный"
+ ],
+ "materials": [
+  "дерево",
+  "металл"
+ ],
+ "styleTags": [
+  "современный",
+  "лофт"
+ ],
+ "url": "https://www.amazon.com/dp/B07B7GYMQL",
+ "model": {
+  "file": "models/abo-B07B7GYMQL.glb",
+  "bytes": 416692,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.552097857,
+     0,
+     -0.329036921
+    ],
+    "max": [
+     0.5489021245490998,
+     0.3950239816606,
+     0.3259313888442
+    ],
+    "size": [
+     1.1009999815490998,
+     0.3950239816606,
+     0.6549683098442
+    ]
+   },
+   "tris": 29984,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 3462716,
+  "bytes": 416692,
+  "srcTris": 29984,
+  "tris": 29984,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 2485527,
+   "after": 235262,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0002,
+   1.0011,
+   1.0003
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07B7GYMQL.jpg",
+  "bytes": 7211,
+  "mime": "image/jpeg"
+ }
+}

@@ -1,0 +1,76 @@
+{
+ "id": "abo-B07B7P51PW",
+ "source": "abo",
+ "typeId": "small-table",
+ "formId": "round",
+ "name": "Rivet Mid-Century Modern Round Metal Side End Table",
+ "brand": "Rivet",
+ "price": 6890,
+ "currency": "RUB",
+ "dims": {
+  "H": 480,
+  "DIA": 299
+ },
+ "colors": [
+  "жёлтый"
+ ],
+ "materials": [
+  "металл"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07B7P51PW",
+ "model": {
+  "file": "models/abo-B07B7P51PW.glb",
+  "bytes": 73548,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.149500012,
+     0,
+     -0.149500012
+    ],
+    "max": [
+     0.14949285616100003,
+     0.4800000155886,
+     0.14949285616100003
+    ],
+    "size": [
+     0.298992868161,
+     0.4800000155886,
+     0.298992868161
+    ]
+   },
+   "tris": 10580,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 1901328,
+  "bytes": 73548,
+  "srcTris": 10580,
+  "tris": 10580,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 1660090,
+   "after": 18752,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0001,
+   1.0006,
+   1.0001
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07B7P51PW.jpg",
+  "bytes": 6294,
+  "mime": "image/jpeg"
+ }
+}

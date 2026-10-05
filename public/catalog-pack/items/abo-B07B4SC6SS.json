@@ -1,0 +1,77 @@
+{
+ "id": "abo-B07B4SC6SS",
+ "source": "abo",
+ "typeId": "chandelier",
+ "formId": "round",
+ "name": "Rivet Mid-Century Modern 6-Light Ceiling Pendant Chandelier Fixture",
+ "brand": "Rivet",
+ "price": 18790,
+ "currency": "RUB",
+ "dims": {
+  "H": 744,
+  "DIA": 682
+ },
+ "colors": [
+  "жёлтый"
+ ],
+ "materials": [
+  "металл",
+  "стекло"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07B4SC6SS",
+ "model": {
+  "file": "models/abo-B07B4SC6SS.glb",
+  "bytes": 235320,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.333778411,
+     -0.743999958,
+     -0.346806288
+    ],
+    "max": [
+     0.3482329086644,
+     5.381400103310341e-9,
+     0.33520503166439997
+    ],
+    "size": [
+     0.6820113196644,
+     0.7439999633814001,
+     0.6820113196644
+    ]
+   },
+   "tris": 25734,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 4,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 8266856,
+  "bytes": 235320,
+  "srcTris": 25734,
+  "tris": 25734,
+  "textures": {
+   "images": 4,
+   "resized": 4,
+   "before": 7444984,
+   "after": 48100,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0002,
+   0.9999,
+   1.071
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07B4SC6SS.jpg",
+  "bytes": 4372,
+  "mime": "image/jpeg"
+ }
+}

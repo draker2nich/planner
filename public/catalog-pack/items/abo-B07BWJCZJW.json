@@ -1,0 +1,78 @@
+{
+ "id": "abo-B07BWJCZJW",
+ "source": "abo",
+ "typeId": "armchair",
+ "formId": "rect",
+ "name": "Stone & Beam Cheyanne Modern Accent Arm Chair",
+ "brand": "Stone & Beam",
+ "price": 37790,
+ "currency": "RUB",
+ "dims": {
+  "H": 919,
+  "W": 780,
+  "D": 899
+ },
+ "colors": [
+  "серый"
+ ],
+ "materials": [
+  "дерево",
+  "ткань"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07BWJCZJW",
+ "model": {
+  "file": "models/abo-B07BWJCZJW.glb",
+  "bytes": 313356,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.389999986,
+     0,
+     -0.449499995
+    ],
+    "max": [
+     0.3899972860985,
+     0.9190000222071,
+     0.4494742072762001
+    ],
+    "size": [
+     0.7799972720985,
+     0.9190000222071,
+     0.8989742022762001
+    ]
+   },
+   "tris": 29998,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 65037992,
+  "bytes": 313356,
+  "srcTris": 37940,
+  "tris": 29998,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 63895206,
+   "after": 153186,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0003,
+   0.9995,
+   0.9998
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07BWJCZJW.jpg",
+  "bytes": 5532,
+  "mime": "image/jpeg"
+ }
+}

@@ -1,0 +1,79 @@
+{
+ "id": "abo-B07B8PXTSF",
+ "source": "abo",
+ "typeId": "picture",
+ "formId": "wall",
+ "name": "Stone & Beam Modern Love Woodblock Wall Art",
+ "brand": "Stone & Beam",
+ "price": 4190,
+ "currency": "RUB",
+ "dims": {
+  "H": 497,
+  "W": 635,
+  "D": 30,
+  "E": 1300
+ },
+ "colors": [
+  "бежевый",
+  "коричневый"
+ ],
+ "materials": [
+  "камень"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07B8PXTSF",
+ "model": {
+  "file": "models/abo-B07B8PXTSF.glb",
+  "bytes": 258244,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.317500025,
+     -0.248500004,
+     0
+    ],
+    "max": [
+     0.317500009036,
+     0.248515526516,
+     0.030000001608
+    ],
+    "size": [
+     0.635000034036,
+     0.497015530516,
+     0.030000001608
+    ]
+   },
+   "tris": 2848,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 3212168,
+  "bytes": 258244,
+  "srcTris": 2848,
+  "tris": 2848,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 3123593,
+   "after": 235000,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0007,
+   0.9998,
+   0.9952
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07B8PXTSF.jpg",
+  "bytes": 9589,
+  "mime": "image/jpeg"
+ }
+}

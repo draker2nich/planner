@@ -1,0 +1,76 @@
+{
+ "id": "abo-B075ZBW22K",
+ "source": "abo",
+ "typeId": "bookcase",
+ "formId": "rect",
+ "name": "Stone & Beam Bryson Tall Narrow 3-Drawer Bookcase",
+ "brand": "Stone & Beam",
+ "price": 18190,
+ "currency": "RUB",
+ "dims": {
+  "H": 1900,
+  "W": 500,
+  "D": 428
+ },
+ "colors": [
+  "коричневый",
+  "натуральное дерево"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B075ZBW22K",
+ "model": {
+  "file": "models/abo-B075ZBW22K.glb",
+  "bytes": 371348,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.249999985,
+     -7.1760167e-19,
+     -0.214001641
+    ],
+    "max": [
+     0.249963390125,
+     1.8999999941249999,
+     0.21394195775
+    ],
+    "size": [
+     0.499963375125,
+     1.8999999941249999,
+     0.42794359875
+    ]
+   },
+   "tris": 9502,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 4209056,
+  "bytes": 371348,
+  "srcTris": 9502,
+  "tris": 9502,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 3945920,
+   "after": 314040,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0007,
+   1,
+   1.001
+  ]
+ },
+ "image": {
+  "file": "images/abo-B075ZBW22K.jpg",
+  "bytes": 6920,
+  "mime": "image/jpeg"
+ }
+}

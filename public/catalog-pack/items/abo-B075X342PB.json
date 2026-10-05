@@ -1,0 +1,77 @@
+{
+ "id": "abo-B075X342PB",
+ "source": "abo",
+ "typeId": "pouf",
+ "formId": "rect",
+ "name": "Rivet Modern Oversized Upholstered Square Ottoman",
+ "brand": "Rivet",
+ "price": 24590,
+ "currency": "RUB",
+ "dims": {
+  "H": 438,
+  "W": 997,
+  "D": 999
+ },
+ "colors": [
+  "коричневый"
+ ],
+ "materials": [
+  "ткань"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B075X342PB",
+ "model": {
+  "file": "models/abo-B075X342PB.glb",
+  "bytes": 666600,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.4972229,
+     0,
+     -0.495717794
+    ],
+    "max": [
+     0.499764782365,
+     0.4380038240017,
+     0.5032821570817001
+    ],
+    "size": [
+     0.996987682365,
+     0.4380038240017,
+     0.9989999510817
+    ]
+   },
+   "tris": 19469,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 4276472,
+  "bytes": 666600,
+  "srcTris": 19469,
+  "tris": 19469,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 3817280,
+   "after": 564234,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9998,
+   1.0006,
+   1
+  ]
+ },
+ "image": {
+  "file": "images/abo-B075X342PB.jpg",
+  "bytes": 5919,
+  "mime": "image/jpeg"
+ }
+}

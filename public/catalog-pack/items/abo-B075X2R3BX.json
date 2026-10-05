@@ -1,0 +1,79 @@
+{
+ "id": "abo-B075X2R3BX",
+ "source": "abo",
+ "typeId": "table-lamp",
+ "formId": "round",
+ "name": "Rivet Mid-Century Modern Square Pillar Living Room Table Lamp With LED Light Bulb",
+ "brand": "Adesso",
+ "price": 4090,
+ "currency": "RUB",
+ "dims": {
+  "H": 417,
+  "DIA": 229
+ },
+ "colors": [
+  "белый",
+  "жёлтый"
+ ],
+ "materials": [
+  "металл",
+  "ткань",
+  "камень"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B075X2R3BX",
+ "model": {
+  "file": "models/abo-B075X2R3BX.glb",
+  "bytes": 233192,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.114500038,
+     0,
+     -0.114499912
+    ],
+    "max": [
+     0.1145025220601,
+     0.4169999934939,
+     0.1145026480601
+    ],
+    "size": [
+     0.2290025600601,
+     0.4169999934939,
+     0.2290025600601
+    ]
+   },
+   "tris": 20086,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 4,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2671140,
+  "bytes": 233192,
+  "srcTris": 20086,
+  "tris": 20086,
+  "textures": {
+   "images": 4,
+   "resized": 4,
+   "before": 2192787,
+   "after": 132564,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0008,
+   1,
+   1.0008
+  ]
+ },
+ "image": {
+  "file": "images/abo-B075X2R3BX.jpg",
+  "bytes": 2834,
+  "mime": "image/jpeg"
+ }
+}

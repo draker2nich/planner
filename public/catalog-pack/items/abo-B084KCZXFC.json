@@ -1,0 +1,78 @@
+{
+ "id": "abo-B084KCZXFC",
+ "source": "abo",
+ "typeId": "mirror",
+ "formId": "wall",
+ "name": "Stone & Beam Vintage Compass Wooden Accent Mirror",
+ "brand": "Stone & Beam",
+ "price": 14090,
+ "currency": "RUB",
+ "dims": {
+  "H": 710,
+  "W": 710,
+  "D": 38,
+  "E": 1200
+ },
+ "colors": [
+  "коричневый"
+ ],
+ "materials": [
+  "камень"
+ ],
+ "styleTags": [
+  "ретро"
+ ],
+ "url": "https://www.amazon.com/dp/B084KCZXFC",
+ "model": {
+  "file": "models/abo-B084KCZXFC.glb",
+  "bytes": 576132,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.354999989,
+     -0.354999989,
+     0
+    ],
+    "max": [
+     0.3549999838852,
+     0.3549999838852,
+     0.0380070790588
+    ],
+    "size": [
+     0.7099999728852,
+     0.7099999728852,
+     0.0380070790588
+    ]
+   },
+   "tris": 5824,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 44251228,
+  "bytes": 576132,
+  "srcTris": 5824,
+  "tris": 5824,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 44080249,
+   "after": 532420,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9995,
+   0.9995,
+   0.9935
+  ]
+ },
+ "image": {
+  "file": "images/abo-B084KCZXFC.jpg",
+  "bytes": 11323,
+  "mime": "image/jpeg"
+ }
+}

@@ -1,0 +1,76 @@
+{
+ "id": "abo-B07H8PS4FZ",
+ "source": "abo",
+ "typeId": "wardrobe",
+ "formId": "rect",
+ "name": "Movian Cinca 5-Door Wardrobe with Mirrors and Internal Storage Compartments",
+ "brand": "Movian",
+ "price": 72190,
+ "currency": "RUB",
+ "dims": {
+  "H": 2260,
+  "W": 2160,
+  "D": 590
+ },
+ "colors": [
+  "белый",
+  "натуральное дерево"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.co.uk/dp/B07H8PS4FZ",
+ "model": {
+  "file": "models/abo-B07H8PS4FZ.glb",
+  "bytes": 77424,
+  "info": {
+   "bbox": {
+    "min": [
+     -1.08000004,
+     0,
+     -0.284615338
+    ],
+    "max": [
+     1.0799878337239999,
+     2.2600000852739996,
+     0.30538773620599996
+    ],
+    "size": [
+     2.159987873724,
+     2.2600000852739996,
+     0.590003074206
+    ]
+   },
+   "tris": 12660,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2924812,
+  "bytes": 77424,
+  "srcTris": 12660,
+  "tris": 12660,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 2588838,
+   "after": 12914,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0001,
+   1.0001,
+   1.0004
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07H8PS4FZ.jpg",
+  "bytes": 4825,
+  "mime": "image/jpeg"
+ }
+}

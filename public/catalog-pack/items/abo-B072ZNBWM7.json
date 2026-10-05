@@ -1,0 +1,78 @@
+{
+ "id": "abo-B072ZNBWM7",
+ "source": "abo",
+ "typeId": "tv-stand",
+ "formId": "rect",
+ "name": "Rivet District Mid-Century Expandable TV Media Console",
+ "brand": "Rivet",
+ "price": 20990,
+ "currency": "RUB",
+ "dims": {
+  "H": 591,
+  "W": 1336,
+  "D": 329
+ },
+ "colors": [
+  "серый"
+ ],
+ "materials": [
+  "дерево",
+  "ЛДСП / МДФ"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B072ZNBWM7",
+ "model": {
+  "file": "models/abo-B072ZNBWM7.glb",
+  "bytes": 156628,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.675026536,
+     0,
+     -0.162833929
+    ],
+    "max": [
+     0.6609734207222001,
+     0.5909779458198,
+     0.16613047467560005
+    ],
+    "size": [
+     1.3359999567222,
+     0.5909779458198,
+     0.32896440367560004
+    ]
+   },
+   "tris": 8390,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2336884,
+  "bytes": 156628,
+  "srcTris": 8390,
+  "tris": 8390,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 2085554,
+   "after": 96480,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9998,
+   1.0002,
+   1.001
+  ]
+ },
+ "image": {
+  "file": "images/abo-B072ZNBWM7.jpg",
+  "bytes": 4548,
+  "mime": "image/jpeg"
+ }
+}

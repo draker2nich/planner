@@ -1,0 +1,78 @@
+{
+ "id": "abo-B07PSZHDNK",
+ "source": "abo",
+ "typeId": "bookcase",
+ "formId": "rect",
+ "name": "AmazonBasics Classic 5-Tier Open Bookcase with Solid Rubber Wood",
+ "brand": "AmazonBasics",
+ "price": 12290,
+ "currency": "RUB",
+ "dims": {
+  "H": 1892,
+  "W": 660,
+  "D": 382
+ },
+ "colors": [
+  "бежевый",
+  "коричневый"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "классика"
+ ],
+ "url": "https://www.amazon.com/dp/B07PSZHDNK",
+ "model": {
+  "file": "models/abo-B07PSZHDNK.glb",
+  "bytes": 221512,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.329936951,
+     0,
+     -0.19099991
+    ],
+    "max": [
+     0.32994756169600004,
+     1.8919999950120001,
+     0.191026335712
+    ],
+    "size": [
+     0.659884512696,
+     1.8919999950120001,
+     0.382026245712
+    ]
+   },
+   "tris": 29999,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 26393764,
+  "bytes": 221512,
+  "srcTris": 79892,
+  "tris": 29999,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 23828724,
+   "after": 69826,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   1.0002,
+   1.0008
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07PSZHDNK.jpg",
+  "bytes": 5674,
+  "mime": "image/jpeg"
+ }
+}

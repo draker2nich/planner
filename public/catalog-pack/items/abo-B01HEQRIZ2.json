@@ -1,0 +1,75 @@
+{
+ "id": "abo-B01HEQRIZ2",
+ "source": "abo",
+ "typeId": "wardrobe",
+ "formId": "rect",
+ "name": "Germania Wardrobe Panel",
+ "brand": "Germania",
+ "price": 35090,
+ "currency": "RUB",
+ "dims": {
+  "H": 1200,
+  "W": 1340,
+  "D": 360
+ },
+ "colors": [
+  "белый"
+ ],
+ "materials": [
+  "ЛДСП / МДФ"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.de/dp/B01HEQRIZ2",
+ "model": {
+  "file": "models/abo-B01HEQRIZ2.glb",
+  "bytes": 100816,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.670000076,
+     0,
+     -0.179999992
+    ],
+    "max": [
+     0.6699999425340999,
+     1.1999719387117,
+     0.17996705198270002
+    ],
+    "size": [
+     1.3400000185341,
+     1.1999719387117,
+     0.3599670439827
+    ]
+   },
+   "tris": 18392,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 17411024,
+  "bytes": 100816,
+  "srcTris": 18392,
+  "tris": 18392,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 16761338,
+   "after": 8702,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   1,
+   1
+  ]
+ },
+ "image": {
+  "file": "images/abo-B01HEQRIZ2.jpg",
+  "bytes": 4230,
+  "mime": "image/jpeg"
+ }
+}

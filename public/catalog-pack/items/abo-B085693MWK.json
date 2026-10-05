@@ -1,0 +1,77 @@
+{
+ "id": "abo-B085693MWK",
+ "source": "abo",
+ "typeId": "bar-stool",
+ "formId": "round",
+ "name": "Rivet Decatur Modern Faux Leather Kitchen Bar Stool",
+ "brand": "Rivet",
+ "price": 13490,
+ "currency": "RUB",
+ "dims": {
+  "H": 1040,
+  "DIA": 556
+ },
+ "colors": [
+  "бежевый",
+  "коричневый"
+ ],
+ "materials": [
+  "кожа"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B085693MWK",
+ "model": {
+  "file": "models/abo-B085693MWK.glb",
+  "bytes": 257132,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.277855873,
+     0,
+     -0.288577974
+    ],
+    "max": [
+     0.2781692860697,
+     1.0400000206689,
+     0.2673837046314
+    ],
+    "size": [
+     0.5560251590697,
+     1.0400000206689,
+     0.5559616786314
+    ]
+   },
+   "tris": 29998,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 39657744,
+  "bytes": 257132,
+  "srcTris": 42954,
+  "tris": 29998,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 38665100,
+   "after": 101992,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.2129,
+   0.9995,
+   1.0005
+  ]
+ },
+ "image": {
+  "file": "images/abo-B085693MWK.jpg",
+  "bytes": 4996,
+  "mime": "image/jpeg"
+ }
+}

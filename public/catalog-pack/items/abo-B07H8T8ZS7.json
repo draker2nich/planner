@@ -1,0 +1,71 @@
+{
+ "id": "abo-B07H8T8ZS7",
+ "source": "abo",
+ "typeId": "sideboard",
+ "formId": "rect",
+ "name": "Movian Moselle.",
+ "brand": "Movian",
+ "price": 42090,
+ "currency": "RUB",
+ "dims": {
+  "H": 1850,
+  "W": 1110,
+  "D": 400
+ },
+ "colors": [],
+ "materials": [],
+ "styleTags": [],
+ "url": "https://www.amazon.de/dp/B07H8T8ZS7",
+ "model": {
+  "file": "models/abo-B07H8T8ZS7.glb",
+  "bytes": 100288,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.555000007,
+     0,
+     -0.199997231
+    ],
+    "max": [
+     0.55502257473,
+     1.849999995573,
+     0.19997224860200002
+    ],
+    "size": [
+     1.11002258173,
+     1.849999995573,
+     0.399969479602
+    ]
+   },
+   "tris": 29644,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 0,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 809096,
+  "bytes": 100288,
+  "srcTris": 29644,
+  "tris": 29644,
+  "textures": {
+   "images": 0,
+   "resized": 0,
+   "before": 0,
+   "after": 0,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   1,
+   1
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07H8T8ZS7.jpg",
+  "bytes": 6733,
+  "mime": "image/jpeg"
+ }
+}

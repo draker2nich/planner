@@ -1,0 +1,78 @@
+{
+ "id": "abo-B01FK3FWNG",
+ "source": "abo",
+ "typeId": "desk",
+ "formId": "rect",
+ "name": "Movian Haven Retro Desk with Riser",
+ "brand": "Movian",
+ "price": 24990,
+ "currency": "RUB",
+ "dims": {
+  "H": 899,
+  "W": 1135,
+  "D": 605
+ },
+ "colors": [
+  "серый",
+  "натуральное дерево"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "ретро"
+ ],
+ "url": "https://www.amazon.co.uk/dp/B01FK3FWNG",
+ "model": {
+  "file": "models/abo-B01FK3FWNG.glb",
+  "bytes": 203516,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.567499995,
+     5.96046448e-8,
+     -0.302500069
+    ],
+    "max": [
+     0.5674999770453001,
+     0.8989660388062448,
+     0.30251456543030003
+    ],
+    "size": [
+     1.1349999720453001,
+     0.8989659792016,
+     0.6050146344303
+    ]
+   },
+   "tris": 3166,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 15855360,
+  "bytes": 203516,
+  "srcTris": 3166,
+  "tris": 3166,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 15738328,
+   "after": 179568,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9997,
+   0.9998,
+   1.0008
+  ]
+ },
+ "image": {
+  "file": "images/abo-B01FK3FWNG.jpg",
+  "bytes": 11589,
+  "mime": "image/jpeg"
+ }
+}

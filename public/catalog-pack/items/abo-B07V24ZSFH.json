@@ -1,0 +1,77 @@
+{
+ "id": "abo-B07V24ZSFH",
+ "source": "abo",
+ "typeId": "tv-stand",
+ "formId": "rect",
+ "name": "AmazonBasics Classic 58\" TV Stand with Side Doors",
+ "brand": "AmazonBasics",
+ "price": 19290,
+ "currency": "RUB",
+ "dims": {
+  "H": 610,
+  "W": 1466,
+  "D": 398
+ },
+ "colors": [
+  "натуральное дерево"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "классика"
+ ],
+ "url": "https://www.amazon.com/dp/B07V24ZSFH",
+ "model": {
+  "file": "models/abo-B07V24ZSFH.glb",
+  "bytes": 391840,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.733795226,
+     0,
+     -0.187734112
+    ],
+    "max": [
+     0.7322047777447,
+     0.6100056171353,
+     0.2102862760032
+    ],
+    "size": [
+     1.4660000037447,
+     0.6100056171353,
+     0.3980203880032
+    ]
+   },
+   "tris": 19040,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 47329524,
+  "bytes": 391840,
+  "srcTris": 19040,
+  "tris": 19040,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 46768151,
+   "after": 282182,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0002,
+   0.9996,
+   0.9999
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07V24ZSFH.jpg",
+  "bytes": 5615,
+  "mime": "image/jpeg"
+ }
+}

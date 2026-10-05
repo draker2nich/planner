@@ -1,0 +1,78 @@
+{
+ "id": "abo-B07B4Y45S1",
+ "source": "abo",
+ "typeId": "bed",
+ "formId": "king",
+ "name": "Rivet Brecken Modern Wood King Bed Frame Platform with Headboard",
+ "brand": "Rivet",
+ "price": 73490,
+ "currency": "RUB",
+ "dims": {
+  "H": 1537,
+  "W": 2038,
+  "L": 2235
+ },
+ "colors": [
+  "коричневый"
+ ],
+ "materials": [
+  "дерево",
+  "камень"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07B4Y45S1",
+ "model": {
+  "file": "models/abo-B07B4Y45S1.glb",
+  "bytes": 401092,
+  "info": {
+   "bbox": {
+    "min": [
+     -1.01899993,
+     0,
+     -1.11750007
+    ],
+    "max": [
+     1.019006923734,
+     1.5370656149019999,
+     1.1175000159980002
+    ],
+    "size": [
+     2.038006853734,
+     1.5370656149019999,
+     2.235000085998
+    ]
+   },
+   "tris": 18918,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 4040820,
+  "bytes": 401092,
+  "srcTris": 18918,
+  "tris": 18918,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 3540402,
+   "after": 290696,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9998,
+   0.9998,
+   1.0001
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07B4Y45S1.jpg",
+  "bytes": 8629,
+  "mime": "image/jpeg"
+ }
+}

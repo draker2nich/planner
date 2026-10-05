@@ -1,0 +1,79 @@
+{
+ "id": "abo-B07HSG8DPR",
+ "source": "abo",
+ "typeId": "coffee-table",
+ "formId": "round",
+ "name": "Stone & Beam Industrial Round Coffee Table",
+ "brand": "Stone & Beam",
+ "price": 37990,
+ "currency": "RUB",
+ "dims": {
+  "H": 516,
+  "DIA": 1264
+ },
+ "colors": [
+  "коричневый",
+  "натуральное дерево"
+ ],
+ "materials": [
+  "дерево",
+  "металл",
+  "камень"
+ ],
+ "styleTags": [
+  "лофт"
+ ],
+ "url": "https://www.amazon.com/dp/B07HSG8DPR",
+ "model": {
+  "file": "models/abo-B07HSG8DPR.glb",
+  "bytes": 169856,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.632000029,
+     0,
+     -0.632000148
+    ],
+    "max": [
+     0.6320000045138002,
+     0.5160002578368,
+     0.6319998855138002
+    ],
+    "size": [
+     1.2640000335138002,
+     0.5160002578368,
+     1.2640000335138002
+    ]
+   },
+   "tris": 1336,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 1960104,
+  "bytes": 169856,
+  "srcTris": 1336,
+  "tris": 1336,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 1922851,
+   "after": 158196,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9998,
+   1.0006,
+   0.9998
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07HSG8DPR.jpg",
+  "bytes": 5049,
+  "mime": "image/jpeg"
+ }
+}

@@ -1,0 +1,79 @@
+{
+ "id": "abo-B072ZLCB3M",
+ "source": "abo",
+ "typeId": "small-table",
+ "formId": "rect",
+ "name": "Rivet Bristol Natural Edge Black Metal Side Table",
+ "brand": "Rivet",
+ "price": 7790,
+ "currency": "RUB",
+ "dims": {
+  "H": 476,
+  "W": 477,
+  "D": 494
+ },
+ "colors": [
+  "коричневый"
+ ],
+ "materials": [
+  "дерево",
+  "ЛДСП / МДФ",
+  "металл"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B072ZLCB3M",
+ "model": {
+  "file": "models/abo-B072ZLCB3M.glb",
+  "bytes": 74940,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.248311266,
+     0,
+     -0.263515174
+    ],
+    "max": [
+     0.22868234875290003,
+     0.4759985588526,
+     0.2304848506853
+    ],
+    "size": [
+     0.47699361475290003,
+     0.4759985588526,
+     0.4940000246853
+    ]
+   },
+   "tris": 912,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 922800,
+  "bytes": 74940,
+  "srcTris": 912,
+  "tris": 912,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 892228,
+   "after": 64540,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0007,
+   0.9992,
+   1.0008
+  ]
+ },
+ "image": {
+  "file": "images/abo-B072ZLCB3M.jpg",
+  "bytes": 6604,
+  "mime": "image/jpeg"
+ }
+}

@@ -1,0 +1,75 @@
+{
+ "id": "abo-B07B8MTV4L",
+ "source": "abo",
+ "typeId": "plant",
+ "formId": "round",
+ "name": "Rivet Mid-Century Modern Stoneware Indoor Hanging Planter Flower Pot with Rope",
+ "brand": "Rivet",
+ "price": 3290,
+ "currency": "RUB",
+ "dims": {
+  "H": 1073,
+  "DIA": 187
+ },
+ "colors": [
+  "белый",
+  "серый"
+ ],
+ "materials": [],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07B8MTV4L",
+ "model": {
+  "file": "models/abo-B07B8MTV4L.glb",
+  "bytes": 658468,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.087441653,
+     -1.07566404,
+     -0.0937946811
+    ],
+    "max": [
+     0.09954573577050004,
+     -0.0026642535806997714,
+     0.09319270767050003
+    ],
+    "size": [
+     0.18698738877050003,
+     1.0729997864193002,
+     0.18698738877050003
+    ]
+   },
+   "tris": 29996,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 9182284,
+  "bytes": 658468,
+  "srcTris": 226560,
+  "tris": 29996,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 2733950,
+   "after": 505468,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0025,
+   1,
+   1.0025
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07B8MTV4L.jpg",
+  "bytes": 2767,
+  "mime": "image/jpeg"
+ }
+}

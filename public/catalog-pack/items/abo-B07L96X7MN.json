@@ -1,0 +1,75 @@
+{
+ "id": "abo-B07L96X7MN",
+ "source": "abo",
+ "typeId": "shelving",
+ "formId": "rect",
+ "name": "AmazonBasics Sporting Goods Storage Organizer Shelf",
+ "brand": "AmazonBasics",
+ "price": 11590,
+ "currency": "RUB",
+ "dims": {
+  "H": 1026,
+  "W": 961,
+  "D": 350
+ },
+ "colors": [
+  "чёрный"
+ ],
+ "materials": [
+  "металл"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B07L96X7MN",
+ "model": {
+  "file": "models/abo-B07L96X7MN.glb",
+  "bytes": 296088,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.480499983,
+     -0.00152695179,
+     -0.174999997
+    ],
+    "max": [
+     0.48051976767019994,
+     1.0244333359220998,
+     0.17500256956429996
+    ],
+    "size": [
+     0.9610197506702,
+     1.0259602877121,
+     0.35000256656429996
+    ]
+   },
+   "tris": 29996,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 24259720,
+  "bytes": 296088,
+  "srcTris": 85680,
+  "tris": 29996,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 21103080,
+   "after": 58762,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0003,
+   1.0002,
+   0.9992
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07L96X7MN.jpg",
+  "bytes": 12296,
+  "mime": "image/jpeg"
+ }
+}

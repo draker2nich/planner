@@ -1,0 +1,75 @@
+{
+ "id": "abo-B07QGDQ1RF",
+ "source": "abo",
+ "typeId": "plant",
+ "formId": "round",
+ "name": "Rivet Rustic Stoneware Crosshatch Indoor Outdoor Flower Plant Pot",
+ "brand": "Rivet",
+ "price": 3590,
+ "currency": "RUB",
+ "dims": {
+  "H": 201,
+  "DIA": 221
+ },
+ "colors": [
+  "оранжевый",
+  "розовый"
+ ],
+ "materials": [],
+ "styleTags": [
+  "кантри"
+ ],
+ "url": "https://www.amazon.com/dp/B07QGDQ1RF",
+ "model": {
+  "file": "models/abo-B07QGDQ1RF.glb",
+  "bytes": 358340,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.110500008,
+     0,
+     -0.110499993
+    ],
+    "max": [
+     0.11050000394879998,
+     0.20099494463999998,
+     0.11050001894879997
+    ],
+    "size": [
+     0.22100001194879998,
+     0.20099494463999998,
+     0.22100001194879998
+    ]
+   },
+   "tris": 25440,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 16693800,
+  "bytes": 358340,
+  "srcTris": 25440,
+  "tris": 25440,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 16114182,
+   "after": 233190,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0009,
+   1.0023,
+   1.0009
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07QGDQ1RF.jpg",
+  "bytes": 4501,
+  "mime": "image/jpeg"
+ }
+}

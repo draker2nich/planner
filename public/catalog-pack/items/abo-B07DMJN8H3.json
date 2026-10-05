@@ -1,0 +1,75 @@
+{
+ "id": "abo-B07DMJN8H3",
+ "source": "abo",
+ "typeId": "console",
+ "formId": "rect",
+ "name": "2L Lifestyle Shelburne Accent Console Table",
+ "brand": "2L Lifestyle",
+ "price": 7190,
+ "currency": "RUB",
+ "dims": {
+  "H": 831,
+  "W": 909,
+  "D": 274
+ },
+ "colors": [
+  "коричневый"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B07DMJN8H3",
+ "model": {
+  "file": "models/abo-B07DMJN8H3.glb",
+  "bytes": 101512,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.456431478,
+     0.00000566244125,
+     -0.0000250190496
+    ],
+    "max": [
+     0.45256850845410007,
+     0.83099466305915,
+     0.273956665203
+    ],
+    "size": [
+     0.9089999864541001,
+     0.8309890006179,
+     0.2739816842526
+    ]
+   },
+   "tris": 9910,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 12125664,
+  "bytes": 101512,
+  "srcTris": 9910,
+  "tris": 9910,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 11798245,
+   "after": 45170,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9996,
+   1.0005,
+   0.9988
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07DMJN8H3.jpg",
+  "bytes": 12063,
+  "mime": "image/jpeg"
+ }
+}

@@ -1,0 +1,77 @@
+{
+ "id": "abo-B075QMHYVD",
+ "source": "abo",
+ "typeId": "nightstand",
+ "formId": "rect",
+ "name": "Rivet Brecken Modern Wood Nightstand Bedside Table",
+ "brand": "Rivet",
+ "price": 17090,
+ "currency": "RUB",
+ "dims": {
+  "H": 610,
+  "W": 610,
+  "D": 458
+ },
+ "colors": [
+  "коричневый"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B075QMHYVD",
+ "model": {
+  "file": "models/abo-B075QMHYVD.glb",
+  "bytes": 292968,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.305000007,
+     0,
+     -0.215949327
+    ],
+    "max": [
+     0.3050000261216999,
+     0.6100000331216999,
+     0.2420626614899
+    ],
+    "size": [
+     0.6100000331216999,
+     0.6100000331216999,
+     0.4580119884899
+    ]
+   },
+   "tris": 13880,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 3102872,
+  "bytes": 292968,
+  "srcTris": 13880,
+  "tris": 13880,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 2567109,
+   "after": 197228,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9997,
+   1.0006,
+   0.9997
+  ]
+ },
+ "image": {
+  "file": "images/abo-B075QMHYVD.jpg",
+  "bytes": 11623,
+  "mime": "image/jpeg"
+ }
+}

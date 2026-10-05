@@ -1,0 +1,78 @@
+{
+ "id": "abo-B07QD6TXWS",
+ "source": "abo",
+ "typeId": "nightstand",
+ "formId": "rect",
+ "name": "Rivet Claremont Contemporary Nightstand with Tapered Legs",
+ "brand": "Rivet",
+ "price": 13490,
+ "currency": "RUB",
+ "dims": {
+  "H": 610,
+  "W": 571,
+  "D": 407
+ },
+ "colors": [
+  "белый"
+ ],
+ "materials": [
+  "дерево",
+  "ЛДСП / МДФ"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07QD6TXWS",
+ "model": {
+  "file": "models/abo-B07QD6TXWS.glb",
+  "bytes": 146876,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.285591811,
+     0,
+     -0.199294329
+    ],
+    "max": [
+     0.28542451738639996,
+     0.6100000331216999,
+     0.20770746322689998
+    ],
+    "size": [
+     0.5710163283863999,
+     0.6100000331216999,
+     0.40700179222689997
+    ]
+   },
+   "tris": 14240,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 12074604,
+  "bytes": 146876,
+  "srcTris": 14240,
+  "tris": 14240,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 11710785,
+   "after": 74426,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9993,
+   1.0006,
+   1.0004
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07QD6TXWS.jpg",
+  "bytes": 5436,
+  "mime": "image/jpeg"
+ }
+}

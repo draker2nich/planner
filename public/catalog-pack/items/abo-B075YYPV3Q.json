@@ -1,0 +1,78 @@
+{
+ "id": "abo-B075YYPV3Q",
+ "source": "abo",
+ "typeId": "tv-stand",
+ "formId": "rect",
+ "name": "Rivet Eastport Modern Industrial Entertainment Center Bookcase Table",
+ "brand": "Rivet",
+ "price": 23790,
+ "currency": "RUB",
+ "dims": {
+  "H": 771,
+  "W": 1151,
+  "D": 410
+ },
+ "colors": [
+  "коричневый"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "современный",
+  "лофт"
+ ],
+ "url": "https://www.amazon.com/dp/B075YYPV3Q",
+ "model": {
+  "file": "models/abo-B075YYPV3Q.glb",
+  "bytes": 202136,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.575500011,
+     0,
+     -0.204999998
+    ],
+    "max": [
+     0.5754999707394001,
+     0.7709866202532001,
+     0.20501256950480004
+    ],
+    "size": [
+     1.1509999817394,
+     0.7709866202532001,
+     0.41001256750480003
+    ]
+   },
+   "tris": 15116,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 43037456,
+  "bytes": 202136,
+  "srcTris": 15116,
+  "tris": 15116,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 42592097,
+   "after": 117148,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0003,
+   1.0004,
+   1
+  ]
+ },
+ "image": {
+  "file": "images/abo-B075YYPV3Q.jpg",
+  "bytes": 10439,
+  "mime": "image/jpeg"
+ }
+}

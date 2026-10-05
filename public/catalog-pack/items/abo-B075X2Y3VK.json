@@ -1,0 +1,74 @@
+{
+ "id": "abo-B075X2Y3VK",
+ "source": "abo",
+ "typeId": "table-lamp",
+ "formId": "round",
+ "name": "Rivet Geometric Ceramic Table Lamp with Bulb",
+ "brand": "Rivet",
+ "price": 7090,
+ "currency": "RUB",
+ "dims": {
+  "H": 597,
+  "DIA": 278
+ },
+ "colors": [
+  "синий"
+ ],
+ "materials": [
+  "камень"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.in/dp/B075X2Y3VK",
+ "model": {
+  "file": "models/abo-B075X2Y3VK.glb",
+  "bytes": 226308,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.139000222,
+     0,
+     -0.139000058
+    ],
+    "max": [
+     0.1390021500077,
+     0.5969999817279,
+     0.1390023140077
+    ],
+    "size": [
+     0.2780023720077,
+     0.5969999817279,
+     0.2780023720077
+    ]
+   },
+   "tris": 10260,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 4,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 1385248,
+  "bytes": 226308,
+  "srcTris": 10260,
+  "tris": 10260,
+  "textures": {
+   "images": 4,
+   "resized": 4,
+   "before": 1114820,
+   "after": 164324,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0011,
+   0.9992,
+   0.9996
+  ]
+ },
+ "image": {
+  "file": "images/abo-B075X2Y3VK.jpg",
+  "bytes": 4680,
+  "mime": "image/jpeg"
+ }
+}

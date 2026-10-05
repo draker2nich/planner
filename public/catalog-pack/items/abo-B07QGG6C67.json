@@ -1,0 +1,77 @@
+{
+ "id": "abo-B07QGG6C67",
+ "source": "abo",
+ "typeId": "plant",
+ "formId": "round",
+ "name": "Stone & Beam Mid-Century Two-Toned Planter",
+ "brand": "Stone & Beam",
+ "price": 3690,
+ "currency": "RUB",
+ "dims": {
+  "H": 214,
+  "DIA": 195
+ },
+ "colors": [
+  "синий",
+  "зелёный"
+ ],
+ "materials": [
+  "камень"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07QGG6C67",
+ "model": {
+  "file": "models/abo-B07QGG6C67.glb",
+  "bytes": 210780,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.0974999964,
+     0,
+     -0.0974999964
+    ],
+    "max": [
+     0.0974943344736,
+     0.2140000082196,
+     0.0974943344736
+    ],
+    "size": [
+     0.1949943308736,
+     0.2140000082196,
+     0.1949943308736
+    ]
+   },
+   "tris": 9760,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 27928060,
+  "bytes": 210780,
+  "srcTris": 9760,
+  "tris": 9760,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 27703977,
+   "after": 157294,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0019,
+   0.9988,
+   1.0019
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07QGG6C67.jpg",
+  "bytes": 7882,
+  "mime": "image/jpeg"
+ }
+}

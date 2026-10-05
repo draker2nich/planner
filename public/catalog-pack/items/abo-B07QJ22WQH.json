@@ -1,0 +1,77 @@
+{
+ "id": "abo-B07QJ22WQH",
+ "source": "abo",
+ "typeId": "nightstand",
+ "formId": "rect",
+ "name": "Stone & Beam Aikins Modern Nightstand",
+ "brand": "Stone & Beam",
+ "price": 20190,
+ "currency": "RUB",
+ "dims": {
+  "H": 612,
+  "W": 775,
+  "D": 457
+ },
+ "colors": [
+  "натуральное дерево"
+ ],
+ "materials": [
+  "камень"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07QJ22WQH",
+ "model": {
+  "file": "models/abo-B07QJ22WQH.glb",
+  "bytes": 373528,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.387499988,
+     0,
+     -0.23082231
+    ],
+    "max": [
+     0.38750000921560007,
+     0.6119865082084001,
+     0.2261925818452
+    ],
+    "size": [
+     0.7749999972156001,
+     0.6119865082084001,
+     0.4570148918452
+    ]
+   },
+   "tris": 18750,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 37444440,
+  "bytes": 373528,
+  "srcTris": 18750,
+  "tris": 18750,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 36972574,
+   "after": 281080,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9997,
+   1.0006,
+   0.9996
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07QJ22WQH.jpg",
+  "bytes": 6093,
+  "mime": "image/jpeg"
+ }
+}

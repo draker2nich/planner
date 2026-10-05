@@ -1,0 +1,77 @@
+{
+ "id": "abo-B073G947XM",
+ "source": "abo",
+ "typeId": "bench",
+ "formId": "rect",
+ "name": "Stone & Beam Union Modern Storage Bench",
+ "brand": "Stone & Beam",
+ "price": 21290,
+ "currency": "RUB",
+ "dims": {
+  "H": 501,
+  "W": 989,
+  "D": 505
+ },
+ "colors": [
+  "зелёный"
+ ],
+ "materials": [
+  "камень"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B073G947XM",
+ "model": {
+  "file": "models/abo-B073G947XM.glb",
+  "bytes": 366480,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.49497655,
+     0,
+     -0.248808533
+    ],
+    "max": [
+     0.49402342430749996,
+     0.5009894882975,
+     0.25616520716249996
+    ],
+    "size": [
+     0.9889999743075,
+     0.5009894882975,
+     0.5049737401625
+    ]
+   },
+   "tris": 6744,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2342556,
+  "bytes": 366480,
+  "srcTris": 6744,
+  "tris": 6744,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 2164686,
+   "after": 324856,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9999,
+   1.0005,
+   1.0005
+  ]
+ },
+ "image": {
+  "file": "images/abo-B073G947XM.jpg",
+  "bytes": 4932,
+  "mime": "image/jpeg"
+ }
+}

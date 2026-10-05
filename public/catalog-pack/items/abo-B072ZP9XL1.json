@@ -1,0 +1,77 @@
+{
+ "id": "abo-B072ZP9XL1",
+ "source": "abo",
+ "typeId": "small-table",
+ "formId": "rect",
+ "name": "Rivet Axel Lift-Up Storage Wood and Metal Side End Table",
+ "brand": "Rivet",
+ "price": 10490,
+ "currency": "RUB",
+ "dims": {
+  "H": 464,
+  "W": 679,
+  "D": 676
+ },
+ "colors": [
+  "коричневый"
+ ],
+ "materials": [
+  "дерево",
+  "ЛДСП / МДФ",
+  "металл"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B072ZP9XL1",
+ "model": {
+  "file": "models/abo-B072ZP9XL1.glb",
+  "bytes": 114244,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.33950001,
+     0,
+     -0.338
+    ],
+    "max": [
+     0.3394999896681001,
+     0.46398126083650004,
+     0.33801593081770004
+    ],
+    "size": [
+     0.6789999996681001,
+     0.46398126083650004,
+     0.6760159308177001
+    ]
+   },
+   "tris": 6418,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2715912,
+  "bytes": 114244,
+  "srcTris": 6418,
+  "tris": 6418,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 2479840,
+   "after": 62752,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0001,
+   0.9998,
+   1.0005
+  ]
+ },
+ "image": {
+  "file": "images/abo-B072ZP9XL1.jpg",
+  "bytes": 8940,
+  "mime": "image/jpeg"
+ }
+}

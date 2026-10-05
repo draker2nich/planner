@@ -1,0 +1,79 @@
+{
+ "id": "abo-B075QFCHLB",
+ "source": "abo",
+ "typeId": "bed",
+ "formId": "king",
+ "name": "Rivet Kyler Tufted Mid-Century Upholstered King Bed with Headboard",
+ "brand": "Rivet",
+ "price": 62490,
+ "currency": "RUB",
+ "dims": {
+  "H": 1158,
+  "W": 1903,
+  "L": 2031
+ },
+ "colors": [
+  "серый",
+  "чёрный"
+ ],
+ "materials": [
+  "ткань"
+ ],
+ "styleTags": [
+  "современный",
+  "классика"
+ ],
+ "url": "https://www.amazon.com/dp/B075QFCHLB",
+ "model": {
+  "file": "models/abo-B075QFCHLB.glb",
+  "bytes": 268152,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.951499999,
+     0,
+     -1.02972555
+    ],
+    "max": [
+     0.95143893305,
+     1.158003424383,
+     1.001274353829
+    ],
+    "size": [
+     1.90293893205,
+     1.158003424383,
+     2.030999903829
+    ]
+   },
+   "tris": 29999,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2997664,
+  "bytes": 268152,
+  "srcTris": 42444,
+  "tris": 29999,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 1989916,
+   "after": 102374,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9999,
+   1.0003,
+   1
+  ]
+ },
+ "image": {
+  "file": "images/abo-B075QFCHLB.jpg",
+  "bytes": 5568,
+  "mime": "image/jpeg"
+ }
+}

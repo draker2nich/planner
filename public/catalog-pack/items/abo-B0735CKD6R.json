@@ -1,0 +1,76 @@
+{
+ "id": "abo-B0735CKD6R",
+ "source": "abo",
+ "typeId": "shelving",
+ "formId": "rect",
+ "name": "AmazonBasics 4 Cube Grid Wire Storage Shelves",
+ "brand": "AmazonBasics",
+ "price": 11090,
+ "currency": "RUB",
+ "dims": {
+  "H": 711,
+  "W": 711,
+  "D": 356
+ },
+ "colors": [
+  "чёрный"
+ ],
+ "materials": [
+  "металл",
+  "пластик"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B0735CKD6R",
+ "model": {
+  "file": "models/abo-B0735CKD6R.glb",
+  "bytes": 211392,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.355499983,
+     0,
+     -0.178000003
+    ],
+    "max": [
+     0.35550003605629993,
+     0.7110000190563,
+     0.1779990909583
+    ],
+    "size": [
+     0.7110000190563,
+     0.7110000190563,
+     0.3559990939583
+    ]
+   },
+   "tris": 13392,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 13203916,
+  "bytes": 211392,
+  "srcTris": 13392,
+  "tris": 13392,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 12574576,
+   "after": 92388,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9997,
+   0.9997,
+   1.0011
+  ]
+ },
+ "image": {
+  "file": "images/abo-B0735CKD6R.jpg",
+  "bytes": 18754,
+  "mime": "image/jpeg"
+ }
+}

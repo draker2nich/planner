@@ -1,0 +1,78 @@
+{
+ "id": "abo-B07DBDWZ61",
+ "source": "abo",
+ "typeId": "coffee-table",
+ "formId": "rect",
+ "name": "Ravenna Home Angela Modern Turned Leg Wood Shelf Storage Coffee Table",
+ "brand": "Ravenna Home",
+ "price": 22090,
+ "currency": "RUB",
+ "dims": {
+  "H": 510,
+  "W": 1107,
+  "D": 550
+ },
+ "colors": [
+  "чёрный"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "современный",
+  "бохо"
+ ],
+ "url": "https://www.amazon.com/dp/B07DBDWZ61",
+ "model": {
+  "file": "models/abo-B07DBDWZ61.glb",
+  "bytes": 104812,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.555715024,
+     0,
+     -0.280170798
+    ],
+    "max": [
+     0.5512848725114001,
+     0.5100186302184,
+     0.26984929341200004
+    ],
+    "size": [
+     1.1069998965114,
+     0.5100186302184,
+     0.550020091412
+    ]
+   },
+   "tris": 14180,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 805664,
+  "bytes": 104812,
+  "srcTris": 14180,
+  "tris": 14180,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 423766,
+   "after": 13354,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0001,
+   0.9991,
+   1.0002
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07DBDWZ61.jpg",
+  "bytes": 4765,
+  "mime": "image/jpeg"
+ }
+}

@@ -1,0 +1,76 @@
+{
+ "id": "abo-B07Q1SBY26",
+ "source": "abo",
+ "typeId": "desk",
+ "formId": "rect",
+ "name": "AmazonBasics Wooden",
+ "brand": "AmazonBasics",
+ "price": 16190,
+ "currency": "RUB",
+ "dims": {
+  "H": 762,
+  "W": 991,
+  "D": 499
+ },
+ "colors": [
+  "чёрный"
+ ],
+ "materials": [
+  "дерево",
+  "ЛДСП / МДФ"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B07Q1SBY26",
+ "model": {
+  "file": "models/abo-B07Q1SBY26.glb",
+  "bytes": 96884,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.495499969,
+     2.98023224e-8,
+     -0.249500006
+    ],
+    "max": [
+     0.4954999780537999,
+     0.7619866215765223,
+     0.24947811542139997
+    ],
+    "size": [
+     0.9909999470537999,
+     0.7619865917741999,
+     0.49897812142139997
+    ]
+   },
+   "tris": 3000,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 44014752,
+  "bytes": 96884,
+  "srcTris": 3000,
+  "tris": 3000,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 43906388,
+   "after": 76324,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0004,
+   0.9999,
+   1.0008
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07Q1SBY26.jpg",
+  "bytes": 3711,
+  "mime": "image/jpeg"
+ }
+}

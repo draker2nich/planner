@@ -1,0 +1,77 @@
+{
+ "id": "abo-B075Z8THYY",
+ "source": "abo",
+ "typeId": "dresser",
+ "formId": "rect",
+ "name": "Stone & Beam Bateman Casual Rustic Wood Bedroom Dresser",
+ "brand": "Stone & Beam",
+ "price": 43990,
+ "currency": "RUB",
+ "dims": {
+  "H": 892,
+  "W": 1387,
+  "D": 438
+ },
+ "colors": [
+  "коричневый"
+ ],
+ "materials": [
+  "камень"
+ ],
+ "styleTags": [
+  "кантри"
+ ],
+ "url": "https://www.amazon.com/dp/B075Z8THYY",
+ "model": {
+  "file": "models/abo-B075Z8THYY.glb",
+  "bytes": 177764,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.693506002,
+     0,
+     -0.215497285
+    ],
+    "max": [
+     0.6934939404664998,
+     0.8919875110679999,
+     0.22253834353699994
+    ],
+    "size": [
+     1.3869999424664998,
+     0.8919875110679999,
+     0.43803562853699995
+    ]
+   },
+   "tris": 6190,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2623540,
+  "bytes": 177764,
+  "srcTris": 6190,
+  "tris": 6190,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 2370498,
+   "after": 120594,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9996,
+   1.0004,
+   1.0001
+  ]
+ },
+ "image": {
+  "file": "images/abo-B075Z8THYY.jpg",
+  "bytes": 12542,
+  "mime": "image/jpeg"
+ }
+}

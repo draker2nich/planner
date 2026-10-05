@@ -1,0 +1,78 @@
+{
+ "id": "abo-B07R17YNZX",
+ "source": "abo",
+ "typeId": "bar-stool",
+ "formId": "round",
+ "name": "AmazonBasics Modern Adjustable Swivel Bar/Island Stools",
+ "brand": "AmazonBasics",
+ "price": 8190,
+ "currency": "RUB",
+ "dims": {
+  "H": 1115,
+  "DIA": 505
+ },
+ "colors": [
+  "коричневый",
+  "серебристый"
+ ],
+ "materials": [
+  "металл",
+  "кожа"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07R17YNZX",
+ "model": {
+  "file": "models/abo-B07R17YNZX.glb",
+  "bytes": 220844,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.252499998,
+     0,
+     -0.250981957
+    ],
+    "max": [
+     0.252492991648,
+     1.1150000201352002,
+     0.254011032648
+    ],
+    "size": [
+     0.504992989648,
+     1.1150000201352002,
+     0.504992989648
+    ]
+   },
+   "tris": 30000,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 25895384,
+  "bytes": 220844,
+  "srcTris": 42398,
+  "tris": 30000,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 24919514,
+   "after": 65756,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.1742,
+   1.0001,
+   1.0009
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07R17YNZX.jpg",
+  "bytes": 4433,
+  "mime": "image/jpeg"
+ }
+}

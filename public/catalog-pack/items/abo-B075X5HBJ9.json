@@ -1,0 +1,77 @@
+{
+ "id": "abo-B075X5HBJ9",
+ "source": "abo",
+ "typeId": "pouf",
+ "formId": "rect",
+ "name": "Rivet mid-Century Modern Oversized Upholstered Square Ottoman",
+ "brand": "Rivet",
+ "price": 23790,
+ "currency": "RUB",
+ "dims": {
+  "H": 378,
+  "W": 970,
+  "D": 981
+ },
+ "colors": [
+  "жёлтый"
+ ],
+ "materials": [
+  "ткань"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B075X5HBJ9",
+ "model": {
+  "file": "models/abo-B075X5HBJ9.glb",
+  "bytes": 669040,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.485918224,
+     0,
+     -0.491213411
+    ],
+    "max": [
+     0.48406404261520003,
+     0.3780170411224,
+     0.48978661825840003
+    ],
+    "size": [
+     0.9699822666152,
+     0.3780170411224,
+     0.9810000292584
+    ]
+   },
+   "tris": 12272,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 3970240,
+  "bytes": 669040,
+  "srcTris": 12272,
+  "tris": 12272,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 3670853,
+   "after": 601432,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9998,
+   1.0003,
+   1.0001
+  ]
+ },
+ "image": {
+  "file": "images/abo-B075X5HBJ9.jpg",
+  "bytes": 5497,
+  "mime": "image/jpeg"
+ }
+}

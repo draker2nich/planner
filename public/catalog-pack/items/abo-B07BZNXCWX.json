@@ -1,0 +1,76 @@
+{
+ "id": "abo-B07BZNXCWX",
+ "source": "abo",
+ "typeId": "office-chair",
+ "formId": "round",
+ "name": "Rivet Contemporary Leather Office Chair",
+ "brand": "Rivet",
+ "price": 28490,
+ "currency": "RUB",
+ "dims": {
+  "H": 922,
+  "DIA": 748
+ },
+ "colors": [
+  "чёрный"
+ ],
+ "materials": [
+  "кожа"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07BZNXCWX",
+ "model": {
+  "file": "models/abo-B07BZNXCWX.glb",
+  "bytes": 238292,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.37843588,
+     0,
+     -0.376367569
+    ],
+    "max": [
+     0.36955299510979994,
+     0.9219999805074,
+     0.37162130610979993
+    ],
+    "size": [
+     0.7479888751097999,
+     0.9219999805074,
+     0.7479888751097999
+    ]
+   },
+   "tris": 30000,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2657756,
+  "bytes": 238292,
+  "srcTris": 34428,
+  "tris": 30000,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 1790768,
+   "after": 61208,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0403,
+   0.9999,
+   1.0006
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07BZNXCWX.jpg",
+  "bytes": 8793,
+  "mime": "image/jpeg"
+ }
+}

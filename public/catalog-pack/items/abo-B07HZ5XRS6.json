@@ -1,0 +1,77 @@
+{
+ "id": "abo-B07HZ5XRS6",
+ "source": "abo",
+ "typeId": "sofa",
+ "formId": "straight",
+ "name": "Stone & Beam Dalton Sofa",
+ "brand": "Stone & Beam",
+ "price": 107490,
+ "currency": "RUB",
+ "dims": {
+  "H": 978,
+  "W": 2369,
+  "D": 1004
+ },
+ "colors": [
+  "серый",
+  "чёрный"
+ ],
+ "materials": [
+  "дерево",
+  "ткань"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B07HZ5XRS6",
+ "model": {
+  "file": "models/abo-B07HZ5XRS6.glb",
+  "bytes": 406300,
+  "info": {
+   "bbox": {
+    "min": [
+     -1.18449998,
+     0,
+     -0.501999974
+    ],
+    "max": [
+     1.1843572928169999,
+     0.9780229868360001,
+     0.502049644656
+    ],
+    "size": [
+     2.368857272817,
+     0.9780229868360001,
+     1.004049618656
+    ]
+   },
+   "tris": 30002,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 11028380,
+  "bytes": 406300,
+  "srcTris": 59946,
+  "tris": 30002,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 9581849,
+   "after": 231948,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9998,
+   0.9998,
+   0.9995
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07HZ5XRS6.jpg",
+  "bytes": 4213,
+  "mime": "image/jpeg"
+ }
+}

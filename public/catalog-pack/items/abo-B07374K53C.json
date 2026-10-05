@@ -1,0 +1,79 @@
+{
+ "id": "abo-B07374K53C",
+ "source": "abo",
+ "typeId": "desk",
+ "formId": "rect",
+ "name": "Stone & Beam Ceramic Geometric Cut-Out Table Desk Lamp With LED Light Bulb",
+ "brand": "Stone & Beam",
+ "price": 15290,
+ "currency": "RUB",
+ "dims": {
+  "H": 636,
+  "W": 325,
+  "D": 324
+ },
+ "colors": [
+  "белый",
+  "серебристый"
+ ],
+ "materials": [
+  "ткань",
+  "камень"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07374K53C",
+ "model": {
+  "file": "models/abo-B07374K53C.glb",
+  "bytes": 239524,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.162500054,
+     0,
+     -0.162000045
+    ],
+    "max": [
+     0.16250709755999998,
+     0.63600001959,
+     0.16199776757999998
+    ],
+    "size": [
+     0.32500715156,
+     0.63600001959,
+     0.32399781258
+    ]
+   },
+   "tris": 29964,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 4,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2780444,
+  "bytes": 239524,
+  "srcTris": 57258,
+  "tris": 29964,
+  "textures": {
+   "images": 4,
+   "resized": 4,
+   "before": 1318001,
+   "after": 41620,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   1.0003,
+   0.9989
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07374K53C.jpg",
+  "bytes": 4218,
+  "mime": "image/jpeg"
+ }
+}

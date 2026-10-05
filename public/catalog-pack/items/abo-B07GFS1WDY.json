@@ -1,0 +1,77 @@
+{
+ "id": "abo-B07GFS1WDY",
+ "source": "abo",
+ "typeId": "wardrobe",
+ "formId": "rect",
+ "name": "Movian Inari Modern 2-Door 2-Drawer Wardrobe",
+ "brand": "Movian",
+ "price": 48690,
+ "currency": "RUB",
+ "dims": {
+  "H": 1808,
+  "W": 991,
+  "D": 577
+ },
+ "colors": [
+  "серый"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.co.uk/dp/B07GFS1WDY",
+ "model": {
+  "file": "models/abo-B07GFS1WDY.glb",
+  "bytes": 95520,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.495500028,
+     0,
+     -0.288499981
+    ],
+    "max": [
+     0.49551748804,
+     1.807999996134,
+     0.288453200944
+    ],
+    "size": [
+     0.99101751604,
+     1.807999996134,
+     0.576953181944
+    ]
+   },
+   "tris": 12492,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 811404,
+  "bytes": 95520,
+  "srcTris": 12492,
+  "tris": 12492,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 509030,
+   "after": 39116,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0005,
+   0.9998,
+   1
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07GFS1WDY.jpg",
+  "bytes": 2952,
+  "mime": "image/jpeg"
+ }
+}

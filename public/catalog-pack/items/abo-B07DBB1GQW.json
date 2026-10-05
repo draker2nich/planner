@@ -1,0 +1,77 @@
+{
+ "id": "abo-B07DBB1GQW",
+ "source": "abo",
+ "typeId": "coffee-table",
+ "formId": "rect",
+ "name": "Ravenna Home Heights Wood Lift Top Storage Coffee Table",
+ "brand": "Ravenna Home",
+ "price": 18990,
+ "currency": "RUB",
+ "dims": {
+  "H": 435,
+  "W": 1095,
+  "D": 574
+ },
+ "colors": [
+  "коричневый"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07DBB1GQW",
+ "model": {
+  "file": "models/abo-B07DBB1GQW.glb",
+  "bytes": 42788,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.547669947,
+     0,
+     -0.286141932
+    ],
+    "max": [
+     0.5473301212250999,
+     0.4349789686876,
+     0.28785920246360003
+    ],
+    "size": [
+     1.0950000682251,
+     0.4349789686876,
+     0.5740011344636
+    ]
+   },
+   "tris": 3800,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 1824792,
+  "bytes": 42788,
+  "srcTris": 3800,
+  "tris": 3800,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 1702152,
+   "after": 17662,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9999,
+   1.0011,
+   1.0006
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07DBB1GQW.jpg",
+  "bytes": 4987,
+  "mime": "image/jpeg"
+ }
+}

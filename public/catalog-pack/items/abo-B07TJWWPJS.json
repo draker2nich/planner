@@ -1,0 +1,74 @@
+{
+ "id": "abo-B07TJWWPJS",
+ "source": "abo",
+ "typeId": "chair",
+ "formId": "rect",
+ "name": "AmazonBasics",
+ "brand": "AmazonBasics",
+ "price": 9290,
+ "currency": "RUB",
+ "dims": {
+  "H": 805,
+  "W": 620,
+  "D": 672
+ },
+ "colors": [
+  "чёрный",
+  "красный"
+ ],
+ "materials": [],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B07TJWWPJS",
+ "model": {
+  "file": "models/abo-B07TJWWPJS.glb",
+  "bytes": 232536,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.309998572,
+     0,
+     -0.374213755
+    ],
+    "max": [
+     0.31000579510309995,
+     0.8048119440813,
+     0.2977646728269
+    ],
+    "size": [
+     0.6200043671030999,
+     0.8048119440813,
+     0.6719784278269
+    ]
+   },
+   "tris": 29997,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 15768396,
+  "bytes": 232536,
+  "srcTris": 67488,
+  "tris": 29997,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 14190423,
+   "after": 59606,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9995,
+   0.9999,
+   1.0003
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07TJWWPJS.jpg",
+  "bytes": 7582,
+  "mime": "image/jpeg"
+ }
+}

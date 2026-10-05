@@ -1,0 +1,76 @@
+{
+ "id": "abo-B07MQF8QFN",
+ "source": "abo",
+ "typeId": "island",
+ "formId": "rect",
+ "name": "Ravenna Home Kitchen Cart",
+ "brand": "Ravenna Home",
+ "price": 30490,
+ "currency": "RUB",
+ "dims": {
+  "H": 839,
+  "W": 584,
+  "D": 403
+ },
+ "colors": [
+  "чёрный",
+  "натуральное дерево"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B07MQF8QFN",
+ "model": {
+  "file": "models/abo-B07MQF8QFN.glb",
+  "bytes": 216516,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.282709956,
+     0.00000113377189,
+     -0.201045603
+    ],
+    "max": [
+     0.3013066149392,
+     0.83900003606029,
+     0.20193812172120004
+    ],
+    "size": [
+     0.5840165709392,
+     0.8389989022884,
+     0.40298372472120003
+    ]
+   },
+   "tris": 29997,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 7580548,
+  "bytes": 216516,
+  "srcTris": 77196,
+  "tris": 29997,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 5716065,
+   "after": 47104,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9998,
+   1.0001,
+   1.0006
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07MQF8QFN.jpg",
+  "bytes": 5919,
+  "mime": "image/jpeg"
+ }
+}

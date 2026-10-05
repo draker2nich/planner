@@ -1,0 +1,76 @@
+{
+ "id": "abo-B07374M9ZT",
+ "source": "abo",
+ "typeId": "chandelier",
+ "formId": "round",
+ "name": "Rivet 5-Arm Mid Century Modern Ceiling Pendant Chandelier Fixture With 5 Light Bulbs",
+ "brand": "Rivet",
+ "price": 14990,
+ "currency": "RUB",
+ "dims": {
+  "H": 988,
+  "DIA": 438
+ },
+ "colors": [
+  "жёлтый"
+ ],
+ "materials": [
+  "металл"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07374M9ZT",
+ "model": {
+  "file": "models/abo-B07374M9ZT.glb",
+  "bytes": 350956,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.219000012,
+     -0.988000035,
+     -0.219000012
+    ],
+    "max": [
+     0.2190055033866,
+     1.4370600043278614e-8,
+     0.2190055033866
+    ],
+    "size": [
+     0.4380055153866,
+     0.9880000493706,
+     0.4380055153866
+    ]
+   },
+   "tris": 29997,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 24606936,
+  "bytes": 350956,
+  "srcTris": 68630,
+  "tris": 29997,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 22818927,
+   "after": 158010,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0006,
+   0.9998,
+   1.041
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07374M9ZT.jpg",
+  "bytes": 5617,
+  "mime": "image/jpeg"
+ }
+}

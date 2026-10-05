@@ -1,0 +1,78 @@
+{
+ "id": "abo-B07B51946F",
+ "source": "abo",
+ "typeId": "desk",
+ "formId": "rect",
+ "name": "Rivet Mid Century Modern Industrial Fan Table Desk Lamp With 3 Edison Light Bulbs",
+ "brand": "Rivet",
+ "price": 18490,
+ "currency": "RUB",
+ "dims": {
+  "H": 436,
+  "W": 414,
+  "D": 180
+ },
+ "colors": [
+  "натуральное дерево"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "современный",
+  "лофт"
+ ],
+ "url": "https://www.amazon.com/dp/B07B51946F",
+ "model": {
+  "file": "models/abo-B07B51946F.glb",
+  "bytes": 268528,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.207000062,
+     0,
+     -0.0976294205
+    ],
+    "max": [
+     0.20699104575719998,
+     0.4360000204671,
+     0.08232737241940001
+    ],
+    "size": [
+     0.4139911077572,
+     0.4360000204671,
+     0.1799567929194
+    ]
+   },
+   "tris": 29856,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 4,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 4152432,
+  "bytes": 268528,
+  "srcTris": 41092,
+  "tris": 29856,
+  "textures": {
+   "images": 4,
+   "resized": 4,
+   "before": 3154054,
+   "after": 95342,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0004,
+   1.0002,
+   1.0001
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07B51946F.jpg",
+  "bytes": 18969,
+  "mime": "image/jpeg"
+ }
+}

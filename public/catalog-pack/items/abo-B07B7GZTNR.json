@@ -1,0 +1,75 @@
+{
+ "id": "abo-B07B7GZTNR",
+ "source": "abo",
+ "typeId": "bookcase",
+ "formId": "rect",
+ "name": "Stone & Beam Alan Casual Wood Bookcase",
+ "brand": "Stone & Beam",
+ "price": 20190,
+ "currency": "RUB",
+ "dims": {
+  "H": 1727,
+  "W": 584,
+  "D": 472
+ },
+ "colors": [
+  "синий"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B07B7GZTNR",
+ "model": {
+  "file": "models/abo-B07B7GZTNR.glb",
+  "bytes": 176336,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.291999996,
+     -2.44501321e-17,
+     -0.236053139
+    ],
+    "max": [
+     0.29199437838000003,
+     1.726999970301,
+     0.235991411266
+    ],
+    "size": [
+     0.58399437438,
+     1.726999970301,
+     0.472044550266
+    ]
+   },
+   "tris": 6903,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 3713484,
+  "bytes": 176336,
+  "srcTris": 6903,
+  "tris": 6903,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 3514133,
+   "after": 129172,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9993,
+   0.9999,
+   1.0007
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07B7GZTNR.jpg",
+  "bytes": 7751,
+  "mime": "image/jpeg"
+ }
+}

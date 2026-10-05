@@ -1,0 +1,76 @@
+{
+ "id": "abo-B07QC85YBY",
+ "source": "abo",
+ "typeId": "office-chair",
+ "formId": "round",
+ "name": "Stone & Beam Modern Upholstered High-Back Swivel Chair",
+ "brand": "Stone & Beam",
+ "price": 20190,
+ "currency": "RUB",
+ "dims": {
+  "H": 1049,
+  "DIA": 640
+ },
+ "colors": [
+  "коричневый"
+ ],
+ "materials": [
+  "ткань"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07QC85YBY",
+ "model": {
+  "file": "models/abo-B07QC85YBY.glb",
+  "bytes": 243564,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.319990277,
+     0,
+     -0.353667319
+    ],
+    "max": [
+     0.3199721057380001,
+     1.0489748590692,
+     0.2862950637380001
+    ],
+    "size": [
+     0.6399623827380001,
+     1.0489748590692,
+     0.6399623827380001
+    ]
+   },
+   "tris": 29998,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 41195328,
+  "bytes": 243564,
+  "srcTris": 76802,
+  "tris": 29998,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 38886560,
+   "after": 66630,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0328,
+   1,
+   1
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07QC85YBY.jpg",
+  "bytes": 4273,
+  "mime": "image/jpeg"
+ }
+}

@@ -1,0 +1,76 @@
+{
+ "id": "abo-B07QB8L1TK",
+ "source": "abo",
+ "typeId": "plant",
+ "formId": "round",
+ "name": "Stone & Beam Mid-Century Patterned Planter",
+ "brand": "Stone & Beam",
+ "price": 3190,
+ "currency": "RUB",
+ "dims": {
+  "H": 270,
+  "DIA": 266
+ },
+ "colors": [
+  "розовый"
+ ],
+ "materials": [
+  "камень"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07QB8L1TK",
+ "model": {
+  "file": "models/abo-B07QB8L1TK.glb",
+  "bytes": 163096,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.132999942,
+     0,
+     -0.133000031
+    ],
+    "max": [
+     0.13299530701800003,
+     0.2700000102021,
+     0.13299521801800004
+    ],
+    "size": [
+     0.26599524901800004,
+     0.2700000102021,
+     0.26599524901800004
+    ]
+   },
+   "tris": 9760,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 28097676,
+  "bytes": 163096,
+  "srcTris": 9760,
+  "tris": 9760,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 27873597,
+   "after": 108694,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.999,
+   1.0006,
+   0.999
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07QB8L1TK.jpg",
+  "bytes": 7193,
+  "mime": "image/jpeg"
+ }
+}

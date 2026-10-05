@@ -1,0 +1,77 @@
+{
+ "id": "abo-B07HSNQW37",
+ "source": "abo",
+ "typeId": "dresser",
+ "formId": "rect",
+ "name": "Stone & Beam Rylee Modern Acacia Wood 6-Drawer Bedroom Dresser",
+ "brand": "Stone & Beam",
+ "price": 43190,
+ "currency": "RUB",
+ "dims": {
+  "H": 805,
+  "W": 1554,
+  "D": 455
+ },
+ "colors": [
+  "бежевый"
+ ],
+ "materials": [
+  "камень"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07HSNQW37",
+ "model": {
+  "file": "models/abo-B07HSNQW37.glb",
+  "bytes": 493584,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.773306429,
+     -8.20830761e-18,
+     -0.227792472
+    ],
+    "max": [
+     0.7806936272431,
+     0.8050295109159,
+     0.22722420808290003
+    ],
+    "size": [
+     1.5540000562431,
+     0.8050295109159,
+     0.4550166800829
+    ]
+   },
+   "tris": 3466,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 4137704,
+  "bytes": 493584,
+  "srcTris": 3466,
+  "tris": 3466,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 4018337,
+   "after": 466044,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   1.0003,
+   1.0007
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07HSNQW37.jpg",
+  "bytes": 6759,
+  "mime": "image/jpeg"
+ }
+}

@@ -1,0 +1,78 @@
+{
+ "id": "abo-B07JWPM3KX",
+ "source": "abo",
+ "typeId": "coffee-table",
+ "formId": "rect",
+ "name": "Movian Coffee Table",
+ "brand": "Movian",
+ "price": 23390,
+ "currency": "RUB",
+ "dims": {
+  "H": 442,
+  "W": 1097,
+  "D": 639
+ },
+ "colors": [
+  "белый",
+  "натуральное дерево"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.co.uk/dp/B07JWPM3KX",
+ "model": {
+  "file": "models/abo-B07JWPM3KX.glb",
+  "bytes": 55572,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.548532486,
+     0,
+     -0.317537487
+    ],
+    "max": [
+     0.5484676712907,
+     0.4420007348029,
+     0.3214585760546999
+    ],
+    "size": [
+     1.0970001572907,
+     0.4420007348029,
+     0.6389960630546999
+    ]
+   },
+   "tris": 3192,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 5209688,
+  "bytes": 55572,
+  "srcTris": 3192,
+  "tris": 3192,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 5112615,
+   "after": 30998,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9998,
+   1.001,
+   0.9994
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07JWPM3KX.jpg",
+  "bytes": 7171,
+  "mime": "image/jpeg"
+ }
+}

@@ -1,0 +1,73 @@
+{
+ "id": "abo-B07R4TY73P",
+ "source": "abo",
+ "typeId": "sofa",
+ "formId": "straight",
+ "name": "Movian Scutari",
+ "brand": "Movian",
+ "price": 109890,
+ "currency": "RUB",
+ "dims": {
+  "H": 890,
+  "W": 1940,
+  "D": 950
+ },
+ "colors": [
+  "серый"
+ ],
+ "materials": [],
+ "styleTags": [],
+ "url": "https://www.amazon.de/dp/B07R4TY73P",
+ "model": {
+  "file": "models/abo-B07R4TY73P.glb",
+  "bytes": 374668,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.969660521,
+     -2.98023224e-8,
+     -0.474911958
+    ],
+    "max": [
+     0.969611883277,
+     0.8900316620586776,
+     0.47477872743699995
+    ],
+    "size": [
+     1.939272404277,
+     0.890031691861,
+     0.949690685437
+    ]
+   },
+   "tris": 30001,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 61158744,
+  "bytes": 374668,
+  "srcTris": 66716,
+  "tris": 30001,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 59201025,
+   "after": 212384,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   1,
+   1
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07R4TY73P.jpg",
+  "bytes": 6356,
+  "mime": "image/jpeg"
+ }
+}

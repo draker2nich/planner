@@ -1,0 +1,77 @@
+{
+ "id": "abo-B07P5LP2TT",
+ "source": "abo",
+ "typeId": "sofa",
+ "formId": "straight",
+ "name": "Rivet Andrews Contemporary Loveseat Sofa with Removable Cushions",
+ "brand": "Rivet",
+ "price": 94790,
+ "currency": "RUB",
+ "dims": {
+  "H": 918,
+  "W": 1709,
+  "D": 947
+ },
+ "colors": [
+  "серый"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07P5LP2TT",
+ "model": {
+  "file": "models/abo-B07P5LP2TT.glb",
+  "bytes": 397128,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.854177237,
+     0,
+     -0.471911579
+    ],
+    "max": [
+     0.85437585211,
+     0.91784018417,
+     0.47512929276999993
+    ],
+    "size": [
+     1.70855308911,
+     0.91784018417,
+     0.94704087177
+    ]
+   },
+   "tris": 30000,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 66435968,
+  "bytes": 397128,
+  "srcTris": 51646,
+  "tris": 30000,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 65149378,
+   "after": 216514,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9998,
+   0.9999,
+   0.9996
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07P5LP2TT.jpg",
+  "bytes": 4413,
+  "mime": "image/jpeg"
+ }
+}

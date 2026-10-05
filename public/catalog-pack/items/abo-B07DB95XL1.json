@@ -1,0 +1,77 @@
+{
+ "id": "abo-B07DB95XL1",
+ "source": "abo",
+ "typeId": "coffee-table",
+ "formId": "rect",
+ "name": "Ravenna Home Dora Classic Shelf Storage Wood Coffee Table",
+ "brand": "Ravenna Home",
+ "price": 20190,
+ "currency": "RUB",
+ "dims": {
+  "H": 456,
+  "W": 943,
+  "D": 533
+ },
+ "colors": [
+  "коричневый"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "классика"
+ ],
+ "url": "https://www.amazon.com/dp/B07DB95XL1",
+ "model": {
+  "file": "models/abo-B07DB95XL1.glb",
+  "bytes": 161876,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.47186783,
+     0,
+     -0.266499996
+    ],
+    "max": [
+     0.4711321469502999,
+     0.4559876590002,
+     0.2665024935659999
+    ],
+    "size": [
+     0.9429999769502999,
+     0.4559876590002,
+     0.5330024895659999
+    ]
+   },
+   "tris": 13548,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2874052,
+  "bytes": 161876,
+  "srcTris": 13548,
+  "tris": 13548,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 2542243,
+   "after": 89844,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0003,
+   1.0009,
+   1.0005
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07DB95XL1.jpg",
+  "bytes": 5177,
+  "mime": "image/jpeg"
+ }
+}

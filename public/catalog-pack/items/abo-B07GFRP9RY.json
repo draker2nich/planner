@@ -1,0 +1,75 @@
+{
+ "id": "abo-B07GFRP9RY",
+ "source": "abo",
+ "typeId": "dresser",
+ "formId": "rect",
+ "name": "Movian Belaya Chest of 3 Drawers with Extendable Dresser Top",
+ "brand": "Movian",
+ "price": 31190,
+ "currency": "RUB",
+ "dims": {
+  "H": 762,
+  "W": 809,
+  "D": 529
+ },
+ "colors": [
+  "натуральное дерево"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.co.uk/dp/B07GFRP9RY",
+ "model": {
+  "file": "models/abo-B07GFRP9RY.glb",
+  "bytes": 89556,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.404499978,
+     0,
+     -0.26420036
+    ],
+    "max": [
+     0.40449994909470005,
+     0.7619897378379,
+     0.2648124104917
+    ],
+    "size": [
+     0.8089999270947,
+     0.7619897378379,
+     0.5290127704917
+    ]
+   },
+   "tris": 124,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2003620,
+  "bytes": 89556,
+  "srcTris": 124,
+  "tris": 124,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 1992853,
+   "after": 84142,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0004,
+   0.9996,
+   1.0008
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07GFRP9RY.jpg",
+  "bytes": 2700,
+  "mime": "image/jpeg"
+ }
+}

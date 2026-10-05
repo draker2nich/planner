@@ -1,0 +1,72 @@
+{
+ "id": "abo-B07QNYVDH4",
+ "source": "abo",
+ "typeId": "bar-stool",
+ "formId": "round",
+ "name": "Marque Amazon",
+ "brand": "Movian",
+ "price": 12790,
+ "currency": "RUB",
+ "dims": {
+  "H": 1115,
+  "DIA": 550
+ },
+ "colors": [],
+ "materials": [
+  "пластик"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.fr/dp/B07QNYVDH4",
+ "model": {
+  "file": "models/abo-B07QNYVDH4.glb",
+  "bytes": 221964,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.275000006,
+     0,
+     -0.274999976
+    ],
+    "max": [
+     0.27497955590640005,
+     1.1150000201352002,
+     0.2749795859064001
+    ],
+    "size": [
+     0.5499795619064001,
+     1.1150000201352002,
+     0.5499795619064001
+    ]
+   },
+   "tris": 30000,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 7538692,
+  "bytes": 221964,
+  "srcTris": 38452,
+  "tris": 30000,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 6395019,
+   "after": 64574,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.1343,
+   1.0002,
+   1.0002
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07QNYVDH4.jpg",
+  "bytes": 5522,
+  "mime": "image/jpeg"
+ }
+}

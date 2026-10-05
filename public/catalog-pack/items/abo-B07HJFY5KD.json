@@ -1,0 +1,74 @@
+{
+ "id": "abo-B07HJFY5KD",
+ "source": "abo",
+ "typeId": "office-chair",
+ "formId": "round",
+ "name": "AmazonBasics Gaming/Racing Style Office Chair with Removable Headrest and High Back Cushion",
+ "brand": "AmazonBasics",
+ "price": 13190,
+ "currency": "RUB",
+ "dims": {
+  "H": 1293,
+  "DIA": 696
+ },
+ "colors": [
+  "белый"
+ ],
+ "materials": [],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07HJFY5KD",
+ "model": {
+  "file": "models/abo-B07HJFY5KD.glb",
+  "bytes": 274732,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.348394185,
+     0,
+     -0.338439435
+    ],
+    "max": [
+     0.34758413344800004,
+     1.2927678901512,
+     0.35753888344800006
+    ],
+    "size": [
+     0.6959783184480001,
+     1.2927678901512,
+     0.6959783184480001
+    ]
+   },
+   "tris": 29999,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2526632,
+  "bytes": 274732,
+  "srcTris": 59324,
+  "tris": 29999,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 809642,
+   "after": 62362,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9996,
+   1.0001,
+   1.0695
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07HJFY5KD.jpg",
+  "bytes": 6195,
+  "mime": "image/jpeg"
+ }
+}

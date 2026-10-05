@@ -1,0 +1,71 @@
+{
+ "id": "abo-B07JGXXK33",
+ "source": "abo",
+ "typeId": "sideboard",
+ "formId": "rect",
+ "name": "Marca Amazon",
+ "brand": "Movian",
+ "price": 36190,
+ "currency": "RUB",
+ "dims": {
+  "H": 800,
+  "W": 1000,
+  "D": 400
+ },
+ "colors": [],
+ "materials": [],
+ "styleTags": [],
+ "url": "https://www.amazon.es/dp/B07JGXXK33",
+ "model": {
+  "file": "models/abo-B07JGXXK33.glb",
+  "bytes": 26124,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.5,
+     0,
+     -0.19950971
+    ],
+    "max": [
+     0.4999999956144999,
+     0.7999755809389999,
+     0.20047808046949994
+    ],
+    "size": [
+     0.9999999956144999,
+     0.7999755809389999,
+     0.39998779046949995
+    ]
+   },
+   "tris": 1594,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 674692,
+  "bytes": 26124,
+  "srcTris": 1594,
+  "tris": 1594,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 595738,
+   "after": 6888,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   1,
+   1
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07JGXXK33.jpg",
+  "bytes": 7061,
+  "mime": "image/jpeg"
+ }
+}

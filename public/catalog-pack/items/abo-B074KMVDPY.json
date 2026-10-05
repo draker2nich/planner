@@ -1,0 +1,78 @@
+{
+ "id": "abo-B074KMVDPY",
+ "source": "abo",
+ "typeId": "small-table",
+ "formId": "rect",
+ "name": "Stone & Beam Arie Rustic Octagonal End Table or Stand",
+ "brand": "Stone & Beam",
+ "price": 7990,
+ "currency": "RUB",
+ "dims": {
+  "H": 543,
+  "W": 458,
+  "D": 458
+ },
+ "colors": [
+  "чёрный"
+ ],
+ "materials": [
+  "дерево",
+  "металл"
+ ],
+ "styleTags": [
+  "кантри"
+ ],
+ "url": "https://www.amazon.com/dp/B074KMVDPY",
+ "model": {
+  "file": "models/abo-B074KMVDPY.glb",
+  "bytes": 423568,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.229000002,
+     0,
+     -0.229000002
+    ],
+    "max": [
+     0.22898533070700003,
+     0.5429999787045,
+     0.22898533070700003
+    ],
+    "size": [
+     0.45798533270700004,
+     0.5429999787045,
+     0.45798533270700004
+    ]
+   },
+   "tris": 4256,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2851056,
+  "bytes": 423568,
+  "srcTris": 4256,
+  "tris": 4256,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 2730547,
+   "after": 393512,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9997,
+   0.9995,
+   0.9997
+  ]
+ },
+ "image": {
+  "file": "images/abo-B074KMVDPY.jpg",
+  "bytes": 7980,
+  "mime": "image/jpeg"
+ }
+}

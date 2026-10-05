@@ -1,0 +1,75 @@
+{
+ "id": "abo-B07P5LNMMS",
+ "source": "abo",
+ "typeId": "armchair",
+ "formId": "rect",
+ "name": "Ravenna Home Pull Recliner with Rotating 360 Swivel Glider",
+ "brand": "Ravenna Home",
+ "price": 37490,
+ "currency": "RUB",
+ "dims": {
+  "H": 1039,
+  "W": 820,
+  "D": 1001
+ },
+ "colors": [
+  "бежевый"
+ ],
+ "materials": [
+  "ткань"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B07P5LNMMS",
+ "model": {
+  "file": "models/abo-B07P5LNMMS.glb",
+  "bytes": 288372,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.409999996,
+     -2.98023224e-8,
+     -0.499432832
+    ],
+    "max": [
+     0.4100128485859999,
+     1.0390000036742775,
+     0.5015789807568
+    ],
+    "size": [
+     0.8200128445859999,
+     1.0390000334765999,
+     1.0010118127568
+    ]
+   },
+   "tris": 30000,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 30671384,
+  "bytes": 288372,
+  "srcTris": 64076,
+  "tris": 30000,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 28698556,
+   "after": 111176,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9995,
+   1.0002,
+   1.0003
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07P5LNMMS.jpg",
+  "bytes": 4633,
+  "mime": "image/jpeg"
+ }
+}

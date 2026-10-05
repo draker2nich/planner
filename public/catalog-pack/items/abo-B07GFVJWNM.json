@@ -1,0 +1,75 @@
+{
+ "id": "abo-B07GFVJWNM",
+ "source": "abo",
+ "typeId": "bed",
+ "formId": "half",
+ "name": "Marque Amazon",
+ "brand": "Movian",
+ "price": 69890,
+ "currency": "RUB",
+ "dims": {
+  "H": 406,
+  "W": 1400,
+  "L": 1900
+ },
+ "colors": [],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.fr/dp/B07GFVJWNM",
+ "model": {
+  "file": "models/abo-B07GFVJWNM.glb",
+  "bytes": 338252,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.699999988,
+     -5.96046448e-8,
+     -0.949999988
+    ],
+    "max": [
+     0.700036631,
+     0.4060244767703552,
+     0.9500000061249999
+    ],
+    "size": [
+     1.400036619,
+     0.40602453637499997,
+     1.8999999941249999
+    ]
+   },
+   "tris": 30001,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 4882792,
+  "bytes": 338252,
+  "srcTris": 37900,
+  "tris": 30001,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 2777313,
+   "after": 41484,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0001,
+   0.9998,
+   1
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07GFVJWNM.jpg",
+  "bytes": 5220,
+  "mime": "image/jpeg"
+ }
+}

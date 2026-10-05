@@ -1,0 +1,81 @@
+{
+ "id": "abo-B073WGQBPY",
+ "source": "abo",
+ "typeId": "mirror",
+ "formId": "wall",
+ "name": "Stone & Beam Vintage-Look Rectangular Barn Farmhouse Frame White Window Wood Mirror",
+ "brand": "Stone & Beam",
+ "price": 15090,
+ "currency": "RUB",
+ "dims": {
+  "H": 844,
+  "W": 808,
+  "D": 37,
+  "E": 1200
+ },
+ "colors": [
+  "белый"
+ ],
+ "materials": [
+  "дерево",
+  "металл",
+  "стекло"
+ ],
+ "styleTags": [
+  "кантри",
+  "ретро"
+ ],
+ "url": "https://www.amazon.com/dp/B073WGQBPY",
+ "model": {
+  "file": "models/abo-B073WGQBPY.glb",
+  "bytes": 243732,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.403999984,
+     -0.422000021,
+     0
+    ],
+    "max": [
+     0.4039897832384,
+     0.4220000017408,
+     0.0369890750368
+    ],
+    "size": [
+     0.8079897672384,
+     0.8440000227408,
+     0.0369890750368
+    ]
+   },
+   "tris": 29970,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2541588,
+  "bytes": 243732,
+  "srcTris": 29970,
+  "tris": 29970,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 1819814,
+   "after": 97850,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0006,
+   1.0005,
+   1.0051
+  ]
+ },
+ "image": {
+  "file": "images/abo-B073WGQBPY.jpg",
+  "bytes": 7774,
+  "mime": "image/jpeg"
+ }
+}

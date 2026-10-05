@@ -1,0 +1,76 @@
+{
+ "id": "abo-B08555N6YQ",
+ "source": "abo",
+ "typeId": "bar-stool",
+ "formId": "round",
+ "name": "Rivet Modern Wood Counter-Height Kitchen Bar Stool",
+ "brand": "Rivet",
+ "price": 12290,
+ "currency": "RUB",
+ "dims": {
+  "H": 615,
+  "DIA": 440
+ },
+ "colors": [
+  "чёрный"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B08555N6YQ",
+ "model": {
+  "file": "models/abo-B08555N6YQ.glb",
+  "bytes": 101772,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.219999999,
+     0,
+     -0.220000014
+    ],
+    "max": [
+     0.21999360730559997,
+     0.6150000215088,
+     0.21999359230559998
+    ],
+    "size": [
+     0.43999360630559997,
+     0.6150000215088,
+     0.43999360630559997
+    ]
+   },
+   "tris": 13640,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 18538984,
+  "bytes": 101772,
+  "srcTris": 13640,
+  "tris": 13640,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 18212382,
+   "after": 30358,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0002,
+   1.0005,
+   1.22
+  ]
+ },
+ "image": {
+  "file": "images/abo-B08555N6YQ.jpg",
+  "bytes": 5752,
+  "mime": "image/jpeg"
+ }
+}

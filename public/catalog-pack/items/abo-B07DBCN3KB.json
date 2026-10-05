@@ -1,0 +1,74 @@
+{
+ "id": "abo-B07DBCN3KB",
+ "source": "abo",
+ "typeId": "floor-lamp",
+ "formId": "round",
+ "name": "Ravenna Home Torchiere Living Room Standing Floor Lamp with LED Light Bulbs",
+ "brand": "Ravenna Home",
+ "price": 17190,
+ "currency": "RUB",
+ "dims": {
+  "H": 1797,
+  "DIA": 405
+ },
+ "colors": [
+  "прозрачный"
+ ],
+ "materials": [
+  "стекло"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B07DBCN3KB",
+ "model": {
+  "file": "models/abo-B07DBCN3KB.glb",
+  "bytes": 108864,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.202499911,
+     0,
+     -0.202500001
+    ],
+    "max": [
+     0.20246399458,
+     1.7969999092950002,
+     0.20246390458
+    ],
+    "size": [
+     0.40496390558,
+     1.7969999092950002,
+     0.40496390558
+    ]
+   },
+   "tris": 17500,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 4,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 843676,
+  "bytes": 108864,
+  "srcTris": 17500,
+  "tris": 17500,
+  "textures": {
+   "images": 4,
+   "resized": 4,
+   "before": 446389,
+   "after": 19074,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9988,
+   1.0002,
+   0.9988
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07DBCN3KB.jpg",
+  "bytes": 1970,
+  "mime": "image/jpeg"
+ }
+}

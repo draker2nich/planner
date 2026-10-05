@@ -1,0 +1,76 @@
+{
+ "id": "abo-B07MCCRNHD",
+ "source": "abo",
+ "typeId": "island",
+ "formId": "rect",
+ "name": "Ravenna Home 1-Drawer Kitchen Cart",
+ "brand": "Ravenna Home",
+ "price": 29290,
+ "currency": "RUB",
+ "dims": {
+  "H": 901,
+  "W": 840,
+  "D": 459
+ },
+ "colors": [
+  "натуральное дерево",
+  "синий"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B07MCCRNHD",
+ "model": {
+  "file": "models/abo-B07MCCRNHD.glb",
+  "bytes": 185804,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.44798097,
+     0,
+     -0.235760048
+    ],
+    "max": [
+     0.3920284136036,
+     0.9009999824261999,
+     0.22323683006439998
+    ],
+    "size": [
+     0.8400093836036,
+     0.9009999824261999,
+     0.4589968780644
+    ]
+   },
+   "tris": 30000,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 10773372,
+  "bytes": 185804,
+  "srcTris": 50618,
+  "tris": 30000,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 9495423,
+   "after": 22688,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0004,
+   1.0005,
+   1
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07MCCRNHD.jpg",
+  "bytes": 6646,
+  "mime": "image/jpeg"
+ }
+}

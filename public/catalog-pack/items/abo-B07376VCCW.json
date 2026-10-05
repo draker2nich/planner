@@ -1,0 +1,75 @@
+{
+ "id": "abo-B07376VCCW",
+ "source": "abo",
+ "typeId": "floor-lamp",
+ "formId": "round",
+ "name": "Stone & Beam Deco Metal Frame Living Room Standing Floor Lamp With Light Bulb and White Shade",
+ "brand": "Stone & Beam",
+ "price": 21190,
+ "currency": "RUB",
+ "dims": {
+  "H": 1510,
+  "DIA": 457
+ },
+ "colors": [
+  "чёрный"
+ ],
+ "materials": [
+  "металл",
+  "ткань"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B07376VCCW",
+ "model": {
+  "file": "models/abo-B07376VCCW.glb",
+  "bytes": 111032,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.228500232,
+     0,
+     -0.228500113
+    ],
+    "max": [
+     0.2284722306926,
+     1.5099999710151,
+     0.2284723496926
+    ],
+    "size": [
+     0.4569724626926,
+     1.5099999710151,
+     0.4569724626926
+    ]
+   },
+   "tris": 17102,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 4,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 1868212,
+  "bytes": 111032,
+  "srcTris": 17102,
+  "tris": 17102,
+  "textures": {
+   "images": 4,
+   "resized": 4,
+   "before": 1436853,
+   "after": 31192,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9996,
+   1.0001,
+   1.0016
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07376VCCW.jpg",
+  "bytes": 3421,
+  "mime": "image/jpeg"
+ }
+}

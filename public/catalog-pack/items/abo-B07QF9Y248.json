@@ -1,0 +1,76 @@
+{
+ "id": "abo-B07QF9Y248",
+ "source": "abo",
+ "typeId": "office-chair",
+ "formId": "round",
+ "name": "Rivet Modern Upholstered Swivel Office Chair",
+ "brand": "Rivet",
+ "price": 24090,
+ "currency": "RUB",
+ "dims": {
+  "H": 831,
+  "DIA": 635
+ },
+ "colors": [
+  "серый"
+ ],
+ "materials": [
+  "ткань"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07QF9Y248",
+ "model": {
+  "file": "models/abo-B07QF9Y248.glb",
+  "bytes": 245324,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.316259801,
+     0.000144894875,
+     -0.350181192
+    ],
+    "max": [
+     0.31853315740500004,
+     0.83099997497,
+     0.28456105194000003
+    ],
+    "size": [
+     0.634792958405,
+     0.830855080095,
+     0.63474224394
+    ]
+   },
+   "tris": 30001,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 51366616,
+  "bytes": 245324,
+  "srcTris": 70976,
+  "tris": 30001,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 49653788,
+   "after": 69582,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0002,
+   0.9994,
+   1.1088
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07QF9Y248.jpg",
+  "bytes": 6752,
+  "mime": "image/jpeg"
+ }
+}

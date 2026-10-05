@@ -1,0 +1,79 @@
+{
+ "id": "abo-B073WGSN2Q",
+ "source": "abo",
+ "typeId": "mirror",
+ "formId": "wall",
+ "name": "Stone & Beam Modern Arc Metal Frame Hanging Wall Mirror Decor",
+ "brand": "Stone & Beam",
+ "price": 8490,
+ "currency": "RUB",
+ "dims": {
+  "H": 1175,
+  "W": 464,
+  "D": 25,
+  "E": 1200
+ },
+ "colors": [
+  "серебристый",
+  "прозрачный"
+ ],
+ "materials": [
+  "металл"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B073WGSN2Q",
+ "model": {
+  "file": "models/abo-B073WGSN2Q.glb",
+  "bytes": 195292,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.232000008,
+     -0.587499976,
+     0
+    ],
+    "max": [
+     0.23203282912599996,
+     0.5875000194613998,
+     0.0250305193442
+    ],
+    "size": [
+     0.46403283712599996,
+     1.1749999954613999,
+     0.0250305193442
+    ]
+   },
+   "tris": 16690,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2789108,
+  "bytes": 195292,
+  "srcTris": 16690,
+  "tris": 16690,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 2353663,
+   "after": 101982,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.001,
+   1.0002,
+   0.9843
+  ]
+ },
+ "image": {
+  "file": "images/abo-B073WGSN2Q.jpg",
+  "bytes": 6659,
+  "mime": "image/jpeg"
+ }
+}

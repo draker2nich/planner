@@ -1,0 +1,78 @@
+{
+ "id": "abo-B082JHX2YP",
+ "source": "abo",
+ "typeId": "sconce",
+ "formId": "wall",
+ "name": "Stone & Beam Contemporary Vanity Light with Metal Cage Shades",
+ "brand": "Stone & Beam",
+ "price": 11190,
+ "currency": "RUB",
+ "dims": {
+  "H": 254,
+  "W": 634,
+  "D": 229,
+  "E": 1700
+ },
+ "colors": [],
+ "materials": [
+  "металл",
+  "камень"
+ ],
+ "styleTags": [
+  "современный",
+  "ретро"
+ ],
+ "url": "https://www.amazon.com/dp/B082JHX2YP",
+ "model": {
+  "file": "models/abo-B082JHX2YP.glb",
+  "bytes": 226552,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.317000002,
+     -0.127000004,
+     0
+    ],
+    "max": [
+     0.31699998586489997,
+     0.12674704601710002,
+     0.2290186124754
+    ],
+    "size": [
+     0.6339999878649,
+     0.2537470500171,
+     0.2290186124754
+    ]
+   },
+   "tris": 30003,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 47095572,
+  "bytes": 226552,
+  "srcTris": 214640,
+  "tris": 30003,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 40491725,
+   "after": 25648,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9997,
+   0.9992,
+   1.0015
+  ]
+ },
+ "image": {
+  "file": "images/abo-B082JHX2YP.jpg",
+  "bytes": 4061,
+  "mime": "image/jpeg"
+ }
+}

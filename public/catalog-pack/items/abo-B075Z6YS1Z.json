@@ -1,0 +1,77 @@
+{
+ "id": "abo-B075Z6YS1Z",
+ "source": "abo",
+ "typeId": "bookcase",
+ "formId": "rect",
+ "name": "Stone & Beam Larson Industrial Wood and Metal 4-Shelf Bookcase",
+ "brand": "Stone & Beam",
+ "price": 24190,
+ "currency": "RUB",
+ "dims": {
+  "H": 1860,
+  "W": 874,
+  "D": 359
+ },
+ "colors": [
+  "коричневый"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "лофт"
+ ],
+ "url": "https://www.amazon.com/dp/B075Z6YS1Z",
+ "model": {
+  "file": "models/abo-B075Z6YS1Z.glb",
+  "bytes": 278784,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.43703267,
+     0,
+     -0.17938827
+    ],
+    "max": [
+     0.436939113964,
+     1.859999965794,
+     0.17960091951600002
+    ],
+    "size": [
+     0.873971783964,
+     1.859999965794,
+     0.358989189516
+    ]
+   },
+   "tris": 6084,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2571604,
+  "bytes": 278784,
+  "srcTris": 6084,
+  "tris": 6084,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 2409666,
+   "after": 243268,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0005,
+   0.9997,
+   1.0011
+  ]
+ },
+ "image": {
+  "file": "images/abo-B075Z6YS1Z.jpg",
+  "bytes": 6864,
+  "mime": "image/jpeg"
+ }
+}

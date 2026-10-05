@@ -1,0 +1,76 @@
+{
+ "id": "abo-B0824FHWSX",
+ "source": "abo",
+ "typeId": "table-lamp",
+ "formId": "round",
+ "name": "Ravenna Home Traditional Ribbed Ceramic Table Lamp",
+ "brand": "Ravenna Home",
+ "price": 8490,
+ "currency": "RUB",
+ "dims": {
+  "H": 570,
+  "DIA": 329
+ },
+ "colors": [
+  "серый"
+ ],
+ "materials": [
+  "камень"
+ ],
+ "styleTags": [
+  "классика"
+ ],
+ "url": "https://www.amazon.com/dp/B0824FHWSX",
+ "model": {
+  "file": "models/abo-B0824FHWSX.glb",
+  "bytes": 222384,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.164499998,
+     0,
+     -0.164499998
+    ],
+    "max": [
+     0.1644946972192,
+     0.5700000097055999,
+     0.1644946972192
+    ],
+    "size": [
+     0.3289946952192,
+     0.5700000097055999,
+     0.3289946952192
+    ]
+   },
+   "tris": 21284,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 28828364,
+  "bytes": 222384,
+  "srcTris": 21284,
+  "tris": 21284,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 28306095,
+   "after": 105576,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0003,
+   0.9994,
+   1.0003
+  ]
+ },
+ "image": {
+  "file": "images/abo-B0824FHWSX.jpg",
+  "bytes": 3256,
+  "mime": "image/jpeg"
+ }
+}

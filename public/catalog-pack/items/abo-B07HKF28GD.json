@@ -1,0 +1,76 @@
+{
+ "id": "abo-B07HKF28GD",
+ "source": "abo",
+ "typeId": "floor-lamp",
+ "formId": "round",
+ "name": "Rivet Contemporary Standing Floor Lamp with LED Light Bulb",
+ "brand": "Rivet",
+ "price": 15790,
+ "currency": "RUB",
+ "dims": {
+  "H": 1543,
+  "DIA": 337
+ },
+ "colors": [
+  "жёлтый"
+ ],
+ "materials": [
+  "ткань"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07HKF28GD",
+ "model": {
+  "file": "models/abo-B07HKF28GD.glb",
+  "bytes": 126968,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.168499991,
+     0,
+     -0.168499961
+    ],
+    "max": [
+     0.16848678407340004,
+     1.5430000939149,
+     0.16848681407340002
+    ],
+    "size": [
+     0.3369867750734,
+     1.5430000939149,
+     0.3369867750734
+    ]
+   },
+   "tris": 12636,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 4,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2276588,
+  "bytes": 126968,
+  "srcTris": 12636,
+  "tris": 12636,
+  "textures": {
+   "images": 4,
+   "resized": 4,
+   "before": 1948860,
+   "after": 54706,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9995,
+   1,
+   0.9995
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07HKF28GD.jpg",
+  "bytes": 1698,
+  "mime": "image/jpeg"
+ }
+}

@@ -1,0 +1,79 @@
+{
+ "id": "abo-B07QFB1TLZ",
+ "source": "abo",
+ "typeId": "coffee-table",
+ "formId": "round",
+ "name": "Stone & Beam Ryder Industrial Round Coffee Table",
+ "brand": "Stone & Beam",
+ "price": 28790,
+ "currency": "RUB",
+ "dims": {
+  "H": 420,
+  "DIA": 1100
+ },
+ "colors": [
+  "бежевый",
+  "жёлтый"
+ ],
+ "materials": [
+  "металл",
+  "камень"
+ ],
+ "styleTags": [
+  "лофт",
+  "классика"
+ ],
+ "url": "https://www.amazon.com/dp/B07QFB1TLZ",
+ "model": {
+  "file": "models/abo-B07QFB1TLZ.glb",
+  "bytes": 303436,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.549999952,
+     0,
+     -0.549999952
+    ],
+    "max": [
+     0.5499999243992001,
+     0.419977978812,
+     0.5499999243992001
+    ],
+    "size": [
+     1.0999998763992,
+     0.419977978812,
+     1.0999998763992
+    ]
+   },
+   "tris": 2604,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 36836592,
+  "bytes": 303436,
+  "srcTris": 2604,
+  "tris": 2604,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 36723442,
+   "after": 279410,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0002,
+   0.9998,
+   1.0002
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07QFB1TLZ.jpg",
+  "bytes": 6078,
+  "mime": "image/jpeg"
+ }
+}

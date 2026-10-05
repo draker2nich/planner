@@ -1,0 +1,75 @@
+{
+ "id": "abo-B07GFS1VB6",
+ "source": "abo",
+ "typeId": "wardrobe",
+ "formId": "rect",
+ "name": "Movian Kolva Sliding 2-Door Wardrobe",
+ "brand": "Movian",
+ "price": 68290,
+ "currency": "RUB",
+ "dims": {
+  "H": 1960,
+  "W": 1780,
+  "D": 629
+ },
+ "colors": [
+  "натуральное дерево"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.co.uk/dp/B07GFS1VB6",
+ "model": {
+  "file": "models/abo-B07GFS1VB6.glb",
+  "bytes": 318836,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.889999986,
+     0,
+     -0.314500004
+    ],
+    "max": [
+     0.8899474868679998,
+     1.9599999628979998,
+     0.314547167148
+    ],
+    "size": [
+     1.7799474728679998,
+     1.9599999628979998,
+     0.629047171148
+    ]
+   },
+   "tris": 7880,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 3336968,
+  "bytes": 318836,
+  "srcTris": 7880,
+  "tris": 7880,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 3112972,
+   "after": 275604,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   0.9998,
+   0.9997
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07GFS1VB6.jpg",
+  "bytes": 4215,
+  "mime": "image/jpeg"
+ }
+}

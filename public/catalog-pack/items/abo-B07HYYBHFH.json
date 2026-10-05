@@ -1,0 +1,78 @@
+{
+ "id": "abo-B07HYYBHFH",
+ "source": "abo",
+ "typeId": "pouf",
+ "formId": "rect",
+ "name": "Rivet Goodwin Modern Ottoman",
+ "brand": "Rivet",
+ "price": 16990,
+ "currency": "RUB",
+ "dims": {
+  "H": 474,
+  "W": 821,
+  "D": 693
+ },
+ "colors": [
+  "серый",
+  "чёрный"
+ ],
+ "materials": [
+  "ткань"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07HYYBHFH",
+ "model": {
+  "file": "models/abo-B07HYYBHFH.glb",
+  "bytes": 623676,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.405896962,
+     0,
+     -0.347711861
+    ],
+    "max": [
+     0.41510303257280007,
+     0.47401812541439997,
+     0.3452997318064
+    ],
+    "size": [
+     0.8209999945728,
+     0.47401812541439997,
+     0.6930115928064
+    ]
+   },
+   "tris": 30000,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 4359332,
+  "bytes": 623676,
+  "srcTris": 37092,
+  "tris": 30000,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 3502968,
+   "after": 479112,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9999,
+   0.9999,
+   1.0006
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07HYYBHFH.jpg",
+  "bytes": 4928,
+  "mime": "image/jpeg"
+ }
+}

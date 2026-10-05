@@ -1,0 +1,76 @@
+{
+ "id": "abo-B075HWDS6P",
+ "source": "abo",
+ "typeId": "plant",
+ "formId": "round",
+ "name": "Stone & Beam Modern Ceramic Floral Embossed Decorative Planter Flower Pot",
+ "brand": "Stone & Beam",
+ "price": 3590,
+ "currency": "RUB",
+ "dims": {
+  "H": 206,
+  "DIA": 184
+ },
+ "colors": [
+  "синий"
+ ],
+ "materials": [
+  "камень"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B075HWDS6P",
+ "model": {
+  "file": "models/abo-B075HWDS6P.glb",
+  "bytes": 301212,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.0920000002,
+     0,
+     -0.0920000002
+    ],
+    "max": [
+     0.0919954852034,
+     0.20600000255339998,
+     0.0919954852034
+    ],
+    "size": [
+     0.1839954854034,
+     0.20600000255339998,
+     0.1839954854034
+    ]
+   },
+   "tris": 9600,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2209652,
+  "bytes": 301212,
+  "srcTris": 9600,
+  "tris": 9600,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 1983220,
+   "after": 248148,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9994,
+   0.9993,
+   0.9994
+  ]
+ },
+ "image": {
+  "file": "images/abo-B075HWDS6P.jpg",
+  "bytes": 26644,
+  "mime": "image/jpeg"
+ }
+}

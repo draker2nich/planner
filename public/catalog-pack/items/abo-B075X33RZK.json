@@ -1,0 +1,77 @@
+{
+ "id": "abo-B075X33RZK",
+ "source": "abo",
+ "typeId": "office-chair",
+ "formId": "round",
+ "name": "Stone & Beam Larkin Living Room Accent Swivel Chair",
+ "brand": "Stone & Beam",
+ "price": 26590,
+ "currency": "RUB",
+ "dims": {
+  "H": 926,
+  "DIA": 870
+ },
+ "colors": [
+  "синий"
+ ],
+ "materials": [
+  "камень"
+ ],
+ "styleTags": [
+  "современный",
+  "классика"
+ ],
+ "url": "https://www.amazon.com/dp/B075X33RZK",
+ "model": {
+  "file": "models/abo-B075X33RZK.glb",
+  "bytes": 264924,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.432004631,
+     0,
+     -0.465466917
+    ],
+    "max": [
+     0.43798204533280005,
+     0.9259999817022,
+     0.40451975933280004
+    ],
+    "size": [
+     0.8699866763328,
+     0.9259999817022,
+     0.8699866763328
+    ]
+   },
+   "tris": 19882,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 3082128,
+  "bytes": 264924,
+  "srcTris": 19882,
+  "tris": 19882,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 2595287,
+   "after": 155730,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.1447,
+   1.0004,
+   1.0004
+  ]
+ },
+ "image": {
+  "file": "images/abo-B075X33RZK.jpg",
+  "bytes": 9935,
+  "mime": "image/jpeg"
+ }
+}

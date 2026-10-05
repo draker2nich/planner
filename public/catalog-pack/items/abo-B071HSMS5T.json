@@ -1,0 +1,78 @@
+{
+ "id": "abo-B071HSMS5T",
+ "source": "abo",
+ "typeId": "chandelier",
+ "formId": "round",
+ "name": "Rivet Glass Bowl Pendant Lamp",
+ "brand": "Rivet",
+ "price": 16090,
+ "currency": "RUB",
+ "dims": {
+  "H": 1511,
+  "DIA": 500
+ },
+ "colors": [
+  "серый",
+  "серебристый"
+ ],
+ "materials": [
+  "металл",
+  "стекло"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B071HSMS5T",
+ "model": {
+  "file": "models/abo-B071HSMS5T.glb",
+  "bytes": 209092,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.25,
+     -1.51100004,
+     -0.25
+    ],
+    "max": [
+     0.249977501855,
+     3.616500010572565e-8,
+     0.249977501855
+    ],
+    "size": [
+     0.499977501855,
+     1.5110000761650002,
+     0.499977501855
+    ]
+   },
+   "tris": 27794,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 3069380,
+  "bytes": 209092,
+  "srcTris": 27794,
+  "tris": 27794,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 2341183,
+   "after": 46268,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0083,
+   1,
+   0.9999
+  ]
+ },
+ "image": {
+  "file": "images/abo-B071HSMS5T.jpg",
+  "bytes": 3795,
+  "mime": "image/jpeg"
+ }
+}

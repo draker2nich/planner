@@ -1,0 +1,78 @@
+{
+ "id": "abo-B07MM5H3HX",
+ "source": "abo",
+ "typeId": "console",
+ "formId": "rect",
+ "name": "Ravenna Home Classic Plank-Top Console Table with Large Drawer",
+ "brand": "Ravenna Home",
+ "price": 25590,
+ "currency": "RUB",
+ "dims": {
+  "H": 768,
+  "W": 1062,
+  "D": 373
+ },
+ "colors": [
+  "чёрный",
+  "натуральное дерево"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "классика"
+ ],
+ "url": "https://www.amazon.com/dp/B07MM5H3HX",
+ "model": {
+  "file": "models/abo-B07MM5H3HX.glb",
+  "bytes": 87536,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.530999899,
+     0,
+     -0.186499983
+    ],
+    "max": [
+     0.5310001642828999,
+     0.7680264145624,
+     0.18649326391019996
+    ],
+    "size": [
+     1.0620000632828999,
+     0.7680264145624,
+     0.37299324691019997
+    ]
+   },
+   "tris": 6392,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 9852132,
+  "bytes": 87536,
+  "srcTris": 6392,
+  "tris": 6392,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 9667966,
+   "after": 47430,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   1,
+   1
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07MM5H3HX.jpg",
+  "bytes": 4645,
+  "mime": "image/jpeg"
+ }
+}

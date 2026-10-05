@@ -1,0 +1,78 @@
+{
+ "id": "abo-B07QF9Y9D1",
+ "source": "abo",
+ "typeId": "shelving",
+ "formId": "rect",
+ "name": "Ravenna Home Springdale Modern Shelving Unit with Decorative Open Sides",
+ "brand": "Ravenna Home",
+ "price": 14590,
+ "currency": "RUB",
+ "dims": {
+  "H": 1411,
+  "W": 611,
+  "D": 340
+ },
+ "colors": [
+  "белый"
+ ],
+ "materials": [
+  "дерево",
+  "ЛДСП / МДФ"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07QF9Y9D1",
+ "model": {
+  "file": "models/abo-B07QF9Y9D1.glb",
+  "bytes": 191220,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.305526376,
+     0,
+     -0.169742763
+    ],
+    "max": [
+     0.30545047129300007,
+     1.4109999561885,
+     0.170282130306
+    ],
+    "size": [
+     0.6109768472930001,
+     1.4109999561885,
+     0.340024893306
+    ]
+   },
+   "tris": 29998,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 16244040,
+  "bytes": 191220,
+  "srcTris": 77356,
+  "tris": 29998,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 14313042,
+   "after": 9372,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9996,
+   1.0003,
+   0.9997
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07QF9Y9D1.jpg",
+  "bytes": 4279,
+  "mime": "image/jpeg"
+ }
+}

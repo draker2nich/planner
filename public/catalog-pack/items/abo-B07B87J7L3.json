@@ -1,0 +1,74 @@
+{
+ "id": "abo-B07B87J7L3",
+ "source": "abo",
+ "typeId": "table",
+ "formId": "round",
+ "name": "Stone & Beam Hughes Round Wood Dining Kitchen Table",
+ "brand": "Stone & Beam",
+ "price": 52090,
+ "currency": "RUB",
+ "dims": {
+  "H": 764,
+  "DIA": 1213
+ },
+ "colors": [
+  "коричневый"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B07B87J7L3",
+ "model": {
+  "file": "models/abo-B07B87J7L3.glb",
+  "bytes": 216928,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.60652411,
+     0,
+     -0.606500149
+    ],
+    "max": [
+     0.6064759377695,
+     0.7640204781135,
+     0.6064998987695
+    ],
+    "size": [
+     1.2130000477695,
+     0.7640204781135,
+     1.2130000477695
+    ]
+   },
+   "tris": 2728,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2544740,
+  "bytes": 216928,
+  "srcTris": 2728,
+  "tris": 2728,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 2449465,
+   "after": 195104,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9998,
+   1.0003,
+   1.0001
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07B87J7L3.jpg",
+  "bytes": 7390,
+  "mime": "image/jpeg"
+ }
+}

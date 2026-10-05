@@ -1,0 +1,75 @@
+{
+ "id": "abo-B07DYV7WNN",
+ "source": "abo",
+ "typeId": "tv-stand",
+ "formId": "rect",
+ "name": "ROCKPOINT TV Stand",
+ "brand": "Rockpoint",
+ "price": 16290,
+ "currency": "RUB",
+ "dims": {
+  "H": 813,
+  "W": 1067,
+  "D": 406
+ },
+ "colors": [
+  "коричневый"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B07DYV7WNN",
+ "model": {
+  "file": "models/abo-B07DYV7WNN.glb",
+  "bytes": 166180,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.533500075,
+     0,
+     -0.202999964
+    ],
+    "max": [
+     0.533499796457,
+     0.812998803357,
+     0.20301097408600002
+    ],
+    "size": [
+     1.066999871457,
+     0.812998803357,
+     0.40601093808600003
+    ]
+   },
+   "tris": 27504,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 31907260,
+  "bytes": 166180,
+  "srcTris": 27504,
+  "tris": 27504,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 31228245,
+   "after": 43888,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0002,
+   1.0002,
+   0.999
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07DYV7WNN.jpg",
+  "bytes": 7910,
+  "mime": "image/jpeg"
+ }
+}

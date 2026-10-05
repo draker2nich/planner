@@ -1,0 +1,79 @@
+{
+ "id": "abo-B07HSMVFJW",
+ "source": "abo",
+ "typeId": "shelving",
+ "formId": "rect",
+ "name": "Stone & Beam Rustic Ladder Display Rack Storage Shelf",
+ "brand": "Stone & Beam",
+ "price": 9990,
+ "currency": "RUB",
+ "dims": {
+  "H": 1600,
+  "W": 454,
+  "D": 141
+ },
+ "colors": [
+  "белый",
+  "бежевый",
+  "натуральное дерево"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "кантри"
+ ],
+ "url": "https://www.amazon.com/dp/B07HSMVFJW",
+ "model": {
+  "file": "models/abo-B07HSMVFJW.glb",
+  "bytes": 162488,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.227000013,
+     0,
+     -0.0705000013
+    ],
+    "max": [
+     0.22703160361449998,
+     1.5999999946215,
+     0.070524230662
+    ],
+    "size": [
+     0.4540316166145,
+     1.5999999946215,
+     0.141024231962
+    ]
+   },
+   "tris": 9712,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 1317932,
+  "bytes": 162488,
+  "srcTris": 9712,
+  "tris": 9712,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 1063860,
+   "after": 105170,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0007,
+   1,
+   1.0002
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07HSMVFJW.jpg",
+  "bytes": 4401,
+  "mime": "image/jpeg"
+ }
+}

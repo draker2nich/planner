@@ -1,0 +1,73 @@
+{
+ "id": "abo-B072JT7WF6",
+ "source": "abo",
+ "typeId": "shelving",
+ "formId": "rect",
+ "name": "AmazonBasics",
+ "brand": "AmazonBasics",
+ "price": 13790,
+ "currency": "RUB",
+ "dims": {
+  "H": 1829,
+  "W": 914,
+  "D": 457
+ },
+ "colors": [],
+ "materials": [
+  "металл"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.de/dp/B072JT7WF6",
+ "model": {
+  "file": "models/abo-B072JT7WF6.glb",
+  "bytes": 331596,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.456999987,
+     5.4507435e-8,
+     -0.228499994
+    ],
+    "max": [
+     0.456997659066,
+     1.829000107701435,
+     0.228554649092
+    ],
+    "size": [
+     0.913997646066,
+     1.829000053194,
+     0.457054643092
+    ]
+   },
+   "tris": 30001,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 21462632,
+  "bytes": 331596,
+  "srcTris": 61456,
+  "tris": 30001,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 18196697,
+   "after": 56488,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9996,
+   1.0001,
+   0.9996
+  ]
+ },
+ "image": {
+  "file": "images/abo-B072JT7WF6.jpg",
+  "bytes": 4499,
+  "mime": "image/jpeg"
+ }
+}

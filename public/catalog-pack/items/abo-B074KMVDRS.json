@@ -1,0 +1,77 @@
+{
+ "id": "abo-B074KMVDRS",
+ "source": "abo",
+ "typeId": "tv-stand",
+ "formId": "rect",
+ "name": "Stone & Beam Parson Entertainment Console with Drawers",
+ "brand": "Stone & Beam",
+ "price": 28990,
+ "currency": "RUB",
+ "dims": {
+  "H": 635,
+  "W": 1815,
+  "D": 425
+ },
+ "colors": [
+  "коричневый",
+  "натуральное дерево"
+ ],
+ "materials": [
+  "дерево",
+  "камень"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B074KMVDRS",
+ "model": {
+  "file": "models/abo-B074KMVDRS.glb",
+  "bytes": 236952,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.906628489,
+     -8.80796586e-20,
+     -0.207720906
+    ],
+    "max": [
+     0.9083715206929999,
+     0.635022892972,
+     0.21725254435599997
+    ],
+    "size": [
+     1.815000009693,
+     0.635022892972,
+     0.424973450356
+    ]
+   },
+   "tris": 28252,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2856012,
+  "bytes": 236952,
+  "srcTris": 28252,
+  "tris": 28252,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 1992241,
+   "after": 85676,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9999,
+   0.9993,
+   0.9995
+  ]
+ },
+ "image": {
+  "file": "images/abo-B074KMVDRS.jpg",
+  "bytes": 8213,
+  "mime": "image/jpeg"
+ }
+}

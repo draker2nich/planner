@@ -1,0 +1,77 @@
+{
+ "id": "abo-B07P5LNLRN",
+ "source": "abo",
+ "typeId": "pouf",
+ "formId": "rect",
+ "name": "Rivet Ava Mid-Century Modern Upholstered Ottoman",
+ "brand": "Rivet",
+ "price": 21390,
+ "currency": "RUB",
+ "dims": {
+  "H": 393,
+  "W": 1609,
+  "D": 646
+ },
+ "colors": [
+  "синий"
+ ],
+ "materials": [
+  "ткань"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07P5LNLRN",
+ "model": {
+  "file": "models/abo-B07P5LNLRN.glb",
+  "bytes": 255936,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.804499984,
+     0,
+     -0.323035955
+    ],
+    "max": [
+     0.8045000002034,
+     0.3930426623196,
+     0.3229996853644
+    ],
+    "size": [
+     1.6089999842034,
+     0.3930426623196,
+     0.6460356403644
+    ]
+   },
+   "tris": 7092,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 67083280,
+  "bytes": 255936,
+  "srcTris": 7092,
+  "tris": 7092,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 66912340,
+   "after": 217126,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0003,
+   0.9988,
+   1.0004
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07P5LNLRN.jpg",
+  "bytes": 2391,
+  "mime": "image/jpeg"
+ }
+}

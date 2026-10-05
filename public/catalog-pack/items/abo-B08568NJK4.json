@@ -1,0 +1,77 @@
+{
+ "id": "abo-B08568NJK4",
+ "source": "abo",
+ "typeId": "chair",
+ "formId": "rect",
+ "name": "Rivet Decatur Modern Upholstered Dining Chair",
+ "brand": "Rivet",
+ "price": 14290,
+ "currency": "RUB",
+ "dims": {
+  "H": 930,
+  "W": 520,
+  "D": 634
+ },
+ "colors": [
+  "жёлтый"
+ ],
+ "materials": [
+  "металл"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B08568NJK4",
+ "model": {
+  "file": "models/abo-B08568NJK4.glb",
+  "bytes": 483492,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.259984434,
+     0,
+     -0.338476032
+    ],
+    "max": [
+     0.25999358335600004,
+     0.9299999845353,
+     0.2955451989879
+    ],
+    "size": [
+     0.519978017356,
+     0.9299999845353,
+     0.6340212309879
+    ]
+   },
+   "tris": 30000,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 52968616,
+  "bytes": 483492,
+  "srcTris": 47622,
+  "tris": 30000,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 51875835,
+   "after": 330182,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9997,
+   1.0005,
+   1.0003
+  ]
+ },
+ "image": {
+  "file": "images/abo-B08568NJK4.jpg",
+  "bytes": 5491,
+  "mime": "image/jpeg"
+ }
+}

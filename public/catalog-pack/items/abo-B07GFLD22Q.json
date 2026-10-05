@@ -1,0 +1,75 @@
+{
+ "id": "abo-B07GFLD22Q",
+ "source": "abo",
+ "typeId": "shoe-rack",
+ "formId": "rect",
+ "name": "Movian Inari 3-door Shoe Cabinet/Cupboard/Organizer",
+ "brand": "Movian",
+ "price": 10090,
+ "currency": "RUB",
+ "dims": {
+  "H": 1280,
+  "W": 750,
+  "D": 250
+ },
+ "colors": [
+  "белый"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.co.uk/dp/B07GFLD22Q",
+ "model": {
+  "file": "models/abo-B07GFLD22Q.glb",
+  "bytes": 60292,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.375,
+     0,
+     -0.118181333
+    ],
+    "max": [
+     0.374967604636,
+     1.2799999236119999,
+     0.13183391179999998
+    ],
+    "size": [
+     0.749967604636,
+     1.2799999236119999,
+     0.2500152448
+    ]
+   },
+   "tris": 2562,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 1911056,
+  "bytes": 60292,
+  "srcTris": 2562,
+  "tris": 2562,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 1814560,
+   "after": 40266,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   1,
+   1
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07GFLD22Q.jpg",
+  "bytes": 2215,
+  "mime": "image/jpeg"
+ }
+}

@@ -1,0 +1,74 @@
+{
+ "id": "abo-B0856G5SZH",
+ "source": "abo",
+ "typeId": "bar-stool",
+ "formId": "round",
+ "name": "AmazonBasics Solid-Back Barstool",
+ "brand": "AmazonBasics",
+ "price": 8990,
+ "currency": "RUB",
+ "dims": {
+  "H": 1045,
+  "DIA": 536
+ },
+ "colors": [
+  "чёрный"
+ ],
+ "materials": [
+  "пластик"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B0856G5SZH",
+ "model": {
+  "file": "models/abo-B0856G5SZH.glb",
+  "bytes": 216632,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.268000007,
+     0,
+     -0.285319149
+    ],
+    "max": [
+     0.2679744257806,
+     1.0449683603766,
+     0.2506552837806
+    ],
+    "size": [
+     0.5359744327806,
+     1.0449683603766,
+     0.5359744327806
+    ]
+   },
+   "tris": 29996,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 19845504,
+  "bytes": 216632,
+  "srcTris": 115910,
+  "tris": 29996,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 15985521,
+   "after": 15786,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9999,
+   1.0001,
+   1.0017
+  ]
+ },
+ "image": {
+  "file": "images/abo-B0856G5SZH.jpg",
+  "bytes": 8125,
+  "mime": "image/jpeg"
+ }
+}

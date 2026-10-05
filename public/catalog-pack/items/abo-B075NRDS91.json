@@ -1,0 +1,73 @@
+{
+ "id": "abo-B075NRDS91",
+ "source": "abo",
+ "typeId": "armchair",
+ "formId": "rect",
+ "name": "Marque Amazon",
+ "brand": "Movian",
+ "price": 38590,
+ "currency": "RUB",
+ "dims": {
+  "H": 800,
+  "W": 770,
+  "D": 779
+ },
+ "colors": [],
+ "materials": [
+  "ткань"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.fr/dp/B075NRDS91",
+ "model": {
+  "file": "models/abo-B075NRDS91.glb",
+  "bytes": 286404,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.384999961,
+     0,
+     -0.391291767
+    ],
+    "max": [
+     0.3850177368987999,
+     0.7999999964915999,
+     0.3877108542555999
+    ],
+    "size": [
+     0.7700176978987999,
+     0.7999999964915999,
+     0.7790026212555999
+    ]
+   },
+   "tris": 11468,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 35816408,
+  "bytes": 286404,
+  "srcTris": 11468,
+  "tris": 11468,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 35466892,
+   "after": 217998,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0002,
+   1.0002,
+   0.9997
+  ]
+ },
+ "image": {
+  "file": "images/abo-B075NRDS91.jpg",
+  "bytes": 3722,
+  "mime": "image/jpeg"
+ }
+}

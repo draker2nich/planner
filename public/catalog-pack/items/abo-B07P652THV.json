@@ -1,0 +1,78 @@
+{
+ "id": "abo-B07P652THV",
+ "source": "abo",
+ "typeId": "bench",
+ "formId": "rect",
+ "name": "AmazonBasics Classic Shoe Bench with Lift-Top Compartment and 3 Storage Cubbies",
+ "brand": "AmazonBasics",
+ "price": 9990,
+ "currency": "RUB",
+ "dims": {
+  "H": 500,
+  "W": 899,
+  "D": 401
+ },
+ "colors": [
+  "белый",
+  "натуральное дерево"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "классика"
+ ],
+ "url": "https://www.amazon.com/dp/B07P652THV",
+ "model": {
+  "file": "models/abo-B07P652THV.glb",
+  "bytes": 126564,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.405931711,
+     0,
+     0.0980477408
+    ],
+    "max": [
+     0.4930683003182,
+     0.5000114816048,
+     0.4990666068632
+    ],
+    "size": [
+     0.8990000113182,
+     0.5000114816048,
+     0.4010188660632
+    ]
+   },
+   "tris": 23128,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 26988336,
+  "bytes": 126564,
+  "srcTris": 23128,
+  "tris": 23128,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 26283596,
+   "after": 17952,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9998,
+   0.9992,
+   0.9993
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07P652THV.jpg",
+  "bytes": 3273,
+  "mime": "image/jpeg"
+ }
+}

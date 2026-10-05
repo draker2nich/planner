@@ -1,0 +1,79 @@
+{
+ "id": "abo-B07B7DMPX7",
+ "source": "abo",
+ "typeId": "tv-stand",
+ "formId": "rect",
+ "name": "Rivet Mid-Century Modern Wood Media TV Console Stand Table",
+ "brand": "Rivet",
+ "price": 30990,
+ "currency": "RUB",
+ "dims": {
+  "H": 769,
+  "W": 1500,
+  "D": 508
+ },
+ "colors": [
+  "белый",
+  "серый",
+  "натуральное дерево"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07B7DMPX7",
+ "model": {
+  "file": "models/abo-B07B7DMPX7.glb",
+  "bytes": 133796,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.75,
+     0,
+     -0.251149774
+    ],
+    "max": [
+     0.7499999942408999,
+     0.7689983489976999,
+     0.25681579812039995
+    ],
+    "size": [
+     1.4999999942409,
+     0.7689983489976999,
+     0.5079655721203999
+    ]
+   },
+   "tris": 5172,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2317536,
+  "bytes": 133796,
+  "srcTris": 5172,
+  "tris": 5172,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 2190027,
+   "after": 105850,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   0.9995,
+   0.9998
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07B7DMPX7.jpg",
+  "bytes": 6043,
+  "mime": "image/jpeg"
+ }
+}

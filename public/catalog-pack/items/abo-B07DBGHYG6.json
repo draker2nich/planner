@@ -1,0 +1,78 @@
+{
+ "id": "abo-B07DBGHYG6",
+ "source": "abo",
+ "typeId": "bench",
+ "formId": "rect",
+ "name": "Ravenna Home Radcliffe Upholstered Storage Bench",
+ "brand": "Ravenna Home",
+ "price": 17890,
+ "currency": "RUB",
+ "dims": {
+  "H": 589,
+  "W": 987,
+  "D": 346
+ },
+ "colors": [
+  "белый"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "современный",
+  "классика"
+ ],
+ "url": "https://www.amazon.com/dp/B07DBGHYG6",
+ "model": {
+  "file": "models/abo-B07DBGHYG6.glb",
+  "bytes": 51576,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.489625722,
+     0,
+     -0.173904315
+    ],
+    "max": [
+     0.4973742811995001,
+     0.5890190460405,
+     0.1720848822395
+    ],
+    "size": [
+     0.9870000031995001,
+     0.5890190460405,
+     0.3459891972395
+    ]
+   },
+   "tris": 5902,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 689656,
+  "bytes": 51576,
+  "srcTris": 5902,
+  "tris": 5902,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 504981,
+   "after": 10780,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9998,
+   1.0005,
+   1.0003
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07DBGHYG6.jpg",
+  "bytes": 3841,
+  "mime": "image/jpeg"
+ }
+}

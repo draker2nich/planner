@@ -1,0 +1,79 @@
+{
+ "id": "abo-B075YP3BD8",
+ "source": "abo",
+ "typeId": "chair",
+ "formId": "rect",
+ "name": "Stone & Beam Bergen Tufted Kitchen Dining Room Table Farmhouse Chairs",
+ "brand": "Stone & Beam",
+ "price": 13890,
+ "currency": "RUB",
+ "dims": {
+  "H": 905,
+  "W": 513,
+  "D": 584
+ },
+ "colors": [
+  "серый",
+  "синий"
+ ],
+ "materials": [
+  "камень"
+ ],
+ "styleTags": [
+  "классика",
+  "кантри"
+ ],
+ "url": "https://www.amazon.com/dp/B075YP3BD8",
+ "model": {
+  "file": "models/abo-B075YP3BD8.glb",
+  "bytes": 296708,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.256500006,
+     0,
+     -0.34679994
+    ],
+    "max": [
+     0.2565156115977,
+     0.9049999852593,
+     0.23719931802120003
+    ],
+    "size": [
+     0.5130156175977,
+     0.9049999852593,
+     0.5839992580212
+    ]
+   },
+   "tris": 10690,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2280044,
+  "bytes": 296708,
+  "srcTris": 10690,
+  "tris": 10690,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 2016160,
+   "after": 232562,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9998,
+   0.9998,
+   0.9994
+  ]
+ },
+ "image": {
+  "file": "images/abo-B075YP3BD8.jpg",
+  "bytes": 6591,
+  "mime": "image/jpeg"
+ }
+}

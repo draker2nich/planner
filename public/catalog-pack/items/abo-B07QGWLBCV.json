@@ -1,0 +1,78 @@
+{
+ "id": "abo-B07QGWLBCV",
+ "source": "abo",
+ "typeId": "chair",
+ "formId": "rect",
+ "name": "Stone & Beam Tufted Dining Chair",
+ "brand": "Stone & Beam",
+ "price": 13690,
+ "currency": "RUB",
+ "dims": {
+  "H": 1091,
+  "W": 634,
+  "D": 629
+ },
+ "colors": [
+  "серый",
+  "синий"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "классика"
+ ],
+ "url": "https://www.amazon.com/dp/B07QGWLBCV",
+ "model": {
+  "file": "models/abo-B07QGWLBCV.glb",
+  "bytes": 734548,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.316648334,
+     0,
+     -0.334564745
+    ],
+    "max": [
+     0.3173210272559999,
+     1.0910000047749,
+     0.2943435163132
+    ],
+    "size": [
+     0.6339693612559999,
+     1.0910000047749,
+     0.6289082613132
+    ]
+   },
+   "tris": 29996,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 60285468,
+  "bytes": 734548,
+  "srcTris": 61648,
+  "tris": 29996,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 58852114,
+   "after": 561314,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   1,
+   0.9999
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07QGWLBCV.jpg",
+  "bytes": 4982,
+  "mime": "image/jpeg"
+ }
+}

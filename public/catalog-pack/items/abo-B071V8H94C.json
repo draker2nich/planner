@@ -1,0 +1,78 @@
+{
+ "id": "abo-B071V8H94C",
+ "source": "abo",
+ "typeId": "mirror",
+ "formId": "wall",
+ "name": "Stone & Beam Round Distressed Rustic Wood Hanging Wall Mirror Decor",
+ "brand": "Stone & Beam",
+ "price": 14290,
+ "currency": "RUB",
+ "dims": {
+  "H": 585,
+  "W": 585,
+  "D": 61,
+  "E": 1200
+ },
+ "colors": [
+  "коричневый"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "кантри"
+ ],
+ "url": "https://www.amazon.com/dp/B071V8H94C",
+ "model": {
+  "file": "models/abo-B071V8H94C.glb",
+  "bytes": 195496,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.292499989,
+     -0.292500019,
+     -2.38995645e-9
+    ],
+    "max": [
+     0.29250004484569997,
+     0.2925000148457,
+     0.060988831023243546
+    ],
+    "size": [
+     0.5850000338457,
+     0.5850000338457,
+     0.060988833413199994
+    ]
+   },
+   "tris": 11160,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 1632064,
+  "bytes": 195496,
+  "srcTris": 11160,
+  "tris": 11160,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 1376737,
+   "after": 134680,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9995,
+   0.9995,
+   1.0024
+  ]
+ },
+ "image": {
+  "file": "images/abo-B071V8H94C.jpg",
+  "bytes": 12637,
+  "mime": "image/jpeg"
+ }
+}

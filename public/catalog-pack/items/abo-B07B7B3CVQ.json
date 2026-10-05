@@ -1,0 +1,76 @@
+{
+ "id": "abo-B07B7B3CVQ",
+ "source": "abo",
+ "typeId": "bar-stool",
+ "formId": "round",
+ "name": "Stone & Beam Cottage Wood Bar Stool",
+ "brand": "Stone & Beam",
+ "price": 13490,
+ "currency": "RUB",
+ "dims": {
+  "H": 737,
+  "DIA": 476
+ },
+ "colors": [
+  "белый"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "кантри"
+ ],
+ "url": "https://www.amazon.com/dp/B07B7B3CVQ",
+ "model": {
+  "file": "models/abo-B07B7B3CVQ.glb",
+  "bytes": 59096,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.237999991,
+     0,
+     -0.238000005
+    ],
+    "max": [
+     0.23799323619410004,
+     0.7370000038863,
+     0.23799322219410005
+    ],
+    "size": [
+     0.47599322719410003,
+     0.7370000038863,
+     0.47599322719410003
+    ]
+   },
+   "tris": 9600,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 457556,
+  "bytes": 59096,
+  "srcTris": 9600,
+  "tris": 9600,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 225636,
+   "after": 9890,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0405,
+   0.9995,
+   1.0001
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07B7B3CVQ.jpg",
+  "bytes": 6411,
+  "mime": "image/jpeg"
+ }
+}

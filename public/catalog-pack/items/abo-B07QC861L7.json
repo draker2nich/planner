@@ -1,0 +1,79 @@
+{
+ "id": "abo-B07QC861L7",
+ "source": "abo",
+ "typeId": "coffee-table",
+ "formId": "rect",
+ "name": "Rivet Campbell Mid-Century Coffee Table with Tapered Legs",
+ "brand": "Rivet",
+ "price": 25090,
+ "currency": "RUB",
+ "dims": {
+  "H": 432,
+  "W": 1194,
+  "D": 609
+ },
+ "colors": [
+  "белый",
+  "коричневый"
+ ],
+ "materials": [
+  "дерево",
+  "ЛДСП / МДФ"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07QC861L7",
+ "model": {
+  "file": "models/abo-B07QC861L7.glb",
+  "bytes": 53236,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.596836865,
+     0,
+     -0.304437786
+    ],
+    "max": [
+     0.5971630968174999,
+     0.43203514458,
+     0.30455102441
+    ],
+    "size": [
+     1.1939999618175,
+     0.43203514458,
+     0.60898881041
+    ]
+   },
+   "tris": 3412,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 16427208,
+  "bytes": 53236,
+  "srcTris": 3412,
+  "tris": 3412,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 16327137,
+   "after": 27810,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9999,
+   1.0008,
+   0.9997
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07QC861L7.jpg",
+  "bytes": 3569,
+  "mime": "image/jpeg"
+ }
+}

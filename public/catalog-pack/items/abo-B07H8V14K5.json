@@ -1,0 +1,71 @@
+{
+ "id": "abo-B07H8V14K5",
+ "source": "abo",
+ "typeId": "sideboard",
+ "formId": "rect",
+ "name": "Movian Hall",
+ "brand": "Movian",
+ "price": 73790,
+ "currency": "RUB",
+ "dims": {
+  "H": 970,
+  "W": 1750,
+  "D": 2080
+ },
+ "colors": [],
+ "materials": [],
+ "styleTags": [],
+ "url": "https://www.amazon.de/dp/B07H8V14K5",
+ "model": {
+  "file": "models/abo-B07H8V14K5.glb",
+  "bytes": 264632,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.875,
+     1.18292274e-8,
+     -1.03999996
+    ],
+    "max": [
+     0.8750287285680001,
+     0.9699811121092274,
+     1.040000087891
+    ],
+    "size": [
+     1.750028728568,
+     0.9699811002800001,
+     2.080000047891
+    ]
+   },
+   "tris": 7730,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 71099968,
+  "bytes": 264632,
+  "srcTris": 7730,
+  "tris": 7730,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 70834492,
+   "after": 216318,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   1,
+   1
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07H8V14K5.jpg",
+  "bytes": 3996,
+  "mime": "image/jpeg"
+ }
+}

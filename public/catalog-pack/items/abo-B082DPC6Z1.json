@@ -1,0 +1,77 @@
+{
+ "id": "abo-B082DPC6Z1",
+ "source": "abo",
+ "typeId": "ceiling-light",
+ "formId": "round",
+ "name": "Rivet Single-Light Flush-Mount Ceiling Light with Metal Shade",
+ "brand": "Rivet",
+ "price": 10690,
+ "currency": "RUB",
+ "dims": {
+  "H": 177,
+  "DIA": 355
+ },
+ "colors": [
+  "белый",
+  "жёлтый"
+ ],
+ "materials": [
+  "металл"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B082DPC6Z1",
+ "model": {
+  "file": "models/abo-B082DPC6Z1.glb",
+  "bytes": 192276,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.177500114,
+     -0.176999971,
+     -0.177500024
+    ],
+    "max": [
+     0.177499901932,
+     -0.00000917992800000822,
+     0.17749999193199997
+    ],
+    "size": [
+     0.355000015932,
+     0.176990791072,
+     0.355000015932
+    ]
+   },
+   "tris": 29999,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 4618932,
+  "bytes": 192276,
+  "srcTris": 75224,
+  "tris": 29999,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 2862984,
+   "after": 27420,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0004,
+   1.0026,
+   1.0004
+  ]
+ },
+ "image": {
+  "file": "images/abo-B082DPC6Z1.jpg",
+  "bytes": 3742,
+  "mime": "image/jpeg"
+ }
+}

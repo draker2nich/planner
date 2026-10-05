@@ -1,0 +1,76 @@
+{
+ "id": "abo-B071F6W28T",
+ "source": "abo",
+ "typeId": "chandelier",
+ "formId": "round",
+ "name": "Stone & Beam Emmons Industrial Ceiling Pendant Chandelier Fixture With Light Bulb",
+ "brand": "Stone & Beam",
+ "price": 10290,
+ "currency": "RUB",
+ "dims": {
+  "H": 851,
+  "DIA": 165
+ },
+ "colors": [
+  "чёрный"
+ ],
+ "materials": [
+  "металл"
+ ],
+ "styleTags": [
+  "лофт"
+ ],
+ "url": "https://www.amazon.com/dp/B071F6W28T",
+ "model": {
+  "file": "models/abo-B071F6W28T.glb",
+  "bytes": 329524,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.0824618861,
+     -0.850994825,
+     -0.0825000033
+    ],
+    "max": [
+     0.08245958619,
+     -2.798359999278688e-8,
+     0.0825253565316
+    ],
+    "size": [
+     0.16492147229,
+     0.8509947970164,
+     0.1650253598316
+    ]
+   },
+   "tris": 30001,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 16396892,
+  "bytes": 329524,
+  "srcTris": 122304,
+  "tris": 30001,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 13623187,
+   "after": 181930,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0911,
+   1.0001,
+   1.0027
+  ]
+ },
+ "image": {
+  "file": "images/abo-B071F6W28T.jpg",
+  "bytes": 3419,
+  "mime": "image/jpeg"
+ }
+}

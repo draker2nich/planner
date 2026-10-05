@@ -1,0 +1,75 @@
+{
+ "id": "abo-B07TKY5163",
+ "source": "abo",
+ "typeId": "shelving",
+ "formId": "rect",
+ "name": "Marchio Amazon",
+ "brand": "Movian",
+ "price": 18490,
+ "currency": "RUB",
+ "dims": {
+  "H": 1700,
+  "W": 800,
+  "D": 360
+ },
+ "colors": [
+  "коричневый"
+ ],
+ "materials": [],
+ "styleTags": [
+  "кантри"
+ ],
+ "url": "https://www.amazon.it/dp/B07TKY5163",
+ "model": {
+  "file": "models/abo-B07TKY5163.glb",
+  "bytes": 500928,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.400000036,
+     0.0000145954473,
+     -0.180000067
+    ],
+    "max": [
+     0.40002974081,
+     1.7000000472603,
+     0.179961449959
+    ],
+    "size": [
+     0.80002977681,
+     1.699985451813,
+     0.359961516959
+    ]
+   },
+   "tris": 29999,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 56332208,
+  "bytes": 500928,
+  "srcTris": 34052,
+  "tris": 29999,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 55502133,
+   "after": 348756,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   1,
+   1
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07TKY5163.jpg",
+  "bytes": 6326,
+  "mime": "image/jpeg"
+ }
+}

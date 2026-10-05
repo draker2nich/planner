@@ -1,0 +1,77 @@
+{
+ "id": "abo-B0825CLV7M",
+ "source": "abo",
+ "typeId": "chandelier",
+ "formId": "round",
+ "name": "Rivet Scandinavian Blonde-Wood Single-Light Adjustable Pendant",
+ "brand": "Rivet",
+ "price": 12490,
+ "currency": "RUB",
+ "dims": {
+  "H": 1798,
+  "DIA": 125
+ },
+ "colors": [
+  "белый",
+  "натуральное дерево"
+ ],
+ "materials": [
+  "металл"
+ ],
+ "styleTags": [
+  "скандинавский"
+ ],
+ "url": "https://www.amazon.com/dp/B0825CLV7M",
+ "model": {
+  "file": "models/abo-B0825CLV7M.glb",
+  "bytes": 175412,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.0625000075,
+     -1.79799998,
+     -0.0625
+    ],
+    "max": [
+     0.06250286312900001,
+     4.591300006850929e-8,
+     0.062502870629
+    ],
+    "size": [
+     0.125002870629,
+     1.798000025913,
+     0.125002870629
+    ]
+   },
+   "tris": 19692,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 5300152,
+  "bytes": 175412,
+  "srcTris": 19692,
+  "tris": 19692,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 4829619,
+   "after": 80464,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9964,
+   0.9998,
+   0.9964
+  ]
+ },
+ "image": {
+  "file": "images/abo-B0825CLV7M.jpg",
+  "bytes": 1486,
+  "mime": "image/jpeg"
+ }
+}

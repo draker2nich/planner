@@ -1,0 +1,77 @@
+{
+ "id": "abo-B07F9X919G",
+ "source": "abo",
+ "typeId": "table-lamp",
+ "formId": "round",
+ "name": "Ravenna Home Mid Century Modern White Ceramic Table Lamp With LED Light Bulb",
+ "brand": "Ravenna Home",
+ "price": 7390,
+ "currency": "RUB",
+ "dims": {
+  "H": 537,
+  "DIA": 277
+ },
+ "colors": [
+  "синий"
+ ],
+ "materials": [
+  "ткань",
+  "камень"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07F9X919G",
+ "model": {
+  "file": "models/abo-B07F9X919G.glb",
+  "bytes": 225524,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.138932198,
+     0,
+     -0.138522923
+    ],
+    "max": [
+     0.1380736641898,
+     0.5370000047633999,
+     0.1384829391898
+    ],
+    "size": [
+     0.2770058621898,
+     0.5370000047633999,
+     0.2770058621898
+    ]
+   },
+   "tris": 24528,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 4,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 3334648,
+  "bytes": 225524,
+  "srcTris": 24528,
+  "tris": 24528,
+  "textures": {
+   "images": 4,
+   "resized": 4,
+   "before": 2757738,
+   "after": 96578,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0013,
+   1.0008,
+   1.0013
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07F9X919G.jpg",
+  "bytes": 3332,
+  "mime": "image/jpeg"
+ }
+}

@@ -1,0 +1,79 @@
+{
+ "id": "abo-B07ML7P94G",
+ "source": "abo",
+ "typeId": "table",
+ "formId": "rect",
+ "name": "Ravenna Home Traditional Dining Table 29\"H",
+ "brand": "Ravenna Home",
+ "price": 30590,
+ "currency": "RUB",
+ "dims": {
+  "H": 738,
+  "W": 747,
+  "D": 747
+ },
+ "colors": [
+  "чёрный",
+  "натуральное дерево"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "классика",
+  "кантри"
+ ],
+ "url": "https://www.amazon.com/dp/B07ML7P94G",
+ "model": {
+  "file": "models/abo-B07ML7P94G.glb",
+  "bytes": 231676,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.373500019,
+     0,
+     -0.373500019
+    ],
+    "max": [
+     0.37350002063930005,
+     0.7380176183606,
+     0.37350002063930005
+    ],
+    "size": [
+     0.7470000396393001,
+     0.7380176183606,
+     0.7470000396393001
+    ]
+   },
+   "tris": 29999,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 18297236,
+  "bytes": 231676,
+  "srcTris": 39108,
+  "tris": 29999,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 17137046,
+   "after": 54888,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0001,
+   1.0002,
+   1.0001
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07ML7P94G.jpg",
+  "bytes": 5632,
+  "mime": "image/jpeg"
+ }
+}

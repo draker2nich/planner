@@ -1,0 +1,77 @@
+{
+ "id": "abo-B075QDMWTP",
+ "source": "abo",
+ "typeId": "bed",
+ "formId": "king",
+ "name": "Rivet Payton Mid-Century Modern Tufted King Bed with Headboard",
+ "brand": "Rivet",
+ "price": 84590,
+ "currency": "RUB",
+ "dims": {
+  "H": 1515,
+  "W": 2042,
+  "L": 2377
+ },
+ "colors": [
+  "белый",
+  "бежевый"
+ ],
+ "materials": [],
+ "styleTags": [
+  "современный",
+  "классика"
+ ],
+ "url": "https://www.amazon.com/dp/B075QDMWTP",
+ "model": {
+  "file": "models/abo-B075QDMWTP.glb",
+  "bytes": 307812,
+  "info": {
+   "bbox": {
+    "min": [
+     -1.02100003,
+     0,
+     -1.20165002
+    ],
+    "max": [
+     1.0209884670799998,
+     1.51502372364,
+     1.1753499478599998
+    ],
+    "size": [
+     2.0419884970799997,
+     1.51502372364,
+     2.37699996786
+    ]
+   },
+   "tris": 29998,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 3501816,
+  "bytes": 307812,
+  "srcTris": 31880,
+  "tris": 29998,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 2591562,
+   "after": 130630,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9999,
+   0.9998,
+   1
+  ]
+ },
+ "image": {
+  "file": "images/abo-B075QDMWTP.jpg",
+  "bytes": 6620,
+  "mime": "image/jpeg"
+ }
+}

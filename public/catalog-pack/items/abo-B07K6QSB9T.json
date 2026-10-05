@@ -1,0 +1,75 @@
+{
+ "id": "abo-B07K6QSB9T",
+ "source": "abo",
+ "typeId": "bed",
+ "formId": "king",
+ "name": "AmazonBasics Heavy Duty Non-Slip Bed Frame with Steel Slats",
+ "brand": "AmazonBasics",
+ "price": 47790,
+ "currency": "RUB",
+ "dims": {
+  "H": 680,
+  "W": 1990,
+  "L": 2635
+ },
+ "colors": [
+  "чёрный"
+ ],
+ "materials": [
+  "металл"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B07K6QSB9T",
+ "model": {
+  "file": "models/abo-B07K6QSB9T.glb",
+  "bytes": 144388,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.995000005,
+     5.84704569e-18,
+     -1.3175
+    ],
+    "max": [
+     0.9950418752069999,
+     0.680020776652,
+     1.317500090797
+    ],
+    "size": [
+     1.990041880207,
+     0.680020776652,
+     2.635000090797
+    ]
+   },
+   "tris": 23256,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2042180,
+  "bytes": 144388,
+  "srcTris": 23256,
+  "tris": 23256,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 1427943,
+   "after": 21300,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9998,
+   1,
+   0.9999
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07K6QSB9T.jpg",
+  "bytes": 9786,
+  "mime": "image/jpeg"
+ }
+}

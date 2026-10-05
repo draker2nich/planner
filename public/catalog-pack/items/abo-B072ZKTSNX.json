@@ -1,0 +1,77 @@
+{
+ "id": "abo-B072ZKTSNX",
+ "source": "abo",
+ "typeId": "console",
+ "formId": "rect",
+ "name": "Rivet Hairpin Wood and Metal 15.7\" Console Table Bench",
+ "brand": "Rivet",
+ "price": 26690,
+ "currency": "RUB",
+ "dims": {
+  "H": 462,
+  "W": 1570,
+  "D": 425
+ },
+ "colors": [
+  "коричневый"
+ ],
+ "materials": [
+  "дерево",
+  "ЛДСП / МДФ",
+  "металл"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B072ZKTSNX",
+ "model": {
+  "file": "models/abo-B072ZKTSNX.glb",
+  "bytes": 72584,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.784094989,
+     0,
+     -0.212500006
+    ],
+    "max": [
+     0.7859049573413002,
+     0.4620014491431,
+     0.21251066127850002
+    ],
+    "size": [
+     1.5699999463413001,
+     0.4620014491431,
+     0.4250106672785
+    ]
+   },
+   "tris": 2484,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 787376,
+  "bytes": 72584,
+  "srcTris": 2484,
+  "tris": 2484,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 716677,
+   "after": 52426,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9999,
+   1.0008,
+   0.9989
+  ]
+ },
+ "image": {
+  "file": "images/abo-B072ZKTSNX.jpg",
+  "bytes": 2885,
+  "mime": "image/jpeg"
+ }
+}

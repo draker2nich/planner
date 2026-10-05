@@ -1,0 +1,75 @@
+{
+ "id": "abo-B07FM83Z21",
+ "source": "abo",
+ "typeId": "dresser",
+ "formId": "rect",
+ "name": "Artum Hill BE6-563 Laurel Dresser",
+ "brand": "Artum Hill",
+ "price": 49290,
+ "currency": "RUB",
+ "dims": {
+  "H": 914,
+  "W": 1524,
+  "D": 457
+ },
+ "colors": [
+  "серый"
+ ],
+ "materials": [],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com.mx/dp/B07FM83Z21",
+ "model": {
+  "file": "models/abo-B07FM83Z21.glb",
+  "bytes": 206036,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.762000024,
+     -0.0000595748425,
+     -0.228499949
+    ],
+    "max": [
+     0.7619999839629001,
+     0.9139869415613,
+     0.22852330920189998
+    ],
+    "size": [
+     1.5240000079629001,
+     0.9140465164038,
+     0.4570232582019
+    ]
+   },
+   "tris": 4688,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 41493176,
+  "bytes": 206036,
+  "srcTris": 4688,
+  "tris": 4688,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 41273462,
+   "after": 165606,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   0.9995,
+   1.0002
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07FM83Z21.jpg",
+  "bytes": 5255,
+  "mime": "image/jpeg"
+ }
+}

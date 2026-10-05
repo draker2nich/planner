@@ -1,0 +1,79 @@
+{
+ "id": "abo-B07QHKQLBH",
+ "source": "abo",
+ "typeId": "desk",
+ "formId": "rect",
+ "name": "Ravenna Home Classic Two-Drawer Desk",
+ "brand": "Ravenna Home",
+ "price": 27790,
+ "currency": "RUB",
+ "dims": {
+  "H": 762,
+  "W": 1117,
+  "D": 508
+ },
+ "colors": [
+  "бежевый",
+  "коричневый"
+ ],
+ "materials": [
+  "дерево",
+  "ЛДСП / МДФ"
+ ],
+ "styleTags": [
+  "классика"
+ ],
+ "url": "https://www.amazon.com/dp/B07QHKQLBH",
+ "model": {
+  "file": "models/abo-B07QHKQLBH.glb",
+  "bytes": 127944,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.55859077,
+     0,
+     -0.252651989
+    ],
+    "max": [
+     0.5584092212432,
+     0.7619844901503999,
+     0.25536039791039994
+    ],
+    "size": [
+     1.1169999912432,
+     0.7619844901503999,
+     0.5080123869104
+    ]
+   },
+   "tris": 3912,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 25711348,
+  "bytes": 127944,
+  "srcTris": 3912,
+  "tris": 3912,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 25559719,
+   "after": 93458,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9997,
+   1,
+   1.0003
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07QHKQLBH.jpg",
+  "bytes": 8562,
+  "mime": "image/jpeg"
+ }
+}

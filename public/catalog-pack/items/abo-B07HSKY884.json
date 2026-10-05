@@ -1,0 +1,78 @@
+{
+ "id": "abo-B07HSKY884",
+ "source": "abo",
+ "typeId": "bookcase",
+ "formId": "rect",
+ "name": "Stone & Beam Half-Moon Industrial Rustic Bookcase",
+ "brand": "Stone & Beam",
+ "price": 27090,
+ "currency": "RUB",
+ "dims": {
+  "H": 1063,
+  "W": 1403,
+  "D": 344
+ },
+ "colors": [],
+ "materials": [
+  "дерево",
+  "металл",
+  "камень"
+ ],
+ "styleTags": [
+  "лофт",
+  "кантри"
+ ],
+ "url": "https://www.amazon.com/dp/B07HSKY884",
+ "model": {
+  "file": "models/abo-B07HSKY884.glb",
+  "bytes": 302644,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.701499701,
+     0,
+     -0.172000006
+    ],
+    "max": [
+     0.7015002511606,
+     1.0630188858065999,
+     0.17200602511939997
+    ],
+    "size": [
+     1.4029999521606,
+     1.0630188858065999,
+     0.3440060311194
+    ]
+   },
+   "tris": 25008,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2534088,
+  "bytes": 302644,
+  "srcTris": 25008,
+  "tris": 25008,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 1739434,
+   "after": 156178,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0002,
+   1,
+   0.9998
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07HSKY884.jpg",
+  "bytes": 9036,
+  "mime": "image/jpeg"
+ }
+}

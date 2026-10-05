@@ -1,0 +1,77 @@
+{
+ "id": "abo-B075HWR58K",
+ "source": "abo",
+ "typeId": "plant",
+ "formId": "round",
+ "name": "Rivet Mid-Century Ceramic Planter with Iron Stand 18.9\"H",
+ "brand": "Rivet",
+ "price": 4990,
+ "currency": "RUB",
+ "dims": {
+  "H": 483,
+  "DIA": 333
+ },
+ "colors": [
+  "зелёный"
+ ],
+ "materials": [
+  "металл",
+  "камень"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B075HWR58K",
+ "model": {
+  "file": "models/abo-B075HWR58K.glb",
+  "bytes": 205636,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.166500047,
+     1.42075814e-16,
+     -0.162246868
+    ],
+    "max": [
+     0.1664966592295,
+     0.4830000033783002,
+     0.17074983822950002
+    ],
+    "size": [
+     0.3329967062295,
+     0.4830000033783,
+     0.3329967062295
+    ]
+   },
+   "tris": 17856,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2449968,
+  "bytes": 205636,
+  "srcTris": 17856,
+  "tris": 17856,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 2029757,
+   "after": 116528,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0276,
+   0.9998,
+   1.0014
+  ]
+ },
+ "image": {
+  "file": "images/abo-B075HWR58K.jpg",
+  "bytes": 6185,
+  "mime": "image/jpeg"
+ }
+}

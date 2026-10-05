@@ -1,0 +1,75 @@
+{
+ "id": "abo-B07PYKQNKK",
+ "source": "abo",
+ "typeId": "dresser",
+ "formId": "rect",
+ "name": "AmazonBasics Classic Dresser Drawers 4-Drawer",
+ "brand": "AmazonBasics",
+ "price": 19090,
+ "currency": "RUB",
+ "dims": {
+  "H": 1020,
+  "W": 704,
+  "D": 399
+ },
+ "colors": [
+  "коричневый"
+ ],
+ "materials": [],
+ "styleTags": [
+  "классика"
+ ],
+ "url": "https://www.amazon.in/dp/B07PYKQNKK",
+ "model": {
+  "file": "models/abo-B07PYKQNKK.glb",
+  "bytes": 103092,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.351999998,
+     0,
+     -0.204467043
+    ],
+    "max": [
+     0.3519699357841,
+     1.0199999491629,
+     0.1945550942267
+    ],
+    "size": [
+     0.7039699337841,
+     1.0199999491629,
+     0.3990221372267
+    ]
+   },
+   "tris": 5432,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 25949840,
+  "bytes": 103092,
+  "srcTris": 5432,
+  "tris": 5432,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 25807957,
+   "after": 69368,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   1,
+   1.0008
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07PYKQNKK.jpg",
+  "bytes": 3994,
+  "mime": "image/jpeg"
+ }
+}

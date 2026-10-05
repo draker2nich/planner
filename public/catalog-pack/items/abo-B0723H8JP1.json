@@ -1,0 +1,78 @@
+{
+ "id": "abo-B0723H8JP1",
+ "source": "abo",
+ "typeId": "pouf",
+ "formId": "rect",
+ "name": "Stone & Beam Bradbury Chesterfield Modern Tufted Ottoman",
+ "brand": "Stone & Beam",
+ "price": 14690,
+ "currency": "RUB",
+ "dims": {
+  "H": 486,
+  "W": 767,
+  "D": 558
+ },
+ "colors": [
+  "синий"
+ ],
+ "materials": [
+  "камень"
+ ],
+ "styleTags": [
+  "современный",
+  "классика"
+ ],
+ "url": "https://www.amazon.com/dp/B0723H8JP1",
+ "model": {
+  "file": "models/abo-B0723H8JP1.glb",
+  "bytes": 290032,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.377496839,
+     0,
+     -0.281090945
+    ],
+    "max": [
+     0.3895031541877,
+     0.48600542814389996,
+     0.2769187552261
+    ],
+    "size": [
+     0.7669999931877,
+     0.48600542814389996,
+     0.5580097002261
+    ]
+   },
+   "tris": 20936,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2653140,
+  "bytes": 290032,
+  "srcTris": 20936,
+  "tris": 20936,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 2126867,
+   "after": 168034,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   0.9993,
+   1.0004
+  ]
+ },
+ "image": {
+  "file": "images/abo-B0723H8JP1.jpg",
+  "bytes": 7991,
+  "mime": "image/jpeg"
+ }
+}

@@ -1,0 +1,76 @@
+{
+ "id": "abo-B07JGMW8DG",
+ "source": "abo",
+ "typeId": "wardrobe",
+ "formId": "rect",
+ "name": "Movian Fils 2-Door Wardrobe",
+ "brand": "Movian",
+ "price": 47490,
+ "currency": "RUB",
+ "dims": {
+  "H": 2040,
+  "W": 860,
+  "D": 600
+ },
+ "colors": [
+  "белый",
+  "натуральное дерево"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.co.uk/dp/B07JGMW8DG",
+ "model": {
+  "file": "models/abo-B07JGMW8DG.glb",
+  "bytes": 77848,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.42999801,
+     0,
+     -0.299999595
+    ],
+    "max": [
+     0.43005688489099997,
+     2.0399999048789996,
+     0.30005897434699996
+    ],
+    "size": [
+     0.860054894891,
+     2.0399999048789996,
+     0.600058569347
+    ]
+   },
+   "tris": 9762,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 14243932,
+  "bytes": 77848,
+  "srcTris": 9762,
+  "tris": 9762,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 13971571,
+   "after": 26688,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   1,
+   1
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07JGMW8DG.jpg",
+  "bytes": 7620,
+  "mime": "image/jpeg"
+ }
+}

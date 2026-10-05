@@ -1,0 +1,75 @@
+{
+ "id": "abo-B07YBH2SR3",
+ "source": "abo",
+ "typeId": "chair",
+ "formId": "rect",
+ "name": "AmazonBasics Solid Wood Kid Chair Set",
+ "brand": "AmazonBasics",
+ "price": 5890,
+ "currency": "RUB",
+ "dims": {
+  "H": 668,
+  "W": 367,
+  "D": 361
+ },
+ "colors": [
+  "белый"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B07YBH2SR3",
+ "model": {
+  "file": "models/abo-B07YBH2SR3.glb",
+  "bytes": 71816,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.183500007,
+     0,
+     -0.177097037
+    ],
+    "max": [
+     0.1835065446753,
+     0.6680000373399,
+     0.1839157403062
+    ],
+    "size": [
+     0.3670065516753,
+     0.6680000373399,
+     0.3610127773062
+    ]
+   },
+   "tris": 8500,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 17389684,
+  "bytes": 71816,
+  "srcTris": 8500,
+  "tris": 8500,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 17174170,
+   "after": 22970,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0009,
+   1.0001,
+   1.0004
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07YBH2SR3.jpg",
+  "bytes": 8788,
+  "mime": "image/jpeg"
+ }
+}

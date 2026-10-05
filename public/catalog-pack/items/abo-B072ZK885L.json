@@ -1,0 +1,80 @@
+{
+ "id": "abo-B072ZK885L",
+ "source": "abo",
+ "typeId": "nightstand",
+ "formId": "rect",
+ "name": "Rivet King Street Industrial Floating Side Table Night Stand",
+ "brand": "Rivet",
+ "price": 11290,
+ "currency": "RUB",
+ "dims": {
+  "H": 540,
+  "W": 378,
+  "D": 378
+ },
+ "colors": [
+  "коричневый"
+ ],
+ "materials": [
+  "дерево",
+  "ЛДСП / МДФ",
+  "металл"
+ ],
+ "styleTags": [
+  "современный",
+  "лофт"
+ ],
+ "url": "https://www.amazon.com/dp/B072ZK885L",
+ "model": {
+  "file": "models/abo-B072ZK885L.glb",
+  "bytes": 183300,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.18900001,
+     0,
+     -0.18900001
+    ],
+    "max": [
+     0.18899670933,
+     0.5400000220425,
+     0.18899670933
+    ],
+    "size": [
+     0.37799671933,
+     0.5400000220425,
+     0.37799671933
+    ]
+   },
+   "tris": 18612,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 1349864,
+  "bytes": 183300,
+  "srcTris": 18612,
+  "tris": 18612,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 639862,
+   "after": 75666,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0011,
+   1.0004,
+   1.0011
+  ]
+ },
+ "image": {
+  "file": "images/abo-B072ZK885L.jpg",
+  "bytes": 10563,
+  "mime": "image/jpeg"
+ }
+}

@@ -1,0 +1,77 @@
+{
+ "id": "abo-B07DBCFM4F",
+ "source": "abo",
+ "typeId": "bench",
+ "formId": "rect",
+ "name": "Ravenna Home Galer Tufted Nailhead Lift Top Storage Bedroom and Entryway Bench",
+ "brand": "Ravenna Home",
+ "price": 16790,
+ "currency": "RUB",
+ "dims": {
+  "H": 470,
+  "W": 1054,
+  "D": 400
+ },
+ "colors": [
+  "бежевый"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "классика"
+ ],
+ "url": "https://www.amazon.com/dp/B07DBCFM4F",
+ "model": {
+  "file": "models/abo-B07DBCFM4F.glb",
+  "bytes": 275148,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.52700001,
+     1.49011612e-8,
+     -0.200000018
+    ],
+    "max": [
+     0.5270000476166999,
+     0.4700314145805612,
+     0.19997058312330002
+    ],
+    "size": [
+     1.0540000576167,
+     0.4700313996794,
+     0.3999706011233
+    ]
+   },
+   "tris": 29998,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 52634040,
+  "bytes": 275148,
+  "srcTris": 31920,
+  "tris": 29998,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 51666200,
+   "after": 110502,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9999,
+   1.0002,
+   0.9999
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07DBCFM4F.jpg",
+  "bytes": 4751,
+  "mime": "image/jpeg"
+ }
+}

@@ -1,0 +1,78 @@
+{
+ "id": "abo-B075QFF9FY",
+ "source": "abo",
+ "typeId": "bed",
+ "formId": "double",
+ "name": "Stone & Beam Chanton Upholstered Tufted King Sleigh Bed with Headboard",
+ "brand": "Stone & Beam",
+ "price": 81690,
+ "currency": "RUB",
+ "dims": {
+  "H": 1268,
+  "W": 1606,
+  "L": 2493
+ },
+ "colors": [
+  "бежевый",
+  "серый"
+ ],
+ "materials": [
+  "камень"
+ ],
+ "styleTags": [
+  "классика"
+ ],
+ "url": "https://www.amazon.com/dp/B075QFF9FY",
+ "model": {
+  "file": "models/abo-B075QFF9FY.glb",
+  "bytes": 230280,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.802741766,
+     0,
+     -1.27548039
+    ],
+    "max": [
+     0.8026510060500001,
+     1.267879865092,
+     1.2175195895730002
+    ],
+    "size": [
+     1.60539277205,
+     1.267879865092,
+     2.4929999795730002
+    ]
+   },
+   "tris": 29997,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2767800,
+  "bytes": 230280,
+  "srcTris": 84957,
+  "tris": 29997,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 801550,
+   "after": 60412,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0001,
+   1,
+   1.0001
+  ]
+ },
+ "image": {
+  "file": "images/abo-B075QFF9FY.jpg",
+  "bytes": 5548,
+  "mime": "image/jpeg"
+ }
+}

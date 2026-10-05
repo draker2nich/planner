@@ -1,0 +1,77 @@
+{
+ "id": "abo-B082JH6PRL",
+ "source": "abo",
+ "typeId": "chandelier",
+ "formId": "round",
+ "name": "Stone & Beam Traditional Globe Pendant Light with White Inner Shade & Rattan Outer Shade",
+ "brand": "Stone & Beam",
+ "price": 14290,
+ "currency": "RUB",
+ "dims": {
+  "H": 1955,
+  "DIA": 407
+ },
+ "colors": [
+  "бежевый"
+ ],
+ "materials": [
+  "ротанг"
+ ],
+ "styleTags": [
+  "современный",
+  "классика"
+ ],
+ "url": "https://www.amazon.com/dp/B082JH6PRL",
+ "model": {
+  "file": "models/abo-B082JH6PRL.glb",
+  "bytes": 372104,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.203389645,
+     -1.95499957,
+     -0.203510314
+    ],
+    "max": [
+     0.20305169672199996,
+     -9.979000070714505e-9,
+     0.203169689696
+    ],
+    "size": [
+     0.40644134172199997,
+     1.954999560021,
+     0.406680003696
+    ]
+   },
+   "tris": 29958,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 51328148,
+  "bytes": 372104,
+  "srcTris": 264960,
+  "tris": 29958,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 43048295,
+   "after": 130556,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   0.9998,
+   1.0018
+  ]
+ },
+ "image": {
+  "file": "images/abo-B082JH6PRL.jpg",
+  "bytes": 7630,
+  "mime": "image/jpeg"
+ }
+}

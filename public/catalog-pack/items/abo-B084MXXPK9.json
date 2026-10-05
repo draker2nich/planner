@@ -1,0 +1,79 @@
+{
+ "id": "abo-B084MXXPK9",
+ "source": "abo",
+ "typeId": "nightstand",
+ "formId": "rect",
+ "name": "Stone & Beam Modern Farmhouse Solid Wood Nightstand with 2 Drawers",
+ "brand": "Stone & Beam",
+ "price": 15190,
+ "currency": "RUB",
+ "dims": {
+  "H": 599,
+  "W": 650,
+  "D": 450
+ },
+ "colors": [
+  "бежевый"
+ ],
+ "materials": [
+  "дерево",
+  "камень"
+ ],
+ "styleTags": [
+  "современный",
+  "кантри"
+ ],
+ "url": "https://www.amazon.com/dp/B084MXXPK9",
+ "model": {
+  "file": "models/abo-B084MXXPK9.glb",
+  "bytes": 420424,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.325000018,
+     0,
+     -0.220395103
+    ],
+    "max": [
+     0.3250000385378,
+     0.5990173261068,
+     0.22960188419719998
+    ],
+    "size": [
+     0.6500000565378,
+     0.5990173261068,
+     0.4499969871972
+    ]
+   },
+   "tris": 19104,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 53300212,
+  "bytes": 420424,
+  "srcTris": 19104,
+  "tris": 19104,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 52808779,
+   "after": 320516,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9996,
+   0.9993,
+   1.0009
+  ]
+ },
+ "image": {
+  "file": "images/abo-B084MXXPK9.jpg",
+  "bytes": 8054,
+  "mime": "image/jpeg"
+ }
+}

@@ -1,0 +1,77 @@
+{
+ "id": "abo-B07PBZ3VDS",
+ "source": "abo",
+ "typeId": "bench",
+ "formId": "rect",
+ "name": "Rivet Ava Mid-Century Modern Leather Ottoman Bench",
+ "brand": "Rivet",
+ "price": 24590,
+ "currency": "RUB",
+ "dims": {
+  "H": 399,
+  "W": 1610,
+  "D": 653
+ },
+ "colors": [
+  "коричневый"
+ ],
+ "materials": [
+  "кожа"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07PBZ3VDS",
+ "model": {
+  "file": "models/abo-B07PBZ3VDS.glb",
+  "bytes": 239728,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.805000126,
+     0,
+     -0.326499999
+    ],
+    "max": [
+     0.8049999633532999,
+     0.39898677670599997,
+     0.3265214618895
+    ],
+    "size": [
+     1.6100000893533,
+     0.39898677670599997,
+     0.6530214608895
+    ]
+   },
+   "tris": 8376,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 67243560,
+  "bytes": 239728,
+  "srcTris": 8376,
+  "tris": 8376,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 67044409,
+   "after": 194128,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9998,
+   0.9994,
+   1.0007
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07PBZ3VDS.jpg",
+  "bytes": 3286,
+  "mime": "image/jpeg"
+ }
+}

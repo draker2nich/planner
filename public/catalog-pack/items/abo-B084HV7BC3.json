@@ -1,0 +1,78 @@
+{
+ "id": "abo-B084HV7BC3",
+ "source": "abo",
+ "typeId": "mirror",
+ "formId": "wall",
+ "name": "Rivet Modern Oval Hanging Mirror",
+ "brand": "Rivet",
+ "price": 6290,
+ "currency": "RUB",
+ "dims": {
+  "H": 991,
+  "W": 222,
+  "D": 32,
+  "E": 1200
+ },
+ "colors": [
+  "чёрный"
+ ],
+ "materials": [
+  "стекло"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B084HV7BC3",
+ "model": {
+  "file": "models/abo-B084HV7BC3.glb",
+  "bytes": 61184,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.111000001,
+     -0.495499969,
+     4.50550403e-10
+    ],
+    "max": [
+     0.11099656896199998,
+     0.4954999780537999,
+     0.0319989610799504
+    ],
+    "size": [
+     0.22199656996199998,
+     0.9909999470537999,
+     0.0319989606294
+    ]
+   },
+   "tris": 5016,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 16124748,
+  "bytes": 61184,
+  "srcTris": 5016,
+  "tris": 5016,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 15969545,
+   "after": 28652,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9989,
+   1.0004,
+   1.0079
+  ]
+ },
+ "image": {
+  "file": "images/abo-B084HV7BC3.jpg",
+  "bytes": 2183,
+  "mime": "image/jpeg"
+ }
+}

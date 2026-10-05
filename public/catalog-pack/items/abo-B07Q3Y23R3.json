@@ -1,0 +1,73 @@
+{
+ "id": "abo-B07Q3Y23R3",
+ "source": "abo",
+ "typeId": "sofa",
+ "formId": "straight",
+ "name": "Amazonbasics Adjustable Foam Floor Sofa",
+ "brand": "AmazonBasics",
+ "price": 44290,
+ "currency": "RUB",
+ "dims": {
+  "H": 778,
+  "W": 1122,
+  "D": 849
+ },
+ "colors": [
+  "синий"
+ ],
+ "materials": [],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B07Q3Y23R3",
+ "model": {
+  "file": "models/abo-B07Q3Y23R3.glb",
+  "bytes": 254400,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.56099999,
+     0.000046357487,
+     -0.436018884
+    ],
+    "max": [
+     0.5609999290132,
+     0.7779745196106,
+     0.4129288664784
+    ],
+    "size": [
+     1.1219999190132,
+     0.7779281621236,
+     0.8489477504784
+    ]
+   },
+   "tris": 30000,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 37024884,
+  "bytes": 254400,
+  "srcTris": 82760,
+  "tris": 30000,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 35181016,
+   "after": 95414,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9996,
+   1.0004,
+   1.0002
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07Q3Y23R3.jpg",
+  "bytes": 5083,
+  "mime": "image/jpeg"
+ }
+}

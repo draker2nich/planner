@@ -1,0 +1,78 @@
+{
+ "id": "abo-B07DBF1R71",
+ "source": "abo",
+ "typeId": "nightstand",
+ "formId": "rect",
+ "name": "Ravenna Home Priscilla Modern X-Frame End Table Nightstand",
+ "brand": "Ravenna Home",
+ "price": 13190,
+ "currency": "RUB",
+ "dims": {
+  "H": 623,
+  "W": 479,
+  "D": 402
+ },
+ "colors": [
+  "чёрный"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "современный",
+  "классика"
+ ],
+ "url": "https://www.amazon.com/dp/B07DBF1R71",
+ "model": {
+  "file": "models/abo-B07DBF1R71.glb",
+  "bytes": 119836,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.239500001,
+     0,
+     -0.199930966
+    ],
+    "max": [
+     0.23949087849480002,
+     0.6229999665579,
+     0.2020547903623
+    ],
+    "size": [
+     0.4789908794948,
+     0.6229999665579,
+     0.4019857563623
+    ]
+   },
+   "tris": 20542,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 758896,
+  "bytes": 119836,
+  "srcTris": 20542,
+  "tris": 20542,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 252103,
+   "after": 13278,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9994,
+   1.0001,
+   0.9998
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07DBF1R71.jpg",
+  "bytes": 6424,
+  "mime": "image/jpeg"
+ }
+}

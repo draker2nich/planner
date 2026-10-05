@@ -1,0 +1,78 @@
+{
+ "id": "abo-B07QJLWJMY",
+ "source": "abo",
+ "typeId": "desk",
+ "formId": "rect",
+ "name": "Ravenna Home Sullivan Modern Desk",
+ "brand": "Ravenna Home",
+ "price": 36590,
+ "currency": "RUB",
+ "dims": {
+  "H": 762,
+  "W": 1380,
+  "D": 807
+ },
+ "colors": [
+  "белый"
+ ],
+ "materials": [
+  "дерево",
+  "ЛДСП / МДФ"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07QJLWJMY",
+ "model": {
+  "file": "models/abo-B07QJLWJMY.glb",
+  "bytes": 162920,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.690267622,
+     0,
+     -0.399523437
+    ],
+    "max": [
+     0.6897325395460999,
+     0.7619777489681999,
+     0.4074350899859999
+    ],
+    "size": [
+     1.3800001615461,
+     0.7619777489681999,
+     0.8069585269859999
+    ]
+   },
+   "tris": 28234,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 20869884,
+  "bytes": 162920,
+  "srcTris": 28234,
+  "tris": 28234,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 20134734,
+   "after": 7350,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0003,
+   1.0002,
+   1.0005
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07QJLWJMY.jpg",
+  "bytes": 3919,
+  "mime": "image/jpeg"
+ }
+}

@@ -1,0 +1,77 @@
+{
+ "id": "abo-B075X61W35",
+ "source": "abo",
+ "typeId": "pouf",
+ "formId": "rect",
+ "name": "Stone & Beam Leila Ottoman",
+ "brand": "Stone & Beam",
+ "price": 15490,
+ "currency": "RUB",
+ "dims": {
+  "H": 483,
+  "W": 864,
+  "D": 584
+ },
+ "colors": [
+  "белый",
+  "бежевый"
+ ],
+ "materials": [
+  "ткань",
+  "камень"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B075X61W35",
+ "model": {
+  "file": "models/abo-B075X61W35.glb",
+  "bytes": 166760,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.431999981,
+     0,
+     -0.291999996
+    ],
+    "max": [
+     0.4319999936509001,
+     0.48302360787570003,
+     0.2920161011302
+    ],
+    "size": [
+     0.8639999746509001,
+     0.48302360787570003,
+     0.5840160971302
+    ]
+   },
+   "tris": 20446,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 39821300,
+  "bytes": 166760,
+  "srcTris": 20446,
+  "tris": 20446,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 39192234,
+   "after": 62378,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0005,
+   1.0008,
+   0.9997
+  ]
+ },
+ "image": {
+  "file": "images/abo-B075X61W35.jpg",
+  "bytes": 6032,
+  "mime": "image/jpeg"
+ }
+}

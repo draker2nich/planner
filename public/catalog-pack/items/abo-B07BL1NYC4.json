@@ -1,0 +1,78 @@
+{
+ "id": "abo-B07BL1NYC4",
+ "source": "abo",
+ "typeId": "dressing-table",
+ "formId": "rect",
+ "name": "AmazonBasics Classic Grand 3-Piece Mirror Table Vanity Set with Stool",
+ "brand": "AmazonBasics",
+ "price": 28290,
+ "currency": "RUB",
+ "dims": {
+  "H": 1310,
+  "W": 1369,
+  "D": 1115
+ },
+ "colors": [
+  "бежевый",
+  "коричневый"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "классика"
+ ],
+ "url": "https://www.amazon.com/dp/B07BL1NYC4",
+ "model": {
+  "file": "models/abo-B07BL1NYC4.glb",
+  "bytes": 246512,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.683678985,
+     0,
+     -0.556991637
+    ],
+    "max": [
+     0.6853210962603,
+     1.3100051439857001,
+     0.5579792525963
+    ],
+    "size": [
+     1.3690000812603,
+     1.3100051439857001,
+     1.1149708895963
+    ]
+   },
+   "tris": 27048,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 10492672,
+  "bytes": 246512,
+  "srcTris": 27048,
+  "tris": 27048,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 9784239,
+   "after": 97750,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0001,
+   1.0001,
+   1.0002
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07BL1NYC4.jpg",
+  "bytes": 8909,
+  "mime": "image/jpeg"
+ }
+}

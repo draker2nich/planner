@@ -1,0 +1,76 @@
+{
+ "id": "abo-B0742GG15D",
+ "source": "abo",
+ "typeId": "floor-lamp",
+ "formId": "round",
+ "name": "Rivet - Lámpara de pie con trípode, diseño minimalista, Antique Brass",
+ "brand": "Rivet",
+ "price": 18690,
+ "currency": "RUB",
+ "dims": {
+  "H": 1545,
+  "DIA": 460
+ },
+ "colors": [
+  "жёлтый"
+ ],
+ "materials": [
+  "металл"
+ ],
+ "styleTags": [
+  "классика"
+ ],
+ "url": "https://www.amazon.com.mx/dp/B0742GG15D",
+ "model": {
+  "file": "models/abo-B0742GG15D.glb",
+  "bytes": 205216,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.229203328,
+     0,
+     -0.255066991
+    ],
+    "max": [
+     0.23081683419139995,
+     1.5450000650228999,
+     0.20495317119139994
+    ],
+    "size": [
+     0.46002016219139996,
+     1.5450000650228999,
+     0.46002016219139996
+    ]
+   },
+   "tris": 29999,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 4,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 1554988,
+  "bytes": 205216,
+  "srcTris": 38198,
+  "tris": 29999,
+  "textures": {
+   "images": 4,
+   "resized": 4,
+   "before": 569052,
+   "after": 57204,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0235,
+   1,
+   0.9998
+  ]
+ },
+ "image": {
+  "file": "images/abo-B0742GG15D.jpg",
+  "bytes": 2862,
+  "mime": "image/jpeg"
+ }
+}

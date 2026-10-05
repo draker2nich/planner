@@ -1,0 +1,77 @@
+{
+ "id": "abo-B0836YQ7QX",
+ "source": "abo",
+ "typeId": "desk",
+ "formId": "rect",
+ "name": "Ravenna Home Solid Pine Writing Desk",
+ "brand": "Ravenna Home",
+ "price": 32090,
+ "currency": "RUB",
+ "dims": {
+  "H": 756,
+  "W": 1353,
+  "D": 574
+ },
+ "colors": [
+  "коричневый"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "классика"
+ ],
+ "url": "https://www.amazon.com/dp/B0836YQ7QX",
+ "model": {
+  "file": "models/abo-B0836YQ7QX.glb",
+  "bytes": 323556,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.676499963,
+     0,
+     -0.286962897
+    ],
+    "max": [
+     0.6764999889703,
+     0.7559886199314,
+     0.28700705149500005
+    ],
+    "size": [
+     1.3529999519703,
+     0.7559886199314,
+     0.573969948495
+    ]
+   },
+   "tris": 30001,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 36162524,
+  "bytes": 323556,
+  "srcTris": 32532,
+  "tris": 30001,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 35344508,
+   "after": 166300,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0003,
+   1.0005,
+   1.0001
+  ]
+ },
+ "image": {
+  "file": "images/abo-B0836YQ7QX.jpg",
+  "bytes": 6002,
+  "mime": "image/jpeg"
+ }
+}

@@ -1,0 +1,80 @@
+{
+ "id": "abo-B07HSLTLGP",
+ "source": "abo",
+ "typeId": "bookcase",
+ "formId": "rect",
+ "name": "Stone & Beam Industrial Bookcase",
+ "brand": "Stone & Beam",
+ "price": 27890,
+ "currency": "RUB",
+ "dims": {
+  "H": 1826,
+  "W": 1371,
+  "D": 379
+ },
+ "colors": [
+  "бежевый",
+  "чёрный",
+  "натуральное дерево"
+ ],
+ "materials": [
+  "дерево",
+  "камень"
+ ],
+ "styleTags": [
+  "лофт"
+ ],
+ "url": "https://www.amazon.com/dp/B07HSLTLGP",
+ "model": {
+  "file": "models/abo-B07HSLTLGP.glb",
+  "bytes": 183412,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.685500026,
+     0,
+     -0.189499989
+    ],
+    "max": [
+     0.6855324940969999,
+     1.825999981851,
+     0.1894538008
+    ],
+    "size": [
+     1.371032520097,
+     1.825999981851,
+     0.3789537898
+    ]
+   },
+   "tris": 6484,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2260752,
+  "bytes": 183412,
+  "srcTris": 6484,
+  "tris": 6484,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 2034842,
+   "after": 131676,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9999,
+   0.9999,
+   0.9987
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07HSLTLGP.jpg",
+  "bytes": 7333,
+  "mime": "image/jpeg"
+ }
+}

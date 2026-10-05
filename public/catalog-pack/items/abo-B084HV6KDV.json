@@ -1,0 +1,78 @@
+{
+ "id": "abo-B084HV6KDV",
+ "source": "abo",
+ "typeId": "mirror",
+ "formId": "wall",
+ "name": "Rivet Modern Round Cutout Hanging Mirror",
+ "brand": "Rivet",
+ "price": 10690,
+ "currency": "RUB",
+ "dims": {
+  "H": 565,
+  "W": 565,
+  "D": 32,
+  "E": 1200
+ },
+ "colors": [
+  "чёрный"
+ ],
+ "materials": [
+  "металл"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B084HV6KDV",
+ "model": {
+  "file": "models/abo-B084HV6KDV.glb",
+  "bytes": 87228,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.282499999,
+     -0.282499999,
+     0
+    ],
+    "max": [
+     0.2825000223184999,
+     0.2825000223184999,
+     0.032003907696
+    ],
+    "size": [
+     0.5650000213184999,
+     0.5650000213184999,
+     0.032003907696
+    ]
+   },
+   "tris": 12120,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 17066288,
+  "bytes": 87228,
+  "srcTris": 12120,
+  "tris": 12120,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 16766818,
+   "after": 22916,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9997,
+   0.9997,
+   1.0079
+  ]
+ },
+ "image": {
+  "file": "images/abo-B084HV6KDV.jpg",
+  "bytes": 5213,
+  "mime": "image/jpeg"
+ }
+}

@@ -1,0 +1,77 @@
+{
+ "id": "abo-B07B4G5YPR",
+ "source": "abo",
+ "typeId": "armchair",
+ "formId": "rect",
+ "name": "Stone & Beam Varon Modern Lounge Daybed Chaise",
+ "brand": "Stone & Beam",
+ "price": 58490,
+ "currency": "RUB",
+ "dims": {
+  "H": 883,
+  "W": 904,
+  "D": 1779
+ },
+ "colors": [
+  "синий"
+ ],
+ "materials": [
+  "камень"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07B4G5YPR",
+ "model": {
+  "file": "models/abo-B07B4G5YPR.glb",
+  "bytes": 262680,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.451999992,
+     0,
+     -0.917884946
+    ],
+    "max": [
+     0.45199655655,
+     0.883039030968,
+     0.8611151086419999
+    ],
+    "size": [
+     0.90399654855,
+     0.883039030968,
+     1.779000054642
+    ]
+   },
+   "tris": 9492,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 3291016,
+  "bytes": 262680,
+  "srcTris": 9492,
+  "tris": 9492,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 3050547,
+   "after": 203624,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9996,
+   1,
+   0.9998
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07B4G5YPR.jpg",
+  "bytes": 7902,
+  "mime": "image/jpeg"
+ }
+}

@@ -1,0 +1,73 @@
+{
+ "id": "abo-B07FM3CDYS",
+ "source": "abo",
+ "typeId": "nightstand",
+ "formId": "rect",
+ "name": "Artum Hill BE5-825 Kensington Nightstand",
+ "brand": "Artum Hill",
+ "price": 16790,
+ "currency": "RUB",
+ "dims": {
+  "H": 711,
+  "W": 686,
+  "D": 457
+ },
+ "colors": [
+  "серый"
+ ],
+ "materials": [],
+ "styleTags": [],
+ "url": "https://www.amazon.com.mx/dp/B07FM3CDYS",
+ "model": {
+  "file": "models/abo-B07FM3CDYS.glb",
+  "bytes": 533112,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.342999995,
+     0,
+     -0.228500009
+    ],
+    "max": [
+     0.3430023454168001,
+     0.7109999584392,
+     0.22848769547200004
+    ],
+    "size": [
+     0.6860023404168001,
+     0.7109999584392,
+     0.45698770447200004
+    ]
+   },
+   "tris": 21849,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 45223632,
+  "bytes": 533112,
+  "srcTris": 21849,
+  "tris": 21849,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 44415302,
+   "after": 398806,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0003,
+   0.9997,
+   0.9996
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07FM3CDYS.jpg",
+  "bytes": 6843,
+  "mime": "image/jpeg"
+ }
+}

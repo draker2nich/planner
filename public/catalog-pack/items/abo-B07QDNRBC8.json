@@ -1,0 +1,75 @@
+{
+ "id": "abo-B07QDNRBC8",
+ "source": "abo",
+ "typeId": "chair",
+ "formId": "rect",
+ "name": "Stone & Beam Leather Parsons Dining Chair",
+ "brand": "Stone & Beam",
+ "price": 11990,
+ "currency": "RUB",
+ "dims": {
+  "H": 991,
+  "W": 500,
+  "D": 633
+ },
+ "colors": [
+  "чёрный"
+ ],
+ "materials": [
+  "металл"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B07QDNRBC8",
+ "model": {
+  "file": "models/abo-B07QDNRBC8.glb",
+  "bytes": 300444,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.249871939,
+     0.0000470083687,
+     -0.339593828
+    ],
+    "max": [
+     0.2501108074388,
+     0.9909999886380999,
+     0.293399087737
+    ],
+    "size": [
+     0.4999827464388,
+     0.9909529802693999,
+     0.632992915737
+    ]
+   },
+   "tris": 30001,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 32001808,
+  "bytes": 300444,
+  "srcTris": 41308,
+  "tris": 30001,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 31039648,
+   "after": 141424,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0002,
+   0.9997,
+   0.9999
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07QDNRBC8.jpg",
+  "bytes": 6080,
+  "mime": "image/jpeg"
+ }
+}

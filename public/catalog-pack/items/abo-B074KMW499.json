@@ -1,0 +1,76 @@
+{
+ "id": "abo-B074KMW499",
+ "source": "abo",
+ "typeId": "tv-stand",
+ "formId": "rect",
+ "name": "Stone & Beam Glenwood Entertainment TV Console Media Stand",
+ "brand": "Stone & Beam",
+ "price": 27690,
+ "currency": "RUB",
+ "dims": {
+  "H": 578,
+  "W": 1541,
+  "D": 382
+ },
+ "colors": [
+  "коричневый",
+  "натуральное дерево"
+ ],
+ "materials": [
+  "камень"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B074KMW499",
+ "model": {
+  "file": "models/abo-B074KMW499.glb",
+  "bytes": 384148,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.770500004,
+     -1.10995375e-18,
+     -0.180605769
+    ],
+    "max": [
+     0.7704999992110001,
+     0.578004334965,
+     0.20137561493699999
+    ],
+    "size": [
+     1.541000003211,
+     0.578004334965,
+     0.381981383937
+    ]
+   },
+   "tris": 13048,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 4112444,
+  "bytes": 384148,
+  "srcTris": 13048,
+  "tris": 13048,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 3755931,
+   "after": 311764,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   0.9998,
+   0.9998
+  ]
+ },
+ "image": {
+  "file": "images/abo-B074KMW499.jpg",
+  "bytes": 8258,
+  "mime": "image/jpeg"
+ }
+}

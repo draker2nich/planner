@@ -1,0 +1,77 @@
+{
+ "id": "abo-B073P1CJXL",
+ "source": "abo",
+ "typeId": "picture",
+ "formId": "wall",
+ "name": "Rivet Paradise Palms Palm Tree Wall Art in Silver Frame",
+ "brand": "Rivet",
+ "price": 2690,
+ "currency": "RUB",
+ "dims": {
+  "H": 559,
+  "W": 454,
+  "D": 29,
+  "E": 1300
+ },
+ "colors": [
+  "серебристый",
+  "разноцветный"
+ ],
+ "materials": [],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B073P1CJXL",
+ "model": {
+  "file": "models/abo-B073P1CJXL.glb",
+  "bytes": 119984,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.226999983,
+     -0.279500008,
+     0
+    ],
+    "max": [
+     0.22701050626520006,
+     0.2794999803986001,
+     0.029002624070000003
+    ],
+    "size": [
+     0.45401048926520005,
+     0.5589999883986001,
+     0.029002624070000003
+    ]
+   },
+   "tris": 432,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 737832,
+  "bytes": 119984,
+  "srcTris": 432,
+  "tris": 432,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 721214,
+   "after": 113394,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0008,
+   0.9998,
+   1.0061
+  ]
+ },
+ "image": {
+  "file": "images/abo-B073P1CJXL.jpg",
+  "bytes": 11181,
+  "mime": "image/jpeg"
+ }
+}

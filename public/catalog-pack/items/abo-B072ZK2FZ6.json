@@ -1,0 +1,79 @@
+{
+ "id": "abo-B072ZK2FZ6",
+ "source": "abo",
+ "typeId": "coffee-table",
+ "formId": "rect",
+ "name": "Rivet Industrial Modern Wood and Metal Coffee Table",
+ "brand": "Rivet",
+ "price": 16290,
+ "currency": "RUB",
+ "dims": {
+  "H": 576,
+  "W": 804,
+  "D": 361
+ },
+ "colors": [
+  "коричневый"
+ ],
+ "materials": [
+  "дерево",
+  "металл"
+ ],
+ "styleTags": [
+  "современный",
+  "лофт"
+ ],
+ "url": "https://www.amazon.com/dp/B072ZK2FZ6",
+ "model": {
+  "file": "models/abo-B072ZK2FZ6.glb",
+  "bytes": 197048,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.40199998,
+     0,
+     -0.179727241
+    ],
+    "max": [
+     0.40199996034589996,
+     0.5759962949301,
+     0.1812703516988
+    ],
+    "size": [
+     0.8039999403458999,
+     0.5759962949301,
+     0.3609975926988
+    ]
+   },
+   "tris": 3288,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2969808,
+  "bytes": 197048,
+  "srcTris": 3288,
+  "tris": 3288,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 2868487,
+   "after": 172070,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0004,
+   0.9995,
+   0.9991
+  ]
+ },
+ "image": {
+  "file": "images/abo-B072ZK2FZ6.jpg",
+  "bytes": 6228,
+  "mime": "image/jpeg"
+ }
+}

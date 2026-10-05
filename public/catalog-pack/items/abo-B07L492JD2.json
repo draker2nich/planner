@@ -1,0 +1,75 @@
+{
+ "id": "abo-B07L492JD2",
+ "source": "abo",
+ "typeId": "island",
+ "formId": "rect",
+ "name": "Civet Home Rolling Kitchen Cart",
+ "brand": "Civet Home",
+ "price": 30790,
+ "currency": "RUB",
+ "dims": {
+  "H": 879,
+  "W": 660,
+  "D": 456
+ },
+ "colors": [
+  "коричневый"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B07L492JD2",
+ "model": {
+  "file": "models/abo-B07L492JD2.glb",
+  "bytes": 217196,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.329999983,
+     0,
+     -0.228000015
+    ],
+    "max": [
+     0.3299877029934001,
+     0.8789999398122,
+     0.22799830572660001
+    ],
+    "size": [
+     0.6599876859934001,
+     0.8789999398122,
+     0.4559983207266
+    ]
+   },
+   "tris": 24420,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 12870716,
+  "bytes": 217196,
+  "srcTris": 24420,
+  "tris": 24420,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 11932193,
+   "after": 59258,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9994,
+   1.0002,
+   1.0002
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07L492JD2.jpg",
+  "bytes": 5669,
+  "mime": "image/jpeg"
+ }
+}

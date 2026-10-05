@@ -1,0 +1,76 @@
+{
+ "id": "abo-B07DBHC39X",
+ "source": "abo",
+ "typeId": "chandelier",
+ "formId": "round",
+ "name": "Ravenna Home Classic Linen Fabric Flushmount Ceiling Pendant Light Fixture with 2 LED Light Bulbs",
+ "brand": "Ravenna Home",
+ "price": 11890,
+ "currency": "RUB",
+ "dims": {
+  "H": 229,
+  "DIA": 393
+ },
+ "colors": [
+  "серебристый"
+ ],
+ "materials": [
+  "металл"
+ ],
+ "styleTags": [
+  "классика"
+ ],
+ "url": "https://www.amazon.com/dp/B07DBHC39X",
+ "model": {
+  "file": "models/abo-B07DBHC39X.glb",
+  "bytes": 81972,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.196500003,
+     -0.229000002,
+     -0.196500003
+    ],
+    "max": [
+     0.19650000626130001,
+     -0.00000787061939999667,
+     0.19650000626130001
+    ],
+    "size": [
+     0.3930000092613,
+     0.2289921313806,
+     0.3930000092613
+    ]
+   },
+   "tris": 8640,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 4,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 837944,
+  "bytes": 81972,
+  "srcTris": 8640,
+  "tris": 8640,
+  "textures": {
+   "images": 4,
+   "resized": 4,
+   "before": 631603,
+   "after": 34024,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9995,
+   1.0012,
+   0.9995
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07DBHC39X.jpg",
+  "bytes": 1963,
+  "mime": "image/jpeg"
+ }
+}

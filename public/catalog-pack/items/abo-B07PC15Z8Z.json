@@ -1,0 +1,77 @@
+{
+ "id": "abo-B07PC15Z8Z",
+ "source": "abo",
+ "typeId": "pouf",
+ "formId": "rect",
+ "name": "Rivet Andrews Contemporary Ottoman",
+ "brand": "Rivet",
+ "price": 17290,
+ "currency": "RUB",
+ "dims": {
+  "H": 450,
+  "W": 749,
+  "D": 549
+ },
+ "colors": [
+  "серый"
+ ],
+ "materials": [
+  "кожа"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07PC15Z8Z",
+ "model": {
+  "file": "models/abo-B07PC15Z8Z.glb",
+  "bytes": 412384,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.372989148,
+     0,
+     -0.272754431
+    ],
+    "max": [
+     0.37601086274730006,
+     0.4500034856733,
+     0.2762287911848
+    ],
+    "size": [
+     0.7490000107473,
+     0.4500034856733,
+     0.5489832221848
+    ]
+   },
+   "tris": 12410,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 53355704,
+  "bytes": 412384,
+  "srcTris": 12410,
+  "tris": 12410,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 53019609,
+   "after": 333598,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9996,
+   1.0009,
+   1.0007
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07PC15Z8Z.jpg",
+  "bytes": 4552,
+  "mime": "image/jpeg"
+ }
+}

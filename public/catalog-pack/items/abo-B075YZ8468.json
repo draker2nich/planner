@@ -1,0 +1,77 @@
+{
+ "id": "abo-B075YZ8468",
+ "source": "abo",
+ "typeId": "nightstand",
+ "formId": "rect",
+ "name": "Rivet Eastport Industrial Wood Nightstand Table",
+ "brand": "Rivet",
+ "price": 18890,
+ "currency": "RUB",
+ "dims": {
+  "H": 1294,
+  "W": 901,
+  "D": 524
+ },
+ "colors": [
+  "коричневый"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "лофт"
+ ],
+ "url": "https://www.amazon.com/dp/B075YZ8468",
+ "model": {
+  "file": "models/abo-B075YZ8468.glb",
+  "bytes": 649380,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.450441629,
+     0,
+     -0.261999995
+    ],
+    "max": [
+     0.450532486426,
+     1.294000081794,
+     0.26198197061200007
+    ],
+    "size": [
+     0.900974115426,
+     1.294000081794,
+     0.5239819656120001
+    ]
+   },
+   "tris": 29580,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 4228540,
+  "bytes": 649380,
+  "srcTris": 29580,
+  "tris": 29580,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 3384001,
+   "after": 482264,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9997,
+   0.9996,
+   0.9993
+  ]
+ },
+ "image": {
+  "file": "images/abo-B075YZ8468.jpg",
+  "bytes": 12696,
+  "mime": "image/jpeg"
+ }
+}

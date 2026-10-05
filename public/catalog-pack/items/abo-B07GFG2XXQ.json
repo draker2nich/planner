@@ -1,0 +1,77 @@
+{
+ "id": "abo-B07GFG2XXQ",
+ "source": "abo",
+ "typeId": "bed",
+ "formId": "double",
+ "name": "Movian - Cadre de lit double 4 tiroirs Belaya Modern, 194,4 x 144,8 x 39,4, Effet Chêne",
+ "brand": "Movian",
+ "price": 61990,
+ "currency": "RUB",
+ "dims": {
+  "H": 490,
+  "W": 1448,
+  "L": 1944
+ },
+ "colors": [
+  "натуральное дерево"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.fr/dp/B07GFG2XXQ",
+ "model": {
+  "file": "models/abo-B07GFG2XXQ.glb",
+  "bytes": 262136,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.723999977,
+     -1.49011612e-8,
+     -0.971999943
+    ],
+    "max": [
+     0.7240029265520002,
+     0.48994540743483883,
+     0.9720000216720001
+    ],
+    "size": [
+     1.4480029035520001,
+     0.489945422336,
+     1.943999964672
+    ]
+   },
+   "tris": 23620,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 25568112,
+  "bytes": 262136,
+  "srcTris": 23620,
+  "tris": 23620,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 24532667,
+   "after": 114692,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0001,
+   0.9994,
+   1.0001
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07GFG2XXQ.jpg",
+  "bytes": 4722,
+  "mime": "image/jpeg"
+ }
+}

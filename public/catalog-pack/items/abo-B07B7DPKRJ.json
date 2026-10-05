@@ -1,0 +1,79 @@
+{
+ "id": "abo-B07B7DPKRJ",
+ "source": "abo",
+ "typeId": "coffee-table",
+ "formId": "rect",
+ "name": "Rivet Mid-Century Modern Wood Media TV Console Coffee Table",
+ "brand": "Rivet",
+ "price": 22890,
+ "currency": "RUB",
+ "dims": {
+  "H": 464,
+  "W": 1119,
+  "D": 490
+ },
+ "colors": [
+  "чёрный",
+  "коричневый",
+  "натуральное дерево"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07B7DPKRJ",
+ "model": {
+  "file": "models/abo-B07B7DPKRJ.glb",
+  "bytes": 91644,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.553398073,
+     0,
+     -0.254959613
+    ],
+    "max": [
+     0.5656018893511999,
+     0.4639789259752,
+     0.23504256791360006
+    ],
+    "size": [
+     1.1189999623512,
+     0.4639789259752,
+     0.49000218091360004
+    ]
+   },
+   "tris": 14472,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2311876,
+  "bytes": 91644,
+  "srcTris": 14472,
+  "tris": 14472,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 1953304,
+   "after": 21882,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9997,
+   0.9998,
+   1.001
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07B7DPKRJ.jpg",
+  "bytes": 5991,
+  "mime": "image/jpeg"
+ }
+}

@@ -1,0 +1,79 @@
+{
+ "id": "abo-B071LD87KZ",
+ "source": "abo",
+ "typeId": "chandelier",
+ "formId": "round",
+ "name": "Rivet Glass Mid Century Modern 3 Pendant Chandelier Fixture With 3 Vintage Light Bulbs",
+ "brand": "Rivet",
+ "price": 22190,
+ "currency": "RUB",
+ "dims": {
+  "H": 1410,
+  "DIA": 608
+ },
+ "colors": [
+  "чёрный",
+  "коричневый"
+ ],
+ "materials": [
+  "металл",
+  "стекло"
+ ],
+ "styleTags": [
+  "современный",
+  "ретро"
+ ],
+ "url": "https://www.amazon.com/dp/B071LD87KZ",
+ "model": {
+  "file": "models/abo-B071LD87KZ.glb",
+  "bytes": 247128,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.304031074,
+     -1.40981364,
+     -0.30425778
+    ],
+    "max": [
+     0.30333417045359995,
+     1.8243599964051782e-8,
+     0.30327957135200007
+    ],
+    "size": [
+     0.6073652444536,
+     1.4098136582436,
+     0.607537351352
+    ]
+   },
+   "tris": 30033,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 31191896,
+  "bytes": 247128,
+  "srcTris": 868256,
+  "tris": 30033,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 6134380,
+   "after": 49142,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9992,
+   0.9998,
+   1.0052
+  ]
+ },
+ "image": {
+  "file": "images/abo-B071LD87KZ.jpg",
+  "bytes": 5232,
+  "mime": "image/jpeg"
+ }
+}

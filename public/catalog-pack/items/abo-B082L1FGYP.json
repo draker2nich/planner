@@ -1,0 +1,80 @@
+{
+ "id": "abo-B082L1FGYP",
+ "source": "abo",
+ "typeId": "pedestal",
+ "formId": "rect",
+ "name": "Stone & Beam Classic 2-Drawer Lateral File Cabinet",
+ "brand": "Stone & Beam",
+ "price": 20290,
+ "currency": "RUB",
+ "dims": {
+  "H": 762,
+  "W": 763,
+  "D": 503
+ },
+ "colors": [
+  "бежевый",
+  "натуральное дерево"
+ ],
+ "materials": [
+  "дерево",
+  "металл"
+ ],
+ "styleTags": [
+  "классика",
+  "кантри"
+ ],
+ "url": "https://www.amazon.com/dp/B082L1FGYP",
+ "model": {
+  "file": "models/abo-B082L1FGYP.glb",
+  "bytes": 466308,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.381499976,
+     0,
+     -0.254803061
+    ],
+    "max": [
+     0.38149995373750006,
+     0.762021903825,
+     0.24818169400000006
+    ],
+    "size": [
+     0.7629999297375001,
+     0.762021903825,
+     0.5029847550000001
+    ]
+   },
+   "tris": 19912,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 43565244,
+  "bytes": 466308,
+  "srcTris": 19912,
+  "tris": 19912,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 43038245,
+   "after": 350474,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0002,
+   1.0004,
+   0.9997
+  ]
+ },
+ "image": {
+  "file": "images/abo-B082L1FGYP.jpg",
+  "bytes": 7657,
+  "mime": "image/jpeg"
+ }
+}

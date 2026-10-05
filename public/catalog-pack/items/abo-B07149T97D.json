@@ -1,0 +1,77 @@
+{
+ "id": "abo-B07149T97D",
+ "source": "abo",
+ "typeId": "chandelier",
+ "formId": "round",
+ "name": "Stone & Beam Industrial Farmhouse Indoor Pendant Ceiling Light with Bulb",
+ "brand": "Stone & Beam",
+ "price": 10290,
+ "currency": "RUB",
+ "dims": {
+  "H": 849,
+  "DIA": 341
+ },
+ "colors": [
+  "чёрный"
+ ],
+ "materials": [
+  "металл"
+ ],
+ "styleTags": [
+  "лофт",
+  "кантри"
+ ],
+ "url": "https://www.amazon.com/dp/B07149T97D",
+ "model": {
+  "file": "models/abo-B07149T97D.glb",
+  "bytes": 179484,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.17049998,
+     -0.848999977,
+     -0.170499966
+    ],
+    "max": [
+     0.170488830666,
+     -2.4850900004480536e-8,
+     0.170488844666
+    ],
+    "size": [
+     0.340988810666,
+     0.8489999521491,
+     0.340988810666
+    ]
+   },
+   "tris": 26100,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 4,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2536332,
+  "bytes": 179484,
+  "srcTris": 26100,
+  "tris": 26100,
+  "textures": {
+   "images": 4,
+   "resized": 4,
+   "before": 1860020,
+   "after": 38996,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9999,
+   1.0005,
+   0.9999
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07149T97D.jpg",
+  "bytes": 4587,
+  "mime": "image/jpeg"
+ }
+}

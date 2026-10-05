@@ -1,0 +1,75 @@
+{
+ "id": "abo-B07H8SSY2P",
+ "source": "abo",
+ "typeId": "table",
+ "formId": "rect",
+ "name": "Movian Kuban Dining Table",
+ "brand": "Movian",
+ "price": 51890,
+ "currency": "RUB",
+ "dims": {
+  "H": 899,
+  "W": 1778,
+  "D": 795
+ },
+ "colors": [
+  "натуральное дерево"
+ ],
+ "materials": [
+  "металл"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.co.uk/dp/B07H8SSY2P",
+ "model": {
+  "file": "models/abo-B07H8SSY2P.glb",
+  "bytes": 119720,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.889002204,
+     0,
+     -0.397503674
+    ],
+    "max": [
+     0.888997750407,
+     0.899038736636,
+     0.39745754592500004
+    ],
+    "size": [
+     1.777999954407,
+     0.899038736636,
+     0.794961219925
+    ]
+   },
+   "tris": 1392,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 1135108,
+  "bytes": 119720,
+  "srcTris": 1392,
+  "tris": 1392,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 1090292,
+   "after": 107352,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9999,
+   1,
+   0.9996
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07H8SSY2P.jpg",
+  "bytes": 3600,
+  "mime": "image/jpeg"
+ }
+}

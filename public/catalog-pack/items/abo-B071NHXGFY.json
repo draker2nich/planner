@@ -1,0 +1,79 @@
+{
+ "id": "abo-B071NHXGFY",
+ "source": "abo",
+ "typeId": "mirror",
+ "formId": "wall",
+ "name": "Rivet Round Glass Hanging Wall Mirror",
+ "brand": "Rivet",
+ "price": 9290,
+ "currency": "RUB",
+ "dims": {
+  "H": 713,
+  "W": 594,
+  "D": 20,
+  "E": 1200
+ },
+ "colors": [
+  "серебристый",
+  "прозрачный"
+ ],
+ "materials": [
+  "стекло"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B071NHXGFY",
+ "model": {
+  "file": "models/abo-B071NHXGFY.glb",
+  "bytes": 69820,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.296999991,
+     -0.3565,
+     0
+    ],
+    "max": [
+     0.29701434494289997,
+     0.35649999016429995,
+     0.020019532165999998
+    ],
+    "size": [
+     0.5940143359429,
+     0.7129999901642999,
+     0.020019532165999998
+    ]
+   },
+   "tris": 10240,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 503892,
+  "bytes": 69820,
+  "srcTris": 10240,
+  "tris": 10240,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 264930,
+   "after": 15546,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9994,
+   1,
+   0.9806
+  ]
+ },
+ "image": {
+  "file": "images/abo-B071NHXGFY.jpg",
+  "bytes": 4929,
+  "mime": "image/jpeg"
+ }
+}

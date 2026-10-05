@@ -1,0 +1,76 @@
+{
+ "id": "abo-B0714QGLVP",
+ "source": "abo",
+ "typeId": "pouf",
+ "formId": "round",
+ "name": "Rivet Madison Modern Round Lift-Top Storage Tray Ottoman Pouf",
+ "brand": "Rivet",
+ "price": 11190,
+ "currency": "RUB",
+ "dims": {
+  "H": 430,
+  "DIA": 520
+ },
+ "colors": [
+  "серый"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B0714QGLVP",
+ "model": {
+  "file": "models/abo-B0714QGLVP.glb",
+  "bytes": 567500,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.25999999,
+     0,
+     -0.25999999
+    ],
+    "max": [
+     0.2600000195153,
+     0.42998474814770005,
+     0.2600000195153
+    ],
+    "size": [
+     0.5200000095153,
+     0.42998474814770005,
+     0.5200000095153
+    ]
+   },
+   "tris": 10376,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 3920736,
+  "bytes": 567500,
+  "srcTris": 10376,
+  "tris": 10376,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 3655601,
+   "after": 503976,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0001,
+   1.0007,
+   1.0001
+  ]
+ },
+ "image": {
+  "file": "images/abo-B0714QGLVP.jpg",
+  "bytes": 19594,
+  "mime": "image/jpeg"
+ }
+}

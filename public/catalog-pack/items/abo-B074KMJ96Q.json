@@ -1,0 +1,79 @@
+{
+ "id": "abo-B074KMJ96Q",
+ "source": "abo",
+ "typeId": "coffee-table",
+ "formId": "rect",
+ "name": "Stone & Beam Glenwood Storage Coffee Table",
+ "brand": "Stone & Beam",
+ "price": 22890,
+ "currency": "RUB",
+ "dims": {
+  "H": 361,
+  "W": 1167,
+  "D": 719
+ },
+ "colors": [
+  "коричневый",
+  "натуральное дерево"
+ ],
+ "materials": [
+  "дерево",
+  "камень"
+ ],
+ "styleTags": [
+  "лофт"
+ ],
+ "url": "https://www.amazon.com/dp/B074KMJ96Q",
+ "model": {
+  "file": "models/abo-B074KMJ96Q.glb",
+  "bytes": 287608,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.583305359,
+     0,
+     -0.35069713
+    ],
+    "max": [
+     0.5836947503911,
+     0.3610057104556,
+     0.36832253087980005
+    ],
+    "size": [
+     1.1670001093911,
+     0.3610057104556,
+     0.7190196608798001
+    ]
+   },
+   "tris": 23746,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2816120,
+  "bytes": 287608,
+  "srcTris": 23746,
+  "tris": 23746,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 2182826,
+   "after": 163630,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0003,
+   0.9989,
+   0.9999
+  ]
+ },
+ "image": {
+  "file": "images/abo-B074KMJ96Q.jpg",
+  "bytes": 7757,
+  "mime": "image/jpeg"
+ }
+}

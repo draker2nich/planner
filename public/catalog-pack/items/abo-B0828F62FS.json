@@ -1,0 +1,74 @@
+{
+ "id": "abo-B0828F62FS",
+ "source": "abo",
+ "typeId": "ceiling-light",
+ "formId": "round",
+ "name": "Ravenna Home Single-Light Flush-Mount Ceiling Light with Frosted Glass Shade",
+ "brand": "Ravenna Home",
+ "price": 8190,
+ "currency": "RUB",
+ "dims": {
+  "H": 135,
+  "DIA": 280
+ },
+ "colors": [
+  "серебристый"
+ ],
+ "materials": [
+  "стекло"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B0828F62FS",
+ "model": {
+  "file": "models/abo-B0828F62FS.glb",
+  "bytes": 179300,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.140000001,
+     -0.135000005,
+     -0.140000001
+    ],
+    "max": [
+     0.13999998597629995,
+     9.043038999845265e-7,
+     0.13999998597629995
+    ],
+    "size": [
+     0.27999998697629996,
+     0.1350009093039,
+     0.27999998697629996
+    ]
+   },
+   "tris": 29998,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 22422508,
+  "bytes": 179300,
+  "srcTris": 39260,
+  "tris": 29998,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 21519931,
+   "after": 28176,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0023,
+   1.0018,
+   0.9996
+  ]
+ },
+ "image": {
+  "file": "images/abo-B0828F62FS.jpg",
+  "bytes": 2765,
+  "mime": "image/jpeg"
+ }
+}

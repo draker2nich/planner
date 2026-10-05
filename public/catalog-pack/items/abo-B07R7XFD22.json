@@ -1,0 +1,75 @@
+{
+ "id": "abo-B07R7XFD22",
+ "source": "abo",
+ "typeId": "bed",
+ "formId": "king",
+ "name": "AmazonBasics Foldable",
+ "brand": "AmazonBasics",
+ "price": 40490,
+ "currency": "RUB",
+ "dims": {
+  "H": 559,
+  "W": 1930,
+  "L": 2032
+ },
+ "colors": [
+  "чёрный"
+ ],
+ "materials": [
+  "металл"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B07R7XFD22",
+ "model": {
+  "file": "models/abo-B07R7XFD22.glb",
+  "bytes": 296864,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.964999974,
+     1.49011612e-8,
+     -1.01600027
+    ],
+    "max": [
+     0.965046541488,
+     0.5590077679571612,
+     1.015999734064
+    ],
+    "size": [
+     1.930046515488,
+     0.559007753056,
+     2.032000004064
+    ]
+   },
+   "tris": 30000,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 9903000,
+  "bytes": 296864,
+  "srcTris": 38825,
+  "tris": 30000,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 7763079,
+   "after": 52522,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9998,
+   1.0004,
+   1
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07R7XFD22.jpg",
+  "bytes": 7680,
+  "mime": "image/jpeg"
+ }
+}

@@ -1,0 +1,71 @@
+{
+ "id": "abo-B07R3CWL3V",
+ "source": "abo",
+ "typeId": "armchair",
+ "formId": "rect",
+ "name": "AmazonBasics",
+ "brand": "AmazonBasics",
+ "price": 22590,
+ "currency": "RUB",
+ "dims": {
+  "H": 580,
+  "W": 820,
+  "D": 780
+ },
+ "colors": [],
+ "materials": [],
+ "styleTags": [],
+ "url": "https://www.amazon.it/dp/B07R3CWL3V",
+ "model": {
+  "file": "models/abo-B07R3CWL3V.glb",
+  "bytes": 342760,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.409999967,
+     0,
+     -0.389999986
+    ],
+    "max": [
+     0.40999998304,
+     0.58000118544,
+     0.39000851192
+    ],
+    "size": [
+     0.81999995004,
+     0.58000118544,
+     0.78000849792
+    ]
+   },
+   "tris": 26778,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 41378044,
+  "bytes": 342760,
+  "srcTris": 26778,
+  "tris": 26778,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 40588972,
+   "after": 199908,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   1,
+   1
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07R3CWL3V.jpg",
+  "bytes": 2536,
+  "mime": "image/jpeg"
+ }
+}

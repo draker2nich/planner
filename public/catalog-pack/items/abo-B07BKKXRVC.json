@@ -1,0 +1,79 @@
+{
+ "id": "abo-B07BKKXRVC",
+ "source": "abo",
+ "typeId": "sofa",
+ "formId": "straight",
+ "name": "Rivet Aiden Tufted Mid-Century Modern Velvet Bench Seat Sofa Couch",
+ "brand": "Rivet",
+ "price": 104190,
+ "currency": "RUB",
+ "dims": {
+  "H": 769,
+  "W": 2199,
+  "D": 918
+ },
+ "colors": [
+  "зелёный"
+ ],
+ "materials": [
+  "велюр",
+  "ткань"
+ ],
+ "styleTags": [
+  "современный",
+  "классика"
+ ],
+ "url": "https://www.amazon.com/dp/B07BKKXRVC",
+ "model": {
+  "file": "models/abo-B07BKKXRVC.glb",
+  "bytes": 367376,
+  "info": {
+   "bbox": {
+    "min": [
+     -1.09929454,
+     0.0000301975415,
+     -0.448513061
+    ],
+    "max": [
+     1.0994564546660002,
+     0.7689152886995,
+     0.469344355378
+    ],
+    "size": [
+     2.198750994666,
+     0.768885091158,
+     0.917857416378
+    ]
+   },
+   "tris": 29962,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 89685328,
+  "bytes": 367376,
+  "srcTris": 979184,
+  "tris": 29962,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 61820895,
+   "after": 198674,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0001,
+   1,
+   0.9997
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07BKKXRVC.jpg",
+  "bytes": 5352,
+  "mime": "image/jpeg"
+ }
+}

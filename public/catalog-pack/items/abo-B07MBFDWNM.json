@@ -1,0 +1,72 @@
+{
+ "id": "abo-B07MBFDWNM",
+ "source": "abo",
+ "typeId": "floor-lamp",
+ "formId": "round",
+ "name": "Ravenna Home Round Base Floor Lamp with LED Light Bulb",
+ "brand": "Ravenna Home",
+ "price": 10090,
+ "currency": "RUB",
+ "dims": {
+  "H": 1462,
+  "DIA": 286
+ },
+ "colors": [],
+ "materials": [
+  "ткань"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B07MBFDWNM",
+ "model": {
+  "file": "models/abo-B07MBFDWNM.glb",
+  "bytes": 110028,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.142931357,
+     0,
+     -0.143462881
+    ],
+    "max": [
+     0.1430791537245,
+     1.4620000615287,
+     0.14254762972450002
+    ],
+    "size": [
+     0.2860105107245,
+     1.4620000615287,
+     0.2860105107245
+    ]
+   },
+   "tris": 14738,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 4,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 14754780,
+  "bytes": 110028,
+  "srcTris": 14738,
+  "tris": 14738,
+  "textures": {
+   "images": 4,
+   "resized": 4,
+   "before": 14387360,
+   "after": 30184,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9986,
+   0.9998,
+   0.9986
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07MBFDWNM.jpg",
+  "bytes": 2011,
+  "mime": "image/jpeg"
+ }
+}

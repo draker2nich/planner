@@ -1,0 +1,76 @@
+{
+ "id": "abo-B07DBJ965S",
+ "source": "abo",
+ "typeId": "chandelier",
+ "formId": "round",
+ "name": "Ravenna Home Open Round Ceiling Pendant Chandelier with 4 LED Light Bulbs",
+ "brand": "Ravenna Home",
+ "price": 15990,
+ "currency": "RUB",
+ "dims": {
+  "H": 1820,
+  "DIA": 503
+ },
+ "colors": [
+  "чёрный"
+ ],
+ "materials": [
+  "металл"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07DBJ965S",
+ "model": {
+  "file": "models/abo-B07DBJ965S.glb",
+  "bytes": 206800,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.25423488,
+     -1.81999993,
+     -0.251777738
+    ],
+    "max": [
+     0.248784085808,
+     7.462999995766495e-9,
+     0.251241227808
+    ],
+    "size": [
+     0.503018965808,
+     1.819999937463,
+     0.503018965808
+    ]
+   },
+   "tris": 29997,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 15349180,
+  "bytes": 206800,
+  "srcTris": 39602,
+  "tris": 29997,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 14350809,
+   "after": 34608,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9998,
+   0.9997,
+   0.9998
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07DBJ965S.jpg",
+  "bytes": 7881,
+  "mime": "image/jpeg"
+ }
+}

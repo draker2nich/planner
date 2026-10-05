@@ -1,0 +1,77 @@
+{
+ "id": "abo-B075X4QMX3",
+ "source": "abo",
+ "typeId": "sofa",
+ "formId": "straight",
+ "name": "Stone & Beam Westport Modern Nailhead Upholstered Sofa",
+ "brand": "Stone & Beam",
+ "price": 104890,
+ "currency": "RUB",
+ "dims": {
+  "H": 911,
+  "W": 2198,
+  "D": 902
+ },
+ "colors": [
+  "белый"
+ ],
+ "materials": [
+  "ткань"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B075X4QMX3",
+ "model": {
+  "file": "models/abo-B075X4QMX3.glb",
+  "bytes": 289628,
+  "info": {
+   "bbox": {
+    "min": [
+     -1.09977221,
+     0,
+     -0.44568187
+    ],
+    "max": [
+     1.0982278043289997,
+     0.9109699137699999,
+     0.4562990917489999
+    ],
+    "size": [
+     2.1980000143289997,
+     0.9109699137699999,
+     0.9019809617489999
+    ]
+   },
+   "tris": 29998,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 45717944,
+  "bytes": 289628,
+  "srcTris": 49850,
+  "tris": 29998,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 44537158,
+   "after": 118822,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9998,
+   0.9995,
+   1.0005
+  ]
+ },
+ "image": {
+  "file": "images/abo-B075X4QMX3.jpg",
+  "bytes": 5691,
+  "mime": "image/jpeg"
+ }
+}

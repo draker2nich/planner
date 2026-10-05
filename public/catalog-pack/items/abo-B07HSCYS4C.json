@@ -1,0 +1,75 @@
+{
+ "id": "abo-B07HSCYS4C",
+ "source": "abo",
+ "typeId": "desk",
+ "formId": "rect",
+ "name": "Rivet Modern 3-Drawer Desk",
+ "brand": "Rivet",
+ "price": 27790,
+ "currency": "RUB",
+ "dims": {
+  "H": 762,
+  "W": 1313,
+  "D": 589
+ },
+ "colors": [
+  "белый"
+ ],
+ "materials": [],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07HSCYS4C",
+ "model": {
+  "file": "models/abo-B07HSCYS4C.glb",
+  "bytes": 47696,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.656499982,
+     0,
+     -0.285151005
+    ],
+    "max": [
+     0.6565000661501,
+     0.7620096720876001,
+     0.3038276529903
+    ],
+    "size": [
+     1.3130000481501,
+     0.7620096720876001,
+     0.5889786579903
+    ]
+   },
+   "tris": 4234,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 709032,
+  "bytes": 47696,
+  "srcTris": 4234,
+  "tris": 4234,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 566022,
+   "after": 13352,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9998,
+   1.0005,
+   1.0006
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07HSCYS4C.jpg",
+  "bytes": 3891,
+  "mime": "image/jpeg"
+ }
+}

@@ -1,0 +1,78 @@
+{
+ "id": "abo-B0742D9X4R",
+ "source": "abo",
+ "typeId": "floor-lamp",
+ "formId": "round",
+ "name": "Rivet Mid-Century Modern Tripod Décor Living Room Standing Floor Lamp with Light Bulb and Drum Shade",
+ "brand": "Rivet",
+ "price": 21090,
+ "currency": "RUB",
+ "dims": {
+  "H": 1545,
+  "DIA": 458
+ },
+ "colors": [
+  "чёрный"
+ ],
+ "materials": [
+  "металл",
+  "ткань"
+ ],
+ "styleTags": [
+  "современный",
+  "классика"
+ ],
+ "url": "https://www.amazon.ca/dp/B0742D9X4R",
+ "model": {
+  "file": "models/abo-B0742D9X4R.glb",
+  "bytes": 189780,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.253025651,
+     0,
+     -0.220708415
+    ],
+    "max": [
+     0.20501410458909997,
+     1.5450000650228999,
+     0.2373313405891
+    ],
+    "size": [
+     0.4580397555891,
+     1.5450000650228999,
+     0.4580397555891
+    ]
+   },
+   "tris": 29999,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 4,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2639728,
+  "bytes": 189780,
+  "srcTris": 38198,
+  "tris": 29999,
+  "textures": {
+   "images": 4,
+   "resized": 4,
+   "before": 1653787,
+   "after": 41038,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9999,
+   1,
+   1.0212
+  ]
+ },
+ "image": {
+  "file": "images/abo-B0742D9X4R.jpg",
+  "bytes": 2760,
+  "mime": "image/jpeg"
+ }
+}

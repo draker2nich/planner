@@ -1,0 +1,75 @@
+{
+ "id": "abo-B07B7GYMQ9",
+ "source": "abo",
+ "typeId": "console",
+ "formId": "rect",
+ "name": "Stone & Beam Alan Casual Wood Media TV Console Table",
+ "brand": "Stone & Beam",
+ "price": 35090,
+ "currency": "RUB",
+ "dims": {
+  "H": 715,
+  "W": 1878,
+  "D": 471
+ },
+ "colors": [
+  "синий"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B07B7GYMQ9",
+ "model": {
+  "file": "models/abo-B07B7GYMQ9.glb",
+  "bytes": 293620,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.93900001,
+     0,
+     -0.227960989
+    ],
+    "max": [
+     0.9390000561920002,
+     0.714953696688,
+     0.24305788861600003
+    ],
+    "size": [
+     1.8780000661920002,
+     0.714953696688,
+     0.47101887761600003
+    ]
+   },
+   "tris": 29996,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 5157268,
+  "bytes": 293620,
+  "srcTris": 81802,
+  "tris": 29996,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 1614266,
+   "after": 64062,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9999,
+   0.9994,
+   1.0006
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07B7GYMQ9.jpg",
+  "bytes": 6897,
+  "mime": "image/jpeg"
+ }
+}

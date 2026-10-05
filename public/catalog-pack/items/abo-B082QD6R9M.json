@@ -1,0 +1,77 @@
+{
+ "id": "abo-B082QD6R9M",
+ "source": "abo",
+ "typeId": "pouf",
+ "formId": "rect",
+ "name": "Rivet Maple Channel Tufted Upholstered Storage Ottoman with a Soft-Close Hinge",
+ "brand": "Rivet",
+ "price": 20190,
+ "currency": "RUB",
+ "dims": {
+  "H": 469,
+  "W": 1151,
+  "D": 482
+ },
+ "colors": [
+  "серый"
+ ],
+ "materials": [
+  "ткань"
+ ],
+ "styleTags": [
+  "классика"
+ ],
+ "url": "https://www.amazon.com/dp/B082QD6R9M",
+ "model": {
+  "file": "models/abo-B082QD6R9M.glb",
+  "bytes": 479264,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.576322973,
+     0.00000276710307,
+     -0.240306318
+    ],
+    "max": [
+     0.5743285816486,
+     0.46902865259067006,
+     0.24136177464360006
+    ],
+    "size": [
+     1.1506515546486,
+     0.46902588548760005,
+     0.48166809264360005
+    ]
+   },
+   "tris": 29983,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 73572656,
+  "bytes": 479264,
+  "srcTris": 550164,
+  "tris": 29983,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 57394352,
+   "after": 315098,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   0.9995,
+   1.0004
+  ]
+ },
+ "image": {
+  "file": "images/abo-B082QD6R9M.jpg",
+  "bytes": 3244,
+  "mime": "image/jpeg"
+ }
+}

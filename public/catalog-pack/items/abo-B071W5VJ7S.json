@@ -1,0 +1,76 @@
+{
+ "id": "abo-B071W5VJ7S",
+ "source": "abo",
+ "typeId": "pouf",
+ "formId": "rect",
+ "name": "Stone & Beam Hoffman Down-Filled Performance Fabric Ottoman",
+ "brand": "Stone & Beam",
+ "price": 19990,
+ "currency": "RUB",
+ "dims": {
+  "H": 451,
+  "W": 977,
+  "D": 694
+ },
+ "colors": [
+  "серый"
+ ],
+ "materials": [
+  "ткань",
+  "камень"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B071W5VJ7S",
+ "model": {
+  "file": "models/abo-B071W5VJ7S.glb",
+  "bytes": 560620,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.48856172,
+     0,
+     -0.346997321
+    ],
+    "max": [
+     0.4884383080636,
+     0.4510194233196,
+     0.34697504832039994
+    ],
+    "size": [
+     0.9770000280636,
+     0.4510194233196,
+     0.6939723693204
+    ]
+   },
+   "tris": 17664,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 3807460,
+  "bytes": 560620,
+  "srcTris": 17664,
+  "tris": 17664,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 3389186,
+   "after": 466352,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9996,
+   0.9992,
+   1.0001
+  ]
+ },
+ "image": {
+  "file": "images/abo-B071W5VJ7S.jpg",
+  "bytes": 7769,
+  "mime": "image/jpeg"
+ }
+}

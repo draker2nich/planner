@@ -1,0 +1,77 @@
+{
+ "id": "abo-B07B4VXZZC",
+ "source": "abo",
+ "typeId": "dresser",
+ "formId": "rect",
+ "name": "Stone & Beam Gould Contemporary Wood Bedroom Dresser Chest",
+ "brand": "Stone & Beam",
+ "price": 33090,
+ "currency": "RUB",
+ "dims": {
+  "H": 986,
+  "W": 1049,
+  "D": 463
+ },
+ "colors": [
+  "синий"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07B4VXZZC",
+ "model": {
+  "file": "models/abo-B07B4VXZZC.glb",
+  "bytes": 247796,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.524500012,
+     0,
+     -0.226513728
+    ],
+    "max": [
+     0.5244999982508,
+     0.9859946992523999,
+     0.2364856661356
+    ],
+    "size": [
+     1.0490000102508,
+     0.9859946992523999,
+     0.4629993941356
+    ]
+   },
+   "tris": 29999,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 3014852,
+  "bytes": 247796,
+  "srcTris": 31966,
+  "tris": 29999,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 1842317,
+   "after": 71102,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0004,
+   0.9998,
+   1.0007
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07B4VXZZC.jpg",
+  "bytes": 9669,
+  "mime": "image/jpeg"
+ }
+}

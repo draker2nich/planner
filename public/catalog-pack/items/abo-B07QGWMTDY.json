@@ -1,0 +1,78 @@
+{
+ "id": "abo-B07QGWMTDY",
+ "source": "abo",
+ "typeId": "table",
+ "formId": "rect",
+ "name": "Rivet Fulton Modern Rustic Dining Table",
+ "brand": "Rivet",
+ "price": 62490,
+ "currency": "RUB",
+ "dims": {
+  "H": 762,
+  "W": 1803,
+  "D": 991
+ },
+ "colors": [
+  "бежевый"
+ ],
+ "materials": [
+  "металл"
+ ],
+ "styleTags": [
+  "современный",
+  "кантри"
+ ],
+ "url": "https://www.amazon.com/dp/B07QGWMTDY",
+ "model": {
+  "file": "models/abo-B07QGWMTDY.glb",
+  "bytes": 364968,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.901499987,
+     5.39817036e-9,
+     -0.495500028
+    ],
+    "max": [
+     0.9014999666829999,
+     0.7620076767221704,
+     0.49552814650500004
+    ],
+    "size": [
+     1.802999953683,
+     0.762007671324,
+     0.991028174505
+    ]
+   },
+   "tris": 17464,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 42450092,
+  "bytes": 364968,
+  "srcTris": 17464,
+  "tris": 17464,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 41797039,
+   "after": 257286,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9998,
+   1,
+   1.0004
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07QGWMTDY.jpg",
+  "bytes": 3605,
+  "mime": "image/jpeg"
+ }
+}

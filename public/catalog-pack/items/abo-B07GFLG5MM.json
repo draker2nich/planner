@@ -1,0 +1,75 @@
+{
+ "id": "abo-B07GFLG5MM",
+ "source": "abo",
+ "typeId": "shoe-rack",
+ "formId": "rect",
+ "name": "Movian Idro 4-Door Shoe Cabinet/Cupboard/Organizer",
+ "brand": "Movian",
+ "price": 10190,
+ "currency": "RUB",
+ "dims": {
+  "H": 1630,
+  "W": 520,
+  "D": 255
+ },
+ "colors": [
+  "серый"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.co.uk/dp/B07GFLG5MM",
+ "model": {
+  "file": "models/abo-B07GFLG5MM.glb",
+  "bytes": 97132,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.26000002,
+     0,
+     -0.127499998
+    ],
+    "max": [
+     0.25995238283479993,
+     1.6300000412634,
+     0.12750153442739998
+    ],
+    "size": [
+     0.5199524028347999,
+     1.6300000412634,
+     0.2550015324274
+    ]
+   },
+   "tris": 3932,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 14593260,
+  "bytes": 97132,
+  "srcTris": 3932,
+  "tris": 3932,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 14437285,
+   "after": 71184,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0001,
+   1.0001,
+   0.9981
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07GFLG5MM.jpg",
+  "bytes": 2097,
+  "mime": "image/jpeg"
+ }
+}

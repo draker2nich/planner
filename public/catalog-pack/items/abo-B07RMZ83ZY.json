@@ -1,0 +1,75 @@
+{
+ "id": "abo-B07RMZ83ZY",
+ "source": "abo",
+ "typeId": "table",
+ "formId": "rect",
+ "name": "AmazonBasics 2-Drawer Beside Table",
+ "brand": "AmazonBasics",
+ "price": 18490,
+ "currency": "RUB",
+ "dims": {
+  "H": 460,
+  "W": 445,
+  "D": 380
+ },
+ "colors": [
+  "бежевый"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.co.uk/dp/B07RMZ83ZY",
+ "model": {
+  "file": "models/abo-B07RMZ83ZY.glb",
+  "bytes": 125072,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.222500026,
+     0,
+     -0.190000013
+    ],
+    "max": [
+     0.22250641615730002,
+     0.4600000341891,
+     0.19000611913180002
+    ],
+    "size": [
+     0.4450064421573,
+     0.4600000341891,
+     0.3800061321318
+    ]
+   },
+   "tris": 11172,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 25744160,
+  "bytes": 125072,
+  "srcTris": 11172,
+  "tris": 11172,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 25373095,
+   "after": 58922,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   1,
+   1
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07RMZ83ZY.jpg",
+  "bytes": 4666,
+  "mime": "image/jpeg"
+ }
+}

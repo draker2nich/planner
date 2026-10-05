@@ -1,0 +1,79 @@
+{
+ "id": "abo-B073WGQBPB",
+ "source": "abo",
+ "typeId": "mirror",
+ "formId": "wall",
+ "name": "Stone & Beam Vintage-Look Rectangular Hanging Wall Frame Mirror Decor",
+ "brand": "Stone & Beam",
+ "price": 9090,
+ "currency": "RUB",
+ "dims": {
+  "H": 922,
+  "W": 472,
+  "D": 27,
+  "E": 1200
+ },
+ "colors": [
+  "серый"
+ ],
+ "materials": [
+  "дерево",
+  "стекло"
+ ],
+ "styleTags": [
+  "ретро"
+ ],
+ "url": "https://www.amazon.com/dp/B073WGQBPB",
+ "model": {
+  "file": "models/abo-B073WGQBPB.glb",
+  "bytes": 269800,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.235999987,
+     -0.460999995,
+     9.42718903e-10
+    ],
+    "max": [
+     0.2360023224986,
+     0.46099998550739996,
+     0.027013367886718903
+    ],
+    "size": [
+     0.4720023094986,
+     0.9219999805074,
+     0.027013366944
+    ]
+   },
+   "tris": 6060,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2452968,
+  "bytes": 269800,
+  "srcTris": 6060,
+  "tris": 6060,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 2297363,
+   "after": 237124,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0007,
+   0.9996,
+   1.0175
+  ]
+ },
+ "image": {
+  "file": "images/abo-B073WGQBPB.jpg",
+  "bytes": 6938,
+  "mime": "image/jpeg"
+ }
+}

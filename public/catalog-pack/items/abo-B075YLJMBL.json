@@ -1,0 +1,78 @@
+{
+ "id": "abo-B075YLJMBL",
+ "source": "abo",
+ "typeId": "picture",
+ "formId": "wall",
+ "name": "Stone & Beam Modern Rustic Farmhouse Photo Print Framed Wall Art Decor",
+ "brand": "Stone & Beam",
+ "price": 2990,
+ "currency": "RUB",
+ "dims": {
+  "H": 328,
+  "W": 401,
+  "D": 30,
+  "E": 1300
+ },
+ "colors": [
+  "разноцветный"
+ ],
+ "materials": [],
+ "styleTags": [
+  "современный",
+  "классика",
+  "кантри"
+ ],
+ "url": "https://www.amazon.com/dp/B075YLJMBL",
+ "model": {
+  "file": "models/abo-B075YLJMBL.glb",
+  "bytes": 76028,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.200499982,
+     -0.16399999,
+     0
+    ],
+    "max": [
+     0.20049997231039998,
+     0.16401077650879994,
+     0.030008297868799997
+    ],
+    "size": [
+     0.4009999543104,
+     0.32801076650879996,
+     0.030008297868799997
+    ]
+   },
+   "tris": 278,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 516068,
+  "bytes": 76028,
+  "srcTris": 278,
+  "tris": 278,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 504856,
+   "after": 70744,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0003,
+   0.9989,
+   0.9878
+  ]
+ },
+ "image": {
+  "file": "images/abo-B075YLJMBL.jpg",
+  "bytes": 11218,
+  "mime": "image/jpeg"
+ }
+}

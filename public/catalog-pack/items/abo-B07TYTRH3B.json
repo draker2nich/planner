@@ -1,0 +1,74 @@
+{
+ "id": "abo-B07TYTRH3B",
+ "source": "abo",
+ "typeId": "bar-stool",
+ "formId": "round",
+ "name": "Stone & Beam Carson Woven Tufted Counter Height Kitchen Stool",
+ "brand": "Stone & Beam",
+ "price": 14590,
+ "currency": "RUB",
+ "dims": {
+  "H": 1047,
+  "DIA": 601
+ },
+ "colors": [
+  "коричневый"
+ ],
+ "materials": [],
+ "styleTags": [
+  "классика"
+ ],
+ "url": "https://www.amazon.com/dp/B07TYTRH3B",
+ "model": {
+  "file": "models/abo-B07TYTRH3B.glb",
+  "bytes": 381176,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.30050528,
+     0,
+     -0.336890459
+    ],
+    "max": [
+     0.3004827712372,
+     1.0469999195469,
+     0.26409759223720003
+    ],
+    "size": [
+     0.6009880512372,
+     1.0469999195469,
+     0.6009880512372
+    ]
+   },
+   "tris": 30000,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 38586824,
+  "bytes": 381176,
+  "srcTris": 35349,
+  "tris": 30000,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 37754433,
+   "after": 219126,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.2197,
+   1,
+   1.0004
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07TYTRH3B.jpg",
+  "bytes": 6622,
+  "mime": "image/jpeg"
+ }
+}

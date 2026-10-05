@@ -1,0 +1,77 @@
+{
+ "id": "abo-B079VK52WZ",
+ "source": "abo",
+ "typeId": "nightstand",
+ "formId": "rect",
+ "name": "Movian High Gloss 2 Drawer Bedside Cabinet",
+ "brand": "Movian",
+ "price": 11290,
+ "currency": "RUB",
+ "dims": {
+  "H": 470,
+  "W": 400,
+  "D": 360
+ },
+ "colors": [
+  "чёрный",
+  "коричневый"
+ ],
+ "materials": [
+  "дерево",
+  "ЛДСП / МДФ"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.co.uk/dp/B079VK52WZ",
+ "model": {
+  "file": "models/abo-B079VK52WZ.glb",
+  "bytes": 85724,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.200000003,
+     0,
+     -0.180000037
+    ],
+    "max": [
+     0.20000066691409998,
+     0.4700000699421,
+     0.1800091724063
+    ],
+    "size": [
+     0.4000006699141,
+     0.4700000699421,
+     0.3600092094063
+    ]
+   },
+   "tris": 11740,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 9017204,
+  "bytes": 85724,
+  "srcTris": 11740,
+  "tris": 11740,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 8641108,
+   "after": 19750,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   1,
+   1
+  ]
+ },
+ "image": {
+  "file": "images/abo-B079VK52WZ.jpg",
+  "bytes": 6797,
+  "mime": "image/jpeg"
+ }
+}

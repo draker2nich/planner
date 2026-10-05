@@ -1,0 +1,77 @@
+{
+ "id": "abo-B07HJ27HHW",
+ "source": "abo",
+ "typeId": "island",
+ "formId": "rect",
+ "name": "Civet Home Kitchen Cart",
+ "brand": "Civet Home",
+ "price": 39190,
+ "currency": "RUB",
+ "dims": {
+  "H": 816,
+  "W": 843,
+  "D": 520
+ },
+ "colors": [
+  "бежевый"
+ ],
+ "materials": [
+  "дерево",
+  "металл",
+  "пластик"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B07HJ27HHW",
+ "model": {
+  "file": "models/abo-B07HJ27HHW.glb",
+  "bytes": 207316,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.516552985,
+     0,
+     -0.255368531
+    ],
+    "max": [
+     0.32644699320799997,
+     0.815985695808,
+     0.264643541256
+    ],
+    "size": [
+     0.842999978208,
+     0.815985695808,
+     0.520012072256
+    ]
+   },
+   "tris": 20582,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 23092044,
+  "bytes": 207316,
+  "srcTris": 20582,
+  "tris": 20582,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 22569380,
+   "after": 88148,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0003,
+   0.9995,
+   1.0007
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07HJ27HHW.jpg",
+  "bytes": 7866,
+  "mime": "image/jpeg"
+ }
+}

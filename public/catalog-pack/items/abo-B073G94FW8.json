@@ -1,0 +1,78 @@
+{
+ "id": "abo-B073G94FW8",
+ "source": "abo",
+ "typeId": "armchair",
+ "formId": "rect",
+ "name": "Rivet Farr Lotus Accent Chair",
+ "brand": "Rivet",
+ "price": 40690,
+ "currency": "RUB",
+ "dims": {
+  "H": 855,
+  "W": 859,
+  "D": 1008
+ },
+ "colors": [
+  "жёлтый"
+ ],
+ "materials": [
+  "ЛДСП / МДФ",
+  "металл"
+ ],
+ "styleTags": [
+  "скандинавский"
+ ],
+ "url": "https://www.amazon.com/dp/B073G94FW8",
+ "model": {
+  "file": "models/abo-B073G94FW8.glb",
+  "bytes": 268596,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.429500014,
+     0,
+     -0.504000008
+    ],
+    "max": [
+     0.4294811260769001,
+     0.8549818725384001,
+     0.5039999932807
+    ],
+    "size": [
+     0.8589811400769001,
+     0.8549818725384001,
+     1.0080000012807
+    ]
+   },
+   "tris": 29184,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 46734120,
+  "bytes": 268596,
+  "srcTris": 29184,
+  "tris": 29184,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 45818988,
+   "after": 102022,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0005,
+   0.9997,
+   0.9998
+  ]
+ },
+ "image": {
+  "file": "images/abo-B073G94FW8.jpg",
+  "bytes": 7295,
+  "mime": "image/jpeg"
+ }
+}

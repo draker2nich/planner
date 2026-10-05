@@ -1,0 +1,79 @@
+{
+ "id": "abo-B07KXFJ12M",
+ "source": "abo",
+ "typeId": "office-chair",
+ "formId": "round",
+ "name": "AmazonBasics High-Back Executive Swivel Office Desk Chair with Ribbed Puresoft Upholstery",
+ "brand": "AmazonBasics",
+ "price": 14690,
+ "currency": "RUB",
+ "dims": {
+  "H": 1149,
+  "DIA": 766
+ },
+ "colors": [
+  "красный"
+ ],
+ "materials": [
+  "ЛДСП / МДФ",
+  "металл",
+  "кожа",
+  "ткань"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07KXFJ12M",
+ "model": {
+  "file": "models/abo-B07KXFJ12M.glb",
+  "bytes": 279508,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.383000016,
+     0,
+     -0.418220699
+    ],
+    "max": [
+     0.38299991135699996,
+     1.1489998910355,
+     0.347779228357
+    ],
+    "size": [
+     0.765999927357,
+     1.1489998910355,
+     0.765999927357
+    ]
+   },
+   "tris": 29998,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 29051260,
+  "bytes": 279508,
+  "srcTris": 38578,
+  "tris": 29998,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 27795598,
+   "after": 93188,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9999,
+   0.9997,
+   1.0371
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07KXFJ12M.jpg",
+  "bytes": 6172,
+  "mime": "image/jpeg"
+ }
+}

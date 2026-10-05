@@ -1,0 +1,80 @@
+{
+ "id": "abo-B075Z85VX9",
+ "source": "abo",
+ "typeId": "coffee-table",
+ "formId": "rect",
+ "name": "Stone & Beam Sparrow Modern Industrial Coffee Table",
+ "brand": "Stone & Beam",
+ "price": 31090,
+ "currency": "RUB",
+ "dims": {
+  "H": 468,
+  "W": 1387,
+  "D": 775
+ },
+ "colors": [
+  "коричневый",
+  "натуральное дерево",
+  "жёлтый"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "современный",
+  "лофт"
+ ],
+ "url": "https://www.amazon.com/dp/B075Z85VX9",
+ "model": {
+  "file": "models/abo-B075Z85VX9.glb",
+  "bytes": 438988,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.693799913,
+     0,
+     -0.387499988
+    ],
+    "max": [
+     0.6932001490623999,
+     0.4680056365184,
+     0.3874861908511999
+    ],
+    "size": [
+     1.3870000620624,
+     0.4680056365184,
+     0.7749861788511999
+    ]
+   },
+   "tris": 7068,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 3693064,
+  "bytes": 438988,
+  "srcTris": 7068,
+  "tris": 7068,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 3497250,
+   "after": 395182,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0002,
+   1,
+   1.0002
+  ]
+ },
+ "image": {
+  "file": "images/abo-B075Z85VX9.jpg",
+  "bytes": 7396,
+  "mime": "image/jpeg"
+ }
+}

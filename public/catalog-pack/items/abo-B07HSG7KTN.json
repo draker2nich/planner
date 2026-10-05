@@ -1,0 +1,75 @@
+{
+ "id": "abo-B07HSG7KTN",
+ "source": "abo",
+ "typeId": "bookcase",
+ "formId": "rect",
+ "name": "Rivet Stevens Modern 2-Drawer Storage Bookcase",
+ "brand": "Rivet",
+ "price": 31690,
+ "currency": "RUB",
+ "dims": {
+  "H": 633,
+  "W": 1342,
+  "D": 457
+ },
+ "colors": [
+  "серый"
+ ],
+ "materials": [],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07HSG7KTN",
+ "model": {
+  "file": "models/abo-B07HSG7KTN.glb",
+  "bytes": 190136,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.671000004,
+     0,
+     -0.228746921
+    ],
+    "max": [
+     0.6709999856421,
+     0.6330327729936001,
+     0.22825228196730002
+    ],
+    "size": [
+     1.3419999896421,
+     0.6330327729936001,
+     0.4569992029673
+    ]
+   },
+   "tris": 5872,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 37348504,
+  "bytes": 190136,
+  "srcTris": 5872,
+  "tris": 5872,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 37160824,
+   "after": 149796,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9999,
+   1,
+   1.0001
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07HSG7KTN.jpg",
+  "bytes": 3202,
+  "mime": "image/jpeg"
+ }
+}

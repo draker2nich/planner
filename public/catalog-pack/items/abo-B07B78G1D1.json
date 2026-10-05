@@ -1,0 +1,75 @@
+{
+ "id": "abo-B07B78G1D1",
+ "source": "abo",
+ "typeId": "sideboard",
+ "formId": "rect",
+ "name": "Stone & Beam Amber Metal Buffet Table Kitchen Storage Rack",
+ "brand": "Stone & Beam",
+ "price": 41590,
+ "currency": "RUB",
+ "dims": {
+  "H": 1659,
+  "W": 1210,
+  "D": 610
+ },
+ "colors": [
+  "белый"
+ ],
+ "materials": [
+  "металл"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B07B78G1D1",
+ "model": {
+  "file": "models/abo-B07B78G1D1.glb",
+  "bytes": 190336,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.605000019,
+     0,
+     -0.308624327
+    ],
+    "max": [
+     0.604997506653,
+     1.6589998713510001,
+     0.30138697892800004
+    ],
+    "size": [
+     1.209997525653,
+     1.6589998713510001,
+     0.610011305928
+    ]
+   },
+   "tris": 20778,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2325160,
+  "bytes": 190336,
+  "srcTris": 20778,
+  "tris": 20778,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 1605423,
+   "after": 53544,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0002,
+   1,
+   1.0007
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07B78G1D1.jpg",
+  "bytes": 11861,
+  "mime": "image/jpeg"
+ }
+}

@@ -1,0 +1,80 @@
+{
+ "id": "abo-B071DQRXDR",
+ "source": "abo",
+ "typeId": "mirror",
+ "formId": "wall",
+ "name": "Rivet Modern Octagonal Metalwork Hanging Geometric Wall Mirror",
+ "brand": "Rivet",
+ "price": 22090,
+ "currency": "RUB",
+ "dims": {
+  "H": 710,
+  "W": 710,
+  "D": 94,
+  "E": 1200
+ },
+ "colors": [
+  "чёрный",
+  "прозрачный"
+ ],
+ "materials": [
+  "металл",
+  "стекло"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B071DQRXDR",
+ "model": {
+  "file": "models/abo-B071DQRXDR.glb",
+  "bytes": 157360,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.354999989,
+     -0.355000019,
+     0
+    ],
+    "max": [
+     0.3550000445022999,
+     0.3550000145022999,
+     0.0939992719689
+    ],
+    "size": [
+     0.7100000335022999,
+     0.7100000335022999,
+     0.0939992719689
+    ]
+   },
+   "tris": 3964,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 7518524,
+  "bytes": 157360,
+  "srcTris": 3964,
+  "tris": 3964,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 7347369,
+   "after": 111184,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   1,
+   0.997
+  ]
+ },
+ "image": {
+  "file": "images/abo-B071DQRXDR.jpg",
+  "bytes": 14946,
+  "mime": "image/jpeg"
+ }
+}

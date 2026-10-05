@@ -1,0 +1,75 @@
+{
+ "id": "abo-B082VT4GGJ",
+ "source": "abo",
+ "typeId": "small-table",
+ "formId": "rect",
+ "name": "Ravenna Home Archer Outdoor Patio Steel Side Table with Panel Top",
+ "brand": "Ravenna Home",
+ "price": 9790,
+ "currency": "RUB",
+ "dims": {
+  "H": 508,
+  "W": 508,
+  "D": 508
+ },
+ "colors": [
+  "серый"
+ ],
+ "materials": [
+  "металл"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B082VT4GGJ",
+ "model": {
+  "file": "models/abo-B082VT4GGJ.glb",
+  "bytes": 217596,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.254000008,
+     0,
+     -0.254000008
+    ],
+    "max": [
+     0.2539999946543,
+     0.5080000026543,
+     0.2539999946543
+    ],
+    "size": [
+     0.5080000026543,
+     0.5080000026543,
+     0.5080000026543
+    ]
+   },
+   "tris": 29998,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 28681760,
+  "bytes": 217596,
+  "srcTris": 47436,
+  "tris": 29998,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 27192555,
+   "after": 18988,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0003,
+   1.0004,
+   1
+  ]
+ },
+ "image": {
+  "file": "images/abo-B082VT4GGJ.jpg",
+  "bytes": 4313,
+  "mime": "image/jpeg"
+ }
+}

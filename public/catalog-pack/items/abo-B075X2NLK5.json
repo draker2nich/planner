@@ -1,0 +1,77 @@
+{
+ "id": "abo-B075X2NLK5",
+ "source": "abo",
+ "typeId": "table-lamp",
+ "formId": "round",
+ "name": "Rivet Modern Deer Head Ceramic Lamp With Bulb",
+ "brand": "Rivet",
+ "price": 8690,
+ "currency": "RUB",
+ "dims": {
+  "H": 503,
+  "DIA": 298
+ },
+ "colors": [
+  "белый"
+ ],
+ "materials": [
+  "ткань",
+  "камень"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.sg/dp/B075X2NLK5",
+ "model": {
+  "file": "models/abo-B075X2NLK5.glb",
+  "bytes": 241224,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.148999974,
+     0,
+     -0.148999989
+    ],
+    "max": [
+     0.1489990578304,
+     0.5030000142672,
+     0.1489990428304
+    ],
+    "size": [
+     0.2979990318304,
+     0.5030000142672,
+     0.2979990318304
+    ]
+   },
+   "tris": 26076,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 4,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 3073432,
+  "bytes": 241224,
+  "srcTris": 26076,
+  "tris": 26076,
+  "textures": {
+   "images": 4,
+   "resized": 4,
+   "before": 2441438,
+   "after": 99228,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.999,
+   1.0007,
+   0.999
+  ]
+ },
+ "image": {
+  "file": "images/abo-B075X2NLK5.jpg",
+  "bytes": 3450,
+  "mime": "image/jpeg"
+ }
+}

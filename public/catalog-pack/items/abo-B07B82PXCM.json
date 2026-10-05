@@ -1,0 +1,77 @@
+{
+ "id": "abo-B07B82PXCM",
+ "source": "abo",
+ "typeId": "table",
+ "formId": "rect",
+ "name": "Stone & Beam Bradhurst Casual Farmhouse Wood Dining Kitchen Table",
+ "brand": "Stone & Beam",
+ "price": 55890,
+ "currency": "RUB",
+ "dims": {
+  "H": 743,
+  "W": 1503,
+  "D": 922
+ },
+ "colors": [
+  "белый"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "кантри"
+ ],
+ "url": "https://www.amazon.com/dp/B07B82PXCM",
+ "model": {
+  "file": "models/abo-B07B82PXCM.glb",
+  "bytes": 217612,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.75150001,
+     0,
+     -0.452780783
+    ],
+    "max": [
+     0.7515000604988,
+     0.7430139517164,
+     0.4692207251799999
+    ],
+    "size": [
+     1.5030000704988,
+     0.7430139517164,
+     0.9220015081799999
+    ]
+   },
+   "tris": 9896,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 2435872,
+  "bytes": 217612,
+  "srcTris": 9896,
+  "tris": 9896,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 2114554,
+   "after": 154296,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9998,
+   0.9994,
+   1.0004
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07B82PXCM.jpg",
+  "bytes": 6094,
+  "mime": "image/jpeg"
+ }
+}

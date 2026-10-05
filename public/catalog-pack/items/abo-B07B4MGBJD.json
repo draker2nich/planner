@@ -1,0 +1,78 @@
+{
+ "id": "abo-B07B4MGBJD",
+ "source": "abo",
+ "typeId": "pouf",
+ "formId": "rect",
+ "name": "Stone & Beam Isabel Traditional Large Storage Ottoman",
+ "brand": "Stone & Beam",
+ "price": 24290,
+ "currency": "RUB",
+ "dims": {
+  "H": 470,
+  "W": 1764,
+  "D": 751
+ },
+ "colors": [
+  "серый"
+ ],
+ "materials": [
+  "ткань",
+  "камень"
+ ],
+ "styleTags": [
+  "классика"
+ ],
+ "url": "https://www.amazon.com/dp/B07B4MGBJD",
+ "model": {
+  "file": "models/abo-B07B4MGBJD.glb",
+  "bytes": 138672,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.87781328,
+     0,
+     -0.363687307
+    ],
+    "max": [
+     0.8861868766509999,
+     0.469990885905,
+     0.3873290570749999
+    ],
+    "size": [
+     1.764000156651,
+     0.469990885905,
+     0.7510163640749999
+    ]
+   },
+   "tris": 21180,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 1302280,
+  "bytes": 138672,
+  "srcTris": 21180,
+  "tris": 21180,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 805089,
+   "after": 34416,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0002,
+   0.9994,
+   0.9997
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07B4MGBJD.jpg",
+  "bytes": 4782,
+  "mime": "image/jpeg"
+ }
+}

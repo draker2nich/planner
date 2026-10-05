@@ -1,0 +1,78 @@
+{
+ "id": "abo-B07Q2MFD1V",
+ "source": "abo",
+ "typeId": "nightstand",
+ "formId": "rect",
+ "name": "AmazonBasics Classic 2-Drawer Wood Nightstand End Table",
+ "brand": "AmazonBasics",
+ "price": 9590,
+ "currency": "RUB",
+ "dims": {
+  "H": 711,
+  "W": 589,
+  "D": 406
+ },
+ "colors": [
+  "бежевый",
+  "коричневый"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "классика"
+ ],
+ "url": "https://www.amazon.com/dp/B07Q2MFD1V",
+ "model": {
+  "file": "models/abo-B07Q2MFD1V.glb",
+  "bytes": 192916,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.294499934,
+     0,
+     -0.201137707
+    ],
+    "max": [
+     0.29450649086919994,
+     0.7110000190563,
+     0.20485662726549997
+    ],
+    "size": [
+     0.5890064248692,
+     0.7110000190563,
+     0.40599433426549997
+    ]
+   },
+   "tris": 7938,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 29429988,
+  "bytes": 192916,
+  "srcTris": 7938,
+  "tris": 7938,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 29231162,
+   "after": 150752,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9997,
+   0.9997,
+   0.999
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07Q2MFD1V.jpg",
+  "bytes": 6772,
+  "mime": "image/jpeg"
+ }
+}

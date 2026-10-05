@@ -1,0 +1,75 @@
+{
+ "id": "abo-B07DBGHSN7",
+ "source": "abo",
+ "typeId": "small-table",
+ "formId": "rect",
+ "name": "Ravenna Home Anne Marie Small Curved Leg Shelf Storage Side End Table",
+ "brand": "Ravenna Home",
+ "price": 7690,
+ "currency": "RUB",
+ "dims": {
+  "H": 438,
+  "W": 502,
+  "D": 451
+ },
+ "colors": [
+  "белый"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B07DBGHSN7",
+ "model": {
+  "file": "models/abo-B07DBGHSN7.glb",
+  "bytes": 51352,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.250853926,
+     0,
+     -0.225384563
+    ],
+    "max": [
+     0.25114604373439997,
+     0.4379898411392,
+     0.22562792277919994
+    ],
+    "size": [
+     0.5019999697344,
+     0.4379898411392,
+     0.45101248577919995
+    ]
+   },
+   "tris": 7040,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 371160,
+  "bytes": 51352,
+  "srcTris": 7040,
+  "tris": 7040,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 189036,
+   "after": 5830,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9994,
+   1.001,
+   0.999
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07DBGHSN7.jpg",
+  "bytes": 4190,
+  "mime": "image/jpeg"
+ }
+}

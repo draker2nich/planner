@@ -1,0 +1,77 @@
+{
+ "id": "abo-B075X4WBLM",
+ "source": "abo",
+ "typeId": "sofa",
+ "formId": "straight",
+ "name": "Stone & Beam St. Cloud ModernArmless Straight Back Settee",
+ "brand": "Stone & Beam",
+ "price": 76890,
+ "currency": "RUB",
+ "dims": {
+  "H": 976,
+  "W": 1212,
+  "D": 946
+ },
+ "colors": [
+  "бежевый"
+ ],
+ "materials": [
+  "ткань"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B075X4WBLM",
+ "model": {
+  "file": "models/abo-B075X4WBLM.glb",
+  "bytes": 514560,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.606000066,
+     1.34940478e-7,
+     -0.563601494
+    ],
+    "max": [
+     0.6059999962155,
+     0.9760067772409781,
+     0.3823696221295
+    ],
+    "size": [
+     1.2120000622155,
+     0.9760066423005,
+     0.9459711161295
+    ]
+   },
+   "tris": 26144,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 3892220,
+  "bytes": 514560,
+  "srcTris": 26144,
+  "tris": 26144,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 3280411,
+   "after": 378502,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0001,
+   0.9995,
+   0.9999
+  ]
+ },
+ "image": {
+  "file": "images/abo-B075X4WBLM.jpg",
+  "bytes": 5136,
+  "mime": "image/jpeg"
+ }
+}

@@ -1,0 +1,78 @@
+{
+ "id": "abo-B084MYDTKM",
+ "source": "abo",
+ "typeId": "nightstand",
+ "formId": "rect",
+ "name": "Rivet Mango Wood and Iron 3-Drawer Shutter Nightstand",
+ "brand": "Rivet",
+ "price": 14190,
+ "currency": "RUB",
+ "dims": {
+  "H": 559,
+  "W": 457,
+  "D": 406
+ },
+ "colors": [
+  "бежевый"
+ ],
+ "materials": [
+  "дерево",
+  "металл"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B084MYDTKM",
+ "model": {
+  "file": "models/abo-B084MYDTKM.glb",
+  "bytes": 301640,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.228499994,
+     0,
+     -0.201428264
+    ],
+    "max": [
+     0.22851307165639997,
+     0.5589999294197999,
+     0.2045743094094
+    ],
+    "size": [
+     0.4570130656564,
+     0.5589999294197999,
+     0.4060025734094
+    ]
+   },
+   "tris": 20484,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 39296916,
+  "bytes": 301640,
+  "srcTris": 20484,
+  "tris": 20484,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 38760088,
+   "after": 187114,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9996,
+   1.0003,
+   0.999
+  ]
+ },
+ "image": {
+  "file": "images/abo-B084MYDTKM.jpg",
+  "bytes": 8638,
+  "mime": "image/jpeg"
+ }
+}

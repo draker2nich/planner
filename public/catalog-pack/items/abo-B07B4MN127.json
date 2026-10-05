@@ -1,0 +1,78 @@
+{
+ "id": "abo-B07B4MN127",
+ "source": "abo",
+ "typeId": "armchair",
+ "formId": "rect",
+ "name": "Stone & Beam Edmunds Traditional Recliner",
+ "brand": "Stone & Beam",
+ "price": 43890,
+ "currency": "RUB",
+ "dims": {
+  "H": 1028,
+  "W": 841,
+  "D": 858
+ },
+ "colors": [
+  "бежевый"
+ ],
+ "materials": [
+  "камень"
+ ],
+ "styleTags": [
+  "современный",
+  "классика"
+ ],
+ "url": "https://www.amazon.com/dp/B07B4MN127",
+ "model": {
+  "file": "models/abo-B07B4MN127.glb",
+  "bytes": 477364,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.42050001,
+     0,
+     -0.451284826
+    ],
+    "max": [
+     0.4205109997428001,
+     1.0279999531908,
+     0.4067308829624
+    ],
+    "size": [
+     0.8410110097428001,
+     1.0279999531908,
+     0.8580157089624
+    ]
+   },
+   "tris": 22992,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 3691176,
+  "bytes": 477364,
+  "srcTris": 22992,
+  "tris": 22992,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 3139269,
+   "after": 347728,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9999,
+   1.0001,
+   0.9996
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07B4MN127.jpg",
+  "bytes": 7447,
+  "mime": "image/jpeg"
+ }
+}

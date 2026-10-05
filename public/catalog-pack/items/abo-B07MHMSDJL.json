@@ -1,0 +1,76 @@
+{
+ "id": "abo-B07MHMSDJL",
+ "source": "abo",
+ "typeId": "table-lamp",
+ "formId": "round",
+ "name": "Ravenna Home Elegant Banker's Lamp with LED Light Bulb",
+ "brand": "Ravenna Home",
+ "price": 7790,
+ "currency": "RUB",
+ "dims": {
+  "H": 404,
+  "DIA": 269
+ },
+ "colors": [
+  "жёлтый"
+ ],
+ "materials": [
+  "стекло"
+ ],
+ "styleTags": [
+  "классика"
+ ],
+ "url": "https://www.amazon.com/dp/B07MHMSDJL",
+ "model": {
+  "file": "models/abo-B07MHMSDJL.glb",
+  "bytes": 226716,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.134474784,
+     0,
+     -0.0852032825
+    ],
+    "max": [
+     0.1345133141364,
+     0.4040000010789,
+     0.18373549621979998
+    ],
+    "size": [
+     0.2689880981364,
+     0.4040000010789,
+     0.2689387787198
+    ]
+   },
+   "tris": 29998,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 4,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 8578692,
+  "bytes": 226716,
+  "srcTris": 37858,
+  "tris": 29998,
+  "textures": {
+   "images": 4,
+   "resized": 4,
+   "before": 7625330,
+   "after": 51182,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0013,
+   0.9992,
+   1.1874
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07MHMSDJL.jpg",
+  "bytes": 2581,
+  "mime": "image/jpeg"
+ }
+}

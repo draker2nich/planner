@@ -1,0 +1,78 @@
+{
+ "id": "abo-B07P6JVMJL",
+ "source": "abo",
+ "typeId": "sofa",
+ "formId": "straight",
+ "name": "Rivet Cove Modern Tufted Loveseat with Tapered Legs",
+ "brand": "Rivet",
+ "price": 72090,
+ "currency": "RUB",
+ "dims": {
+  "H": 898,
+  "W": 1430,
+  "D": 868
+ },
+ "colors": [
+  "коричневый"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "современный",
+  "классика"
+ ],
+ "url": "https://www.amazon.com/dp/B07P6JVMJL",
+ "model": {
+  "file": "models/abo-B07P6JVMJL.glb",
+  "bytes": 457028,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.714827597,
+     0,
+     -0.444666982
+    ],
+    "max": [
+     0.7149872058361,
+     0.8979652387463,
+     0.42327589868149995
+    ],
+    "size": [
+     1.4298148028361,
+     0.8979652387463,
+     0.8679428806814999
+    ]
+   },
+   "tris": 30002,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 66309148,
+  "bytes": 457028,
+  "srcTris": 104180,
+  "tris": 30002,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 63740698,
+   "after": 272022,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   1.0004,
+   0.9996
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07P6JVMJL.jpg",
+  "bytes": 6044,
+  "mime": "image/jpeg"
+ }
+}

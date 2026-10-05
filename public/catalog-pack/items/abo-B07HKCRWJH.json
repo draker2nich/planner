@@ -1,0 +1,77 @@
+{
+ "id": "abo-B07HKCRWJH",
+ "source": "abo",
+ "typeId": "chandelier",
+ "formId": "round",
+ "name": "Rivet Mid-Century Modern Ceiling Hanging Pendant Fixture with Light Bulb",
+ "brand": "Rivet",
+ "price": 12290,
+ "currency": "RUB",
+ "dims": {
+  "H": 758,
+  "DIA": 408
+ },
+ "colors": [
+  "жёлтый"
+ ],
+ "materials": [
+  "металл",
+  "стекло"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07HKCRWJH",
+ "model": {
+  "file": "models/abo-B07HKCRWJH.glb",
+  "bytes": 383892,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.204000011,
+     -0.758000016,
+     -0.204000026
+    ],
+    "max": [
+     0.20398656150499997,
+     -1.4032500050831231e-8,
+     0.20398654650499998
+    ],
+    "size": [
+     0.407986572505,
+     0.7580000019675,
+     0.407986572505
+    ]
+   },
+   "tris": 26250,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 4,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 3284384,
+  "bytes": 383892,
+  "srcTris": 26250,
+  "tris": 26250,
+  "textures": {
+   "images": 4,
+   "resized": 4,
+   "before": 2688440,
+   "after": 249388,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1.0001,
+   1,
+   1.0001
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07HKCRWJH.jpg",
+  "bytes": 6995,
+  "mime": "image/jpeg"
+ }
+}

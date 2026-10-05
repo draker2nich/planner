@@ -1,0 +1,81 @@
+{
+ "id": "abo-B073G856N6",
+ "source": "abo",
+ "typeId": "armchair",
+ "formId": "rect",
+ "name": "Stone & Beam Carrigan Modern Living Room Accent Chair with Slipcover",
+ "brand": "Stone & Beam",
+ "price": 41690,
+ "currency": "RUB",
+ "dims": {
+  "H": 1017,
+  "W": 1135,
+  "D": 988
+ },
+ "colors": [
+  "бежевый",
+  "серый"
+ ],
+ "materials": [
+  "дерево",
+  "ЛДСП / МДФ",
+  "ткань"
+ ],
+ "styleTags": [
+  "современный",
+  "классика"
+ ],
+ "url": "https://www.amazon.com/dp/B073G856N6",
+ "model": {
+  "file": "models/abo-B073G856N6.glb",
+  "bytes": 291816,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.567499995,
+     0,
+     -0.502163589
+    ],
+    "max": [
+     0.5674999770453001,
+     1.0168790569298,
+     0.4858260710951
+    ],
+    "size": [
+     1.1349999720453001,
+     1.0168790569298,
+     0.9879896600951
+    ]
+   },
+   "tris": 29998,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 57184448,
+  "bytes": 291816,
+  "srcTris": 35222,
+  "tris": 29998,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 56338535,
+   "after": 128344,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9997,
+   0.9997,
+   0.9999
+  ]
+ },
+ "image": {
+  "file": "images/abo-B073G856N6.jpg",
+  "bytes": 7749,
+  "mime": "image/jpeg"
+ }
+}

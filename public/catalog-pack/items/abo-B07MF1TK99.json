@@ -1,0 +1,74 @@
+{
+ "id": "abo-B07MF1TK99",
+ "source": "abo",
+ "typeId": "table-lamp",
+ "formId": "round",
+ "name": "Rivet Table Lamp with Textured Ceramic Base",
+ "brand": "Rivet",
+ "price": 6290,
+ "currency": "RUB",
+ "dims": {
+  "H": 511,
+  "DIA": 240
+ },
+ "colors": [
+  "белый"
+ ],
+ "materials": [
+  "камень"
+ ],
+ "styleTags": [],
+ "url": "https://www.amazon.com/dp/B07MF1TK99",
+ "model": {
+  "file": "models/abo-B07MF1TK99.glb",
+  "bytes": 272632,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.120051228,
+     0,
+     -0.11983905
+    ],
+    "max": [
+     0.11996251511100002,
+     0.5110000199334,
+     0.12017469311100001
+    ],
+    "size": [
+     0.24001374311100002,
+     0.5110000199334,
+     0.24001374311100002
+    ]
+   },
+   "tris": 29999,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 4,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 29668524,
+  "bytes": 272632,
+  "srcTris": 54546,
+  "tris": 29999,
+  "textures": {
+   "images": 4,
+   "resized": 4,
+   "before": 28352987,
+   "after": 102370,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9994,
+   1.0005,
+   0.9994
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07MF1TK99.jpg",
+  "bytes": 2445,
+  "mime": "image/jpeg"
+ }
+}

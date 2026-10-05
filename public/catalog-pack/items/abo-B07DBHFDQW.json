@@ -1,0 +1,78 @@
+{
+ "id": "abo-B07DBHFDQW",
+ "source": "abo",
+ "typeId": "console",
+ "formId": "rect",
+ "name": "Ravenna Home Anne Marie Half-Moon Storage Curved Leg Console Entry Table",
+ "brand": "Ravenna Home",
+ "price": 27490,
+ "currency": "RUB",
+ "dims": {
+  "H": 780,
+  "W": 1219,
+  "D": 394
+ },
+ "colors": [
+  "белый"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "современный",
+  "классика"
+ ],
+ "url": "https://www.amazon.com/dp/B07DBHFDQW",
+ "model": {
+  "file": "models/abo-B07DBHFDQW.glb",
+  "bytes": 101712,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.609591484,
+     0,
+     -0.183327451
+    ],
+    "max": [
+     0.6094085966894002,
+     0.7800023100694,
+     0.210654446531
+    ],
+    "size": [
+     1.2190000806894001,
+     0.7800023100694,
+     0.393981897531
+    ]
+   },
+   "tris": 19084,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 1108648,
+  "bytes": 101712,
+  "srcTris": 19084,
+  "tris": 19084,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 664122,
+   "after": 6154,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9997,
+   0.9998,
+   1.0006
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07DBHFDQW.jpg",
+  "bytes": 3095,
+  "mime": "image/jpeg"
+ }
+}

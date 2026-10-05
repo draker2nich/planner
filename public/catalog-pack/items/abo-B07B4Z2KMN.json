@@ -1,0 +1,78 @@
+{
+ "id": "abo-B07B4Z2KMN",
+ "source": "abo",
+ "typeId": "mirror",
+ "formId": "wall",
+ "name": "Rivet Brecken Modern Mirror Wood Frame",
+ "brand": "Rivet",
+ "price": 15890,
+ "currency": "RUB",
+ "dims": {
+  "H": 940,
+  "W": 1041,
+  "D": 43,
+  "E": 1200
+ },
+ "colors": [
+  "коричневый"
+ ],
+ "materials": [
+  "дерево"
+ ],
+ "styleTags": [
+  "современный"
+ ],
+ "url": "https://www.amazon.com/dp/B07B4Z2KMN",
+ "model": {
+  "file": "models/abo-B07B4Z2KMN.glb",
+  "bytes": 94972,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.520500004,
+     -0.470703065,
+     0.000381600112
+    ],
+    "max": [
+     0.5205000022229002,
+     0.4692659939059001,
+     0.0433991795671
+    ],
+    "size": [
+     1.0410000062229001,
+     0.9399690589059001,
+     0.0430175794551
+    ]
+   },
+   "tris": 1372,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 13778084,
+  "bytes": 94972,
+  "srcTris": 1372,
+  "tris": 1372,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 13726258,
+   "after": 82470,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   0.9996,
+   1.0002,
+   0.9958
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07B4Z2KMN.jpg",
+  "bytes": 4930,
+  "mime": "image/jpeg"
+ }
+}

@@ -1,0 +1,74 @@
+{
+ "id": "abo-B07QC6VKWB",
+ "source": "abo",
+ "typeId": "plant",
+ "formId": "round",
+ "name": "Rivet Rustic Textured Stoneware Indoor Planter Pot",
+ "brand": "Rivet",
+ "price": 4090,
+ "currency": "RUB",
+ "dims": {
+  "H": 221,
+  "DIA": 254
+ },
+ "colors": [
+  "серый"
+ ],
+ "materials": [],
+ "styleTags": [
+  "кантри"
+ ],
+ "url": "https://www.amazon.com/dp/B07QC6VKWB",
+ "model": {
+  "file": "models/abo-B07QC6VKWB.glb",
+  "bytes": 305960,
+  "info": {
+   "bbox": {
+    "min": [
+     -0.126999989,
+     0,
+     -0.127000004
+    ],
+    "max": [
+     0.12700001314629997,
+     0.22099224992939998,
+     0.12699999814629997
+    ],
+    "size": [
+     0.2540000021463,
+     0.22099224992939998,
+     0.2540000021463
+    ]
+   },
+   "tris": 10080,
+   "meshes": 1,
+   "materials": 1,
+   "textures": 3,
+   "generator": "gltfpack 1.3"
+  }
+ },
+ "stats": {
+  "srcBytes": 21194984,
+  "bytes": 305960,
+  "srcTris": 10080,
+  "tris": 10080,
+  "textures": {
+   "images": 3,
+   "resized": 3,
+   "before": 20959367,
+   "after": 251640,
+   "skipped": null
+  },
+  "rotateY": 0,
+  "scale": [
+   1,
+   1.0001,
+   1
+  ]
+ },
+ "image": {
+  "file": "images/abo-B07QC6VKWB.jpg",
+  "bytes": 5469,
+  "mime": "image/jpeg"
+ }
+}
