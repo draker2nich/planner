@@ -52,6 +52,14 @@ const TEMPLATES = {
     lead: 'Ваш аккаунт и все проекты в нём удалены. Восстановить их нельзя.',
     note: 'Если хотите вернуться — зарегистрируйтесь заново с той же почтой.',
   }),
+  /* письмо менеджеру (CONTACT_EMAIL) о новой заявке; list — строки списка товаров */
+  lead: ({ lead, link }) => ({
+    subject: `Новая заявка: ${lead.name}, ${lead.phone} — ${BRAND}`,
+    lead: `Заявка по проекту «${lead.projectName}»${lead.variant ? ` (${lead.variant})` : ''}. Контакт: ${lead.name}, ${lead.phone}, ${lead.email}.${lead.comment ? ` Комментарий: ${lead.comment}` : ''}`,
+    list: lead.items.map((i) => `${i.name}${i.qty > 1 ? ` ×${i.qty}` : ''} — ${Math.round(i.price * i.qty).toLocaleString('ru-RU')} ${i.currency}`),
+    button: 'Открыть заявки', link,
+    note: `Итого: ${Math.round(lead.total).toLocaleString('ru-RU')} ${lead.currency}. Позиций: ${lead.items.length}.`,
+  }),
   blocked: ({ reason }) => ({
     subject: `Аккаунт заблокирован — ${BRAND}`,
     lead: 'Ваш аккаунт заблокирован администратором. Проекты сохранены, но вход недоступен.',
@@ -65,9 +73,10 @@ function render(kind, user, data, contact) {
   const t = make(data || {});
   const hello = user && user.name ? `Здравствуйте, ${user.name}!` : 'Здравствуйте!';
   const foot = contact ? `Вопросы — ${contact}` : '';
-  const text = [hello, '', t.lead, t.link ? `\n${t.button}: ${t.link}\n` : '', t.note, '', '— ' + BRAND, foot].filter((x) => x !== undefined).join('\n').replace(/\n{3,}/g, '\n\n').trim() + '\n';
+  const list = Array.isArray(t.list) ? t.list.slice(0, 200) : [];
+  const text = [hello, '', t.lead, list.length ? '\n' + list.map((x) => '• ' + x).join('\n') : '', t.link ? `\n${t.button}: ${t.link}\n` : '', t.note, '', '— ' + BRAND, foot].filter((x) => x !== undefined).join('\n').replace(/\n{3,}/g, '\n\n').trim() + '\n';
   const btn = t.link ? `<p style="margin:24px 0"><a href="${esc(t.link)}" style="display:inline-block;background:#18181b;color:#fafafa;text-decoration:none;padding:12px 20px;border-radius:8px;font-weight:600">${esc(t.button)}</a></p><p style="margin:0 0 16px;font-size:13px;color:#71717a">Если кнопка не работает, скопируйте ссылку в браузер:<br><span style="word-break:break-all">${esc(t.link)}</span></p>` : '';
-  const html = `<!doctype html><html lang="ru"><body style="margin:0;padding:24px;background:#fafafa;font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:#09090b"><div style="max-width:480px;margin:0 auto;background:#ffffff;border:1px solid #e4e4e7;border-radius:14px;padding:28px"><p style="margin:0 0 20px;font-weight:700;font-size:18px;letter-spacing:-.02em">furni<span style="color:#71717a;font-weight:500">tech</span></p><p style="margin:0 0 12px;font-size:16px">${esc(hello)}</p><p style="margin:0 0 12px;font-size:16px;line-height:24px">${esc(t.lead)}</p>${btn}<p style="margin:0;font-size:14px;line-height:21px;color:#52525b">${esc(t.note)}</p></div>${foot ? `<p style="max-width:480px;margin:16px auto 0;font-size:13px;color:#71717a;text-align:center">${esc(foot)}</p>` : ''}</body></html>`;
+  const html = `<!doctype html><html lang="ru"><body style="margin:0;padding:24px;background:#fafafa;font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:#09090b"><div style="max-width:480px;margin:0 auto;background:#ffffff;border:1px solid #e4e4e7;border-radius:14px;padding:28px"><p style="margin:0 0 20px;font-weight:700;font-size:18px;letter-spacing:-.02em">furni<span style="color:#71717a;font-weight:500">tech</span></p><p style="margin:0 0 12px;font-size:16px">${esc(hello)}</p><p style="margin:0 0 12px;font-size:16px;line-height:24px">${esc(t.lead)}</p>${list.length ? `<ul style="margin:0 0 12px;padding-left:20px;font-size:14px;line-height:22px">${list.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}${btn}<p style="margin:0;font-size:14px;line-height:21px;color:#52525b">${esc(t.note)}</p></div>${foot ? `<p style="max-width:480px;margin:16px auto 0;font-size:13px;color:#71717a;text-align:center">${esc(foot)}</p>` : ''}</body></html>`;
   return { subject: t.subject, text, html, link: t.link || null };
 }
 

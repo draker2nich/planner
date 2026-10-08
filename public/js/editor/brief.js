@@ -116,7 +116,7 @@ async function wishesDialog(st){
     box.append(h('div',{class:'hint',style:'margin-top:10px'},'Быстрые предпочтения (необязательно)'),pref);
     const stline=h('div',{class:'stline'},'Чтобы отправить, загрузите фото и отметьте, что нравится, выберите стиль или опишите пожелания словами'); box.append(stline);
     const cards=[];
-    function fill(){list.innerHTML='';cards.length=0;photos.forEach((p,idx)=>{const card=h('div',{class:'pcard'});const img=h('img',{alt:''});IDB.get(p.photoId).then(rec=>{if(rec)img.src=URL.createObjectURL(rec.blob);});
+    function fill(){list.innerHTML='';cards.length=0;photos.forEach((p,idx)=>{const card=h('div',{class:'pcard'});const img=h('img',{alt:''});photoRec(p.photoId).then(rec=>{if(rec){const u=URL.createObjectURL(rec.blob);img.onload=()=>URL.revokeObjectURL(u);img.src=u;}else{img.alt='Фото не найдено';card.classList.add('nophoto');}});
       const chips=h('div',{class:'chips'});LIKES.forEach(([k,nm])=>chips.append(h('button',{type:'button',class:'chip'+(p.likes.includes(k)?' on':''),onclick:()=>{const i=p.likes.indexOf(k);if(i>=0)p.likes.splice(i,1);else p.likes.push(k);fill();}},nm)));
       const body=h('div',{},h('div',{class:'pc-h'},h('span',{},`Фото ${idx+1} — что здесь нравится`),h('button',{class:'ghost',type:'button',onclick:()=>{photos.splice(idx,1);fill();}},ic('trash'),'Убрать')),chips);
       if(p.likes.includes('furniture')){const fch=h('div',{class:'chips'});const q=h('input',{type:'search',placeholder:'Какая мебель? Поиск по типам…',style:'height:30px;width:100%'});

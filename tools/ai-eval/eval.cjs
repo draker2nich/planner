@@ -88,7 +88,7 @@ async function main() {
   const aiFetch = flag('dump') ? async (url, init) => {
     const n = String(++dumpN).padStart(3, '0'); const body = JSON.parse(init.body);
     const text = (body.messages || []).map(m => (Array.isArray(m.content) ? m.content.filter(c => c.type === 'text').map(c => c.text).join('\n') : m.content)).join('\n\n');
-    fs.writeFileSync(path.join(OUT, `call-${n}-request.txt`), `--- system ---\n${typeof body.system === 'string' ? body.system : (body.messages[0] && body.messages[0].role === 'system' ? body.messages[0].content : '')}\n\n--- user ---\n${text}\n`);
+    fs.writeFileSync(path.join(OUT, `call-${n}-request.txt`), `--- system ---\n${typeof body.system === 'string' ? body.system : Array.isArray(body.system) ? body.system.map((x) => x.text).join('\n') : (body.messages[0] && body.messages[0].role === 'system' ? body.messages[0].content : '')}\n\n--- user ---\n${text}\n`);
     const r = await fetch(url, init); const j = await r.clone().json().catch(() => null);
     fs.writeFileSync(path.join(OUT, `call-${n}-response.json`), JSON.stringify(j, null, 2));
     return r;

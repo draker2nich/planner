@@ -21,6 +21,9 @@ const { syncPack } = require('./pack.js');
 const { makeAi, AiError } = require('./ai.js');
 const designer = require('./designer.js');
 const { mock: aiMock } = require('./ai-mock.js');
+const { makeAiUsage } = require('./ai-usage.js');
+const { makePhotos } = require('./photos.js');
+const { makeLeads } = require('./leads.js');
 
 /* ---------- сборка окружения ---------- */
 async function fromEnv(env = process.env, { dataDir } = {}) {
@@ -100,12 +103,18 @@ async function bootstrap(ctx) {
   ctx.baseUrl = baseUrl(ctx);
   ctx.audit = (userId, action, entity, entityId, data = {}) => db.run('INSERT INTO audit_log (user_id, action, entity, entity_id, data, at) VALUES (?,?,?,?,?,?)', [userId, action, entity, entityId, JSON.stringify(data), new Date().toISOString()]);
   ctx.oauth = makeOAuth(ctx, { baseUrl: ctx.baseUrl, secret, audit: ctx.audit, registrationOpen: () => registrationOpen(ctx) });
-  /* ИИ‑дизайнер: обращение к модели и пропуска генерации. ctx.aiFetch подставляют тесты. */
-  ctx.ai = makeAi(env, { mock: aiMock, ...(ctx.aiFetch ? { fetchFn: ctx.aiFetch } : {}) });
+  /* ИИ‑дизайнер: обращение к модели и пропуска генерации. ctx.aiFetch и ctx.aiSleep (пауза между повторами) подставляют тесты. */
+  ctx.ai = makeAi(env, { mock: aiMock, ...(ctx.aiFetch ? { fetchFn: ctx.aiFetch } : {}), ...(ctx.aiSleep ? { sleepFn: ctx.aiSleep } : {}) });
   ctx.aiPasses = designer.makePasses(ctx.limiter.tag);
   ctx.aiSeals = designer.makeSeals(ctx.limiter.tag);
+  ctx.aiUsage = makeAiUsage(db, env);
+  ctx.photos = makePhotos(db, ctx.storage);
+  ctx.leads = makeLeads(db, ctx.catalog);
   if (!ctx.ai.enabled) console.log('ИИ‑дизайнер выключен: ' + ctx.ai.why);
-  else console.log(`ИИ‑дизайнер: ${ctx.ai.mock ? 'заглушка (AI_MOCK=1)' : ctx.ai.provider + ' · ' + ctx.ai.model}`);
+  else {
+    const own = Object.entries(ctx.ai.models).filter(([, m]) => m !== ctx.ai.model).map(([k, m]) => `${k} — ${m}`).join(', ');
+    console.log(`ИИ‑дизайнер: ${ctx.ai.mock ? 'заглушка (AI_MOCK=1)' : ctx.ai.provider + ' · ' + ctx.ai.model + (own ? ` (по шагам: ${own})` : '')}`);
+  }
   await syncEnvAdmin(ctx);
   await ctx.catalog.backfillSearch();
   /* набор каталога из public/catalog-pack; сбой записи набора не должен останавливать сайт */
@@ -354,6 +363,7 @@ function createApp(makeCtx) {
     const c = await ctx.users.confirmDeletion(u, await readJson(req, 16 * 1024));
     if (!c.ok) { await ctx.limiter.hit(key, 5, 900); throw new ApiError(422, 'bad_credentials', c.message, { fields: { [c.field]: c.message } }); }
     await ctx.users.remove(u.id);
+    await ctx.photos.removeAll(u.id); // файлы фото; строки таблицы ушли каскадом
     await ctx.limiter.reset(key);
     await ctx.audit(u.id, 'user.delete', 'user', u.id); // без почты и имени
     await ctx.mailer.sendQuiet('account_deleted', { email: c.row.email, name: c.row.name }, {});
@@ -380,6 +390,42 @@ function createApp(makeCtx) {
   route('PATCH', '/api/projects/:id', async (ctx, req, p) => ctx.projects.rename(await writer(ctx, req), p.id, await readJson(req, 16 * 1024)));
   route('POST', '/api/projects/:id/copy', async (ctx, req, p) => { const u = await writer(ctx, req); await createLimit(ctx, u); return ctx.projects.copy(u, p.id); });
   route('DELETE', '/api/projects/:id', async (ctx, req, p) => ctx.projects.remove(await requireUser(ctx, req), p.id));
+
+  /* ---------- ссылка на проект для просмотра ----------
+     Владелец включает и отключает ссылку; по ней проект открывается без входа и только для чтения (GET /api/shared/:token). */
+  const shareUrl = (ctx, token) => `${ctx.baseUrl}/editor?share=${token}`;
+  route('POST', '/api/projects/:id/share', async (ctx, req, p) => { const r = await ctx.projects.share(await writer(ctx, req), p.id); return { token: r.token, url: shareUrl(ctx, r.token) }; });
+  route('DELETE', '/api/projects/:id/share', async (ctx, req, p) => ctx.projects.unshare(await requireUser(ctx, req), p.id));
+  const sharedLimit = async (ctx, req) => { const lim = await ctx.limiter.hit(`share:ip:${ctx.limiter.tag(clientIp(req))}`, 600, 3600); if (!lim.ok) throw tooMany(lim.retryAfter); };
+  route('GET', '/api/shared/:token', async (ctx, req, p) => { await sharedLimit(ctx, req); return ctx.projects.sharedGet(p.token); });
+  route('GET', '/api/shared/:token/photos/:photo', async (ctx, req, p) => { await sharedLimit(ctx, req); return ctx.photos.ofProject(await ctx.projects.sharedRow(p.token), p.photo, { materialsOnly: true }); });
+
+  /* ---------- фото пользователя (референсы и свои текстуры) ---------- */
+  route('GET', '/api/photos', async (ctx, req) => ctx.photos.list(await requireUser(ctx, req)));
+  route('PUT', '/api/photos/:id', async (ctx, req, p, q) => {
+    const u = await writer(ctx, req);
+    const lim = await ctx.limiter.hit(`photo:put:${u.id}`, 300, 3600);
+    if (!lim.ok) throw tooMany(lim.retryAfter);
+    return ctx.photos.put(u, p.id, await req.body(ctx.photos.MAX_BYTES), q);
+  });
+  route('GET', '/api/photos/:id', async (ctx, req, p) => ctx.photos.get(await requireUser(ctx, req), p.id));
+  route('DELETE', '/api/photos/:id', async (ctx, req, p, q) => ctx.photos.remove(await requireUser(ctx, req), p.id, q.project ? String(q.project) : undefined));
+
+  /* ---------- заявка менеджеру ----------
+     Список товаров проекта с контактом уходит в раздел «Заявки» админ‑панели и письмом на CONTACT_EMAIL (если почта настроена). */
+  route('POST', '/api/projects/:id/lead', async (ctx, req, p) => {
+    const u = await requireUser(ctx, req);
+    const pr = await ctx.projects.own(u, p.id);
+    /* в лимит идут только принятые заявки: опечатка в телефоне не должна отнимать попытку */
+    const lim = await ctx.limiter.peek(`lead:${u.id}`, 5, 3600);
+    if (!lim.ok) throw tooMany(lim.retryAfter);
+    const lead = await ctx.leads.create(u, pr, await readJson(req, 64 * 1024));
+    await ctx.limiter.hit(`lead:${u.id}`, 5, 3600);
+    await ctx.audit(u.id, 'lead.create', 'lead', lead.id, { items: lead.items.length, total: lead.total, currency: lead.currency });
+    const to = contactEmail(ctx);
+    if (to) await ctx.mailer.sendQuiet('lead', { email: to, name: '' }, { lead, link: `${ctx.baseUrl}/admin#/leads` });
+    return { ok: true, id: lead.id, items: lead.items.length, total: lead.total, currency: lead.currency };
+  });
 
   /* ---------- ИИ‑дизайнер ----------
      Три шага одной генерации — три запроса (см. server/core/designer.js). Каждый шаг — платное обращение к модели, поэтому:
@@ -411,7 +457,7 @@ function createApp(makeCtx) {
     const t0 = Date.now();
     try {
       const res = await fn();
-      await ctx.audit(u.id, 'ai.' + step, 'ai', entityId, { ...extra, ...(res.stats || {}), in: res.usage.in, out: res.usage.out, ms: res.ms, model: res.model }).catch((e) => console.error('audit:', e.message));
+      await ctx.audit(u.id, 'ai.' + step, 'ai', entityId, { ...extra, ...(res.stats || {}), in: res.usage.in, out: res.usage.out, ...(res.usage.cacheRead ? { cr: res.usage.cacheRead } : {}), ...(res.usage.cacheWrite ? { cw: res.usage.cacheWrite } : {}), ms: res.ms, model: res.model }).catch((e) => console.error('audit:', e.message));
       return res;
     } catch (e) {
       const code = e instanceof AiError ? e.code : e instanceof ApiError ? e.code : 'internal';
@@ -474,7 +520,7 @@ function createApp(makeCtx) {
   route('GET', '/api/catalog/products', async (ctx, req, p, q) => (q.limit != null || q.offset != null) ? ctx.catalog.publicPage(q) : ({ products: await ctx.catalog.publicList() }));
 
   // админ: товары
-  route('GET', '/api/admin/stats', admin(async (ctx) => ({ ...(await ctx.catalog.stats()), users: await ctx.users.total() })));
+  route('GET', '/api/admin/stats', admin(async (ctx) => ({ ...(await ctx.catalog.stats()), users: await ctx.users.total(), leads: await ctx.leads.fresh() })));
 
   // админ: пользователи (ТЗ этапа 2, раздел 8)
   route('GET', '/api/admin/users', admin((ctx, u, req, p, q) => ctx.users.list(q)));
@@ -495,6 +541,17 @@ function createApp(makeCtx) {
     const r = await ctx.users.revokeSessions(p.id);
     await ctx.audit(u.id, 'user.sessions_revoke', 'user', r.row.id, { revoked: r.revoked });
     return ctx.users.get(p.id, ctx.projects);
+  }));
+  route('GET', '/api/admin/projects/:id/photos/:photo', admin(async (ctx, u, req, p) => {
+    const row = await ctx.db.get('SELECT * FROM projects WHERE id=? AND deleted_at IS NULL', [String(p.id)]);
+    if (!row) throw new ApiError(404, 'not_found', 'Проект не найден');
+    return ctx.photos.ofProject(row, p.photo, { materialsOnly: false });
+  }));
+  route('GET', '/api/admin/leads', admin((ctx, u, req, p, q) => ctx.leads.list(q)));
+  route('POST', '/api/admin/leads/:id/status', admin(async (ctx, u, req, p) => {
+    const lead = await ctx.leads.setStatus(p.id, (await readJson(req, 4096)).status);
+    await ctx.audit(u.id, 'lead.' + lead.status, 'lead', lead.id);
+    return lead;
   }));
   route('GET', '/api/admin/projects/:id', admin(async (ctx, u, req, p) => {
     const pr = await ctx.projects.adminGet(p.id);
@@ -535,6 +592,8 @@ function createApp(makeCtx) {
     const pack = await syncPack(ctx, { force: true }).catch((e) => { console.error('Набор каталога не записан в базу:', e.message); return null; });
     return { deleted, restored: pack ? pack.imported : 0 };
   }));
+  /* сводка расходов ИИ‑дизайнера за последние days суток: токены, ошибки и (если заданы цены) стоимость */
+  route('GET', '/api/admin/ai/usage', admin((ctx, u, req, p, q) => ctx.aiUsage.summary(q.days)));
   /* entity=ai — только обращения к ИИ‑дизайнеру (их много, в общем списке они вытесняют остальное); entity=other — всё, кроме них */
   route('GET', '/api/admin/audit', admin(async (ctx, u, req, p, q) => {
     const where = q.entity === 'ai' ? "WHERE a.entity = 'ai'" : q.entity === 'other' ? "WHERE a.entity <> 'ai'" : '';

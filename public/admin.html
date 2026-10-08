@@ -70,6 +70,16 @@ button.stat{display:flex;flex-direction:column;align-items:flex-start;justify-co
 button.stat:hover{background:var(--card);border-color:color-mix(in srgb,var(--foreground) 22%,var(--border))}
 button.stat span{color:var(--muted-foreground);font-size:13px;font-weight:500;line-height:1.2}
 button.stat b{font-size:24px;font-weight:600;letter-spacing:-.02em;line-height:1.1;font-variant-numeric:tabular-nums}
+/* сводка расходов ИИ и заявки */
+.kpis{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;margin-bottom:16px}
+.kpi{display:flex;flex-direction:column;gap:6px;padding:14px 16px;border-radius:var(--radius-xl);background:var(--card);border:1px solid var(--border);box-shadow:var(--shadow-sm)}
+.kpi span{color:var(--muted-foreground);font-size:13px;font-weight:500;line-height:1.2}
+.kpi b{font-size:22px;font-weight:600;letter-spacing:-.02em;line-height:1.1;font-variant-numeric:tabular-nums}
+.kpi small{color:var(--muted-foreground);font-size:12px}
+.usage{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,460px),1fr));gap:12px;margin-bottom:20px;align-items:start}
+.usage h4{margin:0;padding:14px 16px 6px;font-size:14px;font-weight:600}
+.usage td.r,.usage th.r{text-align:right;font-variant-numeric:tabular-nums}
+.usagehint{color:var(--muted-foreground);font-size:13px;margin:-8px 0 16px}
 button.stat.on{border-color:var(--primary);box-shadow:0 0 0 1px var(--primary),var(--shadow-sm)}
 
 /* ---------- фильтры ---------- */
@@ -389,6 +399,7 @@ function renderNav(){
     link('products','box','Товары',h('span',{class:'cnt'},st.total??'')),
     link('categories','grid','Категории'),
     h('div',{class:'grp'},'Платформа'),
+    link('leads','inbox','Заявки',st.leads?h('span',{class:'cnt'},st.leads):null),
     link('users','users','Пользователи',h('span',{class:'cnt'},st.users??'')),
     link('companies','building','Компании',h('span',{class:'soon'},'скоро')),
     link('moderation','shield','Модерация',st.review?h('span',{class:'cnt'},st.review):h('span',{class:'soon'},'скоро')),
@@ -419,6 +430,7 @@ async function route(){
     case 'companies': return soonPage('Компании',companiesSoon());
     case 'moderation': return soonPage('Модерация',moderationSoon());
     case 'users': if(parts[1])return userPage(parts[1]); return usersPage();
+    case 'leads': return leadsPage();
     case 'audit': return auditPage();
     default: location.hash='#/products';
   }
@@ -754,18 +766,74 @@ function blockDialog(u,onOk){modal((b,close)=>{
     h('div',{class:'btns'},h('button',{type:'button',onclick:()=>close()},'Отмена'),h('button',{type:'submit',class:'destructive'},'Заблокировать')));
   b.append(h('h3',{},'Заблокировать пользователя?'),form);});}
 
+/* ---------- заявки менеджеру ---------- */
+/* Заявка — снимок списка товаров проекта с контактом пользователя (кнопка «Отправить заявку менеджеру» в редакторе) */
+let LEADS_VIEW='new';
+async function leadsPage(){const main=$('#main');
+  const tabs=h('div',{class:'seg',role:'group','aria-label':'Какие заявки показывать'},...[['new','Новые'],['done','Обработанные'],['','Все']].map(([v,l])=>h('button',{type:'button',class:LEADS_VIEW===v?'on':'','aria-pressed':String(LEADS_VIEW===v),onclick:()=>{LEADS_VIEW=v;leadsPage();}},l)));
+  main.replaceChildren(h('div',{class:'ph'},h('div',{class:'tt'},h('h2',{},'Заявки'),h('p',{class:'desc'},'Пользователи отправляют список товаров своего проекта и телефон для связи. Письмо о новой заявке уходит на CONTACT_EMAIL, если почта настроена.')),tabs),h('div',{class:'empty',role:'status'},'Загрузка…'));
+  let r;try{r=await api('GET','/admin/leads'+(LEADS_VIEW?'?status='+LEADS_VIEW:''));}catch(e){main.lastChild.textContent=e.message;return;}
+  if(S.stats&&S.stats.leads!==r.fresh){S.stats.leads=r.fresh;renderNav();}
+  const money=(v,c)=>Math.round(v).toLocaleString('ru')+' '+(c||'');
+  if(!r.leads.length){main.lastChild.replaceWith(h('div',{class:'card'},h('div',{class:'empty'},ic('inbox'),h('b',{},LEADS_VIEW==='new'?'Новых заявок нет':'Заявок пока нет'),'Заявка появится здесь, когда пользователь отправит её из редактора.')));return;}
+  const open=(l)=>modal((b,close)=>{
+    const rows=l.items.map(i=>h('tr',{},h('td',{},i.url?h('a',{class:'rowlink',href:i.url,target:'_blank',rel:'noopener noreferrer'},i.name):i.name,h('div',{class:'sub'},i.brand||'')),h('td',{class:'tnum',style:'text-align:center'},'×'+i.qty),h('td',{class:'tnum',style:'text-align:right;white-space:nowrap'},money(i.price*i.qty,i.currency))));
+    const set=async(st)=>{try{await api('POST',`/admin/leads/${l.id}/status`,{status:st});toast(st==='done'?'Заявка отмечена обработанной':'Заявка возвращена в новые');close();leadsPage();}catch(e){toast(e.message,true);}};
+    b.append(...[h('h3',{},'Заявка от '+fmtDate(l.createdAt)),
+      h('p',{},h('b',{},l.name),' · ',h('a',{href:'tel:'+l.phone.replace(/[^+\d]/g,'')},l.phone),' · ',h('a',{href:'mailto:'+l.email},l.email)),
+      l.comment?h('p',{class:'sub'},'«'+l.comment+'»'):null,
+      h('p',{class:'sub'},'Проект «'+(l.projectName||'без названия')+'»'+(l.variant?' · '+l.variant:'')),
+      h('div',{class:'tcard',style:'max-height:320px;overflow:auto;border:1px solid var(--border);border-radius:var(--radius-lg)'},h('table',{},h('tbody',{},...rows))),
+      h('p',{style:'text-align:right;font-weight:600;margin:12px 0 0'},'Итого: '+money(l.total,l.currency)),
+      h('div',{class:'btns'},
+        l.projectId?h('button',{type:'button',onclick:()=>window.open('/editor?view='+encodeURIComponent(l.projectId),'_blank','noopener')},'Открыть проект'):null,
+        l.user?h('button',{type:'button',onclick:()=>{close();location.hash='#/users/'+l.user.id;}},'К пользователю'):null,
+        l.status==='new'?h('button',{type:'button',class:'primary',onclick:()=>set('done')},'Отметить обработанной'):h('button',{type:'button',onclick:()=>set('new')},'Вернуть в новые'))].filter(Boolean));});
+  main.lastChild.replaceWith(h('div',{class:'card tcard'},h('table',{},h('thead',{},h('tr',{},h('th',{},'Когда'),h('th',{},'Кто'),h('th',{},'Проект'),h('th',{},'Товаров'),h('th',{style:'text-align:right'},'Сумма'),h('th',{},'Статус'))),
+    h('tbody',{},...r.leads.map(l=>h('tr',{class:'clk',tabindex:'0',onclick:()=>open(l),onkeydown:e=>{if(e.key==='Enter')open(l);}},h('td',{class:'sub tnum'},fmtDate(l.createdAt)),h('td',{},l.name,h('div',{class:'sub'},l.phone)),h('td',{},l.projectName||'—',l.variant?h('div',{class:'sub'},l.variant):null),h('td',{class:'tnum'},String(l.items.reduce((s,i)=>s+i.qty,0))),h('td',{class:'tnum',style:'text-align:right;white-space:nowrap'},money(l.total,l.currency)),h('td',{},h('span',{class:'badge '+(l.status==='new'?'info':'ok')},l.status==='new'?'Новая':'Обработана'))))))));}
+
+/* ---------- расходы ИИ‑дизайнера ---------- */
+/* Сводка по журналу обращений к модели: токены, ошибки и — если на сервере заданы цены (AI_PRICE_IN / AI_PRICE_OUT или AI_PRICES) — стоимость */
+let USAGE_DAYS=30;
+async function aiUsageBlock(box){
+  const n=v=>Math.round(+v||0).toLocaleString('ru');
+  box.replaceChildren(h('div',{class:'empty',role:'status'},'Считаем расходы…'));
+  let u;try{u=await api('GET','/admin/ai/usage?days='+USAGE_DAYS);}catch(e){box.replaceChildren(h('div',{class:'usagehint',role:'alert'},'Сводка расходов недоступна: '+e.message));return;}
+  const money=v=>v==null?'—':(v<10?v.toFixed(2):Math.round(v).toLocaleString('ru'))+' '+u.currency;
+  const ok=u.total.calls-u.total.errors;
+  const period=h('div',{class:'seg',role:'group','aria-label':'Период сводки'},...[[1,'Сутки'],[7,'7 дней'],[30,'30 дней'],[90,'90 дней']].map(([d,l])=>h('button',{type:'button',class:USAGE_DAYS===d?'on':'','aria-pressed':String(USAGE_DAYS===d),onclick:()=>{USAGE_DAYS=d;aiUsageBlock(box);}},l)));
+  const kpi=(label,val,note)=>h('div',{class:'kpi'},h('span',{},label),h('b',{},val),note?h('small',{},note):null);
+  const kpis=h('div',{class:'kpis'},
+    kpi('Генераций',n(u.runs),ok?`обращений к модели: ${n(u.total.calls)}`:null),
+    kpi('Токены ввода',n(u.total.in),u.total.cacheRead?`из кэша ${n(u.total.cacheRead)} (${Math.round(u.total.cacheRead/Math.max(1,u.total.in)*100)}%)`:'кэш не использовался'),
+    kpi('Токены вывода',n(u.total.out)),
+    kpi('Ошибки',n(u.total.errors),u.total.calls?`${(u.total.errors/u.total.calls*100).toFixed(1)}% обращений`:null),
+    kpi('Среднее время',ok?(u.total.ms/Math.max(1,u.total.calls)/1000).toFixed(1)+' с':'—','на одно обращение'),
+    u.priced?kpi('Стоимость',money(u.total.cost),u.runs?`≈ ${money(u.total.cost/u.runs)} за генерацию`:null):null);
+  const STEP={taste:'Разбор пожеланий',concept:'Подбор товаров',layout:'Расстановка'};
+  const table=(title,head,rows)=>h('div',{class:'card tcard'},h('h4',{},title),rows.length?h('table',{},h('thead',{},h('tr',{},...head.map(([l,r])=>h('th',{class:r?'r':''},l)))),h('tbody',{},...rows)):h('div',{class:'empty',style:'padding:20px'},'Нет данных за период'));
+  const cols=[['',0],['Обращений',1],['Ввод',1],['Вывод',1],...(u.priced?[['Стоимость',1]]:[])];
+  const cells=(r)=>[h('td',{class:'r'},n(r.calls)+(r.errors?` (ош. ${n(r.errors)})`:'')),h('td',{class:'r'},n(r.in)),h('td',{class:'r'},n(r.out)),u.priced?h('td',{class:'r'},r.unpriced&&!r.cost?'нет цены':money(r.cost)):null];
+  const steps=table('По шагам и моделям',[['Шаг',0],...cols.slice(1)],u.bySteps.map(r=>h('tr',{},h('td',{},STEP[r.step]||r.step,h('div',{class:'sub'},r.model||'ошибки без ответа модели')),...cells(r))));
+  const days=table('По дням',[['День',0],...cols.slice(1)],u.byDay.slice(0,14).map(r=>h('tr',{},h('td',{class:'tnum'},new Date(r.day+'T00:00:00').toLocaleDateString('ru',{day:'2-digit',month:'2-digit',weekday:'short'})),...cells(r))));
+  const users=u.topUsers.length?table('Кто расходует больше всего',[['Пользователь',0],['Обращений',1],['Ввод',1],['Вывод',1]],u.topUsers.map(r=>h('tr',{class:'clk',onclick:()=>{location.hash='#/users/'+r.id;}},h('td',{},r.email||'удалённый аккаунт'),h('td',{class:'r'},n(r.calls)),h('td',{class:'r'},n(r.in)),h('td',{class:'r'},n(r.out))))):null;
+  const note=u.priced?(u.total.unpriced?h('p',{class:'usagehint'},`Для части моделей цена не задана — ${n(u.total.unpriced)} обращений в стоимость не вошли. Добавьте их в AI_PRICES.`):null):h('p',{class:'usagehint'},'Стоимость не считается: задайте на сервере цены за миллион токенов — AI_PRICE_IN и AI_PRICE_OUT или AI_PRICES по моделям.');
+  box.replaceChildren(...[h('div',{class:'toolbar'},period),kpis,note,h('div',{class:'usage'},steps,days,users)].filter(Boolean));
+}
+
 /* ---------- журнал ---------- */
 /* Обращения к ИИ‑дизайнеру идут тремя строками на каждую генерацию и вытеснили бы остальное из последних 200 событий — у них свой отбор */
 let AUDIT_VIEW='other';
 async function auditPage(){const main=$('#main');
   const tabs=h('div',{class:'seg',role:'group','aria-label':'Какие события показывать'},...[['other','Каталог и аккаунты'],['ai','ИИ‑дизайнер'],['','Все']].map(([v,l])=>h('button',{type:'button',class:AUDIT_VIEW===v?'on':'','aria-pressed':String(AUDIT_VIEW===v),onclick:()=>{AUDIT_VIEW=v;auditPage();}},l)));
   main.replaceChildren(h('div',{class:'ph'},h('div',{class:'tt'},h('h2',{},'Журнал действий'),h('p',{class:'desc'},AUDIT_VIEW==='ai'?'Последние 200 обращений к модели: шаг, расход токенов, время ответа, ошибки. Тексты и фото заказчиков в журнал не пишутся.':'Последние 200 событий: каталог, аккаунты, доступ поддержки к проектам.')),tabs),h('div',{class:'empty',role:'status'},'Загрузка…'));
+  if(AUDIT_VIEW==='ai'){const box=h('div',{});main.lastChild.before(box);aiUsageBlock(box);}
   let r;try{r=await api('GET','/admin/audit?limit=200'+(AUDIT_VIEW?'&entity='+AUDIT_VIEW:''));}catch(e){main.lastChild.textContent=e.message;return;}
   const A={create:'создал товар',update:'изменил товар',delete:'удалил товар',publish:'опубликовал',unpublish:'снял с публикации',archive:'в архив',reject:'отклонил',submit:'отправил на модерацию','model.upload':'загрузил 3D‑модель','model.delete':'удалил 3D‑модель','image.add':'добавил фото','image.delete':'удалил фото','demo.purge':'удалил демо‑товары',
     'user.register':'зарегистрировался','user.register_rejected':'регистрация отклонена (бот)','user.verify':'подтвердил почту','user.password_reset':'сбросил пароль по письму','user.delete':'удалил свой аккаунт','user.block':'заблокировал пользователя','user.unblock':'разблокировал пользователя','user.sessions_revoke':'завершил сеансы пользователя','user.oauth_link':'подключил вход через провайдера','user.oauth_register':'зарегистрировался через провайдера','project.view':'открыл проект пользователя',
-    'ai.taste':'ИИ: разбор пожеланий','ai.concept':'ИИ: подбор товаров','ai.layout':'ИИ: расстановка'};
+    'lead.create':'отправил заявку менеджеру','lead.done':'отметил заявку обработанной','lead.new':'вернул заявку в новые','ai.taste':'ИИ: разбор пожеланий','ai.concept':'ИИ: подбор товаров','ai.layout':'ИИ: расстановка'};
   const AI_ERR={ai_timeout:'модель не успела',ai_busy:'модель перегружена',ai_auth:'ключ отклонён',ai_network:'нет связи',ai_request:'запрос не принят',ai_refused:'отказ модели',ai_truncated:'ответ оборвался',ai_bad_answer:'ответ не разобран',no_candidates:'нет товаров',validation:'плохой запрос'};
-  const aiDetail=d=>d.error?('ошибка: '+(AI_ERR[d.error]||d.error)):[d.model,d.in!=null?`${(+d.in).toLocaleString('ru')} → ${(+d.out).toLocaleString('ru')} ток.`:'',d.ms!=null?(d.ms/1000).toFixed(1)+' с':'',d.candidates!=null?`кандидатов ${d.candidates}`:'',d.movable!=null?`предметов ${d.movable}`:'',d.photos?`фото ${d.photos}`:'',d.retry?'повтор':''].filter(Boolean).join(' · ');
+  const aiDetail=d=>d.error?('ошибка: '+(AI_ERR[d.error]||d.error)):[d.model,d.in!=null?`${(+d.in).toLocaleString('ru')} → ${(+d.out).toLocaleString('ru')} ток.`:'',d.cr?`из кэша ${(+d.cr).toLocaleString('ru')}`:'',d.ms!=null?(d.ms/1000).toFixed(1)+' с':'',d.candidates!=null?`кандидатов ${d.candidates}`:'',d.movable!=null?`предметов ${d.movable}`:'',d.photos?`фото ${d.photos}`:'',d.retry?'повтор':''].filter(Boolean).join(' · ');
   const parse=a=>{try{return JSON.parse(a.data)||{};}catch(e){return {};}};
   /* куда ведёт строка: товар, пользователь или владелец просмотренного проекта */
   const target=(a,d)=>a.entity==='ai'?(a.user_id?'#/users/'+a.user_id:null):a.entity==='user'?(a.entity_id&&a.action!=='user.delete'?'#/users/'+a.entity_id:null):a.entity==='project'?(d.owner?'#/users/'+d.owner:null):(a.entity_id&&a.action!=='delete'?'#/products/'+a.entity_id:null);

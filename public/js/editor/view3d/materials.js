@@ -31,6 +31,36 @@ function getLibTexture(id){if(T3.libTex.has(id))return T3.libTex.get(id);const c
 const IDB={db:null,open(){if(this.db)return Promise.resolve(this.db);return new Promise((res,rej)=>{const r=indexedDB.open('roomEditor.assets',1);r.onupgradeneeded=()=>r.result.createObjectStore('photos',{keyPath:'id'});r.onsuccess=()=>{this.db=r.result;res(this.db);};r.onerror=()=>rej(r.error);});},
   tx(mode,fn){return this.open().then(db=>new Promise((res,rej)=>{const t=db.transaction('photos',mode);const st=t.objectStore('photos');const rq=fn(st);rq.onsuccess=()=>res(rq.result);rq.onerror=()=>rej(rq.error);}));},
   put(rec){return this.tx('readwrite',s=>s.put(rec));},get(id){return this.tx('readonly',s=>s.get(id));},del(id){return this.tx('readwrite',s=>s.delete(id));},all(){return this.tx('readonly',s=>s.getAll());}};
+/* Фото в аккаунте. Браузер держит свою копию фото (быстро и без сети), сервер — копию для других устройств.
+   PHOTO_NET подставляет account.js: push(id) — дослать фото в аккаунт, pull(id) — взять с сервера, drop(id) — убрать из аккаунта.
+   Пока PHOTO_NET не задан (сессия ещё проверяется), фото живут только в этом браузере — как раньше. */
+let PHOTO_NET=null;
+const PHOTO_MEM=new Map(),PHOTO_MISS=new Map(); // взятое с сервера в этой вкладке; чего на сервере не нашлось (не спрашиваем чаще раза в полминуты)
+/* Запись фото {id, blob, w, h, createdAt}: из браузера, а если там нет — из аккаунта. null — фото нет нигде. */
+async function photoRec(id){
+  if(!id)return null;
+  let rec=null;try{rec=await IDB.get(id);}catch(e){}
+  if(rec&&rec.blob)return rec;
+  if(PHOTO_MEM.has(id))return PHOTO_MEM.get(id);
+  if(!PHOTO_NET||Date.now()-(PHOTO_MISS.get(id)||0)<30000)return null;
+  const pr=PHOTO_NET.pull(id).catch(()=>null).then(r=>{if(!r){PHOTO_MEM.delete(id);PHOTO_MISS.set(id,Date.now());}return r;});
+  PHOTO_MEM.set(id,pr);return pr;
+}
+/* Фото для панели «Мои фото»: всё, что есть в браузере, плюс фото этого проекта, которых здесь ещё нет (проект открыт на другом устройстве) */
+async function photoLibrary(){
+  let all=[];try{all=await IDB.all();}catch(e){}
+  const have=new Set(all.map(r=>r.id));
+  const miss=[...new Set([...(P.photos||[]),...usedPhotoIds()])].filter(id=>!have.has(id)).slice(0,40);
+  const got=await Promise.all(miss.map(id=>photoRec(id)));
+  return all.concat(got.filter(Boolean));
+}
+/* Удалить фото из браузера и из аккаунта (сервер оставит его, если оно нужно другому проекту) */
+async function photoDelete(id){
+  try{await IDB.del(id);}catch(e){}
+  PHOTO_MEM.delete(id);if(typeof T3!=='undefined')T3.photoTex.delete(id);
+  if(P.photos){const i=P.photos.indexOf(id);if(i>=0)P.photos.splice(i,1);}
+  if(PHOTO_NET)PHOTO_NET.drop(id);
+}
 async function importPhoto(file){
   if(!/^image\/(jpeg|png|webp)$/.test(file.type))throw new Error('Формат: JPG, PNG или WebP');
   if(file.size>15*1024*1024)throw new Error('Файл больше 15 МБ');
@@ -38,11 +68,11 @@ async function importPhoto(file){
   const c=document.createElement('canvas');c.width=w;c.height=h;c.getContext('2d').drawImage(bmp,0,0,w,h);
   const png=file.type==='image/png'; const blob=await new Promise(r=>c.toBlob(r,png?'image/png':'image/jpeg',0.85));
   const all=await IDB.all(); const total=all.reduce((s,r)=>s+r.blob.size,0)+blob.size; if(total>60*1024*1024)throw new Error('Освободите место: удалите неиспользуемые фото');
-  const id=uid(); await IDB.put({id,blob,w,h,createdAt:Date.now()}); P.photos=P.photos||[]; P.photos.push(id); save(); return id;
+  const id=uid(); await IDB.put({id,blob,w,h,createdAt:Date.now()}); P.photos=P.photos||[]; P.photos.push(id); save(); if(PHOTO_NET)PHOTO_NET.push(id); return id;
 }
 function getPhotoTexture(id){
   if(T3.photoTex.has(id))return T3.photoTex.get(id);
-  const pr=IDB.get(id).then(rec=>{if(!rec)return null;return createImageBitmap(rec.blob).then(b=>{const t=new THREE.Texture(b);t.encoding=THREE.sRGBEncoding;t.anisotropy=8;t.needsUpdate=true;return t;});}).catch(()=>null);
+  const pr=photoRec(id).then(rec=>{if(!rec)return null;return createImageBitmap(rec.blob).then(b=>{const t=new THREE.Texture(b);t.encoding=THREE.sRGBEncoding;t.anisotropy=8;t.needsUpdate=true;return t;});}).catch(()=>null);
   T3.photoTex.set(id,pr);return pr;
 }
 /* Используемые фото: текстуры стен и пола (в том числе в исходной расстановке и вариантах ИИ‑дизайнера) и фото‑референсы брифа */
@@ -50,15 +80,15 @@ function usedPhotoIds(){const used=new Set();const mat=(m)=>{if(m&&m.type==='pho
   P.walls.forEach(w=>mat(w.material));mat(P.floor?.material);brief(P.brief);brief(P.briefDraft);
   if(P.ai){brief(P.ai.brief);const cell=(c)=>{if(!c||!c.finishes)return;Object.values(c.finishes.walls||{}).forEach(mat);mat(c.finishes.floor);};cell(P.ai.base);(P.ai.variants||[]).forEach(cell);(P.ai.prevVariants||[]).forEach(cell);}
   return used;}
-async function gcPhotos(){const used=usedPhotoIds();const all=await IDB.all();let n=0;for(const r of all){if(!used.has(r.id)){await IDB.del(r.id);n++;}}P.photos=[...used];save();toast(n?`Удалено фото: ${n}`:'Неиспользуемых фото нет');}
+async function gcPhotos(){const used=usedPhotoIds();const all=await IDB.all();let n=0;for(const r of all){if(!used.has(r.id)){await photoDelete(r.id);n++;}}P.photos=[...used];save();toast(n?`Удалено фото: ${n}`:'Неиспользуемых фото нет');}
 
 /* ---------- Материалы three.js ---------- */
 function buildMaterial(m,faceW,faceH,u0=0,v0=0,isFloor=false){
-  const mat=new THREE.MeshStandardMaterial({color:isFloor?FLOOR_DEF:WALL_DEF,roughness:isFloor?0.6:0.9,side:THREE.FrontSide});
-  if(!m||m.type==='color'){mat.color.set(m?.color||(isFloor?FLOOR_DEF:WALL_DEF));mat.roughness=m?.roughness??(isFloor?0.6:0.9);return mat;}
+  const mat=new THREE.MeshStandardMaterial({color:lin(isFloor?FLOOR_DEF:WALL_DEF),roughness:isFloor?0.6:0.9,side:THREE.FrontSide});
+  if(!m||m.type==='color'){mat.color.copy(lin(m?.color||(isFloor?FLOOR_DEF:WALL_DEF)));mat.roughness=m?.roughness??(isFloor?0.6:0.9);return mat;}
   const rot=(m.rotation||0)*Math.PI/180;
   if(m.type==='texture'){const lib=TEXLIB.find(t=>t.id===m.textureId);const src=getLibTexture(m.textureId);if(!lib||!src)return mat;const tex=src.clone();tex.needsUpdate=true;const sc=(m.scale||100)/100;tex.repeat.set(1/(lib.physW/1000*sc),1/(lib.physH/1000*sc));tex.center.set(0.5,0.5);tex.rotation=rot;const off=m.offset||[0,0];tex.offset.set(off[0]/100,off[1]/100);mat.map=tex;mat.color.set('#ffffff');mat.roughness=lib.roughness;return mat;}
-  if(m.type==='photo'){mat.color.set('#c9c9c4');getPhotoTexture(m.photoId).then(src=>{if(!src)return;const iw=src.image.width,ih=src.image.height;let tex;
+  if(m.type==='photo'){mat.color.copy(lin('#c9c9c4'));getPhotoTexture(m.photoId).then(src=>{if(!src)return;const iw=src.image.width,ih=src.image.height;let tex;
       if(m.mode==='tile'){tex=src.clone();tex.needsUpdate=true;tex.wrapS=tex.wrapT=THREE.RepeatWrapping;const pw=(m.physW||1000)/1000,ph=pw*ih/iw;const sc=(m.scale||100)/100;tex.repeat.set(1/(pw*sc),1/(ph*sc));tex.center.set(0.5,0.5);tex.rotation=rot;const off=m.offset||[0,0];tex.offset.set(off[0]/100,off[1]/100);}
       else{const fa=faceW/faceH,ia=iw/ih;const cover=(m.fit||'cover')==='cover';const al=(m.align||'cc');const ax={l:0,c:0.5,r:1}[al[1]]??0.5,ay={t:1,c:0.5,b:0}[al[0]]??0.5;
         if(cover){tex=src.clone();tex.needsUpdate=true;tex.wrapS=tex.wrapT=THREE.ClampToEdgeWrapping;let rw,rh;if(ia>fa){rh=1/faceH;rw=1/(faceH*ia);}else{rw=1/faceW;rh=1/(faceW/ia);}tex.repeat.set(rw,rh);tex.offset.set(ax*(1-faceW*rw)-u0*rw,ay*(1-faceH*rh)-v0*rh);}

@@ -35,11 +35,38 @@ function makePreview(data) {
 }
 /* Пустой проект, который сервер создаёт сам (экран «Мои проекты» → «Новый проект»).
    Остальные поля достраивает normalizeProject в редакторе. */
+/* Идентификаторы фото, на которые ссылается проект. materialsOnly — только текстуры стен и пола (то, что видно в комнате);
+   без него — ещё и фото‑референсы из пожеланий. Повторяет usedPhotoIds() редактора (public/js/editor/view3d/materials.js). */
+function photoIdsOf(data, { materialsOnly = false } = {}) {
+  const out = new Set();
+  if (!data || typeof data !== 'object') return out;
+  const ok = (v) => typeof v === 'string' && /^[A-Za-z0-9_-]{4,40}$/.test(v);
+  const mat = (m) => { if (m && m.type === 'photo' && ok(m.photoId)) out.add(m.photoId); };
+  const brief = (b) => { if (materialsOnly) return; for (const p of (b && Array.isArray(b.photos) ? b.photos : [])) if (p && ok(p.photoId)) out.add(p.photoId); };
+  const cell = (c) => { if (!c || !c.finishes) return; for (const m of Object.values(c.finishes.walls || {})) mat(m); mat(c.finishes.floor); mat(c.finishes.ceiling); };
+  for (const w of Array.isArray(data.walls) ? data.walls : []) mat(w && w.material);
+  mat(data.floor && data.floor.material); mat(data.ceiling && data.ceiling.material);
+  brief(data.brief); brief(data.briefDraft);
+  if (data.ai && typeof data.ai === 'object') { brief(data.ai.brief); cell(data.ai.base); for (const k of ['variants', 'prevVariants']) for (const c of Array.isArray(data.ai[k]) ? data.ai[k] : []) cell(c); }
+  return out;
+}
+/* Проект для просмотра по ссылке: комната, мебель и варианты — как есть; личное (тексты пожеланий, фото‑референсы,
+   разобранный профиль вкуса, черновик мастера) убирается. Структура брифа остаётся: по ней редактор открывает экран результата. */
+function publicData(data) {
+  if (!data || typeof data !== 'object') return data;
+  const d = JSON.parse(JSON.stringify(data));
+  const strip = (b) => { if (b && typeof b === 'object') { b.text = ''; b.photos = []; } };
+  strip(d.brief); delete d.briefDraft;
+  if (d.ai && typeof d.ai === 'object') { strip(d.ai.brief); d.ai.taste = null; }
+  d.photos = [...photoIdsOf(d, { materialsOnly: true })];
+  return d;
+}
+const SHARE_RE = /^[A-Za-z0-9_-]{24,64}$/;
 const blankProject = (name) => ({ id: crypto.randomBytes(4).toString('hex'), name, unit: 'mm', vertices: [], walls: [], openings: [], furniture: [], closed: false, status: 'draft', createdAt: now(), updatedAt: now() });
 
 function makeProjects(db) {
   const parsePreview = (s) => { try { return s ? JSON.parse(s) : null; } catch { return null; } };
-  const meta = (r) => ({ id: r.id, name: r.name, rev: Number(r.rev), size: Number(r.size), createdAt: r.created_at, updatedAt: r.updated_at, preview: parsePreview(r.preview) });
+  const meta = (r) => ({ id: r.id, name: r.name, rev: Number(r.rev), size: Number(r.size), createdAt: r.created_at, updatedAt: r.updated_at, preview: parsePreview(r.preview), shared: !!r.share_token });
 
   function cleanName(raw, { required = false } = {}) {
     const s = String(raw == null ? '' : raw).replace(/\s+/g, ' ').trim();
@@ -83,7 +110,7 @@ function makeProjects(db) {
     purge,
     async list(user) {
       await purge();
-      const rows = await db.all('SELECT id,name,rev,size,created_at,updated_at,preview FROM projects WHERE user_id=? AND deleted_at IS NULL ORDER BY updated_at DESC, id', [user.id]);
+      const rows = await db.all('SELECT id,name,rev,size,created_at,updated_at,preview,share_token FROM projects WHERE user_id=? AND deleted_at IS NULL ORDER BY updated_at DESC, id', [user.id]);
       /* проекты, сохранённые до появления миниатюр: вычисляем один раз */
       for (const r of rows) {
         if (r.preview) continue;
@@ -97,7 +124,7 @@ function makeProjects(db) {
     async get(user, id) {
       const r = await own(user, id);
       let data = null; try { data = JSON.parse(r.data); } catch { data = null; }
-      return { ...meta(r), data };
+      return { ...meta(r), data, share: r.share_token || null };
     },
     /* data необязателен: без него создаётся пустой проект в мм */
     async create(user, body) {
@@ -120,7 +147,7 @@ function makeProjects(db) {
         const cur = await own(user, id);
         throw new ApiError(409, 'conflict', 'Проект изменили на другом устройстве', { rev: Number(cur.rev), updatedAt: cur.updated_at });
       }
-      return meta({ id: r.id, name, rev: rev + 1, size, created_at: r.created_at, updated_at: t, preview });
+      return meta({ id: r.id, name, rev: rev + 1, size, created_at: r.created_at, updated_at: t, preview, share_token: r.share_token });
     },
     /* Переименование: имя меняется и в колонке, и внутри данных проекта; версия растёт,
        чтобы редактор с прежней версией на другом устройстве не затёр новое имя */
@@ -149,8 +176,35 @@ function makeProjects(db) {
     },
     async remove(user, id) {
       const r = await own(user, id);
-      await db.run('UPDATE projects SET deleted_at=? WHERE id=?', [now(), r.id]);
+      await db.run('UPDATE projects SET deleted_at=?, share_token=NULL WHERE id=?', [now(), r.id]); // ссылка на удалённый проект перестаёт работать сразу
       return { ok: true };
+    },
+    own,
+    /* ---------- ссылка для просмотра ----------
+       Кто знает ссылку, видит проект без входа и только для чтения. Ссылка одна на проект; владелец может её отключить —
+       тогда прежний адрес перестаёт работать, а новая ссылка получит другой адрес. */
+    async share(user, id) {
+      const r = await own(user, id);
+      if (r.share_token) return { token: r.share_token };
+      const token = crypto.randomBytes(24).toString('base64url');
+      await db.run('UPDATE projects SET share_token=? WHERE id=? AND share_token IS NULL', [token, r.id]);
+      return { token: (await db.get('SELECT share_token FROM projects WHERE id=?', [r.id])).share_token };
+    },
+    async unshare(user, id) {
+      const r = await own(user, id);
+      await db.run('UPDATE projects SET share_token=NULL WHERE id=?', [r.id]);
+      return { ok: true };
+    },
+    /* → строка проекта по ссылке или 404 */
+    async sharedRow(token) {
+      const r = SHARE_RE.test(String(token || '')) ? await db.get('SELECT * FROM projects WHERE share_token=? AND deleted_at IS NULL', [String(token)]) : null;
+      if (!r) throw new ApiError(404, 'not_found', 'Ссылка недействительна или отключена владельцем');
+      return r;
+    },
+    async sharedGet(token) {
+      const r = await this.sharedRow(token);
+      let data = null; try { data = JSON.parse(r.data); } catch {}
+      return { name: r.name, rev: Number(r.rev), updatedAt: r.updated_at, data: publicData(data) };
     },
     /* Для поддержки: проект любого пользователя целиком, только чтение */
     async adminGet(id) {
@@ -160,10 +214,10 @@ function makeProjects(db) {
       return { ...meta(r), data, owner: { id: r.user_id, email: r.owner_email, name: r.owner_name } };
     },
     async adminList(userId) {
-      const rows = await db.all('SELECT id,name,rev,size,created_at,updated_at,preview FROM projects WHERE user_id=? AND deleted_at IS NULL ORDER BY updated_at DESC, id', [userId]);
+      const rows = await db.all('SELECT id,name,rev,size,created_at,updated_at,preview,share_token FROM projects WHERE user_id=? AND deleted_at IS NULL ORDER BY updated_at DESC, id', [userId]);
       return rows.map(meta);
     },
   };
 }
 
-module.exports = { makeProjects, makePreview, PROJECT_MAX_BYTES: MAX_BYTES };
+module.exports = { makeProjects, makePreview, photoIdsOf, publicData, PROJECT_MAX_BYTES: MAX_BYTES };

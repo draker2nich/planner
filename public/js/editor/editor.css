@@ -551,3 +551,98 @@ body.res #aiBar{display:none}
   #result .aiacts button{flex:1 1 calc(50% - 4px)}
   #result .aiacts button.primary,#result .aiacts button[aria-pressed="true"]{margin-left:0;flex-basis:100%}
 }
+
+/* ---------- первый шаг на пустом плане (start.js) ---------- */
+#startCard{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:4;width:min(440px,calc(100% - 32px));padding:24px;background:var(--popover);border:1px solid var(--border);border-radius:var(--radius-xl);box-shadow:var(--shadow-md);text-align:center;animation:fade-in .2s ease-out}
+#startCard h3{margin:0 0 6px;font-size:20px;font-weight:600;letter-spacing:-.01em}
+#startCard p{margin:0 0 16px;color:var(--muted-foreground);font-size:14px;line-height:20px;text-wrap:pretty}
+.sc-btns{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.sc-btns button{height:40px;padding:0 16px}
+.sc-steps{display:flex;gap:4px 14px;justify-content:center;flex-wrap:wrap;margin:18px 0 0;padding:14px 0 0;border-top:1px solid var(--border);list-style:none;counter-reset:sc;font-size:12px;line-height:18px;color:var(--muted-foreground)}
+.sc-steps li{counter-increment:sc}
+.sc-steps li::before{content:counter(sc) '. '}
+.tplprev{display:block;width:240px;height:150px;margin:12px auto 0}
+@media (max-width:640px){#startCard{top:44%;padding:20px 16px}.sc-btns button{flex:1 1 100%}}
+
+/* ---------- путь к покупке (order.js) ---------- */
+.orderblk{grid-column:1/-1;display:flex;flex-direction:column;gap:12px}
+.orderblk h4{margin:0!important}
+.orderblk .note{margin:0;font-size:14px;line-height:1.5;color:var(--muted-foreground)}
+.orderblk .seg{align-self:flex-start}
+.orderblk .summary{margin:0}
+.orderacts{display:flex;gap:8px;flex-wrap:wrap}
+.ofld{display:flex;flex-direction:column;gap:6px;margin:12px 0 0}
+.ofld label{font-size:13px;font-weight:500}
+.ofld input,.ofld textarea{width:100%}
+.ofld .bad{outline:2px solid var(--destructive);outline-offset:-1px}
+.sharerow{display:flex;gap:8px;margin:12px 0 4px}
+.sharerow input{flex:1;min-width:0;font-size:13px}
+@media (max-width:640px){.orderacts button{flex:1 1 100%}.sharerow{flex-direction:column}}
+
+/* Лист сметы: на экране скрыт, при печати виден только он */
+#printSheet{display:none}
+@media print{
+  @page{margin:14mm}
+  html,body{height:auto!important;min-height:0!important;overflow:visible!important;background:#fff!important}
+  body>*:not(#printSheet){display:none!important}
+  #printSheet{display:block!important;color:#111;font:13px/1.45 Inter,-apple-system,'Segoe UI',Roboto,Arial,sans-serif}
+  #printSheet .ps-head{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:8px;border-bottom:1px solid #ccc;margin-bottom:14px}
+  #printSheet .ps-brand{font-weight:700;font-size:18px;letter-spacing:-.02em}
+  #printSheet .ps-brand span{color:#777;font-weight:500}
+  #printSheet .ps-meta{color:#555;font-size:12px}
+  #printSheet h1{margin:0 0 2px;font-size:22px;line-height:1.2;letter-spacing:-.01em}
+  #printSheet .ps-sub{margin:0 0 10px;color:#444;font-size:14px}
+  #printSheet .ps-plan{display:block;width:100%;max-width:150mm;margin:8px auto 10px;border:1px solid #ddd;border-radius:6px}
+  #printSheet .ps-room{margin:0 0 12px;color:#444;font-size:12px}
+  #printSheet table{width:100%;border-collapse:collapse}
+  #printSheet th{text-align:left;font-size:11px;font-weight:600;color:#555;border-bottom:1px solid #999;padding:6px 6px}
+  #printSheet td{padding:6px;border-bottom:1px solid #ddd;vertical-align:top}
+  #printSheet tr{break-inside:avoid}
+  #printSheet thead{display:table-header-group}
+  #printSheet .ps-n{width:20px;color:#777}
+  #printSheet .ps-img{width:56px}
+  #printSheet .ps-img img{width:48px;height:48px;object-fit:contain}
+  #printSheet .ps-nm b{font-weight:600}
+  #printSheet .ps-nm div{color:#555;font-size:11px}
+  #printSheet .ps-nm a{display:block;color:#555;font-size:10px;text-decoration:none;word-break:break-all}
+  #printSheet .ps-q{text-align:center;white-space:nowrap}
+  #printSheet .ps-p{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+  #printSheet .ps-ph td{color:#777}
+  #printSheet .ps-total{display:flex;justify-content:space-between;align-items:baseline;margin-top:12px;font-size:13px;break-inside:avoid}
+  #printSheet .ps-total b{font-size:16px}
+  #printSheet .ps-foot{margin-top:14px;color:#777;font-size:11px}
+}
+
+/* ---------- каталог: поиск товаров и фильтры ---------- */
+.cprod .plist{display:flex;flex-direction:column;gap:2px;padding:4px 0 8px}
+.prow{display:grid;grid-template-columns:40px minmax(0,1fr) auto;gap:10px;align-items:center;width:100%;height:auto;padding:6px 8px;border:none;background:transparent;box-shadow:none;border-radius:var(--radius-md);text-align:left}
+.prow:hover{background:var(--accent)}
+.prow img{width:40px;height:40px;object-fit:contain;border-radius:var(--radius-sm);background:#fff}
+.prow img.gen{background:var(--muted)}
+.prow .pn{min-width:0;display:flex;flex-direction:column;gap:1px}
+.prow .pn b{font-size:13px;font-weight:500;line-height:17px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.prow .pn small{font-size:12px;line-height:16px;color:var(--muted-foreground);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.prow .pp{font-size:12px;color:var(--muted-foreground);font-variant-numeric:tabular-nums;white-space:nowrap}
+#dlg .pfilters{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:8px 0 4px}
+#dlg .pfilters .pf-q{position:relative;flex:1 1 180px;min-width:0}
+#dlg .pfilters .pf-q .ic{position:absolute;left:10px;top:50%;transform:translateY(-50%);width:16px;height:16px;color:var(--muted-foreground);pointer-events:none}
+#dlg .pfilters .pf-q input{width:100%;padding-left:32px}
+#dlg .pfilters .pf-price{display:flex;gap:4px;flex:0 0 auto}
+#dlg .pfilters .pf-price input{width:92px}
+#dlg .pfilters select{flex:0 1 auto;width:auto;max-width:190px}
+#dlg .pfilters .chk{display:inline-flex;align-items:center;gap:6px;font-size:13px;white-space:nowrap;margin:0}
+#dlg .pf-count{margin:0 0 6px}
+@media (max-width:640px){#dlg .pfilters .pf-price{flex:1 1 100%}#dlg .pfilters .pf-price input{flex:1;width:auto}#dlg .pfilters select{flex:1 1 45%;max-width:none}}
+
+/* ---------- 3D: кнопка в шапке, режимы «Обзор» и «Изнутри» ---------- */
+header #btn3d{gap:6px;padding:0 10px;font-weight:600;font-size:13px}
+header #btn3d .ic{width:16px;height:16px}
+body.orbit3d header .walk3d,body.orbit3d #minimap{display:none!important}
+body.in3d header .segc.only3d{display:inline-flex}
+@media (max-width:640px){header #btn3d{padding:0 8px}header #btn3d .ic{display:none}}
+@media (max-width:640px){#hint3d:not([hidden]){display:block;left:12px;right:12px;bottom:auto;top:calc(12px + var(--safe-top));transform:none;max-width:none;font-size:12px;line-height:16px}}
+#hint3d{pointer-events:none}
+/* с рядом фильтров окно товаров выше — список сам занимает оставшуюся высоту, кнопки остаются на виду */
+@media (min-width:641px){#dlg:has(.pfilters) .pgrid{max-height:min(56vh,calc(100vh - 400px))}}
+/* просмотр по ссылке и поддержкой: плашка «только просмотр» не должна закрывать заголовок экрана результата */
+body.ro #result{padding-top:72px}

@@ -132,6 +132,38 @@ const MIGRATIONS = [
     "ALTER TABLE users ADD COLUMN disabled_reason TEXT NOT NULL DEFAULT ''",
     'ALTER TABLE projects ADD COLUMN preview TEXT',
   ],
+  // v6: фото пользователя в аккаунте (референсы и свои текстуры), ссылка на проект для просмотра, заявки менеджеру
+  [
+    `CREATE TABLE IF NOT EXISTS user_photos (
+      user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      id TEXT NOT NULL,
+      file TEXT NOT NULL,
+      mime TEXT NOT NULL,
+      w INTEGER NOT NULL DEFAULT 0,
+      h INTEGER NOT NULL DEFAULT 0,
+      bytes INTEGER NOT NULL DEFAULT 0,
+      created_at TEXT NOT NULL,
+      PRIMARY KEY (user_id, id))`,
+    'ALTER TABLE projects ADD COLUMN share_token TEXT',
+    'CREATE UNIQUE INDEX IF NOT EXISTS projects_share ON projects(share_token)',
+    `CREATE TABLE IF NOT EXISTS leads (
+      id TEXT PRIMARY KEY,
+      user_id TEXT REFERENCES users(id) ON DELETE SET NULL,
+      project_id TEXT,
+      project_name TEXT NOT NULL DEFAULT '',
+      variant TEXT NOT NULL DEFAULT '',
+      name TEXT NOT NULL DEFAULT '',
+      phone TEXT NOT NULL DEFAULT '',
+      email TEXT NOT NULL DEFAULT '',
+      comment TEXT NOT NULL DEFAULT '',
+      items TEXT NOT NULL DEFAULT '[]',
+      total DOUBLE PRECISION NOT NULL DEFAULT 0,
+      currency TEXT NOT NULL DEFAULT '',
+      status TEXT NOT NULL DEFAULT 'new' CHECK (status IN ('new','done')),
+      created_at TEXT NOT NULL,
+      updated_at TEXT NOT NULL)`,
+    'CREATE INDEX IF NOT EXISTS leads_created ON leads(created_at)',
+  ],
 ];
 const SCHEMA_VERSION = 1 + MIGRATIONS.length;
 

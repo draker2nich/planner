@@ -92,7 +92,7 @@ async function aiPhotoData(blob,side,q){
 }
 async function aiPhotoPayload(photos){
   const recs=[];let missing=0;
-  for(const p of photos||[]){let rec=null;try{rec=await IDB.get(p.photoId);}catch(e){}if(rec&&rec.blob)recs.push({p,blob:rec.blob});else missing++;}
+  for(const p of photos||[]){let rec=null;try{rec=await photoRec(p.photoId);}catch(e){}if(rec&&rec.blob)recs.push({p,blob:rec.blob});else missing++;}
   const build=async(side,q)=>{const out=[];for(const r of recs)out.push({mime:'image/jpeg',data:await aiPhotoData(r.blob,side,q),likes:r.p.likes||[],furnitureTypes:r.p.furnitureTypes==='all'?'all':(r.p.furnitureTypes||[]).filter(t=>TYPE.has(t)).slice(0,20),comment:(r.p.comment||'').slice(0,300)});return out;};
   let out=await build(1024,0.82);
   if(out.reduce((s,p)=>s+p.data.length,0)>3300*1024)out=await build(768,0.72);
@@ -159,7 +159,7 @@ async function aiRun(opts){
   });
   if(err){toast(err,true);return false;}
   if(out.runsLeft!=null)AI_RUNS_LEFT=out.runsLeft;
-  if(out.taste&&out.taste.missing)toast(`Фото не найдены на этом устройстве и не учтены: ${out.taste.missing}`,true);
+  if(out.taste&&out.taste.missing)toast(`Фото не найдены ни на этом устройстве, ни в аккаунте и не учтены: ${out.taste.missing}`,true);
   E.propsOpen=false;showResult();return true;
 }
 /* Поменять местами нынешние и прежние варианты */

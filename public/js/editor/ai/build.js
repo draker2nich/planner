@@ -226,7 +226,7 @@ async function aiPipeline(env){
   if(!taste){
     const ph=env.photos?await env.photos():{photos:[],missing:0};
     const prefsSignal=['style','palette'].some(k=>brief.prefs&&brief.prefs[k]&&brief.prefs[k]!=='Неважно');
-    if(!ph.photos.length&&(brief.photos||[]).length&&!aiMeaningful(text)&&!prefsSignal)throw new Error('Фото‑референсы не найдены на этом устройстве. Загрузите их заново или опишите пожелания словами');
+    if(!ph.photos.length&&(brief.photos||[]).length&&!aiMeaningful(text)&&!prefsSignal)throw new Error('Фото‑референсы не найдены ни на этом устройстве, ни в аккаунте. Загрузите их заново или опишите пожелания словами');
     if(ph.photos.length||aiMeaningful(text)){const r=await api('/ai/taste',{photos:ph.photos,text,prefs:aiPrefs(brief.prefs),types:types.slice(0,60)});taste={key,profile:r.profile,seal:r.seal||'',missing:ph.missing||0};}
     else taste={key,profile:null};
   }

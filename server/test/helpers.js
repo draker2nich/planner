@@ -9,7 +9,7 @@ const auth = require('../core/auth.js');
 async function makeApp(env = {}, { aiFetch } = {}) {
   const dataDir = fs.mkdtempSync(path.join(os.tmpdir(), 'planner-test-'));
   let ctx;
-  const app = createApp(async () => { ctx = await fromEnv({ AUTH_SECRET: 'test-secret', ...env }, { dataDir }); if (aiFetch) ctx.aiFetch = aiFetch; return ctx; });
+  const app = createApp(async () => { ctx = await fromEnv({ AUTH_SECRET: 'test-secret', ...env }, { dataDir }); if (aiFetch) { ctx.aiFetch = aiFetch; ctx.aiSleep = async () => {}; } return ctx; }); // повторы при перегрузке модели в тестах не ждут
   await app.init();
   /* Каталог теста — только свои товары: при запуске сервер мог записать набор public/catalog-pack или демо‑товары */
   const setCatalog = async (products) => {

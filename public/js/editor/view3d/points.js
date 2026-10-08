@@ -6,9 +6,14 @@
 /* =====================================================================
    Этап 1.1 / 1.2 — точки обзора, 3D‑режим, материалы
    ===================================================================== */
-const T3={active:false,ready:false,scene:null,camera:null,renderer:null,room:null,pickables:[],arrows:[],point:0,yaw:0,pitch:0,fov:70,moving:null,sel:null,outline:null,dirty:false,models:{},raf:0,drag:null,libTex:new Map(),photoTex:new Map(),avg:new Map(),panelTarget:null};
+const T3={active:false,ready:false,scene:null,camera:null,renderer:null,room:null,pickables:[],arrows:[],point:0,yaw:0,pitch:0,fov:70,moving:null,sel:null,outline:null,dirty:false,models:{},raf:0,drag:null,libTex:new Map(),photoTex:new Map(),avg:new Map(),panelTarget:null,
+  /* режим: 'walk' — изнутри, от первого лица; 'orbit' — обзор снаружи сверху («кукольный домик») */
+  mode:'walk',pos:null,free:false,keys:new Set(),orb:{yaw:0,pitch:0.9,dist:8},labels:new Map(),hoverId:null,hoverT:0,tapT:0,lastT:0,wallMeshes:[],ceil:null,sun:null};
 const hasWebGL=(()=>{try{const c=document.createElement('canvas');return !!(c.getContext('webgl2')||c.getContext('webgl'));}catch(e){return false;}})();
 const FLOOR_DEF='#d9cfbf', WALL_DEF='#e9e6df', CEIL_DEF='#f4f4f2', EXT_COL='#9a9a94';
+/* Цвет из палитры (#rrggbb, sRGB) → цвет материала three.js (линейный). Без перевода цвета в 3D выходили светлее выбранных:
+   бежевый пол выглядел почти белым. Текстуры и модели каталога помечены как sRGB и переводятся самим three.js. */
+const lin=(c)=>new THREE.Color(c).convertSRGBToLinear();
 
 /* ---------- Точки обзора ---------- */
 const VP={key:null,points:[]};

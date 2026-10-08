@@ -29,13 +29,13 @@ test('Anthropic: структурированный вывод, ключ в за
   const ai = makeAi({ AI_API_KEY: 'secret' }, { fetchFn: async (url, init) => { seen = { url, init, body: JSON.parse(init.body) }; return anthropicOk('{"a":5}'); } });
   const r = await ai.call({ name: 'taste', system: 'SYS', text: 'TXT', images: [{ mime: 'image/jpeg', data: 'AAAA' }], schema: SCHEMA, maxTokens: 123 });
   assert.deepEqual(r.data, { a: 5 });
-  assert.deepEqual(r.usage, { in: 11, out: 7 });
+  assert.deepEqual(r.usage, { in: 11, out: 7, cacheRead: 0, cacheWrite: 0 });
   assert.equal(seen.url, 'https://api.anthropic.com/v1/messages');
   assert.equal(seen.init.headers['x-api-key'], 'secret');
   assert.equal(seen.init.headers['anthropic-version'], '2023-06-01');
   assert.equal(seen.body.model, 'claude-opus-5-5');
   assert.equal(seen.body.max_tokens, 123);
-  assert.equal(seen.body.system, 'SYS');
+  assert.deepEqual(seen.body.system, [{ type: 'text', text: 'SYS', cache_control: { type: 'ephemeral' } }], 'системный запрос помечен для кэша');
   assert.deepEqual(seen.body.output_config, { format: { type: 'json_schema', schema: SCHEMA } });
   assert.equal(seen.body.tool_choice, undefined, 'принудительный вызов инструмента новые модели не принимают');
   assert.deepEqual(seen.body.messages[0].content.map(c => c.type), ['image', 'text']);
@@ -70,7 +70,7 @@ test('повтор без схемы — только на «запрос не �
 });
 
 test('коды ошибок: отказ, обрыв, ключ, перегрузка, сеть, не JSON', async () => {
-  const run = (fetchFn) => makeAi({ AI_API_KEY: 'k' }, { fetchFn }).call({ name: 'x', system: 's', text: 't', schema: SCHEMA });
+  const run = (fetchFn) => makeAi({ AI_API_KEY: 'k' }, { fetchFn, sleepFn: async () => {} }).call({ name: 'x', system: 's', text: 't', schema: SCHEMA });
   const code = (c) => (e) => e instanceof AiError && e.code === c;
   await assert.rejects(run(async () => anthropicOk('', { stop_reason: 'refusal' })), code('ai_refused'));
   await assert.rejects(run(async () => anthropicOk('{"a":', { stop_reason: 'max_tokens' })), code('ai_truncated'));
@@ -81,6 +81,47 @@ test('коды ошибок: отказ, обрыв, ключ, перегруз�
   await assert.rejects(run(async () => { const e = new Error('t'); e.name = 'TimeoutError'; throw e; }), code('ai_timeout'));
   await assert.rejects(run(async () => anthropicOk('извините, не могу')), code('ai_bad_answer'));
   await assert.rejects(makeAi({ AI_API_KEY: 'k' }, { fetchFn: async () => anthropicOk('{}') }).call({ name: 'x', system: 's', text: 't', schema: SCHEMA, images: [{ mime: 'image/gif', data: 'A' }] }), code('ai_request'));
+});
+
+test('модель по шагам: AI_MODEL_<ШАГ> заменяет общую только для своего шага', async () => {
+  const seen = [];
+  const ai = makeAi({ AI_API_KEY: 'k', AI_MODEL: 'big', AI_MODEL_TASTE: 'small' }, { fetchFn: async (url, init) => { seen.push(JSON.parse(init.body).model); return anthropicOk('{"a":1}'); } });
+  assert.deepEqual(ai.models, { taste: 'small', concept: 'big', layout: 'big' });
+  const r1 = await ai.call({ name: 'taste', system: 's', text: 't', schema: SCHEMA });
+  const r2 = await ai.call({ name: 'layout', system: 's', text: 't', schema: SCHEMA });
+  assert.deepEqual(seen, ['small', 'big']);
+  assert.deepEqual([r1.model, r2.model], ['small', 'big'], 'в журнал уходит модель, которая отвечала');
+});
+
+test('перегрузка и сбой сети: запрос повторяется с паузой провайдера, пока есть время', async () => {
+  const pauses = []; let n = 0;
+  const ai = makeAi({ AI_API_KEY: 'k' }, { sleepFn: async (ms) => { pauses.push(ms); }, fetchFn: async () => { n++; if (n === 1) return reply(529, { error: { type: 'overloaded_error' } }); if (n === 2) return reply(429, {}, { 'retry-after': '3' }); return anthropicOk('{"a":2}'); } });
+  const r = await ai.call({ name: 'x', system: 's', text: 't', schema: SCHEMA });
+  assert.deepEqual(r.data, { a: 2 });
+  assert.equal(n, 3);
+  assert.deepEqual(pauses, [1500, 3000], 'первая пауза своя, вторая — из Retry-After');
+  /* число повторов ограничено: по умолчанию два */
+  let m = 0;
+  await assert.rejects(makeAi({ AI_API_KEY: 'k' }, { sleepFn: async () => {}, fetchFn: async () => { m++; return reply(503, {}); } }).call({ name: 'x', system: 's', text: 't', schema: SCHEMA }), (e) => e.code === 'ai_busy');
+  assert.equal(m, 3);
+  /* AI_RETRIES=0 — без повторов; пауза длиннее оставшегося времени — тоже */
+  m = 0;
+  await assert.rejects(makeAi({ AI_API_KEY: 'k', AI_RETRIES: '0' }, { sleepFn: async () => {}, fetchFn: async () => { m++; return reply(529, {}); } }).call({ name: 'x', system: 's', text: 't', schema: SCHEMA }), (e) => e.code === 'ai_busy');
+  assert.equal(m, 1);
+  m = 0;
+  await assert.rejects(makeAi({ AI_API_KEY: 'k', AI_TIMEOUT_MS: '10000' }, { sleepFn: async () => { throw new Error('ждать не должны'); }, fetchFn: async () => { m++; return reply(429, {}, { 'retry-after': '30' }); } }).call({ name: 'x', system: 's', text: 't', schema: SCHEMA }), (e) => e.code === 'ai_busy' && e.retryAfter === 30);
+  assert.equal(m, 1);
+  /* отказ по ключу и «запрос не принят» не повторяются */
+  m = 0;
+  await assert.rejects(makeAi({ AI_API_KEY: 'k' }, { sleepFn: async () => {}, fetchFn: async () => { m++; return reply(401, {}); } }).call({ name: 'x', system: 's', text: 't', schema: SCHEMA }), (e) => e.code === 'ai_auth');
+  assert.equal(m, 1);
+});
+
+test('кэш запросов: прочитанное из кэша и записанное в него входит в общий ввод и считается отдельно', async () => {
+  const ai = makeAi({ AI_API_KEY: 'k' }, { fetchFn: async () => anthropicOk('{"a":1}', { usage: { input_tokens: 40, output_tokens: 9, cache_read_input_tokens: 2000, cache_creation_input_tokens: 100 } }) });
+  assert.deepEqual((await ai.call({ name: 'layout', system: 's', text: 't', schema: SCHEMA })).usage, { in: 2140, out: 9, cacheRead: 2000, cacheWrite: 100 });
+  const oa = makeAi({ AI_API_KEY: 'k', AI_PROVIDER: 'openai', AI_MODEL: 'm' }, { fetchFn: async () => reply(200, { choices: [{ message: { content: '{"a":1}' } }], usage: { prompt_tokens: 500, completion_tokens: 5, prompt_tokens_details: { cached_tokens: 300 } } }) });
+  assert.deepEqual((await oa.call({ name: 'layout', system: 's', text: 't', schema: SCHEMA })).usage, { in: 500, out: 5, cacheRead: 300, cacheWrite: 0 });
 });
 
 test('сервис с интерфейсом chat/completions: response_format и Bearer', async () => {

@@ -8,13 +8,16 @@
      boot    — запуск: сессия ещё проверяется;
      account — локальная копия + синхронизация с /api/projects (PUT с проверкой версии);
      locked  — сессия закончилась во время работы: только просмотр и приглашение войти;
-     view    — поддержка смотрит чужой проект (/editor?view=<id>): только чтение, ничего не сохраняется.
+     view    — поддержка смотрит чужой проект (/editor?view=<id>) или гость открыл проект по ссылке владельца
+               (/editor?share=<ключ>): только чтение, ничего не сохраняется.
    Адрес: /editor?project=<id> — открыть проект аккаунта; параметр всегда соответствует открытому проекту. */
 (function () {
   const LS = { id: 'roomEditor.projectId', rev: 'roomEditor.projectRev', dirty: 'roomEditor.dirty', owner: 'roomEditor.projectUser', backup: 'roomEditor.project.backup' };
   const ID_RE = /^[A-Za-z0-9-]{8,64}$/;
   const VIEW_ID = (() => { const v = new URLSearchParams(location.search).get('view'); return v && ID_RE.test(v) ? v : null; })();
-  if (VIEW_ID) READONLY = true; // сразу, до любых таймеров сохранения: свой локальный проект администратора не трогаем
+  /* Проект по ссылке владельца (/editor?share=<ключ>): открывается без входа и только для просмотра */
+  const SHARE = (() => { const v = new URLSearchParams(location.search).get('share'); return !VIEW_ID && v && /^[A-Za-z0-9_-]{24,64}$/.test(v) ? v : null; })();
+  if (VIEW_ID || SHARE) READONLY = true; // сразу, до любых таймеров сохранения: свой локальный проект в этом браузере не трогаем
   const SKIP = ['viewport', 'panelCollapsed']; // вид плана не синхронизируем — иначе прокрутка плодит версии
   const lsGet = (k) => { try { return localStorage.getItem(k); } catch { return null; } };
   const lsSet = (k, v) => { try { v == null ? localStorage.removeItem(k) : localStorage.setItem(k, String(v)); } catch {} };
@@ -353,7 +356,7 @@ body.ro #props input,body.ro #props select,body.ro #props textarea,body.ro #prop
   /* ---------- запуск (ТЗ этапа 1, 11.4; ТЗ этапа 2, 7.4) ---------- */
   async function start() {
     try { const f = sessionStorage.getItem('planner.flash'); if (f) { sessionStorage.removeItem('planner.flash'); toast(f); } } catch {}
-    if (VIEW_ID) return startView();
+    if (VIEW_ID || SHARE) return startView();
     const want = wanted();
     if (!Session.token) return toLogin(); // проект создаётся только в аккаунте
     ind('loading');
@@ -363,6 +366,8 @@ body.ro #props input,body.ro #props select,body.ro #props textarea,body.ro #prop
     if (!u) return toLogin();
     handlePanelParam();
     Sync.user = u; Sync.mode = 'account'; renderAccount();
+    PHOTO_NET = { push: photoPush, drop: photoDrop, pull: (id) => photoPull(id, '/api/photos/', Session.token, true) };
+    setTimeout(photoBackfill, 2500);
     fetch('/api/config', { headers: { Accept: 'application/json' } }).then((r) => (r.ok ? r.json() : {})).then((c) => { Sync.mail = c.mail === true; renderAccount(); }).catch(() => {});
     /* локальная копия привязана к проекту другого аккаунта — не показываем и не предлагаем её */
     const owner = lsGet(LS.owner);
@@ -422,17 +427,22 @@ body.ro #props input,body.ro #props select,body.ro #props textarea,body.ro #prop
     $('#projName').readOnly = true;
     P = normalizeProject(newProject()); D = derive(P); hist = []; hi = -1; snapshot(); $('#projName').value = ''; render();
     showResult(); // экран результата мог открыться для локального проекта администратора — к просматриваемому он не относится
-    const box = $('#acctBox'); if (box) box.replaceChildren(h('a', { class: 'lbtn', href: '/admin#/users' }, 'В админ‑панель'));
+    const home = SHARE ? '/' : '/admin#/users', homeLabel = SHARE ? 'На главную' : 'В админ‑панель';
+    const box = $('#acctBox'); if (box) box.replaceChildren(h('a', { class: 'lbtn' + (SHARE ? ' primary' : ''), href: SHARE ? '/register' : home }, SHARE ? 'Спланировать свою комнату' : homeLabel));
     const fail = (title, text) => dialog((b, api) => {
       b.append(h('h3', {}, title), h('div', { class: 'hint' }, text));
-      api.buttons = [{ label: 'В админ‑панель', primary: true, onClick: (a) => a.close(true) }];
-    }).then(() => { location.href = '/admin#/users'; });
-    let tok = null; try { tok = localStorage.getItem('admin.token'); } catch {}
-    if (!tok) return fail('Нужен вход администратора', 'Проекты пользователей открываются для просмотра только из админ‑панели.');
+      api.buttons = [{ label: homeLabel, primary: true, onClick: (a) => a.close(true) }];
+    }).then(() => { location.href = home; });
+    let tok = null; if (!SHARE) { try { tok = localStorage.getItem('admin.token'); } catch {} }
+    if (!SHARE && !tok) return fail('Нужен вход администратора', 'Проекты пользователей открываются для просмотра только из админ‑панели.');
+    PHOTO_NET = { push() {}, drop() {}, pull: (id) => photoPull(id, SHARE ? '/api/shared/' + SHARE + '/photos/' : '/api/admin/projects/' + encodeURIComponent(VIEW_ID) + '/photos/', tok, false) };
     let r;
     try {
-      const res = await fetch('/api/admin/projects/' + encodeURIComponent(VIEW_ID), { headers: { Accept: 'application/json', Authorization: 'Bearer ' + tok } });
+      const res = SHARE ? await fetch('/api/shared/' + SHARE, { headers: { Accept: 'application/json' } })
+        : await fetch('/api/admin/projects/' + encodeURIComponent(VIEW_ID), { headers: { Accept: 'application/json', Authorization: 'Bearer ' + tok } });
       let j = null; try { j = await res.json(); } catch {}
+      if (SHARE && res.status === 404) return fail('Ссылка не работает', 'Владелец отключил ссылку или удалил проект. Попросите у него новую.');
+      if (SHARE && res.status === 429) return fail('Слишком много обращений', 'Попробуйте открыть ссылку позже.');
       if (res.status === 401 || res.status === 403) return fail('Нужен вход администратора', 'Войдите в админ‑панель и откройте проект из карточки пользователя.');
       if (res.status === 404) return fail('Проект не найден', 'Возможно, пользователь его удалил.');
       if (!res.ok || !j) return fail('Не удалось открыть проект', (j && j.error && j.error.message) || 'Ошибка сервера (' + res.status + ')');
@@ -446,9 +456,12 @@ body.ro #props input,body.ro #props select,body.ro #props textarea,body.ro #prop
     updateTools(); updateModeUI(); if (P.mode === 'furniture') buildCatalog(); fitRoom();
     showResult(); // отправленный проект открывается на экране результата — как у владельца
     document.title = 'Просмотр: ' + (P.name || 'проект') + ' — furnitech';
-    $('main').append(h('div', { id: 'roBanner', role: 'status' }, ic('eye'),
-      h('span', {}, 'Просмотр проекта пользователя ', h('b', {}, r.owner.email), ' · только чтение · версия ' + r.rev + ' от ' + new Intl.DateTimeFormat('ru', { day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit' }).format(new Date(r.updatedAt))),
-      h('a', { href: '/admin#/users/' + encodeURIComponent(r.owner.id) }, 'К пользователю')));
+    const stamp = new Intl.DateTimeFormat('ru', { day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit' }).format(new Date(r.updatedAt));
+    $('main').append(SHARE
+      ? h('div', { id: 'roBanner', role: 'status' }, ic('eye'), h('span', {}, 'Проект ', h('b', {}, '«' + (P.name || 'без названия') + '»'), ' открыт по ссылке · только просмотр · обновлён ' + stamp))
+      : h('div', { id: 'roBanner', role: 'status' }, ic('eye'),
+        h('span', {}, 'Просмотр проекта пользователя ', h('b', {}, r.owner.email), ' · только чтение · версия ' + r.rev + ' от ' + stamp),
+        h('a', { href: '/admin#/users/' + encodeURIComponent(r.owner.id) }, 'К пользователю')));
   }
 
   /* ---------- аккаунт в шапке и меню (ТЗ 11.1) ---------- */
@@ -487,7 +500,7 @@ body.ro #props input,body.ro #props select,body.ro #props textarea,body.ro #prop
   window.accountMenuItems = function (menu) {
     const mi = (icon, label, fn, cls) => h('button', { type: 'button', class: 'mi' + (cls ? ' ' + cls : ''), role: 'menuitem', onclick: () => { menu.hidden = true; fn(); } }, ic(icon), label);
     const lk = (icon, label, href) => h('a', { class: 'mi', role: 'menuitem', href }, ic(icon), label);
-    if (Sync.mode === 'view') { menu.append(lk('settings', 'В админ‑панель', '/admin#/users'), h('hr')); return; }
+    if (Sync.mode === 'view') { menu.append(SHARE ? lk('home', 'На главную', '/') : lk('settings', 'В админ‑панель', '/admin#/users'), h('hr')); return; }
     if (Sync.user) menu.append(lk('folder', 'Мои проекты', '/projects'));
     menu.append(lk('home', 'На главную', '/'));
     if (MQ_PHONE.matches) {
@@ -534,7 +547,78 @@ body.ro #props input,body.ro #props select,body.ro #props textarea,body.ro #prop
     } else if (u && Sync.mode === 'locked') location.reload(); // вошли в другой вкладке
   });
 
-  window.photoNote = function () { return Sync.mode === 'account' ? h('div', { class: 'photo-note' }, ic('info'), 'Фото пока сохраняются только на этом устройстве') : null; };
+  /* ---------- фото в аккаунте ----------
+     Референсы для ИИ‑дизайнера и свои текстуры лежат в браузере (IndexedDB) и копией — в аккаунте, чтобы проект выглядел
+     одинаково на любом устройстве. Выгрузка идёт в фоне по одному фото; сбой сети — повтор позже. */
+  const PH = { queue: [], busy: false, done: new Set(), localOnly: false, timer: null };
+  const PHOTO_SERVER_MAX = 1.8 * 1024 * 1024; // сервер принимает до 2 МБ; запас на заголовки
+  /* Копия для сервера: исходник, если он небольшой; иначе JPEG поменьше */
+  async function photoServerCopy(blob) {
+    if (blob.size <= PHOTO_SERVER_MAX) return blob;
+    const bmp = await createImageBitmap(blob);
+    for (const [side, q] of [[1600, 0.82], [1280, 0.78], [1024, 0.72]]) {
+      const k = Math.min(1, side / Math.max(bmp.width, bmp.height)), w = Math.max(1, Math.round(bmp.width * k)), hh = Math.max(1, Math.round(bmp.height * k));
+      const c = document.createElement('canvas'); c.width = w; c.height = hh; const x = c.getContext('2d'); x.fillStyle = '#fff'; x.fillRect(0, 0, w, hh); x.drawImage(bmp, 0, 0, w, hh);
+      const out = await new Promise((res) => c.toBlob(res, 'image/jpeg', q));
+      if (out && out.size <= PHOTO_SERVER_MAX) return out;
+    }
+    return null;
+  }
+  function photoPush(id) {
+    if (Sync.mode !== 'account' || !id || PH.done.has(id) || PH.queue.includes(id)) return;
+    PH.queue.push(id); photoPump();
+  }
+  async function photoPump() {
+    if (PH.busy) return;
+    PH.busy = true; clearTimeout(PH.timer);
+    while (PH.queue.length && Sync.mode === 'account' && Session.token) {
+      const id = PH.queue[0];
+      try {
+        let rec = null; try { rec = await IDB.get(id); } catch {}
+        if (rec && rec.blob) {
+          const body = await photoServerCopy(rec.blob);
+          if (body) {
+            const res = await fetch('/api/photos/' + encodeURIComponent(id) + '?w=' + (rec.w || 0) + '&h=' + (rec.h || 0), { method: 'PUT', headers: { Authorization: 'Bearer ' + Session.token, 'Content-Type': body.type || 'image/jpeg' }, body });
+            if (res.status === 401) break;
+            if (res.status === 403) { PH.localOnly = true; PH.queue.length = 0; break; } // строгий режим: почта не подтверждена
+            if (res.status === 0 || res.status === 429 || res.status >= 500) throw new Error('retry');
+            /* 413, 415, 422 — повтор не поможет: фото остаётся только в этом браузере */
+          }
+        }
+        PH.done.add(id); PH.queue.shift();
+      } catch { PH.busy = false; PH.timer = setTimeout(photoPump, 20000); return; }
+    }
+    PH.busy = false;
+  }
+  window.addEventListener('online', () => { if (PH.queue.length) photoPump(); });
+  /* Фото с сервера → запись как в IndexedDB. keep — положить в хранилище браузера (свой проект); чужой проект в него не пишется. */
+  async function photoPull(id, base, token, keep) {
+    const res = await fetch(base + encodeURIComponent(id), { headers: Object.assign({ Accept: 'application/json' }, token ? { Authorization: 'Bearer ' + token } : {}) });
+    if (!res.ok) return null;
+    const j = await res.json();
+    const bin = atob(j.data); const u8 = new Uint8Array(bin.length); for (let i = 0; i < bin.length; i++) u8[i] = bin.charCodeAt(i);
+    const rec = { id, blob: new Blob([u8], { type: j.mime }), w: j.w || 0, h: j.h || 0, createdAt: Date.now() };
+    if (keep) { PH.done.add(id); try { await IDB.put(rec); } catch {} }
+    return rec;
+  }
+  function photoDrop(id) {
+    if (Sync.mode !== 'account' || !Session.token) return;
+    PH.done.delete(id); const i = PH.queue.indexOf(id); if (i >= 0) PH.queue.splice(i, 1);
+    fetch('/api/photos/' + encodeURIComponent(id) + (Sync.id ? '?project=' + encodeURIComponent(Sync.id) : ''), { method: 'DELETE', headers: { Authorization: 'Bearer ' + Session.token } }).catch(() => {});
+  }
+  /* Фото, добавленные до появления синхронизации (или пока не было сети), досылаются в аккаунт */
+  async function photoBackfill() {
+    if (Sync.mode !== 'account') return;
+    try {
+      const r = await Session.api('GET', '/photos');
+      for (const p of r.photos || []) PH.done.add(p.id);
+      for (const id of new Set([...(P.photos || []), ...usedPhotoIds()])) photoPush(id);
+    } catch {}
+  }
+  window.photoNote = function () {
+    if (Sync.mode !== 'account') return null;
+    return h('div', { class: 'photo-note' }, ic('info'), PH.localOnly ? 'Фото пока сохраняются только на этом устройстве: подтвердите почту, чтобы они попали в аккаунт' : 'Фото сохраняются в аккаунте и будут доступны на других ваших устройствах');
+  };
 
   /* ---------- ?panel=catalog (ТЗ 11.6) ---------- */
   function handlePanelParam() {

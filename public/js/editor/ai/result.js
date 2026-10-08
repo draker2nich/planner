@@ -17,10 +17,11 @@ function aiChanges(cell,base){
 }
 
 /* ---------- мини‑план ---------- */
-function aiMiniPlan(cv,cell,changed){
+/* sheet — {w, h}: рисунок заданного размера в светлых цветах, независимо от темы (для печати сметы) */
+function aiMiniPlan(cv,cell,changed,sheet){
   const poly=innerPoly();if(!poly)return;
-  const css=getComputedStyle(document.documentElement),col=(n,d)=>css.getPropertyValue(n).trim()||d;
-  const dpr=Math.min(2,window.devicePixelRatio||1),W=cv.clientWidth||320,H=cv.clientHeight||220;cv.width=Math.round(W*dpr);cv.height=Math.round(H*dpr);
+  const css=getComputedStyle(document.documentElement),col=(n,d)=>sheet?d:(css.getPropertyValue(n).trim()||d);
+  const dpr=sheet?2:Math.min(2,window.devicePixelRatio||1),W=sheet?sheet.w:(cv.clientWidth||320),H=sheet?sheet.h:(cv.clientHeight||220);cv.width=Math.round(W*dpr);cv.height=Math.round(H*dpr);
   const x=cv.getContext('2d');x.setTransform(dpr,0,0,dpr,0,0);x.clearRect(0,0,W,H);
   const bb=aabbOf(poly),pad=14,k=Math.min((W-2*pad)/Math.max(1,bb.w),(H-2*pad)/Math.max(1,bb.h)),ox=(W-bb.w*k)/2-bb.x0*k,oy=(H-bb.h*k)/2-bb.y0*k;
   const X=(p)=>p.x*k+ox,Y=(p)=>p.y*k+oy;
@@ -125,18 +126,20 @@ function showResult(force){
     const c=polyCentroid(innerPoly()||[{x:0,y:0}]);const pi=nearestPointTo(c);
     const views=h('div',{class:'views'});[['Вид 0°',0],['Вид 90°',Math.PI/2],['Вид 180°',Math.PI],['Вид 270°',Math.PI*1.5]].forEach(([nm,yaw])=>views.append(h('button',{onclick:()=>enter3D(pi,{yaw})},ic('eye'),nm)));
     wrap.append(h('div',{class:'card'},h('h4',{},'4 вида из центра комнаты'),views,h('div',{class:'hint'},'Esc — вернуться сюда.')));
+    const ob0=orderBlock([null]);if(ob0)wrap.append(ob0);
     wrap.append(h('div',{class:'acts'},h('button',{class:'primary',onclick:back},'Вернуться к редактированию')));
     return;
   }
   const ai=P.ai;
   wrap.classList.add('ai');
   wrap.append(h('h2',{},'Варианты ИИ‑дизайнера'));
-  const hint=h('div',{class:'hint'},'Сравните варианты: на планах выделено то, что изменил ИИ. Любой вариант можно открыть на плане и в 3D, поправить вручную или доработать.');
+  const hint=h('div',{class:'hint'},'Сравните варианты: на планах выделено то, что изменил ИИ. Любой вариант можно открыть на плане и в 3D'+(READONLY?'.':', поправить вручную или доработать.'));
   if(AI_RUNS_LEFT!=null)hint.append(' ',h('span',{class:'runs'},`Сегодня осталось генераций: ${AI_RUNS_LEFT}.`));
   wrap.append(hint);
   ai.variants.forEach((v,i)=>wrap.append(aiCard(i)));
   wrap.append(aiCard('base'));
   if(ai.chosen!=null)wrap.append(h('div',{class:'infoblk aichosen'},ic('info'),h('div',{},`Выбрано: «${aiCellName(ai,ai.chosen)}». Фотореалистичный рендер выбранного варианта появится на следующем этапе.`)));
+  const ob=orderBlock([...ai.variants.map((v,i)=>i),'base']);if(ob)wrap.append(ob);
   const acts=h('div',{class:'acts'});
   if(!READONLY){
     if(ai.prevVariants&&ai.prevVariants.length)acts.append(h('button',{onclick:aiSwapPrev},'Вернуть прежние варианты'));
@@ -156,7 +159,7 @@ function aiOpenPlan(which){
 function aiView3D(which){
   if(!aiHasVariants()){showResult();return;}
   const e1=aiSwitch(which);if(e1){toast(e1,true);showResult();return;}
-  const c=polyCentroid(innerPoly()||[{x:0,y:0}]);enter3D(nearestPointTo(c));aiBar();
+  const c=polyCentroid(innerPoly()||[{x:0,y:0}]);enter3D(nearestPointTo(c),{orbit:true});aiBar(); // вариант целиком — в обзоре; внутрь — кнопкой «Изнутри» или кликом по полу
 }
 async function aiAgain(){
   const ok=await confirmDlg('Сгенерировать заново?','ИИ‑дизайнер построит два новых варианта от исходной расстановки с теми же пожеланиями. Нынешние варианты можно будет вернуть кнопкой «Вернуть прежние варианты».','Сгенерировать');

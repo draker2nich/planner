@@ -123,21 +123,32 @@ function glbFor(url){let c=GLB_CACHE.get(url);if(c)return c;c={state:'loading',s
 /* Модель товара (glTF: Y вверх, метры, перед по +Z) вписывается в габарит предмета w×H×d и ставится на пол по центру футпринта */
 function productModel3D(f,wM,hM,dM){const pr=f.productId&&PRODUCT_BY_ID.get(f.productId);if(!pr||!pr.model||!pr.model.url)return null;const c=glbFor(pr.model.url);if(c.state!=='ready')return null;
   const m=c.scene.clone(true);const box=new THREE.Box3().setFromObject(m);const sz=new THREE.Vector3();box.getSize(sz);if(sz.x<=0||sz.y<=0||sz.z<=0)return null;
+  m.traverse(o=>{if(o.isMesh){o.castShadow=true;o.receiveShadow=true;}});
   const wrap=new THREE.Group();m.scale.set(wM/sz.x,hM/sz.y,dM/sz.z);const ctr=new THREE.Vector3();box.getCenter(ctr);m.position.set(-ctr.x*m.scale.x,-box.min.y*m.scale.y,-ctr.z*m.scale.z);wrap.add(m);return wrap;}
 function buildFurniture3D(group){
   const H=P.wallHeight/1000; const items=P.furniture||[];
   for(const f of items){const t=TYPE.get(f.typeId),fo=formOf(t,f.formId),mt=mountOf(t,fo);const fr=furniturePlacementFrame(f);if(!fr)continue;const l=fpPoly(fo.fp,f.dims);const hgt=(f.dims.H||500)/1000;
     const shape=new THREE.Shape(l.pts.map(p=>new THREE.Vector2(p.x/1000,-p.y/1000)));const geo=new THREE.ExtrudeGeometry(shape,{depth:hgt,bevelEnabled:false});
-    const ph=!f.productId;const mat=new THREE.MeshStandardMaterial({color:ph?'#6ea0ec':colorFor(t),roughness:0.7,transparent:ph,opacity:ph?0.35:1,side:THREE.DoubleSide});
+    const ph=!f.productId;const mat=new THREE.MeshStandardMaterial({color:lin(ph?'#6ea0ec':colorFor(t)),roughness:0.7,transparent:ph,opacity:ph?0.35:1,side:THREE.DoubleSide});
     const mesh=new THREE.Mesh(geo,mat);mesh.rotation.x=-Math.PI/2;const g=new THREE.Group();g.add(mesh);
-    const model=productModel3D(f,l.w/1000,hgt,l.h/1000);if(model){mesh.visible=false;g.add(model);}
+    const model=productModel3D(f,l.w/1000,hgt,l.h/1000);if(model){mesh.visible=false;g.add(model);}else if(!ph){mesh.castShadow=true;mesh.receiveShadow=true;}
     let y=0;if(mt==='wall')y=(f.elev??0)/1000;else if(mt==='ceiling')y=H-hgt;else if(mt==='ontop'){const b=items.find(x=>x.id===f.baseId);y=b?(b.dims.H||500)/1000:0;}
     g.position.set(fr.x/1000,y,fr.y/1000);g.rotation.y=-fr.rot*Math.PI/180;g.scale.x=fr.mirror?-1:1;g.userData={type:'furniture',id:f.id};
-    const lab=textSprite((ph?'? ':'')+f.name);lab.position.set(0,hgt+0.15,0);g.add(lab);
+    /* подпись скрыта, пока на предмет не навели указатель или не выбрали его (см. loop3D): раньше плашки висели над всей мебелью и закрывали её */
+    const lab=textSprite((ph?'Пустышка: ':'')+f.name+(f.locked?' · зафиксирован':''));lab.position.set(0,hgt+0.12,0);g.add(lab);T3.labels.set(f.id,lab);
+    /* мягкая тень‑пятно под предметом на полу: «ставит» мебель на пол даже там, куда не достаёт тень от света; ковру и пустышке не нужна */
+    if(!ph&&y===0&&t.layer!=='under'){const sh=new THREE.Mesh(new THREE.PlaneGeometry(l.w/1000+0.22,l.h/1000+0.22),new THREE.MeshBasicMaterial({map:blobTexture(),transparent:true,depthWrite:false,opacity:0.5}));sh.rotation.x=-Math.PI/2;sh.position.y=0.004;sh.renderOrder=1;g.add(sh);}
     group.add(g);T3.pickables.push(mesh);mesh.userData={type:'furniture',id:f.id};
-    if(f.locked){const lk=textSprite('зафиксирован');lk.position.set(0,hgt+0.35,0);g.add(lk);}
   }
 }
 function colorFor(t){const m={living:'#b98a58',bedroom:'#c9b8a0',kids:'#9fc7ad',kitchen:'#c9c9c4',dining:'#a97c50',bath:'#dfe8f8',toilet:'#dfe8f8',hall:'#b0ada4',office:'#8f9aa8',closet:'#c9c2b6',balcony:'#9fc7ad',tech:'#6b6f76',light:'#f7e1c8',decor:'#d9a877'};return m[t.cats[0]]||'#aaaaaa';}
-function textSprite(text){const c=document.createElement('canvas');c.width=256;c.height=64;const x=c.getContext('2d');x.fillStyle='rgba(20,22,26,.65)';x.fillRect(0,0,256,64);x.fillStyle='#fff';x.font='28px sans-serif';x.textAlign='center';x.textBaseline='middle';x.fillText(text.slice(0,22),128,32);const tex=new THREE.CanvasTexture(c);const sp=new THREE.Sprite(new THREE.SpriteMaterial({map:tex,transparent:true,depthTest:false}));sp.scale.set(0.8,0.2,1);return sp;}
+/* Подпись предмета в 3D: название целиком (длинное — с многоточием), постоянный размер на экране независимо от расстояния */
+function textSprite(text){const c=document.createElement('canvas');const x=c.getContext('2d');const F='600 26px Inter, system-ui, -apple-system, Segoe UI, sans-serif';
+  const t=text.length>46?text.slice(0,45).trimEnd()+'…':text;x.font=F;const tw=Math.ceil(x.measureText(t).width);c.width=tw+40;c.height=56;
+  x.font=F;x.fillStyle='rgba(24,24,27,.88)';const r=14,W=c.width,H=c.height;x.beginPath();x.moveTo(r,0);x.arcTo(W,0,W,H,r);x.arcTo(W,H,0,H,r);x.arcTo(0,H,0,0,r);x.arcTo(0,0,W,0,r);x.closePath();x.fill();
+  x.fillStyle='#fff';x.textAlign='center';x.textBaseline='middle';x.fillText(t,W/2,H/2+1);
+  const tex=new THREE.CanvasTexture(c);tex.encoding=THREE.sRGBEncoding;const sp=new THREE.Sprite(new THREE.SpriteMaterial({map:tex,transparent:true,depthTest:false,sizeAttenuation:false}));
+  const k=0.042;sp.scale.set(k*W/H,k,1);sp.center.set(0.5,0);sp.renderOrder=20;sp.visible=false;return sp;}
+/* Текстура тени‑пятна: размытый прямоугольник (через тень холста — работает во всех браузерах) */
+function blobTexture(){if(T3.blobTex)return T3.blobTex;const c=document.createElement('canvas');c.width=c.height=128;const x=c.getContext('2d');x.shadowColor='rgba(0,0,0,.9)';x.shadowBlur=18;x.shadowOffsetX=300;x.fillStyle='#000';x.fillRect(-300+26,26,76,76);T3.blobTex=new THREE.CanvasTexture(c);return T3.blobTex;}
 function openFurnitureCard(f){const pn=$('#matPanel');pn.hidden=false;document.body.classList.add('mat-open');pn.innerHTML='';T3.panelTarget=null;const t=TYPE.get(f.typeId),fo=formOf(t,f.formId);pn.classList.toggle('collapsed',!!P.panelCollapsed);pn.append(h('h4',{},h('button',{type:'button',class:'coll','aria-label':'Свернуть или развернуть панель',title:'Свернуть/развернуть',onclick:toggleMatPanel},ic('chevron-right')),h('span',{style:'flex:1'},f.name),h('button',{type:'button',class:'x','aria-label':'Закрыть панель',onclick:()=>selectIn3D(null)},ic('close'))));pn.append(h('div',{class:'row'},h('span',{},f.productId?'Товар':'Пустышка'),h('span',{},fo.name)));for(const k of [...fo.dims,'H'])pn.append(h('div',{class:'row'},h('span',{},DIMN[k]),h('span',{},fmtU(f.dims[k]))));pn.append(h('div',{class:'foot'},h('button',{onclick:()=>{toggleLock({type:'furniture',id:f.id});}},lockIcon(!f.locked),f.locked?'Отпереть':'Зафиксировать'),h('button',{onclick:()=>{exit3D();setMode('furniture');E.sel={type:'furniture',id:f.id};render();}},'В плане')));}

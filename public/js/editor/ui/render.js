@@ -156,7 +156,20 @@ function arrow(from,to,outside){const ctx=E.ctx;const d=sub(to,from);const L=hyp
 function rr(x,y,w,h,r){const ctx=E.ctx;ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath();}
 
 /* ================= Строка состояния ================= */
-function updateStatus(){const s=$('#status');const m={idle:E.tool==='select'?(IS_TOUCH?'Нажмите на стену, точку или проём. Один палец по пустому месту — сдвиг, два — масштаб. Долгое нажатие — свойства':'Выбор: клик по стене, точке или проёму. Правая кнопка / два пальца — панорама, колесо — масштаб'):'',wallStart:P.vertices.length?'Кликните по свободной точке контура':'Кликните, чтобы поставить первую точку',wallStretch:'Ведите линию и кликните для ввода длины. Esc — отмена',openingPlace:(E.copyMode?'Копия: ':'')+'Ведите по стене и кликните для размещения. Esc — отмена',fPlace:'Размещение: клик — поставить, R — поворот, M — зеркало, Alt — без привязки, Esc — отмена'}[E.mode]||'';const txt=m+(P.closed?'  •  Контур замкнут':'');if(!txt){s.textContent='';return;}if(!s.firstElementChild)s.append(h('span',{}));s.firstElementChild.textContent=txt;}
+/* Подсказка внизу. Формулировки зависят от того, чем работают: пока не было ни одного нажатия — по типу устройства (IS_TOUCH),
+   дальше — по последнему нажатию (E.ptype): на ноутбуке с сенсорным экраном и на планшете с мышью подсказка не обманывает. */
+function updateStatus(){const s=$('#status');const touch=E.ptype?E.ptype==='touch':IS_TOUCH;
+  const m=(touch?{idle:E.tool==='select'?'Нажмите на стену, точку или проём. Один палец по пустому месту — сдвиг, два — масштаб. Долгое нажатие — свойства':'',
+      wallStart:P.vertices.length?'Коснитесь свободной точки контура':'Коснитесь плана, чтобы поставить первую точку',wallStretch:'Ведите линию и коснитесь, чтобы ввести длину',
+      openingPlace:(E.copyMode?'Копия: ':'')+'Ведите по стене и коснитесь, чтобы разместить',fPlace:'Коснитесь места, чтобы поставить предмет. Поворот и зеркало — в свойствах предмета'}
+    :{idle:E.tool==='select'?'Выбор: клик по стене, точке или проёму. Правая кнопка — панорама, колесо — масштаб':'',
+      wallStart:P.vertices.length?'Кликните по свободной точке контура':'Кликните, чтобы поставить первую точку',wallStretch:'Ведите линию и кликните для ввода длины. Esc — отмена',
+      openingPlace:(E.copyMode?'Копия: ':'')+'Ведите по стене и кликните для размещения. Esc — отмена',fPlace:'Размещение: клик — поставить, R — поворот, M — зеркало, Alt — без привязки, Esc — отмена'})[E.mode]||'';
+  const txt=m+(P.closed?'  •  Контур замкнут':'');
+  if(typeof updateEmptyState==='function')updateEmptyState();
+  /* объект выбран — подсказка «как выбирать» уже не нужна, а плашка объекта у нижнего края её перекрывала; на пустом плане вместо неё стартовая карточка */
+  if(!txt||!$('#widget').hidden||document.body.classList.contains('empty-start')){s.textContent='';return;}
+  if(!s.firstElementChild)s.append(h('span',{}));s.firstElementChild.textContent=txt;}
 /* ================= Панель свойств =================
    Параметров много, поэтому панель собрана из трёх спокойных слоёв:
    · редактируемое — поля с лёгкой заливкой, сгруппированные по смыслу (по два‑три в ряд, подпись над полем, единица внутри);

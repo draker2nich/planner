@@ -21,7 +21,7 @@ async function setTool(t){
 }
 function updateTools(){
   document.querySelectorAll('#tools [data-tool]').forEach(b=>{b.classList.toggle('active',b.dataset.tool===E.tool);b.setAttribute('aria-pressed',String(b.dataset.tool===E.tool)); if(b.dataset.tool==='wall'){b.disabled=P.closed;b.title=P.closed?'Контур замкнут. Удалите стену, чтобы изменить контур':'Стена (W)';}});
-  document.querySelectorAll('[data-view=dims]').forEach(b=>b.classList.toggle('on',P.showDims)); document.querySelectorAll('[data-view=points]').forEach(b=>{b.classList.toggle('on',P.closed&&P.viewPointsVisible);b.disabled=!P.closed;}); document.querySelectorAll('[data-view=ai]').forEach(b=>b.classList.toggle('on',!!P.showAiBadges)); updateButtons(); if(typeof updateModeUI==='function')updateModeUI();
+  document.querySelectorAll('[data-view=dims]').forEach(b=>b.classList.toggle('on',P.showDims)); document.querySelectorAll('[data-view=points]').forEach(b=>{b.classList.toggle('on',P.closed&&P.viewPointsVisible);b.disabled=!P.closed;}); document.querySelectorAll('[data-view=ai]').forEach(b=>b.classList.toggle('on',!!P.showAiBadges)); {const b3=$('#btn3d');if(b3){b3.disabled=!P.closed;b3.title=P.closed?'Комната в 3D: обзор сверху и прогулка внутри':'3D откроется, когда контур комнаты будет замкнут';}} updateButtons(); if(typeof updateModeUI==='function')updateModeUI();
 }
 function updateButtons(){document.querySelectorAll('[data-view=undo]').forEach(b=>b.disabled=hi<=0);document.querySelectorAll('[data-view=redo]').forEach(b=>b.disabled=hi>=hist.length-1);}
 
@@ -219,6 +219,7 @@ function ptOf(e){const r=cv.getBoundingClientRect();return {x:e.clientX-r.left,y
 let downInfo=null;
 cv.addEventListener('contextmenu',e=>e.preventDefault());
 cv.addEventListener('pointerdown',e=>{
+  if(E.ptype!==e.pointerType){E.ptype=e.pointerType;updateStatus();} // подсказки внизу говорят на языке того, чем сейчас работают: пальцем или мышью
   cv.setPointerCapture(e.pointerId); const sp=ptOf(e); E.pointers.set(e.pointerId,sp);
   if(E.pointers.size===2){ const [a,b]=[...E.pointers.values()]; E.gesture={d0:Math.hypot(a.x-b.x,a.y-b.y)||1,c0:{x:(a.x+b.x)/2,y:(a.y+b.y)/2},z0:vp().zoom,v0:{...vp()}}; downInfo=null; E.pan=null; return; }
   if(E.dialogOpen)return;

@@ -43,7 +43,7 @@ function initHeader(){
   $('#modeWalls').onclick=()=>{if(P.mode!=='walls')setMode('walls');};
   $('#modeFurn').onclick=()=>{if(P.mode!=='furniture')setMode('furniture');};
   $('#btnLock').onclick=()=>{const st=lockState();if(st.count===0){toast('Нет объектов для фиксации');return;}lockAll(!st.all);};
-  $('#btnFinish').onclick=finishFlow;
+  $('#btnFinish').onclick=finishFlow;$('#btnFinish').prepend(ic('sparkles'));$('#btnFinish').title='ИИ‑дизайнер: подберёт товары на места, расставит мебель и предложит отделку';
   $('#projName').onchange=e=>{P.name=e.target.value||'Новый проект';save();};
 }
 function buildMenu(){
@@ -59,6 +59,7 @@ function buildMenu(){
   }
   if((P.furniture||[]).some(f=>f.aiPolicy)){menu.append(chkItem('sparkles','Показывать права ИИ на плане',P.showAiBadges,()=>{P.showAiBadges=!P.showAiBadges;save();updateTools();render();}),h('hr'));}
   if(P.brief){menu.append(h('button',{type:'button',class:'mi',role:'menuitem',onclick:()=>{menu.hidden=true;showBriefJson();}},ic('copy'),'Бриф (JSON)'),h('hr'));}
+  if(typeof orderMenuItems==='function')orderMenuItems(menu);
   menu.append(h('div',{class:'mi',style:'cursor:default'},ic('ruler'),'Единицы измерения'));
   const sub=h('div',{class:'sub'});Object.keys(UNITS).forEach(u=>sub.append(h('button',{class:u===P.unit?'on':'',onclick:()=>{P.unit=u;$('#unitSel').value=u;save();render();buildMenu();}},UNITS[u].l)));menu.append(sub,h('hr'));
   if(READONLY)return;
@@ -86,7 +87,7 @@ function initDock(){
   place(); MQ_PHONE.addEventListener('change',()=>{place();$('#menu').hidden=true;});
   cv.addEventListener('pointerdown',e=>{if(document.body.classList.contains('cat-open')&&MQ_PHONE.matches){setCatalogOpen(false);}},true);
   document.addEventListener('keydown',e=>{if(e.key==='Escape'&&document.body.classList.contains('cat-open')&&!E.dialogOpen){setCatalogOpen(false);}});
-  if(IS_TOUCH)$('#hint3d').textContent='Проведите пальцем — поворот · двойное касание — выбрать стену, пол или предмет · стрелки на полу — переход';
+  /* подсказка 3D зависит от режима (обзор или вид изнутри) — её ставит show3DHint() в view3d/scene.js */
 }
 /* ---------- Подсказки (tooltip) ---------- */
 const IS_MAC=/Mac|iPhone|iPad/.test(navigator.platform||navigator.userAgent);

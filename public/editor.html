@@ -7,8 +7,8 @@
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#09090b">
 <title>Редактор — furnitech</title>
 <meta name="robots" content="noindex">
-<script>/* Редактор только для вошедших (исключение — просмотр проекта поддержкой, ?view=). Гость уходит на вход ещё до загрузки редактора. */
-(function(){if(/[?&]view=/.test(location.search))return;var ok=false;try{ok=!!localStorage.getItem('planner.token')}catch(e){}
+<script>/* Редактор только для вошедших (исключения — просмотр проекта поддержкой, ?view=, и проект по ссылке владельца, ?share=). Гость уходит на вход ещё до загрузки редактора. */
+(function(){if(/[?&](view|share)=/.test(location.search))return;var ok=false;try{ok=!!localStorage.getItem('planner.token')}catch(e){}
 if(!ok){try{document.documentElement.style.visibility='hidden'}catch(e){}location.replace('/login?next='+encodeURIComponent(location.pathname+location.search));}})();</script>
 <script>try{var t=localStorage.getItem('planner.theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
@@ -33,6 +33,7 @@ if(!ok){try{document.documentElement.style.visibility='hidden'}catch(e){}locatio
   <input class="name" id="projName" value="Новый проект" aria-label="Название проекта" autocomplete="off" spellcheck="false" maxlength="80">
   <div class="segc hide3d" role="group" aria-label="Режим редактора"><button id="modeWalls" class="on" aria-pressed="true"><span class="lg">Стены и проёмы</span><span class="sh">Стены</span></button><button id="modeFurn" aria-pressed="false">Мебель</button></div>
   <button id="btnLock" class="iconbtn ghost hide3d"></button>
+  <button id="btn3d" class="hide3d" title="Комната в 3D: обзор сверху и прогулка внутри" disabled><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l9 5v10l-9 5-9-5V7z"/><path d="M12 22V12M21 7l-9 5-9-5"/></svg>3D</button>
   <span class="hsep hide3d"></span>
   <button id="btnPoints" class="iconbtn ghost hide3d vw" data-view="points" data-tipkey="P"></button>
   <button id="btnDims" class="iconbtn ghost hide3d vw" data-view="dims" data-tipkey="D"></button>
@@ -41,12 +42,13 @@ if(!ok){try{document.documentElement.style.visibility='hidden'}catch(e){}locatio
   <button id="btnUndo" class="iconbtn ghost hide3d" data-view="undo"></button>
   <button id="btnRedo" class="iconbtn ghost hide3d" data-view="redo"></button>
   <button id="btnExit3d" class="only3d" aria-label="К плану"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg><span class="lg">К плану</span><span class="sh">План</span></button>
-  <label class="only3d"><span class="lg">Высота глаз</span><input type="range" id="eyeH" min="1200" max="1900" step="50" aria-label="Высота глаз"><span id="eyeHv"></span></label>
-  <button id="btnPoints3d" class="only3d" aria-label="Точки обзора" aria-pressed="false"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg><span class="lg">Точки обзора</span></button>
+  <div class="segc only3d" role="group" aria-label="Вид в 3D"><button id="m3dOrbit" aria-pressed="false" title="Комната целиком, снаружи (O)">Обзор</button><button id="m3dWalk" aria-pressed="true" title="Вид изнутри, от первого лица (O)">Изнутри</button></div>
+  <label class="only3d walk3d"><span class="lg">Высота глаз</span><input type="range" id="eyeH" min="1200" max="1900" step="50" aria-label="Высота глаз"><span id="eyeHv"></span></label>
+  <button id="btnPoints3d" class="only3d walk3d" aria-label="Точки обзора" aria-pressed="false"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg><span class="lg">Точки обзора</span></button>
   <span class="sp"></span>
   <span class="save hide3d" id="saveInd" role="status">—</span>
   <span id="acctBox" class="hide3d"></span>
-  <button id="btnFinish" class="primary hide3d" hidden><span class="lg">Завершить</span><span class="sh">Готово</span></button>
+  <button id="btnFinish" class="primary hide3d" hidden><span class="lg">Подобрать с ИИ</span><span class="sh">ИИ</span></button>
 </header>
 <main>
   <canvas id="c" aria-label="План комнаты"></canvas>
@@ -77,7 +79,7 @@ if(!ok){try{document.documentElement.style.visibility='hidden'}catch(e){}locatio
     <div class="hud tl" id="lbl3d" aria-live="polite"></div>
     <div id="compass" title="Верх плана" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></svg></div>
     <div id="minimap"><canvas id="mm" width="220" height="160" aria-label="Мини‑карта: нажмите, чтобы перейти к точке"></canvas><button id="mmToggle" aria-label="Свернуть или развернуть мини‑карту"></button></div>
-    <div id="hint3d">ЛКМ — поворот · двойное нажатие — выбрать стену, пол или предмет · WASD / стрелки на полу — переход · Esc — к плану</div>
+    <div id="hint3d" hidden></div>
     <div id="matPanel" role="region" aria-label="Материал" hidden></div>
   </div>
   <div id="toasts" role="status" aria-live="polite"></div>
@@ -104,11 +106,13 @@ if(!ok){try{document.documentElement.style.visibility='hidden'}catch(e){}locatio
 <script src="js/editor/furniture/catalog.js"></script>
 <script src="js/editor/furniture/place.js"></script>
 <script src="js/editor/shell.js"></script>
+<script src="js/editor/start.js"></script>
 <script src="js/editor/ai/place.js"></script>
 <script src="js/editor/ai/build.js"></script>
 <script src="js/editor/ai/run.js"></script>
 <script src="js/editor/brief.js"></script>
 <script src="js/editor/ai/result.js"></script>
+<script src="js/editor/order.js"></script>
 <script src="js/editor/boot.js"></script>
 <script src="js/editor/account.js"></script>
 </body>

@@ -183,7 +183,7 @@ test('профиль вкуса без печати сервера в запро
   let seen = '';
   const answer = { concepts: [0, 1].map(i => ({ title: 'T' + i, note: '', layoutIdea: '', walls: 'keep', floor: 'keep', ceiling: 'keep', picks: [] })) };
   const tasteAnswer = { styles: ['лофт'], colors: [], avoidColors: [], materials: [], tone: 'any', temp: 'any', contrast: false, walls: '', floor: '', ceiling: '', lighting: '', decor: '', layout: 'диван у окна', furniture: [], summary: 'ЧЕСТНЫЙ ПРОФИЛЬ' };
-  const aiFetch = async (url, init) => { const b = JSON.parse(init.body); seen = b.messages[0].content.at(-1).text; const taste = /профиль вкуса/.test(b.system);
+  const aiFetch = async (url, init) => { const b = JSON.parse(init.body); seen = b.messages[0].content.at(-1).text; const taste = /профиль вкуса/.test(b.system[0].text);
     return { ok: true, status: 200, json: async () => ({ content: [{ type: 'text', text: JSON.stringify(taste ? tasteAnswer : answer) }], stop_reason: 'end_turn', usage: { input_tokens: 1, output_tokens: 1 } }), headers: { get: () => null } }; };
   const A = await makeApp({ AI_API_KEY: 'k', MAIL_MODE: 'off' }, { aiFetch }); t.after(A.close);
   await A.setCatalog(CATALOG);
