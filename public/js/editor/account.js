@@ -421,6 +421,7 @@ body.ro #props input,body.ro #props select,body.ro #props textarea,body.ro #prop
     Sync.mode = 'view'; Sync.ready = true; readOnlyUi();
     $('#projName').readOnly = true;
     P = normalizeProject(newProject()); D = derive(P); hist = []; hi = -1; snapshot(); $('#projName').value = ''; render();
+    showResult(); // экран результата мог открыться для локального проекта администратора — к просматриваемому он не относится
     const box = $('#acctBox'); if (box) box.replaceChildren(h('a', { class: 'lbtn', href: '/admin#/users' }, 'В админ‑панель'));
     const fail = (title, text) => dialog((b, api) => {
       b.append(h('h3', {}, title), h('div', { class: 'hint' }, text));
@@ -443,6 +444,7 @@ body.ro #props input,body.ro #props select,body.ro #props textarea,body.ro #prop
     P = p; D = derive(P); E.sel = null; E.mode = 'idle'; E.tool = 'select'; E.propsOpen = false;
     hist = []; hi = -1; snapshot(); $('#projName').value = P.name; $('#unitSel').value = P.unit;
     updateTools(); updateModeUI(); if (P.mode === 'furniture') buildCatalog(); fitRoom();
+    showResult(); // отправленный проект открывается на экране результата — как у владельца
     document.title = 'Просмотр: ' + (P.name || 'проект') + ' — furnitech';
     $('main').append(h('div', { id: 'roBanner', role: 'status' }, ic('eye'),
       h('span', {}, 'Просмотр проекта пользователя ', h('b', {}, r.owner.email), ' · только чтение · версия ' + r.rev + ' от ' + new Intl.DateTimeFormat('ru', { day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit' }).format(new Date(r.updatedAt))),

@@ -45,7 +45,12 @@ function getPhotoTexture(id){
   const pr=IDB.get(id).then(rec=>{if(!rec)return null;return createImageBitmap(rec.blob).then(b=>{const t=new THREE.Texture(b);t.encoding=THREE.sRGBEncoding;t.anisotropy=8;t.needsUpdate=true;return t;});}).catch(()=>null);
   T3.photoTex.set(id,pr);return pr;
 }
-async function gcPhotos(){const used=new Set();P.walls.forEach(w=>{if(w.material?.type==='photo')used.add(w.material.photoId);});if(P.floor?.material?.type==='photo')used.add(P.floor.material.photoId);const all=await IDB.all();let n=0;for(const r of all){if(!used.has(r.id)){await IDB.del(r.id);n++;}}P.photos=[...used];save();toast(n?`Удалено фото: ${n}`:'Неиспользуемых фото нет');}
+/* Используемые фото: текстуры стен и пола (в том числе в исходной расстановке и вариантах ИИ‑дизайнера) и фото‑референсы брифа */
+function usedPhotoIds(){const used=new Set();const mat=(m)=>{if(m&&m.type==='photo'&&m.photoId)used.add(m.photoId);};const brief=(b)=>{((b&&b.photos)||[]).forEach(p=>{if(p&&p.photoId)used.add(p.photoId);});};
+  P.walls.forEach(w=>mat(w.material));mat(P.floor?.material);brief(P.brief);brief(P.briefDraft);
+  if(P.ai){brief(P.ai.brief);const cell=(c)=>{if(!c||!c.finishes)return;Object.values(c.finishes.walls||{}).forEach(mat);mat(c.finishes.floor);};cell(P.ai.base);(P.ai.variants||[]).forEach(cell);(P.ai.prevVariants||[]).forEach(cell);}
+  return used;}
+async function gcPhotos(){const used=usedPhotoIds();const all=await IDB.all();let n=0;for(const r of all){if(!used.has(r.id)){await IDB.del(r.id);n++;}}P.photos=[...used];save();toast(n?`Удалено фото: ${n}`:'Неиспользуемых фото нет');}
 
 /* ---------- Материалы three.js ---------- */
 function buildMaterial(m,faceW,faceH,u0=0,v0=0,isFloor=false){

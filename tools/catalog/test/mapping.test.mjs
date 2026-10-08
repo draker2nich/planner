@@ -111,6 +111,13 @@ test('карточка ABO → товар: бренд не попадает в �
   assert.equal(planItem({ modelId: 'B0', modelPath: 'x', extent: [0.3, 0.1, 0.3], name: 'Leather Boots', brand: '', sourceType: 'SHOES', color: '', material: '', style: '' }).skip, 'не мебель: SHOES');
 });
 
+test('словари: всё, что выдаёт сопоставление, есть в словарях платформы', () => {
+  for (const v of colorsOf.values) assert.equal(T.dictValue('colors', v), v, 'цвет вне словаря: ' + v);
+  for (const v of materialsOf.values) assert.equal(T.dictValue('materials', v), v, 'материал вне словаря: ' + v);
+  for (const v of stylesOf.values) assert.equal(T.dictValue('styles', v), v, 'стиль вне словаря: ' + v);
+  assert.equal(new Set(T.COLORS.map((c) => c.name)).size, T.COLORS.length);
+});
+
 /* минимальный GLB: один треугольник с габаритом 1 × 2 × 0.5 м */
 function tinyGlb() {
   const pos = new Float32Array([0, 0, 0, 1, 0, 0, 0, 2, 0.5]);

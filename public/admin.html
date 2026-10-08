@@ -150,6 +150,11 @@ details.more summary::before{content:'';width:6px;height:6px;border-right:1.5px 
 details.more[open] summary::before{transform:rotate(45deg)}
 details.more .fld{margin-top:12px}
 .seg{flex-wrap:wrap;height:auto;min-height:36px}
+.seg.pick{gap:4px;padding:4px}
+.seg.pick button{display:inline-flex;align-items:center;gap:6px;padding:0 10px}
+.seg.pick button:disabled{opacity:.45;cursor:default}
+.seg.pick .sw{display:inline-block;width:12px;height:12px;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(0,0,0,.18)}
+.fsub{display:flex;align-items:baseline;gap:8px;margin:18px 0 0;padding-top:14px;border-top:1px solid var(--border);font-size:14px;font-weight:600}
 .seg button{height:30px}
 .drop{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;border:1.5px dashed var(--border);border-radius:var(--radius-lg);padding:28px 16px;text-align:center;color:var(--muted-foreground);cursor:pointer;font-size:14px;transition:background-color .15s,border-color .15s}
 .drop .ic{width:20px;height:20px}
@@ -487,7 +492,7 @@ async function purgeDemo(){if(!(await confirmDlg('Удалить демо‑то
 /* ---------- карточка товара ---------- */
 async function productPage(id){
   const main=$('#main');const isNew=id==='new';let p;
-  if(isNew){p={id:null,typeId:'',formId:'',name:'',brand:'',price:'',currency:'USD',dims:{},colors:[],materials:[],styleTags:[],url:'',status:'draft',model:{status:'none',info:{}},images:[],source:'admin'};}
+  if(isNew){p={id:null,typeId:'',formId:'',name:'',brand:'',price:'',currency:PLATFORM_CURRENCY,dims:{},colors:[],materials:[],styleTags:[],url:'',status:'draft',model:{status:'none',info:{}},images:[],source:'admin'};}
   else{main.replaceChildren(h('div',{class:'empty',role:'status'},'Загрузка…'));try{p=await api('GET','/admin/products/'+id);}catch(e){main.replaceChildren(h('div',{class:'empty'},e.message));return;}}
   const f=JSON.parse(JSON.stringify(p)); // черновик формы
   const errs={};
@@ -518,7 +523,14 @@ async function productPage(id){
   const inp=(key,attrs={})=>{const el=h('input',{name:key,autocomplete:'off',value:f[key]??'',...attrs});el.oninput=()=>{f[key]=el.value;markDirty();};return el;};
   const nameI=inp('name',{maxlength:120,placeholder:'Например: Диван Oslo 3‑местный'}),brandI=inp('brand',{maxlength:80,placeholder:'Производитель'}),priceI=inp('price',{inputmode:'decimal',placeholder:'0'}),urlI=inp('url',{type:'url',inputmode:'url',spellcheck:'false',placeholder:'https://…'});
   const curSel=h('select',{'aria-label':'Валюта'},...CURRENCIES.map(c=>h('option',{value:c,selected:c===f.currency},c)));curSel.onchange=()=>{f.currency=curSel.value;markDirty();};
-  const listI=(key,ph)=>{const el=h('input',{name:key,autocomplete:'off',value:(f[key]||[]).join(', '),placeholder:ph});el.oninput=()=>{f[key]=el.value.split(',').map(s=>s.trim()).filter(Boolean);markDirty();};return el;};
+  /* Стиль, цвет, материал — выбор из словаря (shared/catalog-types.js), до ATTR_MAX значений. Старые значения свободным текстом, которых нет в словаре, отбрасываются. */
+  const DICT={colors:COLORS.map(c=>c.name),materials:MATERIALS,styleTags:STYLES};
+  for(const k in DICT){const kind=k==='styleTags'?'styles':k;const was=(f[k]||[]);f[k]=[...new Set(was.map(x=>dictValue(kind,x)).filter(Boolean))].slice(0,ATTR_MAX);f['_lost_'+k]=was.filter(x=>!dictValue(kind,x));}
+  const chipsI=(key,label)=>{const seg=h('div',{class:'seg pick',role:'group','aria-label':label});
+    const draw=()=>{seg.replaceChildren(...DICT[key].map(v=>{const on=f[key].includes(v);const full=!on&&f[key].length>=ATTR_MAX;
+      const b=h('button',{type:'button',class:on?'on':'','aria-pressed':String(on),onclick:()=>{if(on)f[key]=f[key].filter(x=>x!==v);else if(!full)f[key]=[...f[key],v];draw();markDirty();}},key==='colors'?h('i',{class:'sw',style:'background:'+COLOR.get(v).hex}):null,v);b.disabled=full;return b;}));};
+    draw();return seg;};
+  const lostNote=(key)=>f['_lost_'+key].length?h('span',{class:'hint'},'Не из списка и не сохранится: '+f['_lost_'+key].join(', ')):null;
   const dimsBox=h('div',{class:'dims'});
   const fieldErr=(k)=>h('span',{class:'err','data-err':k});
   function renderDims(keepValues){const t=TYPE.get(f.typeId);dimsBox.replaceChildren();if(!t){dimsBox.append(h('span',{class:'hint'},'Сначала выберите категорию'));return;}
@@ -529,11 +541,12 @@ async function productPage(id){
     h('label',{class:'fld'},h('span',{},'Название'),nameI,fieldErr('name')),
     h('div',{class:'row2'},h('label',{class:'fld'},h('span',{},'Бренд'),brandI),h('label',{class:'fld'},h('span',{},'Цена'),h('div',{class:'ig'},priceI,curSel),fieldErr('price'))),
     h('div',{class:'fld'},h('span',{},'Размеры'),dimsBox,fieldErr('dims')),
-    h('details',{class:'more'},h('summary',{},'Атрибуты для ИИ‑подбора',h('span',{class:'sub',style:'font-weight:400'},'необязательно')),
-      h('label',{class:'fld'},h('span',{},'Цвета (через запятую)'),listI('colors','серый, #d9cfbf')),
-      h('label',{class:'fld'},h('span',{},'Материалы'),listI('materials','велюр, дуб')),
-      h('label',{class:'fld'},h('span',{},'Стиль'),listI('styleTags','скандинавский, минимализм')),
-      h('label',{class:'fld'},h('span',{},'Ссылка на товар'),urlI)));
+    h('div',{class:'fsub'},'Атрибуты для ИИ‑подбора',h('span',{class:'sub',style:'font-weight:400'},`нужны для публикации · до ${ATTR_MAX} в каждом`)),
+    h('p',{class:'hint'},'По стилю, цвету и материалу ИИ‑дизайнер выбирает товар под пожелания покупателя. Название и бренд он не видит.'),
+    h('div',{class:'fld'},h('span',{},'Стиль'),chipsI('styleTags','Стиль'),lostNote('styleTags'),fieldErr('styleTags')),
+    h('div',{class:'fld'},h('span',{},'Цвет'),chipsI('colors','Цвет'),lostNote('colors'),fieldErr('colors')),
+    h('div',{class:'fld'},h('span',{},'Материал'),chipsI('materials','Материал'),lostNote('materials'),fieldErr('materials')),
+    h('label',{class:'fld'},h('span',{},'Ссылка на товар'),urlI));
 
   /* 3. 3D‑модель */
   const secModel=h('section',{class:'card sec'});
@@ -742,14 +755,21 @@ function blockDialog(u,onOk){modal((b,close)=>{
   b.append(h('h3',{},'Заблокировать пользователя?'),form);});}
 
 /* ---------- журнал ---------- */
-async function auditPage(){const main=$('#main');main.replaceChildren(h('div',{class:'ph'},h('div',{class:'tt'},h('h2',{},'Журнал действий'),h('p',{class:'desc'},'Последние 200 событий: каталог, аккаунты, доступ поддержки к проектам.'))),h('div',{class:'empty',role:'status'},'Загрузка…'));
-  let r;try{r=await api('GET','/admin/audit?limit=200');}catch(e){main.lastChild.textContent=e.message;return;}
+/* Обращения к ИИ‑дизайнеру идут тремя строками на каждую генерацию и вытеснили бы остальное из последних 200 событий — у них свой отбор */
+let AUDIT_VIEW='other';
+async function auditPage(){const main=$('#main');
+  const tabs=h('div',{class:'seg',role:'group','aria-label':'Какие события показывать'},...[['other','Каталог и аккаунты'],['ai','ИИ‑дизайнер'],['','Все']].map(([v,l])=>h('button',{type:'button',class:AUDIT_VIEW===v?'on':'','aria-pressed':String(AUDIT_VIEW===v),onclick:()=>{AUDIT_VIEW=v;auditPage();}},l)));
+  main.replaceChildren(h('div',{class:'ph'},h('div',{class:'tt'},h('h2',{},'Журнал действий'),h('p',{class:'desc'},AUDIT_VIEW==='ai'?'Последние 200 обращений к модели: шаг, расход токенов, время ответа, ошибки. Тексты и фото заказчиков в журнал не пишутся.':'Последние 200 событий: каталог, аккаунты, доступ поддержки к проектам.')),tabs),h('div',{class:'empty',role:'status'},'Загрузка…'));
+  let r;try{r=await api('GET','/admin/audit?limit=200'+(AUDIT_VIEW?'&entity='+AUDIT_VIEW:''));}catch(e){main.lastChild.textContent=e.message;return;}
   const A={create:'создал товар',update:'изменил товар',delete:'удалил товар',publish:'опубликовал',unpublish:'снял с публикации',archive:'в архив',reject:'отклонил',submit:'отправил на модерацию','model.upload':'загрузил 3D‑модель','model.delete':'удалил 3D‑модель','image.add':'добавил фото','image.delete':'удалил фото','demo.purge':'удалил демо‑товары',
-    'user.register':'зарегистрировался','user.register_rejected':'регистрация отклонена (бот)','user.verify':'подтвердил почту','user.password_reset':'сбросил пароль по письму','user.delete':'удалил свой аккаунт','user.block':'заблокировал пользователя','user.unblock':'разблокировал пользователя','user.sessions_revoke':'завершил сеансы пользователя','user.oauth_link':'подключил вход через провайдера','user.oauth_register':'зарегистрировался через провайдера','project.view':'открыл проект пользователя'};
+    'user.register':'зарегистрировался','user.register_rejected':'регистрация отклонена (бот)','user.verify':'подтвердил почту','user.password_reset':'сбросил пароль по письму','user.delete':'удалил свой аккаунт','user.block':'заблокировал пользователя','user.unblock':'разблокировал пользователя','user.sessions_revoke':'завершил сеансы пользователя','user.oauth_link':'подключил вход через провайдера','user.oauth_register':'зарегистрировался через провайдера','project.view':'открыл проект пользователя',
+    'ai.taste':'ИИ: разбор пожеланий','ai.concept':'ИИ: подбор товаров','ai.layout':'ИИ: расстановка'};
+  const AI_ERR={ai_timeout:'модель не успела',ai_busy:'модель перегружена',ai_auth:'ключ отклонён',ai_network:'нет связи',ai_request:'запрос не принят',ai_refused:'отказ модели',ai_truncated:'ответ оборвался',ai_bad_answer:'ответ не разобран',no_candidates:'нет товаров',validation:'плохой запрос'};
+  const aiDetail=d=>d.error?('ошибка: '+(AI_ERR[d.error]||d.error)):[d.model,d.in!=null?`${(+d.in).toLocaleString('ru')} → ${(+d.out).toLocaleString('ru')} ток.`:'',d.ms!=null?(d.ms/1000).toFixed(1)+' с':'',d.candidates!=null?`кандидатов ${d.candidates}`:'',d.movable!=null?`предметов ${d.movable}`:'',d.photos?`фото ${d.photos}`:'',d.retry?'повтор':''].filter(Boolean).join(' · ');
   const parse=a=>{try{return JSON.parse(a.data)||{};}catch(e){return {};}};
   /* куда ведёт строка: товар, пользователь или владелец просмотренного проекта */
-  const target=(a,d)=>a.entity==='user'?(a.entity_id&&a.action!=='user.delete'?'#/users/'+a.entity_id:null):a.entity==='project'?(d.owner?'#/users/'+d.owner:null):(a.entity_id&&a.action!=='delete'?'#/products/'+a.entity_id:null);
-  const detail=(a,d)=>a.entity==='user'||a.entity==='project'?(d.reason||(d.provider?PROVIDER[d.provider]||d.provider:'')||(d.revoked!=null?'сеансов: '+d.revoked:'')||(a.entity_id||'').slice(0,8)):(d.name||(d.count!=null?String(d.count):'')||(a.entity_id||'').slice(0,8));
+  const target=(a,d)=>a.entity==='ai'?(a.user_id?'#/users/'+a.user_id:null):a.entity==='user'?(a.entity_id&&a.action!=='user.delete'?'#/users/'+a.entity_id:null):a.entity==='project'?(d.owner?'#/users/'+d.owner:null):(a.entity_id&&a.action!=='delete'?'#/products/'+a.entity_id:null);
+  const detail=(a,d)=>a.entity==='ai'?aiDetail(d):a.entity==='user'||a.entity==='project'?(d.reason||(d.provider?PROVIDER[d.provider]||d.provider:'')||(d.revoked!=null?'сеансов: '+d.revoked:'')||(a.entity_id||'').slice(0,8)):(d.name||(d.count!=null?String(d.count):'')||(a.entity_id||'').slice(0,8));
   main.lastChild.replaceWith(r.items.length?h('div',{class:'card tcard'},h('table',{},h('thead',{},h('tr',{},h('th',{},'Когда'),h('th',{},'Кто'),h('th',{},'Действие'),h('th',{},'Объект'))),
     h('tbody',{},...r.items.map(a=>{const d=parse(a),to=target(a,d);return h('tr',{class:to?'clk':'',onclick:e=>{if(to&&!e.target.closest('a'))location.hash=to;}},h('td',{class:'sub tnum'},fmtDate(a.at)),h('td',{},a.email||'—'),h('td',{},A[a.action]||a.action),h('td',{class:'sub'},to?h('a',{class:'rowlink',style:'font-weight:400',href:to},detail(a,d)||'открыть'):detail(a,d)));})))):h('div',{class:'card'},h('div',{class:'empty'},ic('list'),h('b',{},'Действий пока нет'),'Здесь появятся изменения товаров и действия с аккаунтами.')));}
 

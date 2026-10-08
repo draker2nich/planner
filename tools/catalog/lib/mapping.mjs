@@ -176,10 +176,16 @@ export function chooseForm(typeId, sizeMm, name) {
 
 /* ---------- атрибуты для ИИ‑подбора ---------- */
 
-const dict = (pairs) => (text) => {
-  const s = String(text || '').toLowerCase(), out = [];
-  for (const [re, ru] of pairs) if (re.test(s) && !out.includes(ru)) out.push(ru);
-  return out;
+/* Значения справа — из словарей платформы (STYLES, COLORS, MATERIALS в public/shared/catalog-types.js);
+   тест проверяет, что ни одно значение не выходит за словарь. */
+const dict = (pairs) => {
+  const fn = (text) => {
+    const s = String(text || '').toLowerCase(), out = [];
+    for (const [re, ru] of pairs) if (re.test(s) && !out.includes(ru)) out.push(ru);
+    return out;
+  };
+  fn.values = [...new Set(pairs.map(([, ru]) => ru))];
+  return fn;
 };
 
 export const colorsOf = dict([

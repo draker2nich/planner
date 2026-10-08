@@ -51,7 +51,8 @@ function makeCatalog(db, storage) {
   }
 
   /* ---------- проверка полей ---------- */
-  function normalize(input, base) {
+  /* opts.lenient — набор из открытых данных (tools/catalog): значения вне словаря отбрасываются, а не считаются ошибкой */
+  function normalize(input, base, opts = {}) {
     const out = {}, errors = {};
     const typeId = input.typeId ?? base?.type_id;
     const t = T.TYPE.get(typeId);
@@ -71,8 +72,16 @@ function makeCatalog(db, storage) {
     }
     if ('currency' in input) { if (!CURRENCIES.includes(input.currency)) errors.currency = 'Неизвестная валюта'; else out.currency = input.currency; }
     if ('url' in input) out.url = String(input.url || '').trim().slice(0, 500);
+    /* стиль, цвет и материал — только из словарей (public/shared/catalog-types.js): по ним ИИ‑дизайнер подбирает товары */
     for (const k of ['colors', 'materials', 'styleTags']) if (k in input) {
-      if (!Array.isArray(input[k])) errors[k] = 'Ожидается список'; else out[k] = input[k].map(x => typeof x === 'string' ? x.trim().slice(0, 40) : x).filter(Boolean).slice(0, 20);
+      if (!Array.isArray(input[k])) { errors[k] = 'Ожидается список'; continue; }
+      const kind = k === 'styleTags' ? 'styles' : k;
+      const raw = input[k].map(x => typeof x === 'string' ? x.trim() : '').filter(Boolean);
+      const vals = [...new Set(raw.map(x => T.dictValue(kind, x)).filter(Boolean))];
+      if (opts.lenient) { out[k] = vals.slice(0, 6); continue; }
+      if (raw.some(x => !T.dictValue(kind, x))) errors[k] = 'Выберите значения из списка';
+      else if (vals.length > T.ATTR_MAX) errors[k] = `Не больше ${T.ATTR_MAX} значений`;
+      else out[k] = vals;
     }
     if (fo && ('dims' in input || typeId !== base?.type_id || formId !== base?.form_id)) {
       const src = input.dims ?? J(base?.dims, {});
@@ -130,7 +139,7 @@ function makeCatalog(db, storage) {
     const id = crypto.randomUUID(), t = now();
     await db.run(`INSERT INTO products (id,owner_company_id,source,type_id,form_id,name,brand,price,currency,dims,colors,materials,style_tags,url,status,created_by,created_at,updated_at,search)
       VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,'draft',?,?,?,?)`, [
-      id, user.role === 'company' ? user.companyId : null, user.role === 'company' ? 'company' : 'admin', v.typeId, v.formId, v.name, v.brand || '', v.price ?? 0, v.currency || 'USD',
+      id, user.role === 'company' ? user.companyId : null, user.role === 'company' ? 'company' : 'admin', v.typeId, v.formId, v.name, v.brand || '', v.price ?? 0, v.currency || T.PLATFORM_CURRENCY,
       JSON.stringify(v.dims || {}), JSON.stringify(v.colors || []), JSON.stringify(v.materials || []), JSON.stringify(v.styleTags || []), v.url || '', user.id, t, t, searchText(v.name, v.brand)]);
     await audit(user, 'create', id);
     return dto(await row(id));
@@ -170,6 +179,14 @@ function makeCatalog(db, storage) {
     if (!fo) probs.push('Не выбрана категория или форма');
     else for (const k of T.formDimKeys(fo)) if (k !== 'E' && !(d[k] > 0)) probs.push(`Не указан размер «${T.DIMN[k] || k}»`);
     if (!(N(p.price) >= 0)) probs.push('Не указана цена');
+    /* Товары администратора и компаний: цена и атрибуты для ИИ‑подбора обязательны.
+       Набор из открытых данных (source='demo') от этого освобождён — в нём этих данных может не быть. */
+    if (p.source !== 'demo') {
+      if (!(N(p.price) > 0)) probs.push('Укажите цену больше нуля');
+      for (const [col, kind, label] of [['style_tags', 'styles', 'стиль'], ['colors', 'colors', 'цвет'], ['materials', 'materials', 'материал']]) {
+        if (!J(p[col], []).some(x => T.dictValue(kind, x))) probs.push(`Не указан ${label}: выберите из списка`);
+      }
+    }
     if (p.model_status === 'mismatch') probs.push('Размеры 3D‑модели не совпадают с размерами товара');
     if (p.model_status === 'generating') probs.push('3D‑модель ещё генерируется');
     if (p.model_status === 'failed') probs.push('3D‑модель с ошибкой — загрузите заново или удалите');
@@ -294,6 +311,30 @@ function makeCatalog(db, storage) {
     return { products: rows.map(p => publicDto(p, by.get(p.id))), total, next: offset + rows.length < total ? offset + rows.length : null };
   }
 
+  /* ---------- ИИ‑дизайнер ----------
+     Кандидаты: опубликованные товары заданных типов — только поля, по которым идёт подбор.
+     Товар без 3D‑модели допустим (в редакторе он показывается объёмом по габаритам), но при прочих равных уступает товару с моделью.
+     Название и бренд не возвращаются намеренно: в модель они не передаются. */
+  async function aiCandidates(typeIds) {
+    const ids = [...new Set(typeIds)].filter(id => T.TYPE.has(id));
+    if (!ids.length) return [];
+    const rows = await db.all(`SELECT id, type_id, form_id, price, currency, dims, colors, materials, style_tags, model_status FROM products
+      WHERE status = 'published' AND type_id IN (${ids.map(() => '?').join(',')}) ORDER BY id`, ids);
+    return rows.map(p => ({ id: p.id, typeId: p.type_id, formId: p.form_id, price: N(p.price), currency: p.currency, dims: J(p.dims, {}), hasModel: p.model_status === 'ready',
+      /* значения приводятся к словарному написанию: по нему считается совпадение со вкусом заказчика */
+      colors: J(p.colors, []).map(x => T.dictValue('colors', x)).filter(Boolean), materials: J(p.materials, []).map(x => T.dictValue('materials', x)).filter(Boolean), styleTags: J(p.style_tags, []).map(x => T.dictValue('styles', x)).filter(Boolean) }));
+  }
+  /* Карточки товаров в том же виде, что публичный каталог: редактор загружает каталог один раз, а выбранный ИИ товар мог появиться позже */
+  async function publicByIds(ids) {
+    const list = [...new Set(ids)].slice(0, 500);
+    if (!list.length) return [];
+    const marks = list.map(() => '?').join(',');
+    const rows = await db.all(`SELECT * FROM products WHERE status = 'published' AND id IN (${marks})`, list);
+    const imgs = await db.all(`SELECT * FROM product_images WHERE product_id IN (${marks}) ORDER BY sort, created_at`, list);
+    const by = new Map(); for (const i of imgs) { if (!by.has(i.product_id)) by.set(i.product_id, []); by.get(i.product_id).push(i); }
+    return rows.map(p => publicDto(p, by.get(p.id)));
+  }
+
   async function stats() {
     const c = async (w) => N((await db.get(`SELECT ${COUNT} AS c FROM products ${w}`)).c);
     const byType = Object.fromEntries((await db.all(`SELECT type_id, ${COUNT} AS c FROM products GROUP BY type_id`)).map(r => [r.type_id, N(r.c)]));
@@ -326,8 +367,8 @@ function makeCatalog(db, storage) {
         const id = String(it?.id ?? '');
         if (!/^[A-Za-z0-9][A-Za-z0-9._-]{2,79}$/.test(id)) throw new ApiError(422, 'validation', 'Некорректный id товара');
         if (seen.has(id)) throw new ApiError(422, 'validation', 'Повтор id в наборе');
-        const v = normalize(it, null);
-        const p = { name: v.name, type_id: v.typeId, form_id: v.formId, dims: JSON.stringify(v.dims), price: v.price, model_status: 'none' };
+        const v = normalize(it, null, { lenient: true });
+        const p = { source: 'demo', name: v.name, type_id: v.typeId, form_id: v.formId, dims: JSON.stringify(v.dims), price: v.price, model_status: 'none' };
         let modelFile = null, modelInfo = {};
         if (it.model && it.model.url) {
           const info = it.model.info;
@@ -404,7 +445,7 @@ function makeCatalog(db, storage) {
     return rows.length;
   }
 
-  return { backfillSearch, ApiError, row, dto, list, create, update, remove, transition, publishProblems, attachModel, deleteModel, fitDimsToModel, requestGeneration, attachImage, deleteImage, moveImage, publicList, publicPage, stats, seedDemo, importBatch, purgeDemo, LIMITS, CURRENCIES };
+  return { aiCandidates, publicByIds, backfillSearch, ApiError, row, dto, list, create, update, remove, transition, publishProblems, attachModel, deleteModel, fitDimsToModel, requestGeneration, attachImage, deleteImage, moveImage, publicList, publicPage, stats, seedDemo, importBatch, purgeDemo, LIMITS, CURRENCIES };
 }
 
 module.exports = { makeCatalog, ApiError, LIMITS };

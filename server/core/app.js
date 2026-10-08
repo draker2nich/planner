@@ -18,6 +18,9 @@ const { makeTokens } = require('./tokens.js');
 const { makeOAuth, OAuthError, PROVIDERS } = require('./oauth.js');
 const { makeUsers } = require('./users.js');
 const { syncPack } = require('./pack.js');
+const { makeAi, AiError } = require('./ai.js');
+const designer = require('./designer.js');
+const { mock: aiMock } = require('./ai-mock.js');
 
 /* ---------- сборка окружения ---------- */
 async function fromEnv(env = process.env, { dataDir } = {}) {
@@ -97,6 +100,12 @@ async function bootstrap(ctx) {
   ctx.baseUrl = baseUrl(ctx);
   ctx.audit = (userId, action, entity, entityId, data = {}) => db.run('INSERT INTO audit_log (user_id, action, entity, entity_id, data, at) VALUES (?,?,?,?,?,?)', [userId, action, entity, entityId, JSON.stringify(data), new Date().toISOString()]);
   ctx.oauth = makeOAuth(ctx, { baseUrl: ctx.baseUrl, secret, audit: ctx.audit, registrationOpen: () => registrationOpen(ctx) });
+  /* ИИ‑дизайнер: обращение к модели и пропуска генерации. ctx.aiFetch подставляют тесты. */
+  ctx.ai = makeAi(env, { mock: aiMock, ...(ctx.aiFetch ? { fetchFn: ctx.aiFetch } : {}) });
+  ctx.aiPasses = designer.makePasses(ctx.limiter.tag);
+  ctx.aiSeals = designer.makeSeals(ctx.limiter.tag);
+  if (!ctx.ai.enabled) console.log('ИИ‑дизайнер выключен: ' + ctx.ai.why);
+  else console.log(`ИИ‑дизайнер: ${ctx.ai.mock ? 'заглушка (AI_MOCK=1)' : ctx.ai.provider + ' · ' + ctx.ai.model}`);
   await syncEnvAdmin(ctx);
   await ctx.catalog.backfillSearch();
   /* набор каталога из public/catalog-pack; сбой записи набора не должен останавливать сайт */
@@ -106,6 +115,9 @@ async function bootstrap(ctx) {
 }
 
 const registrationOpen = (ctx) => String(ctx.env.REGISTRATION_ENABLED ?? '1').trim() !== '0';
+/* Лимиты ИИ‑дизайнера: AI_DAILY_RUNS — генераций на пользователя в сутки, AI_DAILY_CALLS — обращений к модели в сутки на всю платформу */
+const posInt = (v, d) => { const n = Math.floor(Number(v)); return Number.isFinite(n) && n > 0 ? n : d; };
+const aiLimits = (ctx) => ({ runs: posInt(ctx.env.AI_DAILY_RUNS, 10), calls: posInt(ctx.env.AI_DAILY_CALLS, 2000) });
 /* Жёсткий режим: без подтверждённой почты проекты в аккаунт не сохраняются. При выключенной почте игнорируется. */
 const requireVerified = (ctx) => String(ctx.env.REQUIRE_VERIFIED_EMAIL || '').trim() === '1' && ctx.mailer.enabled;
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -147,7 +159,8 @@ function createApp(makeCtx) {
   route('GET', '/api/health', async (ctx) => ({ ok: true, db: ctx.db.dialect, storage: ctx.storage.kind, setup: ctx.setupProblem || null }));
   route('GET', '/api/config', async (ctx) => ({ uploads: ctx.storage.kind === 'blob' ? 'blob' : 'direct', blobAuth: ctx.storage.auth || null, maxModelMb: 50, maxImageMb: 15,
     registration: registrationOpen(ctx), contactEmail: contactEmail(ctx), termsVersion: V.TERMS_VERSION,
-    mail: ctx.mailer.enabled, oauth: ctx.oauth.list(), requireVerifiedEmail: requireVerified(ctx) }));
+    mail: ctx.mailer.enabled, oauth: ctx.oauth.list(), requireVerifiedEmail: requireVerified(ctx),
+    ai: { enabled: ctx.ai.enabled, mock: ctx.ai.mock, dailyRuns: aiLimits(ctx).runs } }));
 
   // авторизация
   const tooMany = (retryAfter) => {
@@ -368,6 +381,93 @@ function createApp(makeCtx) {
   route('POST', '/api/projects/:id/copy', async (ctx, req, p) => { const u = await writer(ctx, req); await createLimit(ctx, u); return ctx.projects.copy(u, p.id); });
   route('DELETE', '/api/projects/:id', async (ctx, req, p) => ctx.projects.remove(await requireUser(ctx, req), p.id));
 
+  /* ---------- ИИ‑дизайнер ----------
+     Три шага одной генерации — три запроса (см. server/core/designer.js). Каждый шаг — платное обращение к модели, поэтому:
+     нужен вход и подтверждённая почта; лимиты проверяются строго (сбой лимитера — отказ, а не пропуск);
+     шаг «расстановка» принимается только с пропуском, который выдаёт шаг «концепция». */
+  const DAY = 86400;
+  const aiLimit = (message, retryAfter) => new ApiError(429, 'ai_limit', message, { retryAfter }, { 'Retry-After': String(retryAfter || 60) });
+  const aiCount = async (ctx, fn, key, limit, win, message) => {
+    let c;
+    try { c = fn === 'take' ? await ctx.limiter.take(key, limit, win) : await ctx.limiter.peek(key, limit, win, { strict: true }); }
+    catch { throw new ApiError(503, 'ai_limits', 'Не удалось проверить лимиты. Попробуйте позже'); }
+    if (!c.ok) throw aiLimit(message, c.retryAfter);
+    return c;
+  };
+  const aiUser = async (ctx, req) => {
+    if (!ctx.ai.enabled) throw new ApiError(503, 'ai_off', 'ИИ‑дизайнер пока не подключён');
+    const u = await requireUser(ctx, req);
+    /* только подтверждённая почта; пока отправка писем не настроена, подтвердить её нельзя — проверка не действует */
+    if (ctx.mailer.enabled && !u.emailVerified && u.role !== 'admin') throw new ApiError(403, 'email_unverified', 'Подтвердите почту, чтобы пользоваться ИИ‑дизайнером');
+    return u;
+  };
+  const AI_FAIL = {
+    ai_off: [503, 'ИИ‑дизайнер пока не подключён'], ai_timeout: [504, 'Модель не успела ответить. Попробуйте ещё раз'], ai_network: [502, 'Нет связи с моделью. Попробуйте ещё раз'],
+    ai_auth: [502, 'ИИ‑дизайнер временно недоступен'], ai_busy: [503, 'Модель сейчас перегружена. Попробуйте через минуту'], ai_request: [502, 'ИИ‑дизайнер временно недоступен'],
+    ai_refused: [422, 'Модель отказалась обрабатывать запрос. Измените пожелания или фото'], ai_truncated: [502, 'Ответ модели оборвался. Попробуйте ещё раз'], ai_bad_answer: [502, 'Модель вернула непонятный ответ. Попробуйте ещё раз'],
+  };
+  /* Один шаг: вызов, запись в журнал (без текстов и фото — только размеры запроса, расход и время), перевод ошибок модели в ответы API */
+  const aiStep = async (ctx, u, step, entityId, extra, fn) => {
+    const t0 = Date.now();
+    try {
+      const res = await fn();
+      await ctx.audit(u.id, 'ai.' + step, 'ai', entityId, { ...extra, ...(res.stats || {}), in: res.usage.in, out: res.usage.out, ms: res.ms, model: res.model }).catch((e) => console.error('audit:', e.message));
+      return res;
+    } catch (e) {
+      const code = e instanceof AiError ? e.code : e instanceof ApiError ? e.code : 'internal';
+      await ctx.audit(u.id, 'ai.' + step, 'ai', entityId, { ...extra, error: code, ms: Date.now() - t0 }).catch(() => {});
+      if (!(e instanceof AiError)) throw e;
+      console.error(`ai ${step}: ${e.code}: ${e.message}`); // подробности провайдера — только в журнал сервера
+      const [status, message] = AI_FAIL[e.code] || [502, 'ИИ‑дизайнер временно недоступен'];
+      throw new ApiError(status, e.code, message);
+    }
+  };
+  route('POST', '/api/ai/taste', async (ctx, req) => {
+    const u = await aiUser(ctx, req);
+    const r = designer.readTasteReq(await readJson(req, designer.LIM.tasteBody));
+    const lim = aiLimits(ctx);
+    if (u.role !== 'admin') await aiCount(ctx, 'take', `ai:taste:${u.id}`, lim.runs * 3, DAY, 'Дневной лимит ИИ‑дизайнера исчерпан. Попробуйте завтра');
+    await aiCount(ctx, 'take', 'ai:global', lim.calls, DAY, 'ИИ‑дизайнер сегодня перегружен. Попробуйте завтра');
+    const res = await aiStep(ctx, u, 'taste', null, { photos: r.photos.length, text: r.text.length }, () => designer.taste(ctx.ai, r));
+    return { profile: res.profile, seal: ctx.aiSeals.make('taste:' + u.id, res.profile) };
+  });
+  route('POST', '/api/ai/concept', async (ctx, req) => {
+    const u = await aiUser(ctx, req);
+    const r = designer.readConceptReq(await readJson(req, designer.LIM.body));
+    /* профиль вкуса принимается только с печатью шага «вкус» этого же пользователя; иначе подбор идёт без профиля */
+    if (!ctx.aiSeals.check('taste:' + u.id, r.taste, r.tasteSeal)) r.taste = designer.emptyProfile();
+    const prepared = await designer.prepareConcept(ctx.catalog, r); // нет подходящих товаров — отказ до счётчиков и до модели
+    const lim = aiLimits(ctx); const free = u.role === 'admin';
+    const kRun = `ai:run:${u.id}`;
+    /* Запуск резервируется до обращения к модели (параллельные запросы не обходят лимит) и возвращается, если концепция не удалась:
+       сбой модели не съедает дневной лимит. Попытки (ai:try) считаются все — это предел для неудачных. */
+    let run = null;
+    if (!free) {
+      await aiCount(ctx, 'peek', kRun, lim.runs, DAY, `Дневной лимит генераций исчерпан (${lim.runs} в сутки). Попробуйте завтра`);
+      await aiCount(ctx, 'take', `ai:try:${u.id}`, lim.runs * 4, DAY, 'Слишком много попыток генерации. Попробуйте завтра');
+      try { run = await aiCount(ctx, 'take', kRun, lim.runs, DAY, `Дневной лимит генераций исчерпан (${lim.runs} в сутки). Попробуйте завтра`); }
+      catch (e) { if (e.code === 'ai_limit') await ctx.limiter.undo(kRun); throw e; }
+    }
+    const { pass, runId } = ctx.aiPasses.issue(u.id);
+    let res;
+    try {
+      await aiCount(ctx, 'take', 'ai:global', lim.calls, DAY, 'ИИ‑дизайнер сегодня перегружен. Попробуйте завтра');
+      res = await aiStep(ctx, u, 'concept', runId, { mode: r.mode }, () => designer.concept(ctx.ai, ctx.catalog, r, prepared));
+    } catch (e) { if (run) await ctx.limiter.undo(kRun); throw e; }
+    const concepts = res.concepts.map(c => ({ ...c, seal: ctx.aiSeals.make('concept:' + runId, designer.conceptSealed(c)) }));
+    return { runId, pass, concepts, groups: res.groups, products: res.products, runsLeft: run ? Math.max(0, lim.runs - run.count) : null };
+  });
+  route('POST', '/api/ai/layout', async (ctx, req) => {
+    const u = await aiUser(ctx, req);
+    const r = designer.readLayoutReq(await readJson(req, designer.LIM.body));
+    const p = ctx.aiPasses.check(r.pass, u.id);
+    if (!p || !ctx.aiSeals.check('concept:' + p.runId, designer.conceptSealed(r.concept), r.concept.seal)) throw new ApiError(403, 'ai_pass', 'Сеанс генерации устарел. Запустите генерацию заново');
+    await aiCount(ctx, 'take', `ai:pass:${p.runId}`, designer.LIM.layoutCallsPerPass, designer.LIM.passTtlSec, 'Слишком много попыток расстановки. Запустите генерацию заново');
+    await aiCount(ctx, 'take', 'ai:global', aiLimits(ctx).calls, DAY, 'ИИ‑дизайнер сегодня перегружен. Попробуйте завтра');
+    const res = await aiStep(ctx, u, 'layout', p.runId, { variant: r.variant, retry: r.retry }, () => designer.layout(ctx.ai, r));
+    return { placements: res.placements };
+  });
+
   // публичный каталог
   route('GET', '/api/catalog/types', async () => ({ cats: T.CATS, dimNames: T.DIMN, types: T.TYPES.map(t => ({ id: t.id, name: t.name, cats: t.cats, mount: t.mount, forms: t.forms.map(f => ({ id: f.id, name: f.name, fp: f.fp, dims: T.formDimKeys(f), typical: f.typical })) })) }));
   /* без параметров — весь каталог одним ответом (как раньше); с limit/offset — порциями, так его читает редактор */
@@ -435,7 +535,11 @@ function createApp(makeCtx) {
     const pack = await syncPack(ctx, { force: true }).catch((e) => { console.error('Набор каталога не записан в базу:', e.message); return null; });
     return { deleted, restored: pack ? pack.imported : 0 };
   }));
-  route('GET', '/api/admin/audit', admin(async (ctx, u, req, p, q) => ({ items: await ctx.db.all('SELECT a.*, u.email FROM audit_log a LEFT JOIN users u ON u.id=a.user_id ORDER BY a.at DESC, a.id DESC LIMIT ?', [Math.min(+q.limit || 100, 500)]) })));
+  /* entity=ai — только обращения к ИИ‑дизайнеру (их много, в общем списке они вытесняют остальное); entity=other — всё, кроме них */
+  route('GET', '/api/admin/audit', admin(async (ctx, u, req, p, q) => {
+    const where = q.entity === 'ai' ? "WHERE a.entity = 'ai'" : q.entity === 'other' ? "WHERE a.entity <> 'ai'" : '';
+    return { items: await ctx.db.all(`SELECT a.*, u.email FROM audit_log a LEFT JOIN users u ON u.id=a.user_id ${where} ORDER BY a.at DESC, a.id DESC LIMIT ?`, [Math.max(1, Math.min(500, Math.floor(Number(q.limit)) || 100))]) };
+  }));
 
   /* Загрузка файлов из браузера прямо в Vercel Blob (обход лимита 4,5 МБ на запрос к функции).
      Браузер получает здесь одноразовый токен; права проверяются по токену сессии в clientPayload. */

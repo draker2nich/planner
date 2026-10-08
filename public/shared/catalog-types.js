@@ -108,4 +108,100 @@ function footprintExtents(fp,d){
 }
 /* Ключи размеров, которые должен заполнить продавец для формы: размеры формы + высота H (+ E — высота установки для настенных) */
 function formDimKeys(fo){return [...fo.dims,'H',...(fo.typical.E!=null?['E']:[])];}
-if(typeof module!=='undefined'&&module.exports){module.exports={DIMN,DIMLIM,CATS,TYPES,TYPE,BRANDS,formOf,footprintExtents,formDimKeys,demoProducts};}
+
+/* =====================================================================
+   Словари атрибутов товара: стиль, цвет, материал.
+   Один источник для формы товара, мастера пожеланий, сервера и ИИ‑дизайнера.
+   tools/catalog/lib/mapping.mjs переводит названия открытых наборов в эти же значения.
+   ===================================================================== */
+const STYLES=['современный','скандинавский','лофт','классика','минимализм','японди','бохо','кантри','гламур','прибрежный','ретро'];
+/* tone — светлый/средний/тёмный, temp — тёплый/холодный/нейтральный: по ним считается совпадение с «палитрой» из пожеланий */
+const COLORS=[
+ {name:'белый',hex:'#f4f4f1',tone:'light',temp:'neutral'},
+ {name:'бежевый',hex:'#d9c8ad',tone:'light',temp:'warm'},
+ {name:'серый',hex:'#9a9c9e',tone:'mid',temp:'cool'},
+ {name:'чёрный',hex:'#1f1f21',tone:'dark',temp:'neutral'},
+ {name:'коричневый',hex:'#6b4a32',tone:'dark',temp:'warm'},
+ {name:'натуральное дерево',hex:'#c69a68',tone:'mid',temp:'warm'},
+ {name:'синий',hex:'#3d5a80',tone:'dark',temp:'cool'},
+ {name:'зелёный',hex:'#5f7d5a',tone:'mid',temp:'cool'},
+ {name:'красный',hex:'#a3423a',tone:'mid',temp:'warm'},
+ {name:'оранжевый',hex:'#c9743a',tone:'mid',temp:'warm'},
+ {name:'жёлтый',hex:'#d9b441',tone:'light',temp:'warm'},
+ {name:'розовый',hex:'#d9a3a8',tone:'light',temp:'warm'},
+ {name:'фиолетовый',hex:'#7b5c8f',tone:'mid',temp:'cool'},
+ {name:'серебристый',hex:'#c4c7ca',tone:'light',temp:'cool'},
+ {name:'прозрачный',hex:'#e6eef2',tone:'light',temp:'neutral'},
+ {name:'разноцветный',hex:'#b0a090',tone:'mid',temp:'neutral'},
+];
+const COLOR=new Map(COLORS.map(c=>[c.name,c]));
+const MATERIALS=['дерево','ЛДСП / МДФ','металл','стекло','кожа','велюр','ткань','ковровое волокно','ротанг','камень','пластик'];
+/* Сколько значений каждого атрибута можно указать у товара */
+const ATTR_MAX=3;
+/* Валюта платформы по умолчанию (пилот — Беларусь) */
+const PLATFORM_CURRENCY='BYN';
+/* Привести значение к словарному написанию; null — такого значения в словаре нет */
+function dictValue(kind,v){
+  const s=String(v==null?'':v).trim().toLowerCase().replace(/ё/g,'е'); if(!s)return null;
+  const list=kind==='colors'?COLORS.map(c=>c.name):kind==='materials'?MATERIALS:STYLES;
+  return list.find(x=>x.toLowerCase().replace(/ё/g,'е')===s)||null;
+}
+
+/* Встроенные текстуры отделки — идентификаторы и названия те же, что в TEXLIB редактора (js/editor/view3d/materials.js).
+   Нужны серверу, чтобы ИИ‑дизайнер выбирал отделку только из того, что редактор умеет показать. */
+const FINISH_TEXTURES=[
+ {id:'plaster',name:'штукатурка светлая',walls:true,floor:false},{id:'paint-warm',name:'краска тёплая бежевая',walls:true,floor:false},{id:'paint-cool',name:'краска холодная серо‑голубая',walls:true,floor:false},
+ {id:'wp-stripes',name:'обои в полоску',walls:true,floor:false},{id:'wp-dots',name:'обои в горошек',walls:true,floor:false},{id:'wp-damask',name:'обои с ромбами',walls:true,floor:false},
+ {id:'tile-white',name:'плитка белая',walls:true,floor:true},{id:'tile-grey',name:'плитка серая',walls:true,floor:true},{id:'tile-mosaic',name:'мозаика голубая',walls:true,floor:true},
+ {id:'wood-oak',name:'дуб светлый',walls:true,floor:true},{id:'wood-dark',name:'орех тёмный',walls:true,floor:true},{id:'laminate',name:'ламинат серый',walls:false,floor:true},
+ {id:'stone',name:'камень',walls:true,floor:true},{id:'concrete',name:'бетон',walls:true,floor:true},{id:'brick',name:'кирпич',walls:true,floor:false},
+];
+
+/* ---------- Подбор товара на место в плане ---------- */
+/* Формы, которые ИИ‑дизайнер не двигает и не предлагает взамен обычных */
+const CORNER_FP=['L','U','quarter'];
+/* Подходит ли товар под ограничения размеров (режимы «Точно» ±10 мм, «Диапазон», «Неважно»).
+   fo — форма товара, cons — ограничения по ключам размеров. */
+function matchProduct(pr,fo,cons){
+  for(const k of [...fo.dims,'H']){
+    const c=cons&&cons[k]; if(!c||c.mode==='any')continue;
+    const v=pr.dims[k]; if(v==null)return false;
+    if(c.mode==='exact'&&Math.abs(v-c.exact)>10)return false;
+    if(c.mode==='range'){ if(c.min!=null&&v<c.min-0.5)return false; if(c.max!=null&&v>c.max+0.5)return false; }
+  }
+  return true;
+}
+/* Ограничения размеров места. Свои ограничения предмета действуют всегда; если их нет, а товар на плане
+   нужно «Заменить» — берётся ±15 % от текущих габаритов, как в ручной кнопке «Заменить». */
+function slotConstraints(slot){
+  const cons=slot.constraints||{};
+  const own=Object.keys(cons).some(k=>cons[k]&&cons[k].mode&&cons[k].mode!=='any');
+  if(own||!slot.productId||slot.policy!=='replace')return cons;
+  const t=TYPE.get(slot.typeId); if(!t)return cons; const fo=formOf(t,slot.formId); const out={};
+  for(const k of [...fo.dims,'H']) if(slot.dims&&slot.dims[k]>0) out[k]={mode:'range',min:Math.round(slot.dims[k]*0.85),max:Math.round(slot.dims[k]*1.15)};
+  return out;
+}
+/* Может ли товар занять место в плане. Одна функция для редактора (проверка до запуска) и сервера (отбор кандидатов).
+   slot: {typeId, formId, formAny, productId, policy:'replace'|'free', dims, constraints, maxFit:{w,d}|null}
+   room: {wallHeight, longestWall} — в мм. */
+function slotAccepts(pr,slot,room){
+  if(!pr||pr.typeId!==slot.typeId)return false;
+  const t=TYPE.get(slot.typeId); if(!t)return false;
+  const cur=formOf(t,slot.formId); const fo=t.forms.find(f=>f.id===pr.formId); if(!fo)return false;
+  if(pr.formId!==cur.id){
+    if(!slot.formAny)return false;
+    if((fo.mount||t.mount)!==(cur.mount||t.mount))return false; // настенная форма не заменяет напольную
+    if(CORNER_FP.includes(fo.fp))return false;                   // угловые формы взамен обычных не предлагаются
+  }
+  if(slot.policy==='replace'&&slot.productId&&pr.id===slot.productId)return false; // «Заменить» — обязательно другой товар
+  if(!matchProduct(pr,fo,slotConstraints(slot)))return false;
+  const e=footprintExtents(fo.fp,pr.dims);
+  if(room){
+    if(room.wallHeight&&pr.dims.H>room.wallHeight+0.5)return false;
+    if((fo.mount||t.mount)==='wall'&&room.longestWall&&e.w>room.longestWall+0.5)return false;
+  }
+  if(slot.maxFit&&(e.w>slot.maxFit.w+0.5||e.d>slot.maxFit.d+0.5))return false; // не помещается в точке привязки
+  return true;
+}
+if(typeof module!=='undefined'&&module.exports){module.exports={DIMN,DIMLIM,CATS,TYPES,TYPE,BRANDS,formOf,footprintExtents,formDimKeys,demoProducts,
+  STYLES,COLORS,COLOR,MATERIALS,ATTR_MAX,PLATFORM_CURRENCY,dictValue,FINISH_TEXTURES,CORNER_FP,matchProduct,slotConstraints,slotAccepts};}

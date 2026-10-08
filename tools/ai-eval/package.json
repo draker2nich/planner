@@ -1,0 +1,13 @@
+{
+  "name": "planner-ai-eval",
+  "private": true,
+  "description": "Стенд и сквозная проверка ИИ‑дизайнера",
+  "scripts": {
+    "eval": "node eval.cjs",
+    "eval:mock": "AI_MOCK=1 node eval.cjs",
+    "e2e": "node e2e.cjs"
+  },
+  "devDependencies": {
+    "playwright": "^1.56.0"
+  }
+}

@@ -471,3 +471,83 @@ header .only3d.on{background:var(--accent);border-color:var(--ring)}
   .pf-v{min-height:40px}
   .ph .back,.lk{width:40px;height:40px}
 }
+
+/* ================= ИИ‑дизайнер ================= */
+/* мастер: состояние под таблицей прав */
+.aistate{margin-top:12px}
+.aistate .pnote{margin-top:8px}
+.pnote.warn.err{background:var(--destructive-soft);color:var(--destructive)}
+.roomblk small{color:var(--muted-foreground);font-size:12px}
+#dlg .aitable .seg button:disabled{opacity:.35;cursor:not-allowed}
+/* ход генерации */
+/* окно хода генерации закрывает страницу целиком: пока идёт расчёт, проект менять нельзя */
+#overlay:has(#dlg.aiprog){background:var(--overlay);pointer-events:auto;animation:fade-in .15s ease-out}
+#dlg.aiprog .aisteps{list-style:none;margin:16px 0 4px;padding:0;display:flex;flex-direction:column;gap:10px}
+#dlg.aiprog .aisteps li{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--muted-foreground)}
+#dlg.aiprog .aisteps i{width:16px;height:16px;flex:none;border-radius:50%;border:2px solid var(--border)}
+#dlg.aiprog .aisteps li.done{color:var(--foreground)}
+#dlg.aiprog .aisteps li.done i{border-color:var(--foreground);background:var(--foreground)}
+#dlg.aiprog .aisteps li.now{color:var(--foreground);font-weight:500}
+#dlg.aiprog .aisteps li.now i{border-color:var(--brand);border-top-color:transparent;animation:ai-spin .8s linear infinite}
+@keyframes ai-spin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){#dlg.aiprog .aisteps li.now i{animation:none;border-top-color:var(--brand);background:var(--brand-soft)}}
+/* экран результата */
+#result .wrap.ai{max-width:1120px;align-items:start}
+#result .aivar{display:flex;flex-direction:column;gap:12px;min-width:0}
+#result .aivar.base{grid-column:1/-1}
+#result .aivar.chosen{border-color:var(--brand);box-shadow:0 0 0 1px var(--brand)}
+#result .aiplan{display:block;width:100%;height:240px;border-radius:var(--radius-md);background:var(--muted)}
+#result .aivar.base .aiplan{height:200px}
+#result .aihead{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px}
+#result .aihead h4{margin:0;font-size:18px;font-weight:600;letter-spacing:-.01em;flex:1 1 auto;min-width:0;overflow-wrap:anywhere}
+#result .aihead .num{flex:1 0 100%;font-size:12px;font-weight:500;color:var(--muted-foreground);text-transform:uppercase;letter-spacing:.04em}
+#result .aihead .badge{display:inline-flex;align-items:center;gap:4px;height:24px;padding:0 8px;border-radius:999px;background:var(--brand-soft);color:var(--brand);font-size:12px;font-weight:600}
+#result .aihead .badge .ic{width:14px;height:14px}
+#result .aivar .note{margin:0;font-size:14px;line-height:1.5;color:var(--muted-foreground);text-wrap:pretty}
+#result .aivar .summary{margin:0}
+#result .aivar .pnote{margin-top:0}
+#result .aifin{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:13px}
+#result .aisw{display:inline-flex;align-items:center;gap:6px}
+#result .aisw.same{color:var(--muted-foreground)}
+#result .aisw .sw{width:18px;height:18px;border-radius:5px;border:1px solid var(--border);background:var(--muted) center/cover}
+#result .aisw .sw.ph{background-image:repeating-linear-gradient(45deg,var(--border) 0 3px,transparent 3px 6px)}
+#result .aivar details{border-top:1px solid var(--border);padding-top:4px}
+#result .aivar summary{cursor:pointer;font-size:13px;font-weight:500;color:var(--muted-foreground);padding:8px 0;list-style:none;border-radius:var(--radius-sm)}
+#result .aivar summary::-webkit-details-marker{display:none}
+#result .aivar summary::before{content:'▸';display:inline-block;width:14px;transition:transform .15s}
+#result .aivar details[open] summary::before{transform:rotate(90deg)}
+#result .aiitems{display:flex;flex-direction:column;max-height:320px;overflow:auto;overscroll-behavior:contain;margin:0 -4px;padding:0 4px}
+#result .aiitems .it{display:grid;grid-template-columns:44px minmax(0,1fr) auto;gap:10px;align-items:center;padding:8px 0;border-top:1px solid var(--border);font-size:14px}
+#result .aiitems .it:first-child{border-top:none}
+#result .aiitems img{width:44px;height:44px;object-fit:contain;border-radius:var(--radius-md);background:#fff}
+#result .aiitems .it.ph img{background:var(--muted);padding:4px}
+#result .aiitems .nm{min-width:0}
+#result .aiitems .nm b{display:block;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#result .aiitems .nm small{display:block;color:var(--muted-foreground);font-size:12px;font-variant-numeric:tabular-nums;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#result .aiitems .nm em{display:inline-block;margin-top:3px;padding:0 6px;border-radius:4px;background:var(--brand-soft);color:var(--brand);font-size:11px;font-style:normal;font-weight:600;line-height:18px}
+#result .aiitems .pr{display:flex;flex-direction:column;align-items:flex-end;gap:2px;font-variant-numeric:tabular-nums;white-space:nowrap}
+#result .aiitems .pr .mut{color:var(--muted-foreground);font-size:12px}
+#result .aiitems .pr a{font-size:12px;color:var(--brand);text-underline-offset:3px}
+#result .aiacts{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto;padding-top:4px}
+#result .aiacts button{height:38px}
+#result .aiacts button.primary,#result .aiacts button[aria-pressed="true"]{margin-left:auto}
+#result .aichosen{grid-column:1/-1;margin:0}
+#result .runs{white-space:nowrap}
+/* полоса вариантов над планом и в 3D */
+#aiBar{position:absolute;top:calc(var(--gap) + 2px);left:50%;transform:translateX(-50%);z-index:9;display:flex;align-items:center;gap:8px;max-width:calc(100% - 24px);padding:4px 4px 4px 12px;
+  background:var(--popover);color:var(--popover-foreground);border:1px solid var(--border);border-radius:999px;box-shadow:var(--shadow-md);font-size:13px;white-space:nowrap}
+#aiBar .lbl{color:var(--muted-foreground);font-weight:500}
+#aiBar .seg{height:32px;padding:2px;gap:2px;border-radius:999px;background:var(--fill)}
+#aiBar .seg button{height:28px;padding:0 12px;border:0;border-radius:999px;background:transparent;box-shadow:none;font-size:13px}
+#aiBar .seg button.on{background:var(--card);color:var(--foreground);box-shadow:var(--shadow-sm)}
+#aiBar .seg button:disabled{opacity:.4}
+#aiBar>button{height:32px;padding:0 14px;border-radius:999px;font-size:13px}
+body.res #aiBar{display:none}
+@media (max-width:640px){
+  #aiBar{top:6px;padding-left:4px;overflow-x:auto}
+  #aiBar .lbl{display:none}
+  #aiBar .seg button{padding:0 9px}
+  #result .aiplan{height:200px}
+  #result .aiacts button{flex:1 1 calc(50% - 4px)}
+  #result .aiacts button.primary,#result .aiacts button[aria-pressed="true"]{margin-left:0;flex-basis:100%}
+}

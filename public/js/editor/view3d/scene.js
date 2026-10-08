@@ -40,7 +40,7 @@ function rebuildScene(){
   if(poly){
     const fs=new THREE.Shape(poly.map(p=>new THREE.Vector2(p.x/1000,-p.y/1000))); const xs=poly.map(p=>p.x/1000),ys=poly.map(p=>-p.y/1000); const bw=Math.max(...xs)-Math.min(...xs),bh=Math.max(...ys)-Math.min(...ys);
     const floor=new THREE.Mesh(new THREE.ShapeGeometry(fs),buildMaterial(P.floor?.material,bw,bh,Math.min(...xs),Math.min(...ys),true)); floor.rotation.x=-Math.PI/2; floor.userData={type:'floor'}; T3.room.add(floor); T3.pickables.push(floor);
-    const cs=new THREE.Shape(poly.map(p=>new THREE.Vector2(p.x/1000,p.y/1000))); const ceil=new THREE.Mesh(new THREE.ShapeGeometry(cs),new THREE.MeshStandardMaterial({color:'#f4f4f2',roughness:0.95})); ceil.rotation.x=Math.PI/2; ceil.position.y=H; ceil.userData={type:'ceiling'}; T3.room.add(ceil);
+    const cs=new THREE.Shape(poly.map(p=>new THREE.Vector2(p.x/1000,p.y/1000))); const ceil=new THREE.Mesh(new THREE.ShapeGeometry(cs),new THREE.MeshStandardMaterial({color:(P.ceiling&&P.ceiling.material&&P.ceiling.material.color)||CEIL_DEF,roughness:0.95})); ceil.rotation.x=Math.PI/2; ceil.position.y=H; ceil.userData={type:'ceiling'}; T3.room.add(ceil);
   }
   buildFurniture3D(T3.room);
   buildArrows(); if(T3.sel)selectIn3D(T3.sel,true);

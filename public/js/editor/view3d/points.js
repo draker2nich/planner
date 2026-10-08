@@ -8,7 +8,7 @@
    ===================================================================== */
 const T3={active:false,ready:false,scene:null,camera:null,renderer:null,room:null,pickables:[],arrows:[],point:0,yaw:0,pitch:0,fov:70,moving:null,sel:null,outline:null,dirty:false,models:{},raf:0,drag:null,libTex:new Map(),photoTex:new Map(),avg:new Map(),panelTarget:null};
 const hasWebGL=(()=>{try{const c=document.createElement('canvas');return !!(c.getContext('webgl2')||c.getContext('webgl'));}catch(e){return false;}})();
-const FLOOR_DEF='#d9cfbf', WALL_DEF='#e9e6df', EXT_COL='#9a9a94';
+const FLOOR_DEF='#d9cfbf', WALL_DEF='#e9e6df', CEIL_DEF='#f4f4f2', EXT_COL='#9a9a94';
 
 /* ---------- Точки обзора ---------- */
 const VP={key:null,points:[]};

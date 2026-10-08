@@ -76,13 +76,15 @@ function isLocked(sel){if(!sel)return false;if(sel.type==='wall')return !!P.wall
 /* ---------- Режимы ---------- */
 function setMode(m){
   if(m==='furniture'&&!P.closed){toast('Сначала замкните контур комнаты',true);return;}
+  /* варианты ИИ‑дизайнера построены для нынешней комнаты: переход к стенам — только с подтверждением (ai/run.js) */
+  if(m==='walls'&&typeof aiGuardWalls==='function'&&aiGuardWalls())return;
   if(E.mode==='fPlace'){E.fPlace=null;E.fGhost=null;} E.mode='idle';E.tool='select';E.sel=null;E.copyMode=false;
   const err=apply(Q=>{Q.mode=m;refreshWarnings(Q);},{noHist:true}); if(err)toast(err,true);
   updateModeUI();
   if(m==='furniture'){const bad=(P.furniture||[]).filter(f=>f.warnings?.includes('outside'));if(bad.length)toast('Вне комнаты: '+bad.map(f=>f.name).join(', '),true);buildCatalog();}
   render();
 }
-function updateModeUI(){const fm=P.mode==='furniture';document.body.classList.toggle('fm',fm);if(!fm)setCatalogOpen(false);$('#modeWalls').setAttribute('aria-pressed',String(!fm));$('#modeFurn').setAttribute('aria-pressed',String(fm));$('#tools').hidden=fm||T3.active;$('#catalog').hidden=!fm||T3.active;$('#modeWalls').classList.toggle('on',!fm);$('#modeFurn').classList.toggle('on',fm);$('#modeFurn').disabled=!P.closed;$('#modeFurn').title=P.closed?'':'Сначала замкните контур комнаты';$('#btnFinish').hidden=!fm;$('#btnFinish').disabled=!(P.furniture||[]).length;$('#btnFinish').title=(P.furniture||[]).length?'':'Расставьте хотя бы один предмет или пустышку';updateLockBtn();}
+function updateModeUI(){const fm=P.mode==='furniture';document.body.classList.toggle('fm',fm);if(!fm)setCatalogOpen(false);$('#modeWalls').setAttribute('aria-pressed',String(!fm));$('#modeFurn').setAttribute('aria-pressed',String(fm));$('#tools').hidden=fm||T3.active;$('#catalog').hidden=!fm||T3.active;$('#modeWalls').classList.toggle('on',!fm);$('#modeFurn').classList.toggle('on',fm);$('#modeFurn').disabled=!P.closed;$('#modeFurn').title=P.closed?'':'Сначала замкните контур комнаты';$('#btnFinish').hidden=!fm;$('#btnFinish').disabled=!(P.furniture||[]).length;$('#btnFinish').title=(P.furniture||[]).length?'':'Расставьте хотя бы один предмет или пустышку';updateLockBtn();if(typeof aiBar==='function')aiBar();}
 
 /* ---------- Виджет мебели ---------- */
 function furnitureWidget(wg,f){

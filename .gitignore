@@ -4,3 +4,5 @@ node_modules/
 .vercel/
 /catalog-work/
 /catalog-pack/
+/tools/ai-eval/out/
+/tools/ai-eval/shots/

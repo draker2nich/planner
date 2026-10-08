@@ -18,7 +18,7 @@ function buildCatalog(){
 
 /* ---------- Диалог размеров ---------- */
 function typicalDims(fo,cons){const d={};for(const k of [...fo.dims,'H']){const c=cons[k]||{mode:'any'};if(c.mode==='exact')d[k]=c.exact;else if(c.mode==='range'){const lo=c.min??null,hi=c.max??null;const typ=fo.typical[k]||500;d[k]=(lo!=null&&hi!=null)?Math.round((lo+hi)/2):(lo!=null?Math.max(lo,typ):Math.min(hi,typ));}else d[k]=fo.typical[k]||500;}if(fo.typical.E!=null)d.E=fo.typical.E;return d;}
-function matchProduct(pr,fo,cons){for(const k of [...fo.dims,'H']){const c=cons[k];if(!c||c.mode==='any')continue;const v=pr.dims[k];if(v==null)return false;if(c.mode==='exact'&&Math.abs(v-c.exact)>10)return false;if(c.mode==='range'){if(c.min!=null&&v<c.min-0.5)return false;if(c.max!=null&&v>c.max+0.5)return false;}}return true;}
+/* matchProduct — в общем модуле public/shared/catalog-types.js: тем же правилом сервер отбирает кандидатов для ИИ‑дизайнера */
 function countProducts(t,formId,cons){return PRODUCTS.filter(pr=>pr.typeId===t.id&&(formId==='any'||pr.formId===formId)&&matchProduct(pr,formOf(t,pr.formId),cons)).length;}
 async function sizeDialog(t,init){
   return dialog((box,api)=>{
