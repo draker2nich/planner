@@ -646,3 +646,13 @@ body.in3d header .segc.only3d{display:inline-flex}
 @media (min-width:641px){#dlg:has(.pfilters) .pgrid{max-height:min(56vh,calc(100vh - 400px))}}
 /* просмотр по ссылке и поддержкой: плашка «только просмотр» не должна закрывать заголовок экрана результата */
 body.ro #result{padding-top:72px}
+
+/* ---- дополнения: состояние каталога, загрузка моделей в 3D ---- */
+#catalog .cnote{display:flex;gap:8px;align-items:center;justify-content:space-between;font-size:12.5px;line-height:1.35;color:var(--muted-foreground);background:var(--muted);border-radius:var(--radius-md);padding:8px 10px;margin:0 0 8px}
+#catalog .cnote.err{color:var(--foreground);border:1px solid var(--border)}
+#catalog .cnote button{flex:none;height:28px;padding:0 10px;font-size:12.5px}
+#load3d{left:50%;transform:translateX(-50%);top:var(--gap);pointer-events:none;white-space:nowrap}
+/* уведомления — под шапкой: внизу они закрывали кнопки диалога‑шторки, нижнюю панель и строку подсказки */
+#toasts{top:calc(64px + var(--safe-top));bottom:auto}
+#startCard .sc-example{display:block;margin:12px auto 0;height:32px;padding:0 10px;background:none;border:0;box-shadow:none;color:var(--muted-foreground);font-size:13px;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+#startCard .sc-example:hover{color:var(--foreground)}

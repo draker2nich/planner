@@ -61,6 +61,14 @@ function makePhotos(db, storage) {
         if (cur && cur.file !== file) await storage.remove(file);
         return { ok: true, id: pid, existed: true };
       }
+      /* проверка после вставки: одновременные загрузки вместе проходят проверку выше, поэтому каждая пересчитывает фото
+         после своей записи и при превышении убирает своё (см. enforceLimit в projects.js) */
+      const after = Number((await db.get('SELECT CAST(COUNT(*) AS INTEGER) AS c FROM user_photos WHERE user_id=?', [user.id])).c);
+      if (after > MAX_PER_USER) {
+        await db.run('DELETE FROM user_photos WHERE user_id=? AND id=?', [user.id, pid]);
+        await storage.remove(file);
+        throw new ApiError(422, 'limit', `В аккаунте можно хранить не больше ${MAX_PER_USER} фото. Удалите неиспользуемые в панели материалов`);
+      }
       return { ok: true, id: pid };
     },
     get: (user, id) => read(user.id, id),

@@ -145,7 +145,10 @@ async function aiRun(opts){
     const e=out&&out.error;
     if(ctl.signal.aborted||(e&&e.name==='AbortError')){toast('Генерация отменена');return false;}
     if(e&&e.code==='ai_off')AI_CFG=null;
-    toast((e&&e.message)||'Не удалось построить варианты',true);return false;
+    toast((e&&e.message)||'Не удалось построить варианты',true);
+    /* концепция построена (запуск засчитан), но расстановка не получилась ни в одном варианте — просим сервер вернуть запуск */
+    if(e&&e.aiPass)Session.api('POST','/ai/refund',{pass:e.aiPass}).then(r=>{if(r&&r.refunded){if(AI_RUNS_LEFT!=null)AI_RUNS_LEFT++;toast('Эта попытка не засчитана в дневной лимит генераций');}}).catch(()=>{});
+    return false;
   }
   if(P.id+'|'+P.updatedAt!==stamp){toast('Проект изменился, пока шла генерация. Запустите её ещё раз',true);return false;}
   const err=aiCommit(Q=>{

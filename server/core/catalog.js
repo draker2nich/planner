@@ -40,11 +40,13 @@ function makeCatalog(db, storage) {
       createdAt: p.created_at, updatedAt: p.updated_at,
     };
   }
+  /* ссылка на страницу товара попадает в href на сайте: наружу отдаётся только http(s) */
+  const safeUrl = (u) => (/^https?:\/\/\S+$/i.test(String(u || '')) ? String(u) : '');
   function publicDto(p, imgs) {
     const info = J(p.model_info, {});
     return {
       id: p.id, typeId: p.type_id, formId: p.form_id, name: p.name, brand: p.brand, price: N(p.price), currency: p.currency,
-      dims: J(p.dims, {}), colors: J(p.colors, []), materials: J(p.materials, []), styleTags: J(p.style_tags, []), url: p.url,
+      dims: J(p.dims, {}), colors: J(p.colors, []), materials: J(p.materials, []), styleTags: J(p.style_tags, []), url: safeUrl(p.url),
       images: (imgs || []).map(i => ({ url: url(i.file) })),
       model: p.model_status === 'ready' && p.model_file ? { url: url(p.model_file), size: info.bbox?.size } : null,
     };
@@ -71,7 +73,11 @@ function makeCatalog(db, storage) {
       if (input.price === '' || input.price == null || !isFinite(pr) || pr < 0) errors.price = 'Цена — число от 0'; else out.price = Math.round(pr * 100) / 100;
     }
     if ('currency' in input) { if (!CURRENCIES.includes(input.currency)) errors.currency = 'Неизвестная валюта'; else out.currency = input.currency; }
-    if ('url' in input) out.url = String(input.url || '').trim().slice(0, 500);
+    if ('url' in input) {
+      const u = String(input.url || '').trim().slice(0, 500);
+      if (u && !/^https?:\/\/\S+$/i.test(u)) { if (opts.lenient) out.url = ''; else errors.url = 'Ссылка должна начинаться с http:// или https://'; }
+      else out.url = u;
+    }
     /* стиль, цвет и материал — только из словарей (public/shared/catalog-types.js): по ним ИИ‑дизайнер подбирает товары */
     for (const k of ['colors', 'materials', 'styleTags']) if (k in input) {
       if (!Array.isArray(input[k])) { errors[k] = 'Ожидается список'; continue; }
@@ -254,9 +260,6 @@ function makeCatalog(db, storage) {
     }
     return update(user, id, { dims: d });
   }
-  function requestGeneration() {
-    throw new ApiError(501, 'not_implemented', 'Генерация 3D‑модели по фото появится на следующем этапе. Пока загрузите готовую модель GLB.');
-  }
 
   /* ---------- фото ---------- */
   async function attachImage(user, id, buf, storedUrl) {
@@ -278,6 +281,7 @@ function makeCatalog(db, storage) {
     const im = await db.get('SELECT * FROM product_images WHERE id = ? AND product_id = ?', [imgId, id]);
     if (!im) throw new ApiError(404, 'not_found', 'Фото не найдено');
     await db.run('DELETE FROM product_images WHERE id = ?', [imgId]);
+    await db.run('UPDATE products SET updated_at=? WHERE id=?', [now(), id]);
     await storage.remove(im.file);
     await audit(user, 'image.delete', id);
     return dto(await row(id));
@@ -288,10 +292,12 @@ function makeCatalog(db, storage) {
     const j = i + (dir < 0 ? -1 : 1); if (j < 0 || j >= list.length) return dto(await row(id));
     [list[i], list[j]] = [list[j], list[i]];
     for (let k = 0; k < list.length; k++) await db.run('UPDATE product_images SET sort=? WHERE id=?', [k, list[k].id]);
+    await db.run('UPDATE products SET updated_at=? WHERE id=?', [now(), id]);
     return dto(await row(id));
   }
 
   /* ---------- публичный каталог ---------- */
+  /* Весь опубликованный каталог одним списком — для служебных сценариев (tools/ai-eval). Сайт читает каталог порциями: publicPage. */
   async function publicList() {
     const rows = await db.all("SELECT * FROM products WHERE status = 'published' ORDER BY type_id, price, id");
     const imgs = await db.all("SELECT i.* FROM product_images i JOIN products p ON p.id = i.product_id WHERE p.status = 'published' ORDER BY i.sort, i.created_at");
@@ -300,15 +306,23 @@ function makeCatalog(db, storage) {
   }
 
   /* Каталог порциями: ответ функции Vercel ограничен 4,5 МБ, а несколько тысяч товаров одним ответом в него не помещаются.
-     Порядок тот же, что у publicList. → { products, total, next } (next — смещение следующей порции или null). */
+     → { products, total, next } (next — смещение следующей порции или null). */
   async function publicPage(q = {}) {
     const limit = Math.min(Math.max(parseInt(q.limit) || 1000, 1), 2000), offset = Math.max(parseInt(q.offset) || 0, 0);
-    const total = N((await db.get(`SELECT ${COUNT} AS c FROM products WHERE status = 'published'`)).c);
-    const rows = await db.all("SELECT * FROM products WHERE status = 'published' ORDER BY type_id, price, id LIMIT ? OFFSET ?", [limit, offset]);
+    /* images=1 — только товары с фото (витрина главной страницы берёт несколько карточек, а не весь каталог) */
+    const where = "status = 'published'" + ((q.images === true || q.images === '1' || q.images === 'true') ? ' AND EXISTS (SELECT 1 FROM product_images i WHERE i.product_id = products.id)' : '');
+    const total = N((await db.get(`SELECT ${COUNT} AS c FROM products WHERE ${where}`)).c);
+    const rows = await db.all(`SELECT * FROM products WHERE ${where} ORDER BY type_id, price, id LIMIT ? OFFSET ?`, [limit, offset]);
     const ids = rows.map(r => r.id);
     const imgs = ids.length ? await db.all(`SELECT * FROM product_images WHERE product_id IN (${ids.map(() => '?').join(',')}) ORDER BY sort, created_at`, ids) : [];
     const by = new Map(); for (const i of imgs) { if (!by.has(i.product_id)) by.set(i.product_id, []); by.get(i.product_id).push(i); }
     return { products: rows.map(p => publicDto(p, by.get(p.id))), total, next: offset + rows.length < total ? offset + rows.length : null };
+  }
+
+  /* Отметка состояния каталога для ETag: любое изменение товара или его фото меняет updated_at, удаление — количество */
+  async function publicVersion() {
+    const r = await db.get(`SELECT ${COUNT} AS c, MAX(updated_at) AS m FROM products`);
+    return `${N(r.c)}-${String(r.m || '').replace(/[^0-9]/g, '')}`;
   }
 
   /* ---------- ИИ‑дизайнер ----------
@@ -445,7 +459,7 @@ function makeCatalog(db, storage) {
     return rows.length;
   }
 
-  return { aiCandidates, publicByIds, backfillSearch, ApiError, row, dto, list, create, update, remove, transition, publishProblems, attachModel, deleteModel, fitDimsToModel, requestGeneration, attachImage, deleteImage, moveImage, publicList, publicPage, stats, seedDemo, importBatch, purgeDemo, LIMITS, CURRENCIES };
+  return { aiCandidates, publicByIds, publicVersion, publicList, backfillSearch, ApiError, row, dto, list, create, update, remove, transition, publishProblems, attachModel, deleteModel, fitDimsToModel, attachImage, deleteImage, moveImage, publicPage, stats, seedDemo, importBatch, purgeDemo, LIMITS, CURRENCIES };
 }
 
 module.exports = { makeCatalog, ApiError, LIMITS };

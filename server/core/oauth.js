@@ -5,6 +5,7 @@ const crypto = require('node:crypto');
 const auth = require('./auth.js');
 const V = require('../../public/shared/validation.js');
 
+const YANDEX_DOMAINS = /@(yandex\.(ru|by|kz|com|ua|uz|com\.tr|com\.am|com\.ge|az|kg|md|tj|tm|ee|lt|lv|fr|co\.il)|ya\.ru|narod\.ru)$/i;
 const PROVIDERS = {
   google: {
     label: 'Google', idEnv: 'GOOGLE_CLIENT_ID', secretEnv: 'GOOGLE_CLIENT_SECRET',
@@ -13,7 +14,7 @@ const PROVIDERS = {
     extra: { prompt: 'select_account', access_type: 'online' },
     authHeader: (t) => 'Bearer ' + t,
     /* почта принимается только подтверждённая */
-    profile: (j) => ({ subject: String(j.sub || ''), email: (j.email_verified === true || j.email_verified === 'true') && j.email ? String(j.email) : null, name: String(j.name || j.given_name || '') }),
+    profile: (j) => ({ subject: String(j.sub || ''), email: (j.email_verified === true || j.email_verified === 'true') && j.email ? String(j.email) : null, emailTrusted: true, name: String(j.name || j.given_name || '') }),
   },
   yandex: {
     label: 'Яндекс', idEnv: 'YANDEX_CLIENT_ID', secretEnv: 'YANDEX_CLIENT_SECRET',
@@ -21,8 +22,12 @@ const PROVIDERS = {
     userUrl: 'https://login.yandex.ru/info?format=json', scope: 'login:email login:info',
     extra: {},
     authHeader: (t) => 'OAuth ' + t,
-    /* default_email — ящик Яндекса, считается подтверждённым */
-    profile: (j) => ({ subject: String(j.id || ''), email: j.default_email ? String(j.default_email) : null, name: String(j.real_name || j.display_name || j.first_name || '') }),
+    /* default_email на домене Яндекса — собственный ящик, подтверждён самим провайдером. Любой другой адрес пользователь
+       вписал в профиль сам, и Яндекс его владение не гарантирует: такой адрес не даёт войти в уже существующий аккаунт с этой почтой. */
+    profile: (j) => {
+      const email = j.default_email ? String(j.default_email) : null;
+      return { subject: String(j.id || ''), email, emailTrusted: !!email && YANDEX_DOMAINS.test(email), name: String(j.real_name || j.display_name || j.first_name || '') };
+    },
   },
 };
 const COOKIE = 'ft_oauth';
@@ -112,12 +117,16 @@ function makeOAuth(ctx, { baseUrl, secret, audit, registrationOpen }) {
       if (existing) {
         if (Number(existing.disabled)) throw new OAuthError('blocked');
         if (existing.role === 'admin') throw new OAuthError('use_password');
+        /* адрес не подтверждён провайдером — по нему нельзя открыть чужой аккаунт (и тем более сбросить в нём пароль) */
+        if (profile.emailTrusted === false) throw new OAuthError('use_password');
         if (!(await link(existing.id)) && attempt < 1) return this.resolve(provider, profile, attempt + 1);
         if (!existing.email_verified_at) {
           /* защита от перехвата: кто‑то мог заранее зарегистрировать чужой адрес со своим паролем */
           await db.run('UPDATE users SET password_hash=?, email_verified_at=?, updated_at=? WHERE id=?', [auth.NO_PASSWORD, now, now, existing.id]);
           await db.run('DELETE FROM sessions WHERE user_id=?', [existing.id]);
           await db.run('DELETE FROM auth_tokens WHERE user_id=?', [existing.id]);
+          /* и прежние связи с провайдерами: аккаунт на чужой адрес могли создать входом через провайдера с неподтверждённой почтой */
+          await db.run('DELETE FROM user_identities WHERE user_id=? AND NOT (provider=? AND subject=?)', [existing.id, provider, profile.subject]);
           await audit(existing.id, 'user.oauth_link', 'user', existing.id, { provider, passwordReset: true });
         } else await audit(existing.id, 'user.oauth_link', 'user', existing.id, { provider });
         return { user: await db.get('SELECT * FROM users WHERE id=?', [existing.id]), created: false };
@@ -128,7 +137,7 @@ function makeOAuth(ctx, { baseUrl, secret, audit, registrationOpen }) {
       if (V.validateName(name)) name = 'Пользователь';
       let id;
       try {
-        id = await auth.createUser(db, { email, password: null, role: 'client', name, verified: true, terms: { acceptedAt: now, version: V.TERMS_VERSION } });
+        id = await auth.createUser(db, { email, password: null, role: 'client', name, verified: profile.emailTrusted !== false, terms: { acceptedAt: now, version: V.TERMS_VERSION } });
       } catch (e) {
         if (/unique|duplicate|constraint/i.test(e.message) && attempt < 1) return this.resolve(provider, profile, attempt + 1); // параллельный первый вход
         throw e;

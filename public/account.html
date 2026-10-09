@@ -10,9 +10,6 @@
 <script>try{var t=localStorage.getItem('planner.theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
 <link rel="stylesheet" href="/shared/ui.css">
 <link rel="stylesheet" href="/shared/site.css">
 <style>
@@ -82,7 +79,7 @@
   const V = window.Validation;
   const body = $('#body');
   const PROVIDERS = { google: 'Google', yandex: 'Яндекс' };
-  let A = null, cfg = null;
+  let A = null, cfg = null, LEADS = [];
 
   const sect = (title, lead, ...kids) => h('section', { class: 'sect' }, h('h2', {}, title), lead ? h('p', { class: 'lead' }, lead) : null, ...kids);
   const row = (title, desc, ...v) => h('div', { class: 'arow' }, h('div', { class: 'k' }, h('b', {}, title), desc ? h('span', {}, desc) : null), h('div', { class: 'v' }, ...v));
@@ -133,7 +130,33 @@
       });
       mailRow = row(u.email, 'Перейдите по ссылке из письма. Без подтверждения мы не сможем помочь восстановить доступ.', badge('warn', 'Не подтверждена'), again, note);
     }
-    return sect('Профиль', null, h('div', { class: 'arows' }, h('div', { class: 'arow' }, form), mailRow));
+    /* согласие на новости продукта: его дают галочкой при регистрации, а отозвать (или дать позже) можно здесь */
+    let newsRow = null;
+    if (u.role === 'client') {
+      const chk = h('input', { type: 'checkbox', id: 'accNews' }); chk.checked = !!A.marketing;
+      chk.addEventListener('change', async () => {
+        chk.disabled = true;
+        try { const r = await Session.api('PATCH', '/account', { marketing: chk.checked }); A.marketing = r.marketing; Site.toast(r.marketing ? 'Будем присылать новости продукта' : 'Новости продукта отключены'); }
+        catch (x) { chk.checked = !!A.marketing; Site.toast(x.message, true); }
+        chk.disabled = false;
+      });
+      newsRow = row('Новости продукта', 'Редкие письма о новых возможностях. Письма об аккаунте и заявках приходят независимо от этой настройки.', h('label', { class: 'chk', for: 'accNews', style: 'display:inline-flex;gap:8px;align-items:center;cursor:pointer' }, chk, h('span', {}, 'Получать')));
+    }
+    return sect('Профиль', null, h('div', { class: 'arows' }, h('div', { class: 'arow' }, form), mailRow, newsRow));
+  }
+
+  /* ---------- мои заявки ---------- */
+  function leads() {
+    if (!LEADS || !LEADS.length) return null;
+    const money = (v, c) => (v > 0 ? Math.round(v).toLocaleString('ru-RU') + ' ' + (c || '') : '');
+    const rows = LEADS.map((l) => {
+      const when = new Intl.DateTimeFormat('ru', { day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit' }).format(new Date(l.createdAt));
+      const n = l.items.reduce((s, i) => s + (i.qty || 1), 0);
+      const desc = [when, Site.plural(n, ['товар', 'товара', 'товаров']), money(l.total, l.currency)].filter(Boolean).join(' · ');
+      const open = l.projectId ? h('a', { class: 'btn', style: 'height:32px;font-size:13px', href: '/editor?project=' + encodeURIComponent(l.projectId) }, 'Открыть проект') : null;
+      return row('Проект «' + (l.projectName || 'без названия') + '»' + (l.variant ? ' · ' + l.variant : ''), desc, badge(l.status === 'done' ? 'ok' : 'warn', l.status === 'done' ? 'Обработана' : 'Ждёт менеджера'), open);
+    });
+    return sect('Мои заявки', 'Списки товаров, которые вы отправили менеджеру. Он свяжется с вами по телефону из заявки.', h('div', { class: 'arows' }, ...rows));
   }
 
   /* ---------- способы входа ---------- */
@@ -202,7 +225,7 @@
       });
       dlg.append(form); setTimeout(() => inp.focus(), 0);
     }));
-    const s = sect('Удаление аккаунта', null, h('div', { class: 'arows' }, row('Удалить аккаунт и все проекты', 'Действие необратимо: данные удаляются сразу.', btn)));
+    const s = sect('Удаление аккаунта', null, h('div', { class: 'arows' }, row('Удалить аккаунт и все проекты', 'Действие необратимо: аккаунт, проекты и загруженные фото удаляются сразу. Уже отправленные менеджеру заявки остаются у него как запись о заказе.', btn)));
     s.classList.add('danger');
     return s;
   }
@@ -210,13 +233,18 @@
   function render() {
     body.removeAttribute('aria-busy');
     $('#since').textContent = A.createdAt ? 'С нами с ' + new Intl.DateTimeFormat('ru', { day: 'numeric', month: 'long', year: 'numeric' }).format(new Date(A.createdAt)) : ' ';
-    body.replaceChildren(...[profile(), signin(), sessions(), danger()].filter(Boolean));
+    body.replaceChildren(...[profile(), leads(), signin(), sessions(), danger()].filter(Boolean));
   }
   function skeleton() {
     body.replaceChildren(...[0, 1].map(() => h('div', { class: 'sect skel', 'aria-hidden': 'true' }, h('div', { class: 'line', style: 'width:30%' }), h('div', { class: 'line', style: 'width:80%' }), h('div', { class: 'line', style: 'width:55%' }))));
   }
   async function load() {
-    try { A = await Session.api('GET', '/account'); render(); }
+    try {
+      A = await Session.api('GET', '/account');
+      /* заявки — дополнение к странице: их сбой не должен мешать показать аккаунт */
+      try { LEADS = (await Session.api('GET', '/leads')).leads || []; } catch (e) { if (e.status === 401) throw e; LEADS = []; }
+      render();
+    }
     catch (x) {
       if (x.status === 401) return; // Site.requireUser уведёт на вход
       body.removeAttribute('aria-busy'); body.replaceChildren(Site.errorState(x.message, () => { skeleton(); load(); }));

@@ -14,5 +14,5 @@
   document.querySelectorAll('header [data-view]').forEach(b=>{b.append(ic({points:'eye',dims:'ruler',fit:'maximize',undo:'undo',redo:'redo'}[b.dataset.view]));setTip(b,VTIP[b.dataset.view]);});
   initTips();
   initDock();
-  initHeader(); loadCatalog(); snapshot(); updateTools(); updateModeUI(); if(P.mode==='furniture'){if(!P.closed)P.mode='walls';else buildCatalog();} updateModeUI(); render(); if(P.status==='submitted'&&P.brief)showResult();
+  initHeader(); loadCatalog(); snapshot(); updateTools(); updateModeUI(); if(P.mode==='furniture'){if(!P.closed)P.mode='walls';else buildCatalog();} updateModeUI(); render(); if(P.status==='submitted'&&P.brief)showResult(); reportSanitized();
 })();

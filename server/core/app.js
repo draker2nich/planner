@@ -59,17 +59,18 @@ async function syncEnvAdmin(ctx) {
   let pw = String(env.ADMIN_PASSWORD || '').replace(/[\r\n]+$/, '');
   if (email && pw) {
     const sig = await db.get("SELECT value FROM settings WHERE key='env_admin'");
-    if (sig && auth.verifyPassword(email + '\n' + pw, sig.value)) return; // уже применено
+    if (pw.length < 12) console.warn('ADMIN_PASSWORD короче 12 символов: задайте длинный случайный пароль — от него зависит доступ ко всем данным.');
+    if (sig && await auth.verifyPassword(email + '\n' + pw, sig.value)) return; // уже применено
     const u = await db.get('SELECT id, role FROM users WHERE email=?', [email]);
     if (u) {
-      await db.run("UPDATE users SET password_hash=?, role='admin', disabled=0 WHERE id=?", [auth.hashPassword(pw), u.id]);
+      await db.run("UPDATE users SET password_hash=?, role='admin', disabled=0 WHERE id=?", [await auth.hashPassword(auth.normPassword(pw)), u.id]);
       await db.run('DELETE FROM sessions WHERE user_id=?', [u.id]);
       console.log(`Администратор ${email}: пароль обновлён из ADMIN_PASSWORD`);
     } else {
       try { await auth.createUser(db, { email, password: pw, role: 'admin', name: 'Администратор' }); console.log(`Администратор создан: ${email}`); }
       catch (e) { if (!/unique|duplicate/i.test(e.message)) throw e; } // параллельный холодный старт уже создал
     }
-    await db.run("INSERT INTO settings (key, value) VALUES ('env_admin', ?) ON CONFLICT (key) DO UPDATE SET value = excluded.value", [auth.hashPassword(email + '\n' + pw)]);
+    await db.run("INSERT INTO settings (key, value) VALUES ('env_admin', ?) ON CONFLICT (key) DO UPDATE SET value = excluded.value", [await auth.hashPassword(email + '\n' + pw)]);
     return;
   }
   const admins = Number((await db.get("SELECT CAST(COUNT(*) AS INTEGER) AS c FROM users WHERE role='admin'")).c);
@@ -78,7 +79,8 @@ async function syncEnvAdmin(ctx) {
   email = email || 'admin@local'; pw = crypto.randomBytes(9).toString('base64url');
   await auth.createUser(db, { email, password: pw, role: 'admin', name: 'Администратор' });
   fs.writeFileSync(path.join(ctx.dataDir, 'admin-credentials.txt'), `Администратор создан: ${email} / ${pw}\nСмените пароль и удалите этот файл.\n`);
-  console.log(`Администратор создан: ${email} / ${pw}`);
+  /* пароль — только в файле: журнал сервера часто уходит в сторонние системы сбора логов */
+  console.log(`Администратор создан: ${email}. Пароль записан в ${path.join(ctx.dataDir, 'admin-credentials.txt')}`);
 }
 
 /* Соль для HMAC адресов в лимитах: AUTH_SECRET или случайная строка, сохранённая в settings */
@@ -94,6 +96,7 @@ async function authSecret(ctx) {
 async function bootstrap(ctx) {
   const { db, env } = ctx;
   await migrate(db);
+  auth.configure({ adminSessionDays: env.ADMIN_SESSION_DAYS });
   const secret = await authSecret(ctx);
   ctx.limiter = makeLimiter(db, secret);
   ctx.projects = makeProjects(db);
@@ -110,6 +113,14 @@ async function bootstrap(ctx) {
   ctx.aiUsage = makeAiUsage(db, env);
   ctx.photos = makePhotos(db, ctx.storage);
   ctx.leads = makeLeads(db, ctx.catalog);
+  /* Разовая доводка данных после миграции v7: сессии — в хешированный вид, строки поиска пользователей и заявок.
+     Отметка в settings избавляет каждый холодный старт функции от трёх лишних запросов к базе. Повторный запуск безвреден. */
+  if (!(await db.get("SELECT value FROM settings WHERE key='backfill_v7'"))) {
+    /* порциями: на Neon каждая строка — отдельный запрос по сети, и большой объём не должен занять весь холодный старт.
+       Что не успело — доделает следующий запуск; до тех пор старые сессии работают (userFromToken находит их и переводит сам). */
+    const left = (await auth.migrateSessions(db, 200)).left + (await auth.backfillUserSearch(db, 200)).left + (await ctx.leads.backfillSearch(200)).left;
+    if (!left) await db.run("INSERT INTO settings (key, value) VALUES ('backfill_v7', '1') ON CONFLICT (key) DO NOTHING");
+  }
   if (!ctx.ai.enabled) console.log('ИИ‑дизайнер выключен: ' + ctx.ai.why);
   else {
     const own = Object.entries(ctx.ai.models).filter(([, m]) => m !== ctx.ai.model).map(([k, m]) => `${k} — ${m}`).join(', ');
@@ -126,7 +137,7 @@ async function bootstrap(ctx) {
 const registrationOpen = (ctx) => String(ctx.env.REGISTRATION_ENABLED ?? '1').trim() !== '0';
 /* Лимиты ИИ‑дизайнера: AI_DAILY_RUNS — генераций на пользователя в сутки, AI_DAILY_CALLS — обращений к модели в сутки на всю платформу */
 const posInt = (v, d) => { const n = Math.floor(Number(v)); return Number.isFinite(n) && n > 0 ? n : d; };
-const aiLimits = (ctx) => ({ runs: posInt(ctx.env.AI_DAILY_RUNS, 10), calls: posInt(ctx.env.AI_DAILY_CALLS, 2000) });
+const aiLimits = (ctx) => ({ runs: posInt(ctx.env.AI_DAILY_RUNS, 10), calls: posInt(ctx.env.AI_DAILY_CALLS, 2000), monthly: posInt(ctx.env.AI_MONTHLY_CALLS, 0) });
 /* Жёсткий режим: без подтверждённой почты проекты в аккаунт не сохраняются. При выключенной почте игнорируется. */
 const requireVerified = (ctx) => String(ctx.env.REQUIRE_VERIFIED_EMAIL || '').trim() === '1' && ctx.mailer.enabled;
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -176,34 +187,46 @@ function createApp(makeCtx) {
     const min = Math.max(1, Math.ceil(retryAfter / 60));
     return new ApiError(429, 'rate_limited', `Слишком много попыток. Попробуйте через ${min} мин`, { retryAfter }, { 'Retry-After': String(retryAfter) });
   };
+  /* Занять попытку одним запросом к базе: параллельные запросы получают разные номера и не проходят лимит вместе
+     (проверка «сначала прочитать, потом записать» это позволяла). Сбой базы лимитов вход не ломает — попытка пропускается. */
+  const attempt = async (ctx, key, limit, windowSec) => {
+    let c;
+    try { c = await ctx.limiter.take(key, limit, windowSec); } catch (e) { console.error('rate limit:', e.message); return; }
+    if (!c.ok) throw tooMany(c.retryAfter);
+  };
   route('POST', '/api/auth/login', async (ctx, req) => {
     if (ctx.setupProblem) throw new ApiError(503, 'setup', ctx.setupProblem);
     const b = await readJson(req, 16 * 1024);
     const L = ctx.limiter; const ip = L.tag(clientIp(req)); const em = L.tag(V.normEmail(b.email));
     const kPair = `login:pair:${ip}:${em}`, kIp = `login:ip:${ip}`;
-    for (const [k, lim, win] of [[kPair, 10, 900], [kIp, 50, 3600]]) { const c = await L.peek(k, lim, win); if (!c.ok) throw tooMany(c.retryAfter); }
+    /* попытка занимается до проверки пароля и возвращается после верного: в счёт идут только неудачные */
+    await attempt(ctx, kPair, 10, 900);
+    await attempt(ctx, kIp, 50, 3600);
     const r = await auth.login(ctx.db, b.email, b.password);
-    if (!r) {
-      await L.hit(kPair, 10, 900); await L.hit(kIp, 50, 3600);
-      throw new ApiError(401, 'bad_credentials', 'Неверная почта или пароль');
-    }
-    await L.reset(kPair);
+    if (!r) throw new ApiError(401, 'bad_credentials', 'Неверная почта или пароль');
+    await L.reset(kPair); await L.undo(kIp);
+    /* о блокировке узнаёт только тот, кто знает пароль, — существование аккаунта посторонним не раскрывается */
+    if (r.blocked) throw new ApiError(403, 'blocked', 'Аккаунт заблокирован. Если это ошибка, напишите нам');
     return r;
   });
-  route('POST', '/api/auth/logout', async (ctx, req) => { const u = await requireUser(ctx, req); await auth.logout(ctx.db, u.token); return { ok: true }; });
+  route('POST', '/api/auth/logout', async (ctx, req) => { const u = await requireUser(ctx, req); await ctx.db.run('DELETE FROM sessions WHERE token=?', [u.sessionKey]); return { ok: true }; });
   route('GET', '/api/auth/me', async (ctx, req) => ({ user: await requireUser(ctx, req) }));
   /* Смена пароля; у аккаунта без пароля (вход через провайдера) текущий пароль не требуется */
   route('POST', '/api/auth/password', async (ctx, req) => {
     const u = await requireUser(ctx, req); const b = await readJson(req, 16 * 1024);
     const row = await ctx.db.get('SELECT password_hash FROM users WHERE id=?', [u.id]);
     if (auth.hasPassword(row.password_hash)) {
-      const cur = String(b.current || '');
-      if (!cur || cur.length > 1024 || !auth.verifyPassword(cur, row.password_hash)) throw new ApiError(422, 'bad_credentials', 'Текущий пароль неверен', { fields: { current: 'Текущий пароль неверен' } });
+      /* украденный токен сессии не должен давать бесконечный перебор текущего пароля */
+      const key = `pw:${u.id}`;
+      await attempt(ctx, key, 5, 900);
+      const cur = auth.normPassword(b.current);
+      if (!cur || cur.length > 1024 || !(await auth.verifyPassword(cur, row.password_hash))) throw new ApiError(422, 'bad_credentials', 'Текущий пароль неверен', { fields: { current: 'Текущий пароль неверен' } });
+      await ctx.limiter.reset(key);
     }
     const err = V.validatePassword(b.next, u.email);
     if (err) throw new ApiError(422, 'validation', err, { fields: { next: err } });
-    await ctx.db.run('UPDATE users SET password_hash=?, updated_at=? WHERE id=?', [auth.hashPassword(V.normPassword(b.next)), new Date().toISOString(), u.id]);
-    await ctx.db.run('DELETE FROM sessions WHERE user_id=? AND token<>?', [u.id, u.token]);
+    await ctx.db.run('UPDATE users SET password_hash=?, updated_at=? WHERE id=?', [await auth.hashPassword(auth.normPassword(b.next)), new Date().toISOString(), u.id]);
+    await ctx.db.run('DELETE FROM sessions WHERE user_id=? AND token<>?', [u.id, u.sessionKey]);
     await ctx.tokens.dropUnused(u.id, ['reset']);
     await ctx.mailer.sendQuiet('password_changed', u, {});
     return { ok: true };
@@ -236,8 +259,8 @@ function createApp(makeCtx) {
     const u = await requireUser(ctx, req);
     if (u.emailVerified) return { ok: true, already: true };
     if (!ctx.mailer.enabled) throw new ApiError(503, 'mail_disabled', 'Отправка писем не настроена');
-    for (const [k, lim, win] of [[`verify:min:${u.id}`, 1, 60], [`verify:day:${u.id}`, 5, 86400]]) { const c = await ctx.limiter.peek(k, lim, win); if (!c.ok) throw tooMany(c.retryAfter); }
-    await ctx.limiter.hit(`verify:min:${u.id}`, 1, 60); await ctx.limiter.hit(`verify:day:${u.id}`, 5, 86400);
+    await attempt(ctx, `verify:min:${u.id}`, 1, 60);
+    await attempt(ctx, `verify:day:${u.id}`, 5, 86400);
     try { await sendVerify(ctx, u, false); }
     catch (e) { console.error(`Не удалось отправить письмо verify для ${maskEmail(u.email)}: ${e.message}`); throw new ApiError(502, 'mail_failed', 'Не удалось отправить письмо, попробуйте позже'); }
     return { ok: true };
@@ -282,8 +305,11 @@ function createApp(makeCtx) {
     if (err) throw new ApiError(422, 'validation', err, { fields: { password: err } });
     if (!(await ctx.tokens.consume(b.token, 'reset'))) throw tokenError('invalid');
     const t = new Date().toISOString();
-    await ctx.db.run('UPDATE users SET password_hash=?, email_verified_at=COALESCE(email_verified_at, ?), updated_at=? WHERE id=?', [auth.hashPassword(V.normPassword(b.password)), t, t, f.user.id]);
+    await ctx.db.run('UPDATE users SET password_hash=?, email_verified_at=COALESCE(email_verified_at, ?), updated_at=? WHERE id=?', [await auth.hashPassword(auth.normPassword(b.password)), t, t, f.user.id]);
     await ctx.db.run('DELETE FROM sessions WHERE user_id=?', [f.user.id]);
+    /* почта до этого не была подтверждена: аккаунт мог завести посторонний (в том числе входом через провайдера
+       с неподтверждённым адресом) — его способы входа снимаются, владельцем становится тот, кто получил письмо */
+    if (!f.user.email_verified_at) await ctx.db.run('DELETE FROM user_identities WHERE user_id=?', [f.user.id]);
     await ctx.tokens.dropUnused(f.user.id, ['verify']);
     await ctx.limiter.resetSuffix('login:pair:', ':' + ctx.limiter.tag(f.user.email));
     await ctx.audit(f.user.id, 'user.password_reset', 'user', f.user.id);
@@ -333,7 +359,7 @@ function createApp(makeCtx) {
     if (!lim.ok) throw tooMany(lim.retryAfter);
     const b = await readJson(req, 16 * 1024);
     if (b.website) {
-      await ctx.audit(null, 'user.register_rejected', 'user', null, { ip: ipTag.slice(0, 12), reason: 'honeypot' });
+      await ctx.audit(null, 'user.register_rejected', 'user', null, { reason: 'honeypot' });
       throw new ApiError(422, 'rejected', 'Не удалось создать аккаунт');
     }
     const v = V.validateRegistration(b);
@@ -346,7 +372,7 @@ function createApp(makeCtx) {
         terms: { acceptedAt: new Date().toISOString(), version: V.TERMS_VERSION }, marketing: v.values.marketing });
     } catch (e) { if (/unique|duplicate/i.test(e.message)) throw taken(); throw e; }
     const u = await ctx.db.get('SELECT * FROM users WHERE id=?', [id]);
-    await ctx.audit(id, 'user.register', 'user', id, { ip: ipTag.slice(0, 12) });
+    await ctx.audit(id, 'user.register', 'user', id); // метка адреса в журнал не пишется: она живёт только в счётчиках лимитов, не дольше суток
     if (ctx.mailer.enabled) await sendVerify(ctx, u, true); // сбой письма регистрацию не отменяет
     return auth.createSession(ctx.db, u);
   });
@@ -359,9 +385,9 @@ function createApp(makeCtx) {
     const u = await requireUser(ctx, req);
     if (u.role !== 'client') throw new ApiError(403, 'forbidden', u.role === 'admin' ? 'Учётная запись администратора управляется переменными окружения' : 'Удаление аккаунта компании появится вместе с кабинетом компании');
     const key = `del:${u.id}`;
-    const peek = await ctx.limiter.peek(key, 5, 900); if (!peek.ok) throw tooMany(peek.retryAfter);
+    await attempt(ctx, key, 5, 900);
     const c = await ctx.users.confirmDeletion(u, await readJson(req, 16 * 1024));
-    if (!c.ok) { await ctx.limiter.hit(key, 5, 900); throw new ApiError(422, 'bad_credentials', c.message, { fields: { [c.field]: c.message } }); }
+    if (!c.ok) throw new ApiError(422, 'bad_credentials', c.message, { fields: { [c.field]: c.message } });
     await ctx.users.remove(u.id);
     await ctx.photos.removeAll(u.id); // файлы фото; строки таблицы ушли каскадом
     await ctx.limiter.reset(key);
@@ -380,6 +406,10 @@ function createApp(makeCtx) {
   const BODY = PROJECT_MAX_BYTES + 64 * 1024;
   route('GET', '/api/projects', async (ctx, req) => ctx.projects.list(await requireUser(ctx, req)));
   route('POST', '/api/projects', async (ctx, req) => { const u = await writer(ctx, req); await createLimit(ctx, u); return ctx.projects.create(u, await readJson(req, BODY)); });
+  /* корзина: удалённые проекты хранятся 30 суток и могут быть возвращены. Маршруты стоят раньше «/api/projects/:id». */
+  route('GET', '/api/projects/trash', async (ctx, req) => ctx.projects.trash(await requireUser(ctx, req)));
+  route('DELETE', '/api/projects/trash/:id', async (ctx, req, p) => ctx.projects.destroy(await requireUser(ctx, req), p.id));
+  route('POST', '/api/projects/:id/restore', async (ctx, req, p) => ctx.projects.restore(await writer(ctx, req), p.id));
   route('GET', '/api/projects/:id', async (ctx, req, p) => ctx.projects.get(await requireUser(ctx, req), p.id));
   route('PUT', '/api/projects/:id', async (ctx, req, p) => {
     const u = await writer(ctx, req);
@@ -417,15 +447,21 @@ function createApp(makeCtx) {
     const u = await requireUser(ctx, req);
     const pr = await ctx.projects.own(u, p.id);
     /* в лимит идут только принятые заявки: опечатка в телефоне не должна отнимать попытку */
-    const lim = await ctx.limiter.peek(`lead:${u.id}`, 5, 3600);
-    if (!lim.ok) throw tooMany(lim.retryAfter);
-    const lead = await ctx.leads.create(u, pr, await readJson(req, 64 * 1024));
-    await ctx.limiter.hit(`lead:${u.id}`, 5, 3600);
+    const key = `lead:${u.id}`;
+    await attempt(ctx, key, 5, 3600);
+    let lead;
+    try { lead = await ctx.leads.create(u, pr, await readJson(req, 64 * 1024)); }
+    catch (e) { await ctx.limiter.undo(key); throw e; }
     await ctx.audit(u.id, 'lead.create', 'lead', lead.id, { items: lead.items.length, total: lead.total, currency: lead.currency });
     const to = contactEmail(ctx);
     if (to) await ctx.mailer.sendQuiet('lead', { email: to, name: '' }, { lead, link: `${ctx.baseUrl}/admin#/leads` });
+    /* пользователю — подтверждение: заявка принята, вот её состав. Только на подтверждённый адрес:
+       иначе, зарегистрировавшись с чужой почтой, на неё можно слать письма сайта со своим текстом (название проекта) */
+    if (u.emailVerified) await ctx.mailer.sendQuiet('lead_received', u, { lead, link: `${ctx.baseUrl}/account` });
     return { ok: true, id: lead.id, items: lead.items.length, total: lead.total, currency: lead.currency };
   });
+
+  route('GET', '/api/leads', async (ctx, req) => ctx.leads.mine(await requireUser(ctx, req)));
 
   /* ---------- ИИ‑дизайнер ----------
      Три шага одной генерации — три запроса (см. server/core/designer.js). Каждый шаг — платное обращение к модели, поэтому:
@@ -439,6 +475,18 @@ function createApp(makeCtx) {
     catch { throw new ApiError(503, 'ai_limits', 'Не удалось проверить лимиты. Попробуйте позже'); }
     if (!c.ok) throw aiLimit(message, c.retryAfter);
     return c;
+  };
+  /* Общий счётчик обращений к модели: суточный (атомарно) и, если задан AI_MONTHLY_CALLS, за 30 суток — по журналу обращений.
+     Месячный предел — страховка от счёта провайдера, а не точный учёт: считается с небольшим запаздыванием. */
+  const aiGlobal = async (ctx) => {
+    const lim = aiLimits(ctx);
+    if (lim.monthly) {
+      let n;
+      try { n = Number((await ctx.db.get("SELECT CAST(COUNT(*) AS INTEGER) AS c FROM audit_log WHERE entity = 'ai' AND at > ?", [new Date(Date.now() - 30 * DAY * 1000).toISOString()])).c); }
+      catch { throw new ApiError(503, 'ai_limits', 'Не удалось проверить лимиты. Попробуйте позже'); }
+      if (n >= lim.monthly) throw aiLimit('ИИ‑дизайнер временно недоступен: исчерпан месячный лимит. Напишите нам, если он нужен срочно', DAY);
+    }
+    await aiCount(ctx, 'take', 'ai:global', lim.calls, DAY, 'ИИ‑дизайнер сегодня перегружен. Попробуйте завтра');
   };
   const aiUser = async (ctx, req) => {
     if (!ctx.ai.enabled) throw new ApiError(503, 'ai_off', 'ИИ‑дизайнер пока не подключён');
@@ -473,7 +521,7 @@ function createApp(makeCtx) {
     const r = designer.readTasteReq(await readJson(req, designer.LIM.tasteBody));
     const lim = aiLimits(ctx);
     if (u.role !== 'admin') await aiCount(ctx, 'take', `ai:taste:${u.id}`, lim.runs * 3, DAY, 'Дневной лимит ИИ‑дизайнера исчерпан. Попробуйте завтра');
-    await aiCount(ctx, 'take', 'ai:global', lim.calls, DAY, 'ИИ‑дизайнер сегодня перегружен. Попробуйте завтра');
+    await aiGlobal(ctx);
     const res = await aiStep(ctx, u, 'taste', null, { photos: r.photos.length, text: r.text.length }, () => designer.taste(ctx.ai, r));
     return { profile: res.profile, seal: ctx.aiSeals.make('taste:' + u.id, res.profile) };
   });
@@ -497,7 +545,7 @@ function createApp(makeCtx) {
     const { pass, runId } = ctx.aiPasses.issue(u.id);
     let res;
     try {
-      await aiCount(ctx, 'take', 'ai:global', lim.calls, DAY, 'ИИ‑дизайнер сегодня перегружен. Попробуйте завтра');
+      await aiGlobal(ctx);
       res = await aiStep(ctx, u, 'concept', runId, { mode: r.mode }, () => designer.concept(ctx.ai, ctx.catalog, r, prepared));
     } catch (e) { if (run) await ctx.limiter.undo(kRun); throw e; }
     const concepts = res.concepts.map(c => ({ ...c, seal: ctx.aiSeals.make('concept:' + runId, designer.conceptSealed(c)) }));
@@ -509,15 +557,56 @@ function createApp(makeCtx) {
     const p = ctx.aiPasses.check(r.pass, u.id);
     if (!p || !ctx.aiSeals.check('concept:' + p.runId, designer.conceptSealed(r.concept), r.concept.seal)) throw new ApiError(403, 'ai_pass', 'Сеанс генерации устарел. Запустите генерацию заново');
     await aiCount(ctx, 'take', `ai:pass:${p.runId}`, designer.LIM.layoutCallsPerPass, designer.LIM.passTtlSec, 'Слишком много попыток расстановки. Запустите генерацию заново');
-    await aiCount(ctx, 'take', 'ai:global', aiLimits(ctx).calls, DAY, 'ИИ‑дизайнер сегодня перегружен. Попробуйте завтра');
+    await aiGlobal(ctx);
     const res = await aiStep(ctx, u, 'layout', p.runId, { variant: r.variant, retry: r.retry }, () => designer.layout(ctx.ai, r));
     return { placements: res.placements };
+  });
+  /* Сколько генераций осталось сегодня — мастер показывает это до запуска */
+  route('GET', '/api/ai/quota', async (ctx, req) => {
+    const u = await aiUser(ctx, req); const lim = aiLimits(ctx);
+    if (u.role === 'admin') return { runs: lim.runs, left: null };
+    const c = await ctx.limiter.peek(`ai:run:${u.id}`, lim.runs, DAY);
+    return { runs: lim.runs, left: Math.max(0, lim.runs - (c.count || 0)), retryAfter: c.ok ? 0 : c.retryAfter };
+  });
+  /* Возврат генерации, от которой пользователь ничего не получил: концепция построена, но ни один вариант расстановки не собрался.
+     Сервер не видит, что произошло в браузере, поэтому возврат ограничен: один на генерацию и не больше трёх в сутки. */
+  route('POST', '/api/ai/refund', async (ctx, req) => {
+    const u = await aiUser(ctx, req);
+    const b = await readJson(req, 16 * 1024);
+    const p = ctx.aiPasses.check(b.pass, u.id);
+    if (!p) throw new ApiError(403, 'ai_pass', 'Сеанс генерации устарел');
+    if (u.role === 'admin') return { ok: true, refunded: false };
+    let once, daily;
+    try {
+      once = await ctx.limiter.take(`ai:refund:run:${p.runId}`, 1, designer.LIM.passTtlSec);
+      if (!once.ok) return { ok: true, refunded: false };
+      daily = await ctx.limiter.take(`ai:refund:${u.id}`, 3, DAY);
+    } catch { return { ok: true, refunded: false }; }
+    if (!daily.ok) return { ok: true, refunded: false };
+    /* возвращённой генерацией больше нельзя пользоваться: счётчик её пропуска выставляется за предел */
+    try {
+      const kPass = `ai:pass:${p.runId}`;
+      await ctx.limiter.take(kPass, designer.LIM.layoutCallsPerPass, designer.LIM.passTtlSec);
+      await ctx.db.run('UPDATE rate_limits SET count = ? WHERE key = ?', [designer.LIM.layoutCallsPerPass + 1000, kPass]);
+    } catch { return { ok: true, refunded: false }; }
+    await ctx.limiter.undo(`ai:run:${u.id}`);
+    await ctx.audit(u.id, 'ai.refund', 'ai_run', p.runId).catch(() => {});
+    return { ok: true, refunded: true };
   });
 
   // публичный каталог
   route('GET', '/api/catalog/types', async () => ({ cats: T.CATS, dimNames: T.DIMN, types: T.TYPES.map(t => ({ id: t.id, name: t.name, cats: t.cats, mount: t.mount, forms: t.forms.map(f => ({ id: f.id, name: f.name, fp: f.fp, dims: T.formDimKeys(f), typical: f.typical })) })) }));
-  /* без параметров — весь каталог одним ответом (как раньше); с limit/offset — порциями, так его читает редактор */
-  route('GET', '/api/catalog/products', async (ctx, req, p, q) => (q.limit != null || q.offset != null) ? ctx.catalog.publicPage(q) : ({ products: await ctx.catalog.publicList() }));
+  /* Каталог отдаётся порциями (limit до 2000, offset); images=1 — только товары с фото.
+     Ответ одинаков для всех, поэтому кэшируется: CDN держит его минуту, браузер сверяет по ETag и получает 304 без тела. */
+  route('GET', '/api/catalog/products', async (ctx, req, p, q) => {
+    const withImages = q.images === '1' || q.images === 'true';
+    const etag = `W/"${await ctx.catalog.publicVersion()}-${parseInt(q.limit) || 0}-${parseInt(q.offset) || 0}-${withImages ? 1 : 0}"`;
+    const headers = { 'Cache-Control': 'public, max-age=0, s-maxage=60, stale-while-revalidate=300', ETag: etag };
+    /* сравнение «слабое»: пометка W/ не важна, «*» подходит всегда */
+    const opaque = (t) => t.trim().replace(/^W\//, '');
+    if (String(req.header('if-none-match') || '').split(',').some((t) => t.trim() === '*' || opaque(t) === opaque(etag))) return new Reply(304, headers, null);
+    return new Reply(200, headers, await ctx.catalog.publicPage({ ...q, images: withImages }));
+  });
 
   // админ: товары
   route('GET', '/api/admin/stats', admin(async (ctx) => ({ ...(await ctx.catalog.stats()), users: await ctx.users.total(), leads: await ctx.leads.fresh() })));
@@ -553,6 +642,7 @@ function createApp(makeCtx) {
     await ctx.audit(u.id, 'lead.' + lead.status, 'lead', lead.id);
     return lead;
   }));
+  route('POST', '/api/admin/leads/:id/note', admin(async (ctx, u, req, p) => ctx.leads.setNote(p.id, (await readJson(req, 16 * 1024)).note)));
   route('GET', '/api/admin/projects/:id', admin(async (ctx, u, req, p) => {
     const pr = await ctx.projects.adminGet(p.id);
     await ctx.audit(u.id, 'project.view', 'project', pr.id, { owner: pr.owner.id });
@@ -575,7 +665,6 @@ function createApp(makeCtx) {
   }));
   route('DELETE', '/api/admin/products/:id/model', admin((ctx, u, req, p) => ctx.catalog.deleteModel(u, p.id)));
   route('POST', '/api/admin/products/:id/model/fit-dims', admin((ctx, u, req, p) => ctx.catalog.fitDimsToModel(u, p.id)));
-  route('POST', '/api/admin/products/:id/model/generate', admin((ctx) => ctx.catalog.requestGeneration()));
   // фото
   route('POST', '/api/admin/products/:id/images', admin(async (ctx, u, req, p) => ctx.catalog.attachImage(u, p.id, await req.body(LIMITS.imageBytes))));
   route('POST', '/api/admin/products/:id/images/commit', admin(async (ctx, u, req, p) => {
@@ -632,9 +721,6 @@ function createApp(makeCtx) {
     } catch (e) { throw new ApiError(400, 'upload_denied', e.message); }
   });
 
-  // кабинет компании — заложено
-  route('GET', '/api/company/products', async () => { throw new ApiError(501, 'not_implemented', 'Кабинет компании появится на следующем этапе'); });
-
   /* ---------- обработчик ---------- */
   async function handle(req) {
     try {
@@ -643,7 +729,9 @@ function createApp(makeCtx) {
       const r = matching.find(x => x.method === req.method);
       if (!r) throw new ApiError(405, 'method_not_allowed', 'Метод не поддерживается');
       const ctx = await init();
-      const m = r.re.exec(req.pathname); const params = {}; r.keys.forEach((k, i) => params[k] = decodeURIComponent(m[i + 1]));
+      const m = r.re.exec(req.pathname); const params = {};
+      try { r.keys.forEach((k, i) => params[k] = decodeURIComponent(m[i + 1])); }
+      catch { throw new ApiError(400, 'bad_path', 'Некорректный адрес запроса'); } // «%» без кода символа
       const body = await r.handler(ctx, req, params, req.query || {});
       if (body instanceof Reply) return { status: body.status, body: body.body, headers: { 'Cache-Control': 'no-store', ...body.headers } };
       return { status: 200, body, headers: { 'Cache-Control': 'no-store' } };

@@ -5,19 +5,26 @@
 const http = require('node:http');
 const fs = require('node:fs');
 const path = require('node:path');
+const zlib = require('node:zlib');
 const { createApp, fromEnv, ApiError } = require('./core/app.js');
 
 const ROOT = path.resolve(__dirname, '..');
 const PUBLIC = path.join(ROOT, 'public');
 const DATA = path.resolve(process.env.DATA_DIR || path.join(ROOT, 'data'));
 const PORT = +process.env.PORT || 8080;
-/* За обратным прокси (nginx, Caddy) адрес клиента берётся из заголовка, который ставит прокси: TRUST_PROXY=1.
-   Без прокси заголовкам верить нельзя — используется адрес соединения. */
-const TRUST_PROXY = String(process.env.TRUST_PROXY || '').trim() === '1';
+/* За обратным прокси адрес клиента берётся из заголовка, который ставит прокси. Без прокси заголовкам верить нельзя —
+   используется адрес соединения. Заголовок, который прокси не переписывает, клиент присылает сам и обходит им лимиты,
+   поэтому источник выбирается явно:
+     TRUST_PROXY=1          — последний адрес в X-Forwarded-For. Прокси должен ДОПИСЫВАТЬ адрес клиента:
+                              Caddy делает это сам, в nginx нужна строка  proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+     TRUST_PROXY=x-real-ip  — заголовок X-Real-IP. Прокси должен ПЕРЕЗАПИСЫВАТЬ его:
+                              nginx:  proxy_set_header X-Real-IP $remote_addr;   (Caddy этот заголовок сам не ставит) */
+const TRUST_PROXY = String(process.env.TRUST_PROXY || '').trim().toLowerCase();
 function clientAddress(req) {
-  if (TRUST_PROXY) {
+  if (TRUST_PROXY === 'x-real-ip') {
     const real = String(req.headers['x-real-ip'] || '').trim();
     if (real) return real;
+  } else if (TRUST_PROXY === '1') {
     const chain = String(req.headers['x-forwarded-for'] || '').split(',').map((s) => s.trim()).filter(Boolean);
     if (chain.length) return chain[chain.length - 1]; // последний адрес добавил наш прокси; первые присылает клиент
   }
@@ -27,31 +34,71 @@ function clientAddress(req) {
 const app = createApp(() => fromEnv(process.env, { dataDir: DATA }));
 
 const MIME = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.mjs': 'text/javascript; charset=utf-8', '.css': 'text/css; charset=utf-8', '.json': 'application/json', '.glb': 'model/gltf-binary',
-  '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.webp': 'image/webp', '.svg': 'image/svg+xml', '.ico': 'image/x-icon', '.txt': 'text/plain; charset=utf-8' };
+  '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.webp': 'image/webp', '.svg': 'image/svg+xml', '.ico': 'image/x-icon', '.txt': 'text/plain; charset=utf-8', '.xml': 'application/xml; charset=utf-8',
+  '.woff2': 'font/woff2' };
+/* что имеет смысл сжимать: текст; картинки, модели и шрифты уже сжаты */
+const COMPRESSIBLE = new Set(['.html', '.js', '.mjs', '.css', '.json', '.svg', '.txt', '.xml']);
 
 /* Страницы сайта — те же соответствия, что rewrites в vercel.json */
 const PAGES = { '/': 'index.html', '/editor': 'editor.html', '/login': 'auth.html', '/register': 'auth.html', '/forgot': 'auth.html', '/reset': 'auth.html', '/verify': 'auth.html',
   '/projects': 'projects.html', '/account': 'account.html', '/terms': 'legal.html', '/privacy': 'legal.html', '/admin': 'admin.html' };
-/* Заголовки безопасности для HTML (CSP пока в режиме Report-Only — см. ТЗ, раздел 10.3) */
+/* Заголовки безопасности для HTML. Скрипты, стили и шрифты сайта лежат в самом проекте; внешние адреса нужны только
+   картинкам и моделям каталога (могут лежать на любом хостинге) и загрузке файлов в Vercel Blob из админ‑панели.
+   По умолчанию политика работает в режиме отчёта (Report-Only): нарушения видны в консоли браузера, но ничего не блокируется.
+   CSP_ENFORCE=1 включает её всерьёз — сначала проверьте на своём сервере все страницы. */
+const CSP = "default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://esm.sh https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob: https:; connect-src 'self' blob: https:; frame-ancestors 'none'; base-uri 'self'; form-action 'self'";
 const SECURITY = {
   'Referrer-Policy': 'strict-origin-when-cross-origin',
   'Permissions-Policy': 'camera=(), microphone=(), geolocation=()',
   'X-Frame-Options': 'DENY',
-  'Content-Security-Policy-Report-Only': "default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob: https://*.public.blob.vercel-storage.com; connect-src 'self' https://*.public.blob.vercel-storage.com https://vercel.com https://cdn.jsdelivr.net; frame-ancestors 'none'",
+  [String(process.env.CSP_ENFORCE || '').trim() === '1' ? 'Content-Security-Policy' : 'Content-Security-Policy-Report-Only']: CSP,
 };
 
-function serveFile(res, base, rel, extra = {}, status = 200) {
+/* Кэш браузера. Имена файлов сайта не содержат отметки версии, поэтому страницы и скрипты каждый раз сверяются
+   с сервером (ответ 304 без тела, если файл не менялся). Библиотеки, шрифты и файлы каталога меняются редко. */
+function cachePolicy(rel) {
+  if (/^(vendor|shared\/fonts)\//.test(rel)) return 'public, max-age=31536000, immutable';
+  if (/^catalog-pack\//.test(rel) || /\.(png|jpe?g|webp|svg|ico|glb|woff2)$/i.test(rel)) return 'public, max-age=86400';
+  return 'no-cache';
+}
+
+/* Сжатые копии текстовых файлов держим в памяти: файлов немного, а сжимать при каждом запросе незачем */
+const gzCache = new Map(); // путь → { tag, buf }
+const GZ_MAX_FILE = 4 * 1024 * 1024;
+const acceptsGzip = (req) => /\bgzip\b/.test(String(req.headers['accept-encoding'] || ''));
+/* If-None-Match: сравнение «слабое» (пометка W/ не важна), «*» подходит к любому существующему файлу */
+const etagMatches = (req, tag) => { const o = (t) => t.trim().replace(/^W\//, ''); return String(req.headers['if-none-match'] || '').split(',').some((t) => t.trim() === '*' || (t.trim() && o(t) === o(tag))); };
+
+function serveFile(req, res, base, rel, extra = {}, status = 200) {
   let file;
-  try { file = path.resolve(base, '.' + path.posix.normalize('/' + decodeURIComponent(rel))); } catch { res.writeHead(400).end(); return; }
+  try {
+    const decoded = decodeURIComponent(rel);
+    if (decoded.includes('\0')) { res.writeHead(400).end(); return; }
+    file = path.resolve(base, '.' + path.posix.normalize('/' + decoded));
+  } catch { res.writeHead(400).end(); return; }
   if (!file.startsWith(base + path.sep)) { res.writeHead(403).end('Forbidden'); return; }
   fs.stat(file, (err, st) => {
     if (err || !st.isFile()) {
-      if (status !== 404 && base === PUBLIC) return serveFile(res, PUBLIC, '404.html', SECURITY, 404);
+      if (status !== 404 && base === PUBLIC) return serveFile(req, res, PUBLIC, '404.html', SECURITY, 404);
       res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' }).end('Not found'); return;
     }
-    if (path.extname(file) === '.html') extra = { ...SECURITY, ...extra };
-    res.writeHead(status, { 'Content-Type': MIME[path.extname(file).toLowerCase()] || 'application/octet-stream', 'Content-Length': st.size, 'X-Content-Type-Options': 'nosniff', ...extra });
-    fs.createReadStream(file).pipe(res);
+    const ext = path.extname(file).toLowerCase();
+    if (ext === '.html') extra = { ...SECURITY, ...extra };
+    const tag = `W/"${st.size.toString(36)}-${Math.round(st.mtimeMs).toString(36)}"`;
+    const head = { 'Content-Type': MIME[ext] || 'application/octet-stream', 'X-Content-Type-Options': 'nosniff', ETag: tag, 'Last-Modified': st.mtime.toUTCString(),
+      'Cache-Control': cachePolicy(path.relative(base, file).split(path.sep).join('/')), ...extra };
+    const zip = COMPRESSIBLE.has(ext) && st.size >= 1024 && st.size <= GZ_MAX_FILE;
+    if (zip) head.Vary = 'Accept-Encoding'; // и в ответе 304: кэш должен знать, что вид ответа зависит от заголовка
+    if (status === 200 && etagMatches(req, tag)) { res.writeHead(304, head).end(); return; }
+    const plain = () => { res.writeHead(status, { ...head, 'Content-Length': st.size }); if (req.method === 'HEAD') return res.end(); fs.createReadStream(file).on('error', () => res.destroy()).pipe(res); };
+    if (!zip || !acceptsGzip(req)) return plain();
+    const hit = gzCache.get(file);
+    const send = (buf) => { res.writeHead(status, { ...head, 'Content-Encoding': 'gzip', 'Content-Length': buf.length }); res.end(req.method === 'HEAD' ? undefined : buf); };
+    if (hit && hit.tag === tag) return send(hit.buf);
+    fs.readFile(file, (e1, raw) => {
+      if (e1) return plain();
+      zlib.gzip(raw, { level: 6 }, (e2, buf) => { if (e2) return plain(); gzCache.set(file, { tag, buf }); send(buf); });
+    });
   });
 }
 
@@ -66,8 +113,9 @@ function readBody(req, limit) {
   });
 }
 
-const server = http.createServer(async (req, res) => {
-  const url = new URL(req.url, 'http://localhost');
+async function handleRequest(req, res) {
+  let url;
+  try { url = new URL(req.url, 'http://localhost'); } catch { res.writeHead(400).end(); return; }
   const p = url.pathname;
   if (p.startsWith('/api/')) {
     let bodyP = null;
@@ -77,18 +125,35 @@ const server = http.createServer(async (req, res) => {
       body: async (limit) => { try { return await (bodyP ||= readBody(req, limit)); } catch (e) { throw new ApiError(e.status || 400, 'too_large', e.message); } },
       webRequest: () => new Request('http://localhost' + req.url, { method: req.method, headers: Object.entries(req.headers).filter(([, v]) => typeof v === 'string') }),
     });
-    const data = Buffer.from(JSON.stringify(r.body));
-    res.writeHead(r.status, { 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': data.length, ...(r.headers || {}) });
+    const headers = { ...(r.headers || {}) };
+    /* ответы без тела: «не изменилось» и перенаправления */
+    if (r.status === 304 || r.status === 204 || r.body == null) { res.writeHead(r.status, headers); return res.end(); }
+    let data = Buffer.from(JSON.stringify(r.body));
+    headers['Content-Type'] = 'application/json; charset=utf-8';
+    if (data.length > 1024 && acceptsGzip(req)) {
+      data = await new Promise((resolve) => zlib.gzip(data, { level: 5 }, (e, buf) => resolve(e ? data : (headers['Content-Encoding'] = 'gzip', buf))));
+      headers.Vary = 'Accept-Encoding';
+    }
+    res.writeHead(r.status, { ...headers, 'Content-Length': data.length });
     return res.end(data);
   }
   if (req.method !== 'GET' && req.method !== 'HEAD') { res.writeHead(405).end(); return; }
-  if (p.startsWith('/files/')) return serveFile(res, path.join(DATA, 'uploads'), p.slice(7), { 'Cache-Control': 'public, max-age=31536000, immutable' });
+  if (p.startsWith('/files/')) return serveFile(req, res, path.join(DATA, 'uploads'), p.slice(7), { 'Cache-Control': 'public, max-age=31536000, immutable' });
   /* страница со слэшем на конце → без слэша: относительные пути страниц рассчитаны на адрес без него */
   if (p.length > 1 && p.endsWith('/') && PAGES[p.replace(/\/+$/, '')]) { res.writeHead(301, { Location: p.replace(/\/+$/, '') + url.search }).end(); return; }
   const page = PAGES[p];
-  if (page) return serveFile(res, PUBLIC, page);
-  return serveFile(res, PUBLIC, p.slice(1));
+  if (page) return serveFile(req, res, PUBLIC, page);
+  return serveFile(req, res, PUBLIC, p.slice(1));
+}
+
+/* Ни один запрос не должен останавливать процесс: ошибка в обработчике — ответ 400/500 этому клиенту, сервер работает дальше */
+const server = http.createServer((req, res) => {
+  handleRequest(req, res).catch((e) => {
+    console.error('request:', req.method, req.url, e && e.message);
+    try { if (!res.headersSent) res.writeHead(e instanceof URIError ? 400 : 500, { 'Content-Type': 'text/plain; charset=utf-8' }); res.end(); } catch {}
+  });
 });
+process.on('unhandledRejection', (e) => console.error('unhandledRejection:', e));
 
 /* HOST=127.0.0.1 — слушать только локальный адрес, когда снаружи стоит обратный прокси */
 app.init().then(() => server.listen(PORT, process.env.HOST || undefined, () => console.log(`Главная: http://localhost:${PORT}/   Редактор: http://localhost:${PORT}/editor   Админ‑панель: http://localhost:${PORT}/admin`)))

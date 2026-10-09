@@ -82,7 +82,7 @@ async function orderLead(which){
     const name=fld('Как к вам обращаться',h('input',{type:'text',autocomplete:'name',maxlength:'80',value:(S0.user&&S0.user.name)||''}),'leadName');
     const phone=fld('Телефон',h('input',{type:'tel',autocomplete:'tel',inputmode:'tel',maxlength:'32',placeholder:'+375 29 123‑45‑67'}),'leadPhone');
     const cm=fld('Комментарий (необязательно)',h('textarea',{rows:'3',maxlength:'600',placeholder:'Удобное время для звонка, вопросы по доставке и сборке…'}),'leadComment');
-    box.append(name.row,phone.row,cm.row,h('div',{class:'hint',style:'margin-top:8px'},'Вместе с заявкой менеджер увидит почту вашего аккаунта'+(S0.user&&S0.user.email?' ('+S0.user.email+')':'')+'.'));
+    box.append(name.row,phone.row,cm.row,h('div',{class:'hint',style:'margin-top:8px'},'Вместе с заявкой менеджер увидит почту вашего аккаунта'+(S0.user&&S0.user.email?' ('+S0.user.email+')':'')+'. Имя и телефон нужны только для связи по этой заявке — подробнее в ',h('a',{href:'/privacy',target:'_blank',rel:'noopener'},'Политике конфиденциальности'),'.'));
     let busy=false;
     api.buttons=[{label:'Отмена',cancel:true,onClick:a=>{if(!busy)a.close(null);}},{label:'Отправить заявку',primary:true,onClick:async a=>{
       if(busy)return;[name,phone,cm].forEach(f=>{f.er.textContent='';f.el.classList.remove('bad');});a.err('');
@@ -95,7 +95,7 @@ async function orderLead(which){
         if(!shown)a.err(e.message||'Не удалось отправить заявку');}
     }}];
   });
-  if(sent)toast('Заявка отправлена. Менеджер свяжется с вами');
+  if(sent)toast('Заявка отправлена. Менеджер свяжется с вами. Отправленные заявки — на странице «Аккаунт»');
 }
 
 /* ---------- ссылка на проект ---------- */
@@ -144,9 +144,22 @@ function orderBlock(cells){
   fill();return box;
 }
 /* Пункты основного меню редактора (вызывается из buildMenu): то же самое для расстановки, которая сейчас на плане */
+/* План комнаты картинкой: то, что на холсте, целиком и с размерами — отправить в мессенджер, приложить к заявке, распечатать */
+function orderPlanPng(){
+  if(!P.vertices.length){toast('План пуст');return;}
+  const c=$('#c');const keep={...vp()},sel=E.sel,dims=P.showDims,hover=E.hover;
+  E.sel=null;E.hover=null;P.showDims=true;fitRoom(); // fitRoom перерисовывает холст
+  const name=(P.name||'План').replace(/[\\/:*?"<>|]+/g,' ').trim()||'План';
+  try{c.toBlob(b=>{if(!b){toast('Не удалось сохранить изображение',true);return;}const u=URL.createObjectURL(b);const a=h('a',{href:u,download:name+'.png'});document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),10000);},'image/png');}
+  catch(e){toast('Не удалось сохранить изображение',true);}
+  /* снимок холста уже сделан — возвращаем вид, как был */
+  P.viewport=keep;P.showDims=dims;E.sel=sel;E.hover=hover;save();updateTools();render();
+}
 function orderMenuItems(menu){
-  if(!P.closed||!(P.furniture||[]).length||T3.active)return;
+  if(T3.active)return;
   const mi=(icon,label,fn)=>h('button',{type:'button',class:'mi',role:'menuitem',onclick:()=>{menu.hidden=true;fn();}},ic(icon),label);
+  if(P.walls.length)menu.append(mi('image','План картинкой · PNG',orderPlanPng));
+  if(!P.closed||!(P.furniture||[]).length){if(P.walls.length)menu.append(h('hr'));return;}
   menu.append(mi('printer','Смета · PDF',()=>orderPrint(null)));
   if(!READONLY)menu.append(mi('send','Заявка менеджеру',()=>orderLead(null)),mi('link','Поделиться ссылкой',orderShare));
   menu.append(h('hr'));

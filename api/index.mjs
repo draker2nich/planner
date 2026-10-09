@@ -23,6 +23,8 @@ async function handler(request) {
     },
     webRequest: () => request,
   });
+  /* ответы без тела: 304 «не изменилось» (каталог по ETag) и перенаправления входа через провайдера */
+  if (r.status === 304 || r.status === 204 || r.body == null) return new Response(null, { status: r.status, headers: r.headers || {} });
   return new Response(JSON.stringify(r.body), { status: r.status, headers: { 'Content-Type': 'application/json; charset=utf-8', ...(r.headers || {}) } });
 }
 

@@ -21,10 +21,18 @@ function ensureRenderer(){
   const up=new THREE.DirectionalLight('#ffffff',0.2); up.position.set(0,-1,0); T3.scene.add(up);
   const ground=new THREE.Mesh(new THREE.PlaneGeometry(200,200),new THREE.MeshStandardMaterial({color:lin('#8a9a7a'),roughness:1})); ground.rotation.x=-Math.PI/2; ground.position.y=-0.01; T3.scene.add(ground); T3.ground=ground;
   T3.raycaster=new THREE.Raycaster(); T3.ready=true;
-  // модели glb (лениво, с заглушкой)
-  ['door','window','arch'].forEach(k=>{T3.models[k]=null; if(THREE.GLTFLoader){try{gltfLoader().load(`assets/models/${k}.glb`,g=>{T3.models[k]=g.scene;T3.dirty=true;},undefined,()=>{});}catch(e){}}});
+  /* Двери, окна и арки строятся из простых форм (buildOpeningModel). Готовых моделей для них в проекте нет:
+     раньше редактор при каждом входе в 3D запрашивал три несуществующих файла assets/models/*.glb. */
+  ['door','window','arch'].forEach(k=>{T3.models[k]=null;});
 }
-function disposeObj(o){o.traverse(x=>{if(x.geometry)x.geometry.dispose();if(x.material){[].concat(x.material).forEach(m=>{if(m.map&&m.map!==T3.arrowTex&&m.map!==T3.blobTex)m.map.dispose();m.dispose();});}});}
+/* Освобождение видеопамяти при перестройке сцены. Копии моделей товаров (userData.shared) пропускаются: их геометрия и текстуры —
+   общие с кэшем GLB_CACHE, и после dispose() видеокарта получала бы их заново при каждом изменении комнаты. */
+function disposeObj(o){
+  if(o.userData&&o.userData.shared)return;
+  if(o.geometry)o.geometry.dispose();
+  if(o.material){[].concat(o.material).forEach(m=>{if(m.map&&m.map!==T3.arrowTex&&m.map!==T3.blobTex)m.map.dispose();m.dispose();});}
+  for(const c of o.children)disposeObj(c);
+}
 function rebuildScene(){
   if(!T3.ready)return; if(T3.room){T3.scene.remove(T3.room);disposeObj(T3.room);} T3.room=new THREE.Group(); T3.pickables=[]; T3.wallMeshes=[]; T3.labels=new Map(); T3.ceil=null; T3.scene.add(T3.room);
   const H=P.wallHeight/1000,T=P.wallThickness/1000;
@@ -59,7 +67,7 @@ function rebuildScene(){
   buildFurniture3D(T3.room);
   buildArrows(); if(T3.sel)selectIn3D(T3.sel,true);
   if(T3.ceil)T3.ceil.visible=T3.mode!=='orbit';
-  T3.renderer.shadowMap.needsUpdate=true;
+  T3.renderer.shadowMap.needsUpdate=true; T3.redraw=true;
 }
 const MATS={frame:()=>new THREE.MeshStandardMaterial({color:lin('#f2f2ee'),roughness:0.5}),leaf:()=>new THREE.MeshStandardMaterial({color:lin('#a97c50'),roughness:0.6}),metal:()=>new THREE.MeshStandardMaterial({color:lin('#c8c8cc'),roughness:0.3,metalness:0.8}),glass:()=>new THREE.MeshPhysicalMaterial({color:lin('#d8ecf8'),roughness:0.05,metalness:0,transmission:0.85,transparent:true,opacity:0.5})};
 function box(w,h,d,mat,x,y,z){const m=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),mat);m.position.set(x,y,z);return m;}
@@ -112,7 +120,16 @@ function enter3D(idx,opts={}){
   cancelAnimationFrame(T3.raf); loop3D();
 }
 function exit3D(){if(!T3.active)return;T3.active=false;T3.keys.clear();clearTimeout(T3.tapT);document.body.classList.remove('orbit3d');cancelAnimationFrame(T3.raf);$('#view3d').hidden=true;document.body.classList.remove('in3d');updateModeUI();$('#status').hidden=false;P.lastViewPoint=T3.point;P.lastYaw=T3.yaw;save();closeMaterialPanel();render();}
-function resize3D(){if(!T3.ready)return;const r=$('#view3d').getBoundingClientRect();T3.renderer.setSize(r.width,r.height,false);T3.camera.aspect=r.width/r.height;T3.camera.updateProjectionMatrix();}
+function resize3D(){if(!T3.ready)return;const r=$('#view3d').getBoundingClientRect();T3.renderer.setSize(r.width,r.height,false);T3.camera.aspect=r.width/r.height;T3.camera.updateProjectionMatrix();T3.redraw=true;}
+/* Кадр рисуется, когда что‑то изменилось: камера, выбор, подписи, сама сцена (T3.redraw). В неподвижной сцене — редкий
+   страховочный кадр (текстуры и модели догружаются сами и об этом не сообщают). Раньше сцена перерисовывалась 60 раз в секунду всегда. */
+const IDLE_FRAME_MS=250;
+function draw3D(sig,now,after){
+  if(sig===T3.sig&&!T3.redraw&&now-(T3.drawnAt||0)<IDLE_FRAME_MS)return;
+  T3.sig=sig;T3.redraw=false;T3.drawnAt=now;T3.renderer.render(T3.scene,T3.camera);if(after)after();
+  /* сколько моделей товаров ещё загружается — чтобы серые объёмы вместо мебели не выглядели поломкой */
+  const el=$('#load3d');if(el){let n=0;for(const c of GLB_CACHE.values())if(c.state==='loading')n++;const txt=n?`Загружаются 3D‑модели: ${n}`:'';if(el.textContent!==txt)el.textContent=txt;}
+}
 window.addEventListener('resize',()=>{if(T3.active)resize3D();});
 function camPos(){const p=T3.pos||getViewPoints()[T3.point]||{x:0,y:0};return new THREE.Vector3(p.x/1000,P.eyeHeight/1000,p.y/1000);}
 /* Можно ли стоять в точке (мм): внутри комнаты и не вплотную к стене */
@@ -152,13 +169,14 @@ function loop3D(){
   /* подписи мебели: только у предмета под указателем и у выбранного */
   const selId=T3.sel&&T3.sel.type==='furniture'?T3.sel.id:null; if(T3.hoverId&&T3.hoverT&&now>T3.hoverT){T3.hoverId=null;T3.hoverT=0;}
   for(const [id,sp] of T3.labels)sp.visible=id===T3.hoverId||id===selId;
+  const view=`${T3.hoverId||''}|${selId||''}|${T3.sel?T3.sel.type+(T3.sel.id||''):''}|${T3.camera.aspect}|`;
   if(T3.mode==='orbit'){
     const c=T3.center||{x:0,z:0,r:4,h:2.7},o=T3.orb,cp=Math.cos(o.pitch);
     const tgt=new THREE.Vector3(c.x,c.h*0.3,c.z),pos=new THREE.Vector3(c.x+Math.sin(o.yaw)*cp*o.dist,tgt.y+Math.sin(o.pitch)*o.dist,c.z+Math.cos(o.yaw)*cp*o.dist);
     /* стены, оказавшиеся между камерой и комнатой, скрываются — иначе комнату не видно; потолок в обзоре не показывается */
     for(const m of T3.wallMeshes){const u=m.userData;m.visible=((pos.x-u.sx)*u.nx+(pos.z-u.sz)*u.nz)<0.05;}
     T3.camera.position.copy(pos); T3.camera.lookAt(tgt); if(T3.camera.fov!==45){T3.camera.fov=45;T3.camera.updateProjectionMatrix();}
-    T3.renderer.render(T3.scene,T3.camera); $('#compass').style.transform=`rotate(${o.yaw}rad)`; return;
+    draw3D(view+`o|${o.yaw}|${o.pitch}|${o.dist}`,now,()=>{$('#compass').style.transform=`rotate(${o.yaw}rad)`;}); return;
   }
   /* свободная ходьба: пока держат W A S D или стрелки вверх/вниз; в стену не пройти, вдоль стены можно скользить */
   if(!T3.moving&&T3.keys.size&&T3.pos){
@@ -174,30 +192,32 @@ function loop3D(){
   }else pos=camPos();
   T3.lastPos={x:pos.x*1000,y:pos.z*1000};
   const cp=Math.cos(T3.pitch); const dir=new THREE.Vector3(Math.sin(T3.yaw)*cp,Math.sin(T3.pitch),-Math.cos(T3.yaw)*cp);
-  T3.camera.position.copy(pos); T3.camera.lookAt(pos.clone().add(dir)); T3.camera.fov=T3.fov; T3.camera.updateProjectionMatrix();
-  T3.renderer.render(T3.scene,T3.camera); drawMinimap(); $('#compass').style.transform=`rotate(${-T3.yaw}rad)`;
+  T3.camera.position.copy(pos); T3.camera.lookAt(pos.clone().add(dir)); if(T3.camera.fov!==T3.fov){T3.camera.fov=T3.fov; T3.camera.updateProjectionMatrix();}
+  draw3D(view+`w|${pos.x}|${pos.y}|${pos.z}|${T3.yaw}|${T3.pitch}|${T3.fov}|${T3.arrows.length}`,now,()=>{drawMinimap(); $('#compass').style.transform=`rotate(${-T3.yaw}rad)`;});
 }
 function moveTo(idx){const pts=getViewPoints();if(T3.mode==='orbit'){if(pts[idx])walkTo(pts[idx]);return;}if(T3.moving||!pts[idx]||(idx===T3.point&&!T3.free))return;const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;const from=camPos();const toPos=new THREE.Vector3(pts[idx].x/1000,P.eyeHeight/1000,pts[idx].y/1000);if(reduced){T3.point=idx;T3.pos={x:pts[idx].x,y:pts[idx].y};T3.free=false;buildArrows();return;}T3.moving={from,toPos,to:idx,t0:performance.now(),dur:600};T3.arrows.forEach(a=>T3.room.remove(a));T3.arrows=[];}
 function moveByDir(dirName){const pts=getViewPoints();const cur=pts[T3.point];if(!cur)return;const f={x:Math.sin(T3.yaw),y:-Math.cos(T3.yaw)};const v={W:f,S:{x:-f.x,y:-f.y},A:{x:f.y,y:-f.x},D:{x:-f.y,y:f.x}}[dirName];const sec=Math.abs(v.x)>Math.abs(v.y)?(v.x>0?'right':'left'):(v.y>0?'down':'up');if(cur.neighbors[sec]!=null)moveTo(cur.neighbors[sec]);}
 function handle3DKey(e){
-  const k=e.key.toLowerCase(); const tag=document.activeElement?.tagName; if(tag==='INPUT'||tag==='SELECT'||tag==='TEXTAREA')return false;
-  if(e.ctrlKey||e.metaKey){ if(k==='v'&&CLIP){exit3D();copyOpening(CLIP);e.preventDefault();return true;} if(k==='0'){T3.fov=70;e.preventDefault();return true;} return false; }
+  const k=keyOf(e); const tag=document.activeElement?.tagName; if(tag==='INPUT'||tag==='SELECT'||tag==='TEXTAREA')return false;
+  if(e.ctrlKey||e.metaKey){ if(k==='v'&&CLIP&&CLIP.type==='opening'){exit3D();copyOpening(CLIP.item);e.preventDefault();return true;} if(k==='0'){T3.fov=70;e.preventDefault();return true;} return false; }
   if(k==='escape'){if(T3.sel){selectIn3D(null);return true;}exit3D();return true;}
-  if(k==='o'||k==='щ'){set3DMode(T3.mode==='orbit'?'walk':'orbit');return true;}
+  if(k==='o'){set3DMode(T3.mode==='orbit'?'walk':'orbit');return true;}
   if(T3.mode==='orbit'){
     if(k==='q'||k==='arrowleft'||k==='a'){T3.orb.yaw-=Math.PI/12;return true;} if(k==='e'||k==='arrowright'||k==='d'){T3.orb.yaw+=Math.PI/12;return true;}
     if(k==='arrowup'||k==='w'){T3.orb.pitch=Math.min(1.45,T3.orb.pitch+0.1);return true;} if(k==='arrowdown'||k==='s'){T3.orb.pitch=Math.max(0.25,T3.orb.pitch-0.1);return true;}
     if(k==='?'){show3DHint();return true;} return false;
   }
-  /* ходьба: клавиша удерживается — движение идёт в loop3D; раскладка не важна (WASD и ЦФЫВ) */
-  const mv={w:'w',ц:'w',arrowup:'w',s:'s',ы:'s',arrowdown:'s',a:'a',ф:'a',d:'d',в:'d'}[k]; if(mv){T3.keys.add(mv);return true;}
-  if(k==='q'||k==='й'||k==='arrowleft'){T3.yaw-=Math.PI/12;return true;} if(k==='e'||k==='у'||k==='arrowright'){T3.yaw+=Math.PI/12;return true;}
+  /* ходьба: клавиша удерживается — движение идёт в loop3D; раскладка не важна (keyOf берёт клавишу по её месту) */
+  const mv={w:'w',arrowup:'w',s:'s',arrowdown:'s',a:'a',d:'d'}[k]; if(mv){T3.keys.add(mv);return true;}
+  if(k==='q'||k==='arrowleft'){T3.yaw-=Math.PI/12;return true;} if(k==='e'||k==='arrowright'){T3.yaw+=Math.PI/12;return true;}
   if(k==='p'){togglePoints();return true;} if(k==='?'){show3DHint();return true;}
   if(/^[1-9]$/.test(k)){moveTo(+k-1);return true;}
   return false;
 }
-window.addEventListener('keyup',e=>{const mv={w:'w',ц:'w',arrowup:'w',s:'s',ы:'s',arrowdown:'s',a:'a',ф:'a',d:'d',в:'d'}[(e.key||'').toLowerCase()];if(mv)T3.keys.delete(mv);});
+window.addEventListener('keyup',e=>{const mv={w:'w',arrowup:'w',s:'s',arrowdown:'s',a:'a',d:'d'}[keyOf(e)];if(mv)T3.keys.delete(mv);});
 window.addEventListener('blur',()=>T3.keys.clear());
+/* любое действие пользователя в 3D — повод нарисовать кадр сразу, не дожидаясь страховочного (см. draw3D) */
+['pointerdown','pointerup','pointermove','wheel','keydown','input','change'].forEach(t=>window.addEventListener(t,()=>{if(T3.active)T3.redraw=true;},{capture:true,passive:true}));
 /* ---------- Ввод в 3D ---------- */
 (function(){
   const c3=$('#c3'); const ptrs=new Map(); let pinch=null;

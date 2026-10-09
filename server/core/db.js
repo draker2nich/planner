@@ -164,6 +164,15 @@ const MIGRATIONS = [
       updated_at TEXT NOT NULL)`,
     'CREATE INDEX IF NOT EXISTS leads_created ON leads(created_at)',
   ],
+  // v7: поиск пользователей без учёта регистра, заметка менеджера к заявке, индексы журнала и заявок
+  [
+    "ALTER TABLE users ADD COLUMN search TEXT NOT NULL DEFAULT ''",
+    "ALTER TABLE leads ADD COLUMN note TEXT NOT NULL DEFAULT ''",
+    "ALTER TABLE leads ADD COLUMN search TEXT NOT NULL DEFAULT ''",
+    'CREATE INDEX IF NOT EXISTS leads_user ON leads(user_id)',
+    'CREATE INDEX IF NOT EXISTS audit_entity_at ON audit_log(entity, at)',
+    'CREATE INDEX IF NOT EXISTS projects_deleted ON projects(deleted_at)',
+  ],
 ];
 const SCHEMA_VERSION = 1 + MIGRATIONS.length;
 

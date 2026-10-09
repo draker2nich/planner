@@ -10,10 +10,13 @@ const iso = (ms) => new Date(ms).toISOString();
 function makeTokens(db) {
   return {
     TTL,
-    /* Создать токен. Прежние токены этого вида у пользователя удаляются — действует только последняя ссылка. */
+    /* Создать токен. Для сброса пароля действует только последняя ссылка — прежние удаляются.
+       Ссылки подтверждения почты и коды входа через провайдера живут параллельно: повторное письмо не должно
+       ломать ссылку из первого (оно могло просто задержаться), а вход во второй вкладке — вход в первой. */
     async create(userId, kind, meta = {}) {
       const raw = crypto.randomBytes(32).toString('base64url');
-      await db.run('DELETE FROM auth_tokens WHERE user_id=? AND kind=?', [userId, kind]);
+      if (kind === 'reset') await db.run('DELETE FROM auth_tokens WHERE user_id=? AND kind=?', [userId, kind]);
+      else await db.run('DELETE FROM auth_tokens WHERE user_id=? AND kind=? AND expires_at<?', [userId, kind, iso(Date.now())]);
       await db.run('INSERT INTO auth_tokens (token_hash,user_id,kind,meta,created_at,expires_at) VALUES (?,?,?,?,?,?)',
         [sha(raw), userId, kind, JSON.stringify(meta), iso(Date.now()), iso(Date.now() + TTL[kind] * 1000)]);
       return raw;

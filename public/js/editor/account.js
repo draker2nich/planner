@@ -15,7 +15,7 @@
                (/editor?share=<ключ>): только чтение, ничего не сохраняется.
    Адрес: /editor?project=<id> — открыть проект аккаунта; параметр всегда соответствует открытому проекту. */
 (function () {
-  const LS = { id: 'roomEditor.projectId', rev: 'roomEditor.projectRev', dirty: 'roomEditor.dirty', owner: 'roomEditor.projectUser', backup: 'roomEditor.project.backup' };
+  const LS = { id: 'roomEditor.projectId', rev: 'roomEditor.projectRev', dirty: 'roomEditor.dirty', owner: 'roomEditor.projectUser', backup: 'roomEditor.project.backup', sent: 'roomEditor.sent' };
   const ID_RE = /^[A-Za-z0-9-]{8,64}$/;
   const VIEW_ID = (() => { const v = new URLSearchParams(location.search).get('view'); return v && ID_RE.test(v) ? v : null; })();
   /* Проект по ссылке владельца (/editor?share=<ключ>): открывается без входа и только для просмотра */
@@ -28,7 +28,7 @@
   const when = (iso) => { const d = new Date(iso); const today = new Date().toDateString() === d.toDateString(); return today ? 'сегодня в ' + hhmm(d) : d.toLocaleString('ru', { day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit' }); };
 
   const Sync = { mode: 'boot', user: null, id: null, rev: 0, lastKey: null, inflight: false, again: false, timer: null, retryStep: 0, state: 'idle', edited: false, ready: false, mail: false, warned: false, stale: false, checking: false };
-  window.EditorSync = Sync; // для отладки и тестов
+  window.EditorSync = Sync; // состояние аккаунта для остальных файлов редактора (brief.js, order.js) и сквозных проверок (tools/ai-eval)
 
   /* ---------- стили элементов аккаунта ---------- */
   document.head.append(h('style', {}, `
@@ -88,6 +88,28 @@ body.ro #props input,body.ro #props select,body.ro #props textarea,body.ro #prop
   /* ---------- что отправляем на сервер ---------- */
   function payload() { const o = {}; for (const k in P) if (!SKIP.includes(k)) o[k] = P[k]; return o; }
   const key = () => JSON.stringify(payload());
+
+  /* ---------- «своя» ли версия на сервере ----------
+     Сервер отвечает 409, когда его версия новее той, от которой считает редактор. Но новее она бывает и из‑за нашей же
+     отправки, ответ на которую не дошёл: запрос при закрытии вкладки, обрыв связи после записи. Раньше это выглядело как
+     «Проект изменили на другом устройстве», хотя другого устройства не было. Теперь перед каждой отправкой запоминается
+     её отпечаток (версия‑основание и хеш данных), а при расхождении версий данные сервера сверяются с локальными и с отпечатком. */
+  const strip = (data) => { const o = {}; for (const k in data || {}) if (!SKIP.includes(k)) o[k] = data[k]; return o; };
+  const hashStr = (s) => { let a = 0x811c9dc5, b = 5381; for (let i = 0; i < s.length; i++) { const c = s.charCodeAt(i); a = Math.imul(a ^ c, 0x01000193); b = (Math.imul(b, 33) + c) | 0; } return (a >>> 0).toString(36) + '.' + (b >>> 0).toString(36) + '.' + s.length; };
+  const canon = (v) => Array.isArray(v) ? v.map(canon) : v && typeof v === 'object' ? Object.keys(v).sort().reduce((o, k) => { o[k] = canon(v[k]); return o; }, {}) : v;
+  /* данные сервера совпадают с локальными (k — key() на момент сравнения) */
+  function sameData(serverData, k) {
+    try { const s = JSON.stringify(strip(serverData)); return s === k || JSON.stringify(canon(JSON.parse(s))) === JSON.stringify(canon(JSON.parse(k))); } catch { return false; }
+  }
+  /* Отпечатки всех отправок, на которые ещё не пришёл ответ. Их может быть несколько: запрос дошёл, ответ потерялся,
+     пользователь правит дальше — повторная отправка несёт уже другие данные, а на сервере лежат прежние, тоже наши. */
+  const readSent = () => { try { const a = JSON.parse(lsGet(LS.sent) || '[]'); return Array.isArray(a) ? a.filter((s) => s && s.id === Sync.id) : []; } catch { return []; } };
+  const markSent = (rev, k) => { const h = hashStr(k); const a = readSent().filter((s) => !(s.rev === rev && s.h === h)); a.push({ id: Sync.id, rev, h }); lsSet(LS.sent, JSON.stringify(a.slice(-8))); };
+  /* версия сервера cur — одна из тех, что отправляли мы сами от версии baseRev */
+  function sentMatches(cur, baseRev) {
+    if (Number(cur.rev) !== baseRev + 1) return false;
+    try { const h = hashStr(JSON.stringify(strip(cur.data))); return readSent().some((s) => s.rev === baseRev && s.h === h); } catch { return false; }
+  }
 
   /* Хук основного скрипта: вызывается после каждого локального сохранения */
   window.afterLocalSave = function (ok) {
@@ -175,14 +197,27 @@ body.ro #props input,body.ro #props select,body.ro #props textarea,body.ro #prop
     const k = key();
     if (k === Sync.lastKey) { lsSet(LS.dirty, null); ind('saved'); return; }
     Sync.inflight = true; Sync.again = false;
+    const base = Sync.rev;
     try {
-      const r = await Session.api('PUT', '/projects/' + Sync.id, { name: P.name, data: JSON.parse(k), rev: Sync.rev });
+      markSent(base, k);
+      const r = await Session.api('PUT', '/projects/' + Sync.id, { name: P.name, data: JSON.parse(k), rev: base });
       Sync.rev = r.rev; Sync.lastKey = k; Sync.retryStep = 0;
       if (!own()) { Sync.inflight = false; lostLocal(); return; }
-      lsSet(LS.rev, r.rev);
+      lsSet(LS.rev, r.rev); lsSet(LS.sent, null);
       if (key() === k) { lsSet(LS.dirty, null); ind('saved'); } else Sync.again = true;
     } catch (e) {
-      if (e.status === 409 && e.code === 'conflict') { ind('conflict'); Sync.inflight = false; conflictDialog(e.details); return; }
+      if (e.status === 409 && e.code === 'conflict') {
+        /* прежде чем спрашивать пользователя, выясняем, не наша ли это версия (см. sentMatches) */
+        let cur = null; try { cur = await Session.api('GET', '/projects/' + Sync.id); } catch {}
+        const same = !!cur && sameData(cur.data, k);
+        if (cur && (same || sentMatches(cur, base))) {
+          Sync.rev = cur.rev; if (own()) { lsSet(LS.rev, cur.rev); lsSet(LS.sent, null); }
+          if (same) { Sync.lastKey = k; if (key() === k) { lsSet(LS.dirty, null); ind('saved'); } else Sync.again = true; }
+          else Sync.again = true;
+          Sync.inflight = false; if (Sync.again) schedule(300); return;
+        }
+        ind('conflict'); Sync.inflight = false; conflictDialog(cur || e.details); return;
+      }
       if (e.status === 401) { Sync.inflight = false; sessionLost(); return; }
       if (e.status === 404) { Sync.inflight = false; gone().catch(() => ind('offline')); return; }
       if (unverified(e)) { Sync.inflight = false; return; }
@@ -217,6 +252,7 @@ body.ro #props input,body.ro #props select,body.ro #props textarea,body.ro #prop
     if (P.status === 'submitted' && P.brief) showResult();
     document.title = (P.name || 'Новый проект') + ' — furnitech';
     ind('saved');
+    reportSanitized();
   }
   function backupLocal() { try { localStorage.setItem(LS.backup, JSON.stringify(P)); } catch {} }
 
@@ -397,7 +433,16 @@ body.ro #props input,body.ro #props select,body.ro #props textarea,body.ro #prop
     ind('loading');
     let u;
     try { u = await Session.me(); }
-    catch { ind('offline'); window.addEventListener('online', () => start(), { once: true }); return; }
+    catch {
+      /* сервер не ответил. Событие online приходит только при смене состояния сети, а сбой мог быть на стороне сервера —
+         поэтому повторяем и по таймеру; редактор тем временем работает с локальной копией */
+      ind('offline');
+      let fired = false;
+      const again = () => { if (fired) return; fired = true; clearTimeout(timer); window.removeEventListener('online', again); start(); };
+      const timer = setTimeout(again, 8000);
+      window.addEventListener('online', again);
+      return;
+    }
     if (!u) return needsAccount() ? toLogin() : startGuest();
     handlePanelParam();
     Sync.user = u; Sync.mode = 'account'; renderAccount();
@@ -415,7 +460,18 @@ body.ro #props input,body.ro #props select,body.ro #props textarea,body.ro #prop
         try { r = await Session.api('GET', '/projects/' + id); }
         catch (e) { if (e.status !== 404) throw e; await gone(); return; }
         Sync.id = id; lsSet(LS.owner, u.id); setProjectParam(id);
-        if (dirty && r.rev > rev) { Sync.rev = rev; ind('conflict'); conflictDialog(r); }
+        /* версия сервера новее, но это может быть наша же отправка, ответ на которую не дошёл (закрытие вкладки) */
+        const k = key(); const same = dirty && r.rev > rev && sameData(r.data, k);
+        if (dirty && r.rev > rev && (same || sentMatches(r, rev))) {
+          /* На сервере — наша же версия. Обычно локальная копия не старее её, и она отправляется поверх. Но если локальная
+             запись в тот раз не удалась (переполнено хранилище, вкладку закрыли раньше), новее окажется версия сервера —
+             тогда берём её: затирать свои же последние правки более старой копией нельзя. */
+          const newerOnServer = !same && String((r.data && r.data.updatedAt) || '') > String(P.updatedAt || '');
+          lsSet(LS.sent, null);
+          if (newerOnServer) loadIntoEditor(r.data, r);
+          else { Sync.rev = r.rev; lsSet(LS.rev, r.rev); Sync.lastKey = same ? k : null; ind('saving'); push(); }
+        }
+        else if (dirty && r.rev > rev) { Sync.rev = rev; ind('conflict'); conflictDialog(r); }
         else if (dirty || Sync.edited) { Sync.rev = r.rev; lsSet(LS.rev, r.rev); Sync.lastKey = null; ind('saving'); push(); }
         else loadIntoEditor(r.data, r);
         return;
@@ -679,11 +735,33 @@ body.ro #props input,body.ro #props select,body.ro #props textarea,body.ro #prop
   }
 
   /* ---------- уход со страницы ---------- */
+  /* Локальная запись отложена на 0,4 с — при закрытии или сворачивании вкладки выполняем её сразу, иначе последняя правка терялась */
+  const flushNow = () => { try { if (typeof flushSave === 'function') flushSave(); } catch {} };
+  window.addEventListener('pagehide', flushNow);
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState !== 'hidden') return;
+    flushNow();
+    /* на телефоне вкладку чаще сворачивают, чем закрывают: beforeunload там не приходит, поэтому отправляем в аккаунт сейчас */
+    if (Sync.mode === 'account' && Sync.id && !Sync.stale && lsGet(LS.dirty) === '1') schedule(0);
+  });
   window.addEventListener('beforeunload', (e) => {
+    flushNow();
     if (Sync.mode !== 'account' || Sync.stale || !own() || lsGet(LS.dirty) !== '1' || !Sync.id) return;
-    const body = JSON.stringify({ name: P.name, data: payload(), rev: Sync.rev });
-    if (body.length <= 64 * 1024 && Session.token) {
-      try { fetch('/api/projects/' + Sync.id, { method: 'PUT', keepalive: true, headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + Session.token }, body }); } catch {}
+    const k = key(), base = Sync.rev;
+    const body = JSON.stringify({ name: P.name, data: JSON.parse(k), rev: base });
+    /* пока идёт обычная отправка, вторую не запускаем: два запроса от одной версии дали бы 409 и ложный «конфликт» */
+    if (!Sync.inflight && Sync.state !== 'conflict' && body.length <= 64 * 1024 && Session.token) {
+      try {
+        markSent(base, k);
+        fetch('/api/projects/' + Sync.id, { method: 'PUT', keepalive: true, headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + Session.token }, body })
+          .then((r) => (r.ok ? r.json() : null))
+          .then((j) => {
+            /* пользователь остался на странице («Отмена» в запросе браузера): учитываем, что версия на сервере уже новая */
+            if (!j || !Number.isInteger(j.rev) || Sync.rev !== base || !own()) return;
+            Sync.rev = j.rev; Sync.lastKey = k; lsSet(LS.rev, j.rev); lsSet(LS.sent, null);
+            if (key() === k) { lsSet(LS.dirty, null); ind('saved'); }
+          }).catch(() => {});
+      } catch {}
     }
     e.preventDefault(); e.returnValue = '';
   });

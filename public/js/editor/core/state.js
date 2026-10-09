@@ -23,5 +23,30 @@ function normalizeProject(p){
   for(const k in d){ if(p[k]==null) p[k]=d[k]; }
   if(!UNITS[p.unit])p.unit='mm';
   if(!p.seq)p.seq={door:0,window:0,arch:0}; if(!p.floor)p.floor={material:{type:'color',color:'#d9cfbf'}}; if(p.viewPointsVisible==null)p.viewPointsVisible=true; if(!p.eyeHeight)p.eyeHeight=1600; if(!p.photos)p.photos=[]; if(!p.mode)p.mode='walls'; if(!p.furniture)p.furniture=[]; if(!p.fseq)p.fseq={}; if(!p.status)p.status='draft'; if(!p.viewport)p.viewport={x:0,y:0,zoom:0.08}; if(!p.openings)p.openings=[]; if(!p.walls)p.walls=[]; if(!p.vertices)p.vertices=[];
+  sanitizeProject(p);
   return p;
+}
+/* Повреждённые данные (сбой записи, ручная правка localStorage, старая версия) не должны ронять редактор:
+   derive() и отрисовка рассчитывают, что стена ссылается на существующие точки, а проём — на существующую стену.
+   Всё, что этому не отвечает, отбрасывается. → число отброшенных элементов.
+   Молча терять данные нельзя: перед первым изменением проект запоминается как был (SANITIZED.raw), а редактор после
+   загрузки сохраняет эту копию в браузере и сообщает пользователю (reportSanitized в core/history.js). */
+let SANITIZED=null;
+function sanitizeProject(p){
+  let dropped=0,raw=null; const obj=(x)=>!!x&&typeof x==='object'&&!Array.isArray(x); const num=(v)=>typeof v==='number'&&isFinite(v);
+  const keep=(k,ok)=>{const a=Array.isArray(p[k])?p[k]:[];const b=a.filter(x=>obj(x)&&ok(x));if(b.length!==a.length&&raw==null){try{raw=JSON.stringify(p);}catch(e){raw='';}}dropped+=a.length-b.length;p[k]=b;};
+  keep('vertices',v=>v.id!=null&&num(v.x)&&num(v.y));
+  const V=new Set(p.vertices.map(v=>v.id));
+  const wallsBefore=Array.isArray(p.walls)?p.walls.length:0;
+  keep('walls',w=>w.id!=null&&V.has(w.a)&&V.has(w.b)&&w.a!==w.b);
+  if(p.walls.length!==wallsBefore)p.closed=false; // контур с выпавшей стеной замкнутым быть не может
+  const W=new Set(p.walls.map(w=>w.id));
+  keep('openings',o=>o.id!=null&&W.has(o.wallId)&&num(o.offset)&&num(o.width)&&o.width>0);
+  keep('furniture',f=>f.id!=null&&typeof f.typeId==='string'&&obj(f.dims)&&num(f.x)&&num(f.y)&&(typeof TYPE==='undefined'||TYPE.has(f.typeId)));
+  for(const f of p.furniture){if(!num(f.rot))f.rot=0;if(!obj(f.constraints))f.constraints={};if(!Array.isArray(f.warnings))f.warnings=[];}
+  if(!obj(p.viewport)||!num(p.viewport.x)||!num(p.viewport.y)||!num(p.viewport.zoom)||p.viewport.zoom<=0)p.viewport={x:0,y:0,zoom:0.08};
+  if(!num(p.wallHeight)||p.wallHeight<=0)p.wallHeight=DEF.wallH; if(!num(p.wallThickness)||p.wallThickness<=0)p.wallThickness=DEF.wallT;
+  if(p.mode!=='walls'&&p.mode!=='furniture')p.mode='walls';
+  if(dropped)SANITIZED={dropped,raw,name:p.name||''};
+  return dropped;
 }

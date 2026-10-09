@@ -60,6 +60,14 @@ const TEMPLATES = {
     button: 'Открыть заявки', link,
     note: `Итого: ${Math.round(lead.total).toLocaleString('ru-RU')} ${lead.currency}. Позиций: ${lead.items.length}.`,
   }),
+  /* подтверждение пользователю: заявка принята */
+  lead_received: ({ lead, link }) => ({
+    subject: `Заявка принята — ${BRAND}`,
+    lead: `Мы получили вашу заявку по проекту «${lead.projectName}»${lead.variant ? ` (${lead.variant})` : ''}. Менеджер свяжется с вами по телефону ${lead.phone}.`,
+    list: lead.items.map((i) => `${i.name}${i.qty > 1 ? ` ×${i.qty}` : ''} — ${Math.round(i.price * i.qty).toLocaleString('ru-RU')} ${i.currency}`),
+    button: 'Мои заявки', link,
+    note: `Итого: ${Math.round(lead.total).toLocaleString('ru-RU')} ${lead.currency}. Цены — на момент отправки; точную стоимость и наличие подтвердит менеджер.`,
+  }),
   blocked: ({ reason }) => ({
     subject: `Аккаунт заблокирован — ${BRAND}`,
     lead: 'Ваш аккаунт заблокирован администратором. Проекты сохранены, но вход недоступен.',

@@ -1,6 +1,7 @@
 data/
 node_modules/
 .env*
+!.env.example
 .vercel/
 /catalog-work/
 /catalog-pack/

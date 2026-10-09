@@ -20,9 +20,6 @@
 <script>try{var t=localStorage.getItem('planner.theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}catch(e){}document.documentElement.classList.add('js')</script>
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
 <link rel="stylesheet" href="/shared/ui.css">
 <link rel="stylesheet" href="/shared/site.css">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"furnitech","url":"https://furnitech.vercel.app/","description":"Онлайн‑планировщик комнаты: стены по точным размерам, двери и окна, мебель из каталога и прогулка в 3D.","applicationCategory":"DesignApplication","operatingSystem":"Any","inLanguage":"ru","offers":{"@type":"Offer","price":"0","priceCurrency":"BYN"}}</script>
@@ -494,7 +491,8 @@ async function loadShelf() {
   sec.hidden = false; skeletons(ul);
   const hide = () => { sec.hidden = true; document.querySelectorAll('[data-needs=catalog]').forEach(a => { a.hidden = true; }); };
   try {
-    const r = await fetch('/api/catalog/products', { headers: { Accept: 'application/json' }, signal: ctl.signal });
+    /* витрине нужны восемь карточек с фото — сервер отдаёт только их, а не весь каталог (сотни килобайт) */
+    const r = await fetch('/api/catalog/products?limit=8&images=1', { headers: { Accept: 'application/json' }, signal: ctl.signal });
     if (!r.ok) throw new Error(r.status);
     const list = ((await r.json()).products || []).filter(p => p.images && p.images.length).slice(0, 8);
     if (list.length < 3) return hide();

@@ -122,7 +122,7 @@ function showResult(force){
   const back=()=>{const err=READONLY?null:aiCommit(Q=>{Q.status='draft';});if(err)toast(err,true);r.hidden=true;document.body.classList.remove('res');aiBar();render();};
   if(!aiHasVariants()){
     /* ИИ‑дизайнеру нечего было менять: всё остаётся как есть */
-    wrap.append(h('h2',{},'Расстановка сохранена'),h('div',{class:'hint'},'ИИ‑дизайнер ничего не менял: все предметы и отделка остаются такими, как вы их задали. Рендер появится на следующем этапе.'));
+    wrap.append(h('h2',{},'Расстановка сохранена'),h('div',{class:'hint'},'ИИ‑дизайнер ничего не менял: все предметы и отделка остаются такими, как вы их задали.'));
     const c=polyCentroid(innerPoly()||[{x:0,y:0}]);const pi=nearestPointTo(c);
     const views=h('div',{class:'views'});[['Вид 0°',0],['Вид 90°',Math.PI/2],['Вид 180°',Math.PI],['Вид 270°',Math.PI*1.5]].forEach(([nm,yaw])=>views.append(h('button',{onclick:()=>enter3D(pi,{yaw})},ic('eye'),nm)));
     wrap.append(h('div',{class:'card'},h('h4',{},'4 вида из центра комнаты'),views,h('div',{class:'hint'},'Esc — вернуться сюда.')));
@@ -138,7 +138,7 @@ function showResult(force){
   wrap.append(hint);
   ai.variants.forEach((v,i)=>wrap.append(aiCard(i)));
   wrap.append(aiCard('base'));
-  if(ai.chosen!=null)wrap.append(h('div',{class:'infoblk aichosen'},ic('info'),h('div',{},`Выбрано: «${aiCellName(ai,ai.chosen)}». Фотореалистичный рендер выбранного варианта появится на следующем этапе.`)));
+  if(ai.chosen!=null)wrap.append(h('div',{class:'infoblk aichosen'},ic('info'),h('div',{},`Выбрано: «${aiCellName(ai,ai.chosen)}». Список его товаров и заявка менеджеру — ниже.`)));
   const ob=orderBlock([...ai.variants.map((v,i)=>i),'base']);if(ob)wrap.append(ob);
   const acts=h('div',{class:'acts'});
   if(!READONLY){

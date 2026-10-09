@@ -10,9 +10,6 @@
 <script>try{var t=localStorage.getItem('planner.theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
 <link rel="stylesheet" href="/shared/ui.css">
 <link rel="stylesheet" href="/shared/site.css">
 <style>
@@ -27,6 +24,20 @@
 .pcard .thumb{aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;background:var(--muted);color:var(--muted-foreground);border-radius:calc(var(--radius-xl) - 1px) calc(var(--radius-xl) - 1px) 0 0;border-bottom:1px solid var(--border);overflow:hidden}
 .pcard .thumb svg.plan{width:100%;height:100%;padding:20px;color:var(--foreground)}
 .pcard .thumb svg.plan line{stroke:currentColor;stroke-width:2.5;stroke-linecap:round;vector-effect:non-scaling-stroke}
+.pcard .thumb svg.plan rect{fill:color-mix(in srgb,currentColor 16%,transparent);stroke:color-mix(in srgb,currentColor 45%,transparent);stroke-width:1;vector-effect:non-scaling-stroke}
+.trash{margin:32px 0 0;border-top:1px solid var(--border);padding-top:16px}
+.trash summary{display:inline-flex;align-items:center;gap:8px;cursor:pointer;font-size:14px;font-weight:500;color:var(--muted-foreground);border-radius:var(--radius-sm);padding:4px 6px;margin-left:-6px;list-style:none}
+.trash summary::-webkit-details-marker{display:none}
+.trash summary:hover{color:var(--foreground)}
+.trash summary .ic{width:16px;height:16px}
+.trash .hint{margin:10px 0;font-size:13px;color:var(--muted-foreground)}
+.trash ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.trash li{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:10px 14px;border:1px solid var(--border);border-radius:var(--radius-lg);background:var(--card)}
+.trash li .t{flex:1 1 220px;min-width:0}
+.trash li .t b{display:block;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.trash li .t span{font-size:13px;color:var(--muted-foreground)}
+.trash li .a{display:flex;gap:8px;flex-wrap:wrap}
+.trash li.busy{opacity:.6;pointer-events:none}
 .pcard .thumb .blank{display:flex;flex-direction:column;align-items:center;gap:6px;font-size:13px}
 .pcard .thumb .blank .ic{width:24px;height:24px}
 .pcard .thumb{position:relative}
@@ -79,6 +90,7 @@
       <input type="search" id="q" name="q" autocomplete="off" spellcheck="false" maxlength="80" placeholder="Поиск по названию…"></label>
   </div>
   <div id="list" aria-busy="true"></div>
+  <div id="trash"></div>
 </main>
 <footer class="site-f">
   <div class="wrap">
@@ -118,6 +130,15 @@
     const w = Math.max(x1 - x0, 1), hh = Math.max(y1 - y0, 1), pad = Math.max(w, hh) * 0.04;
     const svg = document.createElementNS(SVG, 'svg');
     svg.setAttribute('class', 'plan'); svg.setAttribute('aria-hidden', 'true'); svg.setAttribute('viewBox', `${x0 - pad} ${y0 - pad} ${w + pad * 2} ${hh + pad * 2}`); svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+    /* мебель — прямоугольники по габариту [центр x, центр y, ширина, глубина, поворот°]: по ней проект легче узнать */
+    const furn = p.preview && Array.isArray(p.preview.furn) ? p.preview.furn.filter((f) => Array.isArray(f) && f.length === 5 && f.every(Number.isFinite)) : [];
+    for (const [cx, cy, fw, fd, rot] of furn) {
+      if (cx < x0 - 1 || cx > x1 + 1 || cy < y0 - 1 || cy > y1 + 1) continue; // предмет вне комнаты миниатюру не растягивает
+      const r = document.createElementNS(SVG, 'rect');
+      r.setAttribute('x', cx - fw / 2); r.setAttribute('y', cy - fd / 2); r.setAttribute('width', fw); r.setAttribute('height', fd); r.setAttribute('rx', Math.min(fw, fd) * 0.08);
+      if (rot) r.setAttribute('transform', `rotate(${rot} ${cx} ${cy})`);
+      svg.append(r);
+    }
     for (const [ax, ay, bx, by] of walls) {
       const l = document.createElementNS(SVG, 'line');
       l.setAttribute('x1', ax); l.setAttribute('y1', ay); l.setAttribute('x2', bx); l.setAttribute('y2', by); svg.append(l);
@@ -208,12 +229,58 @@
     try {
       const r = await Session.api('GET', '/projects');
       S.projects = r.projects; S.limit = r.limit || 50; S.loaded = true;
-      render(); localNote();
+      S.trash = r.trash || 0; S.trashList = null;
+      render(); localNote(); renderTrash();
     } catch (x) {
       if (x.status === 401) return; // сессия закончилась — Site.requireUser уведёт на вход
       list.removeAttribute('aria-busy'); countEl.textContent = ' ';
       list.replaceChildren(Site.errorState(x.message, load));
     }
+  }
+
+  /* ---------- корзина ----------
+     Удалённый проект хранится на сервере 30 суток и может быть возвращён. Список подгружается, когда корзину раскрыли. */
+  const trashBox = $('#trash');
+  function renderTrash() {
+    trashBox.replaceChildren();
+    if (!S.trash) return;
+    const det = h('details', { class: 'trash' }); det.open = !!S.trashOpen;
+    const body = h('div', {});
+    det.append(h('summary', {}, ic('trash'), `Корзина · ${S.trash}`), body);
+    det.addEventListener('toggle', () => { S.trashOpen = det.open; if (det.open && !S.trashList) loadTrash(); });
+    if (S.trashList) fillTrash(body); else if (det.open) { body.append(h('p', { class: 'hint' }, 'Загрузка…')); loadTrash(); }
+    trashBox.append(det);
+  }
+  async function loadTrash() {
+    try { const r = await Session.api('GET', '/projects/trash'); S.trashList = r.projects; S.trashDays = r.days || 30; S.trash = r.projects.length; renderTrash(); }
+    catch (x) { if (x.status !== 401) fail(x); }
+  }
+  function fillTrash(body) {
+    body.append(h('p', { class: 'hint' }, `Удалённые проекты хранятся ${S.trashDays || 30} дней, потом стираются окончательно.`));
+    const day = (iso) => new Date(iso).toLocaleDateString('ru', { day: 'numeric', month: 'long' });
+    body.append(h('ul', {}, ...S.trashList.map((p) => {
+      const li = h('li', {});
+      const back = h('button', { type: 'button', class: 'sm' }, 'Восстановить');
+      const kill = h('button', { type: 'button', class: 'sm ghost' }, 'Удалить навсегда');
+      back.addEventListener('click', async () => {
+        li.classList.add('busy');
+        try {
+          const r = await Session.api('POST', '/projects/' + p.id + '/restore');
+          S.trashList.splice(S.trashList.indexOf(p), 1); S.trash = S.trashList.length;
+          S.projects.unshift(r); S.projects.sort((a, b) => (a.updatedAt < b.updatedAt ? 1 : -1));
+          render(); renderTrash(); Site.toast(`Проект «${p.name}» восстановлен`);
+        } catch (x) { li.classList.remove('busy'); fail(x); }
+      });
+      kill.addEventListener('click', async () => {
+        if (!(await Site.confirm('Удалить навсегда?', `Проект «${p.name}» будет стёрт без возможности восстановления.`, { ok: 'Удалить навсегда', danger: true }))) return;
+        li.classList.add('busy');
+        try { await Session.api('DELETE', '/projects/trash/' + p.id); }
+        catch (x) { if (x.status !== 404) { li.classList.remove('busy'); return fail(x); } }
+        S.trashList.splice(S.trashList.indexOf(p), 1); S.trash = S.trashList.length; renderTrash();
+      });
+      li.append(h('div', { class: 't' }, h('b', { title: p.name }, p.name), h('span', {}, `Удалён ${day(p.deletedAt)} · сотрётся ${day(p.purgeAt)}`)), h('div', { class: 'a' }, back, kill));
+      return li;
+    })));
   }
 
   /* ---------- локальная копия редактора ---------- */
@@ -278,13 +345,14 @@
     } catch (x) { li.classList.remove('busy'); fail(x); }
   }
   async function remove(p, btn) {
-    const ok = await Site.confirm('Удалить проект?', `Проект «${p.name}» будет удалён из аккаунта на всех устройствах. Отменить удаление нельзя.`, { ok: 'Удалить', danger: true });
+    const ok = await Site.confirm('Удалить проект?', `Проект «${p.name}» исчезнет на всех устройствах и переместится в корзину. В течение 30 дней его можно восстановить — корзина внизу этой страницы.`, { ok: 'Удалить', danger: true });
     if (!ok) { btn.focus(); return; }
     const li = btn.closest('.pcard'); if (li) li.classList.add('busy');
     try {
       await Session.api('DELETE', '/projects/' + p.id);
       if (lsGet(LS.id) === p.id) dropLocal(); // удалённый проект не должен «воскреснуть» из браузера
-      const i = S.projects.indexOf(p); S.projects.splice(i, 1); render(); Site.toast('Проект удалён');
+      const i = S.projects.indexOf(p); S.projects.splice(i, 1); S.trash = (S.trash || 0) + 1; S.trashList = null;
+      render(); renderTrash(); Site.toast('Проект в корзине. Вернуть его можно в течение 30 дней');
       const next = list.querySelectorAll('.pcard .name')[Math.min(i, S.projects.length - 1)]; (next || newBtn).focus();
     } catch (x) {
       if (x.status === 404) { S.projects.splice(S.projects.indexOf(p), 1); render(); return; } // уже удалён в другой вкладке

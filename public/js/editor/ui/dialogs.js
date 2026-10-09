@@ -16,6 +16,7 @@ function dialog(build){
     if(api.setup)api.setup();
     box.onkeydown=(e)=>{ if(e.key==='Enter'&&e.target.tagName!=='TEXTAREA'&&api.primaryBtn&&!api.primaryBtn.disabled){e.preventDefault();api.primaryBtn.click();} if(e.key==='Escape'&&api.cancelBtn){e.preventDefault();api.cancelBtn.click();} e.stopPropagation(); };
     const fi=box.querySelector('.f:not(.unit) input:not([readonly])')||box.querySelector('input:not([readonly]):not([type=file]),select:not(#dlgUnit),button'); if(fi&&!IS_TOUCH){fi.focus(); if(fi.select)fi.select();} else box.focus({preventScroll:true});
+    if(api.afterFocus)api.afterFocus();
   });
 }
 let NR_ID=0;
@@ -51,6 +52,8 @@ async function lengthDialog(lenMm,opts={}){ // opts.closing, opts.title
     if(P.lengthsIncludeThickness&&!opts.closing) box.append(h('div',{class:'hint'},'Вводится наружный размер (включая толщину стены).'));
     U.sel.onchange=()=>{const v=L.get();P.unit=U.sel.value;$('#unitSel').value=P.unit;if(!isNaN(v))L.inp.value=fmt(v);L.unitSpan.textContent=UNITS[P.unit].l;render();};
     box.append(U.row,L.row);
+    /* число начали набирать прямо на плане: поле открывается с этой цифрой, курсор — после неё */
+    if(opts.typed!=null&&!opts.closing){L.inp.value=String(opts.typed);api.afterFocus=()=>{try{L.inp.focus();L.inp.setSelectionRange(L.inp.value.length,L.inp.value.length);}catch(e){}};}
     api.buttons=[{label:'Отмена',cancel:true,onClick:a=>a.close(null)},{label:opts.closing?'Замкнуть':'ОК',primary:true,onClick:a=>{
       if(opts.closing)return a.close({len:lenMm});
       const v=L.get(); if(isNaN(v))return a.err('Введите длину');

@@ -31,3 +31,14 @@ function parseLen(str,unit=P.unit){
   const v=Number(str); if(!isFinite(v)) return NaN; return Math.round(v*UNITS[unit].f);
 }
 function m2(mm2){return (mm2/1e6).toFixed(2)+' м²';}
+
+/* Клавиша сочетания. В латинской раскладке — сам символ (так сочетания верны и в AZERTY, и в Dvorak).
+   В остальных раскладках (русская, греческая…) символ другой — «Z» даёт «я», — и клавиша берётся по её месту на клавиатуре. */
+function keyOf(e){
+  const k=String(e.key||'').toLowerCase();
+  if(k.length!==1||k.charCodeAt(0)<128) return k;
+  const c=String(e.code||'');
+  if(/^Key[A-Z]$/.test(c)) return c.slice(3).toLowerCase();
+  if(/^Digit\d$/.test(c)) return c.slice(5);
+  return k;
+}

@@ -11,9 +11,6 @@
 <script>try{var t=localStorage.getItem('planner.theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
 <link rel="stylesheet" href="/shared/ui.css">
 <link rel="stylesheet" href="/shared/site.css">
 <style>
@@ -384,6 +381,9 @@ function renderLogin() {
         pw.inp.setAttribute('aria-invalid', 'true'); pw.inp.focus(); pw.inp.select();
       } else if (x.status === 429) {
         gerr.replaceChildren(ic('alert'), h('span', {}, x.message)); lockFor(btn, x.retryAfter || 60, 'Войти');
+      } else if (x.code === 'blocked') {
+        /* сервер сообщает о блокировке только тому, кто ввёл верный пароль */
+        gerr.replaceChildren(ic('alert'), h('span', {}, 'Аккаунт заблокирован администратором.' + (S.cfg.contactEmail ? ' Если это ошибка, напишите нам: ' + S.cfg.contactEmail : '')));
       } else {
         gerr.replaceChildren(ic('alert'), h('span', {}, netMsg(x)));
       }

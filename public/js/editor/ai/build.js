@@ -250,6 +250,7 @@ async function aiPipeline(env){
     catch(e){if(e&&e.name==='AbortError')throw e;return {id:uid(),title:c.title||`Вариант ${i+1}`,note:c.note||'',failed:(e&&e.message)||'Не удалось построить вариант',createdAt:new Date().toISOString(),from:mode};}
   }));
   step('check');
-  if(cells.every(c=>c.failed))throw new Error(cells[0].failed);
+  /* ни один вариант не собрался: пользователь ничего не получил — пропуск генерации уходит в ошибку, чтобы её вернули в дневной лимит (ai/run.js) */
+  if(cells.every(c=>c.failed)){const e=new Error(cells[0].failed);e.aiPass=cr.pass;throw e;}
   return {cells,taste,runsLeft:cr.runsLeft==null?null:cr.runsLeft};
 }

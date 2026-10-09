@@ -13,14 +13,11 @@
 if(!ok&&need){try{document.documentElement.style.visibility='hidden'}catch(e){}location.replace('/login?next='+encodeURIComponent(location.pathname+location.search));}})();</script>
 <script>try{var t=localStorage.getItem('planner.theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
 <link rel="stylesheet" href="shared/ui.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/libs/meshopt_decoder.js"></script>
+<!-- three.js r128 лежит в проекте (public/vendor/three-r128): 3D не зависит от доступности сторонних CDN, и чужой сервер не может подменить скрипт -->
+<script src="vendor/three-r128/three.min.js"></script>
+<script src="vendor/three-r128/GLTFLoader.js"></script>
+<script src="vendor/three-r128/meshopt_decoder.js"></script>
 <script src="shared/catalog-types.js"></script>
 <script src="shared/session.js"></script>
 <link rel="stylesheet" href="js/editor/editor.css">
@@ -78,6 +75,7 @@ if(!ok&&need){try{document.documentElement.style.visibility='hidden'}catch(e){}l
   <div id="view3d" hidden>
     <canvas id="c3" aria-label="3D‑вид комнаты"></canvas>
     <div class="hud tl" id="lbl3d" aria-live="polite"></div>
+    <div class="hud" id="load3d" role="status"></div>
     <div id="compass" title="Верх плана" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></svg></div>
     <div id="minimap"><canvas id="mm" width="220" height="160" aria-label="Мини‑карта: нажмите, чтобы перейти к точке"></canvas><button id="mmToggle" aria-label="Свернуть или развернуть мини‑карту"></button></div>
     <div id="hint3d" hidden></div>

@@ -6,15 +6,27 @@
 /* =====================================================================
    Правки C–D и Этап 2 — замок, режим мебели, каталог, символы, 3D‑мебель
    ===================================================================== */
-/* Категории и формы — public/shared/catalog-types.js. Товары — с сервера (/api/catalog/products), без сервера — демо‑набор. */
-let PRODUCTS=demoProducts(); let PRODUCT_BY_ID=new Map(PRODUCTS.map(p=>[p.id,p])); let CATALOG_SOURCE='demo';
+/* Категории и формы — public/shared/catalog-types.js. Товары — с сервера (/api/catalog/products).
+   Демо‑набор (выдуманные товары) подставляется только там, где сервера нет вовсе: страница открыта файлом с диска.
+   На сайте до загрузки каталог пуст: показывать посетителю несуществующие товары с ценами нельзя.
+   CATALOG_SOURCE: 'demo' | 'loading' | 'server' | 'error'. */
+const CATALOG_OFFLINE=location.protocol==='file:';
+let PRODUCTS=CATALOG_OFFLINE?demoProducts():[]; let PRODUCT_BY_ID=new Map(PRODUCTS.map(p=>[p.id,p])); let CATALOG_SOURCE=CATALOG_OFFLINE?'demo':'loading';
 function setProducts(list,src){PRODUCTS=list;PRODUCT_BY_ID=new Map(list.map(p=>[p.id,p]));CATALOG_SOURCE=src;}
+let catalogTries=0;
 async function loadCatalog(){
-  if(location.protocol==='file:')return;
+  if(CATALOG_OFFLINE)return;
+  const refresh=()=>{if(typeof T3!=='undefined'&&T3.active)T3.dirty=true;if(typeof buildCatalog==='function'&&P&&P.mode==='furniture'&&!E.dialogOpen)buildCatalog();render();};
+  if(CATALOG_SOURCE==='error'){CATALOG_SOURCE='loading';refresh();}
   /* порциями: тысячи товаров одним ответом не помещаются в предел ответа функции Vercel (4,5 МБ) */
   try{let all=[],off=0;for(;;){const r=await fetch('api/catalog/products?limit=2000&offset='+off,{headers:{Accept:'application/json'}});if(!r.ok)throw new Error(r.status);const j=await r.json();all=all.concat(j.products||[]);if(j.next==null||!(j.next>off))break;off=j.next;}setProducts(all,'server');
-    if(typeof T3!=='undefined'&&T3.active)T3.dirty=true; render();
-  }catch(e){console.warn('Каталог сервера недоступен, используется демо‑набор',e);}
+    refresh();
+  }catch(e){
+    console.warn('Каталог не загрузился',e);
+    if(CATALOG_SOURCE!=='server'){CATALOG_SOURCE='error';refresh();}
+    /* одна повторная попытка сама (сбой сети часто минутный); дальше — кнопка «Повторить» в панели каталога */
+    if(++catalogTries<2)setTimeout(loadCatalog,4000);
+  }
 }
 const mountOf=(t,f)=>f.mount||t.mount;
 
@@ -54,7 +66,7 @@ function validateFurniture(p,d){
     if(mt==='wall'){const i=d.W.get(f.wallId);if(f.offset<-0.5||f.offset+f.dims.W>i.len+0.5)return `${f.name}: не помещается на стене`;}
     else if(mt==='ontop'){const b=items.find(x=>x.id===f.baseId);if(!b)return `${f.name}: нет основания`;const bb=aabbOf(fWorldOf(b,p,d)),aa=aabbOf(pts);if(aa.x0<bb.x0-1||aa.x1>bb.x1+1||aa.y0<bb.y0-1||aa.y1>bb.y1+1)return `${f.name}: выходит за пределы основания`;}
     else if(!insideRoom(pts,p,d))return `${f.name}: вне комнаты или в стене`;
-    if(f.productId){const pr=PRODUCTS.find(x=>x.id===f.productId);if(pr)for(const k in pr.dims)if(k!=='E'&&Math.abs((f.dims[k]||0)-pr.dims[k])>0.5)return `${f.name}: размеры товара фиксированы`;}
+    if(f.productId){const pr=PRODUCT_BY_ID.get(f.productId);if(pr)for(const k in pr.dims)if(k!=='E'&&Math.abs((f.dims[k]||0)-pr.dims[k])>0.5)return `${f.name}: размеры товара фиксированы`;}
   }
   for(let i=0;i<items.length;i++)for(let j=i+1;j<items.length;j++){const a=items[i],b=items[j];if(!chk(a)&&!chk(b))continue;const la=TYPE.get(a.typeId).layer,lb=TYPE.get(b.typeId).layer;const ma=mountOf(TYPE.get(a.typeId),formOf(TYPE.get(a.typeId),a.formId)),mb=mountOf(TYPE.get(b.typeId),formOf(TYPE.get(b.typeId),b.formId));
     let check=false;if(ma==='floor'&&mb==='floor'&&la==='floor'&&lb==='floor')check=true;if(ma==='ontop'&&mb==='ontop'&&a.baseId===b.baseId)check=true;if(ma==='wall'&&mb==='wall'&&a.wallId===b.wallId)check=true;if(ma==='ceiling'&&mb==='ceiling')check=true;

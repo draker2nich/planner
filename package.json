@@ -11,7 +11,7 @@
     "test": "node --test \"server/test/*.test.js\""
   },
   "dependencies": {
-    "@neondatabase/serverless": "latest",
-    "@vercel/blob": "latest"
+    "@neondatabase/serverless": "1.2.0",
+    "@vercel/blob": "2.8.1"
   }
 }

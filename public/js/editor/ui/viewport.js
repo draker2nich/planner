@@ -22,4 +22,4 @@ function fitRoom(){const r=roomBox(); const z=Math.min(E.W/(r.w*1.2),E.H/(r.h*1.
 /* ================= UI helpers ================= */
 const $=(s)=>document.querySelector(s);
 const IS_TOUCH=matchMedia('(pointer:coarse)').matches; const MQ_PHONE=matchMedia('(max-width:640px)');
-function h(tag,attrs={},...kids){const el=document.createElement(tag);for(const k in attrs){if(k==='class')el.className=attrs[k];else if(k.startsWith('on'))el.addEventListener(k.slice(2),attrs[k]);else if(k==='html')el.innerHTML=attrs[k];else el.setAttribute(k,attrs[k]);}for(const c of kids){if(c==null)continue;el.appendChild(typeof c==='string'?document.createTextNode(c):c);}return el;}
+function h(tag,attrs={},...kids){const el=document.createElement(tag);for(const k in attrs){if(k==='class')el.className=attrs[k];else if(k.startsWith('on'))el.addEventListener(k.slice(2),attrs[k]);else el.setAttribute(k,attrs[k]);}for(const c of kids){if(c==null)continue;el.appendChild(typeof c==='string'?document.createTextNode(c):c);}return el;}

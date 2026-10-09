@@ -31,38 +31,57 @@ function makeUsers(db) {
     async account(user) {
       const u = await db.get('SELECT * FROM users WHERE id=?', [user.id]);
       return {
-        user: auth.publicUser(u), createdAt: u.created_at,
+        user: auth.publicUser(u), createdAt: u.created_at, marketing: !!Number(u.marketing_opt_in),
         providers: await providersOf(u.id), sessions: await sessionsOf(u.id),
         projects: Number((await db.get(`SELECT ${COUNT} AS c FROM projects WHERE user_id=? AND deleted_at IS NULL`, [u.id])).c),
       };
     },
+    /* Профиль: имя и согласие на новости продукта. Меняется только то, что прислано. */
     async rename(user, body) {
-      const err = V.validateName(body.name);
-      if (err) throw new ApiError(422, 'validation', err, { fields: { name: err } });
-      await db.run('UPDATE users SET name=?, updated_at=? WHERE id=?', [V.normName(body.name), now(), user.id]);
-      return { user: auth.publicUser(await db.get('SELECT * FROM users WHERE id=?', [user.id])) };
+      body = body || {};
+      const hasName = body.name !== undefined, hasMarketing = typeof body.marketing === 'boolean';
+      if (!hasName && !hasMarketing) throw new ApiError(422, 'validation', 'Нечего сохранять');
+      if (hasName) {
+        const err = V.validateName(body.name);
+        if (err) throw new ApiError(422, 'validation', err, { fields: { name: err } });
+        const name = V.normName(body.name);
+        await db.run('UPDATE users SET name=?, search=?, updated_at=? WHERE id=?', [name, auth.searchText(name, user.email), now(), user.id]);
+      }
+      if (hasMarketing) await db.run('UPDATE users SET marketing_opt_in=?, updated_at=? WHERE id=?', [body.marketing ? 1 : 0, now(), user.id]);
+      const u = await db.get('SELECT * FROM users WHERE id=?', [user.id]);
+      return { user: auth.publicUser(u), marketing: !!Number(u.marketing_opt_in) };
     },
     async revokeOtherSessions(user) {
-      const r = await db.run('DELETE FROM sessions WHERE user_id=? AND token<>?', [user.id, user.token]);
+      const r = await db.run('DELETE FROM sessions WHERE user_id=? AND token<>?', [user.id, user.sessionKey]);
       return { ok: true, revoked: r.changes };
     },
     /* Проверка подтверждения перед удалением: пароль, а у аккаунта без пароля — собственная почта */
     async confirmDeletion(user, body) {
       const u = await db.get('SELECT * FROM users WHERE id=?', [user.id]);
       if (auth.hasPassword(u.password_hash)) {
-        const pw = String(body.password || '');
-        if (!pw || pw.length > 1024 || !auth.verifyPassword(pw, u.password_hash)) return { ok: false, field: 'password', message: 'Неверный пароль' };
+        const pw = auth.normPassword(body.password);
+        if (!pw || pw.length > 1024 || !(await auth.verifyPassword(pw, u.password_hash))) return { ok: false, field: 'password', message: 'Неверный пароль' };
       } else if (V.normEmail(body.confirmEmail) !== u.email) return { ok: false, field: 'confirmEmail', message: 'Введите почту этого аккаунта' };
       return { ok: true, row: u };
     },
     /* Сессии, проекты, токены и связи с провайдерами удаляются каскадом */
-    async remove(userId) { await db.run('DELETE FROM users WHERE id=?', [userId]); },
+    async remove(userId) {
+      /* в журнале остаётся сам факт (регистрация, удаление), но не сведения об удалённом человеке — например, метка адреса */
+      await db.run("UPDATE audit_log SET data='{}' WHERE user_id=? AND entity='user'", [userId]);
+      await db.run('DELETE FROM users WHERE id=?', [userId]);
+    },
 
     /* ---------- админ‑панель ---------- */
     async list(q = {}) {
       const where = []; const args = [];
       const text = String(q.q || '').trim().slice(0, 100);
-      if (text) { where.push("(u.email LIKE ? ESCAPE '\\' OR u.name LIKE ? ESCAPE '\\')"); args.push('%' + likeEsc(text.toLowerCase()) + '%', '%' + likeEsc(text) + '%'); }
+      /* поиск по почте и имени без учёта регистра: колонка search хранит их в нижнем регистре (как у товаров) */
+      /* у строки, которую ещё не дополнили (search пуст), ищем по почте и имени как раньше */
+      if (text) {
+        where.push("(u.search LIKE ? ESCAPE '\\' OR (u.search = '' AND (u.email LIKE ? ESCAPE '\\' OR u.name LIKE ? ESCAPE '\\')))");
+        const like = '%' + likeEsc(text.toLowerCase().replace(/ё/g, 'е')) + '%', plain = '%' + likeEsc(text) + '%';
+        args.push(like, '%' + likeEsc(text.toLowerCase()) + '%', plain);
+      }
       if (['admin', 'company', 'client'].includes(q.role)) { where.push('u.role=?'); args.push(q.role); }
       if (q.status === 'blocked') where.push('u.disabled=1');
       else if (q.status === 'unverified') where.push("u.disabled=0 AND u.email_verified_at IS NULL AND u.role<>'admin'");

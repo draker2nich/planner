@@ -13,7 +13,6 @@ function initialPolicies(){const m=new Map();for(const f of P.furniture||[])m.se
 function hasSavedPolicies(){return (P.furniture||[]).some(f=>savedPolicy(f));}
 function defaultRoom(){const anyWall=P.walls.some(w=>w.material);return {walls:anyWall?'keep':'ai',floor:(P.floor?.material&&!(P.floor.material.type==='color'&&P.floor.material.color===FLOOR_DEF))?'keep':'ai',ceiling:'ai',lighting:'ai'};}
 /* ТЗ 47.1 */
-/* «Освещение и декор» учитывается только на этапе рендера: ИИ‑дизайнер предметы не добавляет (см. aiNeeds в ai/build.js) */
 function calcNeedsBrief(policies,room){return aiNeeds(policies,room);}
 function meaningfulText(s){s=(s||'').trim();return s.length>=10&&((s.match(/\p{L}/gu)||[]).length>=3);}
 function photoError(p){
@@ -41,6 +40,8 @@ async function finishFlow(){
    а под таблицей сразу видно, сможет ли ИИ‑дизайнер работать с таким планом (aiPrecheck). */
 async function rightsDialog(st){
   const cfg=await aiConfig();
+  /* сколько генераций осталось сегодня — показываем до запуска, а не после того, как лимит уже упёрся */
+  let quota=null; if(cfg.enabled&&typeof Session!=='undefined'&&Session.token){try{quota=await Session.api('GET','/ai/quota');}catch(e){}}
   return dialog((box,api)=>{
     box.classList.add('xwide'); box.append(h('h3',{},'Шаг 1 из 2 — что может менять ИИ‑дизайнер'));
     const s=briefSummary(); box.append(h('div',{class:'summary'},h('span',{},'Заперто: ',h('b',{},String(s.locked))),h('span',{},'Свободно: ',h('b',{},String(s.free))),h('span',{},'Пустышек: ',h('b',{},String(s.ph)))));
@@ -61,8 +62,9 @@ async function rightsDialog(st){
       items.forEach(f=>{const t=TYPE.get(f.typeId),fo=formOf(t,f.formId);table.append(h('div',{class:'airow'},h('img',{src:typeIcon(t),alt:'',width:'36',height:'36'}),h('div',{class:'nm'},f.name,h('small',{},(f.productId?'Товар':'Пустышка')+' · '+fo.dims.map(k=>fmt(f.dims[k])).join('×')+' '+UNITS[P.unit].l+(f.locked?' · заперт':''))),segFor(f)));});};
     fill(); box.append(table);
     const blk=h('div',{class:'roomblk'},h('h5',{},'Комната'));
-    [['walls','Материалы стен'],['floor','Пол'],['ceiling','Потолок'],['lighting','Освещение и декор']].forEach(([k,nm])=>{const seg=h('div',{class:'seg',role:'group','aria-label':nm});[['keep','Как есть'],['ai','На усмотрение ИИ']].forEach(([v,l])=>seg.append(h('button',{type:'button',class:rm[k]===v?'on':'','aria-pressed':String(rm[k]===v),onclick:()=>{rm[k]=v;[...seg.children].forEach(x=>{const on=x.textContent===l;x.classList.toggle('on',on);x.setAttribute('aria-pressed',String(on));});refreshSoon();}},l)));
-      blk.append(h('span',{},nm,k==='lighting'?h('small',{},' — учитывается на этапе рендера'):null),seg);});
+    /* «Освещение и декор» в списке нет: ИИ‑дизайнер предметы не добавляет, а этапа, который бы это учитывал, пока не существует */
+    [['walls','Материалы стен'],['floor','Пол'],['ceiling','Потолок']].forEach(([k,nm])=>{const seg=h('div',{class:'seg',role:'group','aria-label':nm});[['keep','Как есть'],['ai','На усмотрение ИИ']].forEach(([v,l])=>seg.append(h('button',{type:'button',class:rm[k]===v?'on':'','aria-pressed':String(rm[k]===v),onclick:()=>{rm[k]=v;[...seg.children].forEach(x=>{const on=x.textContent===l;x.classList.toggle('on',on);x.setAttribute('aria-pressed',String(on));});refreshSoon();}},l)));
+      blk.append(h('span',{},nm),seg);});
     box.append(blk);
     const state=h('div',{class:'aistate','aria-live':'polite'}); box.append(state);
     const note=(kind,text)=>h('div',{class:kind==='err'?'pnote warn err':'pnote warn',role:kind==='err'?'alert':'status'},ic('alert'),h('div',{},text));
@@ -76,6 +78,10 @@ async function rightsDialog(st){
         const u=window.EditorSync&&EditorSync.user;
         if(!cfg.enabled){state.append(note('err',cfg.offline?'Нет связи с сервером — ИИ‑дизайнер сейчас недоступен.':'ИИ‑дизайнер пока не подключён на сервере.'));blocked=true;}
         else if(u&&u.emailVerified===false&&u.role!=='admin'&&EditorSync.mail){state.append(note('err','ИИ‑дизайнер доступен после подтверждения почты. Письмо со ссылкой — в вашем ящике; отправить его ещё раз можно в меню аккаунта.'));blocked=true;}
+        if(quota&&quota.left!=null){
+          if(quota.left<=0){state.append(note('err',`Дневной лимит генераций исчерпан (${quota.runs} в сутки). Попробуйте завтра.`));blocked=true;}
+          else state.append(h('div',{class:'hint',role:'status'},`Сегодня осталось генераций: ${quota.left} из ${quota.runs}.`));
+        }
         const pre=aiPrecheck(pol,rm);
         pre.errors.forEach(e=>{state.append(note('err',e));blocked=true;});
         if(pre.empty.length)state.append(note('warn',`В каталоге нет подходящих товаров для: ${pre.empty.slice(0,6).map(f=>f.name).join(', ')}${pre.empty.length>6?` и ещё ${pre.empty.length-6}`:''}. ${pre.empty.length>1?'Эти предметы останутся':'Этот предмет останется'} как есть — ослабьте размеры, если нужен подбор.`));
@@ -95,11 +101,11 @@ async function wishesDialog(st){
     box.classList.add('xwide');
     const photos=st.photos.map(p=>Object.assign({},p)); let text=st.text||''; const prefs=Object.assign({},st.prefs);
     const needs=calcNeedsBrief(st.policies,st.room); let tried=false;
-    box.append(h('h3',{},needs?'Шаг 2 из 2 — пожелания':'Шаг 2 из 2 — рендер'));
+    box.append(h('h3',{},needs?'Шаг 2 из 2 — пожелания':'Шаг 2 из 2 — подтверждение'));
     const out=(extra)=>Object.assign({photos,text,prefs},extra);
     if(!needs){
-      box.append(h('div',{class:'infoblk'},ic('info'),h('div',{},'ИИ ничего не будет менять. Вы получите фотореалистичные виды комнаты в текущем виде.')));
-      api.buttons=[{label:'Назад',onClick:a=>a.close(out({back:true}))},{label:'Отмена',cancel:true,onClick:a=>a.close(out({cancel:true}))},{label:'Получить рендер',primary:true,onClick:a=>a.close(out({}))}];
+      box.append(h('div',{class:'infoblk'},ic('info'),h('div',{},'ИИ‑дизайнеру нечего менять: все предметы и отделка оставлены «как есть». Расстановка сохранится как итоговая — дальше можно посмотреть комнату в 3D, получить список товаров и отправить заявку менеджеру. Чтобы ИИ предложил варианты, вернитесь назад и разрешите ему менять предметы или отделку.')));
+      api.buttons=[{label:'Назад',onClick:a=>a.close(out({back:true}))},{label:'Отмена',cancel:true,onClick:a=>a.close(out({cancel:true}))},{label:'Сохранить расстановку',primary:true,onClick:a=>a.close(out({}))}];
       return;
     }
     const list=h('div',{});

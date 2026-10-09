@@ -19,6 +19,9 @@ function buildCatalog(){
   const search=h('input',{type:'search',placeholder:'Тип, товар или бренд…',value:E.catQuery||'','aria-label':'Поиск по каталогу',autocomplete:'off',spellcheck:'false'}); search.oninput=()=>{E.catQuery=search.value;buildCatalog();const s=$('#catalog input[type=search]');s.focus();s.setSelectionRange(s.value.length,s.value.length);};
   cat.append(h('div',{class:'chead'},h('h4',{},'Каталог'),E.catQuery?h('button',{type:'button',class:'x','aria-label':'Сбросить поиск',title:'Сбросить поиск',onclick:()=>{E.catQuery='';buildCatalog();}},ic('close')):null,h('button',{type:'button',class:'x closeSheet','aria-label':'Закрыть каталог',onclick:()=>setCatalogOpen(false)},ic('chevron-down'))),h('div',{class:'csearch'},ic('search'),search));
   const clist=h('div',{class:'clist'}); cat.append(clist);
+  /* состояние загрузки товаров: типы мебели доступны сразу (они в самом редакторе), товары приходят с сервера */
+  if(CATALOG_SOURCE==='loading')clist.append(h('div',{class:'cnote',role:'status'},'Загружаем товары каталога…'));
+  else if(CATALOG_SOURCE==='error')clist.append(h('div',{class:'cnote err',role:'alert'},h('span',{},'Товары не загрузились. Можно ставить пустышки и выбрать товары позже.'),h('button',{type:'button',onclick:()=>{catalogTries=0;loadCatalog();}},'Повторить')));
   if(E.recentTypes?.length&&!q){clist.append(h('div',{class:'ccat open'},h('div',{class:'ct',style:'cursor:default;text-decoration:none'},'Недавние'),h('div',{class:'tiles'},...E.recentTypes.map(id=>tile(TYPE.get(id))))));}
   for(const [cid,cname] of CATS){const types=TYPES.filter(t=>t.cats.includes(cid)&&(!q||t.name.toLowerCase().includes(q)));if(!types.length)continue;const open=!!q||E.catOpen===cid;const el=h('div',{class:'ccat'+(open?' open':'')});const head=h('button',{type:'button',class:'ct','aria-expanded':String(open),onclick:()=>{E.catOpen=E.catOpen===cid?null:cid;buildCatalog();}},cname,h('span',{},String(types.length),ic('chevron-right','chev')));el.append(head);if(open)el.append(h('div',{class:'tiles'},...types.map(tile)));clist.append(el);}
   /* поиск по названию и бренду товара: совпадают все слова запроса; товар ставится на план сразу, минуя выбор размеров */
@@ -124,12 +127,16 @@ async function productDialog(t,formId,cons,opts={}){
       addPage();
       if(!list.length)grid.append(h('div',{class:'hint'},filtered&&bySize?'Под фильтры ничего не подходит — снимите часть из них':'Ничего не подходит — ослабьте ограничения по размерам'));};
     fill();
-    api.buttons=[{label:'← Изменить размеры',onClick:a=>a.close({back:true})},{label:'Отмена',cancel:true,onClick:a=>a.close(null)}];
+    api.buttons=[{label:'Подобрать по размерам',onClick:a=>a.close({back:true})},{label:'Отмена',cancel:true,onClick:a=>a.close(null)}];
   });
 }
+/* Выбор предмета. Если товары этого типа есть — сразу их список (с фильтрами и пустышкой первой плиткой):
+   большинству нужно «выбрать диван», а не сначала заполнить форму ограничений. Окно размеров остаётся —
+   кнопкой «Подобрать по размерам» из списка, и открывается первым, когда товаров типа нет или заданы начальные ограничения (init). */
 async function startFurniture(t,init){
   if(P.mode!=='furniture')return; E.recentTypes=[t.id,...(E.recentTypes||[]).filter(x=>x!==t.id)].slice(0,8);
-  let r=await sizeDialog(t,init); if(!r)return;
+  const direct=!init&&PRODUCTS.some(pr=>pr.typeId===t.id);
+  let r=direct?{formId:'any',cons:{},placeholder:false}:await sizeDialog(t,init); if(!r)return;
   while(!r.placeholder){const pr=await productDialog(t,r.formId,r.cons);if(!pr){return;}if(pr.back){r=await sizeDialog(t,{formId:r.formId,cons:r.cons});if(!r)return;continue;}if(pr.placeholder){r={formId:pr.formId,cons:r.cons,placeholder:true,formAny:r.formId==='any'};break;}
     beginPlace(makeFurniture(t,pr.product.formId,r.cons,pr.product));return;} // форма — та, что у товара: круглый стол не должен встать прямоугольным
   beginPlace(makeFurniture(t,r.formId,r.cons,null,r.formAny));

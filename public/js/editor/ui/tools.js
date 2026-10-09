@@ -31,8 +31,10 @@ function wallAtScreen(sp){let best=null,bd=Infinity;const wp=Wd(sp);for(const w 
 function openingAtScreen(sp){const wp=Wd(sp);for(const o of P.openings){const i=D.W.get(o.wallId);const along=dot(sub(wp,i.ref),{x:i.rx,y:i.ry});const off=dot(sub(wp,i.ref),{x:i.nx,y:i.ny});const pad=6/vp().zoom;if(along>=o.offset-pad&&along<=o.offset+o.width+pad&&off>=-pad&&off<=P.wallThickness+pad)return o;}return null;}
 function hitTest(sp){
   for(const hh of E.dimHits) if(sp.x>=hh.rect.x&&sp.x<=hh.rect.x+hh.rect.w&&sp.y>=hh.rect.y&&sp.y<=hh.rect.y+hh.rect.h) return {type:'dim',item:hh.item};
-  const vpt=viewPointAtScreen(sp); if(vpt)return {type:'viewpoint',id:vpt.index};
-  const fu=furnitureAtScreen(sp); if(fu)return {type:'furniture',id:fu.id};
+  /* в режиме мебели предмет важнее точки обзора под ним: иначе клик по дивану открывал 3D, а перетащить его было нельзя */
+  const vpt=viewPointAtScreen(sp), fu=furnitureAtScreen(sp);
+  if(fu&&(P.mode==='furniture'||!vpt))return {type:'furniture',id:fu.id};
+  if(vpt)return {type:'viewpoint',id:vpt.index};
   const o=openingAtScreen(sp); if(o)return {type:'opening',id:o.id};
   const v=vertexNear(sp); if(v)return {type:'vertex',id:v.id};
   const w=wallAtScreen(sp); if(w)return {type:'wall',id:w.w.id};
@@ -103,18 +105,7 @@ async function onClick(sp){
       const r=await lengthDialog(Math.round(st.len),{closing:true}); if(!r){render();return;}
       commitWall(E.start.id,null,st.closes.id); render(); return;
     }
-    const start=E.start; const prefill=Math.max(MIN_WALL,Math.round(st.len/10)*10);
-    E.activeDim={type:'temp'};
-    const r=await lengthDialog(P.lengthsIncludeThickness?prefill+2*P.wallThickness:prefill,{validate:(len)=>{
-      const end={x:start.x+st.dirx*len,y:start.y+st.diry*len}; const Q=JSON.parse(JSON.stringify(P)); const bId=uid(); Q.vertices.push({id:bId,...end}); Q.walls.push({id:uid(),a:start.id,b:bId}); return validateProject(Q);}});
-    E.activeDim=null;
-    if(!r){render();return;}
-    const end={x:start.x+st.dirx*r.len,y:start.y+st.diry*r.len};
-    const closeV=freeVertices().find(v=>v.id!==start.id&&Math.abs(v.x-end.x)<1&&Math.abs(v.y-end.y)<1);
-    const id=commitWall(start.id,end,closeV?closeV.id:null,r.entered);
-    if(id&&!P.closed){const w=P.walls.find(x=>x.id===id); E.start=D.V.get(w.b); E.mode='wallStretch'; E.stretch=null;}
-    if(!id&&P.vertices.length===1&&!P.walls.length){/* первая точка осталась */}
-    render(); return;
+    await wallLengthEntry(st); return;
   }
   if(E.mode==='openingPlace'){
     const g=computeGhost(cw); if(!g||g.invalid){if(g)toast(g.invalid,true);return;}
@@ -122,17 +113,32 @@ async function onClick(sp){
     if(p.count>1&&g.offs){ await placeRow(p,g); return; }
     const id=uid(); const name=p.name||newOpeningName(kind);
     const o={id,kind,name,wallId:g.info.w.id,offset:g.offset,width:p.width,height:p.height,sill:p.sill,head:p.head,radius:p.radius,hinge:p.hinge||'left',swing:p.swing||'in'};
-    const err=apply(Q=>{Q.openings.push(o);Q.seq=Q.seq||{door:0,window:0,arch:0};if(!p.name)Q.seq[kind]=(Q.seq[kind]||0)+1;},{noHist:true}); if(err)return toast(err,true);
-    E.sel={type:'opening',id}; E.activeDim={type:'opening',id}; render();
-    const r=await positionDialog(P.openings.find(x=>x.id===id));
-    E.activeDim=null;
-    if(!r){ apply(Q=>{Q.openings=Q.openings.filter(x=>x.id!==id);if(!p.name)Q.seq[kind]--;},{noHist:true}); E.sel=null; }
-    else { const e2=apply(Q=>{Q.openings.find(x=>x.id===id).offset=r.offset;}); if(e2)toast(e2,true); }
+    /* проём встаёт туда, где показан его контур; точное расстояние до угла — по клику на размер (editDim) */
+    const err=apply(Q=>{Q.openings.push(o);Q.seq=Q.seq||{door:0,window:0,arch:0};if(!p.name)Q.seq[kind]=(Q.seq[kind]||0)+1;}); if(err)return toast(err,true);
+    E.sel={type:'opening',id}; preciseHint();
     if(E.copyMode){ E.mode='openingPlace'; E.sel=null; E.ghost=null; }
     else { E.tool='select'; E.mode='idle'; E.openParams=null; E.ghost=null; }
     updateTools(); render(); return;
   }
 }
+/* Длина новой стены в направлении st: диалог с подставленной длиной по курсору.
+   typed — цифра, набранная прямо на плане (ведёте линию → набираете длину → Enter): поле начинается с неё. */
+async function wallLengthEntry(st,typed){
+  const start=E.start; const prefill=Math.max(MIN_WALL,Math.round(st.len/10)*10);
+  E.activeDim={type:'temp'};
+  const r=await lengthDialog(P.lengthsIncludeThickness?prefill+2*P.wallThickness:prefill,{typed,validate:(len)=>{
+    const end={x:start.x+st.dirx*len,y:start.y+st.diry*len}; const Q=JSON.parse(JSON.stringify(P)); const bId=uid(); Q.vertices.push({id:bId,...end}); Q.walls.push({id:uid(),a:start.id,b:bId}); return validateProject(Q);}});
+  E.activeDim=null;
+  if(!r){render();return;}
+  const end={x:start.x+st.dirx*r.len,y:start.y+st.diry*r.len};
+  const closeV=freeVertices().find(v=>v.id!==start.id&&Math.abs(v.x-end.x)<1&&Math.abs(v.y-end.y)<1);
+  const id=commitWall(start.id,end,closeV?closeV.id:null,r.entered);
+  if(id&&!P.closed){const w=P.walls.find(x=>x.id===id); E.start=D.V.get(w.b); E.mode='wallStretch'; E.stretch=null;}
+  render();
+}
+/* Подсказка после первого перетаскивания: точное значение теперь не спрашивается окном, а вводится по клику на размер */
+let preciseHinted=false;
+function preciseHint(){if(preciseHinted)return;preciseHinted=true;try{if(sessionStorage.getItem('roomEditor.preciseHint'))return;sessionStorage.setItem('roomEditor.preciseHint','1');}catch(e){}toast('Нужно точное расстояние? Нажмите на размер рядом с объектом и введите число');}
 async function placeRow(p,g){
   const n=g.offs.length, gid=uid(), wallId=g.info.w.id; const base=(P.seq&&P.seq.window)||0;
   const ops=g.offs.map((off,k)=>({id:uid(),kind:'window',name:`${KIND_NAME.window} ${base+k+1}`,wallId,offset:off,width:p.width,height:p.height,sill:p.sill,head:p.head,hinge:'left',swing:'in',group:gid,groupLayout:p.layout}));
@@ -143,16 +149,13 @@ async function placeRow(p,g){
     if(err){toast(err,true);return;}
     E.sel={type:'opening',id:ops[0].id}; toast(`${nWin(n)} в ряд: простенки по ${fmtU(g.gap)}`); finish(); return;
   }
-  const err=apply(Q=>{Q.openings.push(...ops);Q.seq=Q.seq||{door:0,window:0,arch:0};Q.seq.window=base+n;},{noHist:true}); if(err){toast(err,true);return;}
-  E.sel={type:'opening',id:ops[0].id}; E.activeDim={type:'opening',id:ops[0].id}; render();
-  const row=P.openings.filter(x=>ids.has(x.id)).sort((a,b)=>a.offset-b.offset);
-  const r=await rowPositionDialog(row,row[0].offset,{gap:p.gap}); E.activeDim=null;
-  if(!r){ apply(Q=>{Q.openings=Q.openings.filter(x=>!ids.has(x.id));Q.seq.window=base;},{noHist:true}); E.sel=null; }
-  else { const e2=apply(Q=>relayoutRow(Q,gid,{start:r.start,gap:r.gap})); if(e2)toast(e2,true); }
+  const err=apply(Q=>{Q.openings.push(...ops);Q.seq=Q.seq||{door:0,window:0,arch:0};Q.seq.window=base+n;}); if(err){toast(err,true);return;}
+  E.sel={type:'opening',id:ops[0].id}; preciseHint();
   finish();
 }
 function copyOpening(o){const row=rowOf(o);if(o.kind==='window'&&row.length>1){const g=rowUniformGap(row);E.openParams={kind:'window',width:o.width,height:o.height,sill:o.sill,head:o.head,count:row.length,layout:row[0].groupLayout==='even'?'even':'gap',gap:g==null?DEF_PIER:g};E.copyMode=true;E.sel=null;E.tool='window';E.mode='openingPlace';E.ghost=null;updateTools();render();toast(`Укажите стену для копии ряда: ${nWin(row.length)}`);return;}
   E.openParams={kind:o.kind,width:o.width,height:o.height,sill:o.sill,head:o.head,radius:o.radius,hinge:o.hinge,swing:o.swing};E.copyMode=true;E.sel=null;E.tool=o.kind;E.mode='openingPlace';E.ghost=null;updateTools();render();}
+/* Буфер копирования: {type:'opening',item} или {type:'furniture',item} */
 let CLIP=null;
 function duplicateOpening(o){const i=D.W.get(o.wallId);const off=o.offset+o.width;const fits=off+o.width<=i.len+0.5&&!wallOpenings(o.wallId).some(q=>q.id!==o.id&&off<q.offset+q.width&&q.offset<off+o.width);
   if(fits){const id=uid();const name=newOpeningName(o.kind);const err=apply(Q=>{Q.openings.push(Object.assign({},o,{id,name,offset:off}));Q.seq[o.kind]=(Q.seq[o.kind]||0)+1;});if(err)toast(err,true);else E.sel={type:'opening',id};render();}
@@ -196,21 +199,22 @@ function updateDrag(sp){
   else { const v=D.V.get(dr.id); const t=dot(sub(cw,dr.start),dr.axis); v.x=Math.round(dr.start.x+dr.axis.x*t); v.y=Math.round(dr.start.y+dr.axis.y*t); D=derive(P); }
   render();
 }
-async function endDrag(){
-  const dr=E.drag; E.drag=null;
+/* Конец перетаскивания: объект остаётся там, куда его привели, одним шагом истории. Окно с точным значением больше не
+   открывается после каждого движения — оно вызывается кликом по размеру (editDim). Недопустимое положение — объект возвращается. */
+function endDrag(){
+  const dr=E.drag; E.drag=null; E.activeDim=null;
+  const back=(err)=>{ if(err)toast(err+' — возвращено на место',true); else preciseHint(); render(); };
   if(dr.type==='opening'&&dr.row){ const cur=dr.row.map(m=>P.openings.find(x=>x.id===m.id).offset); const curStart=Math.min(...cur);
-    dr.row.forEach(m=>{P.openings.find(x=>x.id===m.id).offset=m.orig;});
-    const o=P.openings.find(x=>x.id===dr.id); const row=rowOf(o); const gid=o.group;
-    const r=await rowPositionDialog(row,curStart); E.activeDim=null;
-    if(r){const err=apply(Q=>relayoutRow(Q,gid,r.gap==null?{start:r.start}:{start:r.start,gap:r.gap})); if(err)toast(err,true);} render(); return; }
-  if(dr.type==='opening'){ const o=P.openings.find(x=>x.id===dr.id); const cur=o.offset; o.offset=dr.orig; const tmp=Object.assign({},o,{offset:cur});
-    const r=await positionDialog(tmp); E.activeDim=null;
-    if(r){const err=apply(Q=>{Q.openings.find(x=>x.id===o.id).offset=r.offset;}); if(err)toast(err,true);} render(); return; }
+    dr.row.forEach(m=>{P.openings.find(x=>x.id===m.id).offset=m.orig;}); E.sel={type:'opening',id:dr.id};
+    if(Math.abs(curStart-Math.min(...dr.row.map(m=>m.orig)))<0.5){render();return;}
+    const gid=P.openings.find(x=>x.id===dr.id).group;
+    return back(apply(Q=>relayoutRow(Q,gid,{start:curStart}))); }
+  if(dr.type==='opening'){ const o=P.openings.find(x=>x.id===dr.id); const cur=o.offset; o.offset=dr.orig; E.sel={type:'opening',id:o.id};
+    if(Math.abs(cur-dr.orig)<0.5){render();return;}
+    return back(apply(Q=>{Q.openings.find(x=>x.id===o.id).offset=cur;})); }
   const v=D.V.get(dr.id); const cur={x:v.x,y:v.y}; v.x=dr.orig.x;v.y=dr.orig.y; D=derive(P);
-  const w=P.walls.find(x=>x.id===dr.wallId); const other=D.V.get(w.a===v.id?w.b:w.a); const newLen=Math.round(hyp(sub(cur,other)));
-  const r=await lengthDialog(P.lengthsIncludeThickness?newLen+P.wallThickness*kOf(w.id):newLen,{title:'Длина стены после сдвига'}); E.activeDim=null;
-  if(r&&r.len>0){ const dir={x:(cur.x-other.x)/(newLen||1),y:(cur.y-other.y)/(newLen||1)}; const err=apply(Q=>{const vv=Q.vertices.find(x=>x.id===v.id); vv.x=Math.round(other.x+dir.x*r.len); vv.y=Math.round(other.y+dir.y*r.len); clampOpenings(Q,derive(Q));}); if(err)toast(err,true); }
-  render();
+  if(cur.x===dr.orig.x&&cur.y===dr.orig.y){render();return;}
+  back(apply(Q=>{const vv=Q.vertices.find(x=>x.id===v.id); vv.x=cur.x; vv.y=cur.y; clampOpenings(Q,derive(Q));}));
 }
 
 /* ================= Ввод ================= */
@@ -258,23 +262,48 @@ function onUp(e){
 }
 cv.addEventListener('pointerup',onUp); cv.addEventListener('pointercancel',onUp);
 cv.addEventListener('wheel',e=>{e.preventDefault(); const sp=ptOf(e); zoomAt(sp.x,sp.y,Math.exp(-e.deltaY*0.0015));},{passive:false});
+/* keyOf(e) — клавиша сочетания независимо от раскладки — в core/units.js */
+function clipCopy(){
+  if(E.sel?.type==='opening'){const o=P.openings.find(x=>x.id===E.sel.id);if(!o)return;CLIP={type:'opening',item:Object.assign({},o)};toast('Скопировано: '+o.name);}
+  else if(E.sel?.type==='furniture'){const f=P.furniture.find(x=>x.id===E.sel.id);if(!f)return;CLIP={type:'furniture',item:JSON.parse(JSON.stringify(f))};toast('Скопировано: '+f.name);}
+  else toast('Выберите проём или предмет мебели');
+}
+function clipPaste(){
+  if(!CLIP){toast('Буфер пуст');return;}
+  if(READONLY){toast(READONLY_MSG);return;}
+  if(CLIP.type==='furniture'){if(P.mode!=='furniture'){toast('Мебель вставляется в режиме «Мебель»');return;}copyFurniture(CLIP.item);toast('Укажите место для копии');}
+  else{if(P.mode==='furniture'){toast('Проёмы вставляются в режиме «Стены и проёмы»');return;}copyOpening(CLIP.item);}
+}
+function clipDuplicate(){
+  if(E.sel?.type==='opening')duplicateOpening(P.openings.find(o=>o.id===E.sel.id));
+  else if(E.sel?.type==='furniture'){const f=P.furniture.find(x=>x.id===E.sel.id);if(f&&!READONLY){copyFurniture(f);toast('Укажите место для копии');}}
+  else toast('Выберите проём или предмет мебели');
+}
 window.addEventListener('keydown',e=>{
   if(typeof T3!=='undefined'&&T3.active&&handle3DKey(e)){e.preventDefault();return;}
   if(E.dialogOpen)return; const tag=document.activeElement?.tagName; if(tag==='INPUT'||tag==='SELECT'||tag==='TEXTAREA')return;
-  const k=e.key.toLowerCase();
-  if(e.ctrlKey||e.metaKey){ if(k==='z'&&e.shiftKey){redo();} else if(k==='z'){undo();} else if(k==='y'){redo();} else if(k==='0'){fitRoom();} else if(k==='='||k==='+'){zoomAt(E.W/2,E.H/2,1.25);} else if(k==='-'){zoomAt(E.W/2,E.H/2,0.8);} else if(k==='c'){if(E.sel?.type==='opening'){CLIP=Object.assign({},P.openings.find(o=>o.id===E.sel.id));toast('Скопировано: '+CLIP.name);}else toast('Копируются только проёмы');} else if(k==='v'){if(CLIP)copyOpening(CLIP);else toast('Буфер пуст');} else if(k==='d'){if(E.sel?.type==='opening')duplicateOpening(P.openings.find(o=>o.id===E.sel.id));else toast('Дублируются только проёмы');} else return; e.preventDefault(); return; }
+  const k=keyOf(e);
+  if(e.ctrlKey||e.metaKey){ if(k==='z'&&e.shiftKey){redo();} else if(k==='z'){undo();} else if(k==='y'){redo();} else if(k==='0'){fitRoom();} else if(k==='='||k==='+'||e.code==='NumpadAdd'){zoomAt(E.W/2,E.H/2,1.25);} else if(k==='-'||e.code==='NumpadSubtract'){zoomAt(E.W/2,E.H/2,0.8);} else if(k==='c'){clipCopy();} else if(k==='v'){clipPaste();} else if(k==='d'){clipDuplicate();} else return; e.preventDefault(); return; }
+  if(e.altKey&&e.key!=='Alt')return; // сочетания браузера и системы с Alt не перехватываем
   if(k===' '){E.space=true;e.preventDefault();return;}
   if(e.key==='Alt'){E.alt=true;e.preventDefault();return;}
+  /* длина стены с клавиатуры: ведёте линию в нужную сторону и набираете число — открывается то же поле, что и по клику */
+  if(E.mode==='wallStretch'&&/^[0-9]$/.test(e.key)&&E.start&&E.cursorW){const st=computeStretch(E.start,E.cursorW);if(st.mode==='ortho'&&!st.blocked&&!st.closes){e.preventDefault();E.stretch=st;wallLengthEntry(st,e.key);return;}}
   if(k==='escape'&&E.mode==='fPlace'){E.mode='idle';E.fPlace=null;E.fGhost=null;E.tool='select';updateTools();render();return;}
   if(k==='r'){ if(E.mode==='fPlace'){E.fRot=(E.fRot+90)%360;if(E.cursorW){E.fGhost=computeFGhost(E.cursorW);}render();} else if(E.sel?.type==='furniture'){const err=fUpdate(E.sel.id,q=>{q.rot=(q.rot+90)%360;});if(err)toast(err,true);} return; }
   if(k==='m'){ if(E.mode==='fPlace'){E.fMirror=!E.fMirror;if(E.cursorW)E.fGhost=computeFGhost(E.cursorW);render();} else if(E.sel?.type==='furniture'){const err=fUpdate(E.sel.id,q=>{q.mirror=!q.mirror;});if(err)toast(err,true);} return; }
   if(k==='l'){toggleLock(E.sel);return;}
   if(k==='escape'){ if(E.mode==='wallStretch'){ if(P.vertices.length===1&&!P.walls.length){apply(Q=>{Q.vertices=[];},{noHist:true});} E.mode='wallStart';E.start=null;E.stretch=null; } else if(E.mode==='openingPlace'){E.tool='select';E.mode='idle';E.ghost=null;E.openParams=null;E.copyMode=false;updateTools();} else if(E.mode==='wallStart'){E.tool='select';E.mode='idle';updateTools();} else if(E.propsOpen){E.propsOpen=false;} else {E.sel=null;} render(); return; }
   if(k==='delete'||k==='backspace'){deleteSelected();e.preventDefault();return;}
+  /* стрелки двигают выбранный предмет мебели (10 мм, с Shift — 100 мм); без выбора — сдвигают план */
+  if(/^arrow/.test(k)&&E.mode==='idle'&&E.sel?.type==='furniture'&&P.mode==='furniture'&&typeof nudgeFurniture==='function'){const s=e.shiftKey?100:10;nudgeFurniture(E.sel.id,k==='arrowleft'?-s:k==='arrowright'?s:0,k==='arrowup'?-s:k==='arrowdown'?s:0);e.preventDefault();return;}
   const st=e.shiftKey?200:50; if(k==='arrowleft'){setView(vp().x+st,vp().y,vp().zoom);render();} if(k==='arrowright'){setView(vp().x-st,vp().y,vp().zoom);render();} if(k==='arrowup'){setView(vp().x,vp().y+st,vp().zoom);render();} if(k==='arrowdown'){setView(vp().x,vp().y-st,vp().zoom);render();}
-  if(k==='v')setTool('select'); if(k==='w')setTool('wall'); if(k==='o')setTool('door'); if(k==='n')setTool('window'); if(k==='a')setTool('arch');
-  if(k==='d')toggleDims(); if(k==='f')fitRoom(); if(k==='p'&&P.closed)togglePoints();
+  /* preventDefault обязателен: инструмент сразу открывает окно с полем ввода, и без него буква клавиши попадала в это поле вместо ширины */
+  const hot={v:()=>setTool('select'),w:()=>setTool('wall'),o:()=>setTool('door'),n:()=>setTool('window'),a:()=>setTool('arch'),d:toggleDims,f:fitRoom,p:()=>{if(P.closed)togglePoints();}}[k];
+  if(hot&&!e.repeat){e.preventDefault();hot();}
 });
 window.addEventListener('keyup',e=>{if(e.key===' ')E.space=false;if(e.key==='Alt')E.alt=false;});
+/* окно потеряло фокус с зажатой клавишей (Alt+Tab, переключение раскладки) — keyup не придёт, и «зажатие» осталось бы навсегда */
+window.addEventListener('blur',()=>{E.space=false;E.alt=false;});
 function toggleDims(){P.showDims=!P.showDims;save();updateTools();render();}
 $('#btnDims').onclick=toggleDims; $('#btnPoints').onclick=()=>{if(P.closed)togglePoints();}; $('#btnFit').onclick=fitRoom; $('#btnUndo').onclick=undo; $('#btnRedo').onclick=redo;

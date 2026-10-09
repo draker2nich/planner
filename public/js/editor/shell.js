@@ -27,7 +27,7 @@ function ic(name,cls){const s=document.createElementNS('http://www.w3.org/2000/s
 function setIcon(el,name){el.querySelectorAll('svg').forEach(x=>x.remove());el.prepend(ic(name));}
 function lockIcon(locked){return ic(locked?'lock':'lock-open');}
 /* toast с иконкой (переопределение) */
-function toast(msg,err=false){const box=$('#toasts');while(box.children.length>=3)box.firstElementChild.remove();const t=document.createElement('div');t.className='toast'+(err?' err':'');t.setAttribute('role',err?'alert':'status');t.append(ic(err?'alert':'info'),h('span',{},msg));box.appendChild(t);setTimeout(()=>t.remove(),err?3500:2500);}
+function toast(msg,err=false){const box=$('#toasts');while(box.children.length>=3)box.firstElementChild.remove();const t=document.createElement('div');t.className='toast'+(err?' err':'');t.setAttribute('role',err?'alert':'status');t.append(ic(err?'alert':'info'),h('span',{},msg));box.appendChild(t);/* время показа зависит от длины: длинную подсказку за 2,5 секунды не прочитать */setTimeout(()=>t.remove(),Math.min(9000,(err?3500:2500)+Math.max(0,String(msg).length-40)*45));}
 
 /* ---------- Шапка ---------- */
 function initHeader(){
@@ -58,7 +58,8 @@ function buildMenu(){
     menu.append(h('button',{type:'button',class:'mi',role:'menuitem',onclick:()=>{menu.hidden=true;fitRoom();}},ic('maximize'),'Показать комнату'),h('hr'));
   }
   if((P.furniture||[]).some(f=>f.aiPolicy)){menu.append(chkItem('sparkles','Показывать права ИИ на плане',P.showAiBadges,()=>{P.showAiBadges=!P.showAiBadges;save();updateTools();render();}),h('hr'));}
-  if(P.brief){menu.append(h('button',{type:'button',class:'mi',role:'menuitem',onclick:()=>{menu.hidden=true;showBriefJson();}},ic('copy'),'Бриф (JSON)'),h('hr'));}
+  /* служебный просмотр данных для ИИ‑дизайнера — только по адресу с ?debug=1: обычному пользователю JSON ни к чему */
+  if(P.brief&&/[?&]debug=1(&|$)/.test(location.search)){menu.append(h('button',{type:'button',class:'mi',role:'menuitem',onclick:()=>{menu.hidden=true;showBriefJson();}},ic('copy'),'Бриф (JSON)'),h('hr'));}
   if(typeof orderMenuItems==='function')orderMenuItems(menu);
   menu.append(h('div',{class:'mi',style:'cursor:default'},ic('ruler'),'Единицы измерения'));
   const sub=h('div',{class:'sub'});Object.keys(UNITS).forEach(u=>sub.append(h('button',{class:u===P.unit?'on':'',onclick:()=>{P.unit=u;$('#unitSel').value=u;save();render();buildMenu();}},UNITS[u].l)));menu.append(sub,h('hr'));
@@ -131,6 +132,7 @@ function updateWidget(){
 }
 
 /* ---------- AI‑бейджи на плане ---------- */
-const AI_LETTER={keep:'K',move:'M',replace:'R',free:'F'};
+/* значок права ИИ на плане — короткой русской подписью: «AI K / M / R / F» никто не расшифровывал */
+const AI_LETTER={keep:'не менять',move:'двигать',replace:'заменить',free:'любые правки'};
 const AI_NAME={keep:'Ничего',move:'Двигать',replace:'Заменить',free:'Двигать и заменять'};
-function drawAiBadge(ctx,x,y,pol){const t='AI '+AI_LETTER[pol];ctx.save();ctx.font='600 10px '+cssv('--font');const w=ctx.measureText(t).width+10;ctx.fillStyle=cssv('--brand-soft');ctx.strokeStyle=cssv('--brand');ctx.lineWidth=1;rr(x-w/2,y-8,w,16,8);ctx.fill();ctx.stroke();ctx.fillStyle=cssv('--brand');ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(t,x,y+0.5);ctx.restore();}
+function drawAiBadge(ctx,x,y,pol){const t='ИИ: '+(AI_LETTER[pol]||'');ctx.save();ctx.font='600 10px '+cssv('--font');const w=ctx.measureText(t).width+10;ctx.fillStyle=cssv('--brand-soft');ctx.strokeStyle=cssv('--brand');ctx.lineWidth=1;rr(x-w/2,y-8,w,16,8);ctx.fill();ctx.stroke();ctx.fillStyle=cssv('--brand');ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(t,x,y+0.5);ctx.restore();}

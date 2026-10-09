@@ -4,7 +4,7 @@
    Запуск:  cd tools/ai-eval && npm install && npx playwright install chromium && npm run e2e
    Переменные:
      PLAYWRIGHT_PATH  путь к уже установленному пакету playwright (если он стоит не в tools/ai-eval)
-     E2E_CDN_DIR      папка с three.min.js, GLTFLoader.js и meshopt_decoder.js — когда машине недоступны CDN
+     E2E_CDN_DIR      больше не нужна: three.js лежит в проекте (public/vendor/three-r128); переменная оставлена для старых веток
      E2E_SHOTS        куда складывать снимки экрана (по умолчанию tools/ai-eval/shots)
      E2E_HEADED=1     показать окно браузера */
 const { spawn } = require('node:child_process');

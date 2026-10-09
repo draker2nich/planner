@@ -19,15 +19,14 @@ function finishGhost(f){
   f.warnings=furnitureWarnings(f,Q,D).filter(w=>w!=='outside');
   return {item:f,invalid:err?err.replace(/^[^:]+: /,''):null};
 }
-async function placeFurnitureClick(cw){
+/* Предмет встаёт туда, где показан его контур, — без окна «Положение». Точные расстояния до стен вводятся
+   кликом по размеру у выбранного предмета (editDim → fPositionDialog), сдвиг на шаг — стрелками. */
+function placeFurnitureClick(cw){
   const g=computeFGhost(cw); if(!g||g.invalid){if(g)toast(g.invalid,true);return;}
-  const f=g.item; const t=TYPE.get(f.typeId);
-  const err=apply(Q=>{Q.furniture=Q.furniture||[];Q.furniture.push(f);Q.fseq=Q.fseq||{};if(!f.productId)Q.fseq[t.id]=(Q.fseq[t.id]||0)+1;},{noHist:true}); if(err)return toast(err,true);
-  E.sel={type:'furniture',id:f.id}; E.activeDim={type:'furniture',id:f.id}; render();
-  const r=await fPositionDialog(P.furniture.find(x=>x.id===f.id)); E.activeDim=null;
-  if(!r){apply(Q=>{Q.furniture=Q.furniture.filter(x=>x.id!==f.id);if(!f.productId)Q.fseq[t.id]--;},{noHist:true});E.sel=null;}
-  else{const e2=apply(Q=>{Object.assign(Q.furniture.find(x=>x.id===f.id),r);refreshWarnings(Q);Q._strict=[f.id];});if(e2)toast(e2,true);}
-  E.mode='idle';E.fPlace=null;E.fGhost=null;E.tool='select';updateTools();render();
+  const f=g.item; const t=TYPE.get(f.typeId); f.x=Math.round(f.x); f.y=Math.round(f.y);
+  const err=apply(Q=>{Q.furniture=Q.furniture||[];Q.furniture.push(f);Q.fseq=Q.fseq||{};if(!f.productId)Q.fseq[t.id]=(Q.fseq[t.id]||0)+1;refreshWarnings(Q);Q._strict=[f.id];}); if(err)return toast(err,true);
+  E.sel={type:'furniture',id:f.id};
+  E.mode='idle';E.fPlace=null;E.fGhost=null;E.tool='select';updateTools();render();preciseHint();
 }
 function refreshWarnings(Q){const d=derive(Q);(Q.furniture||[]).forEach(f=>{f.warnings=furnitureWarnings(f,Q,d);});}
 function rayToWall(from,dir,p=P,d=D){let best=null;for(const w of p.walls){const i=d.W.get(w.id);const r=lineInter(from,dir,i.a,{x:i.ux,y:i.uy});if(!r)continue;const t=(r.x-from.x)*dir.x+(r.y-from.y)*dir.y;if(t<-0.5)continue;const s=dot(sub(r,i.a),{x:i.ux,y:i.uy});if(s<-0.5||s>i.len+0.5)continue;if(!best||t<best.t)best={t,wallId:w.id,pt:r};}return best;}
@@ -53,12 +52,39 @@ async function fPositionDialog(f){
 }
 function beginFDrag(f,sp){if(READONLY||P.mode!=='furniture')return false;if(f.locked){toast('Объект зафиксирован. Снимите замок (L)');cv.style.cursor='not-allowed';return false;}const t=TYPE.get(f.typeId),fo=formOf(t,f.formId),mt=mountOf(t,fo);const cw=Wd(sp);E.drag={type:'furniture',id:f.id,orig:JSON.parse(JSON.stringify(f)),grab:mt==='wall'?null:{x:cw.x-f.x,y:cw.y-f.y}};E.activeDim={type:'furniture',id:f.id};return true;}
 function updateFDrag(sp){const f=P.furniture.find(x=>x.id===E.drag.id);const cw=Wd(sp);E.fPlace=f;E.fRot=f.rot;E.fMirror=f.mirror;const g=computeFGhost(E.drag.grab?{x:cw.x-E.drag.grab.x,y:cw.y-E.drag.grab.y}:cw);E.fPlace=null;if(g){Object.assign(f,{x:g.item.x,y:g.item.y,rot:g.item.rot,wallId:g.item.wallId??f.wallId,offset:g.item.offset??f.offset,baseId:g.item.baseId??f.baseId});E.dragInvalid=g.invalid;}render();}
-async function endFDrag(){const dr=E.drag;E.drag=null;const f=P.furniture.find(x=>x.id===dr.id);const moved=JSON.parse(JSON.stringify(f));Object.assign(f,dr.orig);const tmp=Object.assign({},f,moved);const r=await fPositionDialog(tmp);E.activeDim=null;if(r){const err=apply(Q=>{const q=Q.furniture.find(x=>x.id===f.id);Object.assign(q,moved,r);refreshWarnings(Q);Q._strict=[f.id];});if(err)toast(err,true);}render();}
+/* Конец перетаскивания: предмет остаётся на новом месте одним шагом истории; недопустимое место — возвращается обратно */
+function endFDrag(){
+  const dr=E.drag;E.drag=null;E.activeDim=null;E.dragInvalid=null;
+  const f=P.furniture.find(x=>x.id===dr.id);const moved=JSON.parse(JSON.stringify(f));
+  if(typeof moved.x==='number'){moved.x=Math.round(moved.x);moved.y=Math.round(moved.y);} // координаты — целые миллиметры, как при вводе числом
+  for(const k of Object.keys(f))delete f[k];Object.assign(f,dr.orig); // во время движения менялся сам объект проекта — возвращаем как было, изменение пройдёт через apply
+  E.sel={type:'furniture',id:f.id}; // перетащенный предмет остаётся выбранным: видны его размеры до стен, работают стрелки и R
+  const same=['x','y','rot','wallId','offset','baseId'].every(k=>moved[k]===dr.orig[k]);
+  if(same){render();return;}
+  const err=apply(Q=>{const q=Q.furniture.find(x=>x.id===f.id);Object.assign(q,moved);refreshWarnings(Q);Q._strict=[f.id];});
+  if(err)toast(err.replace(/^[^:]+: /,'')+' — предмет возвращён на место',true);else preciseHint();
+  render();
+}
+/* Сдвиг выбранного предмета стрелками. Серия нажатий подряд — один шаг истории. */
+let nudgeMark=null;
+function nudgeFurniture(id,dx,dy){
+  const f=P.furniture.find(x=>x.id===id);if(!f||READONLY)return;
+  if(f.locked){toast('Объект зафиксирован. Снимите замок (L)');return;}
+  const t=TYPE.get(f.typeId),mt=mountOf(t,formOf(t,f.formId));
+  const merge=!!nudgeMark&&nudgeMark.id===id&&nudgeMark.hi===hi&&Date.now()-nudgeMark.t<1500;
+  const err=apply(Q=>{const q=Q.furniture.find(x=>x.id===id);
+    if(mt==='wall'){const i=derive(Q).W.get(q.wallId);if(!i)return 'Стена предмета не найдена';const d=dx*i.rx+dy*i.ry;if(Math.abs(d)<0.5)return 'Настенный предмет двигается только вдоль своей стены';q.offset=Math.round(Math.max(0,Math.min(i.len-q.dims.W,q.offset+d)));const c={x:i.ref.x+i.rx*(q.offset+q.dims.W/2),y:i.ref.y+i.ry*(q.offset+q.dims.W/2)};q.x=c.x-i.nx*q.dims.D/2;q.y=c.y-i.ny*q.dims.D/2;}
+    else{q.x=Math.round(q.x+dx);q.y=Math.round(q.y+dy);}
+    refreshWarnings(Q);Q._strict=[id];},{noHist:merge});
+  if(err){toast(err.replace(/^[^:]+: /,''),true);return;}
+  if(merge)hist[hi]=JSON.stringify(P);
+  nudgeMark={id,hi,t:Date.now()};
+}
 
 /* ---------- Операции над мебелью ---------- */
 function fUpdate(id,fn){return apply(Q=>{const q=Q.furniture.find(x=>x.id===id);if(!q)return 'Предмет не найден';if(q.locked)return 'Объект зафиксирован. Снимите замок (L)';fn(q,Q);refreshWarnings(Q);Q._strict=[id];});}
 function deleteFurniture(id){const f=P.furniture.find(x=>x.id===id);if(!f)return;if(f.locked){toast('Объект зафиксирован. Снимите замок (L)',true);return;}const err=apply(Q=>{Q.furniture=Q.furniture.filter(x=>x.id!==id&&x.baseId!==id);});if(err)toast(err,true);else E.sel=null;render();}
-function copyFurniture(f){const t=TYPE.get(f.typeId);const c=makeFurniture(t,f.formId,f.constraints,f.productId?PRODUCTS.find(p=>p.id===f.productId):null,f.formAny);c.dims=Object.assign({},f.dims);beginPlace(c);}
+function copyFurniture(f){const t=TYPE.get(f.typeId);const c=makeFurniture(t,f.formId,f.constraints,f.productId?(PRODUCT_BY_ID.get(f.productId)||null):null,f.formAny);c.dims=Object.assign({},f.dims);if(f.productId&&!c.productId){c.productId=f.productId;c.name=f.name;}beginPlace(c);E.fRot=f.rot||0;E.fMirror=!!f.mirror;}
 async function replaceFurniture(f){const t=TYPE.get(f.typeId);let cons=f.constraints;if(f.productId){cons={};const fo=formOf(t,f.formId);for(const k of [...fo.dims,'H'])cons[k]={mode:'range',min:Math.round(f.dims[k]*0.85),max:Math.round(f.dims[k]*1.15)};}
   const r=await productDialog(t,f.formId,cons,{noPlaceholder:!f.productId});if(!r||r.back)return;
   const err=fUpdate(f.id,(q,Q)=>{if(r.placeholder){q.productId=null;q.formAny=false;q.name=`${t.name} ${(Q.fseq[t.id]||0)+1}`;Q.fseq[t.id]=(Q.fseq[t.id]||0)+1;}else{q.productId=r.product.id;q.formAny=false;q.name=r.product.name;q.formId=r.product.formId;q.dims=Object.assign({},r.product.dims);}});if(err)toast('Замена невозможна: '+err,true);}
@@ -124,7 +150,7 @@ function glbFor(url){let c=GLB_CACHE.get(url);if(c)return c;c={state:'loading',s
 function productModel3D(f,wM,hM,dM){const pr=f.productId&&PRODUCT_BY_ID.get(f.productId);if(!pr||!pr.model||!pr.model.url)return null;const c=glbFor(pr.model.url);if(c.state!=='ready')return null;
   const m=c.scene.clone(true);const box=new THREE.Box3().setFromObject(m);const sz=new THREE.Vector3();box.getSize(sz);if(sz.x<=0||sz.y<=0||sz.z<=0)return null;
   m.traverse(o=>{if(o.isMesh){o.castShadow=true;o.receiveShadow=true;}});
-  const wrap=new THREE.Group();m.scale.set(wM/sz.x,hM/sz.y,dM/sz.z);const ctr=new THREE.Vector3();box.getCenter(ctr);m.position.set(-ctr.x*m.scale.x,-box.min.y*m.scale.y,-ctr.z*m.scale.z);wrap.add(m);return wrap;}
+  const wrap=new THREE.Group();wrap.userData.shared=true;m.scale.set(wM/sz.x,hM/sz.y,dM/sz.z);const ctr=new THREE.Vector3();box.getCenter(ctr);m.position.set(-ctr.x*m.scale.x,-box.min.y*m.scale.y,-ctr.z*m.scale.z);wrap.add(m);return wrap;}
 function buildFurniture3D(group){
   const H=P.wallHeight/1000; const items=P.furniture||[];
   for(const f of items){const t=TYPE.get(f.typeId),fo=formOf(t,f.formId),mt=mountOf(t,fo);const fr=furniturePlacementFrame(f);if(!fr)continue;const l=fpPoly(fo.fp,f.dims);const hgt=(f.dims.H||500)/1000;

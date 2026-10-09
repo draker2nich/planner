@@ -9,13 +9,16 @@ const MAX_BYTES = 2 * 1024 * 1024;
 const MAX_PER_USER = 50;
 const NAME_MAX = 80;
 const PREVIEW_WALLS = 200;
+const PREVIEW_FURN = 150;
 const PURGE_DAYS = 30;
+const TRASH_MAX = 30;      // в корзине одного пользователя — не больше стольких проектов; самые старые стираются раньше срока
+const MAX_ITEMS = 3000;    // вершин, стен, проёмов, предметов в одном проекте
 const COPY_SUFFIX = ' — копия';
 const now = () => new Date().toISOString();
 
 /* Миниатюра: только числа; всё нечисловое отбрасывается */
 function makePreview(data) {
-  const out = { walls: [], counts: { walls: 0, openings: 0, furniture: 0 }, closed: false };
+  const out = { walls: [], furn: [], counts: { walls: 0, openings: 0, furniture: 0 }, closed: false };
   if (!data || typeof data !== 'object') return out;
   const V = new Map();
   for (const v of Array.isArray(data.vertices) ? data.vertices : []) {
@@ -31,10 +34,18 @@ function makePreview(data) {
   out.counts.openings = Array.isArray(data.openings) ? data.openings.length : 0;
   out.counts.furniture = Array.isArray(data.furniture) ? data.furniture.length : 0;
   out.closed = data.closed === true;
+  /* мебель — прямоугольники по габариту [центр x, центр y, ширина, глубина, поворот°]: по ним проект узнаётся в списке */
+  const num = (v) => (Number.isFinite(+v) && +v > 0 ? +v : null);
+  for (const f of Array.isArray(data.furniture) ? data.furniture : []) {
+    if (out.furn.length >= PREVIEW_FURN) break;
+    if (!f || !Number.isFinite(+f.x) || !Number.isFinite(+f.y)) continue;
+    const d = f.dims && typeof f.dims === 'object' ? f.dims : {};
+    const w = num(d.W) ?? num(d.A) ?? num(d.DIA) ?? num(d.R) ?? 500;
+    const dp = (num(d.A) && num(d.B)) ?? num(d.D) ?? num(d.L) ?? num(d.DIA) ?? num(d.R) ?? 500;
+    out.furn.push([Math.round(+f.x), Math.round(+f.y), Math.round(w), Math.round(dp), Math.round(Number.isFinite(+f.rot) ? +f.rot : 0)]);
+  }
   return out;
 }
-/* Пустой проект, который сервер создаёт сам (экран «Мои проекты» → «Новый проект»).
-   Остальные поля достраивает normalizeProject в редакторе. */
 /* Идентификаторы фото, на которые ссылается проект. materialsOnly — только текстуры стен и пола (то, что видно в комнате);
    без него — ещё и фото‑референсы из пожеланий. Повторяет usedPhotoIds() редактора (public/js/editor/view3d/materials.js). */
 function photoIdsOf(data, { materialsOnly = false } = {}) {
@@ -62,11 +73,14 @@ function publicData(data) {
   return d;
 }
 const SHARE_RE = /^[A-Za-z0-9_-]{24,64}$/;
+/* Пустой проект, который сервер создаёт сам (экран «Мои проекты» → «Новый проект»).
+   Остальные поля достраивает normalizeProject в редакторе. */
 const blankProject = (name) => ({ id: crypto.randomBytes(4).toString('hex'), name, unit: 'mm', vertices: [], walls: [], openings: [], furniture: [], closed: false, status: 'draft', createdAt: now(), updatedAt: now() });
 
 function makeProjects(db) {
   const parsePreview = (s) => { try { return s ? JSON.parse(s) : null; } catch { return null; } };
   const meta = (r) => ({ id: r.id, name: r.name, rev: Number(r.rev), size: Number(r.size), createdAt: r.created_at, updatedAt: r.updated_at, preview: parsePreview(r.preview), shared: !!r.share_token });
+  const LIST = 'id,name,rev,size,created_at,updated_at,preview,share_token';
 
   function cleanName(raw, { required = false } = {}) {
     const s = String(raw == null ? '' : raw).replace(/\s+/g, ' ').trim();
@@ -78,6 +92,13 @@ function makeProjects(db) {
   function serialize(data) {
     if (!data || typeof data !== 'object' || Array.isArray(data)) throw new ApiError(422, 'validation', 'Нет данных проекта');
     for (const k of ['vertices', 'walls', 'openings']) if (!Array.isArray(data[k])) throw new ApiError(422, 'validation', `Некорректный проект: нет массива ${k}`);
+    if (data.furniture !== undefined && !Array.isArray(data.furniture)) throw new ApiError(422, 'validation', 'Некорректный проект: furniture — не массив');
+    /* в списках — только объекты и не больше разумного: редактор и миниатюра рассчитывают на эту форму */
+    for (const k of ['vertices', 'walls', 'openings', 'furniture']) {
+      const a = data[k] || [];
+      if (a.length > MAX_ITEMS) throw new ApiError(422, 'validation', `Некорректный проект: слишком много элементов в ${k}`);
+      if (a.some((x) => !x || typeof x !== 'object' || Array.isArray(x))) throw new ApiError(422, 'validation', `Некорректный проект: в ${k} есть элемент, который не является объектом`);
+    }
     const text = JSON.stringify(data);
     const size = Buffer.byteLength(text);
     if (size > MAX_BYTES) throw new ApiError(413, 'too_large', 'Проект больше 2 МБ');
@@ -88,11 +109,26 @@ function makeProjects(db) {
     if (!r || r.user_id !== user.id) throw new ApiError(404, 'not_found', 'Проект не найден');
     return r;
   }
+  /* То же без данных проекта: сохранению и переименованию не нужно читать из базы до 2 МБ JSON */
+  async function ownMeta(user, id, { deleted = false } = {}) {
+    const r = await db.get(`SELECT ${LIST},user_id,deleted_at FROM projects WHERE id=? AND deleted_at IS ${deleted ? 'NOT NULL' : 'NULL'}`, [String(id)]);
+    if (!r || r.user_id !== user.id) throw new ApiError(404, 'not_found', 'Проект не найден');
+    return r;
+  }
   async function count(user) {
     return Number((await db.get('SELECT CAST(COUNT(*) AS INTEGER) AS c FROM projects WHERE user_id=? AND deleted_at IS NULL', [user.id])).c);
   }
+  const limitError = () => new ApiError(422, 'limit', `Можно хранить не больше ${MAX_PER_USER} проектов. Удалите ненужные, чтобы создать новый`);
   async function checkLimit(user) {
-    if ((await count(user)) >= MAX_PER_USER) throw new ApiError(422, 'limit', `Можно хранить не больше ${MAX_PER_USER} проектов. Удалите ненужные, чтобы создать новый`);
+    if ((await count(user)) >= MAX_PER_USER) throw limitError();
+  }
+  /* Проверка после вставки: одновременные запросы вместе проходят checkLimit, поэтому каждый после своей вставки
+     пересчитывает проекты и, если их стало больше предела, убирает свою строку. Транзакций на Neon нет, так что при
+     одновременном создании у самого предела могут отказать оба запроса — зато предел не превышается никогда. */
+  async function enforceLimit(user, id) {
+    if ((await count(user)) <= MAX_PER_USER) return;
+    await db.run('DELETE FROM projects WHERE id=?', [id]);
+    throw limitError();
   }
 
   /* Удалённые проекты стираются окончательно через PURGE_DAYS. Отдельного планировщика нет (на Vercel функции живут недолго),
@@ -105,12 +141,12 @@ function makeProjects(db) {
   }
 
   return {
-    MAX_PER_USER,
+    MAX_PER_USER, PURGE_DAYS, TRASH_MAX,
     count,
     purge,
     async list(user) {
       await purge();
-      const rows = await db.all('SELECT id,name,rev,size,created_at,updated_at,preview,share_token FROM projects WHERE user_id=? AND deleted_at IS NULL ORDER BY updated_at DESC, id', [user.id]);
+      const rows = await db.all(`SELECT ${LIST} FROM projects WHERE user_id=? AND deleted_at IS NULL ORDER BY updated_at DESC, id`, [user.id]);
       /* проекты, сохранённые до появления миниатюр: вычисляем один раз */
       for (const r of rows) {
         if (r.preview) continue;
@@ -119,7 +155,8 @@ function makeProjects(db) {
         r.preview = JSON.stringify(makePreview(data));
         await db.run('UPDATE projects SET preview=? WHERE id=?', [r.preview, r.id]);
       }
-      return { projects: rows.map(meta), limit: MAX_PER_USER };
+      const trash = Number((await db.get('SELECT CAST(COUNT(*) AS INTEGER) AS c FROM projects WHERE user_id=? AND deleted_at IS NOT NULL', [user.id])).c);
+      return { projects: rows.map(meta), limit: MAX_PER_USER, trash };
     },
     async get(user, id) {
       const r = await own(user, id);
@@ -133,10 +170,11 @@ function makeProjects(db) {
       const { text, size, preview } = serialize(body.data === undefined || body.data === null ? blankProject(name) : body.data);
       const id = crypto.randomUUID(); const t = now();
       await db.run('INSERT INTO projects (id,user_id,name,data,size,rev,created_at,updated_at,preview) VALUES (?,?,?,?,?,1,?,?,?)', [id, user.id, name, text, size, t, t, preview]);
+      await enforceLimit(user, id);
       return meta({ id, name, rev: 1, size, created_at: t, updated_at: t, preview });
     },
     async update(user, id, body) {
-      const r = await own(user, id);
+      const r = await ownMeta(user, id);
       const rev = Number(body.rev);
       if (!Number.isInteger(rev)) throw new ApiError(422, 'validation', 'Не указана версия проекта (rev)');
       const name = body.name !== undefined ? cleanName(body.name) : r.name;
@@ -144,7 +182,7 @@ function makeProjects(db) {
       const t = now();
       const res = await db.run('UPDATE projects SET name=?, data=?, size=?, preview=?, rev=rev+1, updated_at=? WHERE id=? AND user_id=? AND rev=? AND deleted_at IS NULL', [name, text, size, preview, t, r.id, user.id, rev]);
       if (!res.changes) {
-        const cur = await own(user, id);
+        const cur = await ownMeta(user, id);
         throw new ApiError(409, 'conflict', 'Проект изменили на другом устройстве', { rev: Number(cur.rev), updatedAt: cur.updated_at });
       }
       return meta({ id: r.id, name, rev: rev + 1, size, created_at: r.created_at, updated_at: t, preview, share_token: r.share_token });
@@ -158,6 +196,7 @@ function makeProjects(db) {
       if (!data || typeof data !== 'object') throw new ApiError(422, 'validation', 'Проект повреждён');
       data.name = name;
       const text = JSON.stringify(data); const size = Buffer.byteLength(text); const t = now();
+      if (size > MAX_BYTES) throw new ApiError(413, 'too_large', 'Проект больше 2 МБ');
       const res = await db.run('UPDATE projects SET name=?, data=?, size=?, rev=rev+1, updated_at=? WHERE id=? AND user_id=? AND rev=? AND deleted_at IS NULL', [name, text, size, t, r.id, user.id, r.rev]);
       if (!res.changes) throw new ApiError(409, 'conflict', 'Проект только что изменили. Обновите страницу и повторите');
       return meta({ ...r, name, size, rev: Number(r.rev) + 1, updated_at: t });
@@ -168,15 +207,46 @@ function makeProjects(db) {
       const name = r.name.slice(0, NAME_MAX - COPY_SUFFIX.length).trimEnd() + COPY_SUFFIX;
       let data = null; try { data = JSON.parse(r.data); } catch {}
       if (!data || typeof data !== 'object') throw new ApiError(422, 'validation', 'Проект повреждён');
+      /* проект, сохранённый до проверки формы списков, копируется без «мусорных» элементов — иначе копию нельзя было бы создать */
+      for (const k of ['vertices', 'walls', 'openings', 'furniture']) if (Array.isArray(data[k])) data[k] = data[k].filter((x) => x && typeof x === 'object' && !Array.isArray(x));
       data.name = name; data.id = crypto.randomBytes(4).toString('hex'); data.status = 'draft';
       const { text, size, preview } = serialize(data);
       const nid = crypto.randomUUID(); const t = now();
       await db.run('INSERT INTO projects (id,user_id,name,data,size,rev,created_at,updated_at,preview) VALUES (?,?,?,?,?,1,?,?,?)', [nid, user.id, name, text, size, t, t, preview]);
+      await enforceLimit(user, nid);
       return meta({ id: nid, name, rev: 1, size, created_at: t, updated_at: t, preview });
     },
+    /* Удаление — в корзину на PURGE_DAYS суток. Корзина ограничена: иначе удалёнными проектами можно занять сколько угодно места. */
     async remove(user, id) {
-      const r = await own(user, id);
+      const r = await ownMeta(user, id);
       await db.run('UPDATE projects SET deleted_at=?, share_token=NULL WHERE id=?', [now(), r.id]); // ссылка на удалённый проект перестаёт работать сразу
+      try {
+        const old = await db.all('SELECT id FROM projects WHERE user_id=? AND deleted_at IS NOT NULL ORDER BY deleted_at DESC, id LIMIT 1000 OFFSET ?', [user.id, TRASH_MAX]);
+        for (const o of old) await db.run('DELETE FROM projects WHERE id=? AND deleted_at IS NOT NULL', [o.id]);
+      } catch (e) { console.error('trash:', e.message); }
+      return { ok: true, restorableDays: PURGE_DAYS };
+    },
+    /* ---------- корзина ---------- */
+    async trash(user) {
+      await purge();
+      const rows = await db.all(`SELECT ${LIST},deleted_at FROM projects WHERE user_id=? AND deleted_at IS NOT NULL ORDER BY deleted_at DESC, id`, [user.id]);
+      return { projects: rows.map((r) => ({ ...meta(r), deletedAt: r.deleted_at, purgeAt: new Date(Date.parse(r.deleted_at) + PURGE_DAYS * 864e5).toISOString() })), days: PURGE_DAYS };
+    },
+    async restore(user, id) {
+      const r = await ownMeta(user, id, { deleted: true });
+      await checkLimit(user);
+      await db.run('UPDATE projects SET deleted_at=NULL WHERE id=? AND user_id=?', [r.id, user.id]);
+      /* два одновременных восстановления могли вместе превысить лимит — тогда проект возвращается в корзину */
+      if ((await count(user)) > MAX_PER_USER) {
+        await db.run('UPDATE projects SET deleted_at=? WHERE id=?', [r.deleted_at, r.id]);
+        throw limitError();
+      }
+      return meta(r);
+    },
+    /* стереть из корзины сразу, не дожидаясь срока */
+    async destroy(user, id) {
+      const r = await ownMeta(user, id, { deleted: true });
+      await db.run('DELETE FROM projects WHERE id=? AND user_id=? AND deleted_at IS NOT NULL', [r.id, user.id]);
       return { ok: true };
     },
     own,
@@ -214,7 +284,7 @@ function makeProjects(db) {
       return { ...meta(r), data, owner: { id: r.user_id, email: r.owner_email, name: r.owner_name } };
     },
     async adminList(userId) {
-      const rows = await db.all('SELECT id,name,rev,size,created_at,updated_at,preview,share_token FROM projects WHERE user_id=? AND deleted_at IS NULL ORDER BY updated_at DESC, id', [userId]);
+      const rows = await db.all(`SELECT ${LIST} FROM projects WHERE user_id=? AND deleted_at IS NULL ORDER BY updated_at DESC, id`, [userId]);
       return rows.map(meta);
     },
   };

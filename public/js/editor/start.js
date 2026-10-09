@@ -59,6 +59,33 @@ async function startFromTemplate(){
   toast('Комната построена. Добавьте двери и окна, затем переходите к мебели');
 }
 
+/* Готовый пример: комната с окном, дверью и несколькими пустышками мебели — за одно нажатие видно, что умеет редактор
+   (режим мебели, 3D, ИИ‑дизайнер), ничего не рисуя. Ставится только на пустой план; отменяется одним шагом. */
+function startFromExample(){
+  if(READONLY){toast(READONLY_MSG);return;}
+  if(P.vertices.length){toast('Пример ставится на пустой план. Очистите проект в меню, чтобы начать заново',true);return;}
+  const pts=roomTemplatePoints('rect',4200,3400);
+  const piece=(typeId,formId,x,y,rot)=>{const t=TYPE.get(typeId);if(!t)return null;const fo=formOf(t,formId);return {id:uid(),typeId,formId:fo.id,productId:null,formAny:false,name:`${t.name} 1`,constraints:{},dims:typicalDims(fo,{}),x,y,rot,mirror:false,locked:false,warnings:[]};};
+  const build=(withFurniture)=>apply(Q=>{
+    Q.vertices=pts.map(([x,y])=>({id:uid(),x,y}));
+    Q.walls=Q.vertices.map((v,i)=>({id:uid(),a:v.id,b:Q.vertices[(i+1)%Q.vertices.length].id}));
+    Q.wallHeight=DEF.wallH;Q.wallThickness=Q.wallThickness||DEF.wallT;Q.wallParamsSet=true;Q.seq={door:1,window:1,arch:0};
+    Q.openings=[
+      {id:uid(),kind:'window',name:`${KIND_NAME.window} 1`,wallId:Q.walls[0].id,offset:1500,width:DEF.window.w,height:DEF.window.h,sill:DEF.window.sill,head:Q.wallHeight-DEF.window.sill-DEF.window.h,hinge:'left',swing:'in'},
+      {id:uid(),kind:'door',name:`${KIND_NAME.door} 1`,wallId:Q.walls[2].id,offset:500,width:DEF.door.w,height:DEF.door.h,hinge:'left',swing:'in'}];
+    if(withFurniture){
+      /* диван у левой стены, столик перед ним, тумба под ТВ у правой стены, ковёр посередине */
+      const list=[piece('rug','rect',1750,1400,0),piece('sofa','straight',460,1400,270),piece('coffee-table','rect',1650,1400,90),piece('tv-stand','rect',3965,1400,90)].filter(Boolean);
+      Q.furniture=list;Q.fseq={};list.forEach(f=>{Q.fseq[f.typeId]=1;});
+      if(typeof refreshWarnings==='function')refreshWarnings(Q);
+    }
+  });
+  let err=build(true); if(err)err=build(false); // мебель не прошла проверку (изменились типы каталога) — пример без неё
+  if(err){toast(err,true);return;}
+  E.tool='select';E.mode='idle';updateTools();fitRoom();
+  toast('Это пример. Переключитесь на «Мебель», чтобы двигать и заменять предметы, или откройте 3D. Свою комнату начните с «Очистить проект» в меню');
+}
+
 /* ---------- стартовая карточка ---------- */
 /* Показывается, пока на плане нет ни одной точки и пользователь ничего не начал. «Нарисовать самому» прячет её до конца сеанса:
    если после этого отменить рисование, план останется пустым, но карточка не будет мешать. */
@@ -77,6 +104,7 @@ function updateEmptyState(){
       h('div',{class:'sc-btns'},
         h('button',{type:'button',class:'primary',onclick:startFromTemplate},ic('maximize'),'Комната по размерам'),
         h('button',{type:'button',onclick:()=>{START_DISMISSED=true;setTool('wall');}},ic('wall'),'Нарисовать стены')),
+      h('button',{type:'button',class:'sc-example',onclick:startFromExample},'Посмотреть готовый пример'),
       h('ol',{class:'sc-steps'},h('li',{},'Стены'),h('li',{},'Двери и окна'),h('li',{},'Мебель из каталога'),h('li',{},'Прогулка в 3D и подбор с ИИ')));
     main.append(el);
   }
