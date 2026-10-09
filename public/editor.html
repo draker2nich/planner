@@ -7,9 +7,10 @@
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#09090b">
 <title>Редактор — furnitech</title>
 <meta name="robots" content="noindex">
-<script>/* Редактор только для вошедших (исключения — просмотр проекта поддержкой, ?view=, и проект по ссылке владельца, ?share=). Гость уходит на вход ещё до загрузки редактора. */
-(function(){if(/[?&](view|share)=/.test(location.search))return;var ok=false;try{ok=!!localStorage.getItem('planner.token')}catch(e){}
-if(!ok){try{document.documentElement.style.visibility='hidden'}catch(e){}location.replace('/login?next='+encodeURIComponent(location.pathname+location.search));}})();</script>
+<script>/* Редактор открыт и гостю: его проект хранится в этом браузере. На вход — ещё до загрузки редактора — уходим, только когда без аккаунта не обойтись:
+   в адресе указан проект аккаунта (?project=) или в браузере осталась копия проекта аккаунта (сессия истекла). Исключения — ?view= и ?share=. */
+(function(){if(/[?&](view|share)=/.test(location.search))return;var ok=false,need=/[?&]project=/.test(location.search);try{ok=!!localStorage.getItem('planner.token');need=need||!!localStorage.getItem('roomEditor.projectId')}catch(e){}
+if(!ok&&need){try{document.documentElement.style.visibility='hidden'}catch(e){}location.replace('/login?next='+encodeURIComponent(location.pathname+location.search));}})();</script>
 <script>try{var t=localStorage.getItem('planner.theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">

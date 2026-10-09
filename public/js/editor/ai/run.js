@@ -105,6 +105,7 @@ async function aiPhotoPayload(photos){
 let AI_BUSY=false;
 async function aiStart(opts){
   if(READONLY){toast(READONLY_MSG);return false;}
+  if(typeof needAccount==='function'&&needAccount('ИИ‑дизайнер работает в аккаунте.'))return false;
   if(AI_BUSY)return false;
   AI_BUSY=true;
   try{return await aiRun(opts);}finally{AI_BUSY=false;}

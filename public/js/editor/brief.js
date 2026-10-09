@@ -27,6 +27,7 @@ function saveBriefDraft(st){const policies={};if(st.policies)st.policies.forEach
 async function finishFlow(){
   if(READONLY){toast(READONLY_MSG);return;}
   if(P.mode!=='furniture')return; if(!(P.furniture||[]).length){toast('Расставьте хотя бы один предмет или пустышку',true);return;}
+  if(typeof needAccount==='function'&&needAccount('ИИ‑дизайнер работает в аккаунте.'))return;
   if(typeof aiCheckStale==='function')aiCheckStale();
   const draft=P.briefDraft||P.brief||{};
   const st={policies:initialPolicies(),room:Object.assign({},draft.room||defaultRoom()),photos:(draft.photos||[]).map(p=>Object.assign({likes:[],furnitureTypes:[],comment:''},p,{likes:[...(p.likes||[])],furnitureTypes:p.furnitureTypes==='all'?'all':[...(p.furnitureTypes||[])]})),text:draft.text||'',prefs:Object.assign({},draft.prefs||{})};

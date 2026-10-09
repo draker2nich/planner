@@ -2,10 +2,13 @@
 /* furnitech · редактор · account.js
    Редактор в аккаунте (ТЗ этапа 1, разделы 7 и 11; ТЗ этапа 2, разделы 7.4 и 8.4). Подключается последним
    и пользуется глобальными объявлениями остальных файлов: P, D, derive, save, render, dialog, confirmDlg, h, ic, toast…
-   Редактор открыт только вошедшему пользователю: проект создаётся и хранится в аккаунте.
-   Гостя на вход отправляет встроенный скрипт в editor.html (ещё до загрузки редактора) и start() здесь.
+   Редактор открыт и гостю: без входа проект хранится только в этом браузере, а после входа или регистрации
+   сам сохраняется в аккаунт (auth.html → migrateLocalProject, здесь → openDefault). ИИ‑дизайнер, заявка и ссылка
+   на проект гостю недоступны — needAccount() предлагает войти.
+   На вход гостя отправляют встроенный скрипт в editor.html и start() здесь — только когда нужен проект аккаунта.
    Режимы:
      boot    — запуск: сессия ещё проверяется;
+     guest   — без входа: только локальная копия, с сервером проект не синхронизируется;
      account — локальная копия + синхронизация с /api/projects (PUT с проверкой версии);
      locked  — сессия закончилась во время работы: только просмотр и приглашение войти;
      view    — поддержка смотрит чужой проект (/editor?view=<id>) или гость открыл проект по ссылке владельца
@@ -57,6 +60,9 @@ body.ro #btnFinish,body.ro #btnLock,body.ro #catalog,body.ro #dockCat,body.ro #t
 body.ro #props input,body.ro #props select,body.ro #props textarea,body.ro #props button:not(.back),body.ro #widget button.iconbtn,body.ro #matPanel{pointer-events:none;opacity:.6}
 `));
 
+  /* Гость в узкой шапке: одна кнопка «Войти» и короткая подпись индикатора — иначе шапке не хватает места */
+  const MQ_GUEST_NARROW = matchMedia('(max-width:1239px)');
+
   /* ---------- индикатор сохранения (ТЗ 11.2) ---------- */
   function ind(state, extra) {
     Sync.state = state;
@@ -64,6 +70,7 @@ body.ro #props input,body.ro #props select,body.ro #props textarea,body.ro #prop
     el.classList.toggle('warn', state === 'offline' || state === 'conflict');
     const t = {
       local: 'В браузере ' + hhmm(),
+      guest: MQ_GUEST_NARROW.matches ? 'В браузере' : 'Только в этом браузере',
       locked: 'Нужен вход',
       saving: 'Сохранение…',
       saved: null,
@@ -74,7 +81,7 @@ body.ro #props input,body.ro #props select,body.ro #props textarea,body.ro #prop
       error: extra || 'Не сохраняется',
     }[state];
     if (state === 'saved') { el.replaceChildren(ic('cloud-check'), 'Сохранено ' + hhmm()); el.title = 'Сохранено в аккаунте'; return; }
-    el.textContent = t; el.title = state === 'local' ? 'Записано в этом браузере, в аккаунт ещё не отправлено' : state === 'view' ? 'Изменения не сохраняются' : state === 'locked' ? 'Сессия истекла — войдите, чтобы продолжить' : '';
+    el.textContent = t; el.title = state === 'local' ? 'Записано в этом браузере, в аккаунт ещё не отправлено' : state === 'guest' ? 'Проект хранится в этом браузере. Войдите или создайте аккаунт, чтобы сохранить его и открывать на любом устройстве' : state === 'view' ? 'Изменения не сохраняются' : state === 'locked' ? 'Сессия истекла — войдите, чтобы продолжить' : '';
   }
   ICONS['cloud-check'] = '<path d="M7 18a5 5 0 0 1-.6-10A6 6 0 0 1 18 9a4.5 4.5 0 0 1-.5 9z"/><path d="M9.5 13l2 2 3.5-4"/>';
 
@@ -88,7 +95,7 @@ body.ro #props input,body.ro #props select,body.ro #props textarea,body.ro #prop
     if (Sync.mode === 'view' || Sync.stale) return;
     if (Sync.mode !== 'account') {
       if (lsGet(LS.id)) lsSet(LS.dirty, '1'); // сессия ещё не проверена или нет связи: правки дойдут до аккаунта позже
-      ind(ok ? 'local' : 'error'); return;
+      ind(ok ? (Sync.mode === 'guest' ? 'guest' : 'local') : 'error'); return;
     }
     const k = key();
     if (k === Sync.lastKey) return; // изменился только вид плана
@@ -353,17 +360,45 @@ body.ro #props input,body.ro #props select,body.ro #props textarea,body.ro #prop
   const wanted = () => { const v = new URLSearchParams(location.search).get('project'); return v && ID_RE.test(v) ? v : null; };
   const toLogin = () => location.replace('/login?next=' + encodeURIComponent(location.pathname + location.search));
 
+  /* ---------- гость ----------
+     Проект гостя не привязан к аккаунту (в localStorage нет roomEditor.projectId) и живёт только в этом браузере. */
+  const authHref = (page) => '/' + page + '?next=' + encodeURIComponent('/editor');
+  /* Локальная запись откладывается на доли секунды — перед уходом на вход записываем проект сразу */
+  const flushLocal = () => { try { if (!READONLY && Sync.mode === 'guest') localStorage.setItem('roomEditor.project', JSON.stringify(P)); } catch {} };
+  function startGuest() {
+    Sync.mode = 'guest'; Sync.user = null; Sync.ready = true;
+    handlePanelParam(); renderAccount(); ind('guest');
+  }
+  /* Действие, которому нужен аккаунт. Гостю показывает приглашение войти и возвращает true (действие отменяется);
+     вошедшему — false. why — первая фраза диалога: что именно требует аккаунта. */
+  window.needAccount = function (why) {
+    if (Sync.mode !== 'guest') return false;
+    dialog((box, api) => {
+      box.append(h('h3', {}, 'Нужен аккаунт'),
+        h('div', { class: 'hint' }, (why ? why + ' ' : '') + 'Войдите или создайте аккаунт: проект из этого браузера сохранится в нём, и вы продолжите с того же места.'));
+      api.buttons = [
+        { label: 'Отмена', cancel: true, onClick: (a) => a.close(null) },
+        { label: 'Войти', onClick: (a) => a.close('login') },
+        { label: 'Создать аккаунт', primary: true, onClick: (a) => a.close('register') },
+      ];
+    }).then((page) => { if (page === 'login' || page === 'register') { flushLocal(); location.href = authHref(page); } });
+    return true;
+  };
+
   /* ---------- запуск (ТЗ этапа 1, 11.4; ТЗ этапа 2, 7.4) ---------- */
   async function start() {
     try { const f = sessionStorage.getItem('planner.flash'); if (f) { sessionStorage.removeItem('planner.flash'); toast(f); } } catch {}
     if (VIEW_ID || SHARE) return startView();
     const want = wanted();
-    if (!Session.token) return toLogin(); // проект создаётся только в аккаунте
+    /* без входа — гость; на вход уходим, только если нужен проект аккаунта: он указан в адресе
+       или в браузере осталась привязанная к аккаунту копия (сессия истекла) */
+    const needsAccount = () => !!(want || lsGet(LS.id));
+    if (!Session.token) return needsAccount() ? toLogin() : startGuest();
     ind('loading');
     let u;
     try { u = await Session.me(); }
     catch { ind('offline'); window.addEventListener('online', () => start(), { once: true }); return; }
-    if (!u) return toLogin();
+    if (!u) return needsAccount() ? toLogin() : startGuest();
     handlePanelParam();
     Sync.user = u; Sync.mode = 'account'; renderAccount();
     PHOTO_NET = { push: photoPush, drop: photoDrop, pull: (id) => photoPull(id, '/api/photos/', Session.token, true) };
@@ -471,6 +506,14 @@ body.ro #props input,body.ro #props select,body.ro #props textarea,body.ro #prop
     const old = $('#acctMenu'); if (old) old.remove();
     if (MQ_PHONE.matches) return; // на телефоне — в основном меню
     if (Sync.mode === 'view') return;
+    if (Sync.mode === 'guest') {
+      /* в узкой шапке двум кнопкам тесно — остаётся одна «Войти» (на странице входа есть ссылка на регистрацию) */
+      const tip = 'Проект из этого браузера сохранится в аккаунт';
+      if (MQ_GUEST_NARROW.matches) box.append(h('a', { class: 'lbtn primary', href: authHref('login'), onclick: flushLocal, title: tip }, 'Войти'));
+      else box.append(h('a', { class: 'lbtn', href: authHref('login'), onclick: flushLocal }, 'Войти'),
+        h('a', { class: 'lbtn primary', href: authHref('register'), onclick: flushLocal, title: tip }, 'Сохранить в аккаунт'));
+      return;
+    }
     if (!Sync.user) { if (Sync.mode === 'locked') box.append(h('a', { class: 'lbtn primary', href: '/login?next=' + encodeURIComponent(location.pathname + location.search) }, 'Войти')); return; }
     const u = Sync.user;
     const btn = h('button', { type: 'button', class: 'ava', 'aria-haspopup': 'menu', 'aria-expanded': 'false', 'aria-label': 'Аккаунт: ' + (u.name || u.email) }, Session.initial(u.name || u.email));
@@ -494,6 +537,7 @@ body.ro #props input,body.ro #props select,body.ro #props textarea,body.ro #prop
     box.append(btn); $('header').append(menu);
   }
   MQ_PHONE.addEventListener('change', renderAccount);
+  MQ_GUEST_NARROW.addEventListener('change', () => { if (Sync.mode === 'guest') { renderAccount(); if (Sync.state === 'guest') ind('guest'); } });
   const needsVerify = () => !!Sync.user && Sync.user.emailVerified === false && Sync.user.role !== 'admin' && Sync.mail;
 
   /* Пункты в основном меню редактора (вызывается из buildMenu) */
@@ -510,6 +554,10 @@ body.ro #props input,body.ro #props select,body.ro #props textarea,body.ro #prop
         if (Sync.user.role === 'admin') menu.append(lk('settings', 'Админ‑панель', '/admin'));
         menu.append(mi('logout', 'Выйти', logout, 'danger'));
       } else if (Sync.mode === 'locked') menu.append(lk('arrow-up', 'Войти', '/login?next=' + encodeURIComponent(location.pathname + location.search)));
+      else if (Sync.mode === 'guest') {
+        const go = (icon, label, page) => { const a = lk(icon, label, authHref(page)); a.addEventListener('click', flushLocal); return a; };
+        menu.append(h('div', { class: 'mh' }, 'Проект хранится только в этом браузере'), go('user', 'Создать аккаунт', 'register'), go('arrow-up', 'Войти', 'login'));
+      }
     }
     menu.append(h('hr'));
   };
@@ -533,7 +581,7 @@ body.ro #props input,body.ro #props select,body.ro #props textarea,body.ro #prop
     await Session.logout();
     unbind();
     try { sessionStorage.setItem('planner.flash', 'Вы вышли из аккаунта'); } catch {}
-    location.replace('/'); // без входа редактор не работает
+    location.replace('/'); // проект аккаунта из браузера убран — возвращаемся на главную
   }
   /* Выход или вход в другой вкладке */
   window.addEventListener('planner:session', (e) => {
@@ -544,7 +592,7 @@ body.ro #props input,body.ro #props select,body.ro #props textarea,body.ro #prop
          истёкшая сессия привязку не трогает: проект остаётся на экране до входа */
       if (!lsGet(LS.id) && Sync.id) { Sync.mode = 'locked'; clearTimeout(Sync.timer); Sync.id = null; toLogin(); }
       else sessionLost();
-    } else if (u && Sync.mode === 'locked') location.reload(); // вошли в другой вкладке
+    } else if (u && (Sync.mode === 'locked' || Sync.mode === 'guest')) { flushLocal(); location.reload(); } // вошли в другой вкладке
   });
 
   /* ---------- фото в аккаунте ----------

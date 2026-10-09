@@ -212,7 +212,7 @@ section{padding:64px 0}
         <h1>Спланируйте комнату за&nbsp;вечер <span>с&nbsp;настоящей мебелью и&nbsp;прогулкой в&nbsp;3D</span></h1>
         <p class="lead">Нарисуйте стены по&nbsp;своим размерам, поставьте двери и&nbsp;окна, расставьте мебель из&nbsp;каталога и&nbsp;посмотрите на&nbsp;результат глазами человека, стоящего в&nbsp;комнате.</p>
         <div class="cta">
-          <a class="btn primary lg" id="ctaMain" href="/register?next=/editor" data-ev="cta_start_click" data-pos="hero"><span id="ctaMainT">Начать планировку</span><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a class="btn primary lg" id="ctaMain" href="/editor" data-ev="cta_start_click" data-pos="hero"><span id="ctaMainT">Начать планировку</span><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
           <a class="btn lg" href="#how">Как это работает</a>
         </div>
         <p class="cta-note" id="ctaNote">Бесплатно. Регистрация займёт минуту — проекты хранятся в аккаунте и открываются на любом устройстве.</p>
@@ -408,8 +408,8 @@ section{padding:64px 0}
       <div class="sec-head reveal"><p class="eyebrow">Вопросы</p><h2 class="sec">Частые вопросы</h2></div>
       <div class="faq reveal">
         <details><summary>Это бесплатно?</summary><p>Да. Редактор, каталог и&nbsp;3D‑просмотр бесплатны.</p></details>
-        <details><summary>Нужна&nbsp;ли регистрация?</summary><p>Да. Чтобы создать проект, нужен аккаунт — это бесплатно и&nbsp;занимает минуту. Проекты хранятся в&nbsp;аккаунте и&nbsp;открываются на&nbsp;любом устройстве.</p></details>
-        <details><summary>Где хранится мой проект?</summary><p>В&nbsp;аккаунте, на&nbsp;сервере. В&nbsp;браузере остаётся рабочая копия открытого проекта — она выручает, если связь пропала. Фото‑референсы из&nbsp;брифа пока хранятся только в&nbsp;браузере.</p></details>
+        <details><summary>Нужна&nbsp;ли регистрация?</summary><p>Чтобы начать — нет: комнату можно нарисовать и&nbsp;обставить сразу, проект сохранится в&nbsp;этом браузере. Аккаунт нужен, чтобы хранить проекты на&nbsp;сервере и&nbsp;открывать их на&nbsp;любом устройстве, запускать ИИ‑дизайнера и&nbsp;отправлять заявку. Это бесплатно и&nbsp;занимает минуту.</p></details>
+        <details><summary>Где хранится мой проект?</summary><p>Пока вы не&nbsp;вошли — только в&nbsp;этом браузере. После входа — в&nbsp;аккаунте, на&nbsp;сервере. В&nbsp;браузере остаётся рабочая копия открытого проекта — она выручает, если связь пропала. Фото‑референсы из&nbsp;брифа пока хранятся только в&nbsp;браузере.</p></details>
         <details><summary>Можно&nbsp;ли работать с&nbsp;телефона?</summary><p>Да, редактор работает на&nbsp;телефоне и&nbsp;планшете. Рисовать стены удобнее на&nbsp;компьютере, а&nbsp;смотреть и&nbsp;двигать мебель — где угодно.</p></details>
         <details><summary>Можно&nbsp;ли купить мебель из&nbsp;каталога?</summary><p>Если продавец указал ссылку на&nbsp;свой магазин, она есть в&nbsp;карточке товара. Размеры и&nbsp;наличие лучше уточнить у&nbsp;продавца перед покупкой.</p></details>
         <details><summary>Что такое ИИ‑дизайнер?</summary><p>Это следующий этап: по&nbsp;вашему плану и&nbsp;брифу ИИ предложит расстановку и&nbsp;подбор вещей. Он&nbsp;ещё в&nbsp;разработке, но&nbsp;бриф — что можно двигать и&nbsp;менять, фото и&nbsp;пожелания — можно подготовить уже сейчас.</p></details>
@@ -422,7 +422,7 @@ section{padding:64px 0}
     <div class="wrap reveal">
       <h2 class="sec">Начните с&nbsp;размеров вашей комнаты</h2>
       <p class="lead">Рулетка, пять минут — и&nbsp;у&nbsp;вас точный план, на&nbsp;который можно ставить мебель.</p>
-      <div class="cta"><a class="btn primary lg" id="ctaFinal" href="/register?next=/editor" data-ev="cta_start_click" data-pos="final">Начать планировку<svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+      <div class="cta"><a class="btn primary lg" id="ctaFinal" href="/editor" data-ev="cta_start_click" data-pos="final">Начать планировку<svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
     </div>
   </section>
 </main>
@@ -461,9 +461,9 @@ const clip = (s, n) => { s = String(s || '').trim() || 'Новый проект'
 function paintState(user) {
   const proj = localProject();
   const main = $('#ctaMain'), mainT = $('#ctaMainT'), note = $('#ctaNote'), greet = $('#greet');
-  /* проект создаётся только в аккаунте: гостя все кнопки «Начать» ведут на регистрацию */
-  const START = '/register?next=/editor';
-  $('#ctaFinal').href = user ? '/editor' : START;
+  /* редактор открыт и без аккаунта: кнопки «Начать» ведут прямо в него, проект гостя хранится в браузере */
+  const START = '/editor';
+  $('#ctaFinal').href = START;
   greet.textContent = '';
   const sv = $('#save'); if (sv) sv.hidden = !!user;
   $('#footLogin').hidden = !!user;
@@ -476,10 +476,10 @@ function paintState(user) {
   main.href = START;
   if (proj) {
     mainT.textContent = `Продолжить «${clip(proj.name, 40)}»`; main.dataset.ev = 'cta_continue_click';
-    note.replaceChildren('Чтобы продолжить, создайте аккаунт — проект из этого браузера сохранится в нём. Уже есть аккаунт? ', h('a', { href: '/login?next=/editor' }, 'Войти'), '.');
+    note.replaceChildren('Проект хранится в этом браузере. ', h('a', { href: '/register?next=/editor' }, 'Создайте аккаунт'), ', чтобы он не потерялся и открывался на любом устройстве. Уже есть аккаунт? ', h('a', { href: '/login?next=/editor' }, 'Войти'), '.');
   } else {
     mainT.textContent = 'Начать планировку'; main.dataset.ev = 'cta_start_click';
-    note.textContent = 'Бесплатно. Регистрация займёт минуту — проекты хранятся в аккаунте и открываются на любом устройстве.';
+    note.textContent = 'Бесплатно и без регистрации. Аккаунт понадобится, чтобы сохранить проект, запустить ИИ‑дизайнера и отправить заявку.';
   }
 }
 

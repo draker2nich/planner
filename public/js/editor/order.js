@@ -68,6 +68,7 @@ async function orderPrint(which){
 /* ---------- заявка менеджеру ---------- */
 async function orderLead(which){
   if(READONLY){toast(READONLY_MSG);return;}
+  if(typeof needAccount==='function'&&needAccount('Заявка менеджеру отправляется из аккаунта.'))return;
   const S0=window.EditorSync||{};
   if(S0.mode!=='account'||!S0.id){toast('Проект ещё не сохранён в аккаунт. Проверьте связь и попробуйте снова',true);return;}
   const cell=orderCell(which),o=orderRows(cell.furniture);
@@ -100,6 +101,7 @@ async function orderLead(which){
 /* ---------- ссылка на проект ---------- */
 async function orderShare(){
   if(READONLY){toast(READONLY_MSG);return;}
+  if(typeof needAccount==='function'&&needAccount('Ссылка на проект создаётся в аккаунте.'))return;
   const S0=window.EditorSync||{};
   if(S0.mode!=='account'||!S0.id){toast('Проект ещё не сохранён в аккаунт. Проверьте связь и попробуйте снова',true);return;}
   let r;try{r=await Session.api('POST','/projects/'+S0.id+'/share');}catch(e){toast(e.message||'Не удалось создать ссылку',true);return;}
