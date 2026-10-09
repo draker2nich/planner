@@ -93,7 +93,7 @@ async function buildItems(todo, p, o, fetchSource) {
       if (!r.ok) { writeJson(failFile, { id: plan.id, name: plan.name, typeId: plan.typeId, reason: r.reason }); failN++; log(`${tag()} —   ${plan.id}  ${r.reason}`); return; }
       const item = {
         id: plan.id, source: plan.source, typeId: plan.typeId, formId: r.formId, name: plan.name, brand: plan.brand || '',
-        price: plan.price ?? syntheticPrice({ id: plan.id, typeId: plan.typeId, formId: r.formId, dims: r.dims, brand: plan.brand }), currency: plan.currency || 'RUB',
+        price: plan.price ?? syntheticPrice({ id: plan.id, typeId: plan.typeId, formId: r.formId, dims: r.dims, brand: plan.brand }), currency: plan.currency || T.PLATFORM_CURRENCY,
         dims: r.dims, colors: plan.colors || [], materials: plan.materials || [], styleTags: plan.styleTags || [], url: plan.url || '',
         model: { file: `models/${plan.id}.glb`, bytes: r.buf.length, info: r.info }, stats: r.stats,
       };
@@ -151,7 +151,7 @@ async function aboBuild(o) {
 }
 
 /* Свои модели из папки: *.glb и необязательный items.json
-   [{ "file": "sofa.glb", "typeId": "sofa", "name": "…", "brand": "…", "price": 45990, "colors": […], "materials": […], "styleTags": […], "image": "sofa.jpg" }] */
+   [{ "file": "sofa.glb", "typeId": "sofa", "name": "…", "brand": "…", "price": 1690, "currency": "BYN", "colors": […], "materials": […], "styleTags": […], "image": "sofa.jpg" }] */
 async function localBuild(o) {
   if (typeof o.in !== 'string') throw new Error('Укажите папку с моделями: --in <папка>');
   const dir = path.resolve(o.in), p = packPaths(dirArg(o.pack, 'catalog-pack'));

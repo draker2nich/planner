@@ -347,8 +347,8 @@ function makeCatalog(db, storage) {
     const t = now(), list = T.demoProducts(), B = 50;
     for (let i = 0; i < list.length; i += B) {
       const part = list.slice(i, i + B);
-      const vals = part.map(() => "(?, 'demo', ?, ?, ?, ?, ?, 'RUB', ?, 'published', ?, ?, ?)").join(',');
-      const args = part.flatMap(p => [p.id, p.typeId, p.formId, p.name, p.brand, p.price, JSON.stringify(p.dims), t, t, searchText(p.name, p.brand)]);
+      const vals = part.map(() => "(?, 'demo', ?, ?, ?, ?, ?, ?, ?, 'published', ?, ?, ?)").join(',');
+      const args = part.flatMap(p => [p.id, p.typeId, p.formId, p.name, p.brand, p.price, p.currency || T.PLATFORM_CURRENCY, JSON.stringify(p.dims), t, t, searchText(p.name, p.brand)]);
       await db.run(`INSERT INTO products (id,source,type_id,form_id,name,brand,price,currency,dims,status,created_at,updated_at,search) VALUES ${vals} ON CONFLICT (id) DO NOTHING`, args);
     }
   }
@@ -402,7 +402,7 @@ function makeCatalog(db, storage) {
       const oldFiles = [...old.filter(o => !foreign.has(o.id)).map(o => o.model_file),
         ...(await db.all(`SELECT file FROM product_images WHERE product_id IN (${marks(liveIds.length)})`, liveIds)).map(r => r.file)].filter(Boolean);
       const vals = part.map(() => `(?, 'demo', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`).join(',');
-      const args = part.flatMap(r => [r.id, r.v.typeId, r.v.formId, r.v.name, r.v.brand || '', r.v.price ?? 0, r.v.currency || 'RUB',
+      const args = part.flatMap(r => [r.id, r.v.typeId, r.v.formId, r.v.name, r.v.brand || '', r.v.price ?? 0, r.v.currency || T.PLATFORM_CURRENCY,
         JSON.stringify(r.v.dims), JSON.stringify(r.v.colors || []), JSON.stringify(r.v.materials || []), JSON.stringify(r.v.styleTags || []), r.v.url || '',
         r.status, r.modelStatus, r.modelFile ? 'upload' : null, r.modelFile, JSON.stringify(r.modelInfo), t, t, searchText(r.v.name, r.v.brand)]);
       await db.run(`INSERT INTO products (id,source,type_id,form_id,name,brand,price,currency,dims,colors,materials,style_tags,url,status,model_status,model_source,model_file,model_info,created_at,updated_at,search)

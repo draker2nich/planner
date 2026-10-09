@@ -73,8 +73,8 @@ async function sizeDialog(t,init){
     api.setup=()=>{api.showBtn=api.primaryBtn;upd();};
   });
 }
-const CUR_SIGN={RUB:'₽',USD:'$',EUR:'€',BYN:'Br'};
-function fmtPrice(v,c){return v.toLocaleString('ru')+' '+(CUR_SIGN[c||'RUB']||c);}
+const CUR_SIGN={RUB:'₽',USD:'$',EUR:'€'};
+function fmtPrice(v,c){c=c||PLATFORM_CURRENCY;return v.toLocaleString('ru')+' '+(CUR_SIGN[c]||c);}
 function productThumb(pr){if(pr.images&&pr.images.length)return pr.images[0].url;if(pr._thumb)return pr._thumb;const t=TYPE.get(pr.typeId),fo=formOf(t,pr.formId);const c=document.createElement('canvas');c.width=c.height=96;const x=c.getContext('2d');const l=fpPoly(fo.fp,pr.dims);const k=80/Math.max(l.w,l.h);x.translate(48,48);x.scale(k,k);x.lineWidth=1.2/k;x.strokeStyle='#333';x.fillStyle='rgba(31,95,191,.08)';x.beginPath();l.pts.forEach((p,i)=>i?x.lineTo(p.x,p.y):x.moveTo(p.x,p.y));x.closePath();x.fill();x.stroke();x.lineWidth=0.9/k;(SYM[t.symbol]||SYM.generic)(x,l,pr.dims,fo);pr._thumb=c.toDataURL();return pr._thumb;}
 async function productDialog(t,formId,cons,opts={}){
   return dialog((box,api)=>{

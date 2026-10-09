@@ -91,7 +91,7 @@ const TYPES=[
 const TYPE=new Map(TYPES.map(t=>[t.id,t]));
 const BRANDS=['Nord','Lumo','Casa','Verto','Alma','Terra','Orbit','Mira'];
 /* Демо‑товары (генерируются из типовых размеров). Используются, пока каталог не загружен с сервера, и для первичного наполнения базы. */
-function demoProducts(){const PRODUCTS=[];let n=0;for(const t of TYPES)for(const f of t.forms){[[0.85,'S'],[1,'M'],[1.2,'L']].forEach(([k,sz],i)=>{const dims={};for(const key of f.dims)dims[key]=Math.round(f.typical[key]*k/10)*10;dims.H=Math.round((f.typical.H||500)*(1+(i-1)*0.06)/10)*10;if(f.typical.E!=null)dims.E=f.typical.E;const brand=BRANDS[(n*7)%BRANDS.length];PRODUCTS.push({id:`p-${t.id}-${f.id}-${sz}`,typeId:t.id,formId:f.id,name:`${t.name} ${brand} ${sz}`,brand,price:Math.round((1500+n*37%9000)*k*10),currency:'RUB',dims,tags:[]});n++;});}return PRODUCTS;}
+function demoProducts(){const PRODUCTS=[];let n=0;for(const t of TYPES)for(const f of t.forms){[[0.85,'S'],[1,'M'],[1.2,'L']].forEach(([k,sz],i)=>{const dims={};for(const key of f.dims)dims[key]=Math.round(f.typical[key]*k/10)*10;dims.H=Math.round((f.typical.H||500)*(1+(i-1)*0.06)/10)*10;if(f.typical.E!=null)dims.E=f.typical.E;const brand=BRANDS[(n*7)%BRANDS.length];PRODUCTS.push({id:`p-${t.id}-${f.id}-${sz}`,typeId:t.id,formId:f.id,name:`${t.name} ${brand} ${sz}`,brand,price:Math.round((1500+n*37%9000)*k*0.37),currency:PLATFORM_CURRENCY,dims,tags:[]});n++;});}return PRODUCTS;}
 const formOf=(t,fid)=>t.forms.find(f=>f.id===fid)||t.forms[0];
 
 /* Габарит футпринта формы в плане (мм): w — по локальной X, d — по локальной Y (перед предмета смотрит в +Y).

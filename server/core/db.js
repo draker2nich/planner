@@ -35,7 +35,7 @@ const SCHEMA = [
     name TEXT NOT NULL,
     brand TEXT NOT NULL DEFAULT '',
     price DOUBLE PRECISION NOT NULL DEFAULT 0,
-    currency TEXT NOT NULL DEFAULT 'USD',
+    currency TEXT NOT NULL DEFAULT 'BYN',
     dims TEXT NOT NULL DEFAULT '{}',
     colors TEXT NOT NULL DEFAULT '[]',
     materials TEXT NOT NULL DEFAULT '[]',

@@ -25,7 +25,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
 <link rel="stylesheet" href="/shared/ui.css">
 <link rel="stylesheet" href="/shared/site.css">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"furnitech","url":"https://furnitech.vercel.app/","description":"Онлайн‑планировщик комнаты: стены по точным размерам, двери и окна, мебель из каталога и прогулка в 3D.","applicationCategory":"DesignApplication","operatingSystem":"Any","inLanguage":"ru","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"furnitech","url":"https://furnitech.vercel.app/","description":"Онлайн‑планировщик комнаты: стены по точным размерам, двери и окна, мебель из каталога и прогулка в 3D.","applicationCategory":"DesignApplication","operatingSystem":"Any","inLanguage":"ru","offers":{"@type":"Offer","price":"0","priceCurrency":"BYN"}}</script>
 <style>
 /* ================= Главная =================
    Язык страницы — чертёж: сетка плана, размерные линии, синий цвет выделения из редактора.
@@ -281,7 +281,7 @@ section{padding:64px 0}
             <ellipse cx="118" cy="122" rx="48" ry="14" fill="color-mix(in srgb,var(--foreground) 6%,transparent)"/>
             <rect x="96" y="104" width="44" height="12" rx="3" fill="color-mix(in srgb,var(--sofa3d) 55%,var(--floor3d))"/>
           </svg>
-          <span class="tag">3D · глаза на 160&nbsp;см</span>
+          <span class="tag">3D · глаза на 1600&nbsp;мм</span>
         </div>
       </div>
     </div>
@@ -353,7 +353,7 @@ section{padding:64px 0}
     <div class="wrap split">
       <div class="sec-head reveal"><p class="eyebrow">Возможности</p><h2 class="sec">Всё, что нужно для планировки одной комнаты</h2></div>
       <ul class="feats reveal" role="list">
-        <li class="feat"><span class="fi"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 8h18M3 6v4M21 6v4M8 18h8M8 16v4M16 16v4"/></svg></span><h3>Точные размеры</h3><p>Редактор проверяет геометрию: стена не&nbsp;короче 10&nbsp;см, а&nbsp;точка не&nbsp;соединяет больше двух стен — план всегда собирается в&nbsp;комнату.</p></li>
+        <li class="feat"><span class="fi"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 8h18M3 6v4M21 6v4M8 18h8M8 16v4M16 16v4"/></svg></span><h3>Точные размеры</h3><p>Редактор проверяет геометрию: стена не&nbsp;короче 100&nbsp;мм, а&nbsp;точка не&nbsp;соединяет больше двух стен — план всегда собирается в&nbsp;комнату.</p></li>
         <li class="feat"><span class="fi"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l9 5v10l-9 5-9-5V7z"/><path d="M12 22V12M21 7l-9 5-9-5"/></svg></span><h3>Каталог с&nbsp;3D‑моделями</h3><p>Товары с&nbsp;настоящими габаритами и&nbsp;моделями — в&nbsp;3D видно не&nbsp;прямоугольник, а&nbsp;сам диван.</p></li>
         <li class="feat"><span class="fi"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span><h3>Замки</h3><p>Зафиксируйте стены или готовую расстановку, чтобы случайно ничего не&nbsp;сдвинуть.</p></li>
         <li class="feat"><span class="fi"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 14L4 9l5-5M4 9h10a6 6 0 0 1 0 12h-3"/></svg></span><h3>Отмена и&nbsp;повтор</h3><p>Пробуйте смело: любое действие отменяется привычным сочетанием клавиш.</p></li>
@@ -485,8 +485,8 @@ function paintState(user) {
 
 /* Витрина каталога (ТЗ 5.2) */
 const DIM_ORDER = ['W', 'L', 'A', 'DIA', 'D', 'B', 'R', 'H'];
-function dimsText(d) { const v = DIM_ORDER.filter(k => +d[k] > 0).map(k => Math.round(d[k] / 10)); return v.length ? v.join(' × ') + ' см' : ''; }
-function priceText(p) { if (!(p.price > 0)) return ''; try { return new Intl.NumberFormat('ru', { style: 'currency', currency: p.currency || 'USD', maximumFractionDigits: 0 }).format(p.price); } catch { return String(p.price); } }
+function dimsText(d) { const v = DIM_ORDER.filter(k => +d[k] > 0).map(k => Math.round(d[k])); return v.length ? v.join(' × ') + ' мм' : ''; }
+function priceText(p) { if (!(p.price > 0)) return ''; try { return new Intl.NumberFormat('ru', { style: 'currency', currency: p.currency || 'BYN', maximumFractionDigits: 0 }).format(p.price); } catch { return String(p.price); } }
 function skeletons(ul) { ul.replaceChildren(...Array.from({ length: 4 }, () => h('li', { class: 'prod sk', 'aria-hidden': 'true' }, h('div', { class: 'ph' }), h('div', { class: 'bd' }, h('div', { class: 'bar', style: 'width:70%' }), h('div', { class: 'bar', style: 'width:40%' }), h('div', { class: 'bar', style: 'width:30%' }))))); }
 async function loadShelf() {
   const sec = $('#catalog'), ul = $('#shelf');

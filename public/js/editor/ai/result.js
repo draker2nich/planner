@@ -72,7 +72,7 @@ function aiItemsList(cell,changed){
     const mark=r.ch.has('new')||r.ch.has('both')?(r.ch.has('both')?'подобран и переставлен':'подобран ИИ'):r.ch.has('moved')?'переставлен':'';
     const img=h('img',{alt:'',width:'44',height:'44',loading:'lazy'});img.src=pr?productThumb(pr):typeIcon(t);if(!pr||!(pr.images&&pr.images.length))img.className='gen';
     const price=pr&&pr.price>0?fmtPrice(pr.price*r.n,pr.currency):'';
-    if(pr&&pr.price>0){sums.set(pr.currency||'RUB',(sums.get(pr.currency||'RUB')||0)+pr.price*r.n);}
+    if(pr&&pr.price>0){sums.set(pr.currency||PLATFORM_CURRENCY,(sums.get(pr.currency||PLATFORM_CURRENCY)||0)+pr.price*r.n);}
     if(f.productId)count+=r.n;
     const nm=h('div',{class:'nm'},h('b',{},(f.productId?f.name:'Пустышка: '+f.name)+(r.n>1?` ×${r.n}`:'')),h('small',{},t.name+' · '+dims+(pr&&pr.brand?' · '+pr.brand:'')));
     if(mark)nm.append(h('em',{},mark));

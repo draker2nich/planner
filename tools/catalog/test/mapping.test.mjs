@@ -98,7 +98,7 @@ test('условная цена стабильна и зависит от раз
   const a = { id: 'abo-1', typeId: 'sofa', formId: 'straight', dims: { W: 2200, D: 900, H: 850 }, brand: 'Rivet' };
   assert.equal(syntheticPrice(a), syntheticPrice({ ...a }));
   assert.ok(syntheticPrice({ ...a, dims: { W: 3200, D: 1100, H: 850 } }) > syntheticPrice({ ...a, dims: { W: 1500, D: 800, H: 850 } }));
-  assert.ok(syntheticPrice(a) > 10000 && syntheticPrice(a) < 250000);
+  assert.ok(syntheticPrice(a) > 400 && syntheticPrice(a) < 9000);
 });
 
 test('карточка ABO → товар: бренд не попадает в материалы, ссылка и адреса файлов собираются', () => {

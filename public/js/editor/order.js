@@ -23,7 +23,7 @@ function orderRows(furniture){
     if(!map.has(key))map.set(key,{f,t,pr,n:0});map.get(key).n++;}
   const rows=[...map.values()].sort((a,b)=>(b.pr?1:0)-(a.pr?1:0));
   const sums=new Map();let products=0,missing=0;
-  for(const r of rows){if(r.pr){products+=r.n;if(r.pr.price>0)sums.set(r.pr.currency||'RUB',(sums.get(r.pr.currency||'RUB')||0)+r.pr.price*r.n);}else missing+=r.n;}
+  for(const r of rows){if(r.pr){products+=r.n;if(r.pr.price>0)sums.set(r.pr.currency||PLATFORM_CURRENCY,(sums.get(r.pr.currency||PLATFORM_CURRENCY)||0)+r.pr.price*r.n);}else missing+=r.n;}
   return {rows,sums,products,missing,total:[...sums.entries()].map(([c,v])=>fmtPrice(Math.round(v),c)).join(' + ')};
 }
 const orderDims=(r)=>{const fo=formOf(r.t,r.f.formId);return fo.dims.map(k=>fmt(r.f.dims[k])).join('×')+'×'+fmt(r.f.dims.H||0)+' '+UNITS[P.unit].l;};

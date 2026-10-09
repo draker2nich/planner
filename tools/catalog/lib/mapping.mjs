@@ -230,11 +230,12 @@ export function cleanName(name, max = 120) {
 /* ---------- условная цена ----------
    В открытых наборах цен нет. Чтобы ИИ‑дизайнеру было из чего выбирать по бюджету, цена считается из типа, размера
    и «ценового уровня» бренда; для одного и того же товара она всегда одинакова. Это не реальные цены. */
-const BASE_RUB = { sofa: 62000, armchair: 26000, pouf: 7500, beanbag: 6000, 'coffee-table': 14000, 'tv-stand': 19000, shelving: 12000, bookcase: 17000, showcase: 28000,
-  console: 15000, fireplace: 45000, rug: 11000, 'floor-lamp': 9000, 'table-lamp': 4500, plant: 3500, bed: 42000, nightstand: 8500, dresser: 22000, wardrobe: 48000,
-  'dressing-table': 16000, bench: 11000, mirror: 7000, 'kids-bed': 24000, desk: 18000, chair: 7000, table: 30000, 'bar-counter': 26000, 'bar-stool': 6500,
-  sideboard: 29000, 'shoe-rack': 7500, 'coat-rack': 5000, 'meeting-table': 55000, 'office-chair': 14000, pedestal: 9000, 'small-table': 6500, chandelier: 12000,
-  'ceiling-light': 5000, sconce: 3500, picture: 3000, 'wall-shelf': 2500, island: 34000, vanity: 21000 };
+/* Базовые цены — в валюте платформы (BYN, см. PLATFORM_CURRENCY в public/shared/catalog-types.js) */
+const BASE_BYN = { sofa: 2300, armchair: 960, pouf: 280, beanbag: 220, 'coffee-table': 520, 'tv-stand': 700, shelving: 440, bookcase: 630, showcase: 1040,
+  console: 560, fireplace: 1670, rug: 410, 'floor-lamp': 330, 'table-lamp': 170, plant: 130, bed: 1550, nightstand: 310, dresser: 810, wardrobe: 1780,
+  'dressing-table': 590, bench: 410, mirror: 260, 'kids-bed': 890, desk: 670, chair: 260, table: 1110, 'bar-counter': 960, 'bar-stool': 240,
+  sideboard: 1070, 'shoe-rack': 280, 'coat-rack': 190, 'meeting-table': 2040, 'office-chair': 520, pedestal: 330, 'small-table': 240, chandelier: 440,
+  'ceiling-light': 190, sconce: 130, picture: 110, 'wall-shelf': 90, island: 1260, vanity: 780 };
 
 function hash(s) { let h = 2166136261; for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); } return h >>> 0; }
 
@@ -244,6 +245,6 @@ export function syntheticPrice({ id, typeId, formId, dims, brand }) {
   const size = Math.min(1.8, Math.max(0.6, Math.sqrt((a.w * a.d) / (b.w * b.d))));
   const tier = [0.65, 1, 1, 1.6][hash('tier:' + String(brand || id)) % 4];
   const jitter = 0.85 + (hash('price:' + id) % 3001) / 10000; // 0.85…1.15
-  const raw = (BASE_RUB[typeId] || 10000) * size * tier * jitter;
-  return Math.max(490, Math.round(raw / 100) * 100 - 10);
+  const raw = (BASE_BYN[typeId] || 370) * size * tier * jitter;
+  return Math.max(19, Math.round(raw / 10) * 10 - 1);
 }

@@ -97,7 +97,7 @@ node tools/catalog/cli.mjs local-build --in <папка с .glb>
 Категория определяется по имени файла. Точнее — описать модели в `items.json` в той же папке:
 
 ```json
-[{ "file": "sofa.glb", "typeId": "sofa", "name": "Диван Осло", "brand": "Nord", "price": 45990,
+[{ "file": "sofa.glb", "typeId": "sofa", "name": "Диван Осло", "brand": "Nord", "price": 1690, "currency": "BYN",
    "colors": ["серый"], "materials": ["ткань"], "styleTags": ["скандинавский"], "image": "sofa.jpg" }]
 ```
 
