@@ -6,6 +6,7 @@
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#09090b">
 <title>furnitech — онлайн‑планировщик комнаты с 3D и каталогом мебели</title>
+<meta name="description" content="Онлайн‑планировщик комнаты: стены по вашим размерам, двери и окна, мебель из каталога с настоящими габаритами и вид в 3D. Бесплатно и без регистрации.">
 <link rel="canonical" href="https://furnitech.vercel.app/">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://furnitech.vercel.app/">
@@ -16,174 +17,160 @@
 <meta property="og:image:height" content="630">
 <meta property="og:locale" content="ru_RU">
 <meta name="twitter:card" content="summary_large_image">
-<script>try{var t=localStorage.getItem('planner.theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}catch(e){}document.documentElement.classList.add('js')</script>
+<script>try{var t=localStorage.getItem('planner.theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<!-- текст первого экрана — кириллица и цифры: оба набора нужны сразу, не после разбора стилей -->
+<link rel="preload" href="/shared/fonts/inter-cyrillic-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/shared/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/shared/ui.css">
 <link rel="stylesheet" href="/shared/site.css">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"furnitech","url":"https://furnitech.vercel.app/","description":"Онлайн‑планировщик комнаты: стены по точным размерам, двери и окна, мебель из каталога и прогулка в 3D.","applicationCategory":"DesignApplication","operatingSystem":"Any","inLanguage":"ru","offers":{"@type":"Offer","price":"0","priceCurrency":"BYN"}}</script>
 <style>
 /* ================= Главная =================
-   Язык страницы — чертёж: сетка плана, размерные линии, синий цвет выделения из редактора.
-   Типографика: одна гарнитура (Inter), шкала 13 / 14 / 15 / 17 / 24–36 / 32–52, интерлиньяж без единиц. */
-:root{--plan-grid:color-mix(in srgb,var(--foreground) 6%,transparent);--plan-wall:#27272a;--plan-wallfill:#a1a1aa;--plan-floor:var(--card);--plan-room:#f1eee9;--plan-furn:color-mix(in srgb,var(--foreground) 7%,var(--card));--plan-line:color-mix(in srgb,var(--foreground) 45%,transparent);
-  --floor3d:#e6dccb;--wall3d:#f1efec;--wall3d-side:#e4e1dc;--sofa3d:#8a8f98}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--plan-wall:#e4e4e7;--plan-wallfill:#52525b;--plan-room:#201f1d;--floor3d:#4a4237;--wall3d:#2a2a2e;--wall3d-side:#232327;--sofa3d:#6b7280}}
-:root[data-theme="dark"]{--plan-wall:#e4e4e7;--plan-wallfill:#52525b;--plan-room:#201f1d;--floor3d:#4a4237;--wall3d:#2a2a2e;--wall3d-side:#232327;--sofa3d:#6b7280}
+   Страница продолжает редактор: первый экран — его холст, и план на нём строится из введённых размеров.
+   Тот же чертёж повторяется в шагах; последний шаг — настоящий снимок 3D‑вида.
+   Типографика: одна гарнитура (Inter), шкала 13 / 15 / 17 / 20 / 26–36 / 34–56, интерлиньяж без единиц.
+   Группы разделяет воздух (шаг 8 px), линии — только в таблицах. Анимаций при прокрутке нет. */
+:root{--ink-2:color-mix(in srgb,var(--foreground) 74%,var(--background));--canvas:var(--sidebar);--shot:#fafafa;--tile:#f1f1f2;--img-edge:oklch(0 0 0 / .08);
+  --plan-grid:color-mix(in srgb,var(--foreground) 7%,transparent);--plan-wall:#27272a;--plan-wallfill:#a1a1aa;--plan-room:#efece7;--plan-furn:#dedbd6;--plan-rug:#e8e4de;--plan-line:#3f3f46}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--shot:#0b0b0d;--tile:#e4e4e7;--img-edge:oklch(1 0 0 / .1);--plan-wall:#e4e4e7;--plan-wallfill:#52525b;--plan-room:#211f1d;--plan-furn:#3a3835;--plan-rug:#2b2927;--plan-line:#d4d4d8}
+  :root:not([data-theme="light"]) .only-light{display:none}}
+:root[data-theme="dark"]{--shot:#0b0b0d;--tile:#e4e4e7;--img-edge:oklch(1 0 0 / .1);--plan-wall:#e4e4e7;--plan-wallfill:#52525b;--plan-room:#211f1d;--plan-furn:#3a3835;--plan-rug:#2b2927;--plan-line:#d4d4d8}
+:root[data-theme="dark"] .only-light{display:none}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]) .only-dark{display:none}}
+@media (prefers-color-scheme:dark){:root[data-theme="light"] .only-dark{display:none}}
 
-section{padding:64px 0}
-@media (min-width:900px){section{padding:104px 0}}
-/* надзаголовок с размерной засечкой — тот же знак, что у размерных линий на плане */
-.eyebrow{display:flex;align-items:center;gap:8px;font-size:13px;line-height:1.4;font-weight:600;color:var(--brand);margin:0 0 12px}
-.eyebrow::before{content:'';flex:none;width:18px;height:7px;border-inline:1.5px solid currentColor;background:linear-gradient(currentColor,currentColor) center/100% 1.5px no-repeat}
-.sec{font-size:clamp(24px,1.5vw + 18px,36px);line-height:1.15;letter-spacing:-.025em;margin:0;font-weight:600;max-width:20em}
-.lead{font-size:17px;line-height:1.55;color:var(--muted-foreground);margin:16px 0 0;max-width:34em}
+main>section{padding:72px 0}
+@media (min-width:900px){main>section{padding:112px 0}}
+.sec{font-size:clamp(26px,1.6vw + 18px,36px);line-height:1.12;letter-spacing:-.025em;margin:0;font-weight:600;max-width:18em}
+.lead{font-size:17px;line-height:1.55;color:var(--ink-2);margin:16px 0 0;max-width:36em}
 .sec-head{margin-bottom:48px}
-.bg-muted{background:var(--sidebar);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
-/* заголовок сбоку, содержимое справа — для списков (возможности, вопросы) */
+.textlink{color:var(--foreground);text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:from-font;text-decoration-color:color-mix(in srgb,var(--foreground) 35%,transparent);transition:text-decoration-color .15s}
+.textlink:hover{text-decoration-color:currentColor}
+/* заголовок слева, содержимое справа — для таблиц */
 @media (min-width:960px){
   .split{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:48px;align-items:start}
   .split>.sec-head{position:sticky;top:96px;margin:0}
 }
 
-/* ---------- первый экран ---------- */
-.hero{position:relative;isolation:isolate;overflow:hidden;padding:48px 0 72px}
-@media (min-width:900px){.hero{padding:88px 0 112px}}
-.hero::before{content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;
-  background-image:linear-gradient(var(--plan-grid) 1px,transparent 1px),linear-gradient(90deg,var(--plan-grid) 1px,transparent 1px);background-size:32px 32px;background-position:center top;
-  -webkit-mask-image:radial-gradient(ellipse 60% 78% at 74% 46%,#000 10%,transparent 72%);mask-image:radial-gradient(ellipse 60% 78% at 74% 46%,#000 10%,transparent 72%)}
-.hero .wrap{display:grid;gap:56px;align-items:center}
-@media (min-width:960px){.hero .wrap{grid-template-columns:minmax(0,1.06fr) minmax(0,1fr);gap:56px}}
-.greet{font-size:14px;line-height:1.5;color:var(--muted-foreground);margin:0 0 12px;min-height:21px}
-.hero h1{font-size:clamp(32px,2.6vw + 12px,48px);line-height:1.08;letter-spacing:-.032em;margin:0;font-weight:700}
-/* вторая часть заголовка тише: сначала — что вы сделаете, потом — чем */
-.hero h1 span{display:block;color:var(--muted-foreground)}
-.hero .lead{margin-top:20px;max-width:31em}
-.cta{display:flex;flex-wrap:wrap;gap:12px;margin:32px 0 0}
-@media (max-width:599px){.cta .btn{flex:1 1 100%}}
+/* ---------- первый экран: слева текст и размеры, справа холст ---------- */
+main>.hero{padding:0;display:grid;border-bottom:1px solid var(--border)}
+.hero-text{min-width:0;padding:40px calc(16px + var(--safe-right)) 40px calc(16px + var(--safe-left))}
+.hero-canvas{position:relative;min-width:0;height:min(80vw,440px);background:var(--canvas);border-top:1px solid var(--border);overflow:hidden;user-select:none}
+.hero-canvas svg{position:absolute;inset:0;width:100%;height:100%}
+.canvas-note{position:absolute;left:calc(16px + var(--safe-left));bottom:12px;margin:0;font-size:13px;line-height:1.4;color:var(--muted-foreground)}
+@media (min-width:600px){.hero-text{padding:56px 24px}}
+@media (min-width:960px){
+  main>.hero{grid-template-columns:minmax(32px,1fr) minmax(0,496px) minmax(0,560px) minmax(0,1fr);min-height:min(680px,calc(100dvh - 57px))}
+  .hero-text{grid-column:2;align-self:center;padding:72px 40px 72px 0}
+  .hero-canvas{grid-column:3/5;height:auto;min-height:540px;border-top:0;border-left:1px solid var(--border)}
+  .canvas-note{left:24px;bottom:20px}
+}
+.greet{font-size:15px;line-height:1.5;color:var(--muted-foreground);margin:0 0 12px}
+.greet:empty{display:none}
+.hero h1{font-size:clamp(34px,3.2vw + 14px,56px);line-height:1.04;letter-spacing:-.035em;margin:0;font-weight:600}
+.hero .lead{margin-top:20px;max-width:30em}
+.dims{margin:36px 0 0}
+.dims fieldset{border:0;margin:0;padding:0;min-width:0}
+.dims legend{padding:0;margin:0 0 14px;font-size:15px;line-height:1.4;font-weight:600}
+.dims-row{display:flex;flex-wrap:wrap;align-items:flex-end;gap:12px}
+.dims label{display:flex;flex-direction:column;gap:6px;font-size:13px;line-height:1.4;color:var(--muted-foreground)}
+.dims input{width:108px;height:48px;padding:0 14px;border-radius:var(--radius-lg);font-size:20px;font-weight:500;font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+.dims .x{display:flex;align-items:center;height:48px;font-size:20px;color:var(--muted-foreground)}
+.dims button{height:48px;padding:0 20px;font-size:15px;border-radius:var(--radius-lg);transition:background-color .15s,scale .15s ease-out}
+.dims button:active{scale:.96}
+@media (max-width:479px){.dims label{flex:1 1 0}.dims input{width:100%}.dims button{flex:1 1 100%}}
+.dims-msg{margin:14px 0 0;min-height:21px;font-size:14px;line-height:1.5;color:var(--muted-foreground);font-variant-numeric:tabular-nums}
+.dims-msg output{color:var(--foreground);font-weight:500}
+.dims-msg.bad{color:var(--destructive)}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin:36px 0 0}
+.cta .btn{max-width:100%;height:auto;min-height:44px;padding-block:10px;white-space:normal;line-height:1.3;text-align:center;overflow-wrap:anywhere}
+@media (max-width:479px){.cta .btn{flex:1 1 100%}}
 .cta-note{margin:16px 0 0;font-size:14px;line-height:1.5;color:var(--muted-foreground);max-width:34em}
 .cta-note a{color:var(--foreground);text-underline-offset:4px;text-decoration-thickness:from-font}
 
-/* макет редактора: та же шапка, тот же план и та же панель инструментов, что в продукте */
-.hero-art{position:relative;max-width:580px;width:100%;justify-self:center;margin-bottom:28px;font-size:12px;line-height:1;color:var(--muted-foreground);user-select:none}
-.mock{border:1px solid var(--border);border-radius:var(--radius-xl);background:var(--plan-floor);box-shadow:var(--shadow-lg);overflow:hidden}
-.mock-bar{display:flex;align-items:center;gap:10px;height:44px;padding:0 10px;border-bottom:1px solid var(--border);background:var(--background)}
-.mock-logo{width:22px;height:22px;flex:none;border-radius:var(--radius-sm);background:var(--primary);color:var(--primary-foreground);display:inline-flex;align-items:center;justify-content:center}
-.mock-logo .ic{width:14px;height:14px;stroke-width:2.6}
-.mock-name{font-weight:600;color:var(--foreground);white-space:nowrap}
-.mock-seg{display:inline-flex;height:26px;padding:2px;border-radius:var(--radius-md);background:var(--muted)}
-.mock-seg span{display:inline-flex;align-items:center;padding:0 10px;border-radius:var(--radius-sm);font-weight:500;white-space:nowrap}
-.mock-seg span.on{background:var(--seg-on);color:var(--foreground);box-shadow:var(--shadow-sm)}
-.mock-area{margin-left:auto;font-variant-numeric:tabular-nums;white-space:nowrap}
-@media (max-width:419px){.mock-area{display:none}}
-.mock-body{position:relative}
-.mock-body>svg{display:block;width:100%;height:auto}
-.mock-rail{position:absolute;top:10px;right:10px;display:flex;flex-direction:column;gap:2px;padding:3px;border:1px solid var(--border);border-radius:var(--radius-lg);background:var(--card);box-shadow:var(--shadow-md)}
-.mock-rail i{display:flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:var(--radius-sm)}
-.mock-rail i.on{background:var(--primary);color:var(--primary-foreground)}
-.mock-rail .ic{width:15px;height:15px}
-@media (max-width:659px){.mock-rail{top:8px;right:8px;padding:2px}.mock-rail i{width:24px;height:24px}.mock-rail .ic{width:13px;height:13px}}
-.inset{position:absolute;right:-14px;bottom:-28px;width:43%;border:1px solid var(--border);border-radius:var(--radius-lg);background:var(--card);box-shadow:var(--shadow-lg);overflow:hidden}
-@media (max-width:659px){.inset{right:8px;bottom:-24px;width:48%}}
-.inset svg{display:block;width:100%;height:auto}
-.inset .tag{position:absolute;left:8px;top:8px;font-size:11px;font-weight:600;background:color-mix(in srgb,var(--background) 88%,transparent);border-radius:999px;padding:4px 8px;color:var(--foreground)}
-/* общие классы чертежа: первый экран и иллюстрации шагов */
+/* ---------- чертёж: цвета и толщины линий — как на холсте редактора ---------- */
 .p-grid{stroke:var(--plan-grid);stroke-width:1}
 .p-room{fill:var(--plan-room)}
-.p-wall{fill:none;stroke:var(--plan-wall);stroke-width:10;stroke-linejoin:miter}
-.p-wallf{fill:none;stroke:var(--plan-wallfill);stroke-width:7.6;stroke-linejoin:miter}
-.p-furn{fill:var(--plan-furn);stroke:var(--plan-line);stroke-width:1.25}
-.p-sel{fill:var(--brand-soft);stroke:var(--brand);stroke-width:1.75}
-.p-thin{fill:none;stroke:var(--plan-line);stroke-width:1.25}
-.p-dash{fill:none;stroke:var(--plan-line);stroke-width:1.25;stroke-dasharray:4 4}
-.p-dim{fill:none;stroke:var(--brand);stroke-width:1.25}
+.p-wallp{fill:var(--plan-wallfill);stroke:var(--plan-wall);stroke-width:1.25;stroke-linejoin:miter}
+.p-thin{fill:none;stroke:var(--plan-wall);stroke-width:1}
+.p-win{fill:var(--background);stroke:var(--plan-wall);stroke-width:1}
+.p-furn{fill:var(--plan-furn);stroke:var(--plan-line);stroke-width:1}
+.p-rug{fill:var(--plan-rug);stroke:var(--plan-line);stroke-width:1}
+.p-fl{fill:none;stroke:var(--plan-line);stroke-width:1}
+.p-sel{fill:var(--brand-soft);stroke:var(--brand);stroke-width:1.5}
+.is-sel .p-fl{stroke:var(--brand)}
+.p-ph{fill:var(--brand-soft);stroke:var(--brand);stroke-width:1.25;stroke-dasharray:5 4}
+.p-dim{fill:none;stroke:var(--brand);stroke-width:1}
 .p-dimt{fill:var(--brand);font:600 12px var(--font);font-variant-numeric:tabular-nums}
+.p-bg{fill:var(--canvas)}
 .p-rub{fill:none;stroke:var(--brand);stroke-width:2;stroke-dasharray:6 4}
+.p-ring{fill:none;stroke:var(--brand);stroke-width:1.5;opacity:.45}
 .p-dot{fill:var(--brand)}
+.p-q{fill:var(--background);font:700 11px var(--font)}
 .p-vx{fill:var(--plan-wall)}
-.p-win{fill:var(--plan-floor);stroke:var(--plan-wall);stroke-width:1.25}
-.p-bg{fill:var(--plan-floor)}
 .p-cap rect{fill:var(--popover);stroke:var(--border)}
-.p-cap text{fill:var(--foreground);font:500 11px var(--font)}
+.p-cap text{fill:var(--foreground);font:500 11px var(--font);font-variant-numeric:tabular-nums}
 
-/* ---------- шаги ---------- */
-.steps{list-style:none;margin:0;padding:0;display:grid;gap:40px 24px}
-@media (min-width:600px){.steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (min-width:1000px){.steps{grid-template-columns:repeat(4,minmax(0,1fr))}}
-.step-art{border:1px solid var(--border);border-radius:var(--radius-xl);background:var(--plan-floor);overflow:hidden;margin-bottom:20px}
-.step-art svg{display:block;width:100%;height:auto}
-.step-n{display:block;font-size:13px;line-height:1.4;font-weight:600;color:var(--muted-foreground);font-variant-numeric:tabular-nums;margin-bottom:4px}
-.steps h3{font-size:17px;line-height:1.3;letter-spacing:-.01em;margin:0 0 8px;font-weight:600}
-.steps p{margin:0;color:var(--muted-foreground);font-size:15px;line-height:1.55}
+/* ---------- шаги: три чертежа одной комнаты и её 3D‑вид ---------- */
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:48px 24px;counter-reset:step}
+@media (min-width:760px){.steps{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.steps>li{counter-increment:step;min-width:0}
+.step-art{aspect-ratio:4/3;border-radius:var(--radius-xl);background:var(--canvas);overflow:hidden;margin-bottom:20px;user-select:none}
+.step-art svg{display:block;width:100%;height:100%}
+.steps h3{display:flex;gap:10px;font-size:20px;line-height:1.25;letter-spacing:-.015em;margin:0 0 8px;font-weight:600}
+.steps h3::before{content:counter(step);flex:none;font-weight:500;font-variant-numeric:tabular-nums;color:var(--muted-foreground)}
+.steps p{margin:0;font-size:15px;line-height:1.55;color:var(--ink-2);max-width:34em}
+.steps>.in3d{grid-column:1/-1;display:grid;gap:20px 48px;align-items:center}
+@media (min-width:900px){.steps>.in3d{grid-template-columns:minmax(0,8fr) minmax(0,4fr);margin-top:24px}}
+.shot{margin:0;border-radius:var(--radius-xl);background:var(--shot);overflow:hidden;outline:1px solid var(--img-edge);outline-offset:-1px}
+.shot img{display:block;width:100%;height:auto}
+.steps .src{margin-top:12px;font-size:13px;line-height:1.5;color:var(--muted-foreground)}
 
-/* ---------- возможности: список без рамок, группы разделяет воздух ---------- */
-.feats{display:grid;gap:32px 40px;margin:0;padding:0;list-style:none}
-@media (min-width:600px){.feats{grid-template-columns:repeat(2,minmax(0,1fr));gap:40px}}
-.feat{display:grid;grid-template-columns:40px minmax(0,1fr);gap:4px 16px;align-items:start;align-content:start}
-.feat .fi{grid-row:1/3;display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:var(--radius-lg);background:var(--fill);color:var(--foreground)}
-.feat .fi .ic{width:20px;height:20px;stroke-width:1.75}
-.feat h3{margin:0;padding-top:1px;font-size:17px;line-height:1.3;letter-spacing:-.01em;font-weight:600;display:flex;align-items:center;gap:4px 6px;flex-wrap:wrap}
-.feat h3 .badge{height:20px;padding:0 6px;font-size:11px}
-.feat p{margin:0;grid-column:2;color:var(--muted-foreground);font-size:15px;line-height:1.55}
+/* ---------- каталог: фото, название и след вещи на плане в одном масштабе ---------- */
+.goods{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:32px 16px}
+@media (min-width:760px){.goods{grid-template-columns:repeat(3,minmax(0,1fr));gap:48px 24px}}
+.good{display:flex;flex-direction:column;min-width:0}
+.good .ph{aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;padding:14px;border-radius:var(--radius-xl);background:var(--tile);overflow:hidden;outline:1px solid var(--img-edge);outline-offset:-1px}
+.good .ph img{width:100%;height:100%;object-fit:contain;mix-blend-mode:multiply}
+.good .nm{margin:14px 0 0;font-size:15px;line-height:1.35;font-weight:600;overflow-wrap:anywhere;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;line-clamp:2;overflow:hidden}
+.good .br{margin-top:2px;font-size:13px;line-height:1.4;color:var(--muted-foreground)}
+.good .fp{display:flex;align-items:center;gap:12px;margin-top:auto;padding-top:12px;font-size:13px;line-height:1.4;color:var(--ink-2);font-variant-numeric:tabular-nums}
+.good .fp svg{flex:none;border-radius:var(--radius-sm);background:var(--canvas)}
+@media (max-width:479px){.good .fp{flex-direction:column;align-items:flex-start;gap:6px}}
+.good .pr{margin-top:6px;font-size:15px;line-height:1.4;font-weight:600;font-variant-numeric:tabular-nums}
+.good.sk .ph{background:var(--muted)}
+.good.sk .bar{height:12px;border-radius:4px;margin:14px 0 0;background:var(--muted)}
+.goods-foot{margin:40px 0 0;font-size:15px;line-height:1.5}
 
-/* ---------- витрина ---------- */
-.shelf-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:32px}
-.shelf-nav{display:none;gap:8px}
-@media (min-width:900px) and (pointer:fine){.shelf-nav{display:flex}}
-.shelf{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(220px,calc((100% - 48px)/4));gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 2px 12px;margin:0 -2px;list-style:none;scrollbar-width:none;overscroll-behavior-x:contain}
-.shelf::-webkit-scrollbar{display:none}
-@media (max-width:599px){.shelf{grid-auto-columns:72%}}
-.prod{scroll-snap-align:start;display:flex;flex-direction:column;border:1px solid var(--border);border-radius:var(--radius-xl);background:var(--card);overflow:hidden;min-height:100%}
-.prod .ph{aspect-ratio:4/3;background:#fff;display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--border)}
-.prod .ph img{width:100%;height:100%;object-fit:contain}
-.prod .bd{padding:12px 14px 14px;display:flex;flex-direction:column;gap:2px;min-width:0}
-.prod .nm{font-weight:600;font-size:14px;line-height:1.4;overflow-wrap:anywhere}
-.prod .br{font-size:13px;line-height:1.4;color:var(--muted-foreground)}
-.prod .dm{font-size:13px;line-height:1.4;color:var(--muted-foreground);font-variant-numeric:tabular-nums}
-.prod .pr{font-weight:600;font-size:15px;line-height:1.4;margin-top:6px;font-variant-numeric:tabular-nums}
-.prod.sk .ph,.prod.sk .bar{background:var(--muted)}
-.prod.sk .bar{height:12px;border-radius:4px;margin:4px 0}
-.shelf-foot{margin-top:24px}
+/* ---------- возможности и сравнение: таблицы без рамок ---------- */
+.spec{margin:0;border-top:1px solid var(--border)}
+.spec>div{display:grid;gap:6px 32px;padding:20px 0;border-bottom:1px solid var(--border)}
+@media (min-width:640px){.spec>div{grid-template-columns:minmax(0,5fr) minmax(0,8fr)}}
+.spec dt{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;font-size:17px;line-height:1.4;letter-spacing:-.01em;font-weight:600}
+.spec dd{margin:0;font-size:15px;line-height:1.6;color:var(--ink-2)}
+.cmp{width:100%;border-collapse:collapse;table-layout:fixed;font-size:15px;line-height:1.45}
+.cmp th,.cmp td{padding:14px 16px 14px 0;text-align:start;vertical-align:top;border-bottom:1px solid var(--border);overflow-wrap:break-word}
+.cmp th:last-child,.cmp td:last-child{padding-right:0}
+.cmp thead th{font-size:13px;line-height:1.4;font-weight:600;color:var(--muted-foreground)}
+.cmp tbody th{font-weight:500}
+.cmp td{color:var(--ink-2)}
+.cmp-foot{display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px;margin:28px 0 0;font-size:14px;line-height:1.5;color:var(--muted-foreground)}
+.biz{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px 32px;padding-top:32px;border-top:1px solid var(--border)}
+.biz h2{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;margin:0 0 4px;font-size:17px;line-height:1.4;font-weight:600}
+.biz p{margin:0;font-size:15px;line-height:1.55;color:var(--ink-2);max-width:36em}
 
-/* ---------- блок регистрации и компаний ---------- */
-.save{position:relative;isolation:isolate;overflow:hidden;display:grid;gap:32px;align-items:center;padding:32px 24px;border-radius:20px;background:var(--primary);color:var(--primary-foreground)}
-.save::before{content:'';position:absolute;inset:0;z-index:-1;opacity:.07;background-image:linear-gradient(currentColor 1px,transparent 1px),linear-gradient(90deg,currentColor 1px,transparent 1px);background-size:32px 32px;
-  -webkit-mask-image:linear-gradient(100deg,transparent 35%,#000);mask-image:linear-gradient(100deg,transparent 35%,#000)}
-@media (min-width:900px){.save{grid-template-columns:1fr auto;gap:48px;padding:56px}}
-.save h2{font-size:clamp(22px,1vw + 18px,28px);line-height:1.2;margin:0 0 20px;letter-spacing:-.02em;font-weight:600}
-.save ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
-.save li{display:flex;gap:10px;align-items:flex-start;font-size:15px;line-height:1.5;color:color-mix(in srgb,var(--primary-foreground) 86%,var(--primary))}
-.save li .ic{margin-top:3px;color:var(--primary-foreground)}
-.save .btn{background:var(--primary-foreground);color:var(--primary);border-color:transparent}
-.save .btn:hover{background:color-mix(in srgb,var(--primary-foreground) 88%,var(--primary))}
-.save .btn:focus-visible{outline-color:var(--primary-foreground)}
-.biz{display:flex;flex-wrap:wrap;gap:16px 24px;align-items:center;justify-content:space-between;padding:24px;box-shadow:none}
-.biz .t{display:flex;gap:14px;align-items:flex-start;max-width:640px}
-.biz .t .ic{width:20px;height:20px;margin-top:2px;flex:none}
-.biz h3{margin:0 0 4px;font-size:16px;line-height:1.4;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-.biz p{margin:0;color:var(--muted-foreground);font-size:14px;line-height:1.5}
+/* ---------- вопросы: ответы видны сразу ---------- */
+.faq{display:grid;gap:36px 48px}
+@media (min-width:760px){.faq{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.faq h3{margin:0 0 8px;font-size:17px;line-height:1.35;letter-spacing:-.01em;font-weight:600}
+.faq p{margin:0;font-size:15px;line-height:1.6;color:var(--ink-2);max-width:36em}
 
-/* ---------- вопросы ---------- */
-.faq details{border-bottom:1px solid var(--border)}
-.faq details:first-of-type{border-top:1px solid var(--border)}
-.faq summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 0;font-size:17px;line-height:1.4;font-weight:500;border-radius:var(--radius-sm)}
-.faq summary::-webkit-details-marker{display:none}
-.faq summary:hover{color:color-mix(in srgb,var(--foreground) 72%,transparent)}
-.faq summary::after{content:'';width:8px;height:8px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:translateY(-2px) rotate(45deg);transition:transform .15s ease-out;flex:none;margin-right:6px}
-.faq details[open] summary::after{transform:translateY(2px) rotate(-135deg)}
-.faq details p{margin:0 0 22px;color:var(--muted-foreground);font-size:15px;line-height:1.6;max-width:38em}
-
-/* ---------- финальный призыв ---------- */
-.final{position:relative;isolation:isolate;overflow:hidden}
-.final::before{content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;background-image:linear-gradient(var(--plan-grid) 1px,transparent 1px),linear-gradient(90deg,var(--plan-grid) 1px,transparent 1px);background-size:32px 32px;background-position:center;
-  -webkit-mask-image:radial-gradient(ellipse 55% 90% at 50% 50%,transparent 30%,#000 100%);mask-image:radial-gradient(ellipse 55% 90% at 50% 50%,transparent 30%,#000 100%)}
-.final .wrap{text-align:center;display:flex;flex-direction:column;align-items:center}
-.final .cta{justify-content:center}
-
-/* ---------- появление секций ---------- */
-.js .reveal{opacity:0;transform:translateY(8px);transition:opacity .25s ease-out,transform .25s ease-out}
-.js .reveal.in{opacity:1;transform:none}
-@media (prefers-reduced-motion:reduce){.js .reveal{opacity:1;transform:none}}
+/* ---------- последний раздел ---------- */
+.closing .wrap{display:grid;gap:28px 48px;align-items:end}
+@media (min-width:760px){.closing .wrap{grid-template-columns:minmax(0,1fr) auto}}
+main>.closing{border-top:1px solid var(--border)}
 </style>
 </head>
 <body>
@@ -191,197 +178,271 @@ section{padding:64px 0}
 <header class="site-h">
   <div class="wrap">
     <a class="brand" href="/" translate="no"><span class="logo"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19V9a3 3 0 0 1 3-3h4.5M9 12.5h5.5"/></svg></span><span class="wm" translate="no">furni<span>tech</span></span></a>
-    <nav class="anchors" aria-label="Разделы"><a href="#how">Как это работает</a><a href="#features">Возможности</a><a href="#catalog" data-needs="catalog">Каталог</a><a href="#faq">Вопросы</a></nav>
+    <nav class="anchors" aria-label="Разделы"><a href="#how">Как это работает</a><a href="#catalog" data-needs="catalog">Каталог</a><a href="#features">Возможности</a><a href="#faq">Вопросы</a></nav>
     <span class="sp"></span>
     <div class="acct"><span class="skel" aria-hidden="true"></span></div>
     <button class="burger ghost iconbtn" type="button" aria-expanded="false" aria-controls="mnav" aria-label="Открыть меню"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
   </div>
-  <nav class="mnav" id="mnav" hidden aria-label="Меню"><a href="#how">Как это работает</a><a href="#features">Возможности</a><a href="#catalog" data-needs="catalog">Каталог</a><a href="#faq">Вопросы</a><div class="row"></div></nav>
+  <nav class="mnav" id="mnav" hidden aria-label="Меню"><a href="#how">Как это работает</a><a href="#catalog" data-needs="catalog">Каталог</a><a href="#features">Возможности</a><a href="#faq">Вопросы</a><div class="row"></div></nav>
 </header>
 
 <main id="main">
   <!-- ================= Первый экран ================= -->
   <section class="hero">
-    <div class="wrap">
-      <div>
-        <p class="greet" id="greet"></p>
-        <h1>Спланируйте комнату за&nbsp;вечер <span>с&nbsp;настоящей мебелью и&nbsp;прогулкой в&nbsp;3D</span></h1>
-        <p class="lead">Нарисуйте стены по&nbsp;своим размерам, поставьте двери и&nbsp;окна, расставьте мебель из&nbsp;каталога и&nbsp;посмотрите на&nbsp;результат глазами человека, стоящего в&nbsp;комнате.</p>
-        <div class="cta">
-          <a class="btn primary lg" id="ctaMain" href="/editor" data-ev="cta_start_click" data-pos="hero"><span id="ctaMainT">Начать планировку</span><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-          <a class="btn lg" href="#how">Как это работает</a>
-        </div>
-        <p class="cta-note" id="ctaNote">Бесплатно. Регистрация займёт минуту — проекты хранятся в аккаунте и открываются на любом устройстве.</p>
-      </div>
+    <div class="hero-text">
+      <p class="greet" id="greet"></p>
+      <h1>Сначала расставьте мебель, потом покупайте</h1>
+      <p class="lead">Нарисуйте комнату по своим размерам, поставьте двери и&nbsp;окна, расставьте вещи из&nbsp;каталога в&nbsp;их настоящих габаритах и&nbsp;посмотрите, как это выглядит в&nbsp;3D.</p>
 
-      <!-- Макет редактора: декоративный, для скринридера скрыт -->
-      <div class="hero-art" aria-hidden="true">
-        <div class="mock">
-          <div class="mock-bar">
-            <span class="mock-logo"><svg class="ic" viewBox="0 0 24 24"><path d="M9 19V9a3 3 0 0 1 3-3h4.5M9 12.5h5.5"/></svg></span>
-            <span class="mock-name">Гостиная</span>
-            <span class="mock-seg"><span>Стены</span><span class="on">Мебель</span></span>
-            <span class="mock-area">21,1&nbsp;м²</span>
+      <!-- Гостю без проекта: размеры уходят в редактор (/editor?w=…&l=…), и комната строится сразу -->
+      <form class="dims" id="dims" action="/editor" method="get" novalidate>
+        <fieldset>
+          <legend>Начните с&nbsp;размеров комнаты</legend>
+          <div class="dims-row">
+            <label>Ширина<input id="dimW" name="w" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" maxlength="7" value="5400" aria-describedby="dimMsg"></label>
+            <span class="x" aria-hidden="true">×</span>
+            <label>Длина<input id="dimL" name="l" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" maxlength="7" value="3900" aria-describedby="dimMsg"></label>
+            <button class="primary" type="submit">Построить комнату</button>
           </div>
-          <div class="mock-body">
-            <svg viewBox="0 0 520 356" width="520" height="356" role="presentation">
-              <defs><pattern id="g" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" class="p-grid" fill="none"/></pattern></defs>
-              <rect width="520" height="356" fill="url(#g)"/>
-              <rect class="p-room" x="56" y="64" width="348" height="251"/>
-              <!-- размеры -->
-              <path class="p-dim" d="M56 34H404M56 28v12M404 28v12"/>
-              <rect class="p-bg" x="196" y="25" width="68" height="18" rx="4"/><text class="p-dimt" x="230" y="38" text-anchor="middle">5400 мм</text>
-              <path class="p-dim" d="M430 64V315M424 64h12M424 315h12"/>
-              <rect class="p-bg" x="421" y="156" width="18" height="68" rx="4"/><text class="p-dimt" text-anchor="middle" transform="translate(434 190) rotate(-90)">3900 мм</text>
-              <!-- ковёр -->
-              <ellipse class="p-dash" cx="278" cy="193" rx="74" ry="52"/>
-              <!-- стены: тёмный контур и серая заливка, как в редакторе -->
-              <path class="p-wall" d="M136 315H404V64H56V315H86"/><path class="p-wallf" d="M136 315H404V64H56V315H86"/>
-              <!-- окно -->
-              <rect class="p-win" x="150" y="59" width="120" height="10"/><path class="p-thin" d="M150 64H270"/>
-              <!-- дверь -->
-              <path class="p-thin" d="M86 315V265"/><path class="p-dash" d="M86 265A50 50 0 0 1 136 315"/>
-              <!-- ТВ‑тумба -->
-              <rect class="p-furn" x="63" y="150" width="18" height="90" rx="3"/>
-              <!-- кресло -->
-              <g transform="rotate(-18 160 122)"><rect class="p-furn" x="137" y="99" width="46" height="46" rx="6"/><rect class="p-furn" x="137" y="99" width="46" height="11" rx="4"/></g>
-              <!-- журнальный стол -->
-              <rect class="p-furn" x="250" y="172" width="56" height="42" rx="8"/>
-              <!-- диван (выделен) -->
-              <rect class="p-sel" x="341" y="118" width="57" height="142" rx="8"/><rect class="p-sel" x="382" y="118" width="16" height="142" rx="5"/>
-              <g class="p-cap"><rect x="222" y="84" width="152" height="24" rx="12"/><text x="298" y="100" text-anchor="middle">Диван · 2200 × 900 мм</text></g>
-              <!-- стол и стулья -->
-              <circle class="p-furn" cx="176" cy="262" r="25"/>
-              <rect class="p-furn" x="166" y="223" width="20" height="12" rx="3"/><rect class="p-furn" x="166" y="289" width="20" height="12" rx="3"/><rect class="p-furn" x="137" y="252" width="12" height="20" rx="3"/><rect class="p-furn" x="203" y="252" width="12" height="20" rx="3"/>
-              <!-- растение -->
-              <circle class="p-furn" cx="384" cy="290" r="11"/>
-            </svg>
-            <div class="mock-rail">
-              <i class="on"><svg class="ic" viewBox="0 0 24 24"><path d="M5 3l14 8-6 2-3 6z"/></svg></i>
-              <i><svg class="ic" viewBox="0 0 24 24"><path d="M4 20V6h16v14M4 13h16M12 6v7M8 13v7M16 13v7"/></svg></i>
-              <i><svg class="ic" viewBox="0 0 24 24"><path d="M3 20h18M7 20V5M7 5a12 12 0 0 1 10 10"/></svg></i>
-              <i><svg class="ic" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="1"/><path d="M3 12h18M12 5v14"/></svg></i>
-              <i><svg class="ic" viewBox="0 0 24 24"><path d="M4 20V11a8 8 0 0 1 16 0v9"/></svg></i>
-            </div>
+        </fieldset>
+        <p class="dims-msg" id="dimMsg" role="status">Размеры&nbsp;— в&nbsp;миллиметрах или метрах: 5400 или&nbsp;5,4.</p>
+      </form>
+      <div class="cta" id="ctaRow" hidden><a class="btn primary lg" id="ctaMain" href="/editor" data-ev="cta_start_click" data-pos="hero">Открыть редактор</a></div>
+      <p class="cta-note" id="ctaNote">Бесплатно и&nbsp;без регистрации. Аккаунт понадобится, чтобы сохранить проект, запустить ИИ‑дизайнера и&nbsp;отправить заявку.</p>
+    </div>
+
+    <!-- Холст: чертёж рисует скрипт ниже; для скринридера это украшение, площадь названа в форме -->
+    <div class="hero-canvas" aria-hidden="true">
+      <svg id="heroPlan" role="presentation"></svg>
+      <p class="canvas-note" id="canvasNote"></p>
+    </div>
+  </section>
+<script>
+/* ================= План комнаты =================
+   Один и тот же чертёж рисует первый экран (по размерам из полей) и три шага ниже.
+   Всё считается в миллиметрах, как в редакторе: стена 150 мм, дверь 800, окно 1500, мебель — в габаритах товаров каталога.
+   Вещь, которая не помещается в комнату, на план не ставится. */
+const WALL = 150, DOOR = 800;
+/* ширина × глубина, мм: диван, ТВ‑тумба, журнальный стол, ковёр, обеденный стол, стул, кресло, торшер */
+const FURN = { sofa: [2212, 853], tv: [1448, 349], coffee: [1119, 490], rug: [2135, 1524], table: [1500, 900], chair: [450, 611], arm: [663, 743], lamp: [229, 229] };
+
+function roomOpenings(w) {
+  const ww = Math.min(1500, Math.max(600, w - 1400));
+  return { door: { x: Math.round(Math.min(600, (w - DOOR) / 2)), w: DOOR }, win: { x: Math.round((w - ww) * 0.77 / 50) * 50, w: ww } };
+}
+/* Расстановка: каждая вещь привязана к стене или к соседней вещи; не влезла или упёрлась в другую — пропускается */
+function roomFurniture(w, l) {
+  const out = [], hard = [], GAP = 30;
+  const { door } = roomOpenings(w);
+  hard.push({ x: door.x - 60, y: l - DOOR - 60, w: DOOR + 120, h: DOOR + 60 }); // дверь должна открываться
+  const box = (cx, cy, ww, d, rot) => { const q = rot % 180 !== 0, bw = rot % 90 ? Math.max(ww, d) * 1.2 : q ? d : ww, bh = rot % 90 ? bw : q ? ww : d; return { x: cx - bw / 2, y: cy - bh / 2, w: bw, h: bh }; };
+  const hit = (a, b, g) => a.x < b.x + b.w + g && b.x < a.x + a.w + g && a.y < b.y + b.h + g && b.y < a.y + a.h + g;
+  const inside = (b) => b.x >= GAP - 1 && b.y >= GAP - 1 && b.x + b.w <= w - GAP + 1 && b.y + b.h <= l - GAP + 1;
+  const fits = (b, g = 100, among = hard) => inside(b) && !among.some((h) => hit(b, h, g));
+  const put = (kind, cx, cy, rot, opt = {}) => {
+    const [ww, d] = FURN[kind], b = box(cx, cy, ww, d, rot);
+    if (!fits(b, opt.gap, opt.among)) return null;
+    (opt.into || hard).push(b);
+    const it = { kind, cx, cy, w: ww, d, rot }; out.push(it); return it;
+  };
+  const [SW, SD] = FURN.sofa, [, TD] = FURN.tv, [, CD] = FURN.coffee, rugs = [];
+  const side = l >= SW + 2 * GAP; // диван встаёт вдоль правой стены, иначе — вдоль верхней
+  const sofa = side ? put('sofa', w - GAP - SD / 2, l / 2, 90) : put('sofa', w - GAP - SW / 2, GAP + SD / 2, 0);
+  if (sofa) {
+    const tv = side ? put('tv', GAP + TD / 2, sofa.cy, 270) : put('tv', sofa.cx, l - GAP - TD / 2, 180);
+    const coffee = side ? put('coffee', sofa.cx - SD / 2 - 450 - CD / 2, sofa.cy, 90) : put('coffee', sofa.cx, sofa.cy + SD / 2 + 450 + CD / 2, 0);
+    /* ковёр лежит под столиком и передними ножками дивана; мешать ему могут только дверь и тумба */
+    if (coffee) { const rug = put('rug', coffee.cx, coffee.cy, coffee.rot, { gap: 0, among: tv ? [hard[0], hard[2]] : [hard[0]], into: rugs }); if (rug) { out.pop(); out.unshift(rug); } }
+  }
+  /* обеденная группа у окна: стол и четыре стула — ставится целиком или никак */
+  const tx = 1750, ty = 1150, group = { x: tx - 750, y: ty - 895, w: 1500, h: 1790 };
+  if (fits(group, 250, hard.concat(rugs))) {
+    hard.push(group);
+    out.push({ kind: 'table', cx: tx, cy: ty, w: 1500, d: 900, rot: 0 });
+    for (const [dx, dy, rot] of [[-350, -590, 0], [350, -590, 0], [-350, 590, 180], [350, 590, 180]]) out.push({ kind: 'chair', cx: tx + dx, cy: ty + dy, w: 450, d: 611, rot });
+  }
+  if (sofa && side) put('arm', sofa.cx - SD / 2 - 1020, l - 550, 160, { gap: 0 });
+  put('lamp', w - 270, 280, 0, { gap: 20 });
+  return out;
+}
+
+/* 5400, но 12 000: четырёхзначные числа на разряды не разбиваются */
+const fmtMm = (v) => { const t = String(Math.round(v)); return t.length > 4 ? t.replace(/\B(?=(\d{3})+(?!\d))/g, '\u00a0') : t; };
+let planSeq = 0;
+/* svg — пустой <svg>; o: { w, l, stage: 1 стены | 2 проёмы | 3 мебель | 0 всё, pad, maxK, noTag } → { step — клетка сетки в мм, sofa } */
+function drawPlan(svg, o) {
+  const W = Math.round(svg.clientWidth), H = Math.round(svg.clientHeight); if (!W || !H) return null;
+  const { w, l } = o, stage = o.stage || 0, pad = o.pad || { t: 52, r: 56, b: 40, l: 32 };
+  const k = Math.min((W - pad.l - pad.r) / w, (H - pad.t - pad.b) / l, o.maxK || 1);
+  const rw = w * k, rl = l * k, T = Math.max(3, WALL * k);
+  const ox = Math.round(pad.l + (W - pad.l - pad.r - rw) / 2), oy = Math.round(pad.t + (H - pad.t - pad.b - rl) / 2);
+  const n = (v) => Math.round(v * 10) / 10, X = (mm) => n(ox + mm * k), Y = (mm) => n(oy + mm * k);
+  const step = [500, 1000, 2000, 5000, 10000].find((s) => s * k >= 14) || 10000, cell = n(step * k);
+  const id = svg.dataset.pid || (svg.dataset.pid = 'pg' + (++planSeq));
+  const s = [];
+  s.push(`<defs><pattern id="${id}" width="${cell}" height="${cell}" patternUnits="userSpaceOnUse" patternTransform="translate(${ox} ${oy})"><path d="M${cell} 0H0V${cell}" class="p-grid" fill="none"/></pattern></defs><rect width="${W}" height="${H}" fill="url(#${id})"/>`);
+  s.push(`<rect class="p-room" x="${ox}" y="${oy}" width="${n(rw)}" height="${n(rl)}"/>`);
+
+  /* подпись на подложке: разрывает размерную линию */
+  const label = (x, y, text, cls = 'p-dimt', rot = 0) => { const tw = text.length * 6.9 + 10; return `<g transform="translate(${n(x)} ${n(y)})${rot ? ` rotate(${rot})` : ''}"><rect class="p-bg" x="${n(-tw / 2)}" y="-9" width="${n(tw)}" height="18" rx="3"/><text class="${cls}" y="4" text-anchor="middle">${text}</text></g>`; };
+  /* размерная линия с засечками под 45° — как на строительном чертеже; from — край, от которого идут выносные */
+  const dimH = (a, b, y, from, text) => `<path class="p-dim" d="M${X(a)} ${n(from)}V${n(y - Math.sign(from - y) * 5)}M${X(b)} ${n(from)}V${n(y - Math.sign(from - y) * 5)}M${n(X(a) - 6)} ${y}H${n(X(b) + 6)}M${n(X(a) - 4)} ${y + 4}l8 -8M${n(X(b) - 4)} ${y + 4}l8 -8"/>` + ((b - a) * k > text.length * 6.9 + 22 ? label((X(a) + X(b)) / 2, y, text) : label((X(a) + X(b)) / 2, y + (from > y ? -13 : 13), text));
+  const dimV = (a, b, x, from, text) => `<path class="p-dim" d="M${n(from)} ${Y(a)}H${n(x - Math.sign(from - x) * 5)}M${n(from)} ${Y(b)}H${n(x - Math.sign(from - x) * 5)}M${x} ${n(Y(a) - 6)}V${n(Y(b) + 6)}M${x - 4} ${n(Y(a) + 4)}l8 -8M${x - 4} ${n(Y(b) + 4)}l8 -8"/>` + label(x, (Y(a) + Y(b)) / 2, text, 'p-dimt', -90);
+  const tag = (x, y, text, anchor = 'middle') => { const tw = text.length * 6.3 + 18, x0 = anchor === 'end' ? x - tw : anchor === 'start' ? x : x - tw / 2; const xx = Math.min(Math.max(x0, 4), W - tw - 4); return `<g class="p-cap"><rect x="${n(xx)}" y="${n(y - 11)}" width="${n(tw)}" height="22" rx="11"/><text x="${n(xx + tw / 2)}" y="${n(y + 4)}" text-anchor="middle">${text}</text></g>`; };
+
+  const { door, win } = roomOpenings(w);
+  const x0 = ox - T, y0 = oy - T, x1 = ox + rw + T, y1 = oy + rl + T, xr = n(ox + rw), yb = n(oy + rl);
+  if (stage === 1) {
+    /* три стены готовы, четвёртую тянут к первой точке */
+    const cur = Math.max(0, w - Math.min(3000, Math.round(w * 0.55 / 100) * 100));
+    s.push(`<path class="p-wallp" d="M${n(x0)} ${yb}V${n(y0)}H${n(x1)}V${yb}H${xr}V${oy}H${ox}V${yb}Z"/>`);
+    s.push(`<path class="p-thin" d="M${ox} ${oy}L${n(x0)} ${n(y0)}M${xr} ${oy}L${n(x1)} ${n(y0)}"/>`);
+    s.push(`<path class="p-rub" d="M${xr} ${n(yb + T / 2)}H${X(cur)}"/><circle class="p-ring" cx="${X(cur)}" cy="${n(yb + T / 2)}" r="9"/><circle class="p-dot" cx="${X(cur)}" cy="${n(yb + T / 2)}" r="4"/>`);
+    for (const [vx, vy] of [[ox, yb], [ox, oy], [xr, oy], [xr, yb]]) s.push(`<circle class="p-vx" cx="${vx}" cy="${vy}" r="3"/>`);
+    s.push(dimH(0, w, y0 - 20, y0, fmtMm(w)), dimV(0, l, n(x0 - 20), x0, fmtMm(l)));
+    s.push(tag(X(cur), yb + T / 2 + 24, fmtMm(w - cur)));
+  } else {
+    s.push(`<path class="p-wallp" fill-rule="evenodd" d="M${n(x0)} ${n(y0)}H${n(x1)}V${n(y1)}H${n(x0)}ZM${ox} ${oy}V${yb}H${xr}V${oy}Z"/>`);
+    s.push(`<path class="p-thin" d="M${ox} ${oy}L${n(x0)} ${n(y0)}M${xr} ${oy}L${n(x1)} ${n(y0)}M${xr} ${yb}L${n(x1)} ${n(y1)}M${ox} ${yb}L${n(x0)} ${n(y1)}"/>`);
+    /* окно: проём в стене и три линии рамы */
+    s.push(`<rect class="p-win" x="${X(win.x)}" y="${n(y0)}" width="${n(win.w * k)}" height="${n(T)}"/><path class="p-thin" d="M${X(win.x)} ${n(oy - T / 3)}H${X(win.x + win.w)}M${X(win.x)} ${n(oy - T * 2 / 3)}H${X(win.x + win.w)}"/>`);
+    /* дверь: проём, полотно и дуга открывания */
+    s.push(`<rect class="p-win" x="${X(door.x)}" y="${yb}" width="${n(DOOR * k)}" height="${n(T)}"/><path class="p-thin" d="M${X(door.x)} ${yb}V${Y(l - DOOR)}A${n(DOOR * k)} ${n(DOOR * k)} 0 0 1 ${X(door.x + DOOR)} ${yb}"/>`);
+  }
+
+  let sofa = null;
+  if (stage === 0 || stage === 3) {
+    const line = (d) => `<path class="p-fl" d="${d}"/>`;
+    for (const f of roomFurniture(w, l)) {
+      const ph = stage === 3 && f.kind === 'arm'; // «пустышка»: место под вещь, которую ещё не выбрали — квадрат типового габарита
+      if (ph) { f.w = f.d = 900; f.rot = 0; }
+      const fw = n(f.w * k), fd = n(f.d * k), hx = n(-fw / 2), hy = n(-fd / 2), r = Math.min(3, fd / 4);
+      const sel = stage === 0 && f.kind === 'sofa'; if (sel) sofa = f;
+      const body = `<rect class="${ph ? 'p-ph' : sel ? 'p-sel' : f.kind === 'rug' ? 'p-rug' : 'p-furn'}" x="${hx}" y="${hy}" width="${fw}" height="${fd}" rx="${n(r)}"/>`;
+      let det = '';
+      if (ph) det = '';
+      else if (f.kind === 'sofa' || f.kind === 'arm') { const b = n(fd * 0.26), a = n(fw * (f.kind === 'sofa' ? 0.09 : 0.16)); det = line(`M${hx} ${n(hy + b)}H${n(-hx)}M${n(hx + a)} ${n(hy + b)}V${n(-hy)}M${n(-hx - a)} ${n(hy + b)}V${n(-hy)}` + (f.kind === 'sofa' ? `M0 ${n(hy + b)}V${n(-hy)}` : '')); }
+      else if (f.kind === 'chair') det = line(`M${hx} ${n(hy + fd * 0.2)}H${n(-hx)}`);
+      else if (f.kind === 'table' || f.kind === 'coffee') { const i = Math.min(4, fd * 0.12); det = `<rect class="p-fl" x="${n(hx + i)}" y="${n(hy + i)}" width="${n(fw - 2 * i)}" height="${n(fd - 2 * i)}" rx="${n(r / 2)}"/>`; }
+      else if (f.kind === 'tv') det = line(`M${n(hx + fw / 3)} ${hy}V${n(-hy)}M${n(hx + fw * 2 / 3)} ${hy}V${n(-hy)}`);
+      const shape = f.kind === 'lamp' ? `<circle class="p-furn" r="${n(Math.max(fw / 2, 3))}"/><circle class="p-fl" r="${n(Math.max(fw / 5, 1))}"/>` : body + det;
+      s.push(`<g${sel ? ' class="is-sel"' : ''} transform="translate(${X(f.cx)} ${Y(f.cy)})${f.rot ? ` rotate(${f.rot})` : ''}">${shape}</g>`);
+      if (ph) s.push(`<circle class="p-dot" cx="${X(f.cx)}" cy="${Y(f.cy)}" r="8"/><text class="p-q" x="${X(f.cx)}" y="${n(Y(f.cy) + 4)}" text-anchor="middle">?</text>`, tag(X(f.cx) - fw / 2 - 8, Y(f.cy), 'Пустышка 900 × 900', 'end'));
+    }
+  }
+  if (stage === 0) {
+    s.push(dimH(0, w, n(y0 - 22), y0, fmtMm(w)), dimV(0, l, n(x1 + 22), x1, fmtMm(l)));
+    if (sofa && !o.noTag) { const t = `Диван ${fmtMm(sofa.w)} × ${fmtMm(sofa.d)}`; s.push(sofa.rot === 90 ? tag(X(sofa.cx - sofa.d / 2) - 8, Y(sofa.cy - sofa.w / 2) + 15, t, 'end') : tag(X(sofa.cx), Y(sofa.cy + sofa.d / 2) + 17, t)); }
+  }
+  if (stage === 2) {
+    const yt = n(y0 - 20), ybm = n(y1 + 20);
+    s.push(dimH(win.x, win.x + win.w, yt, y0, fmtMm(win.w)), dimH(door.x, door.x + door.w, ybm, y1, fmtMm(door.w)));
+    s.push(tag(X(win.x + win.w / 2), oy + 22, 'высота 1400, подоконник 900'));
+  }
+  svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+  svg.innerHTML = s.join('');
+  return { step, sofa };
+}
+
+/* Чертежи страницы: первый экран — по размерам из полей, шаги — та же комната 5400 × 3900 по этапам.
+   Чертёж рисуется в пикселях своего блока, поэтому при изменении ширины его надо перерисовать (подписи остаются 12 px). */
+const ROOM = { w: 5400, l: 3900 };
+const heroPlan = document.getElementById('heroPlan');
+function drawHero() {
+  const wide = heroPlan.clientWidth >= 520;
+  const r = drawPlan(heroPlan, { w: ROOM.w, l: ROOM.l, maxK: 0.118, noTag: !wide, pad: wide ? { t: 80, r: 92, b: 68, l: 56 } : { t: 52, r: 50, b: 44, l: 18 } });
+  /* на узком холсте подпись дивана закрыла бы полкомнаты — его размеры уходят в строку под планом */
+  if (r) document.getElementById('canvasNote').textContent = 'Клетка сетки — ' + String(r.step / 1000).replace('.', ',') + '\u00a0м' + (!wide && r.sofa ? `, диван — ${fmtMm(r.sofa.w)} × ${fmtMm(r.sofa.d)}\u00a0мм` : '');
+}
+drawHero();
+</script>
+
+  <!-- ================= Как это работает ================= -->
+  <section id="how">
+    <div class="wrap">
+      <div class="sec-head"><h2 class="sec">Как это работает</h2><p class="lead">Рисуете один раз&nbsp;— дальше всё считается само: площадь, размеры проёмов, свободное место между вещами.</p></div>
+      <ol class="steps" role="list">
+        <li>
+          <div class="step-art" aria-hidden="true"><svg class="plan" data-stage="1" role="presentation"></svg></div>
+          <h3>Нарисуйте стены</h3><p>Постройте комнату по&nbsp;размерам или обведите контур сами, стена за&nbsp;стеной. Размеры&nbsp;— внутренние, по&nbsp;полу.</p>
+        </li>
+        <li>
+          <div class="step-art" aria-hidden="true"><svg class="plan" data-stage="2" role="presentation"></svg></div>
+          <h3>Добавьте двери, окна и&nbsp;арки</h3><p>С&nbsp;шириной, высотой и&nbsp;подоконником&nbsp;— проёмы встают в&nbsp;стену и&nbsp;не&nbsp;дают поставить шкаф поперёк двери.</p>
+        </li>
+        <li>
+          <div class="step-art" aria-hidden="true"><svg class="plan" data-stage="3" role="presentation"></svg></div>
+          <h3>Расставьте мебель</h3><p>Каталог по&nbsp;комнатам: реальные товары с&nbsp;размерами или «пустышки» нужного габарита, если вещь ещё не&nbsp;выбрана.</p>
+        </li>
+        <li class="in3d">
+          <figure class="shot">
+            <img class="only-light" src="/landing/room-3d-light.webp" width="1600" height="1094" loading="lazy" decoding="async" alt="Та же комната в 3D: синий диван у стены, журнальный стол на ковре, зелёное кресло, у окна — обеденный стол и четыре стула.">
+            <img class="only-dark" src="/landing/room-3d-dark.webp" width="1600" height="1094" loading="lazy" decoding="async" alt="Та же комната в 3D: синий диван у стены, журнальный стол на ковре, зелёное кресло, у окна — обеденный стол и четыре стула.">
+          </figure>
+          <div>
+            <h3>Пройдитесь по&nbsp;комнате в&nbsp;3D</h3><p>Точки обзора, высота глаз, мини‑карта, материалы стен и&nbsp;пола&nbsp;— видно, как будет на&nbsp;самом деле.</p>
+            <p class="src">Снимок экрана редактора: комната с&nbsp;чертежей выше, мебель&nbsp;— товары каталога.</p>
           </div>
-        </div>
-        <div class="inset">
-          <svg viewBox="0 0 240 150" width="240" height="150" role="presentation">
-            <rect width="240" height="150" fill="var(--wall3d-side)"/>
-            <polygon points="0,0 70,24 70,92 0,150" fill="var(--wall3d-side)"/>
-            <polygon points="240,0 170,24 170,92 240,150" fill="var(--wall3d-side)"/>
-            <rect x="70" y="24" width="100" height="68" fill="var(--wall3d)"/>
-            <polygon points="70,92 170,92 240,150 0,150" fill="var(--floor3d)"/>
-            <rect x="94" y="34" width="52" height="34" rx="1.5" fill="color-mix(in srgb,var(--brand) 22%,var(--wall3d))" stroke="var(--plan-line)" stroke-width=".8"/><path d="M120 34v34M94 51h52" stroke="var(--plan-line)" stroke-width=".8"/>
-            <polygon points="176,96 222,118 222,138 176,114" fill="var(--sofa3d)"/><polygon points="176,96 182,93 228,114 222,118" fill="color-mix(in srgb,var(--sofa3d) 70%,#fff)"/><polygon points="222,118 228,114 228,134 222,138" fill="color-mix(in srgb,var(--sofa3d) 80%,#000)"/>
-            <ellipse cx="118" cy="122" rx="48" ry="14" fill="color-mix(in srgb,var(--foreground) 6%,transparent)"/>
-            <rect x="96" y="104" width="44" height="12" rx="3" fill="color-mix(in srgb,var(--sofa3d) 55%,var(--floor3d))"/>
-          </svg>
-        </div>
-      </div>
+        </li>
+      </ol>
     </div>
   </section>
 
-  <!-- ================= Как это работает ================= -->
-  <section id="how" class="bg-muted">
+  <!-- ================= Каталог ================= -->
+  <section id="catalog" hidden>
     <div class="wrap">
-      <div class="sec-head reveal"><p class="eyebrow">Как это работает</p><h2 class="sec">Четыре шага от&nbsp;пустого листа до&nbsp;комнаты</h2><p class="lead">Рисуете один раз — дальше всё считается само: площадь, размеры проёмов, свободное место между вещами.</p></div>
-      <ol class="steps reveal" role="list">
-        <li>
-          <div class="step-art" aria-hidden="true"><svg viewBox="0 0 240 150" width="240" height="150" role="presentation">
-            <rect width="240" height="150" fill="url(#g)"/>
-            <path class="p-dim" d="M56 22H184M56 17v10M184 17v10"/><rect class="p-bg" x="98" y="13" width="44" height="18" rx="4"/><text class="p-dimt" x="120" y="26" text-anchor="middle">4200</text>
-            <path class="p-wall" d="M56 128V46H184V88"/><path class="p-wallf" d="M56 128V46H184V88"/>
-            <path class="p-rub" d="M184 94V122"/>
-            <circle cx="184" cy="126" r="9" fill="none" stroke="var(--brand)" stroke-width="1.5" opacity=".45"/><circle class="p-dot" cx="184" cy="126" r="4.5"/>
-            <circle class="p-vx" cx="56" cy="128" r="3.5"/><circle class="p-vx" cx="56" cy="46" r="3.5"/><circle class="p-vx" cx="184" cy="46" r="3.5"/>
-            <g class="p-cap"><rect x="196" y="98" width="38" height="20" rx="10"/><text x="215" y="112" text-anchor="middle">1800</text></g>
-          </svg></div>
-          </li>
-        <li>
-          <div class="step-art" aria-hidden="true"><svg viewBox="0 0 240 150" width="240" height="150" role="presentation">
-            <rect width="240" height="150" fill="url(#g)"/>
-            <rect class="p-room" y="64" width="240" height="86"/>
-            <path class="p-dim" d="M0 34H240M44 29v10M108 29v10M144 29v10M188 29v10"/>
-            <rect class="p-bg" x="57" y="25" width="38" height="18" rx="4"/><text class="p-dimt" x="76" y="38" text-anchor="middle">1200</text>
-            <rect class="p-bg" x="150" y="25" width="32" height="18" rx="4"/><text class="p-dimt" x="166" y="38" text-anchor="middle">800</text>
-            <path class="p-wall" d="M-8 64H144M188 64H248"/><path class="p-wallf" d="M-8 64H142.8M189.2 64H248"/>
-            <rect class="p-win" x="44" y="59" width="64" height="10"/><path class="p-thin" d="M44 64H108"/>
-            <path class="p-thin" d="M144 69V113"/><path class="p-dash" d="M144 113A44 44 0 0 0 188 69"/>
-            <g class="p-cap"><rect x="28" y="84" width="96" height="20" rx="10"/><text x="76" y="98" text-anchor="middle">h 1400 · пол 900</text></g>
-          </svg></div>
-          <span class="step-n">Шаг&nbsp;2</span><h3>Добавьте двери, окна и&nbsp;арки</h3><p>С&nbsp;шириной, высотой и&nbsp;подоконником — проёмы встают в&nbsp;стену и&nbsp;не&nbsp;дают поставить шкаф поперёк двери.</p>
-        </li>
-        <li>
-          <div class="step-art" aria-hidden="true"><svg viewBox="0 0 240 150" width="240" height="150" role="presentation">
-            <rect width="240" height="150" fill="url(#g)"/>
-            <rect class="p-room" x="28" y="28" width="212" height="122"/>
-            <path class="p-wall" d="M28 156V28H246"/><path class="p-wallf" d="M28 156V28H246"/>
-            <rect class="p-sel" x="72" y="35" width="100" height="42" rx="7"/><rect class="p-sel" x="72" y="35" width="100" height="12" rx="4"/>
-            <rect class="p-furn" x="96" y="94" width="52" height="28" rx="6"/>
-            <g transform="rotate(14 53 106)"><rect class="p-furn" x="38" y="91" width="30" height="30" rx="5"/><rect class="p-furn" x="38" y="91" width="9" height="30" rx="3"/></g>
-            <rect class="p-rub" x="186" y="84" width="40" height="40" rx="5" style="stroke-width:1.5"/><text x="206" y="109" text-anchor="middle" class="p-dimt" style="font-size:14px">?</text>
-          </svg></div>
-          <span class="step-n">Шаг&nbsp;3</span><h3>Расставьте мебель</h3><p>Каталог по&nbsp;комнатам: реальные товары с&nbsp;размерами или «пустышки» нужного габарита, если вещь ещё не&nbsp;выбрана.</p>
-        </li>
-        <li>
-          <div class="step-art" aria-hidden="true"><svg viewBox="0 0 240 150" width="240" height="150" role="presentation">
-            <rect width="240" height="150" fill="var(--wall3d-side)"/>
-            <polygon points="0,0 240,0 176,26 64,26" fill="var(--wall3d)"/>
-            <rect x="64" y="26" width="112" height="72" fill="var(--wall3d)"/>
-            <polygon points="64,98 176,98 240,150 0,150" fill="var(--floor3d)"/>
-            <path d="M64 26V98M176 26V98M0 0L64 26M240 0L176 26" stroke="var(--plan-line)" stroke-width=".6" fill="none" opacity=".5"/>
-            <polygon points="12,34 46,42 46,88 12,100" fill="color-mix(in srgb,var(--brand) 22%,var(--wall3d))" stroke="var(--plan-line)" stroke-width=".8"/><path d="M29 38V94" stroke="var(--plan-line)" stroke-width=".8"/>
-            <rect x="84" y="66" width="72" height="18" rx="3" fill="color-mix(in srgb,var(--sofa3d) 72%,#fff)"/><rect x="84" y="80" width="72" height="20" rx="3" fill="var(--sofa3d)"/><rect x="80" y="76" width="9" height="24" rx="3" fill="color-mix(in srgb,var(--sofa3d) 86%,#000)"/><rect x="151" y="76" width="9" height="24" rx="3" fill="color-mix(in srgb,var(--sofa3d) 86%,#000)"/>
-            <ellipse cx="120" cy="126" rx="20" ry="7" fill="var(--brand-soft)" stroke="var(--brand)" stroke-width="1.5"/><path d="M120 130v-8M116.5 125.5l3.5-3.5 3.5 3.5" fill="none" stroke="var(--brand)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            <g><rect x="8" y="108" width="50" height="34" rx="5" fill="var(--popover)" stroke="var(--border)"/><rect x="15" y="114" width="36" height="22" fill="none" stroke="var(--plan-wall)" stroke-width="1.5"/><path d="M33 128l-7-9h14z" fill="var(--brand)" opacity=".3"/><circle class="p-dot" cx="33" cy="128" r="2.5"/></g>
-          </svg></div>
-          <span class="step-n">Шаг&nbsp;4</span><h3>Пройдитесь по&nbsp;комнате в&nbsp;3D</h3><p>Точки обзора, высота глаз, мини‑карта, материалы стен и&nbsp;пола — видно, как будет на&nbsp;самом деле.</p>
-        </li>
-      </ol>
+      <div class="sec-head"><h2 class="sec">Мебель с&nbsp;настоящими размерами</h2><p class="lead">Ставьте на&nbsp;план вещи, которые можно купить. Рядом с&nbsp;каждой&nbsp;— её след на&nbsp;плане: все нарисованы в&nbsp;одном масштабе.</p></div>
+      <ul class="goods" id="goods" role="list"></ul>
+      <p class="goods-foot"><a class="textlink" href="/editor?panel=catalog">Открыть каталог в&nbsp;редакторе</a></p>
     </div>
   </section>
 
   <!-- ================= Возможности ================= -->
   <section id="features">
     <div class="wrap split">
-      <div class="sec-head reveal"><p class="eyebrow">Возможности</p><h2 class="sec">Всё, что нужно для планировки одной комнаты</h2></div>
-      <ul class="feats reveal" role="list">
-        <li class="feat"><span class="fi"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 8h18M3 6v4M21 6v4M8 18h8M8 16v4M16 16v4"/></svg></span><h3>Точные размеры</h3><p>Редактор проверяет геометрию: стена не&nbsp;короче 100&nbsp;мм, а&nbsp;точка не&nbsp;соединяет больше двух стен — план всегда собирается в&nbsp;комнату.</p></li>
-        <li class="feat"><span class="fi"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l9 5v10l-9 5-9-5V7z"/><path d="M12 22V12M21 7l-9 5-9-5"/></svg></span><h3>Каталог с&nbsp;3D‑моделями</h3><p>Товары с&nbsp;настоящими габаритами и&nbsp;моделями — в&nbsp;3D видно не&nbsp;прямоугольник, а&nbsp;сам диван.</p></li>
-        <li class="feat"><span class="fi"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span><h3>Замки</h3><p>Зафиксируйте стены или готовую расстановку, чтобы случайно ничего не&nbsp;сдвинуть.</p></li>
-        <li class="feat"><span class="fi"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 14L4 9l5-5M4 9h10a6 6 0 0 1 0 12h-3"/></svg></span><h3>Отмена и&nbsp;повтор</h3><p>Пробуйте смело: любое действие отменяется привычным сочетанием клавиш.</p></li>
-        <li class="feat"><span class="fi"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg></span><h3>На&nbsp;компьютере и&nbsp;телефоне</h3><p>Светлая и&nbsp;тёмная тема. Стены удобнее рисовать мышью, а&nbsp;посмотреть план можно где угодно.</p></li>
-        <li class="feat"><span class="fi"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8zM19 17l.8 2.2 2.2.8-2.2.8L19 23l-.8-2.2L16 20l2.2-.8z"/></svg></span><h3>ИИ‑дизайнер</h3><p>Отметьте, что можно двигать и&nbsp;менять, приложите фото‑референсы, выберите стиль, палитру и&nbsp;бюджет — бриф уже сейчас сохраняется в&nbsp;проекте.</p></li>
-      </ul>
+      <div class="sec-head"><h2 class="sec">Что умеет редактор</h2></div>
+      <dl class="spec">
+        <div><dt>Точные размеры</dt><dd>Редактор проверяет геометрию: стена не&nbsp;короче 100&nbsp;мм, а&nbsp;точка не&nbsp;соединяет больше двух стен&nbsp;— план всегда собирается в&nbsp;комнату.</dd></div>
+        <div><dt>Каталог с&nbsp;3D‑моделями</dt><dd>Товары с&nbsp;настоящими габаритами и&nbsp;моделями&nbsp;— в&nbsp;3D видно не&nbsp;прямоугольник, а&nbsp;сам диван.</dd></div>
+        <div><dt>Замки</dt><dd>Зафиксируйте стены или готовую расстановку, чтобы случайно ничего не&nbsp;сдвинуть.</dd></div>
+        <div><dt>Отмена и&nbsp;повтор</dt><dd>Любое действие отменяется привычным сочетанием клавиш.</dd></div>
+        <div><dt>Компьютер и&nbsp;телефон</dt><dd>Стены удобнее рисовать мышью, а&nbsp;посмотреть план и&nbsp;подвинуть мебель можно где угодно. Есть светлая и&nbsp;тёмная тема.</dd></div>
+        <div><dt>ИИ‑дизайнер <span class="badge muted">в&nbsp;разработке</span></dt><dd>Отметьте, что можно двигать и&nbsp;менять, приложите фото‑референсы, выберите стиль, палитру и&nbsp;бюджет&nbsp;— бриф уже сейчас сохраняется в&nbsp;проекте.</dd></div>
+      </dl>
     </div>
   </section>
 
-  <!-- ================= Витрина каталога ================= -->
-  <section id="catalog" class="bg-muted" hidden>
-    <div class="wrap">
-      <div class="shelf-head reveal">
-        <div><p class="eyebrow">Каталог</p><h2 class="sec">Мебель с&nbsp;реальными размерами</h2><p class="lead">Ставьте на&nbsp;план те&nbsp;вещи, которые можно купить, — с&nbsp;их&nbsp;точными габаритами.</p></div>
-        <div class="shelf-nav"><button class="iconbtn" type="button" id="shPrev" aria-label="Назад"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button><button class="iconbtn" type="button" id="shNext" aria-label="Вперёд"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button></div>
-      </div>
-      <ul class="shelf" id="shelf" role="list" tabindex="0" aria-label="Товары каталога — прокрутите стрелками"></ul>
-      <div class="shelf-foot"><a class="btn" href="/editor?panel=catalog">Открыть каталог в редакторе<svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
-    </div>
-  </section>
-
-  <!-- ================= Сохранить в аккаунте (гостю) ================= -->
+  <!-- ================= С аккаунтом и без (гостю) ================= -->
   <section id="save" hidden>
+    <div class="wrap split">
+      <div class="sec-head"><h2 class="sec">С&nbsp;аккаунтом и&nbsp;без</h2><p class="lead">Редактор работает сразу. Аккаунт нужен, чтобы проект не&nbsp;зависел от&nbsp;одного браузера.</p></div>
+      <div>
+        <table class="cmp">
+          <caption class="sr-only">Что доступно без аккаунта и&nbsp;с&nbsp;аккаунтом</caption>
+          <thead><tr><td></td><th scope="col">Без аккаунта</th><th scope="col">С&nbsp;аккаунтом</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Редактор, каталог и&nbsp;3D</th><td>Да</td><td>Да</td></tr>
+            <tr><th scope="row">Где хранится проект</th><td>В&nbsp;этом браузере</td><td>На&nbsp;сервере, до&nbsp;50&nbsp;проектов</td></tr>
+            <tr><th scope="row">Другой компьютер или телефон</th><td>Нет</td><td>Проект откроется на&nbsp;любом устройстве</td></tr>
+            <tr><th scope="row">ИИ‑дизайнер и&nbsp;заявка</th><td>Нет</td><td>Да</td></tr>
+          </tbody>
+        </table>
+        <p class="cmp-foot"><a class="btn primary lg" href="/register?next=/editor" data-ev="register_click">Создать аккаунт</a><span>Бесплатно, занимает минуту.</span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= Вопросы ================= -->
+  <section id="faq">
     <div class="wrap">
-      <div class="save reveal">
-        <div>
-          <h2>Проекты хранятся в&nbsp;аккаунте</h2>
-          <ul role="list">
-            <li><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l5 5 9-11"/></svg>Не&nbsp;пропадут, если очистить браузер или сменить устройство.</li>
-            <li><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l5 5 9-11"/></svg>Откроются на&nbsp;другом компьютере и&nbsp;телефоне.</li>
-            <li><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l5 5 9-11"/></svg>До&nbsp;50&nbsp;проектов: квартира, дача, варианты одной комнаты.</li>
-          </ul>
-        </div>
-        <a class="btn lg" href="/register?next=/editor" data-ev="register_click">Создать аккаунт</a>
+      <div class="sec-head"><h2 class="sec">Частые вопросы</h2></div>
+      <div class="faq">
+        <div><h3>Это бесплатно?</h3><p>Да. Редактор, каталог и&nbsp;3D‑просмотр бесплатны.</p></div>
+        <div><h3>Нужна&nbsp;ли регистрация?</h3><p>Чтобы начать&nbsp;— нет: комнату можно нарисовать и&nbsp;обставить сразу, проект сохранится в&nbsp;этом браузере. Аккаунт нужен, чтобы хранить проекты на&nbsp;сервере и&nbsp;открывать их на&nbsp;любом устройстве, запускать ИИ‑дизайнера и&nbsp;отправлять заявку.</p></div>
+        <div><h3>Где хранится мой проект?</h3><p>Пока вы не&nbsp;вошли&nbsp;— только в&nbsp;этом браузере. После входа&nbsp;— в&nbsp;аккаунте, на&nbsp;сервере. В&nbsp;браузере остаётся рабочая копия открытого проекта&nbsp;— она выручает, если связь пропала. Фото‑референсы из&nbsp;брифа пока хранятся только в&nbsp;браузере.</p></div>
+        <div><h3>Можно&nbsp;ли работать с&nbsp;телефона?</h3><p>Да, редактор работает на&nbsp;телефоне и&nbsp;планшете. Рисовать стены удобнее на&nbsp;компьютере, а&nbsp;смотреть и&nbsp;двигать мебель&nbsp;— где угодно.</p></div>
+        <div><h3>Можно&nbsp;ли купить мебель из&nbsp;каталога?</h3><p>Если продавец указал ссылку на&nbsp;свой магазин, она есть в&nbsp;карточке товара. Размеры и&nbsp;наличие лучше уточнить у&nbsp;продавца перед покупкой.</p></div>
+        <div><h3>Что такое ИИ‑дизайнер?</h3><p>Это следующий этап: по&nbsp;вашему плану и&nbsp;брифу ИИ предложит расстановку и&nbsp;подбор вещей. Он&nbsp;ещё в&nbsp;разработке, но&nbsp;бриф&nbsp;— что можно двигать и&nbsp;менять, фото и&nbsp;пожелания&nbsp;— можно подготовить уже сейчас.</p></div>
       </div>
     </div>
   </section>
@@ -389,34 +450,18 @@ section{padding:64px 0}
   <!-- ================= Для компаний ================= -->
   <section id="biz" hidden style="padding-top:0">
     <div class="wrap">
-      <div class="card biz reveal">
-        <div class="t"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 21V5l8-2v18M12 7l8 2v12M8 8v1M8 12v1M8 16v1M16 12v1M16 16v1M2 21h20"/></svg><div><h3>Для производителей и&nbsp;магазинов мебели <span class="badge muted">скоро</span></h3><p>Добавляйте товары с&nbsp;размерами и&nbsp;3D‑моделями — их&nbsp;будут ставить прямо в&nbsp;свои комнаты.</p></div></div>
+      <div class="biz">
+        <div><h2>Для производителей и&nbsp;магазинов мебели <span class="badge muted">скоро</span></h2><p>Добавляйте товары с&nbsp;размерами и&nbsp;3D‑моделями&nbsp;— их&nbsp;будут ставить прямо в&nbsp;свои комнаты.</p></div>
         <a class="btn" id="bizBtn" href="#">Оставить заявку</a>
       </div>
     </div>
   </section>
 
-  <!-- ================= Вопросы ================= -->
-  <section id="faq">
-    <div class="wrap split">
-      <div class="sec-head reveal"><p class="eyebrow">Вопросы</p><h2 class="sec">Частые вопросы</h2></div>
-      <div class="faq reveal">
-        <details><summary>Это бесплатно?</summary><p>Да. Редактор, каталог и&nbsp;3D‑просмотр бесплатны.</p></details>
-        <details><summary>Нужна&nbsp;ли регистрация?</summary><p>Чтобы начать — нет: комнату можно нарисовать и&nbsp;обставить сразу, проект сохранится в&nbsp;этом браузере. Аккаунт нужен, чтобы хранить проекты на&nbsp;сервере и&nbsp;открывать их на&nbsp;любом устройстве, запускать ИИ‑дизайнера и&nbsp;отправлять заявку. Это бесплатно и&nbsp;занимает минуту.</p></details>
-        <details><summary>Где хранится мой проект?</summary><p>Пока вы не&nbsp;вошли — только в&nbsp;этом браузере. После входа — в&nbsp;аккаунте, на&nbsp;сервере. В&nbsp;браузере остаётся рабочая копия открытого проекта — она выручает, если связь пропала. Фото‑референсы из&nbsp;брифа пока хранятся только в&nbsp;браузере.</p></details>
-        <details><summary>Можно&nbsp;ли работать с&nbsp;телефона?</summary><p>Да, редактор работает на&nbsp;телефоне и&nbsp;планшете. Рисовать стены удобнее на&nbsp;компьютере, а&nbsp;смотреть и&nbsp;двигать мебель — где угодно.</p></details>
-        <details><summary>Можно&nbsp;ли купить мебель из&nbsp;каталога?</summary><p>Если продавец указал ссылку на&nbsp;свой магазин, она есть в&nbsp;карточке товара. Размеры и&nbsp;наличие лучше уточнить у&nbsp;продавца перед покупкой.</p></details>
-        <details><summary>Что такое ИИ‑дизайнер?</summary><p>Это следующий этап: по&nbsp;вашему плану и&nbsp;брифу ИИ предложит расстановку и&nbsp;подбор вещей. Он&nbsp;ещё в&nbsp;разработке, но&nbsp;бриф — что можно двигать и&nbsp;менять, фото и&nbsp;пожелания — можно подготовить уже сейчас.</p></details>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= Финальный призыв ================= -->
-  <section class="bg-muted final">
-    <div class="wrap reveal">
-      <h2 class="sec">Начните с&nbsp;размеров вашей комнаты</h2>
-      <p class="lead">Рулетка, пять минут — и&nbsp;у&nbsp;вас точный план, на&nbsp;который можно ставить мебель.</p>
-      <div class="cta"><a class="btn primary lg" id="ctaFinal" href="/editor" data-ev="cta_start_click" data-pos="final">Начать планировку<svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+  <!-- ================= Последний раздел ================= -->
+  <section class="closing">
+    <div class="wrap">
+      <div><h2 class="sec">Начните с&nbsp;размеров вашей комнаты</h2><p class="lead">Рулетка, пять минут&nbsp;— и&nbsp;у&nbsp;вас точный план, на&nbsp;который можно ставить мебель.</p></div>
+      <a class="btn primary lg" id="ctaFinal" href="/editor" data-ev="cta_start_click" data-pos="final">Начать планировку</a>
     </div>
   </section>
 </main>
@@ -451,74 +496,137 @@ function localProject() {
 }
 const clip = (s, n) => { s = String(s || '').trim() || 'Новый проект'; return s.length > n ? s.slice(0, n - 1) + '…' : s; };
 
-/* Первый экран и блоки, зависящие от сессии (ТЗ 5.1) */
+/* Первый экран и блоки, зависящие от сессии (ТЗ 5.1).
+   Новому гостю — поля размеров: комната строится в редакторе сразу. У кого проект уже есть, тому — кнопка к нему. */
 function paintState(user) {
   const proj = localProject();
-  const main = $('#ctaMain'), mainT = $('#ctaMainT'), note = $('#ctaNote'), greet = $('#greet');
-  /* редактор открыт и без аккаунта: кнопки «Начать» ведут прямо в него, проект гостя хранится в браузере */
-  const START = '/editor';
-  $('#ctaFinal').href = START;
+  const form = $('#dims'), row = $('#ctaRow'), main = $('#ctaMain'), note = $('#ctaNote'), greet = $('#greet');
   greet.textContent = '';
   const sv = $('#save'); if (sv) sv.hidden = !!user;
   $('#footLogin').hidden = !!user;
+  form.hidden = !!(user || proj); row.hidden = !form.hidden; note.hidden = false;
   if (user) {
-    mainT.textContent = 'Мои проекты'; main.dataset.ev = 'cta_projects_click'; main.href = '/projects';
+    main.textContent = 'Мои проекты'; main.dataset.ev = 'cta_projects_click'; main.href = '/projects';
     greet.textContent = 'С возвращением' + (user.name ? ', ' + user.name : '');
     note.textContent = 'Проекты сохраняются в аккаунте и открываются на любом устройстве.';
-    return;
-  }
-  main.href = START;
-  if (proj) {
-    mainT.textContent = `Продолжить «${clip(proj.name, 40)}»`; main.dataset.ev = 'cta_continue_click';
+  } else if (proj) {
+    main.textContent = `Продолжить «${clip(proj.name, 40)}»`; main.dataset.ev = 'cta_continue_click'; main.href = '/editor';
     note.replaceChildren('Проект хранится в этом браузере. ', h('a', { href: '/register?next=/editor' }, 'Создайте аккаунт'), ', чтобы он не потерялся и открывался на любом устройстве. Уже есть аккаунт? ', h('a', { href: '/login?next=/editor' }, 'Войти'), '.');
   } else {
-    mainT.textContent = 'Начать планировку'; main.dataset.ev = 'cta_start_click';
     note.textContent = 'Бесплатно и без регистрации. Аккаунт понадобится, чтобы сохранить проект, запустить ИИ‑дизайнера и отправить заявку.';
   }
 }
 
-/* Витрина каталога (ТЗ 5.2) */
-const DIM_ORDER = ['W', 'L', 'A', 'DIA', 'D', 'B', 'R', 'H'];
-function dimsText(d) { const v = DIM_ORDER.filter(k => +d[k] > 0).map(k => Math.round(d[k])); return v.length ? v.join(' × ') + ' мм' : ''; }
-function priceText(p) { if (!(p.price > 0)) return ''; try { return new Intl.NumberFormat('ru', { style: 'currency', currency: p.currency || 'BYN', maximumFractionDigits: 0 }).format(p.price); } catch { return String(p.price); } }
-function skeletons(ul) { ul.replaceChildren(...Array.from({ length: 4 }, () => h('li', { class: 'prod sk', 'aria-hidden': 'true' }, h('div', { class: 'ph' }), h('div', { class: 'bd' }, h('div', { class: 'bar', style: 'width:70%' }), h('div', { class: 'bar', style: 'width:40%' }), h('div', { class: 'bar', style: 'width:30%' }))))); }
-async function loadShelf() {
-  const sec = $('#catalog'), ul = $('#shelf');
-  const ctl = new AbortController(); const timer = setTimeout(() => ctl.abort(), 5000);
-  sec.hidden = false; skeletons(ul);
-  const hide = () => { sec.hidden = true; document.querySelectorAll('[data-needs=catalog]').forEach(a => { a.hidden = true; }); };
-  try {
-    /* витрине нужны восемь карточек с фото — сервер отдаёт только их, а не весь каталог (сотни килобайт) */
-    const r = await fetch('/api/catalog/products?limit=8&images=1', { headers: { Accept: 'application/json' }, signal: ctl.signal });
-    if (!r.ok) throw new Error(r.status);
-    const list = ((await r.json()).products || []).filter(p => p.images && p.images.length).slice(0, 8);
-    if (list.length < 3) return hide();
-    ul.replaceChildren(...list.map(p => h('li', { class: 'prod' },
-      h('div', { class: 'ph' }, h('img', { src: p.images[0].url, alt: p.name, loading: 'lazy', decoding: 'async', width: '400', height: '300' })),
-      h('div', { class: 'bd' }, h('span', { class: 'nm' }, p.name), p.brand ? h('span', { class: 'br' }, p.brand) : null, h('span', { class: 'dm' }, dimsText(p.dims || {})), priceText(p) ? h('span', { class: 'pr' }, priceText(p)) : null))));
-    ul.addEventListener('click', (e) => { if (e.target.closest('.prod')) track('catalog_item_click'); });
-    const step = () => ul.clientWidth * 0.8;
-    $('#shPrev').onclick = () => ul.scrollBy({ left: -step(), behavior: 'smooth' });
-    $('#shNext').onclick = () => ul.scrollBy({ left: step(), behavior: 'smooth' });
-  } catch { hide(); } finally { clearTimeout(timer); }
+/* ---------- размеры комнаты ----------
+   Понимает миллиметры и метры: «5400», «5 400», «5,4» и «5.4» — одно и то же. Границы те же, что в редакторе. */
+const DIM_MIN = 1000, DIM_MAX = 50000;
+function parseDim(raw) {
+  const s = String(raw).replace(/[\s\u00a0]/g, '').replace(',', '.');
+  if (!/^\d+(\.\d+)?$/.test(s)) return NaN;
+  const v = parseFloat(s);
+  return Math.round(v < 100 ? v * 1000 : v);
+}
+const dimOk = (v) => v >= DIM_MIN && v <= DIM_MAX;
+const DIM_HINT = 'Можно вводить в метрах: 5,4.';
+const DIM_RANGE = `Ширина и длина — от ${fmtMm(DIM_MIN)} до ${fmtMm(DIM_MAX)} мм (или от 1 до 50 м).`;
+function initDims() {
+  const form = $('#dims'), inW = $('#dimW'), inL = $('#dimL'), msg = $('#dimMsg');
+  const area = (w, l) => new Intl.NumberFormat('ru', { maximumFractionDigits: 2 }).format(w * l / 1e6) + '\u00a0м²';
+  const say = (bad) => {
+    msg.classList.toggle('bad', !!bad);
+    if (bad) msg.textContent = DIM_RANGE; else msg.replaceChildren('Площадь пола — ', h('output', { for: 'dimW dimL' }, area(ROOM.w, ROOM.l)), '. ' + DIM_HINT);
+  };
+  /* перерисовываем, когда набор остановился: иначе «5» по пути к «5400» успевает стать пятью метрами */
+  let timer = null;
+  const update = () => {
+    const w = parseDim(inW.value), l = parseDim(inL.value);
+    if (!dimOk(w) || !dimOk(l)) return;
+    inW.removeAttribute('aria-invalid'); inL.removeAttribute('aria-invalid');
+    if (w !== ROOM.w || l !== ROOM.l) { ROOM.w = w; ROOM.l = l; drawHero(); }
+    say(false);
+  };
+  for (const inp of [inW, inL]) {
+    inp.addEventListener('input', () => { clearTimeout(timer); timer = setTimeout(update, 250); });
+    inp.addEventListener('change', () => { clearTimeout(timer); update(); const v = parseDim(inp.value); if (dimOk(v)) inp.value = String(v); });
+  }
+  form.addEventListener('submit', (e) => {
+    clearTimeout(timer);
+    const bad = [inW, inL].filter((inp) => !dimOk(parseDim(inp.value)));
+    [inW, inL].forEach((inp) => { if (bad.includes(inp)) inp.setAttribute('aria-invalid', 'true'); else inp.removeAttribute('aria-invalid'); });
+    if (bad.length) { e.preventDefault(); say(true); bad[0].focus(); bad[0].select(); return; }
+    inW.value = String(parseDim(inW.value)); inL.value = String(parseDim(inL.value)); // в адрес уходят миллиметры
+    track('cta_start_click', { position: 'hero', w: +inW.value, l: +inL.value });
+  });
+  /* возврат кнопкой «Назад»: браузер восстановил поля — чертёж должен им соответствовать */
+  window.addEventListener('pageshow', update);
+  update(); say(false);
 }
 
-/* Появление секций */
-function initReveal() {
-  const els = document.querySelectorAll('.reveal');
-  if (!('IntersectionObserver' in window)) { els.forEach(e => e.classList.add('in')); return; }
-  const io = new IntersectionObserver((ents) => ents.forEach(en => { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } }), { rootMargin: '0px 0px -8% 0px' });
-  els.forEach(e => io.observe(e));
+/* ---------- чертежи шагов ---------- */
+function initPlans() {
+  const steps = [...document.querySelectorAll('svg.plan')];
+  const drawStep = (svg) => drawPlan(svg, { w: 5400, l: 3900, stage: +svg.dataset.stage, pad: svg.dataset.stage === '1' ? { t: 44, r: 22, b: 40, l: 46 } : { t: 44, r: 28, b: 44, l: 28 } });
+  steps.forEach(drawStep);
+  if (!('ResizeObserver' in window)) return;
+  const seen = new WeakMap(); // первый вызов наблюдателя приходит сразу — чертёж уже нарисован
+  const ro = new ResizeObserver((ents) => { for (const en of ents) { const t = en.target, key = Math.round(en.contentRect.width) + 'x' + Math.round(en.contentRect.height); if (seen.get(t) === key) continue; const first = !seen.has(t); seen.set(t, key); if (first) continue; if (t === heroPlan) drawHero(); else drawStep(t); } });
+  [heroPlan, ...steps].forEach((s) => ro.observe(s));
+}
+
+/* ---------- каталог (ТЗ 5.2) ----------
+   Шесть товаров с фото из разных мест каталога: он отсортирован по типам, поэтому равные шаги дают разные вещи.
+   След на плане — вид сверху в общем масштабе: диван рядом с торшером выглядит так же, как в комнате. */
+const SHELF = 6, FP_SCALE = 0.02, FP_W = 72, FP_H = 56 /* клетка — те же 0,5 м, что на холсте */;
+function dimsText(d) { const v = ['W', 'L', 'A', 'DIA', 'D', 'B', 'R', 'H'].filter(k => +d[k] > 0).map(k => fmtMm(d[k])); return v.length ? v.join(' × ') + ' мм' : ''; }
+function priceText(p) { if (!(p.price > 0)) return ''; try { return new Intl.NumberFormat('ru', { style: 'currency', currency: p.currency || 'BYN', maximumFractionDigits: 0 }).format(p.price); } catch { return String(p.price); } }
+function footprint(d) {
+  const round = +d.DIA > 0, a = round ? +d.DIA : +d.W || +d.A, b = round ? +d.DIA : +d.D || +d.L || +d.B || +d.W;
+  if (!(a > 0 && b > 0)) return null;
+  const BW = FP_W, BH = FP_H, cell = 500 * FP_SCALE, k = Math.min(FP_SCALE, (BW - 8) / a, (BH - 8) / b);
+  const w = Math.max(3, a * k), hh = Math.max(3, b * k), x = (BW - w) / 2, y = (BH - hh) / 2, r = (v) => Math.round(v * 10) / 10;
+  let grid = ''; for (let g = cell; g < BW; g += cell) grid += `M${r(g)} 0V${BH}`; for (let g = cell; g < BH; g += cell) grid += `M0 ${r(g)}H${BW}`;
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  svg.setAttribute('width', BW); svg.setAttribute('height', BH); svg.setAttribute('viewBox', `0 0 ${BW} ${BH}`); svg.setAttribute('aria-hidden', 'true');
+  svg.innerHTML = `<path class="p-grid" d="${grid}"/>` + (round ? `<circle class="p-furn" cx="${BW / 2}" cy="${BH / 2}" r="${r(w / 2)}"/>` : `<rect class="p-furn" x="${r(x)}" y="${r(y)}" width="${r(w)}" height="${r(hh)}" rx="${r(Math.min(2, hh / 4))}"/>`);
+  return svg;
+}
+function skeletons(ul) { ul.replaceChildren(...Array.from({ length: SHELF }, () => h('li', { class: 'good sk', 'aria-hidden': 'true' }, h('div', { class: 'ph' }), h('div', { class: 'bar', style: 'width:70%' }), h('div', { class: 'bar', style: 'width:40%' })))); }
+async function loadShelf() {
+  const sec = $('#catalog'), ul = $('#goods');
+  const ctl = new AbortController(); const timer = setTimeout(() => ctl.abort(), 6000);
+  const get = async (offset, limit) => { const r = await fetch(`/api/catalog/products?images=1&limit=${limit}&offset=${offset}`, { headers: { Accept: 'application/json' }, signal: ctl.signal }); if (!r.ok) throw new Error(r.status); return r.json(); };
+  const hide = () => { sec.hidden = true; document.querySelectorAll('[data-needs=catalog]').forEach(a => { a.hidden = true; }); };
+  sec.hidden = false; skeletons(ul);
+  try {
+    const first = await get(0, SHELF);
+    let list = first.products || [];
+    if (first.total > SHELF * 4) { // каталог большой — берём по одному товару через равные промежутки
+      const picks = await Promise.all(Array.from({ length: SHELF }, (_, i) => get(Math.floor(first.total * (i + 0.2) / SHELF), 1).then(j => (j.products || [])[0]).catch(() => null)));
+      const spread = picks.filter(Boolean); if (spread.length >= 3) list = spread;
+    }
+    list = list.filter(p => p.images && p.images.length).slice(0, SHELF);
+    if (list.length < 3) return hide();
+    ul.replaceChildren(...list.map(p => {
+      const fp = footprint(p.dims || {}), dims = dimsText(p.dims || {}), price = priceText(p);
+      return h('li', { class: 'good' },
+        h('div', { class: 'ph' }, h('img', { src: p.images[0].url, alt: '', loading: 'lazy', decoding: 'async', width: '400', height: '300' })),
+        h('span', { class: 'nm', title: p.name }, p.name), p.brand ? h('span', { class: 'br' }, p.brand) : null,
+        dims ? h('span', { class: 'fp' }, fp, h('span', {}, dims)) : null, price ? h('span', { class: 'pr' }, price) : null);
+    }));
+    ul.addEventListener('click', (e) => { if (e.target.closest('.good')) track('catalog_item_click'); });
+  } catch { hide(); } finally { clearTimeout(timer); }
 }
 
 (function init() {
   paintState(null);
-  initReveal();
+  /* вход сохранён — не показываем поля гостя на полсекунды, пока сервер подтверждает сессию */
+  if (Session.token) for (const id of ['#dims', '#ctaRow', '#ctaNote']) $(id).hidden = true;
+  initDims(); initPlans();
   window.addEventListener('site:user', (e) => paintState(e.detail.user));
   Site.init();
   Site.config().then(c => {
     if (c.contactEmail) { $('#biz').hidden = false; $('#bizBtn').href = 'mailto:' + c.contactEmail + '?subject=' + encodeURIComponent('Заявка компании'); }
-    if (!c.registration) { $('#save').remove(); }
+    if (!c.registration) { const sv = $('#save'); if (sv) sv.remove(); }
   });
   try { const f = sessionStorage.getItem('planner.flash'); if (f) { sessionStorage.removeItem('planner.flash'); Site.toast(f); } } catch {}
   const idle = window.requestIdleCallback || ((fn) => setTimeout(fn, 300));

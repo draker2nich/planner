@@ -404,7 +404,7 @@ body.ro #props input,body.ro #props select,body.ro #props textarea,body.ro #prop
   const flushLocal = () => { try { if (!READONLY && Sync.mode === 'guest') localStorage.setItem('roomEditor.project', JSON.stringify(P)); } catch {} };
   function startGuest() {
     Sync.mode = 'guest'; Sync.user = null; Sync.ready = true;
-    handlePanelParam(); renderAccount(); ind('guest');
+    startFromUrl(); handlePanelParam(); renderAccount(); ind('guest');
   }
   /* Действие, которому нужен аккаунт. Гостю показывает приглашение войти и возвращает true (действие отменяется);
      вошедшему — false. why — первая фраза диалога: что именно требует аккаунта. */
@@ -445,7 +445,7 @@ body.ro #props input,body.ro #props select,body.ro #props textarea,body.ro #prop
       return;
     }
     if (!u) return needsAccount() ? toLogin() : startGuest();
-    handlePanelParam();
+    startFromUrl(); handlePanelParam();
     Sync.user = u; Sync.mode = 'account'; renderAccount();
     PHOTO_NET = { push: photoPush, drop: photoDrop, pull: (id) => photoPull(id, '/api/photos/', Session.token, true) };
     setTimeout(photoBackfill, 2500);

@@ -48,15 +48,31 @@ async function startFromTemplate(){
   if(READONLY){toast(READONLY_MSG);return;}
   if(P.vertices.length){toast('Шаблон ставится на пустой план. Очистите проект в меню, чтобы начать заново',true);return;}
   const r=await roomTemplateDialog();if(!r)return;
-  const pts=roomTemplatePoints(r.shape,Math.round(r.w),Math.round(r.l),Math.round(r.cw),Math.round(r.cl));
+  buildRoom(roomTemplatePoints(r.shape,Math.round(r.w),Math.round(r.l),Math.round(r.cw),Math.round(r.cl)),Math.round(r.hv));
+}
+/* Контур по точкам → стены на пустом плане. → true, если комната построена */
+function buildRoom(pts,wallHeight){
   const err=apply(Q=>{
     Q.vertices=pts.map(([x,y])=>({id:uid(),x,y}));
     Q.walls=Q.vertices.map((v,i)=>({id:uid(),a:v.id,b:Q.vertices[(i+1)%Q.vertices.length].id}));
-    Q.wallHeight=Math.round(r.hv);Q.wallParamsSet=true;
+    Q.wallHeight=wallHeight;Q.wallParamsSet=true;
   });
-  if(err){toast(err,true);return;}
+  if(err){toast(err,true);return false;}
   E.tool='select';E.mode='idle';updateTools();fitRoom();
   toast('Комната построена. Добавьте двери и окна, затем переходите к мебели');
+  return true;
+}
+/* Размеры из адреса: главная страница ведёт сюда как /editor?w=5400&l=3900 (мм, внутренние, по полу) — и прямоугольная комната
+   строится без диалога. Только на пустом плане: готовый проект адресом не заменяется. Параметры из адреса убираются,
+   чтобы обновление страницы не строило комнату второй раз. Вызывается из account.js, когда понятно, чей проект открыт. */
+function startFromUrl(){
+  const q=new URLSearchParams(location.search);if(!q.has('w')&&!q.has('l'))return;
+  const w=Math.round(Number(q.get('w'))),l=Math.round(Number(q.get('l')));
+  q.delete('w');q.delete('l');history.replaceState(null,'',location.pathname+(q.toString()?'?'+q:'')+location.hash);
+  if(READONLY||!(w>=1000&&l>=1000&&w<=MAX_WALL&&l<=MAX_WALL))return;
+  let bound=false;try{bound=!!localStorage.getItem('roomEditor.projectId');}catch(e){} // в браузере лежит копия проекта аккаунта — её не трогаем
+  if(P.vertices.length||bound){toast('Комната по размерам строится на пустом плане — открыт ваш прежний проект');return;}
+  buildRoom(roomTemplatePoints('rect',w,l),P.wallHeight||DEF.wallH);
 }
 
 /* Готовый пример: комната с окном, дверью и несколькими пустышками мебели — за одно нажатие видно, что умеет редактор
