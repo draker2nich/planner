@@ -173,6 +173,20 @@ const MIGRATIONS = [
     'CREATE INDEX IF NOT EXISTS audit_entity_at ON audit_log(entity, at)',
     'CREATE INDEX IF NOT EXISTS projects_deleted ON projects(deleted_at)',
   ],
+  // v8: визуализации комнаты — картинки от модели, привязанные к проекту (server/core/renders.js)
+  [
+    `CREATE TABLE IF NOT EXISTS renders (
+      id TEXT PRIMARY KEY,
+      user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      project_id TEXT NOT NULL,
+      file TEXT NOT NULL,
+      mime TEXT NOT NULL,
+      bytes INTEGER NOT NULL DEFAULT 0,
+      meta TEXT NOT NULL DEFAULT '{}',
+      created_at TEXT NOT NULL)`,
+    'CREATE INDEX IF NOT EXISTS renders_project ON renders(project_id, created_at)',
+    'CREATE INDEX IF NOT EXISTS renders_user ON renders(user_id)',
+  ],
 ];
 const SCHEMA_VERSION = 1 + MIGRATIONS.length;
 

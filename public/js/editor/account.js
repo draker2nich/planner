@@ -29,6 +29,7 @@
 
   const Sync = { mode: 'boot', user: null, id: null, rev: 0, lastKey: null, inflight: false, again: false, timer: null, retryStep: 0, state: 'idle', edited: false, ready: false, mail: false, warned: false, stale: false, checking: false };
   window.EditorSync = Sync; // состояние аккаунта для остальных файлов редактора (brief.js, order.js) и сквозных проверок (tools/ai-eval)
+  Sync.view = SHARE ? { share: SHARE } : VIEW_ID ? { id: VIEW_ID } : null; // чужой проект на просмотре: render.js берёт его визуализации по тому же ключу
 
   /* ---------- стили элементов аккаунта ---------- */
   document.head.append(h('style', {}, `

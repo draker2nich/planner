@@ -833,12 +833,13 @@ async function aiUsageBlock(box){
   const kpi=(label,val,note)=>h('div',{class:'kpi'},h('span',{},label),h('b',{},val),note?h('small',{},note):null);
   const kpis=h('div',{class:'kpis'},
     kpi('Генераций',n(u.runs),ok?`обращений к модели: ${n(u.total.calls)}`:null),
+    u.renders?kpi('Визуализаций',n(u.renders)):null,
     kpi('Токены ввода',n(u.total.in),u.total.cacheRead?`из кэша ${n(u.total.cacheRead)} (${Math.round(u.total.cacheRead/Math.max(1,u.total.in)*100)}%)`:'кэш не использовался'),
     kpi('Токены вывода',n(u.total.out)),
     kpi('Ошибки',n(u.total.errors),u.total.calls?`${(u.total.errors/u.total.calls*100).toFixed(1)}% обращений`:null),
     kpi('Среднее время',ok?(u.total.ms/Math.max(1,u.total.calls)/1000).toFixed(1)+' с':'—','на одно обращение'),
-    u.priced?kpi('Стоимость',money(u.total.cost),u.runs?`≈ ${money(u.total.cost/u.runs)} за генерацию`:null):null);
-  const STEP={taste:'Разбор пожеланий',concept:'Подбор товаров',layout:'Расстановка'};
+    u.priced?kpi('Стоимость',money(u.total.cost),u.runs?`≈ ${money((u.runCost??u.total.cost)/u.runs)} за генерацию`:null):null);
+  const STEP={taste:'Разбор пожеланий',concept:'Подбор товаров',layout:'Расстановка',render:'Визуализация'};
   const table=(title,head,rows)=>h('div',{class:'card tcard'},h('h4',{},title),rows.length?h('table',{},h('thead',{},h('tr',{},...head.map(([l,r])=>h('th',{class:r?'r':''},l)))),h('tbody',{},...rows)):h('div',{class:'empty',style:'padding:20px'},'Нет данных за период'));
   const cols=[['',0],['Обращений',1],['Ввод',1],['Вывод',1],...(u.priced?[['Стоимость',1]]:[])];
   const cells=(r)=>[h('td',{class:'r'},n(r.calls)+(r.errors?` (ош. ${n(r.errors)})`:'')),h('td',{class:'r'},n(r.in)),h('td',{class:'r'},n(r.out)),u.priced?h('td',{class:'r'},r.unpriced&&!r.cost?'нет цены':money(r.cost)):null];

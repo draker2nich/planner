@@ -24,6 +24,8 @@ const { mock: aiMock } = require('./ai-mock.js');
 const { makeAiUsage } = require('./ai-usage.js');
 const { makePhotos } = require('./photos.js');
 const { makeLeads } = require('./leads.js');
+const { makeImageAi } = require('./imagegen.js');
+const rendersCore = require('./renders.js');
 
 /* ---------- сборка окружения ---------- */
 async function fromEnv(env = process.env, { dataDir } = {}) {
@@ -112,6 +114,9 @@ async function bootstrap(ctx) {
   ctx.aiSeals = designer.makeSeals(ctx.limiter.tag);
   ctx.aiUsage = makeAiUsage(db, env);
   ctx.photos = makePhotos(db, ctx.storage);
+  /* Визуализация комнаты: модель, которая рисует изображения, и хранение готовых картинок. ctx.renderFetch подставляют тесты. */
+  ctx.imageAi = makeImageAi(env, { mock: rendersCore.mock, ...(ctx.renderFetch ? { fetchFn: ctx.renderFetch } : {}), ...(ctx.aiSleep ? { sleepFn: ctx.aiSleep } : {}) });
+  ctx.renders = rendersCore.makeRenders(db, ctx.storage);
   ctx.leads = makeLeads(db, ctx.catalog);
   /* Разовая доводка данных после миграции v7: сессии — в хешированный вид, строки поиска пользователей и заявок.
      Отметка в settings избавляет каждый холодный старт функции от трёх лишних запросов к базе. Повторный запуск безвреден. */
@@ -126,6 +131,7 @@ async function bootstrap(ctx) {
     const own = Object.entries(ctx.ai.models).filter(([, m]) => m !== ctx.ai.model).map(([k, m]) => `${k} — ${m}`).join(', ');
     console.log(`ИИ‑дизайнер: ${ctx.ai.mock ? 'заглушка (AI_MOCK=1)' : ctx.ai.provider + ' · ' + ctx.ai.model + (own ? ` (по шагам: ${own})` : '')}`);
   }
+  console.log(ctx.imageAi.enabled ? `Визуализация: ${ctx.imageAi.mock ? 'заглушка (RENDER_MOCK=1)' : `${ctx.imageAi.provider} · ${ctx.imageAi.model} · ${ctx.imageAi.size}`}` : 'Визуализация выключена: ' + ctx.imageAi.why);
   await syncEnvAdmin(ctx);
   await ctx.catalog.backfillSearch();
   /* набор каталога из public/catalog-pack; сбой записи набора не должен останавливать сайт */
@@ -138,6 +144,12 @@ const registrationOpen = (ctx) => String(ctx.env.REGISTRATION_ENABLED ?? '1').tr
 /* Лимиты ИИ‑дизайнера: AI_DAILY_RUNS — генераций на пользователя в сутки, AI_DAILY_CALLS — обращений к модели в сутки на всю платформу */
 const posInt = (v, d) => { const n = Math.floor(Number(v)); return Number.isFinite(n) && n > 0 ? n : d; };
 const aiLimits = (ctx) => ({ runs: posInt(ctx.env.AI_DAILY_RUNS, 10), calls: posInt(ctx.env.AI_DAILY_CALLS, 2000), monthly: posInt(ctx.env.AI_MONTHLY_CALLS, 0) });
+/* Лимиты визуализации: RENDER_DAILY — картинок на пользователя в сутки; RENDER_REFS — сколько фото товаров прикладывать к кадру (0 — не прикладывать).
+   Общие пределы AI_DAILY_CALLS и AI_MONTHLY_CALLS считают и эти обращения: в журнале они лежат рядом с шагами ИИ‑дизайнера. */
+const renderLimits = (ctx) => {
+  const refs = Math.floor(Number(ctx.env.RENDER_REFS));
+  return { daily: posInt(ctx.env.RENDER_DAILY, 5), refs: ctx.env.RENDER_REFS == null || ctx.env.RENDER_REFS === '' || !Number.isFinite(refs) ? 6 : Math.max(0, Math.min(rendersCore.LIM.refs, refs)) };
+};
 /* Жёсткий режим: без подтверждённой почты проекты в аккаунт не сохраняются. При выключенной почте игнорируется. */
 const requireVerified = (ctx) => String(ctx.env.REQUIRE_VERIFIED_EMAIL || '').trim() === '1' && ctx.mailer.enabled;
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -180,7 +192,8 @@ function createApp(makeCtx) {
   route('GET', '/api/config', async (ctx) => ({ uploads: ctx.storage.kind === 'blob' ? 'blob' : 'direct', blobAuth: ctx.storage.auth || null, maxModelMb: 50, maxImageMb: 15,
     registration: registrationOpen(ctx), contactEmail: contactEmail(ctx), termsVersion: V.TERMS_VERSION,
     mail: ctx.mailer.enabled, oauth: ctx.oauth.list(), requireVerifiedEmail: requireVerified(ctx),
-    ai: { enabled: ctx.ai.enabled, mock: ctx.ai.mock, dailyRuns: aiLimits(ctx).runs } }));
+    ai: { enabled: ctx.ai.enabled, mock: ctx.ai.mock, dailyRuns: aiLimits(ctx).runs },
+    render: { enabled: ctx.imageAi.enabled, mock: ctx.imageAi.mock, daily: renderLimits(ctx).daily } }));
 
   // авторизация
   const tooMany = (retryAfter) => {
@@ -389,7 +402,7 @@ function createApp(makeCtx) {
     const c = await ctx.users.confirmDeletion(u, await readJson(req, 16 * 1024));
     if (!c.ok) throw new ApiError(422, 'bad_credentials', c.message, { fields: { [c.field]: c.message } });
     await ctx.users.remove(u.id);
-    await ctx.photos.removeAll(u.id); // файлы фото; строки таблицы ушли каскадом
+    await ctx.photos.removeAll(u.id); // файлы фото и визуализаций (всё под users/<id>/); строки таблиц ушли каскадом
     await ctx.limiter.reset(key);
     await ctx.audit(u.id, 'user.delete', 'user', u.id); // без почты и имени
     await ctx.mailer.sendQuiet('account_deleted', { email: c.row.email, name: c.row.name }, {});
@@ -404,11 +417,21 @@ function createApp(makeCtx) {
   };
   const createLimit = async (ctx, u) => { const lim = await ctx.limiter.hit(`proj:new:${u.id}`, 30, 3600); if (!lim.ok) throw tooMany(lim.retryAfter); };
   const BODY = PROJECT_MAX_BYTES + 64 * 1024;
-  route('GET', '/api/projects', async (ctx, req) => ctx.projects.list(await requireUser(ctx, req)));
+  route('GET', '/api/projects', async (ctx, req) => {
+    const u = await requireUser(ctx, req);
+    const out = await ctx.projects.list(u); // заодно стирает проекты, пролежавшие в корзине свой срок
+    await ctx.renders.gc(u.id, 3600);       // …а это — визуализации стёртых проектов
+    return out;
+  });
   route('POST', '/api/projects', async (ctx, req) => { const u = await writer(ctx, req); await createLimit(ctx, u); return ctx.projects.create(u, await readJson(req, BODY)); });
   /* корзина: удалённые проекты хранятся 30 суток и могут быть возвращены. Маршруты стоят раньше «/api/projects/:id». */
   route('GET', '/api/projects/trash', async (ctx, req) => ctx.projects.trash(await requireUser(ctx, req)));
-  route('DELETE', '/api/projects/trash/:id', async (ctx, req, p) => ctx.projects.destroy(await requireUser(ctx, req), p.id));
+  route('DELETE', '/api/projects/trash/:id', async (ctx, req, p) => {
+    const u = await requireUser(ctx, req);
+    const out = await ctx.projects.destroy(u, p.id);
+    await ctx.renders.gc(u.id);
+    return out;
+  });
   route('POST', '/api/projects/:id/restore', async (ctx, req, p) => ctx.projects.restore(await writer(ctx, req), p.id));
   route('GET', '/api/projects/:id', async (ctx, req, p) => ctx.projects.get(await requireUser(ctx, req), p.id));
   route('PUT', '/api/projects/:id', async (ctx, req, p) => {
@@ -478,15 +501,16 @@ function createApp(makeCtx) {
   };
   /* Общий счётчик обращений к модели: суточный (атомарно) и, если задан AI_MONTHLY_CALLS, за 30 суток — по журналу обращений.
      Месячный предел — страховка от счёта провайдера, а не точный учёт: считается с небольшим запаздыванием. */
-  const aiGlobal = async (ctx) => {
+  const AI_BUSY_TEXT = { monthly: 'ИИ‑дизайнер временно недоступен: исчерпан месячный лимит. Напишите нам, если он нужен срочно', daily: 'ИИ‑дизайнер сегодня перегружен. Попробуйте завтра' };
+  const aiGlobal = async (ctx, text = AI_BUSY_TEXT) => {
     const lim = aiLimits(ctx);
     if (lim.monthly) {
       let n;
       try { n = Number((await ctx.db.get("SELECT CAST(COUNT(*) AS INTEGER) AS c FROM audit_log WHERE entity = 'ai' AND at > ?", [new Date(Date.now() - 30 * DAY * 1000).toISOString()])).c); }
       catch { throw new ApiError(503, 'ai_limits', 'Не удалось проверить лимиты. Попробуйте позже'); }
-      if (n >= lim.monthly) throw aiLimit('ИИ‑дизайнер временно недоступен: исчерпан месячный лимит. Напишите нам, если он нужен срочно', DAY);
+      if (n >= lim.monthly) throw aiLimit(text.monthly, DAY);
     }
-    await aiCount(ctx, 'take', 'ai:global', lim.calls, DAY, 'ИИ‑дизайнер сегодня перегружен. Попробуйте завтра');
+    await aiCount(ctx, 'take', 'ai:global', lim.calls, DAY, text.daily);
   };
   const aiUser = async (ctx, req) => {
     if (!ctx.ai.enabled) throw new ApiError(503, 'ai_off', 'ИИ‑дизайнер пока не подключён');
@@ -501,7 +525,7 @@ function createApp(makeCtx) {
     ai_refused: [422, 'Модель отказалась обрабатывать запрос. Измените пожелания или фото'], ai_truncated: [502, 'Ответ модели оборвался. Попробуйте ещё раз'], ai_bad_answer: [502, 'Модель вернула непонятный ответ. Попробуйте ещё раз'],
   };
   /* Один шаг: вызов, запись в журнал (без текстов и фото — только размеры запроса, расход и время), перевод ошибок модели в ответы API */
-  const aiStep = async (ctx, u, step, entityId, extra, fn) => {
+  const aiStep = async (ctx, u, step, entityId, extra, fn, fails = AI_FAIL) => {
     const t0 = Date.now();
     try {
       const res = await fn();
@@ -512,7 +536,7 @@ function createApp(makeCtx) {
       await ctx.audit(u.id, 'ai.' + step, 'ai', entityId, { ...extra, error: code, ms: Date.now() - t0 }).catch(() => {});
       if (!(e instanceof AiError)) throw e;
       console.error(`ai ${step}: ${e.code}: ${e.message}`); // подробности провайдера — только в журнал сервера
-      const [status, message] = AI_FAIL[e.code] || [502, 'ИИ‑дизайнер временно недоступен'];
+      const [status, message] = fails[e.code] || fails.other || [502, 'ИИ‑дизайнер временно недоступен'];
       throw new ApiError(status, e.code, message);
     }
   };
@@ -594,6 +618,69 @@ function createApp(makeCtx) {
     return { ok: true, refunded: true };
   });
 
+  /* ---------- визуализация комнаты ----------
+     Кадр из 3D‑вида → фотореалистичная картинка (server/core/renders.js). Каждая картинка — платное обращение к модели, поэтому правила
+     те же, что у ИИ‑дизайнера: вход, подтверждённая почта, строгие лимиты; попытка возвращается, если модель картинку не отдала.
+     Картинка принадлежит проекту аккаунта и читается только через API: владельцем, поддержкой и гостем по ссылке на проект. */
+  const RENDER_FAIL = {
+    ai_off: [503, 'Визуализация пока не подключена'], ai_timeout: [504, 'Модель не успела нарисовать картинку. Попробуйте ещё раз'], ai_network: [502, 'Нет связи с моделью. Попробуйте ещё раз'],
+    ai_busy: [503, 'Модель сейчас перегружена. Попробуйте через минуту'], ai_refused: [422, 'Модель отказалась рисовать этот кадр. Попробуйте другой ракурс'],
+    ai_bad_answer: [502, 'Модель вернула непонятный ответ. Попробуйте ещё раз'], other: [502, 'Визуализация временно недоступна'],
+  };
+  const RENDER_BUSY_TEXT = { monthly: 'Визуализация временно недоступна: исчерпан месячный лимит. Напишите нам, если она нужна срочно', daily: 'Сегодня визуализация перегружена. Попробуйте завтра' };
+  const renderQuota = async (ctx, u) => {
+    const lim = renderLimits(ctx);
+    if (u.role === 'admin') return { limit: lim.daily, left: null };
+    const c = await ctx.limiter.peek(`ai:render:${u.id}`, lim.daily, DAY);
+    return { limit: lim.daily, left: Math.max(0, lim.daily - (c.count || 0)) };
+  };
+  const renderList = async (ctx, projectId, extra = {}) => ({ renders: await ctx.renders.list(projectId), limit: rendersCore.LIM.perProject, ...extra });
+  route('GET', '/api/projects/:id/renders', async (ctx, req, p) => {
+    const u = await requireUser(ctx, req);
+    const pr = await ctx.projects.ownMeta(u, p.id);
+    return renderList(ctx, pr.id, { enabled: ctx.imageAi.enabled, mock: ctx.imageAi.mock, refs: renderLimits(ctx).refs, daily: await renderQuota(ctx, u) });
+  });
+  route('POST', '/api/projects/:id/renders', async (ctx, req, p) => {
+    if (!ctx.imageAi.enabled) throw new ApiError(503, 'ai_off', 'Визуализация пока не подключена');
+    const u = await requireUser(ctx, req);
+    if (ctx.mailer.enabled && !u.emailVerified && u.role !== 'admin') throw new ApiError(403, 'email_unverified', 'Подтвердите почту, чтобы создавать визуализации');
+    const pr = await ctx.projects.ownMeta(u, p.id);
+    const r = rendersCore.readReq(await readJson(req, rendersCore.LIM.body));
+    const lim = renderLimits(ctx);
+    /* фото товаров принимаются только для опубликованных товаров каталога: подпись к фото берётся из каталога, а не от клиента */
+    const cards = r.refs.length && lim.refs ? new Map((await ctx.catalog.publicByIds(r.refs.map((x) => x.productId))).map((c) => [c.id, c])) : new Map();
+    const refs = r.refs.filter((x) => cards.has(x.productId)).slice(0, lim.refs);
+    /* образец стиля — готовая визуализация этого же проекта; новый ракурс наследует и её освещение */
+    const anchor = r.anchorId ? await ctx.renders.source(pr.id, r.anchorId) : null;
+    const mood = anchor ? anchor.mood : r.mood;
+    await ctx.renders.gc(u.id);
+    if ((await ctx.renders.count(pr.id)) >= rendersCore.LIM.perProject) throw new ApiError(422, 'limit', `В проекте уже ${rendersCore.LIM.perProject} визуализаций. Удалите ненужные, чтобы создать новую`);
+    /* Попытка резервируется до обращения к модели (параллельные запросы не обходят лимит) и возвращается, если картинка не получена.
+       Неудачные попытки считаются отдельно (ai:rtry) — это предел для них. */
+    const free = u.role === 'admin', kDay = `ai:render:${u.id}`, dayText = `Дневной лимит визуализаций исчерпан (${lim.daily} в сутки). Попробуйте завтра`;
+    let take = null;
+    if (!free) {
+      await aiCount(ctx, 'peek', kDay, lim.daily, DAY, dayText);
+      await aiCount(ctx, 'take', `ai:rtry:${u.id}`, lim.daily * 4, DAY, 'Слишком много попыток визуализации. Попробуйте завтра');
+      try { take = await aiCount(ctx, 'take', kDay, lim.daily, DAY, dayText); }
+      catch (e) { if (e.code === 'ai_limit') await ctx.limiter.undo(kDay); throw e; }
+    }
+    let saved;
+    try {
+      await aiGlobal(ctx, RENDER_BUSY_TEXT);
+      const prompt = rendersCore.buildPrompt({ scene: r.scene, mood, products: refs.map((x) => cards.get(x.productId)), anchor: !!anchor });
+      const images = [r.frame, ...(anchor ? [{ mime: anchor.mime, data: anchor.data }] : []), ...refs.map((x) => ({ mime: x.mime, data: x.data }))];
+      const res = await aiStep(ctx, u, 'render', pr.id, { refs: refs.length, anchor: !!anchor, mood }, () => ctx.imageAi.generate({ ...prompt, images, aspect: r.aspect }), RENDER_FAIL);
+      saved = await ctx.renders.save(u, pr.id, res.image, { label: r.label, mood, anchor: anchor ? anchor.id : null, aspect: r.aspect, model: res.model, size: ctx.imageAi.size });
+    } catch (e) { if (take) await ctx.limiter.undo(kDay); throw e; }
+    return { render: saved, daily: { limit: lim.daily, left: take ? Math.max(0, lim.daily - take.count) : null } };
+  });
+  route('GET', '/api/projects/:id/renders/:rid', async (ctx, req, p) => ctx.renders.read((await ctx.projects.ownMeta(await requireUser(ctx, req), p.id)).id, p.rid));
+  route('DELETE', '/api/projects/:id/renders/:rid', async (ctx, req, p) => ctx.renders.remove((await ctx.projects.ownMeta(await requireUser(ctx, req), p.id)).id, p.rid));
+  /* гость по ссылке владельца: визуализации видны вместе с проектом, только для просмотра */
+  route('GET', '/api/shared/:token/renders', async (ctx, req, p) => { await sharedLimit(ctx, req); return renderList(ctx, (await ctx.projects.sharedRow(p.token)).id); });
+  route('GET', '/api/shared/:token/renders/:rid', async (ctx, req, p) => { await sharedLimit(ctx, req); return ctx.renders.read((await ctx.projects.sharedRow(p.token)).id, p.rid); });
+
   // публичный каталог
   route('GET', '/api/catalog/types', async () => ({ cats: T.CATS, dimNames: T.DIMN, types: T.TYPES.map(t => ({ id: t.id, name: t.name, cats: t.cats, mount: t.mount, forms: t.forms.map(f => ({ id: f.id, name: f.name, fp: f.fp, dims: T.formDimKeys(f), typical: f.typical })) })) }));
   /* Каталог отдаётся порциями (limit до 2000, offset); images=1 — только товары с фото.
@@ -636,6 +723,14 @@ function createApp(makeCtx) {
     if (!row) throw new ApiError(404, 'not_found', 'Проект не найден');
     return ctx.photos.ofProject(row, p.photo, { materialsOnly: false });
   }));
+  /* визуализации просматриваемого проекта — поддержке, только чтение */
+  const adminProjectId = async (ctx, id) => {
+    const row = await ctx.db.get('SELECT id FROM projects WHERE id=? AND deleted_at IS NULL', [String(id)]);
+    if (!row) throw new ApiError(404, 'not_found', 'Проект не найден');
+    return row.id;
+  };
+  route('GET', '/api/admin/projects/:id/renders', admin(async (ctx, u, req, p) => renderList(ctx, await adminProjectId(ctx, p.id))));
+  route('GET', '/api/admin/projects/:id/renders/:rid', admin(async (ctx, u, req, p) => ctx.renders.read(await adminProjectId(ctx, p.id), p.rid)));
   route('GET', '/api/admin/leads', admin((ctx, u, req, p, q) => ctx.leads.list(q)));
   route('POST', '/api/admin/leads/:id/status', admin(async (ctx, u, req, p) => {
     const lead = await ctx.leads.setStatus(p.id, (await readJson(req, 4096)).status);

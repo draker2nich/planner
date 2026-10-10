@@ -249,7 +249,7 @@ function makeProjects(db) {
       await db.run('DELETE FROM projects WHERE id=? AND user_id=? AND deleted_at IS NOT NULL', [r.id, user.id]);
       return { ok: true };
     },
-    own,
+    own, ownMeta,
     /* ---------- ссылка для просмотра ----------
        Кто знает ссылку, видит проект без входа и только для чтения. Ссылка одна на проект; владелец может её отключить —
        тогда прежний адрес перестаёт работать, а новая ссылка получит другой адрес. */

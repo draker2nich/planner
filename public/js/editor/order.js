@@ -47,6 +47,8 @@ async function orderPrint(which){
   const area=D&&D.area?m2(Math.abs(D.area)):'';
   const fin=cell.finishes||{walls:{}};const wallIds=Object.keys(fin.walls||{});
   sheet.append(h('p',{class:'ps-room'},[area&&'Площадь '+area,'высота потолка '+fmtU(P.wallHeight),'стены — '+orderFinishText(wallIds.length?fin.walls[wallIds[0]]:null,WALL_DEF),'пол — '+orderFinishText(fin.floor,FLOOR_DEF),'потолок — '+orderFinishText(fin.ceiling,CEIL_DEF)].filter(Boolean).join(' · ')));
+  /* визуализации этой расстановки, если они есть: до двух последних */
+  if(typeof renderPrintImages==='function'){const pics=await renderPrintImages(cell.label);if(pics.length){const pb=h('div',{class:'ps-renders'});pics.forEach(u=>pb.append(h('img',{alt:'Визуализация комнаты',src:u})));sheet.append(pb,h('p',{class:'ps-rnote'},'Визуализация выполнена ИИ по 3D‑виду проекта: вид и мелкие детали товаров могут отличаться от настоящих.'));}}
   const tb=h('tbody',{});let i=0;
   for(const r of o.rows){i++;const pr=r.pr;const img=h('img',{alt:'',width:'48',height:'48'});img.src=pr?productThumb(pr):typeIcon(r.t);
     const name=h('td',{class:'ps-nm'},h('b',{},pr?pr.name:'Пустышка: '+r.f.name),h('div',{},r.t.name+' · '+orderDims(r)+(pr&&pr.brand?' · '+pr.brand:'')));
@@ -108,7 +110,7 @@ async function orderShare(){
   const url=location.origin+'/editor?share='+r.token;
   await dialog((box,api)=>{
     box.classList.add('mid');
-    box.append(h('h3',{},'Ссылка на проект'),h('div',{class:'hint'},'Кто откроет ссылку, увидит план, мебель, 3D и варианты ИИ‑дизайнера — без входа и только для просмотра. Ваши пожелания, фото‑референсы и почта по ссылке не показываются.'));
+    box.append(h('h3',{},'Ссылка на проект'),h('div',{class:'hint'},'Кто откроет ссылку, увидит план, мебель, 3D, варианты ИИ‑дизайнера и визуализации комнаты — без входа и только для просмотра. Ваши пожелания, фото‑референсы и почта по ссылке не показываются.'));
     const inp=h('input',{type:'text',readonly:'',value:url,'aria-label':'Ссылка на проект',spellcheck:'false'});inp.onfocus=()=>inp.select();
     const copy=async()=>{try{await navigator.clipboard.writeText(url);toast('Ссылка скопирована');}catch(e){inp.focus();inp.select();toast('Выделите ссылку и скопируйте вручную');}};
     box.append(h('div',{class:'sharerow'},inp,h('button',{type:'button',onclick:copy},ic('copy'),'Копировать')));
@@ -139,6 +141,7 @@ function orderBlock(cells){
     const acts=h('div',{class:'orderacts'});
     if(!READONLY){const lb=h('button',{type:'button',class:'primary',onclick:()=>orderLead(ORDER_PICK)},ic('send'),'Отправить заявку менеджеру');if(!o.products){lb.disabled=true;lb.title='В расстановке нет товаров';}acts.append(lb);}
     acts.append(h('button',{type:'button',class:READONLY?'primary':'',onclick:()=>orderPrint(ORDER_PICK)},ic('printer'),'Смета · PDF'));
+    if(typeof renderOpenFor==='function'&&P.closed)acts.append(h('button',{type:'button',onclick:()=>renderOpenFor(ORDER_PICK)},ic('camera'),READONLY?'Визуализации':'Визуализация'));
     if(!READONLY)acts.append(h('button',{type:'button',onclick:orderShare},ic('link'),'Поделиться ссылкой'));
     box.append(acts);};
   fill();return box;
@@ -159,6 +162,7 @@ function orderMenuItems(menu){
   if(T3.active)return;
   const mi=(icon,label,fn)=>h('button',{type:'button',class:'mi',role:'menuitem',onclick:()=>{menu.hidden=true;fn();}},ic(icon),label);
   if(P.walls.length)menu.append(mi('image','План картинкой · PNG',orderPlanPng));
+  if(P.closed&&typeof renderOpen==='function')menu.append(mi('camera',READONLY?'Визуализации комнаты':'Визуализация комнаты',renderOpen));
   if(!P.closed||!(P.furniture||[]).length){if(P.walls.length)menu.append(h('hr'));return;}
   menu.append(mi('printer','Смета · PDF',()=>orderPrint(null)));
   if(!READONLY)menu.append(mi('send','Заявка менеджеру',()=>orderLead(null)),mi('link','Поделиться ссылкой',orderShare));
