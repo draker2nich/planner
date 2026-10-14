@@ -5,10 +5,13 @@
 
    Настройки (переменные окружения):
      RENDER_API_KEY     ключ провайдера; без него (и без RENDER_MOCK) визуализация выключена
-     RENDER_PROVIDER    google (по умолчанию) — Gemini API напрямую
-     RENDER_MODEL       идентификатор модели; по умолчанию gemini-nano-banana-2.1
+     RENDER_PROVIDER    openai (по умолчанию) — OpenAI Image API | google — Gemini API
+     RENDER_MODEL       идентификатор модели; по умолчанию у openai — gpt-image-2.5-sunburst (точнее держит исходный кадр;
+                        быстрее и проще — gpt-image-2.5-flare), у google — gemini-nano-banana-2.1
      RENDER_SIZE        размер результата: 1K (по умолчанию) или 2K. 4K не предлагается: ответ функции Vercel ограничен 4,5 МБ
-     RENDER_THINKING    глубина «обдумывания» модели: minimal | low | medium | high; не задано — как решит провайдер.
+     RENDER_QUALITY     только openai: low | medium (по умолчанию) | high | xhigh | max | auto. Выше качество — дольше и дороже ответ:
+                        high и выше могут не уложиться во время жизни функции Vercel
+     RENDER_THINKING    только google: глубина «обдумывания» модели: minimal | low | medium | high; не задано — как решит провайдер.
                         Чем глубже, тем дольше ответ: если визуализация не укладывается во время жизни функции, поставьте minimal
      RENDER_TIMEOUT_MS  предел ожидания ответа, по умолчанию 50000: функция Vercel живёт 60 секунд, а результат ещё надо сохранить
      RENDER_RETRIES     повторы при перегрузке провайдера и сбое сети, по умолчанию 1 (0 — не повторять)
@@ -19,15 +22,22 @@
    и примеры редактирования изображений в документации даны для него. Запрос не сохраняется у провайдера (store:false).
    API пока в статусе beta: если формат ответа изменится, править нужно только googleRequest и googleAnswer ниже.
 
+   OpenAI: Image API, правка изображения (POST /v1/images/edits, тело JSON). Кадр и образцы идут массивом images в том порядке,
+   в каком текст на них ссылается; размер — WIDTHxHEIGHT по соотношению сторон (стороны кратны 16), результат — JPEG.
+
    generate() возвращает { image: { mime, buf }, usage: { in, out }, ms, model }. Ошибки — AiError с теми же кодами,
    что у текстовой модели: их переводит в ответы API общий код в app.js. */
 const { AiError } = require('./ai.js');
 
 const PROVIDERS = {
+  openai: { url: 'https://api.openai.com/v1/images/edits', model: 'gpt-image-2.5-sunburst' },
   google: { url: 'https://generativelanguage.googleapis.com/v1beta/interactions', model: 'gemini-nano-banana-2.1' },
 };
 const SIZES = ['1K', '2K'];
 const THINKING = ['minimal', 'low', 'medium', 'high'];
+const QUALITY = ['low', 'medium', 'high', 'xhigh', 'max', 'auto'];
+/* Длинная сторона результата у openai. 1K для 3:2 даёт стандартные 1536x1024 */
+const OPENAI_LONG = { '1K': 1536, '2K': 2048 };
 const ASPECTS = ['3:2', '2:3', '4:3', '3:4', '16:9', '9:16', '1:1'];
 const IN_MIME = ['image/jpeg', 'image/png', 'image/webp'];
 const MAX_OUT_BYTES = 3 * 1024 * 1024; // картинка отдаётся клиенту через функцию в base64: больше в ответ не поместится
@@ -77,10 +87,39 @@ function googleAnswer(j) {
   return { data: img.data, usage: { in: num(u.total_input_tokens), out: num(u.total_output_tokens) + num(u.total_thought_tokens), cacheRead: 0, cacheWrite: 0 } };
 }
 
+/* Размер для openai: длинная сторона из OPENAI_LONG, короткая — по соотношению сторон, обе кратны 16 (требование API) */
+function openaiSize(aspect, size) {
+  const [a, b] = String(aspect).split(':').map(Number);
+  const long = OPENAI_LONG[size] || OPENAI_LONG['1K'];
+  const short = Math.max(16, Math.round((long * Math.min(a, b)) / Math.max(a, b) / 16) * 16);
+  return a >= b ? `${long}x${short}` : `${short}x${long}`;
+}
+function openaiRequest({ model, system, text, images, aspect, size, quality }) {
+  const body = {
+    model,
+    prompt: system ? system + '\n\n' + text : text,
+    images: images.map((i) => ({ image_url: `data:${i.mime};base64,${i.data}` })),
+    size: openaiSize(aspect, size),
+    output_format: 'jpeg',
+    output_compression: 90,
+    n: 1,
+  };
+  if (quality) body.quality = quality;
+  return body;
+}
+function openaiAnswer(j) {
+  const img = Array.isArray(j.data) ? j.data.find((d) => d && typeof d.b64_json === 'string' && d.b64_json) : null;
+  if (!img) throw new AiError('ai_bad_answer', 'В ответе модели нет изображения');
+  const u = j.usage || {};
+  return { data: img.b64_json, usage: { in: num(u.input_tokens), out: num(u.output_tokens), cacheRead: 0, cacheWrite: 0 } };
+}
+/* Отказ по правилам содержания OpenAI приходит ошибкой 400 с особым кодом, а не пустым ответом */
+const isRefusal = (j) => /moderation|content_policy|safety/i.test(String((j && j.error && (j.error.code || j.error.type)) || ''));
+
 /* mock({ images }) → { mime, buf }; передаётся снаружи. sleepFn подменяют тесты, чтобы повторы не ждали по‑настоящему. */
 function makeImageAi(env = {}, { fetchFn = fetch, mock = null, sleepFn = wait } = {}) {
   const isMock = String(env.RENDER_MOCK || '').trim() === '1' && typeof mock === 'function';
-  const provider = String(env.RENDER_PROVIDER || 'google').trim().toLowerCase();
+  const provider = String(env.RENDER_PROVIDER || 'openai').trim().toLowerCase();
   const def = PROVIDERS[provider];
   const key = String(env.RENDER_API_KEY || '').trim();
   const model = String(env.RENDER_MODEL || (def && def.model) || '').trim();
@@ -88,7 +127,9 @@ function makeImageAi(env = {}, { fetchFn = fetch, mock = null, sleepFn = wait } 
   const sizeRaw = String(env.RENDER_SIZE || '1K').trim().toUpperCase();
   const size = SIZES.includes(sizeRaw) ? sizeRaw : '1K';
   const thinkingRaw = String(env.RENDER_THINKING || '').trim().toLowerCase();
-  const thinking = THINKING.includes(thinkingRaw) ? thinkingRaw : '';
+  const thinking = provider === 'google' && THINKING.includes(thinkingRaw) ? thinkingRaw : '';
+  const qualityRaw = String(env.RENDER_QUALITY || 'medium').trim().toLowerCase();
+  const quality = provider === 'openai' ? (QUALITY.includes(qualityRaw) ? qualityRaw : 'medium') : '';
   const timeoutMs = Math.max(5000, Math.min(280000, Number(env.RENDER_TIMEOUT_MS) || 50000));
   const retries = env.RENDER_RETRIES == null || env.RENDER_RETRIES === '' ? 1 : Math.max(0, Math.min(3, Math.floor(Number(env.RENDER_RETRIES)) || 0));
   const enabled = isMock || (!!def && !!key && !!model && !!url);
@@ -98,7 +139,8 @@ function makeImageAi(env = {}, { fetchFn = fetch, mock = null, sleepFn = wait } 
     const left = deadline - Date.now();
     if (left < 1500) throw new AiError('ai_timeout', 'Модель не успела ответить');
     let r;
-    try { r = await fetchFn(url, { method: 'POST', headers: { 'content-type': 'application/json', 'x-goog-api-key': key }, body: JSON.stringify(body), signal: AbortSignal.timeout(left) }); }
+    const auth = provider === 'openai' ? { authorization: 'Bearer ' + key } : { 'x-goog-api-key': key };
+    try { r = await fetchFn(url, { method: 'POST', headers: { 'content-type': 'application/json', ...auth }, body: JSON.stringify(body), signal: AbortSignal.timeout(left) }); }
     catch (e) {
       if (e && (e.name === 'TimeoutError' || e.name === 'AbortError')) throw new AiError('ai_timeout', 'Модель не успела ответить');
       throw new AiError('ai_network', 'Не удалось связаться с моделью: ' + ((e && e.message) || 'ошибка сети'));
@@ -107,6 +149,7 @@ function makeImageAi(env = {}, { fetchFn = fetch, mock = null, sleepFn = wait } 
     if (r.ok && j && typeof j === 'object') return j;
     if (r.ok) throw new AiError('ai_bad_answer', 'Ответ провайдера не разобран');
     const detail = String((j && (j.error && (j.error.message || j.error.status) || j.message)) || ('HTTP ' + r.status)).slice(0, 300);
+    if (r.status === 400 && isRefusal(j)) throw new AiError('ai_refused', 'Модель не стала рисовать: ' + detail);
     if (r.status === 401 || r.status === 403) throw new AiError('ai_auth', 'Провайдер модели отклонил ключ: ' + detail, { status: r.status });
     if (r.status === 429 || r.status === 529 || r.status >= 500) throw new AiError('ai_busy', 'Модель сейчас перегружена: ' + detail, { status: r.status, retryAfter: Number(r.headers.get('retry-after')) || 0 });
     throw new AiError('ai_request', 'Провайдер не принял запрос: ' + detail, { status: r.status });
@@ -134,8 +177,10 @@ function makeImageAi(env = {}, { fetchFn = fetch, mock = null, sleepFn = wait } 
       const out = await mock({ system, text, images, aspect });
       return { image: out, usage: { in: 0, out: 0, cacheRead: 0, cacheWrite: 0 }, ms: Date.now() - t0, model: 'mock' };
     }
-    const j = await postRetry(googleRequest({ model, system, text, images, aspect: ASPECTS.includes(aspect) ? aspect : '3:2', size, thinking }), t0 + timeoutMs);
-    const out = googleAnswer(j);
+    const req = { model, system, text, images, aspect: ASPECTS.includes(aspect) ? aspect : '3:2', size, thinking, quality };
+    const isOpenai = provider === 'openai';
+    const j = await postRetry(isOpenai ? openaiRequest(req) : googleRequest(req), t0 + timeoutMs);
+    const out = isOpenai ? openaiAnswer(j) : googleAnswer(j);
     const buf = Buffer.from(out.data, 'base64');
     const mime = mimeOf(buf);
     if (!mime) throw new AiError('ai_bad_answer', 'Модель вернула не изображение');
@@ -143,7 +188,7 @@ function makeImageAi(env = {}, { fetchFn = fetch, mock = null, sleepFn = wait } 
     return { image: { mime, buf }, usage: out.usage, ms: Date.now() - t0, model };
   }
 
-  return { enabled, mock: isMock, provider: isMock ? 'mock' : provider, model: isMock ? 'mock' : model, size, thinking, retries, why, timeoutMs, generate };
+  return { enabled, mock: isMock, provider: isMock ? 'mock' : provider, model: isMock ? 'mock' : model, size, quality, thinking, retries, why, timeoutMs, generate };
 }
 
-module.exports = { makeImageAi, googleRequest, googleAnswer, mimeOf, ASPECTS, IN_MIME, MAX_OUT_BYTES };
+module.exports = { makeImageAi, googleRequest, googleAnswer, openaiRequest, openaiAnswer, openaiSize, mimeOf, ASPECTS, IN_MIME, MAX_OUT_BYTES };

@@ -17,10 +17,10 @@ node --env-file=.env tools/render-check/check.cjs кадр.jpg --dump        # �
 - Кадр берётся из редактора: запустите сервер с `RENDER_MOCK=1`, создайте визуализацию и нажмите «Скачать» —
   на заглушке «визуализацией» становится сам кадр, то есть ровно то, что получает модель.
 - `--anchor` — готовая визуализация этой же комнаты: новый кадр рисуется в её стиле. `--ref` — фото товаров из каталога.
-- Сравнить модели на одном кадре: `RENDER_MODEL=gemini-3-pro-image node --env-file=.env tools/render-check/check.cjs кадр.jpg`
+- Сравнить модели на одном кадре: `RENDER_MODEL=gpt-image-2.5-flare node --env-file=.env tools/render-check/check.cjs кадр.jpg`
   (имя модели попадает в имя файла результата).
-- Если ответ идёт дольше 45 секунд, на Vercel он может не уложиться во время жизни функции: поставьте `RENDER_THINKING=minimal`
-  или увеличьте `maxDuration` в `vercel.json` вместе с `RENDER_TIMEOUT_MS`.
+- Если ответ идёт дольше 45 секунд, на Vercel он может не уложиться во время жизни функции: понизьте `RENDER_QUALITY` (OpenAI)
+  или поставьте `RENDER_THINKING=minimal` (Google), либо увеличьте `maxDuration` в `vercel.json` вместе с `RENDER_TIMEOUT_MS`.
 
 На что смотреть в результате: мебель осталась той же (форма, цвет, место), стены и проёмы на месте, ничего лишнего не появилось.
 

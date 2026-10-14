@@ -4,7 +4,7 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
 const { makeApp } = require('./helpers.js');
-const { googleAnswer, makeImageAi } = require('../core/imagegen.js');
+const { googleAnswer, makeImageAi, openaiAnswer, openaiSize } = require('../core/imagegen.js');
 const { buildPrompt, readReq, LIM } = require('../core/renders.js');
 
 const JPEG = Buffer.concat([Buffer.from([0xff, 0xd8, 0xff, 0xe0]), Buffer.alloc(40, 7)]);
@@ -100,7 +100,7 @@ test('проверка запроса: кадр, сцена, лишние пол
 
 test('дневной лимит: считаются только полученные картинки, администратор — без лимита', async (t) => {
   let fail = true;
-  const A = await makeApp({ RENDER_API_KEY: 'k', RENDER_DAILY: '2' }, { renderFetch: async () => (fail ? reply(500, { error: { message: 'boom', status: 'INTERNAL' } }) : reply(200, interaction())) }); t.after(A.close);
+  const A = await makeApp({ RENDER_PROVIDER: 'google', RENDER_API_KEY: 'k', RENDER_DAILY: '2' }, { renderFetch: async () => (fail ? reply(500, { error: { message: 'boom', status: 'INTERNAL' } }) : reply(200, interaction())) }); t.after(A.close);
   const u = await A.user('g@test.dev'); const id = await newProject(A, u);
   const post = (tok = u.token, pid = id) => A.call('POST', `/api/projects/${pid}/renders`, body(), tok);
   const bad = await post();
@@ -129,7 +129,7 @@ test('в проекте не больше заданного числа визу
 
 test('запрос к Gemini: адрес, ключ, порядок изображений, текст только из словарей; ответ с черновиком разбирается', async (t) => {
   const calls = [];
-  const A = await makeApp({ RENDER_API_KEY: 'secret-key', RENDER_SIZE: '2k', RENDER_THINKING: 'minimal' }, { renderFetch: async (url, init) => { calls.push({ url, init, body: JSON.parse(init.body) }); return reply(200, interaction()); } });
+  const A = await makeApp({ RENDER_PROVIDER: 'google', RENDER_API_KEY: 'secret-key', RENDER_SIZE: '2k', RENDER_THINKING: 'minimal' }, { renderFetch: async (url, init) => { calls.push({ url, init, body: JSON.parse(init.body) }); return reply(200, interaction()); } });
   t.after(A.close);
   await A.setCatalog([{ id: 'sofa-1', typeId: 'sofa', formId: 'straight', name: 'Диван СЕКРЕТНОЕ‑ИМЯ', brand: 'Бренд', dims: { W: 2200, D: 900, H: 850 }, colors: ['серый'], materials: ['ткань'] },
     { id: 'draft-1', typeId: 'chair', formId: 'rect', dims: { W: 450, D: 500, H: 900 }, status: 'draft' }]);
@@ -174,7 +174,7 @@ test('запрос к Gemini: адрес, ключ, порядок изобра�
 
 test('отказ модели, чужой формат ответа и неверный ключ переводятся в ответы API', async (t) => {
   let next;
-  const A = await makeApp({ RENDER_API_KEY: 'k', RENDER_RETRIES: '0' }, { renderFetch: async () => next }); t.after(A.close);
+  const A = await makeApp({ RENDER_PROVIDER: 'google', RENDER_API_KEY: 'k', RENDER_RETRIES: '0' }, { renderFetch: async () => next }); t.after(A.close);
   const u = await A.user('i@test.dev'); const id = await newProject(A, u);
   const post = () => A.call('POST', `/api/projects/${id}/renders`, body(), u.token);
   next = reply(200, { status: 'completed', steps: [{ type: 'model_output', content: [{ type: 'text', text: 'I cannot generate this image.' }] }] });
@@ -199,15 +199,63 @@ test('разбор ответа: прежнее поле outputs, статус f
 
 test('обёртка модели: повтор при перегрузке, предел размера, выключение без ключа', async () => {
   let n = 0;
-  const ai = makeImageAi({ RENDER_API_KEY: 'k' }, { fetchFn: async () => (++n === 1 ? reply(503, { error: { message: 'overloaded' } }) : reply(200, interaction())), sleepFn: async () => {} });
+  const ai = makeImageAi({ RENDER_PROVIDER: 'google', RENDER_API_KEY: 'k' }, { fetchFn: async () => (++n === 1 ? reply(503, { error: { message: 'overloaded' } }) : reply(200, interaction())), sleepFn: async () => {} });
   const res = await ai.generate({ system: 's', text: 't', images: [{ mime: 'image/jpeg', data: b64(JPEG) }] });
   assert.equal(n, 2); assert.equal(res.image.mime, 'image/png'); assert.equal(res.model, 'gemini-nano-banana-2.1'); assert.equal(ai.size, '1K');
-  const big = makeImageAi({ RENDER_API_KEY: 'k' }, { fetchFn: async () => reply(200, interaction(Buffer.concat([PNG, Buffer.alloc(3 * 1024 * 1024 + 1)]))) });
+  const big = makeImageAi({ RENDER_PROVIDER: 'google', RENDER_API_KEY: 'k' }, { fetchFn: async () => reply(200, interaction(Buffer.concat([PNG, Buffer.alloc(3 * 1024 * 1024 + 1)]))) });
   await assert.rejects(big.generate({ system: 's', text: 't', images: [{ mime: 'image/jpeg', data: b64(JPEG) }] }), (e) => e.code === 'ai_bad_answer' && /RENDER_SIZE/.test(e.message));
   const off = makeImageAi({});
   assert.equal(off.enabled, false); assert.match(off.why, /RENDER_API_KEY/);
   await assert.rejects(off.generate({ system: 's', text: 't', images: [{ mime: 'image/jpeg', data: b64(JPEG) }] }), (e) => e.code === 'ai_off');
   assert.equal(makeImageAi({ RENDER_MOCK: '1' }).enabled, false, 'заглушка включается только вместе с функцией‑заглушкой');
+});
+
+/* ответ OpenAI Image API */
+const imagesReply = (img = JPEG) => ({ created: 1, data: [{ b64_json: b64(img) }], output_format: 'jpeg', usage: { input_tokens: 900, output_tokens: 1600, total_tokens: 2500 } });
+
+test('по умолчанию — OpenAI: адрес, ключ, порядок изображений, размер, качество и расход в журнале', async (t) => {
+  const calls = [];
+  const A = await makeApp({ RENDER_API_KEY: 'sk-test' }, { renderFetch: async (url, init) => { calls.push({ url, init, body: JSON.parse(init.body) }); return reply(200, imagesReply()); } });
+  t.after(A.close);
+  await A.setCatalog([{ id: 'sofa-1', typeId: 'sofa', formId: 'straight', name: 'Диван', dims: { W: 2200, D: 900, H: 850 }, colors: ['серый'], materials: ['ткань'] }]);
+  const u = await A.user('oa@test.dev'); const id = await newProject(A, u);
+  const r = await A.call('POST', `/api/projects/${id}/renders`, body({ refs: [{ productId: 'sofa-1', mime: 'image/png', data: b64(PNG) }] }), u.token);
+  assert.equal(r.status, 200, JSON.stringify(r.body)); assert.equal(r.body.render.mime, 'image/jpeg');
+  const c = calls[0];
+  assert.equal(c.url, 'https://api.openai.com/v1/images/edits');
+  assert.equal(c.init.headers.authorization, 'Bearer sk-test'); assert.equal(c.init.headers['x-goog-api-key'], undefined);
+  assert.equal(c.body.model, 'gpt-image-2.5-sunburst'); assert.equal(c.body.quality, 'medium'); assert.equal(c.body.size, '1536x1024');
+  assert.equal(c.body.output_format, 'jpeg'); assert.equal(c.body.n, 1);
+  assert.deepEqual(c.body.images.map((i) => i.image_url), [`data:image/jpeg;base64,${b64(JPEG)}`, `data:image/png;base64,${b64(PNG)}`], 'кадр первым, фото товара вторым');
+  assert.match(c.body.prompt, /^You are an architectural visualisation renderer[\s\S]*Image 1 is the 3D screenshot/);
+  assert.equal(c.body.generation_config, undefined); assert.equal(c.body.store, undefined);
+  const log = JSON.parse((await A.ctx.db.get("SELECT data FROM audit_log WHERE action='ai.render'")).data);
+  assert.equal(log.in, 900); assert.equal(log.out, 1600); assert.equal(log.model, 'gpt-image-2.5-sunburst');
+});
+
+test('OpenAI: отказ по модерации, пустой ответ, неверный ключ; настройки качества и модели', async () => {
+  let next;
+  const ai = makeImageAi({ RENDER_API_KEY: 'k', RENDER_RETRIES: '0', RENDER_QUALITY: 'HIGH', RENDER_MODEL: 'gpt-image-2.5-flare', RENDER_SIZE: '2K', RENDER_THINKING: 'high' }, { fetchFn: async (url, init) => { next.body = JSON.parse(init.body); return next; } });
+  assert.equal(ai.provider, 'openai'); assert.equal(ai.quality, 'high'); assert.equal(ai.thinking, '', 'обдумывание — только у google'); assert.equal(ai.model, 'gpt-image-2.5-flare');
+  const gen = () => ai.generate({ system: 's', text: 't', images: [{ mime: 'image/jpeg', data: b64(JPEG) }], aspect: '16:9' });
+  next = reply(200, imagesReply());
+  const ok = await gen(); assert.equal(ok.image.mime, 'image/jpeg'); assert.equal(next.body.size, '2048x1152'); assert.equal(next.body.prompt, 's\n\nt');
+  next = reply(400, { error: { message: 'Your request was rejected by the safety system.', type: 'image_generation_user_error', code: 'moderation_blocked' } });
+  await assert.rejects(gen(), (e) => e.code === 'ai_refused');
+  next = reply(400, { error: { message: 'Invalid size', type: 'invalid_request_error', code: null } });
+  await assert.rejects(gen(), (e) => e.code === 'ai_request');
+  next = reply(401, { error: { message: 'Incorrect API key provided', type: 'invalid_request_error', code: 'invalid_api_key' } });
+  await assert.rejects(gen(), (e) => e.code === 'ai_auth');
+  next = reply(200, { created: 1, data: [] });
+  await assert.rejects(gen(), (e) => e.code === 'ai_bad_answer');
+  assert.equal(makeImageAi({ RENDER_API_KEY: 'k', RENDER_QUALITY: 'ultra' }).quality, 'medium', 'неизвестное значение — по умолчанию');
+  assert.equal(makeImageAi({ RENDER_API_KEY: 'k', RENDER_PROVIDER: 'google' }).quality, '');
+});
+
+test('OpenAI: размеры по соотношению сторон кратны 16; разбор расхода', () => {
+  assert.deepEqual(['3:2', '2:3', '4:3', '3:4', '16:9', '9:16', '1:1'].map((a) => openaiSize(a, '1K')), ['1536x1024', '1024x1536', '1536x1152', '1152x1536', '1536x864', '864x1536', '1536x1536']);
+  for (const a of ['3:2', '4:3', '16:9']) for (const s of openaiSize(a, '2K').split('x').map(Number)) assert.equal(s % 16, 0);
+  assert.deepEqual(openaiAnswer({ data: [{ b64_json: 'QQ==' }] }).usage, { in: 0, out: 0, cacheRead: 0, cacheWrite: 0 });
 });
 
 test('текст запроса: несколько отделок стен, своё фото, без предметов', () => {

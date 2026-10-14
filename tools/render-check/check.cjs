@@ -6,7 +6,7 @@
    Запуск из корня проекта (настройки берутся из .env — те же, что у сервера):
      node --env-file=.env tools/render-check/check.cjs кадр.jpg
      node --env-file=.env tools/render-check/check.cjs кадр.jpg --anchor готовая.jpg --ref диван.jpg --ref стол.jpg --evening --out результат.jpg
-     RENDER_MODEL=gemini-3-pro-image node --env-file=.env tools/render-check/check.cjs кадр.jpg      # другая модель на том же кадре
+     RENDER_MODEL=gpt-image-2.5-flare node --env-file=.env tools/render-check/check.cjs кадр.jpg    # другая модель на том же кадре
    Кадр — снимок 3D‑вида 3:2. Проще всего взять его из редактора: запустить сервер с RENDER_MOCK=1, создать визуализацию
    и нажать «Скачать» (на заглушке «визуализацией» становится сам кадр). --dump печатает текст запроса и ничего не отправляет. */
 const fs = require('node:fs');
